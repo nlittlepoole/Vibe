@@ -12,9 +12,9 @@ echo $uid = $facebook->getUserFromAccessToken();
 
 switch ( $action ) {
   case 'login':
-    //addUser($uid);
-    //topFriends();
-   //header('Location: /index.php?action=question');
+    addUser($uid);
+    topFriends();
+   header('Location: /index.php?action=question');
     break;
   case 'question':
       $params = array( 'next' => 'http://nl2418.kd.io' );
@@ -26,7 +26,7 @@ switch ( $action ) {
     global $facebook;
     $params = array(
                   'scope' => "friends_photos, user_groups, user_photos,user_education_history,read_friendlists,read_stream,user_work_history",
-                  'redirect_uri' => 'http://vibe-c9-nl2418.c9.io/index.php?action=login'
+                  'redirect_uri' => 'http://localhost/index.php?action=login'
                  ////'cookie' => true
                 );
     $loginUrl = $facebook->getLoginUrl($params);
