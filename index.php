@@ -8,13 +8,14 @@ $config = array();
 $config['appId'] = '162254093981266';
 $config['secret'] = '7387b4372a38f8db30ae8834dd193c5b'; 
 $facebook = new Facebook($config);
-echo $uid = $facebook->getUserFromAccessToken();
+$token = $facebook->getAccessToken();
+ $uid = $facebook->getUser();
 
 switch ( $action ) {
   case 'login':
     addUser($uid);
     topFriends();
-   header('Location: /index.php?action=question');
+   	header('Location: /index.php?action=question');
     break;
   case 'question':
       $params = array( 'next' => 'http://nl2418.kd.io' );
@@ -41,7 +42,7 @@ function question(){
     $question;
     $question_id;
     $random=rand(0,1);
-    $recipient;
+    $recipient=0;
     $name;
     while(!$recipient){
         if($random==0){
@@ -97,14 +98,13 @@ function addUser( $input_id ) {
     $sql = "SELECT Active FROM user WHERE id= $input_id";
     $st = $conn->prepare( $sql );
     $st->execute();
-    echo $raw=$st->fetch();
+    $raw=$st->fetch();
     $add=$raw['Active'];
     if(!$raw){
         $graph_url="https://graph.facebook.com/" . $input_id . "/?fields=gender";
         $data = json_decode(file_get_contents($graph_url), true);
         $gender=$data['gender'];
         $affiliations=getAffiliations();
-         echo 'Add new User';
          $sql = "INSERT INTO user  (id,Active,Gender,Communities) VALUES('$input_id','1','$gender','$affiliations')";
         $st = $conn->prepare( $sql );
           $st->execute();
@@ -117,7 +117,6 @@ function addUser( $input_id ) {
             $sql = "UPDATE user SET Active=1,Gender=$gender, Communities=$affiliations WHERE id=$input_id;";
              $st = $conn->prepare( $sql );
              $st->execute();
-            echo 'Activate User';
     }
     $conn=null;
   }
@@ -160,7 +159,7 @@ function getQuestion($input){
     $question_source=$st->fetch();
     $conn = null;
     return (array(
-            'id'    => $random,
+            'id'    => $question_number,
             'question' => $question_source,
         ));
   }

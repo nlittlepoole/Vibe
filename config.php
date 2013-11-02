@@ -2,7 +2,7 @@
 ini_set( "display_errors", true );
 $adress=getenv('IP');
 date_default_timezone_set( "America/New_York" );  // http://www.php.net/manual/en/timezones.php
-define( "DB_DSN", "mysql:host=$adress;dbname=Vibosphere" );
+define( "DB_DSN", "mysql:host=localhost;dbname=Vibosphere" );
 define( "DB_USERNAME", "Vibosphere" );
 define( "DB_PASSWORD", "Carman4ever!" );
 define( "CLASS_PATH", "classes" );
