@@ -1,4 +1,5 @@
 <?php
+// 
 require( "config.php" );
 require("php-sdk/facebook.php");
 session_start();
@@ -18,7 +19,7 @@ switch ( $action ) {
    	header('Location: /index.php?action=question');
     break;
   case 'question':
-      $params = array( 'next' => 'http://nl2418.kd.io' );
+      $params = array( 'next' => 'http://localhost' );
       $_SESSION['logoutUrl'] = $facebook->getLogoutUrl($params); 
    question();
   header('Location: /templates/questions.php');
