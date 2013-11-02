@@ -6,390 +6,205 @@ require_once($path . "/config.php");
     
     $loginUrl = $_SESSION['loginUrl'];
    ?>
-<!DOCTYPE html>
-<html lang="en">
-
-  <head>
-    <meta charset="utf-8">
-    <title>Vibe - Feedback for the Masses</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <!-- Le styles -->
-    <link href="/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-    <style>
-
-    /* GLOBAL STYLES
-    -------------------------------------------------- */
-    /* Padding below the footer and lighter body text */
-
-    body {
-      padding-bottom: 40px;
-      color: #5a5a5a;
-    }
-
-
-
-    /* CUSTOMIZE THE NAVBAR
-    -------------------------------------------------- */
-
-    /* Special class on .container surrounding .navbar, used for positioning it into place. */
-    .navbar-wrapper {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 10;
-      margin-top: 20px;
-      margin-bottom: -90px; /* Negative margin to pull up carousel. 90px is roughly margins and height of navbar. */
-    }
-    .navbar-wrapper .navbar {
-
-    }
-
-    /* Remove border and change up box shadow for more contrast */
-    .navbar .navbar-inner {
-      border: 0;
-      -webkit-box-shadow: 0 2px 10px rgba(0,0,0,.25);
-         -moz-box-shadow: 0 2px 10px rgba(0,0,0,.25);
-              box-shadow: 0 2px 10px rgba(0,0,0,.25);
-    }
-
-    /* Downsize the brand/project name a bit */
-    .navbar .brand {
-      padding: 14px 20px 16px; /* Increase vertical padding to match navbar links */
-      font-size: 16px;
-      font-weight: bold;
-      text-shadow: 0 -1px 0 rgba(0,0,0,.5);
-    }
-
-    /* Navbar links: increase padding for taller navbar */
-    .navbar .nav > li > a {
-      padding: 15px 20px;
-    }
-
-    /* Offset the responsive button for proper vertical alignment */
-    .navbar .btn-navbar {
-      margin-top: 10px;
-    }
-
-
-
-    /* CUSTOMIZE THE CAROUSEL
-    -------------------------------------------------- */
-
-    /* Carousel base class */
-    .carousel {
-      margin-bottom: 60px;
-    }
-
-    .carousel .container {
-      position: relative;
-      z-index: 9;
-    }
-
-    .carousel-control {
-      height: 80px;
-      margin-top: 0;
-      font-size: 120px;
-      text-shadow: 0 1px 1px rgba(0,0,0,.4);
-      background-color: transparent;
-      border: 0;
-      z-index: 10;
-    }
-
-    .carousel .item {
-      height: 500px;
-    }
-    .carousel img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      min-width: 100%;
-      height: 500px;
-    }
-
-    .carousel-caption {
-      background-color: transparent;
-      position: static;
-      max-width: 550px;
-      padding: 0 20px;
-      margin-top: 200px;
-    }
-    .carousel-caption h1,
-    .carousel-caption .lead {
-      margin: 0;
-      line-height: 1.25;
-      color: #fff;
-      text-shadow: 0 1px 1px rgba(0,0,0,.4);
-    }
-    .carousel-caption .btn {
-      margin-top: 10px;
-    }
-
-
-
-    /* MARKETING CONTENT
-    -------------------------------------------------- */
-
-    /* Center align the text within the three columns below the carousel */
-    .marketing .span4 {
-      text-align: center;
-    }
-    .marketing h2 {
-      font-weight: normal;
-    }
-    .marketing .span4 p {
-      margin-left: 10px;
-      margin-right: 10px;
-    }
-
-
-    /* Featurettes
-    ------------------------- */
-
-    .featurette-divider {
-      margin: 80px 0; /* Space out the Bootstrap <hr> more */
-    }
-    .featurette {
-      padding-top: 120px; /* Vertically center images part 1: add padding above and below text. */
-      overflow: hidden; /* Vertically center images part 2: clear their floats. */
-    }
-    .featurette-image {
-      margin-top: -120px; /* Vertically center images part 3: negative margin up the image the same amount of the padding to center it. */
-    }
-
-    /* Give some space on the sides of the floated elements so text doesn't run right into it. */
-    .featurette-image.pull-left {
-      margin-right: 40px;
-    }
-    .featurette-image.pull-right {
-      margin-left: 40px;
-    }
-
-    /* Thin out the marketing headings */
-    .featurette-heading {
-      font-size: 50px;
-      font-weight: 300;
-      line-height: 1;
-      letter-spacing: -1px;
-    }
-
-
-
-    /* RESPONSIVE CSS
-    -------------------------------------------------- */
-
-    @media (max-width: 979px) {
-
-      .container.navbar-wrapper {
-        margin-bottom: 0;
-        width: auto;
-      }
-      .navbar-inner {
-        border-radius: 0;
-        margin: -20px 0;
-      }
-
-      .carousel .item {
-        height: 500px;
-      }
-      .carousel img {
-        width: auto;
-        height: 500px;
-      }
-
-      .featurette {
-        height: auto;
-        padding: 0;
-      }
-      .featurette-image.pull-left,
-      .featurette-image.pull-right {
-        display: block;
-        float: none;
-        max-width: 40%;
-        margin: 0 auto 20px;
-      }
-    }
-
-
-    @media (max-width: 767px) {
-
-      .navbar-inner {
-        margin: -20px;
-      }
-
-      .carousel {
-        margin-left: -20px;
-        margin-right: -20px;
-      }
-      .carousel .container {
-
-      }
-      .carousel .item {
-        height: 300px;
-      }
-      .carousel img {
-        height: 300px;
-      }
-      .carousel-caption {
-        width: 65%;
-        padding: 0 70px;
-        margin-top: 100px;
-      }
-      .carousel-caption h1 {
-        font-size: 30px;
-      }
-      .carousel-caption .lead,
-      .carousel-caption .btn {
-        font-size: 18px;
-      }
-
-      .marketing .span4 + .span4 {
-        margin-top: 40px;
-      }
-
-      .featurette-heading {
-        font-size: 30px;
-      }
-      .featurette .lead {
-        font-size: 18px;
-        line-height: 1.5;
-      }
-
-    }
-    </style>
-
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="../assets/js/html5shiv.js"></script>
-    <![endif]-->
-
-    <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/bootstrap/img/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/bootstrap/img/apple-touch-icon-114-precomposed.png">
-      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/bootstrap/img/apple-touch-icon-72-precomposed.png">
-                    <link rel="apple-touch-icon-precomposed" href="/bootstrap/img/apple-touch-icon-57-precomposed.png">
-                                   <link rel="shortcut icon" href="/bootstrap/img/favicon.png">
-  </head>
-
-  <body>
-  	
-    <!-- NAVBAR
-    ================================================== -->
-    <div class="navbar-wrapper">
-      <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
-      <div class="container">
-
-        <div class="navbar navbar-inverse">
-          <div class="navbar-inner">
-            <!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="brand" href="#">Vibe</a>
-            <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
-            <div class="nav-collapse collapse">
-              <ul class="nav">
-                <li class="active"><a href="/templates/homepage.php">Home</a></li>
-                <li><a href="/templates/team.php">Team</a></li>
-                <!-- Read about Bootstrap dropdowns at http://twbs.github.com/bootstrap/javascript.html#dropdowns -->
-              </ul>
-            </div><!--/.nav-collapse -->
-          </div><!-- /.navbar-inner -->
-        </div><!-- /.navbar -->
-
-      </div> <!-- /.container -->
-    </div><!-- /.navbar-wrapper -->
-
-
-
-    <!-- Carousel
-    ================================================== -->
-    <div id="myCarousel" class="carousel slide">
-      <div class="carousel-inner">
-        <div class="item active">
-          <img src="/bootstrap/img/slide-01-temp.jpg" alt="">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Vibin'</h1>
-              <p class="lead">What is the first impression people get of you? What are your strongest qualities? What are some areas of improvement? Find out with Vibe -- a feedback tool with content driven by your peers. </p>
-              <a class="btn btn-large btn-primary" href=<?php echo $loginUrl ?>>Login with Facebook</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div><!-- /.carousel -->
-
-
-
-    <!-- Marketing messaging and featurettes
-    ================================================== -->
-    <!-- Wrap the rest of the page in another container to center all the content. -->
-
-    <div class="container marketing">
-
-      <!-- Three columns of text below the carousel -->
-      <div class="row">
-        <div class="span4">
-          <img class="img-circle" src="/images/selfimprove1.jpg" width="200px">
-          <h2>Self Improvement</h2>
-          <p>Get feedback from people and use Vibe as an opportunity to see yourself through the lenses of others. Get personalized feedback on you first impressions and on your personality. </p>
-        </div><!-- /.span4 -->
-        <div class="span4">
-          <img class="img-circle" src="/images/selfimprove2.jpg" width="200px">
-          <h2>Anonymity</h2>
-          <p>All ratings and comments are confidential. Whatever you say is protected information. We encourage an open community. </p>
-        </div><!-- /.span4 -->
-        <div class="span4">
-          <img class="img-circle" src="/images/selfimprove3.jpg" width="200px">
-          <h2>Communities</h2>
-          <p>Find out how you fare in your local community with leaderboards. Get advice from the people in the top 10. Find out what percentile you fall in for a given trait. </p>
-</a>
-
-        </div><!-- /.span4 -->
-      </div><!-- /.row -->
-
-
-		<br />
-      <!-- FOOTER -->
-      <footer>
-        <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2013 Company, Inc. &middot; <a href="/admin.php">Admin</a> &middot; <a href="#">Terms</a></p>
-      </footer>
-
-    </div><!-- /.container -->
-
-
-
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/bootstrap/js/jquery.js"></script>
-    <script src="/bootstrap/js/bootstrap-transition.js"></script>
-    <script src="/bootstrap/js/bootstrap-alert.js"></script>
-    <script src="/bootstrap/js/bootstrap-modal.js"></script>
-    <script src="/bootstrap/js/bootstrap-dropdown.js"></script>
-    <script src="/bootstrap/js/bootstrap-scrollspy.js"></script>
-    <script src="/bootstrap/js/bootstrap-tab.js"></script>
-    <script src="/bootstrap/js/bootstrap-tooltip.js"></script>
-    <script src="/bootstrap/js/bootstrap-popover.js"></script>
-    <script src="/bootstrap/js/bootstrap-button.js"></script>
-    <script src="/bootstrap/js/bootstrap-collapse.js"></script>
-    <script src="/bootstrap/js/bootstrap-carousel.js"></script>
-    <script src="/bootstrap/js/bootstrap-typeahead.js"></script>
-    <script>
-      !function ($) {
-        $(function(){
-          // carousel demo
-          $('#myCarousel').carousel()
-        })
-      }(window.jQuery)
-    </script>
-    <script src="/bootstrap/js/holder.js"></script>
-  </body>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+		<meta charset="utf-8">
+		<title>Vibe</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="/css/bootstrap.css">
+		<link rel="stylesheet" href="/css/bootstrap-responsive.css">
+		<link rel="stylesheet" href="/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/css/main.css">
+
+		<!--[if lt IE 9]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		
+	</head>
+	<body data-spy="scroll" data-target="#top-bar">
+		<!-- Header -->
+		<header id="top-bar">
+			<nav id="site-navigation">
+				<h1 id="site-name" class="hide-text">VIBE</h1>
+				<!--NOTE: We have a Chrome Bug with the way CONTACT is rendered -->
+				<a href="#" id="menu-trigger" class="hide-text icon-menu">Main Menu</a>
+				<!-- Main Navigation -->
+				<ul class="menu nav">
+					<li><a href="#home">Home</a></li>
+					<li><a href="#about">About</a></li>
+					<li><a href="#team">Team</a></li>
+					<li><a href="#contact">Contact</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<!-- Home Section -->
+		<section id="home" class="page parallax">
+			<!-- Messaging Carousel -->
+			<div id="home-messages" class="carousel slide" data-interval="3000">
+			  <!-- Messages -->
+			  <div class="carousel-inner">
+			    <div class="item active">
+			    	<span>We are Vibe<br /><p><a class="btn btn-large btn-primary" style="background-color: #000033" href=<?php echo $loginUrl ?>>Log in with Facebook <a class="icon-circle-arrow-right" style="color: white" href=<?php echo $loginUrl ?>></a></a></p></span>
+			    </div>
+			  </div>
+			</div>
+		</section>
+
+		<!-- About Section -->
+		<section id="about" class="page">
+			<div class="container">
+				<div class="row-fluid">
+					<h1 class="page-title">About</h1>
+					<h2 class="page-subtitle">Feedback for Everyone</h2>
+					<div class="text-section">
+						<p>Have you ever wondered how you came across during an interview? Were you making eye contact? Did you maintain a consistent tone? At Vibe, we believe you should have access to this information. It's helpful to have feedback from a third party.</p>
+						<p>Vibe sets you up with a list of questions about you that your peers will answer. Over time, responses from your friends will generate a summary of the vibe you give off to your community. We protect and privatize your feedback so only <em>you</em> receive it. Set up an account for free with us today!</p>
+					</div>
+				</div> <!-- end row-fluid -->
+				<!-- Services -->
+				<div class="grid">
+					<div class="row-fluid">
+						<div class="span4">
+							<h3 class="icon-thumbs-up">Feedback</h3>
+							<p>Get a third party perspective with a summary of question results on your own privatized dashboard.</p>
+						</div>
+						<div class="span4">
+							<h3 class="icon-heart">Communities</h3>
+							<p>Answer questions from both your peers and people in your local community.</p>
+						</div>
+						<div class="span4">
+							<h3 class="icon-trophy">Leaderboards</h3>
+							<p>See how you fare for a particular question in the local community.</p>
+						</div>
+					</div> <!-- end row-fluid -->
+				</div> <!-- end grid -->
+			</div> <!-- end container -->
+		</section>
+
+		<!-- Team Section -->
+		<section id="team" class="page color-highlight">
+			<div class="container">
+				<h1 class="page-title">Team</h1>
+				<h2 class="page-subtitle">Our Thinkers and Makers</h2>
+				<!-- Team Members -->
+				<div class="grid">
+					<div class="row-fluid">
+						<div class="span4">
+							<img src="/img/noah1.jpg" alt="" class="profile" />
+							<h3>Noah</h3>
+							<h4>Co-founder</h4>
+							<p>Noah is a sophomore studying Computer Science with a minor in Economics. In his spare
+								time, he enjoys playing ping pong, running, and playing ukelele.</p>
+							<ul class="icons-list">
+								<li><a href="#" class="icon-facebook">Facebook</a></li>
+								<li><a href="#" class="icon-twitter">Twitter</a></li>
+								<li><a href="#" class="icon-linkedin">LinkedIn</a></li>
+							</ul>
+						</div>
+						<div class="span4">
+							<img src="/img/niger1.jpg" alt="" class="profile" />
+							<h3>Niger</h3>
+							<h4>Co-founder</h4>
+							<p>Niger is a sophomore studying Operations Research with a minor in Computer Science. When he's
+								not watching Legend of Korra, he's probably playing ping pong, surfing subreddits, or listening
+								to Drake's new album.</p>
+							<ul class="icons-list">
+								<li><a href="#" class="icon-facebook">Facebook</a></li>
+								<li><a href="#" class="icon-twitter">Twitter</a></li>
+								<li><a href="#" class="icon-linkedin">LinkedIn</a></li>
+							</ul>
+						</div>
+						<div class="span4">
+							<img src="/img/question.png" alt="" class="profile" />
+							<h3>You?</h3>
+							<h4>An Awesome Person</h4>
+							<p>Join Vibe today! Become a part of the next big thing in social feedback.</p>
+							<ul class="icons-list">
+								<li><a href="#" class="icon-facebook">Facebook</a></li>
+								<li><a href="#" class="icon-twitter">Twitter</a></li>
+								<li><a href="#" class="icon-linkedin">LinkedIn</a></li>
+							</ul>
+						</div>
+					</div> <!-- end row-fluid -->
+				</div> <!-- end grid -->
+			</div> <!-- end container -->
+		</section>
+
+		<!-- Contact Section -->
+		<section id="contact" class="page">
+			<div class="container">
+				<h1 class="page-title">Contact</h1>
+				<h2 class="page-subtitle">Get in Touch!</h2>
+				<div class="row-fluid">
+					<div class="span8 main-form">
+						<h3>Send Us a Message</h3>
+						<p id="response"></p>
+						<form method="post" action="/send-email.php" id="contact-form">
+							<label for="sender-name" class="hide-text">Your Name</label>
+							<input type="text" name="sender-name" id="sender-name" placeholder="Your Name" />
+		          <label for="sender-email" class="hide-text">Your Email</label>
+		          <input type="text" name="sender-email" id="sender-email" placeholder="Your Email" required />
+		          <label for="message" class="hide-text">Your Message</label>
+		          <textarea name="message" id="message" rows="6" required placeholder="Your Message"></textarea>	
+		          <input type="submit" name="submit" id="submit" value="Send &raquo;" class="btn btn-inverse" />
+						</form>
+					</div> <!-- end main-form -->
+					<div class="span4 sidebar">
+						<h3>Contact Info</h3>
+						<ul class="info-list">
+	            <li class="icon-map-marker">Columbia University<br>New York, NY<br>10027</li>
+	            <li class="icon-phone">141-411-2401</li>
+	            <li class="icon-envelope">team@go-vibe.com</li>
+	          </ul>
+	          <h3>Social Media</h3>
+	          <ul class="icons-list">
+	            <li><a href="" title="Facebook" class="icon-facebook">Facebook</a></li>
+	            <li><a href="" title="Twitter" class="icon-twitter">Twitter</a></li>
+	            <li><a href="" title="Google Plus" class="icon-google-plus">Google Plus</a></li>
+	            <li><a href="" title="LinkedIn" class="icon-linkedin">LinkedIn</a></li>
+	            <li><a href="" title="Pinterest" class="icon-pinterest">Pinterest</a></li>
+	          </ul>
+					</div> <!-- end sidebar -->
+				</div> <!-- end row-fluid -->
+			</div> <!-- end container -->
+		</section>
+
+		<!-- Footer -->
+		<footer id="main-footer">
+			<p>&copy; 2013 Strand by <a href="http://www.glorm.com">Glorm</a></p>
+		</footer>
+
+		<!-- Preloader -->
+		<div id="preloader"></div>
+		
+		<!-- Plugins & Scripts -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
+		<script>window.jQuery || document.write('<script src="/js/jquery.min.js" type="text/javascript"><\/script>')</script>
+		<script src="/js/bootstrap.min.js" type="text/javascript"></script>
+		<script src="/js/jquery.parallax-1.1.3.js" type="text/javascript"></script>
+		<script src="/js/jquery.flexslider-min.js" type="text/javascript"></script>
+		<script src="/js/jquery.isotope.min.js" type="text/javascript"></script>
+		<script src="/js/jquery.magnific-popup.min.js" type="text/javascript"></script>
+		<script src="/js/main.js" type="text/javascript"></script>
+
+		<script type="text/javascript">
+			//Twitter feed
+		  $('#tweets').tweet({
+		  	modpath: 'twitter/index.php',
+		    username: 'twitter', // Enter Twitter Username Here
+		    count: 1,
+		    template: [
+					'{text}{time}'
+				].join( '' ), 
+		    loading_text: "loading tweets..."
+		  });
+	  </script>
+
+	</body>
 </html>
