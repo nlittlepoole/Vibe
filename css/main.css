@@ -37,6 +37,14 @@ p {
   text-shadow: none;
   font-family: 'Lora', serif;
 }
+/*Adding rounded corners to Log In button */
+#rounded_corners {
+	margin-top: 10px; 
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
+	border-radius: 20px; /* future proofing */
+}
+
 .btn-primary {
 	background: #000033;
 }
