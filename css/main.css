@@ -242,6 +242,14 @@ label, input[type="reset"], input[type="submit"] {
 	border: none;
 	text-align: center;
 }
+/*Changing a bit of the questions header for nicer formatting */
+#questions-header {
+	font: bold 42px "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	margin-bottom: 30px;
+	margin-top: 10px;
+	border: none;
+	text-align: center;
+}
 .subsection .quote {
 	margin-bottom: 30px;
 	padding: 0;
@@ -370,6 +378,18 @@ label, input[type="reset"], input[type="submit"] {
 }
 .icons-list li a:before {
 	font-size: 16px;
+}
+
+/* =questions page
+----------------------------------------------- */
+#questions { 
+	background-color: #A8A8A8; 
+}
+
+#questions-title { 
+	padding-top: 0px; 
+	margin-top: 0px; 
+	padding-bottom: 10px; 
 }
 
 /* =contact
