@@ -364,7 +364,7 @@ label, input[type="reset"], input[type="submit"] {
 	font-size: 16px;
 }
 
-/* =Contact
+/* =contact
 ----------------------------------------------- */
 #contact {
 	text-align: left;
@@ -1306,12 +1306,14 @@ img.mfp-img {
 		padding: 0 20px;
 		position: relative;
 	}
+	/*
 	#menu-trigger {
 		position: absolute;
 		right: 0;
 		top: 0;
 		left: auto;
 	}
+	*/
 	.menu {
 		width: 100% !important;
 		height: 0;
