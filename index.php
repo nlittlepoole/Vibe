@@ -84,7 +84,7 @@ function question(){
     }
 
     $expanded = explode(" ", $name);
-    $question= str_replace(" I ", " " . $expanded[0] . " ", $question); //needs to be switched from " I " to " name "
+    $question= str_replace("name", $expanded[0], $question); //needs to be switched from " I " to " name "
     $pic="http://graph.facebook.com/" . $recipient . "/picture?width=200&height=200"; //creates graph link to user's profile pic, the largest size facebook allows is 200x 200, this will be changed to use facebook FQL when the questions.php page is finished
     //all of the vibe information is stored in the session data to be used by the questions.php page
     $_SESSION['name'] = $name;
