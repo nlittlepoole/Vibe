@@ -57,10 +57,9 @@ function question(){
             $question_source=getQuestion(20); //calls the getQuestion(int) function to get the data of a question out of the Vibosphere database. This is a php array
             $question_id=$question_source['id']; // $question_id is set to the attribute number in the table, this will be changed later to Attribute
             $question=$question_source['question']; //$question is set to the string of the question picked
-            $top_friends=$_SESSION['topFriends']; //the top friends array, which contains a users top friends, is returned and set to $result
+            $result=$_SESSION['topFriends']; //the top friends array, which contains a users top friends, is returned and set to $result
             $random=rand(0,sizeof($result)-1); //random is set to an integer between 0(inclusive) and the size of the array of top friends(non inclusive)
             $recipient=$result[$top_friends] ['uid']; //$random is used as the index of the top friends array and the user id is returned 
-
             $grab='https://graph.facebook.com/' . $recipient; //$grab is set to the graph url of the friend selected
             $data = json_decode(file_get_contents($grab), true); //the graph data is natively a json file, the stock php decode method is used to decode the user's json data to a 2d array
             $name=$data['name']; //name is set to the user's name
@@ -82,12 +81,9 @@ function question(){
             $name=$names[$random];  //the name of the recipient is set from the names list using the random number
         } 
     }
-
-    $expanded = explode(" ", $name);
-    $question= str_replace("name", $expanded[0], $question); //needs to be switched from " I " to " name "
+    $question= str_replace("name", $name, $question); //needs to be switched from " I " to " name "
     $pic="http://graph.facebook.com/" . $recipient . "/picture?width=200&height=200"; //creates graph link to user's profile pic, the largest size facebook allows is 200x 200, this will be changed to use facebook FQL when the questions.php page is finished
     //all of the vibe information is stored in the session data to be used by the questions.php page
-    $_SESSION['name'] = $name;
     $_SESSION['question'] = $question;
     $_SESSION['question_id'] = $question_id;
     $_SESSION['pic'] = $pic;
