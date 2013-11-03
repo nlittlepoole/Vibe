@@ -97,7 +97,7 @@ function question(){
         } 
     }
     $question= str_replace("name", $name, $question); //needs to be switched from " I " to " name "
-    $pic="http://graph.facebook.com/" . $recipient . "/picture?width=200&height=200"; //creates graph link to user's profile pic, the largest size facebook allows is 200x 200, this will be changed to use facebook FQL when the questions.php page is finished
+    $pic="http://graph.facebook.com/" . $recipient . "/picture?width=300&height=300"; //creates graph link to user's profile pic, the largest size facebook allows is 200x 200, this will be changed to use facebook FQL when the questions.php page is finished
     //all of the vibe information is stored in the session data to be used by the questions.php page
     $_SESSION['question'] = $question;
     $_SESSION['question_id'] = $question_id;
@@ -172,10 +172,10 @@ function topFriends(){
 //getQuestion(int) returns an question using the $input as the upward bound of questions that can be pulled
 function getQuestion($input){
     $attribute= rand(1,$input); //4andom is set to a number between 1 and $input
-    $random=rand(1,10);
+    $random=rand(1,1);
     $question="Question" . $random;
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //database connection is established uisng credentials in config.php
-    $sql = "SELECT Question FROM question WHERE id=$attribute"; //sql query that returns the string of the question in the table
+    $sql = "SELECT $question FROM question WHERE id=$attribute"; //sql query that returns the string of the question in the table
     $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
     $st->execute();//executes query above
     $question_source=$st->fetch(); //$question source is set to result of query
