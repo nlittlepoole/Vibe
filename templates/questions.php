@@ -26,6 +26,24 @@
 		<link rel="stylesheet" href="/css/bootstrap-responsive.css">
 		<link rel="stylesheet" href="/css/font-awesome.min.css">
 		<link rel="stylesheet" href="/css/main.css">
+		
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+		  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+		  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		  <script>
+		  $(function() {
+		    $( "#slider" ).slider({
+		      value:1,
+		      min: 1,
+		      max: 5,
+		      step: 1,
+		      slide: function( event, ui ) {
+		        $( "#amount" ).val(ui.value );
+		      }
+		    });
+		    $( "#amount" ).val($( "#slider" ).slider( "value" ) );
+		  });
+		  </script>
 
 		<!--[if lt IE 9]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -48,7 +66,7 @@
 
 		<!-- Questions Section -->
 		<section id="questions" class="page">
-			<div class="container">
+			<div class="container" id="questions-container">
 				<div class="row-fluid">
 					<h1 id="questions-title" class="page-title">Questions</h1>
 				</div> <!-- end row-fluid -->
@@ -56,12 +74,26 @@
 				<div class="grid">
 					<div class="row-fluid">
 						<div class="span12">
-							<h2 class="page-subtitle" id="questions-header">Noah Stebbins</h2>
-							<div style="display: block; margin-left: auto; margin-right: auto; height: 300px; width: 300px; overflow:hidden">
+							<h3 class="page-subtitle" style="font-weight: normal" id="questions-header">Is Noah confident?</h3>
+							<div style="display: block; border-radius: 50%; margin-left: auto; margin-right: auto; height: 300px; width: 300px; overflow:hidden">
       							<img src="../img/profpic-sample1.jpg"/>
       						</div>	
-							<h3>Is Noah confident?</h3>
-							<p>Get a third party perspective with a summary of question results on your own privatized dashboard.</p>
+
+      <!-- Main hero unit for a primary marketing message or call to action -->
+			      <!--<p>
+					  <label for="amount"></label>
+					  <input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold;" />
+					</p> -->
+				<div style="width: 300px; margin-top: 20px; display: block; margin-left: auto; margin-right: auto" id="slider"></div>
+
+				<br />
+				
+						<form>
+							<input type="text" name="comments" style="width: 300px" placeholder="Comments?" />
+						</form>
+						
+					<button title="Submit" id="rounded_corners2" class="btn btn-primary btn-large">Submit <i class="icon-circle-arrow-right" style="color: white"></i></button>
+					<button title="Skip" id="rounded_corners2" class="btn btn-primary btn-large" ><i class="icon-ban-circle"></i></button>
 						</div>
 					</div> <!-- end row-fluid -->
 				</div> <!-- end grid -->
@@ -77,8 +109,8 @@
 		<div id="preloader"></div>
 		
 		<!-- Plugins & Scripts -->
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
-		<script>window.jQuery || document.write('<script src="/js/jquery.min.js" type="text/javascript"><\/script>')</script>
+		<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
+		<script>window.jQuery || document.write('<script src="/js/jquery.min.js" type="text/javascript"><\/script>')</script> -->
 		<script src="/js/bootstrap.min.js" type="text/javascript"></script>
 		<script src="/js/jquery.parallax-1.1.3.js" type="text/javascript"></script>
 		<script src="/js/jquery.flexslider-min.js" type="text/javascript"></script>
