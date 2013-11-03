@@ -3,9 +3,10 @@
 	<head>
 		<!--This PHP establishes the local variables necessary for the questions Don't worry about this code now. As it doesn't do anything since I never coded functions for it-->
     <?php 
+    session_start();
     $path = $_SERVER['DOCUMENT_ROOT'];
     require($path . "/config.php");
-    session_start();
+    
     $action = isset( $_GET['action'] ) ? $_GET['action'] : ""; //sets $action to "Action" url fragment string if action isn't null
     $recipient;
     $pic;
@@ -21,7 +22,6 @@
 	    	$next="questions.php?action=test";
 	    break;
 	    default:
-		    $recipient=$_SESSION['recipient'];
 	    	$recipient=$_SESSION['recipient'];
 		    $pic = $_SESSION['pic'];
 		    $question = $_SESSION['question'];
