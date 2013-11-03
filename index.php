@@ -25,6 +25,21 @@ switch ( $action ) {
     question(); // calls the question function that pulls a user and question and places the data in the Session cache
     header('Location: /templates/questions.php'); //sends browser to questions page with Session Data containing questions input above
     break;
+  case 'submit'://a user submits a question
+    $recipient=$_SESSION['recipient'];
+    $attriubte=$_SESSION['attribute'];
+    $positive=$_SESSION['positive'];
+    $slider=$_SESSION['slider'];
+    $comment=$_SESSION['slider'];
+
+    $vibe= new Vibe($uid, $recipient,$attribute);
+    if(!$positive){
+      $slider=10-$slider;
+    }
+    $vibe->setAnswer($slider,$comment);
+    $vibe->recordToTable();
+    header('Location: /index.php?action=question');
+    break;
   default: //this is the default setting, it simply take sthe user to the homepage. It also creates the facebook login url 
     global $facebook; //global is necessary to maintain scope. PHP has slightly different scope rules than other high level languages and this line is necessary to keep accessing the facebook api
     //when a user logs in through facebook, the are simply going to a special link created by the facebook api. The api uses our AP ID and password to generate the link
@@ -120,11 +135,10 @@ function addUser( $input_id ) {
 //function used to create a list of a user's top friends. This function will only be called once per vibe session when the user first logs in.
 // the top friends list is saved in the session and refered to whenever the user gets a close friends question. This is done for efficiency reasons
 function topFriends(){
-      // globals are necessary for scope reasons in php. The $uid $token and $facebook are just the same ones as earlier in index.php
-      global $uid;
-      global $token;
-      global $facebook;
-
+    // globals are necessary for scope reasons in php. The $uid $token and $facebook are just the same ones as earlier in index.php
+    global $uid;
+    global $token;
+    global $facebook;
     //facebook fql query that returns a 3d array of a user's last 300 timeline activities created by other friends(includes status updates, wall post, tagged photos, etc)
     $fql="SELECT actor_id FROM stream WHERE actor_id!=me() AND filter_key = 'others' AND source_id = me() LIMIT 300";
     $param=array(//facebook api uses arrays to store components of query's and then runs them out of $facebook->api(array of parameters)
@@ -157,9 +171,11 @@ function topFriends(){
 
 //getQuestion(int) returns an question using the $input as the upward bound of questions that can be pulled
 function getQuestion($input){
-    $question_number= rand(1,$input); //4andom is set to a number between 1 and $input
+    $attribute= rand(1,$input); //4andom is set to a number between 1 and $input
+    $random=rand(1,10);
+    $question="Question" . $random;
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //database connection is established uisng credentials in config.php
-    $sql = "SELECT Question FROM question WHERE id=$question_number"; //sql query that returns the string of the question in the table
+    $sql = "SELECT Question FROM question WHERE id=$attribute"; //sql query that returns the string of the question in the table
     $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
     $st->execute();//executes query above
     $question_source=$st->fetch(); //$question source is set to result of query
