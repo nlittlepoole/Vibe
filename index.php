@@ -175,7 +175,6 @@ function getQuestion($input){
   }
 
 //getAffilitaions() uses the facebook fql of the graph api to return a user's community
-// may change affiliation identifier to string name instead of user ID because there may not be an easy way to get the name later
 function getAffiliations(){
    global $facebook; //global variable necessary for scope in php
    $affiliations=array(); // intializs the affiliations array
@@ -187,15 +186,15 @@ function getAffiliations(){
       );
        $result  = $facebook->api($param); //result is set to the 5d array that is returned after executing the query above
        $education=$result[0]['education']; //education is set to the 3d education array that is 2 dimensions in from the result array
-       foreach($education as $school){ //education array is iterated over and each school id is added to affiliations
+       foreach($education as $school){ //education array is iterated over and each school name is added to affiliations
            //php is shitty at concatenation so it is easier to add all the elements to an array and concatenate at the end
-           array_push($affiliations, $school['school']['id'] . "&&");
+           array_push($affiliations, $school['school']['name'] . "&&");
        }
         $work=$result[0]['work']; //$ work is set to the 3d education array that is 2 dimensions in from result array
-       foreach($work as $employer){ //work is iterated over and each employer ID and location ID is added to $affiliations
+       foreach($work as $employer){ //work is iterated over and each employer name and location name is added to $affiliations
           $employer['employer']['id'];
-           array_push($affiliations, $employer['employer']['id'] . "&&");
-           array_push($affiliations, $employer['location']['id'] . "&&"); //I decided to the use the locations of a user's job because facebook doesn't have that info for schools
+           array_push($affiliations, $employer['employer']['name'] . "&&");
+           array_push($affiliations, $employer['location']['name'] . "&&"); //I decided to the use the locations of a user's job because facebook doesn't have that info for schools
        }
        $sum=''; //sum is initialized
        foreach($affiliations as $id){// loops through all the $affiliations added in the above loops and concatenates them into one string seperated by "&&"
