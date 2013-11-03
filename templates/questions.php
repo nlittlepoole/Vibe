@@ -107,8 +107,8 @@
 							<input type="text" name="comments" style="width: 300px" placeholder="Comments?" />
 						</form>
 						
-					<button title="Submit" id="rounded_corners2" class="btn btn-primary btn-large" onclick="location.href='<?php echo $next ?>'">Submit <i class="icon-circle-arrow-right" style="color: white" ></i></button>
-					<button title="Skip" id="rounded_corners2" class="btn btn-primary btn-large" ><i class="icon-ban-circle"></i></button>
+					<button title="Submit" id="rounded_corners2" class="btn btn-primary btn-large">Submit <i class="icon-circle-arrow-right" style="color: white" ></i></button>
+					<button title="Skip" id="rounded_corners2" class="btn btn-primary btn-large" onclick="location.href='<?php echo $next ?>'" ><i class="icon-ban-circle"></i></button>
 						</div>
 					</div> <!-- end row-fluid -->
 				</div> <!-- end grid -->
