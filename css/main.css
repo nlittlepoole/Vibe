@@ -37,6 +37,28 @@ p {
   text-shadow: none;
   font-family: 'Lora', serif;
 }
+/*Adding rounded corners to Log In button */
+#rounded_corners {
+	margin-top: 10px; 
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
+	border-radius: 20px; /* future proofing */
+}
+
+#rounded_corners2 {
+	margin-top: 0px;
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
+	border-radius: 20px;
+}
+
+#rounded_corners3 {
+	margin-top: 0px;
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
+	border-radius: 20px;
+}
+
 .btn-primary {
 	background: #000033;
 }
@@ -220,6 +242,14 @@ label, input[type="reset"], input[type="submit"] {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+#questions-container {
+	padding-top: 20px;
+	
+	max-width: 960px;
+	-moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
 .page-title {
 	font: normal 24px 'Lora', serif;
 	text-transform: uppercase;
@@ -231,6 +261,14 @@ label, input[type="reset"], input[type="submit"] {
 	font: bold 60px "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	margin-bottom: 60px;
 	margin-top: 20px;
+	border: none;
+	text-align: center;
+}
+/*Changing a bit of the questions header for nicer formatting */
+#questions-header {
+	font: bold 36px "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	margin-bottom: 10px;
+	margin-top: 0px;
 	border: none;
 	text-align: center;
 }
@@ -362,6 +400,18 @@ label, input[type="reset"], input[type="submit"] {
 }
 .icons-list li a:before {
 	font-size: 16px;
+}
+
+/* =questions page
+----------------------------------------------- */
+#questions { 
+	background-color: #C8C8C8; 
+}
+
+#questions-title { 
+	padding-top: 0px; 
+	margin-top: 0px; 
+	padding-bottom: 10px; 
 }
 
 /* =contact
