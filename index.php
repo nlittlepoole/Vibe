@@ -124,8 +124,9 @@ function getPictures($recipient){
 }
 //addUser(int) function checks if a user is in the Vibosphere database, it adds them if they are not, activates them if they are in there but not active, and ignores if they are in the database
 function addUser( $input_id ) {
+    $input_id=$input_id."";
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //initialies connection to the database using the credentials found in config.php
-    $sql = "SELECT Active FROM user WHERE id= $input_id"; //gets the active status of the user with $input_id as a user ID
+    $sql = "SELECT Active FROM user WHERE UID= $input_id"; //gets the active status of the user with $input_id as a user ID
     $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
     $st->execute(); //executes the sql query found above
     $raw=$st->fetch(); //sets raw to be the raw data returned from the sql command, raw is always an array, even if only one element is being queried
@@ -135,7 +136,7 @@ function addUser( $input_id ) {
         $data = json_decode(file_get_contents($graph_url), true); //decoded json data is returned as an array using above graph api link
         $gender=$data['gender']; //$gender is set to user gender
         $affiliations=getAffiliations(); //$affiliations is set to result of affiliations function defined below
-         $sql = "INSERT INTO user  (id,Active,Gender,Communities) VALUES('$input_id','1','$gender','$affiliations')"; //user is added to Vibosphere database
+         $sql = "INSERT INTO user  (UID,Active,Gender,Communities) VALUES('$input_id','1','$gender','$affiliations')"; //user is added to Vibosphere database
         $st = $conn->prepare( $sql );
           $st->execute(); //query is executed
     }
@@ -144,7 +145,7 @@ function addUser( $input_id ) {
         $data = json_decode(file_get_contents($graph_url), true); //user data json is decrypted and returned as an array
         $gender=$data['gender']; //gender is set
         $affiliations=getAffiliations(); //affiliations is set to the result of the affilations function defined below
-            $sql = "UPDATE user SET Active=1,Gender=$gender, Communities=$affiliations WHERE id=$input_id;"; //query is set to update the user to active and add their gender and communities
+            $sql = "UPDATE user SET Active=1,Gender=$gender, Communities=$affiliations WHERE UID=$input_id;"; //query is set to update the user to active and add their gender and communities
              $st = $conn->prepare( $sql ); //protection line used to hide queries from browsers
              $st->execute(); //command above is executed
     }

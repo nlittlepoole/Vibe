@@ -3,7 +3,8 @@ USE Vibosphere;
 DROP TABLE IF EXISTS user;
 CREATE TABLE user
 (
-  id              	  int unsigned NOT NULL, # Unique ID for the transaction
+  id              	  int unsigned NOT NULL, # user's in order of join time
+  UID               varchar(255),   # user's ID
   Active	  	      boolean not null default 0, # returns if user has signed up yet
   Communities	  	  varchar(255),		# List of communities user is in, terms seperated using symbols, dealt with using python script
   Gender	  	      varchar(255),		# users gender
