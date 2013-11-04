@@ -44,7 +44,7 @@ switch ( $action ) {
     global $facebook; //global is necessary to maintain scope. PHP has slightly different scope rules than other high level languages and this line is necessary to keep accessing the facebook api
     //when a user logs in through facebook, the are simply going to a special link created by the facebook api. The api uses our AP ID and password to generate the link
     $params = array(
-                  'scope' => "friends_photos, user_groups, user_photos,user_education_history,read_friendlists,read_stream,user_work_history", //these are the permissions Vibe needs from facebook
+                  'scope' => "friends_photos, user_groups, user_photos,user_education_history,read_friendlists,read_stream,user_work_history,user_photo_video_tags, friends_photo_video_tags", //these are the permissions Vibe needs from facebook
                   'redirect_uri' => 'http://localhost/index.php?action=login' //this is the link that facebook will redirect the browser to after succesful login
                 );
     $loginUrl = $facebook->getLoginUrl($params); //the facebook getLoginUrl() is an api method that uses the permissions and redirct url to create a unique login url
@@ -97,12 +97,27 @@ function question(){
         } 
     }
     $question= str_replace("name", $name, $question); //needs to be switched from " I " to " name "
-    $pic="http://graph.facebook.com/" . $recipient . "/picture?width=300&height=300"; //creates graph link to user's profile pic, the largest size facebook allows is 200x 200, this will be changed to use facebook FQL when the questions.php page is finished
-    //all of the vibe information is stored in the session data to be used by the questions.php page
+    $pic=getPictures($recipient);
     $_SESSION['question'] = $question;
     $_SESSION['question_id'] = $question_id;
     $_SESSION['pic'] = $pic;
     $_SESSION['recipient'] = $recipient; 
+}
+
+function getPictures($recipient){
+    global $facebook;
+    $fql="SELECT src_big FROM photo WHERE pid IN (SELECT pid FROM photo_tag WHERE subject = $recipient) LIMIT 4; ";
+    $param=array(//facebook api uses arrays to store components of query's and then runs them out of $facebook->api(array of parameters)
+            'method'    => 'fql.query',
+            'query'     => $fql,
+            'callback'  => ''
+        );
+    $result = $facebook->api($param); //result is set to 3d array returned by the fql api. This is an expensive query, it takes the longest of any facebook api query
+    $photos=array();
+    foreach($result as $photo){
+     $photos[]=$photo['src_big'];
+    }
+    return $photos[0];
 }
 //addUser(int) function checks if a user is in the Vibosphere database, it adds them if they are not, activates them if they are in there but not active, and ignores if they are in the database
 function addUser( $input_id ) {
@@ -181,7 +196,7 @@ function getQuestion($input){
     $question_source=$st->fetch(); //$question source is set to result of query
     $conn = null;
     return (array( // returns the the sql table id # of the question and its string. Will be changed later to return attribute and not ID #
-            'id'    => $question_number,
+            'id'    => $attribute,
             'question' => $question_source,
         ));
   }
