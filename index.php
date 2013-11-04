@@ -117,6 +117,9 @@ function getPictures($recipient){
     foreach($result as $photo){
      $photos[]=$photo['src_big'];
     }
+    while(sizeof($photos)<4){
+      array_push($photos, "http://graph.facebook.com/" . $recipient . "/picture?width=300&height=300");
+    }
     return $photos[0];
 }
 //addUser(int) function checks if a user is in the Vibosphere database, it adds them if they are not, activates them if they are in there but not active, and ignores if they are in the database
