@@ -80,6 +80,9 @@ while count[0][0] != 0:
     cur.execute("SELECT COUNT(id) FROM transaction") #python determines if there are any transactions to record
     count = cur.fetchall()
     exists=None;
+
+
+    
 query="ALTER TABLE transaction AUTO_INCREMENT = 1"
 cur.execute(query)
 cur.connection.commit()

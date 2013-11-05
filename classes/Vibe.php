@@ -39,11 +39,18 @@ class Vibe
   *
   * @param assoc The property values
   */
+   public $affiliations = null;
+  /**
+  * Sets a Vibe's Parameters
+  *
+  * @param assoc The property values
+  */
  
-  public function __construct( $input_user1, $input_user2, $input_attribute) {
+  public function __construct( $input_user1, $input_user2, $input_attribute,$input_affiliations) {
     $this->user_id_1 = (int) $input_user1;
     $this->user_id_2 = (int) $input_user2;
     $this->attribute =(int) $input_attribute;
+    $this->affiliations =(int) $input_affiliations;
   }
  
   /**
@@ -59,7 +66,7 @@ class Vibe
  
   public function recordToTable(){
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
-    $sql = "INSERT INTO transaction (asked,receipt,attribute,answer,comment) VALUES('this->$user_id_1', 'this->$user_id_2','this->$answer','this->$comment')";
+    $sql = "INSERT INTO transaction (asked,receipt,attribute,answer,comment, Affiliations) VALUES('this->$user_id_1', 'this->$user_id_2','this->$answer','this->$comment', 'this->$affiliations')";
     $st = $conn->prepare( $sql );
     $st->execute();
     $conn = null;
