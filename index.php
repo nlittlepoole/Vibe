@@ -30,7 +30,7 @@ switch ( $action ) {
     $attriubte=$_SESSION['attribute'];
     $positive=$_SESSION['positive'];
     $slider=$_SESSION['slider'];
-    $comment=$_SESSION['slider'];
+    $comment=$_SESSION['comment'];
     $affilations=$_SESSION['affilations'];
     $vibe= new Vibe($uid, $recipient,$attribute,$affiliations);
     if(!$positive){
