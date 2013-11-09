@@ -83,7 +83,7 @@ while count[0][0] != 0:
 
 
     
-query="ALTER TABLE transaction AUTO_INCREMENT = 1"
+query="ALTER TABLE transaction AUTO_INCREMENT = 1" #resets transaction tables id counter to 1
 cur.execute(query)
 cur.connection.commit()
 db.close()
