@@ -59,7 +59,7 @@ function question(){
             $question=$question_source['question']; //$question is set to the string of the question picked
             $result=$_SESSION['topFriends']; //the top friends array, which contains a users top friends, is returned and set to $result
             $random=rand(0,sizeof($result)-1); //random is set to an integer between 0(inclusive) and the size of the array of top friends(non inclusive)
-            $recipient=$result[$random] ['uid']; //$random is used as the index of the top friends array and the user id is returned 
+            $recipient=$result[$top_friends] ['uid']; //$random is used as the index of the top friends array and the user id is returned 
             $grab='https://graph.facebook.com/' . $recipient; //$grab is set to the graph url of the friend selected
             $data = json_decode(file_get_contents($grab), true); //the graph data is natively a json file, the stock php decode method is used to decode the user's json data to a 2d array
             $name=$data['name']; //name is set to the user's name
