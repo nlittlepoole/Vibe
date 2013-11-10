@@ -109,7 +109,7 @@
 					  <label for="amount"></label>
 					  <input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold;" />
 					</p> -->
-					<form action="/index.php?action=test" method="post">
+					<form action="/index.php?action=submit" method="post">
 						<p style="text-align: center">Amount: <span id="amountDisp" style="color: #ff0000">500</span>
 					    <div id="amount_slider" style="width: 300px; margin-top: 20px; display: block; margin-left: auto; margin-right: auto"></div>
 					    <input type="text" id="amount_field" name="slideVal">
