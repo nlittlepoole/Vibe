@@ -54,7 +54,7 @@
 		<section id="questions" class="page">
 			<div class="container" id="questions-container">
 				<div class="row-fluid">
-					<h1 id="questions-title" class="page-title">Questions</h1>
+					<h1 id="questions-title" class="page-title">Dashboard</h1>
 				</div> <!-- end row-fluid -->
 				<!-- Services -->
 				<div class="grid">
