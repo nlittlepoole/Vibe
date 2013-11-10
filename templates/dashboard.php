@@ -12,8 +12,9 @@
 		<link rel="stylesheet" href="/css/bootstrap-responsive.css">
 		<link rel="stylesheet" href="/css/font-awesome.min.css">
 		<link rel="stylesheet" href="/css/main.css">
+		<link rel="stylesheet" href="/jquery-ui/css/ui-lightness/jquery-ui-1.10.3.custom.css" />
 		
-		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+		<!--<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />-->
 		  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 		  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 		  <script>
@@ -28,6 +29,9 @@
 		      }
 		    });
 		    $( "#amount" ).val($( "#slider" ).slider( "value" ) );
+		  });
+		  $(function() {
+		      $( "#accordion" ).accordion();
 		  });
 		  </script>
 
@@ -65,44 +69,170 @@
 	      							<img src="../img/profpic-sample1.jpg"/> 
 	      						</div>	
 	
-	      						<!-- Main hero unit for a primary marketing message or call to action -->
-							    <!--<p>
-									<label for="amount"></label>
-									<input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold;" />
-								</p> -->
-								<div style="width: 300px; margin-top: 20px; display: block; margin-left: auto; margin-right: auto" id="slider"></div>
-		
-								<br />
-					
-								<form>
-									<input type="text" name="comments" style="width: 300px" placeholder="Comments?" />
-								</form>
-							
-								<button title="Submit" id="rounded_corners2" class="btn btn-primary btn-large">Submit 
-									<i class="icon-circle-arrow-right" style="color: white" ></i></button>
-								<button title="Skip" id="rounded_corners2" class="btn btn-primary btn-large" 
-								onclick="location.href='<?php echo $next ?>'" ><i class="icon-ban-circle"></i></button>
+	      						<div style="margin-top: 15px; text-align: left; margin-left: 20px">
+	      							<table style="margin: 0px">
+	      								<tr><td style="padding: 0px"><p><strong>Name: </strong></td><td style="padding: 0px">Noah Stebbins</p></td></tr>
+										<tr><td style="padding: 0px"><p><strong>Communities:</strong></td><td style="padding: 0px">Columbia, Boeing, New York</p></td></tr>
+										<tr><td style="padding: 0px"><p><strong>Points: </strong></td><td style="padding: 0px">824</p></td></tr>
+										<tr><td style="padding: 0px"><p><strong># of Questions Answered: </strong></td><td style="padding: 0px">387</p></td></tr>
+										<tr><td colspan="2"><p><button id="rounded_corners" class="btn btn-large btn-primary" style="background-color: #000033" >Go to Questions <i class="icon-circle-arrow-right" style="color: white" ></i></button></p></td></tr>
+									</table>
+								</div>
 						</div>
 						<div class="span6">
-								<p>Name: </p>
-	
-	      						<!-- Main hero unit for a primary marketing message or call to action -->
-							    <!--<p>
-									<label for="amount"></label>
-									<input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold;" />
-								</p> -->
-								<div style="width: 300px; margin-top: 20px; display: block; margin-left: auto; margin-right: auto" id="slider"></div>
-		
-								<br />
-					
-								<form>
-									<input type="text" name="comments" style="width: 300px" placeholder="Comments?" />
-								</form>
-							
-								<button title="Submit" id="rounded_corners2" class="btn btn-primary btn-large">Submit 
-									<i class="icon-circle-arrow-right" style="color: white" ></i></button>
-								<button title="Skip" id="rounded_corners2" class="btn btn-primary btn-large" 
-								onclick="location.href='<?php echo $next ?>'" ><i class="icon-ban-circle"></i></button>
+							<h1 class="page-title" style="margin-top: 0px">My Vibes</h1>
+							<div id="accordion">
+							  <p style="text-align: left"><strong><span>Attractiveness </span></strong><span style="float: right">8.7</span></p>
+							  <div>
+							    <p style="text-align: left; margin-bottom: 0px"> Keywords: <em>Preppy, Nerdy, Professional</em></p>
+							    <p style="text-align: left; margin-bottom: 0px" > Comments: </p>
+							    <ul style="text-align: left">
+							    	<li>"You are fat."</li>
+							    	<li>"Bro, tone down on the polo."</li>
+							    	<li>"Bro, do you even lift?"</li>
+							    	<li>"Peter wuz here lolol"</li>
+							    	<li>"Bro, do you even Keanu?"</li>
+							    </ul>
+							  </div>
+							  <p style="text-align: left"><strong><span>Intelligence </span></strong><span style="float: right">8.7</span></p>
+							  <div>
+							    <p style="text-align: left; margin-bottom: 0px"> Keywords: <em>Preppy, Nerdy, Professional</em></p>
+							    <p style="text-align: left; margin-bottom: 0px" > Comments: </p>
+							    <ul style="text-align: left">
+							    	<li>"You are fat."</li>
+							    	<li>"Bro, tone down on the polo."</li>
+							    	<li>"Bro, do you even lift?"</li>
+							    	<li>"Peter wuz here lolol"</li>
+							    	<li>"Bro, do you even Keanu?"</li>
+							    </ul>
+							  </div>
+							  <p style="text-align: left"><strong><span>Fashionability </span></strong><span style="float: right">7.7</span></p>
+							  <div>
+							    <p style="text-align: left; margin-bottom: 0px"> Keywords: <em>Preppy, Nerdy, Professional</em></p>
+							    <p style="text-align: left; margin-bottom: 0px" > Comments: </p>
+							    <ul style="text-align: left">
+							    	<li>"You are fat."</li>
+							    	<li>"Bro, tone down on the polo."</li>
+							    	<li>"Bro, do you even lift?"</li>
+							    	<li>"Peter wuz here lolol"</li>
+							    	<li>"Bro, do you even Keanu?"</li>
+							    </ul>
+							  </div>
+							  <p style="text-align: left"><strong><span>Ambition </span></strong><span style="float: right">8.7</span></p>
+							  <div>
+							    <p style="text-align: left; margin-bottom: 0px"> Keywords: <em>Preppy, Nerdy, Professional</em></p>
+							    <p style="text-align: left; margin-bottom: 0px" > Comments: </p>
+							    <ul style="text-align: left">
+							    	<li>"You are fat."</li>
+							    	<li>"Bro, tone down on the polo."</li>
+							    	<li>"Bro, do you even lift?"</li>
+							    	<li>"Peter wuz here lolol"</li>
+							    	<li>"Bro, do you even Keanu?"</li>
+							    </ul>
+							  </div>
+							  <p style="text-align: left"><strong><span>Promiscuity </span></strong><span style="float: right">8.2</span></p>
+							  <div>
+							    <p style="text-align: left; margin-bottom: 0px"> Keywords: <em>Preppy, Nerdy, Professional</em></p>
+							    <p style="text-align: left; margin-bottom: 0px" > Comments: </p>
+							    <ul style="text-align: left">
+							    	<li>"You are fat."</li>
+							    	<li>"Bro, tone down on the polo."</li>
+							    	<li>"Bro, do you even lift?"</li>
+							    	<li>"Peter wuz here lolol"</li>
+							    	<li>"Bro, do you even Keanu?"</li>
+							    </ul>
+							  </div>
+							  <p style="text-align: left"><strong><span>Humor </span></strong><span style="float: right">6.7</span></p>
+							  <div>
+							    <p>
+							    Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+							    et malesuada fames ac turpis egestas. 
+							    </p>
+							    <p>
+							    Suspendisse eu nisl. Nullam ut libero. 
+							    </p>
+							  </div>
+							  <p style="text-align: left"><strong><span>Confidence </span></strong><span style="float: right">8.7</span></p>
+							  <div>
+							    <p>
+							    Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+							    et malesuada fames ac turpis egestas. 
+							    </p>
+							    <p>
+							    Suspendisse eu nisl. Nullam ut libero. 
+							    </p>
+							  </div>
+							  <p style="text-align: left"><strong><span>Fun </span></strong><span style="float: right">8.7</span></p>
+							  <div>
+							    <p>
+							    Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+							    et malesuada fames ac turpis egestas. 
+							    </p>
+							    <p>
+							    Suspendisse eu nisl. Nullam ut libero. 
+							    </p>
+							  </div>
+							  <p style="text-align: left"><strong><span>Kindness </span></strong><span style="float: right">8.7</span></p>
+							  <div>
+							    <p>
+							    Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+							    et malesuada fames ac turpis egestas. 
+							    </p>
+							    <p>
+							    Suspendisse eu nisl. Nullam ut libero. 
+							    </p>
+							  </div>
+							  <p style="text-align: left"><strong><span>Awkwardness </span></strong><span style="float: right">8.7</span></p>
+							  <div>
+							    <p>
+							    Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+							    et malesuada fames ac turpis egestas. 
+							    </p>
+							    <p>
+							    Suspendisse eu nisl. Nullam ut libero. 
+							    </p>
+							  </div>
+							  <p style="text-align: left"><strong><span>Honesty </span></strong><span style="float: right">8.7</span></p>
+							  <div>
+							    <p>
+							    Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+							    et malesuada fames ac turpis egestas. 
+							    </p>
+							    <p>
+							    Suspendisse eu nisl. Nullam ut libero. 
+							    </p>
+							  </div>
+							  <p style="text-align: left"><strong><span>Dependability </span></strong><span style="float: right">8.7</span></p>
+							  <div>
+							    <p>
+							    Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+							    et malesuada fames ac turpis egestas. 
+							    </p>
+							    <p>
+							    Suspendisse eu nisl. Nullam ut libero. 
+							    </p>
+							  </div>
+							  <p style="text-align: left"><strong><span>Humility </span></strong><span style="float: right">8.7</span></p>
+							  <div>
+							    <p>
+							    Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+							    et malesuada fames ac turpis egestas. 
+							    </p>
+							    <p>
+							    Suspendisse eu nisl. Nullam ut libero. 
+							    </p>
+							  </div>
+							  <p style="text-align: left"><strong><span>Happiness </span></strong><span style="float: right">8.7</span></p>
+							  <div>
+							    <p>
+							    Cras dictum. Pellentesque habitant morbi tristique senectus et netus
+							    et malesuada fames ac turpis egestas. 
+							    </p>
+							    <p>
+							    Suspendisse eu nisl. Nullam ut libero. 
+							    </p>
+							  </div>
+							</div>
 						</div>
 					</div> <!-- end row-fluid -->
 				</div> <!-- end grid -->
