@@ -90,8 +90,8 @@
 					<div class="row-fluid">
 						<div class="span12">
 							<h3 class="page-subtitle" style="font-weight: normal" id="questions-header"><?php echo $question[0] ?></h3>
-							<div style="display: block; border-radius: 50%; margin-left: auto; margin-right: auto; height: 200px; width: 200px; overflow:hidden">
-      							<img src=<?php echo $pic ?>> 
+							<div style="display: block; border-radius: 50%; margin-left: auto; margin-right: auto; height: 300px; width: 300px; overflow:hidden">
+      							<img src=<?php echo $pic ?> > 
       						</div>	
 
       <!-- Main hero unit for a primary marketing message or call to action -->
