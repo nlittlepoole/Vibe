@@ -74,7 +74,7 @@ p {
 }
 .btn-large {
 	font-weight: bold;
-	font-size: 30px;
+	font-size: 20px;
 	padding: 15px 25px;
 	letter-spacing: 1px;
 }
@@ -1435,3 +1435,39 @@ img.mfp-img {
 	  height: 70px;
 	}
 }
+
+/*NOAH's ADDIIONAL STYLE */
+#amount_slider {
+	height: 10px; 
+	width: 300px; 
+	background: #ef2a0b;
+	background: -moz-linear-gradient(left, #ef2a0b 0%, #2fd11d 100%);
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#ef2a0b), color-stop(100%,#2fd11d));
+	background: -webkit-linear-gradient(left, #ef2a0b 0%,#2fd11d 100%);
+	background: -o-linear-gradient(left, #ef2a0b 0%,#2fd11d 100%);
+	background: -ms-linear-gradient(left, #ef2a0b 0%,#2fd11d 100%);
+	background: linear-gradient(to right, #ef2a0b 0%,#2fd11d 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ef2a0b', endColorstr='#2fd11d',GradientType=1 );
+}
+/*
+#red {
+	height: 10px; 
+	width: 100px;
+	background-color: red; 
+	float: left; 
+}
+
+#yellow {
+	height: 10px; 
+	width: 100px; 
+	background-color: yellow; 
+	float: left; 
+}
+
+#green {
+	height: 10px; 
+	width: 100px; 
+	background-color: green; 
+	float: left; 
+}
+*/
