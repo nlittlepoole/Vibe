@@ -84,10 +84,7 @@
 								onclick="location.href='<?php echo $next ?>'" ><i class="icon-ban-circle"></i></button>
 						</div>
 						<div class="span6">
-								<div style="display: block; border-radius: 50%; margin-left: auto; margin-right: auto; height: 300px; 
-								width: 300px; overflow:hidden">
-	      							<img src="../img/profpic-sample1.jpg"/> 
-	      						</div>	
+								<p>Name: </p>
 	
 	      						<!-- Main hero unit for a primary marketing message or call to action -->
 							    <!--<p>
