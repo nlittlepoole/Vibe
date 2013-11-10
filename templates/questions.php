@@ -48,16 +48,25 @@
 		  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 		  <script>
 		  $(function() {
-		    $( "#slider" ).slider({
-		      value:1,
-		      min: 1,
-		      max: 5,
-		      step: 1,
-		      slide: function( event, ui ) {
-		        $( "#amount" ).val(ui.value );
-		      }
-		    });
-		    $( "#amount" ).val($( "#slider" ).slider( "value" ) );
+				$("#amount_slider").slider({
+			    handle: "myhandle",
+			    orientation: "horizontal",
+			    range: false,
+			    min: 1,
+			    max: 5,
+			    value: 1,
+			    step: 1,
+			    animate: true,
+			    change: function (event, ui) {       
+			        $("#amount_field").val(ui.value);
+			        $("#amountDisp").text(ui.value);
+			        calculate();
+			    },
+			     slide: function (event, ui) {
+			        $("#amount_field").val(ui.value);
+			        $("#amountDisp").text(ui.value);        
+			    }
+				});
 		  });
 		  </script>
 
@@ -91,8 +100,8 @@
 					<div class="row-fluid">
 						<div class="span12">
 							<h3 class="page-subtitle" style="font-weight: normal" id="questions-header"><?php echo $question[0] ?></h3>
-							<div style="display: block; border-radius: 50%; margin-left: auto; margin-right: auto; height: 300px; width: 300px; overflow:hidden">
-      							<img src=<?php echo $pic ?> > 
+							<div style="display: block; margin-left: auto; margin-right: auto; ">
+      							<img src=<?php echo $pic ?> style="height: 300px; width: 300px; overflow:hidden; border-radius: 50%"> 
       						</div>	
 
       <!-- Main hero unit for a primary marketing message or call to action -->
@@ -100,13 +109,16 @@
 					  <label for="amount"></label>
 					  <input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold;" />
 					</p> -->
-				<div style="width: 300px; margin-top: 20px; display: block; margin-left: auto; margin-right: auto" id="slider"></div>
-
-				<br />
-				
-						<form>
-							<input type="text" name="comments" style="width: 300px" placeholder="Comments?" />
-						</form>
+					<form action="/index.php?action=test" method="post">
+						<p style="text-align: center">Amount: <span id="amountDisp" style="color: #ff0000">500</span>
+					    <div id="amount_slider" style="width: 300px; margin-top: 20px; display: block; margin-left: auto; margin-right: auto"></div>
+					    <input type="text" id="amount_field" name="slideVal">
+					    </p>
+						<input type="text" name="commentsVal" style="width: 300px" placeholder="Comments?" />
+						<input type="submit" />
+					</form>
+						
+						<br />
 						
 					<button title="Submit" id="rounded_corners2" class="btn btn-primary btn-large">Submit <i class="icon-circle-arrow-right" style="color: white" ></i></button>
 					<button title="Skip" id="rounded_corners2" class="btn btn-primary btn-large" onclick="location.href='<?php echo $next ?>'" ><i class="icon-ban-circle"></i></button>
