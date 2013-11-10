@@ -60,7 +60,30 @@
 				<div class="grid">
 					<div class="row-fluid">
 						<div class="span6">
-								<h3 class="page-subtitle" style="font-weight: normal" id="questions-header"><?php echo $question[0] ?></h3>
+								<div style="display: block; border-radius: 50%; margin-left: auto; margin-right: auto; height: 300px; 
+								width: 300px; overflow:hidden">
+	      							<img src="../img/profpic-sample1.jpg"/> 
+	      						</div>	
+	
+	      						<!-- Main hero unit for a primary marketing message or call to action -->
+							    <!--<p>
+									<label for="amount"></label>
+									<input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold;" />
+								</p> -->
+								<div style="width: 300px; margin-top: 20px; display: block; margin-left: auto; margin-right: auto" id="slider"></div>
+		
+								<br />
+					
+								<form>
+									<input type="text" name="comments" style="width: 300px" placeholder="Comments?" />
+								</form>
+							
+								<button title="Submit" id="rounded_corners2" class="btn btn-primary btn-large">Submit 
+									<i class="icon-circle-arrow-right" style="color: white" ></i></button>
+								<button title="Skip" id="rounded_corners2" class="btn btn-primary btn-large" 
+								onclick="location.href='<?php echo $next ?>'" ><i class="icon-ban-circle"></i></button>
+						</div>
+						<div class="span6">
 								<div style="display: block; border-radius: 50%; margin-left: auto; margin-right: auto; height: 300px; 
 								width: 300px; overflow:hidden">
 	      							<img src="../img/profpic-sample1.jpg"/> 
