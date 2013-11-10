@@ -110,8 +110,13 @@
 					  <input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold;" />
 					</p> -->
 					<form action="/index.php?action=submit" method="post">
-						<p style="text-align: center">
-					    <div id="amount_slider" style="width: 300px; margin-top: 20px; display: block; margin-left: auto; margin-right: auto"></div>
+						<p style="text-align: center; margin-top: 20px">
+					    <div id="amount_slider" style="display: block; margin-left: auto; margin-right: auto">
+					    	<div id="red"></div>
+					    	<div id="yellow"></div>
+					    	<div id="green"></div>
+					    </div>
+					    <br />
 					    <input type="hidden" id="amount_field" name="slideVal">
 					    </p>
 						<input type="text" name="commentsVal" style="width: 300px" placeholder="Comments?" />
