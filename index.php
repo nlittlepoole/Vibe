@@ -107,7 +107,7 @@ function question(){
 
 function getPictures($recipient){
     global $facebook;
-    $fql="SELECT src_big FROM photo WHERE pid IN (SELECT pid FROM photo_tag WHERE subject = $recipient) LIMIT 4; ";
+    $fql="SELECT src_big FROM photo WHERE aid IN (SELECT aid FROM album WHERE owner = $recipient AND type = 'profile') LIMIT 4; ";
     $param=array(//facebook api uses arrays to store components of query's and then runs them out of $facebook->api(array of parameters)
             'method'    => 'fql.query',
             'query'     => $fql,
