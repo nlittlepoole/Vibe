@@ -2,37 +2,7 @@
  <html lang="en" class="no-js"> <!--<![endif]-->
 	<head>
 		<!--This PHP establishes the local variables necessary for the questions Don't worry about this code now. As it doesn't do anything since I never coded functions for it-->
-    <?php 
-    session_start();
-    $path = $_SERVER['DOCUMENT_ROOT'];
-    require($path . "/config.php");
-    
-    $action = isset( $_GET['action'] ) ? $_GET['action'] : ""; //sets $action to "Action" url fragment string if action isn't null
-    $recipient;
-    $pic;
-    $question;
-    $logoutURL;
-    $question_id;
-    $vibe;
-    $next;
-    switch ( $action ) {
-  		case 'test':
-	  	    $question=array("Is Noah Stebbins confident?",);
-	    	$pic="../img/profpic-sample1.jpg";
-	    	$next="questions.php?action=test";
-	    break;
-	    default:
-	    	$recipient=$_SESSION['recipient'];
-		    $pic = $_SESSION['pic'];
-		    $question = $_SESSION['question'];
-		    $logoutURL = $_SESSION['logoutUrl'];
-		    $question_id=$_SESSION['question_id'];
-			$affiliations=$_SESSION['affiliations'];
-		    $vibe= new Vibe("test", $recipient, $question_id , $affiliations);
-		    $next="/index.php?action=question";
-    }
-
-   ?>
+		<!--See the Questions file for the PHP -->
 		<meta charset="utf-8">
 		<title>Vibe</title>
 		<meta name="description" content="">
@@ -89,27 +59,30 @@
 				<!-- Services -->
 				<div class="grid">
 					<div class="row-fluid">
-						<div class="span12">
-							<h3 class="page-subtitle" style="font-weight: normal" id="questions-header"><?php echo $question[0] ?></h3>
-							<div style="display: block; border-radius: 50%; margin-left: auto; margin-right: auto; height: 300px; width: 300px; overflow:hidden">
-      							<img src=<?php echo $pic ?> > 
-      						</div>	
-
-      <!-- Main hero unit for a primary marketing message or call to action -->
-			      <!--<p>
-					  <label for="amount"></label>
-					  <input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold;" />
-					</p> -->
-				<div style="width: 300px; margin-top: 20px; display: block; margin-left: auto; margin-right: auto" id="slider"></div>
-
-				<br />
-				
-						<form>
-							<input type="text" name="comments" style="width: 300px" placeholder="Comments?" />
-						</form>
-						
-					<button title="Submit" id="rounded_corners2" class="btn btn-primary btn-large">Submit <i class="icon-circle-arrow-right" style="color: white" ></i></button>
-					<button title="Skip" id="rounded_corners2" class="btn btn-primary btn-large" onclick="location.href='<?php echo $next ?>'" ><i class="icon-ban-circle"></i></button>
+						<div class="span6">
+								<h3 class="page-subtitle" style="font-weight: normal" id="questions-header"><?php echo $question[0] ?></h3>
+								<div style="display: block; border-radius: 50%; margin-left: auto; margin-right: auto; height: 200px; 
+								width: 200px; overflow:hidden">
+	      							<img src="../img/profpic-sample1.jpg"/> 
+	      						</div>	
+	
+	      						<!-- Main hero unit for a primary marketing message or call to action -->
+							    <!--<p>
+									<label for="amount"></label>
+									<input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold;" />
+								</p> -->
+								<div style="width: 300px; margin-top: 20px; display: block; margin-left: auto; margin-right: auto" id="slider"></div>
+		
+								<br />
+					
+								<form>
+									<input type="text" name="comments" style="width: 300px" placeholder="Comments?" />
+								</form>
+							
+								<button title="Submit" id="rounded_corners2" class="btn btn-primary btn-large">Submit 
+									<i class="icon-circle-arrow-right" style="color: white" ></i></button>
+								<button title="Skip" id="rounded_corners2" class="btn btn-primary btn-large" 
+								onclick="location.href='<?php echo $next ?>'" ><i class="icon-ban-circle"></i></button>
 						</div>
 					</div> <!-- end row-fluid -->
 				</div> <!-- end grid -->
