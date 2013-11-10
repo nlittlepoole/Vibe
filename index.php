@@ -27,11 +27,11 @@ switch ( $action ) {
     break;
   case 'submit'://a user submits a question
     $recipient=$_SESSION['recipient'];
-    $attriubte=$_SESSION['attribute'];
-    $positive=$_SESSION['positive'];
-    $slider=$_POST["slideVal"];
-    $comment=$_POST["commentsVal"];
-    $affilations=$_SESSION['affilations'];
+    $attribute=isset( $_SESSION['attribute'] ) ? $_SESSION['attribute'] : "";
+    $positive=isset( $_SESSION['positive'] ) ? $_SESSION['positive'] + "" : "";
+    echo $slider=$_POST["slideVal"];
+    $comment=isset( $_POST["commentsVal"] ) ? $_POST["commentsVal"] : "";
+    $affiliations=$_SESSION['affiliations'];
     $vibe= new Vibe($uid, $recipient,$attribute,$affiliations);
     if(!$positive){
       $slider=10-$slider;
@@ -100,7 +100,7 @@ function question(){
     $pic=getPictures($recipient);
     $_SESSION['affiliations']=friendAffiliations($recipient);
     $_SESSION['question'] = $question;
-    $_SESSION['question_id'] = $question_id;
+    $_SESSION['attribute'] = $question_id;
     $_SESSION['pic'] = $pic;
     $_SESSION['recipient'] = $recipient; 
 }
@@ -251,7 +251,6 @@ function friendAffiliations($input){
        }
         $work=$result[0]['work']; //$ work is set to the 3d education array that is 2 dimensions in from result array
        foreach($work as $employer){ //work is iterated over and each employer name and location name is added to $affiliations
-          $employer['employer']['id'];
            array_push($affiliations, $employer['employer']['name'] . "&&");
            array_push($affiliations, $employer['location']['name'] . "&&"); //I decided to the use the locations of a user's job because facebook doesn't have that info for schools
        }
@@ -259,6 +258,7 @@ function friendAffiliations($input){
        foreach($affiliations as $id){// loops through all the $affiliations added in the above loops and concatenates them into one string seperated by "&&"
            $sum=$sum . $id; 
        }
+       echo $sum;
        return $sum; //returns concatenated string of affiliations
 }
 ?>
