@@ -49,6 +49,7 @@
 				<a href="#" id="menu-trigger" class="hide-text icon-menu">Main Menu</a>
 				<!-- Main Navigation -->
 				<ul class="menu nav">
+					<li><a href="#questions">Dashboard</a></li>
 					<li><a href="#questions">Questions</a></li>
 				</ul>
 			</nav>
@@ -71,10 +72,10 @@
 	
 	      						<div style="margin-top: 15px; text-align: left; margin-left: 20px">
 	      							<table style="margin: 0px">
-	      								<tr><td style="padding: 0px"><p><strong>Name: </strong></td><td style="padding: 0px">Noah Stebbins</p></td></tr>
-										<tr><td style="padding: 0px"><p><strong>Communities:</strong></td><td style="padding: 0px">Columbia, Boeing, New York</p></td></tr>
-										<tr><td style="padding: 0px"><p><strong>Points: </strong></td><td style="padding: 0px">824</p></td></tr>
-										<tr><td style="padding: 0px"><p><strong># of Questions Answered: </strong></td><td style="padding: 0px">387</p></td></tr>
+	      								<tr><td style="padding: 0px"><p><strong>Name: </strong></td><td style="padding-left: 8px">Noah Stebbins</p></td></tr>
+										<tr><td style="padding: 0px"><p><strong>Communities:</strong></td><td style="padding-left: 8px">Columbia, Boeing, New York</p></td></tr>
+										<tr><td style="padding: 0px"><p><strong>Points: </strong></td><td style="padding-left: 8px">824</p></td></tr>
+										<tr><td style="padding: 0px"><p><strong># of Questions Answered: </strong></td><td style="padding-left: 8px">387</p></td></tr>
 										<tr><td colspan="2"><p><button id="rounded_corners" class="btn btn-large btn-primary" style="background-color: #000033" >Go to Questions <i class="icon-circle-arrow-right" style="color: white" ></i></button></p></td></tr>
 									</table>
 								</div>

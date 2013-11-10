@@ -110,18 +110,17 @@
 					  <input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold;" />
 					</p> -->
 					<form action="/index.php?action=submit" method="post">
-						<p style="text-align: center">Amount: <span id="amountDisp" style="color: #ff0000">500</span>
+						<p style="text-align: center">
 					    <div id="amount_slider" style="width: 300px; margin-top: 20px; display: block; margin-left: auto; margin-right: auto"></div>
-					    <input type="text" id="amount_field" name="slideVal">
+					    <input type="hidden" id="amount_field" name="slideVal">
 					    </p>
 						<input type="text" name="commentsVal" style="width: 300px" placeholder="Comments?" />
-						<input type="submit" />
+						<br />
+						<input id="rounded_corners2" class="btn btn-primary btn-large" type="submit" />
+						<button title="Skip" id="rounded_corners2" class="btn btn-primary btn-large" onclick="location.href='<?php echo $next ?>'" ><i class="icon-ban-circle"></i></button>
 					</form>
 						
 						<br />
-						
-					<button title="Submit" id="rounded_corners2" class="btn btn-primary btn-large">Submit <i class="icon-circle-arrow-right" style="color: white" ></i></button>
-					<button title="Skip" id="rounded_corners2" class="btn btn-primary btn-large" onclick="location.href='<?php echo $next ?>'" ><i class="icon-ban-circle"></i></button>
 						</div>
 					</div> <!-- end row-fluid -->
 				</div> <!-- end grid -->
