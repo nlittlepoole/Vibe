@@ -85,15 +85,9 @@ function question(){
             $question_id=$question_source['id']; //question ID is set to $question_id, will later be changed to attribute
               $graph_url="https://graph.facebook.com/" . $uid . "/friends?access_token=" . $token; //graph url is made to access the user's friendlist
             $user = json_decode(file_get_contents($graph_url), true); //user's friend list is a json that is decoded from the graph url and returned as a 2d array
-            $peopleid=array(); //$peopleID is an array of ID's of a user's facebook friends
-            $names=array(); //$names is an array of the name's of a user's facebook friends. It may make sense to use a php 2d array for $peopleid and $names later as that would be better practice
-            foreach($user["data"] as $person) { //every person in a user's friend list is iteratoed through and their name and uid is added to their respective lists.
-                 array_push($peopleid, $person['id']);
-                 array_push($names, $person['name']);
-            }
-            $random=rand(0,sizeof($peopleid)); // random is set to an int between 0 and the number of facebook friends
-            $recipient=$peopleid[$random]; //the uid of the recipient is set from the uid list using the random number
-            $name=$names[$random];  //the name of the recipient is set from the names list using the random number
+            $random=rand(0,sizeof($user['data']));
+            $recipient=$user['data'][$random]['id'];
+            $name=$user['data'][$random]['name'];
         } 
     }
     $question= str_replace("name", $name, $question); //needs to be switched from " I " to " name "
