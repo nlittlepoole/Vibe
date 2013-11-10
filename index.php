@@ -27,11 +27,11 @@ switch ( $action ) {
     break;
   case 'submit'://a user submits a question
     $recipient=$_SESSION['recipient'];
-    $attriubte=$_SESSION['attribute'];
-    $positive=$_SESSION['positive'];
-    $slider=$_POST["slideVal"];
-    $comment=$_POST["commentsVal"];
-    $affilations=$_SESSION['affilations'];
+    $attribute=isset( $_SESSION['attribute'] ) ? $_SESSION['attribute'] : "";
+    $positive=isset( $_SESSION['positive'] ) ? $_SESSION['positive'] + "" : "";
+    echo $slider=$_POST["slideVal"];
+    $comment=isset( $_POST["commentsVal"] ) ? $_POST["commentsVal"] : "";
+    $affiliations=$_SESSION['affiliations'];
     $vibe= new Vibe($uid, $recipient,$attribute,$affiliations);
     if(!$positive){
       $slider=10-$slider;
@@ -85,29 +85,23 @@ function question(){
             $question_id=$question_source['id']; //question ID is set to $question_id, will later be changed to attribute
               $graph_url="https://graph.facebook.com/" . $uid . "/friends?access_token=" . $token; //graph url is made to access the user's friendlist
             $user = json_decode(file_get_contents($graph_url), true); //user's friend list is a json that is decoded from the graph url and returned as a 2d array
-            $peopleid=array(); //$peopleID is an array of ID's of a user's facebook friends
-            $names=array(); //$names is an array of the name's of a user's facebook friends. It may make sense to use a php 2d array for $peopleid and $names later as that would be better practice
-            foreach($user["data"] as $person) { //every person in a user's friend list is iteratoed through and their name and uid is added to their respective lists.
-                 array_push($peopleid, $person['id']);
-                 array_push($names, $person['name']);
-            }
-            $random=rand(0,sizeof($peopleid)); // random is set to an int between 0 and the number of facebook friends
-            $recipient=$peopleid[$random]; //the uid of the recipient is set from the uid list using the random number
-            $name=$names[$random];  //the name of the recipient is set from the names list using the random number
+            $random=rand(0,sizeof($user['data']));
+            $recipient=$user['data'][$random]['id'];
+            $name=$user['data'][$random]['name'];
         } 
     }
     $question= str_replace("name", $name, $question); //needs to be switched from " I " to " name "
     $pic=getPictures($recipient);
     $_SESSION['affiliations']=friendAffiliations($recipient);
     $_SESSION['question'] = $question;
-    $_SESSION['question_id'] = $question_id;
+    $_SESSION['attribute'] = $question_id;
     $_SESSION['pic'] = $pic;
     $_SESSION['recipient'] = $recipient; 
 }
 
 function getPictures($recipient){
     global $facebook;
-    $fql="SELECT src_big FROM photo WHERE pid IN (SELECT pid FROM photo_tag WHERE subject = $recipient) LIMIT 4; ";
+    $fql="SELECT src_big FROM photo WHERE aid IN (SELECT aid FROM album WHERE owner = $recipient AND type = 'profile') LIMIT 4; ";
     $param=array(//facebook api uses arrays to store components of query's and then runs them out of $facebook->api(array of parameters)
             'method'    => 'fql.query',
             'query'     => $fql,
@@ -251,7 +245,6 @@ function friendAffiliations($input){
        }
         $work=$result[0]['work']; //$ work is set to the 3d education array that is 2 dimensions in from result array
        foreach($work as $employer){ //work is iterated over and each employer name and location name is added to $affiliations
-          $employer['employer']['id'];
            array_push($affiliations, $employer['employer']['name'] . "&&");
            array_push($affiliations, $employer['location']['name'] . "&&"); //I decided to the use the locations of a user's job because facebook doesn't have that info for schools
        }
@@ -259,6 +252,7 @@ function friendAffiliations($input){
        foreach($affiliations as $id){// loops through all the $affiliations added in the above loops and concatenates them into one string seperated by "&&"
            $sum=$sum . $id; 
        }
+       echo $sum;
        return $sum; //returns concatenated string of affiliations
 }
 ?>
