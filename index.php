@@ -80,7 +80,7 @@ function question(){
             $name=$data['name']; //name is set to the user's name
         }
         else{
-            $question_source=getQuestion(4); //only the first four questions, which are first vibe questions, are used to get question data
+            $question_source=getQuestion(5); //only the first four questions, which are first vibe questions, are used to get question data
             $question=$question_source['question']; //question String is set to $question
             $question_id=$question_source['id']; //question ID is set to $question_id, will later be changed to attribute
               $graph_url="https://graph.facebook.com/" . $uid . "/friends?access_token=" . $token; //graph url is made to access the user's friendlist
@@ -186,7 +186,7 @@ function topFriends(){
 //getQuestion(int) returns an question using the $input as the upward bound of questions that can be pulled
 function getQuestion($input){
     $attribute= rand(1,$input); //4andom is set to a number between 1 and $input
-    $random=rand(1,1);
+    $random=rand(1,10);
     $question="Question" . $random;
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //database connection is established uisng credentials in config.php
     $sql = "SELECT $question FROM question WHERE id=$attribute"; //sql query that returns the string of the question in the table
