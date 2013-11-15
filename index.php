@@ -29,7 +29,7 @@ switch ( $action ) {
     $recipient=$_SESSION['recipient'];
     $attribute=isset( $_SESSION['attribute'] ) ? $_SESSION['attribute'] : "";
     $positive=isset( $_SESSION['positive'] ) ? $_SESSION['positive'] + "" : "";
-    echo $slider=$_POST["slideVal"];
+    $slider=2*$_POST["slideVal"]; //Slider value needs to be multiplied by two since slider has 5 notches
     $comment=isset( $_POST["commentsVal"] ) ? $_POST["commentsVal"] : "";
     $affiliations=$_SESSION['affiliations'];
     $vibe= new Vibe($uid, $recipient,$attribute,$affiliations);
@@ -60,7 +60,7 @@ function question(){
     
     //Useful variables are initialized here at the beginning of the code
     $question;
-    $question_id;
+    $attribute;
     $random=rand(0,1); //random is set to 0 or 1
     $recipient=0;
     $name;
@@ -69,8 +69,8 @@ function question(){
     while(!$recipient){
         //if $random is 0, the code only uses top friends and picks from any of the vibe questions
         if($random==0){
-            $question_source=getQuestion(20); //calls the getQuestion(int) function to get the data of a question out of the Vibosphere database. This is a php array
-            $question_id=$question_source['id']; // $question_id is set to the attribute number in the table, this will be changed later to Attribute
+            $question_source=getQuestion(14); //calls the getQuestion(int) function to get the data of a question out of the Vibosphere database. This is a php array
+            $attribute=$question_source['id']; // $question_id is set to the attribute number in the table, this will be changed later to Attribute
             $question=$question_source['question']; //$question is set to the string of the question picked
             $result=$_SESSION['topFriends']; //the top friends array, which contains a users top friends, is returned and set to $result
             $random=rand(0,sizeof($result)-1); //random is set to an integer between 0(inclusive) and the size of the array of top friends(non inclusive)
@@ -82,7 +82,7 @@ function question(){
         else{
             $question_source=getQuestion(5); //only the first four questions, which are first vibe questions, are used to get question data
             $question=$question_source['question']; //question String is set to $question
-            $question_id=$question_source['id']; //question ID is set to $question_id, will later be changed to attribute
+            $attribute=$question_source['id']; //question ID is set to $question_id, will later be changed to attribute
               $graph_url="https://graph.facebook.com/" . $uid . "/friends?access_token=" . $token; //graph url is made to access the user's friendlist
             $user = json_decode(file_get_contents($graph_url), true); //user's friend list is a json that is decoded from the graph url and returned as a 2d array
             $random=rand(0,sizeof($user['data']));
@@ -90,11 +90,11 @@ function question(){
             $name=$user['data'][$random]['name'];
         } 
     }
-    $question= str_replace("name", $name, $question); //needs to be switched from " I " to " name "
+    $question= str_replace("name", $name, $question); 
     $pic=getPictures($recipient);
     $_SESSION['affiliations']=friendAffiliations($recipient);
     $_SESSION['question'] = $question;
-    $_SESSION['attribute'] = $question_id;
+    $_SESSION['attribute'] = $attribute;
     $_SESSION['pic'] = $pic;
     $_SESSION['recipient'] = $recipient; 
 }
@@ -185,18 +185,33 @@ function topFriends(){
 
 //getQuestion(int) returns an question using the $input as the upward bound of questions that can be pulled
 function getQuestion($input){
-    $attribute= rand(1,$input); //4andom is set to a number between 1 and $input
-    $random=rand(1,10);
+    echo $attribute= rand(1,14); //4andom is set to a number between 1 and $input
+    echo $random=rand(1,10);
     $question="Question" . $random;
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //database connection is established uisng credentials in config.php
-    $sql = "SELECT $question FROM question WHERE id=$attribute"; //sql query that returns the string of the question in the table
+    $sql = "SELECT $question, Attribute FROM question WHERE id=$attribute"; //sql query that returns the string of the question in the table
     $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
     $st->execute();//executes query above
     $question_source=$st->fetch(); //$question source is set to result of query
+    $question=$question_source[0]; //sets question to the question field of the question table
+    if(strpos($question, '(')){
+      $keywords=strrchr($question, "("); //sets keywords in question string equal to keywords
+      $question=substr($question,0,strrpos($question, '(')); //takes out keyword from question string
+    }
+    if(strpos($question, '*') === FALSE){
+      $_SESSION['positive']=1;
+    }
+    else{
+       $question=substr($question, 1);
+      $_SESSION['positive']=0;
+    }
+    $attribute=$question_source[1]; //sets attribute
+
     $conn = null;
     return (array( // returns the the sql table id # of the question and its string. Will be changed later to return attribute and not ID #
             'id'    => $attribute,
-            'question' => $question_source,
+            'question' => $question,
+            'keywords' =>$keywords,
         ));
   }
 
@@ -252,7 +267,7 @@ function friendAffiliations($input){
        foreach($affiliations as $id){// loops through all the $affiliations added in the above loops and concatenates them into one string seperated by "&&"
            $sum=$sum . $id; 
        }
-       echo $sum;
+       $sum;
        return $sum; //returns concatenated string of affiliations
 }
 ?>

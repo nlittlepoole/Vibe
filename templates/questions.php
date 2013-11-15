@@ -11,10 +11,10 @@
     $recipient;
     $pic;
     $question;
-    $logoutURL;
     $question_id;
     $vibe;
     $next;
+    $logoutURL = $_SESSION['logoutUrl'];
     switch ( $action ) {
   		case 'test':
 	  	    $question=array("Is Noah Stebbins confident?",);
@@ -22,13 +22,8 @@
 	    	$next="questions.php?action=test";
 	    break;
 	    default:
-	    	$recipient=$_SESSION['recipient'];
 		    $pic = $_SESSION['pic'];
 		    $question = $_SESSION['question'];
-		    $logoutURL = $_SESSION['logoutUrl'];
-		    $question_id=$_SESSION['question_id'];
-			$affiliations=$_SESSION['affiliations'];
-		    $vibe= new Vibe("test", $recipient, $question_id , $affiliations);
 		    $next="/index.php?action=question";
     }
 
@@ -99,7 +94,7 @@
 				<div class="grid">
 					<div class="row-fluid">
 						<div class="span12">
-							<h3 class="page-subtitle" style="font-weight: normal" id="questions-header"><?php echo $question[0] ?></h3>
+							<h3 class="page-subtitle" style="font-weight: normal" id="questions-header"><?php echo $question?></h3>
 							<div style="display: block; margin-left: auto; margin-right: auto; ">
       							<img src=<?php echo $pic ?> style="height: 300px; width: 300px; overflow:hidden; border-radius: 50%"> 
       						</div>	
@@ -122,7 +117,7 @@
 						<input type="text" name="commentsVal" style="width: 300px" placeholder="Comments?" />
 						<br />
 						<input id="rounded_corners2" class="btn btn-primary btn-large" type="submit" />
-						<button title="Skip" id="rounded_corners2" class="btn btn-primary btn-large" onclick="location.href='<?php echo $next ?>'" ><i class="icon-ban-circle"></i></button>
+						<button title="Skip" id="rounded_corners2" class="btn btn-primary btn-large" onclick="location.href='/index.php?action=question'" ><i class="icon-ban-circle"></i></button>
 					</form>
 						
 						<br />

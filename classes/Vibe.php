@@ -49,8 +49,8 @@ class Vibe
   public function __construct( $input_user1, $input_user2, $input_attribute,$input_affiliations) {
     $this->user_id_1 = (int) $input_user1;
     $this->user_id_2 = (int) $input_user2;
-    $this->attribute =(int) $input_attribute;
-    $this->affiliations =(int) $input_affiliations;
+    $this->attribute = $input_attribute;
+    $this->affiliations =$input_affiliations;
   }
  
   /**
