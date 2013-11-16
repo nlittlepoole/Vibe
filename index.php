@@ -32,7 +32,8 @@ switch ( $action ) {
     $slider=2*$_POST["slideVal"]; //Slider value needs to be multiplied by two since slider has 5 notches
     $comment=isset( $_POST["commentsVal"] ) ? $_POST["commentsVal"] : "";
     $affiliations=$_SESSION['affiliations'];
-    $vibe= new Vibe($uid, $recipient,$attribute,$affiliations);
+    $keywords=$slider>7?$_SESSION['keywords']:"null";
+    $vibe= new Vibe($uid, $recipient,$attribute,$keywords,$affiliations);
     if(!$positive){
       $slider=10-$slider;
     }
@@ -73,6 +74,7 @@ function question(){
             $attribute=$question_source['id']; // $question_id is set to the attribute number in the table, this will be changed later to Attribute
             $question=$question_source['question']; //$question is set to the string of the question picked
             $result=$_SESSION['topFriends']; //the top friends array, which contains a users top friends, is returned and set to $result
+            $_SESSION['keywords']=$question_source['keywords'];
             $random=rand(0,sizeof($result)-1); //random is set to an integer between 0(inclusive) and the size of the array of top friends(non inclusive)
             $recipient=$result[$random] ['uid']; //$random is used as the index of the top friends array and the user id is returned 
             $grab='https://graph.facebook.com/' . $recipient; //$grab is set to the graph url of the friend selected
@@ -83,7 +85,8 @@ function question(){
             $question_source=getQuestion(5); //only the first four questions, which are first vibe questions, are used to get question data
             $question=$question_source['question']; //question String is set to $question
             $attribute=$question_source['id']; //question ID is set to $question_id, will later be changed to attribute
-              $graph_url="https://graph.facebook.com/" . $uid . "/friends?access_token=" . $token; //graph url is made to access the user's friendlist
+            $_SESSION['keywords']=$question_source['keywords'];
+            $graph_url="https://graph.facebook.com/" . $uid . "/friends?access_token=" . $token; //graph url is made to access the user's friendlist
             $user = json_decode(file_get_contents($graph_url), true); //user's friend list is a json that is decoded from the graph url and returned as a 2d array
             $random=rand(0,sizeof($user['data']));
             $recipient=$user['data'][$random]['id'];
@@ -181,6 +184,7 @@ function getQuestion($input){
     $st->execute();//executes query above
     $question_source=$st->fetch(); //$question source is set to result of query
     $question=$question_source[0]; //sets question to the question field of the question table
+    $keywords="";
     if(strpos($question, '(')){
       $keywords=strrchr($question, "("); //sets keywords in question string equal to keywords
       $question=substr($question,0,strrpos($question, '(')); //takes out keyword from question string
