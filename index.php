@@ -93,6 +93,7 @@ function question(){
     $question= str_replace("name", $name, $question); 
     $pic=getPictures($recipient);
     $_SESSION['affiliations']=friendAffiliations($recipient);
+    $_SESSION['affiliations']="";
     $_SESSION['question'] = $question;
     $_SESSION['attribute'] = $attribute;
     $_SESSION['pic'] = $pic;
@@ -153,39 +154,25 @@ function topFriends(){
     global $uid;
     global $token;
     global $facebook;
-    //facebook fql query that returns a 3d array of a user's last 300 timeline activities created by other friends(includes status updates, wall post, tagged photos, etc)
-    $fql="SELECT actor_id FROM stream WHERE actor_id!=me() AND filter_key = 'others' AND source_id = me() LIMIT 300";
-    $param=array(//facebook api uses arrays to store components of query's and then runs them out of $facebook->api(array of parameters)
-            'method'    => 'fql.query',
-            'query'     => $fql,
-            'callback'  => ''
-        );
-    $result   = $facebook->api($param); //result is set to 3d array returned by the fql api. This is an expensive query, it takes the longest of any facebook api query
-    $top_frds=array(); //top friends array is intialized 
-    foreach($result as $result1) //iterates through every single timeline activity and adds the corresponding friend's uid to $top_frds
-    {
-        $top_frds[]=$result1['actor_id'];
+    $statuses = $facebook->api('/me/statuses');
+    $top_frds=array();
+    foreach($statuses['data'] as $status){
+    // processing likes array for calculating fanbase. 
+      foreach($status['likes']['data'] as $likesData){
+          $top_frds[] = array('uid'=>$likesData['id']); 
+      }
+      foreach($status['comments']['data'] as $comArray){
+     // processing comments array for calculating fanbase
+                $top_frds[] =array('uid'=> $comArray['from']['id']);
+      }
     }
-
-    $new_array = array(); //temporary array used for sorting
-
-    //top_frds is iterated through and a new array is created with each uid and the frequency that it appeared in the user's timeline stream
-    foreach ($top_frds as $key => $value) {
-        if(isset($new_array[$value]))
-             $new_array[$value] += 1;
-        else
-            $new_array[$value] = 1;
-    }
-    $top_frds=array(); //top friends is reinitialized to clear it
-    foreach($new_array as $tuid => $trate){ //uses the frequency that the user appeared to sort the user's by most appearences
-        $top_frds[]=array('uid'=>$tuid,'rate'=>$trate);
-    }
+   
     $_SESSION['topFriends'] = $top_frds; //top friends is added to the session data to be used by the app whenever necessary
   }
 
 //getQuestion(int) returns an question using the $input as the upward bound of questions that can be pulled
 function getQuestion($input){
-    echo $attribute= rand(1,14); //4andom is set to a number between 1 and $input
+    echo $attribute= rand(1,$input); //4andom is set to a number between 1 and $input
     echo $random=rand(1,10);
     $question="Question" . $random;
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //database connection is established uisng credentials in config.php
