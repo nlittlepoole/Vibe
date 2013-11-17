@@ -33,6 +33,8 @@ while count[0][0] != 0:
     keyword=row[0][6]
     newKeyword=""
     #print keyword
+    affiliation=row[0][7]
+    
     query="SELECT * FROM user WHERE UID=" + user2
     cur.execute(query)
     exists=cur.fetchall()
@@ -42,15 +44,12 @@ while count[0][0] != 0:
         cur.execute(query)
         raw=cur.fetchall()
         previous= raw[0][0]
-        #print previous
         previous_score=0
         previous_comment=''
         total=int(raw[0][1])
         previousKeyword=raw[0][2]
-        print previousKeyword
-        if (not "null" in keyword) and (keyword in previousKeyword):
+        if ((not "null" in keyword) and (previousKeyword)) and (keyword in previousKeyword):
             previousKeywords=previousKeyword.split('&&')
-            print previousKeywords
             found=False
             for element in previousKeywords:
                 if keyword in element:
@@ -63,7 +62,7 @@ while count[0][0] != 0:
         elif not "null" in keyword:
             newKeyword=""
         else:
-            newKeyword=previousKeyword+ "&&"+ "1"+keyword
+            newKeyword=previousKeyword
         #print previous_scor
         #Sets the previous score to the same score as the input if the user has never had an answer for this before
         #essentially makes the input score weighted against itself
@@ -72,27 +71,35 @@ while count[0][0] != 0:
             #print previous_score
         else:
             previous_list=previous.split('&&')
-            print previous_list
             #print previous_list
             previous_score=float(previous_list[0])
             previous_list.pop(0)
-            for comments in previous_list:
-                previous_comment=comments +'&&' + previous_comment
-            comment=previous_comment+comment
+            if len(comment)>1:
+                for comments in previous_list:
+                    previous_comment=comments +'&&' + previous_comment
+                comment=previous_comment+comment
+            else:
+                for comments in previous_list:
+                    comment=comment + "&&" +comments
+                if len(comment)>1:
+                    comment=comment[2:]
         score=(score+(previous_score*total))/(total+1)
         score="%.2f" % score
-        score=str(score)+'&&'+str(comment)
+        if len(comment) >1:
+            score=str(score)+"&&"+str(comment)
         #print score
-
-        query="UPDATE user SET " + attribute + "=" +"'"+ score+ "' , " + attribute + "_Total="+attribute+"_Total + 1 ," +attribute + "_Keywords='" +newKeyword + "' WHERE UID="+ user2
+        if newKeyword:
+            query="UPDATE user SET " + attribute + "=" +"'"+ score+ "' , " + attribute + "_Total="+attribute+"_Total + 1 ," +attribute + "_Keywords='" +newKeyword + "' WHERE UID="+ user2
         #print query
+        else:
+            query="UPDATE user SET " + attribute + "=" +"'"+ score+ "' , " + attribute + "_Total="+attribute+"_Total + 1 WHERE UID="+ user2
         cur.execute(query)
         cur.connection.commit()
     else:
         score=str(score);
         if not "null" in keyword:
             keyword="1"+keyword
-        query="INSERT INTO user (UID, ACTIVE, " + attribute + "," + attribute + "_Total ," + attribute+ "_Keywords) VALUES (" + user2 + ",0," +"'"+ score+'&&'+comment +"',1, '"+keyword+"' )"
+        query="INSERT INTO user (UID, ACTIVE, " + attribute + "," + attribute + "_Total ," + attribute+ "_Keywords) VALUES (" + user2 + ",0," +"'"+ score+"&&"+comment +"',1, '"+keyword+"' )"
         print query
         cur.execute(query)
         cur.connection.commit()
