@@ -1,5 +1,6 @@
 
 import MySQLdb
+import time
 
 db = MySQLdb.connect(host="127.0.0.1",
                      port=3306, # your host, usually localhost
@@ -14,7 +15,7 @@ cur = db.cursor()
 # Use all the SQL you like
 cur.execute("SELECT COUNT(id) FROM transaction") #python determines if there are any transactions to record
 count = cur.fetchall() 
-
+start_time = time.time()
 while count[0][0] != 0:
     #print count[0][0]
     cur.execute("SELECT * FROM transaction LIMIT 1")
@@ -34,7 +35,19 @@ while count[0][0] != 0:
     newKeyword=""
     #print keyword
     affiliation=row[0][7]
-    
+    affiliations=affiliation.split('&&')
+    for affiliate in affiliations:
+        data=affiliate.split('||')
+        if len(data)>1:
+            query="SELECT COUNT(1) FROM communities WHERE UID='" + (data[1]) + "'"
+            cur.execute(query)
+            exists=cur.fetchall()
+            if exists[0][0]>1:
+                print "exists"
+            else:
+                query="INSERT INTO communities (UID, Name, Picture) VALUES ('"+data[1] +"','" + data[0]+"','http://graph.facebook.com/"+data[1]+"/picture?width=600&height=600')"
+                cur.execute(query)
+                cur.connection.commit() 
     query="SELECT * FROM user WHERE UID=" + user2
     cur.execute(query)
     exists=cur.fetchall()
@@ -116,3 +129,5 @@ query="ALTER TABLE transaction AUTO_INCREMENT = 1" #resets transaction tables id
 cur.execute(query)
 cur.connection.commit()
 db.close()
+end_time = time.time()
+print("Elapsed time was %g seconds" % (end_time - start_time))
