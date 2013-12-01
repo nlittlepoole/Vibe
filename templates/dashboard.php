@@ -34,6 +34,11 @@
 		      $( "#accordion" ).accordion();
 		  });
 		  </script>
+		  <script>
+			  $(function() {
+			    $( document ).tooltip();
+			  });
+		  </script>
 
 		<!--[if lt IE 9]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -73,8 +78,8 @@
 	      						<div style="margin-top: 15px; text-align: left; margin-left: 20px">
 	      							<table style="margin: 0px">
 	      								<tr><td style="padding: 0px"><p><strong>Name: </strong></td><td style="padding-left: 8px">Noah Stebbins</p></td></tr>
-										<tr><td style="padding: 0px"><p><strong>Communities:</strong></td><td style="padding-left: 8px">Columbia, Boeing, New York</p></td></tr>
-										<tr><td style="padding: 0px"><p><strong>Points: </strong></td><td style="padding-left: 8px">824</p></td></tr>
+										<tr><td style="padding: 0px"><p><strong>Communities:</strong></td><td style="padding-left: 8px"><a href="http://www.google.com" style="color: #006699">Columbia</a>, <a href="http://www.google.com" style="color: #006699">Boeing</a>, <a href="http://www.google.com" style="color: #006699">New York</a></p></td></tr>
+										<tr><td style="padding: 0px" title="Points can be used for more feedback about how you fare among your communities."><p><strong>Points: </strong></td><td style="padding-left: 8px">824</p></td></tr>
 										<tr><td style="padding: 0px"><p><strong># of Questions Answered: </strong></td><td style="padding-left: 8px">387</p></td></tr>
 										<tr><td colspan="2"><p><button id="rounded_corners" class="btn btn-large btn-primary" style="background-color: #000033" >Go to Questions <i class="icon-circle-arrow-right" style="color: white" ></i></button></p></td></tr>
 									</table>
