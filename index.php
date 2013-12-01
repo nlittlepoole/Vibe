@@ -27,12 +27,13 @@ switch ( $action ) {
     break;
   case 'submit'://a user submits a question
     $recipient=$_SESSION['recipient'];
-    $attriubte=$_SESSION['attribute'];
-    $positive=$_SESSION['positive'];
-    $slider=$_POST["slideVal"];
-    $comment=$_POST["commentsVal"];
-    $affilations=$_SESSION['affilations'];
-    $vibe= new Vibe($uid, $recipient,$attribute,$affiliations);
+    $attribute=isset( $_SESSION['attribute'] ) ? $_SESSION['attribute'] : "";
+    $positive=isset( $_SESSION['positive'] ) ? $_SESSION['positive'] + "" : "";
+    $slider=2*$_POST["slideVal"]; //Slider value needs to be multiplied by two since slider has 5 notches
+    $comment=isset( $_POST["commentsVal"] ) ? $_POST["commentsVal"] : "";
+    $affiliations=isset($_SESSION['affiliations']) ? $_SESSION['affiliations'] : "";
+    $keywords=$slider>7 && $_SESSION['keywords']!="" ? $_SESSION['keywords']:"null";
+    $vibe= new Vibe($uid, $recipient,$attribute,$keywords,$affiliations);
     if(!$positive){
       $slider=10-$slider;
     }
@@ -60,7 +61,7 @@ function question(){
     
     //Useful variables are initialized here at the beginning of the code
     $question;
-    $question_id;
+    $attribute;
     $random=rand(0,1); //random is set to 0 or 1
     $recipient=0;
     $name;
@@ -69,10 +70,11 @@ function question(){
     while(!$recipient){
         //if $random is 0, the code only uses top friends and picks from any of the vibe questions
         if($random==0){
-            $question_source=getQuestion(20); //calls the getQuestion(int) function to get the data of a question out of the Vibosphere database. This is a php array
-            $question_id=$question_source['id']; // $question_id is set to the attribute number in the table, this will be changed later to Attribute
+            $question_source=getQuestion(14); //calls the getQuestion(int) function to get the data of a question out of the Vibosphere database. This is a php array
+            $attribute=$question_source['id']; // $question_id is set to the attribute number in the table, this will be changed later to Attribute
             $question=$question_source['question']; //$question is set to the string of the question picked
             $result=$_SESSION['topFriends']; //the top friends array, which contains a users top friends, is returned and set to $result
+            $_SESSION['keywords']=$question_source['keywords'];
             $random=rand(0,sizeof($result)-1); //random is set to an integer between 0(inclusive) and the size of the array of top friends(non inclusive)
             $recipient=$result[$random] ['uid']; //$random is used as the index of the top friends array and the user id is returned 
             $grab='https://graph.facebook.com/' . $recipient; //$grab is set to the graph url of the friend selected
@@ -80,34 +82,29 @@ function question(){
             $name=$data['name']; //name is set to the user's name
         }
         else{
-            $question_source=getQuestion(4); //only the first four questions, which are first vibe questions, are used to get question data
+            $question_source=getQuestion(5); //only the first four questions, which are first vibe questions, are used to get question data
             $question=$question_source['question']; //question String is set to $question
-            $question_id=$question_source['id']; //question ID is set to $question_id, will later be changed to attribute
-              $graph_url="https://graph.facebook.com/" . $uid . "/friends?access_token=" . $token; //graph url is made to access the user's friendlist
+            $attribute=$question_source['id']; //question ID is set to $question_id, will later be changed to attribute
+            $_SESSION['keywords']=$question_source['keywords'];
+            $graph_url="https://graph.facebook.com/" . $uid . "/friends?access_token=" . $token; //graph url is made to access the user's friendlist
             $user = json_decode(file_get_contents($graph_url), true); //user's friend list is a json that is decoded from the graph url and returned as a 2d array
-            $peopleid=array(); //$peopleID is an array of ID's of a user's facebook friends
-            $names=array(); //$names is an array of the name's of a user's facebook friends. It may make sense to use a php 2d array for $peopleid and $names later as that would be better practice
-            foreach($user["data"] as $person) { //every person in a user's friend list is iteratoed through and their name and uid is added to their respective lists.
-                 array_push($peopleid, $person['id']);
-                 array_push($names, $person['name']);
-            }
-            $random=rand(0,sizeof($peopleid)); // random is set to an int between 0 and the number of facebook friends
-            $recipient=$peopleid[$random]; //the uid of the recipient is set from the uid list using the random number
-            $name=$names[$random];  //the name of the recipient is set from the names list using the random number
+            $random=rand(0,sizeof($user['data']));
+            $recipient=$user['data'][$random]['id'];
+            $name=$user['data'][$random]['name'];
         } 
     }
-    $question= str_replace("name", $name, $question); //needs to be switched from " I " to " name "
+    $question= str_replace("name", $name, $question); 
     $pic=getPictures($recipient);
     $_SESSION['affiliations']=friendAffiliations($recipient);
     $_SESSION['question'] = $question;
-    $_SESSION['question_id'] = $question_id;
+    $_SESSION['attribute'] = $attribute;
     $_SESSION['pic'] = $pic;
     $_SESSION['recipient'] = $recipient; 
 }
 
 function getPictures($recipient){
     global $facebook;
-    $fql="SELECT src_big FROM photo WHERE pid IN (SELECT pid FROM photo_tag WHERE subject = $recipient) LIMIT 4; ";
+    $fql="SELECT src_big FROM photo WHERE aid IN (SELECT aid FROM album WHERE owner = $recipient AND type = 'profile') LIMIT 4; ";
     $param=array(//facebook api uses arrays to store components of query's and then runs them out of $facebook->api(array of parameters)
             'method'    => 'fql.query',
             'query'     => $fql,
@@ -159,50 +156,52 @@ function topFriends(){
     global $uid;
     global $token;
     global $facebook;
-    //facebook fql query that returns a 3d array of a user's last 300 timeline activities created by other friends(includes status updates, wall post, tagged photos, etc)
-    $fql="SELECT actor_id FROM stream WHERE actor_id!=me() AND filter_key = 'others' AND source_id = me() LIMIT 300";
-    $param=array(//facebook api uses arrays to store components of query's and then runs them out of $facebook->api(array of parameters)
-            'method'    => 'fql.query',
-            'query'     => $fql,
-            'callback'  => ''
-        );
-    $result   = $facebook->api($param); //result is set to 3d array returned by the fql api. This is an expensive query, it takes the longest of any facebook api query
-    $top_frds=array(); //top friends array is intialized 
-    foreach($result as $result1) //iterates through every single timeline activity and adds the corresponding friend's uid to $top_frds
-    {
-        $top_frds[]=$result1['actor_id'];
+    $statuses = $facebook->api('/me/statuses');
+    $top_frds=array();
+    foreach($statuses['data'] as $status){
+    // processing likes array for calculating fanbase. 
+      foreach($status['likes']['data'] as $likesData){
+          $top_frds[] = array('uid'=>$likesData['id']); 
+      }
+      foreach($status['comments']['data'] as $comArray){
+     // processing comments array for calculating fanbase
+                $top_frds[] =array('uid'=> $comArray['from']['id']);
+      }
     }
-
-    $new_array = array(); //temporary array used for sorting
-
-    //top_frds is iterated through and a new array is created with each uid and the frequency that it appeared in the user's timeline stream
-    foreach ($top_frds as $key => $value) {
-        if(isset($new_array[$value]))
-             $new_array[$value] += 1;
-        else
-            $new_array[$value] = 1;
-    }
-    $top_frds=array(); //top friends is reinitialized to clear it
-    foreach($new_array as $tuid => $trate){ //uses the frequency that the user appeared to sort the user's by most appearences
-        $top_frds[]=array('uid'=>$tuid,'rate'=>$trate);
-    }
+   
     $_SESSION['topFriends'] = $top_frds; //top friends is added to the session data to be used by the app whenever necessary
   }
 
 //getQuestion(int) returns an question using the $input as the upward bound of questions that can be pulled
 function getQuestion($input){
-    $attribute= rand(1,$input); //4andom is set to a number between 1 and $input
-    $random=rand(1,1);
+    echo $attribute= rand(1,$input); //4andom is set to a number between 1 and $input
+    echo $random=rand(1,10);
     $question="Question" . $random;
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //database connection is established uisng credentials in config.php
-    $sql = "SELECT $question FROM question WHERE id=$attribute"; //sql query that returns the string of the question in the table
+    $sql = "SELECT $question, Attribute FROM question WHERE id=$attribute"; //sql query that returns the string of the question in the table
     $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
     $st->execute();//executes query above
     $question_source=$st->fetch(); //$question source is set to result of query
+    $question=$question_source[0]; //sets question to the question field of the question table
+    $keywords="";
+    if(strpos($question, '(')){
+      $keywords=strrchr($question, "("); //sets keywords in question string equal to keywords
+      $question=substr($question,0,strrpos($question, '(')); //takes out keyword from question string
+    }
+    if(strpos($question, '*') === FALSE){
+      $_SESSION['positive']=1;
+    }
+    else{
+       $question=substr($question, 1);
+      $_SESSION['positive']=0;
+    }
+    $attribute=$question_source[1]; //sets attribute
+
     $conn = null;
     return (array( // returns the the sql table id # of the question and its string. Will be changed later to return attribute and not ID #
             'id'    => $attribute,
-            'question' => $question_source,
+            'question' => $question,
+            'keywords' =>$keywords,
         ));
   }
 
@@ -247,18 +246,19 @@ function friendAffiliations($input){
        $education=$result[0]['education']; //education is set to the 3d education array that is 2 dimensions in from the result array
        foreach($education as $school){ //education array is iterated over and each school name is added to affiliations
            //php is shitty at concatenation so it is easier to add all the elements to an array and concatenate at the end
-           array_push($affiliations, $school['school']['name'] . "&&");
+           array_push($affiliations, $school['school']['name']."||". $school['school']['id'] . "&&");
        }
         $work=$result[0]['work']; //$ work is set to the 3d education array that is 2 dimensions in from result array
        foreach($work as $employer){ //work is iterated over and each employer name and location name is added to $affiliations
-          $employer['employer']['id'];
-           array_push($affiliations, $employer['employer']['name'] . "&&");
-           array_push($affiliations, $employer['location']['name'] . "&&"); //I decided to the use the locations of a user's job because facebook doesn't have that info for schools
+           array_push($affiliations, $employer['employer']['name'] . "||" . $employer['employer']['id'] .  "&&");
+           array_push($affiliations, $employer['location']['name'] . "||". $employer['location']['id'] . "&&"); //I decided to the use the locations of a user's job because facebook doesn't have that info for schools
        }
+       $affiliations=array_unique($affiliations);
        $sum=''; //sum is initialized
        foreach($affiliations as $id){// loops through all the $affiliations added in the above loops and concatenates them into one string seperated by "&&"
            $sum=$sum . $id; 
        }
+       $sum;
        return $sum; //returns concatenated string of affiliations
 }
 ?>
