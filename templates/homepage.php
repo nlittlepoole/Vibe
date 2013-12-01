@@ -88,48 +88,43 @@ require_once($path . "/config.php");
 		</section>
 
 		<!-- Team Section -->
-		<section id="team" class="page color-highlight">
+		<section id="team" style="background: url(../img/greenwall1.jpg) no-repeat center center fixed" class="page">
 			<div class="container">
-				<h1 class="page-title">Team</h1>
-				<h2 class="page-subtitle">Our Thinkers and Makers</h2>
+				<h1 class="page-title" style="color: white">Team</h1>
+				<h2 class="page-subtitle" style="color: white">Our Thinkers and Makers</h2>
 				<!-- Team Members -->
 				<div class="grid">
 					<div class="row-fluid">
 						<div class="span4">
 							<img src="/img/noah1.jpg" alt="" class="profile" />
-							<h3>Noah</h3>
-							<h4>Co-founder</h4>
-							<p>Noah is a sophomore studying Computer Science with a minor in Economics. In his spare
+							<h3 style="color: white">Noah</h3>
+							<h4 style="color: white">Co-founder</h4>
+							<p style="color: white">Noah is a sophomore studying Computer Science with a minor in Economics. In his spare
 								time, he enjoys playing ping pong, running, and playing ukelele.</p>
 							<ul class="icons-list">
-								<li><a href="#" class="icon-facebook">Facebook</a></li>
+								<li><a href="http://www.facebook.com/emanuelstebbins" class="icon-facebook">Facebook</a></li>
 								<li><a href="#" class="icon-twitter">Twitter</a></li>
-								<li><a href="#" class="icon-linkedin">LinkedIn</a></li>
+								<li><a href="http://www.linkedin.com/in/noahstebbins" class="icon-linkedin">LinkedIn</a></li>
 							</ul>
 						</div>
 						<div class="span4">
 							<img src="/img/niger1.jpg" alt="" class="profile" />
-							<h3>Niger</h3>
-							<h4>Co-founder</h4>
-							<p>Niger is a sophomore studying Operations Research with a minor in Computer Science. When he's
+							<h3 style="color: white">Niger</h3>
+							<h4 style="color: white">Co-founder</h4>
+							<p style="color: white">Niger is a sophomore studying Operations Research with a minor in Computer Science. When he's
 								not watching Legend of Korra, he's probably playing ping pong, surfing subreddits, or listening
 								to Drake's new album.</p>
 							<ul class="icons-list">
-								<li><a href="#" class="icon-facebook">Facebook</a></li>
+								<li><a href="http://www.facebook.com/nlittlepoole" class="icon-facebook">Facebook</a></li>
 								<li><a href="#" class="icon-twitter">Twitter</a></li>
-								<li><a href="#" class="icon-linkedin">LinkedIn</a></li>
+								<li><a href="http://www.linkedin.com/pub/niger-little-poole/55/803/557" class="icon-linkedin">LinkedIn</a></li>
 							</ul>
 						</div>
 						<div class="span4">
 							<img src="/img/question.png" alt="" class="profile" />
-							<h3>You?</h3>
-							<h4>An Awesome Person</h4>
-							<p>Join Vibe today! Become a part of the next big thing in social feedback.</p>
-							<ul class="icons-list">
-								<li><a href="#" class="icon-facebook">Facebook</a></li>
-								<li><a href="#" class="icon-twitter">Twitter</a></li>
-								<li><a href="#" class="icon-linkedin">LinkedIn</a></li>
-							</ul>
+							<h3 style="color: white">You?</h3>
+							<h4 style="color: white">An Awesome Person</h4>
+							<p style="color: white">Join Vibe today! Become a part of the next big thing in social feedback.</p>
 						</div>
 					</div> <!-- end row-fluid -->
 				</div> <!-- end grid -->
@@ -159,16 +154,13 @@ require_once($path . "/config.php");
 						<h3>Contact Info</h3>
 						<ul class="info-list">
 	            <li class="icon-map-marker">Columbia University<br>New York, NY<br>10027</li>
-	            <li class="icon-phone">141-411-2401</li>
-	            <li class="icon-envelope">team@go-vibe.com</li>
+	            <li class="icon-envelope">teamgovibe@gmail.com</li>
 	          </ul>
 	          <h3>Social Media</h3>
 	          <ul class="icons-list">
 	            <li><a href="" title="Facebook" class="icon-facebook">Facebook</a></li>
 	            <li><a href="" title="Twitter" class="icon-twitter">Twitter</a></li>
-	            <li><a href="" title="Google Plus" class="icon-google-plus">Google Plus</a></li>
 	            <li><a href="" title="LinkedIn" class="icon-linkedin">LinkedIn</a></li>
-	            <li><a href="" title="Pinterest" class="icon-pinterest">Pinterest</a></li>
 	          </ul>
 					</div> <!-- end sidebar -->
 				</div> <!-- end row-fluid -->
