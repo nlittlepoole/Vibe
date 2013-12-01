@@ -114,7 +114,7 @@
 					    <br />
 					    <input type="hidden" id="amount_field" name="slideVal">
 					    </p>
-						<input type="text" name="commentsVal" style="width: 300px" placeholder="Comments?" />
+						<input type="text" name="commentsVal" style="width: 300px" placeholder="Comments?" maxlength="40" />
 						<br />
 						<input id="rounded_corners2" class="btn btn-primary btn-large" type="submit" />
 						<button title="Skip" id="rounded_corners2" class="btn btn-primary btn-large" onclick="location.href='/index.php?action=question'" ><i class="icon-ban-circle"></i></button>
