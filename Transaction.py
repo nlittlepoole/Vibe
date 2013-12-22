@@ -80,6 +80,7 @@ while count[0][0] != 0:
                 cur.execute(query)
                 cur.connection.commit()
                 query= "INSERT INTO `" + data[1] + "`(`ID`, `Attribute`, `Keywords`, `Average`, `Sum`, `Squares`, `Deviation`, `Rank1`, `Rank2`, `Rank3`, `Rank4`, `Rank5`, `Rank6`, `Rank7`, `Rank8`, `Rank9`, `Rank10`) VALUES(1, 'Attractiveness', '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', ''),(2, 'Awkwardness', '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', ''),(3, 'Intelligence', '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', ''),(4, 'Fashionability', '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', ''),(5, 'Promiscuity', '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', ''),(6, 'Humor', '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', ''),(7, 'Confidence', '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', ''),(8, 'Fun', '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', ''),(9, 'Kindness', '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', ''),(10, 'Honesty', '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', ''),(11, 'Dependability', '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', ''),(12, 'Satisfaction', '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', ''),(13, 'Ambition', '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', ''),(14, 'Humility', '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', '');"
+                print query
                 cur.execute(query)
                 cur.connection.commit()
                 query="SELECT Average,Sum FROM `"+data[1] +"` WHERE Attribute= '" + attribute + "';"
@@ -96,12 +97,11 @@ while count[0][0] != 0:
     exists=cur.fetchall()
     #print exists
     if exists:
-        query="SELECT " +attribute + ","+ attribute+"_Total,"+attribute+"_Keywords FROM user WHERE UID=" + user2
+        query="SELECT " +attribute + ","+ attribute+"_Total,"+ attribute+"_Keywords,"+attribute+"_Comments FROM user WHERE UID=" + user2
         cur.execute(query)
         raw=cur.fetchall()
-        previous= raw[0][0]
-        previous_score=0
-        previous_comment=''
+        previous_score=float(raw[0][0])
+        previous_comment=raw[0][3]
         total=int(raw[0][1])
         previousKeyword=raw[0][2]
         if ((not "null" in keyword) and (previousKeyword)) and (keyword in previousKeyword):
@@ -122,40 +122,30 @@ while count[0][0] != 0:
         #print previous_scor
         #Sets the previous score to the same score as the input if the user has never had an answer for this before
         #essentially makes the input score weighted against itself
-        if previous is None:
-            previous_score=float(0)
-            #print previous_score
+        previous_list=previous_comment.split('&&')
+        #print previous_list
+        if len(comment)>1:
+            if len(previous_comment) >1:
+                for comments in previous_list:
+                    comment=comment +'&&' + previous_comment  
         else:
-            previous_list=previous.split('&&')
-            #print previous_list
-            previous_score=float(previous_list[0])
-            previous_list.pop(0)
-            if len(comment)>1:
-                for comments in previous_list:
-                    previous_comment=comments +'&&' + previous_comment
-                comment=previous_comment+comment
-            else:
-                for comments in previous_list:
-                    comment=comment + "&&" +comments
-                if len(comment)>1:
-                    comment=comment[2:]
+            comment=previous_comment
         score=(score+(previous_score*total))/(total+1)
         score="%.2f" % score
-        if len(comment) >1:
-            score=str(score)+"&&"+str(comment)
+        score=str(score)
         #print score
         if newKeyword:
-            query="UPDATE user SET " + attribute + "=" +"'"+ score+ "' , " + attribute + "_Total="+attribute+"_Total + 1 ," +attribute + "_Keywords='" +newKeyword + "' WHERE UID="+ user2
+            query="UPDATE user SET " + attribute + "=" +""+ score+ " , " + attribute + "_Total="+attribute+"_Total + 1 ," +attribute + "_Keywords='" +newKeyword + "'," + attribute + "_Comments='"+comment+"' WHERE UID="+ user2
         #print query
         else:
-            query="UPDATE user SET " + attribute + "=" +"'"+ score+ "' , " + attribute + "_Total="+attribute+"_Total + 1 WHERE UID="+ user2
+            query="UPDATE user SET " + attribute + "=" +""+ score+ " , " + attribute + "_Total="+attribute+"_Total + 1," + attribute + "_Comments="+comment+"' WHERE UID="+ user2
+        print query
         cur.execute(query)
         cur.connection.commit()
     else:
-        score=str(score);
         if not "null" in keyword:
             keyword="1"+keyword
-        query="INSERT INTO user (UID, ACTIVE, " + attribute + "," + attribute + "_Total ," + attribute+ "_Keywords) VALUES (" + user2 + ",0," +"'"+ score+"&&"+comment +"',1, '"+keyword+"' )"
+        query="INSERT INTO user (UID, ACTIVE, " + attribute + "," + attribute + "_Total ," + attribute+ "_Keywords," +attribute+"_Comments) VALUES (" + user2 + ",0,"+ str(score)+",1, '"+keyword+"','"+comment+"')"
         #print query
         cur.execute(query)
         cur.connection.commit()
