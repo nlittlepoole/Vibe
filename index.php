@@ -6,8 +6,8 @@ session_start(); //initializes the PHP session and allows php to access cookie/u
 
 $action = isset( $_GET['action'] ) ? $_GET['action'] : ""; //sets $action to "Action" url fragment string if action isn't null
 $config = array(); //initializes $config as an array
-$config['appId'] = '162254093981266'; //$ Facebook App ID code for Vibe, assigned by facebook to Niger Little-Poole
-$config['secret'] = '7387b4372a38f8db30ae8834dd193c5b'; //FAcebook secret code for vibe
+$config['appId'] = APP_ID; //$ Facebook App ID code for Vibe, assigned by facebook to Niger Little-Poole
+$config['secret'] = APP_SECRET; //FAcebook secret code for vibe
 $facebook = new Facebook($config); //App ID and passcode used to initialize session authoirzation for facebook API
 $token = $facebook->getAccessToken(); //Authorization token is grabbed from URL fragment, if user hasn't logged in it will return an invalid token
  $uid = $facebook->getUser(); // Facebook user ID number is returned, if facebook isn't logged in or exception, it returns 0
@@ -17,13 +17,33 @@ switch ( $action ) {
   case 'login': //login occurs after user hits login button on homepage.php, mostly just sets up environment to play vibe 
     addUser($uid); //adds user ID to mysql USER table, method does nothing if ID already exists and activates the ID if information exists but this is the first time the user has logged in
     topFriends(); // pulls users top friends using the top friends function
-   	header('Location: /index.php?action=question'); // index is reloaded but with question prameter. Now that environment is set up index.php is reloaded with the intent of answring questiosn
+   	header('Location: /index.php?action=dashboard'); // index is reloaded but with question prameter. Now that environment is set up index.php is reloaded with the intent of answring questiosn
     break;
   case 'question'://occurs after a login or another question, this case handles generating a new question and friend
     $params = array( 'next' => 'http://localhost' ); // redirect url is passed to facebook object
     $_SESSION['logoutUrl'] = $facebook->getLogoutUrl($params); //logout url is created and stored to the session data.
     question(); // calls the question function that pulls a user and question and places the data in the Session cache
     header('Location: /templates/questions.php'); //sends browser to questions page with Session Data containing questions input above
+    break;
+  case 'dashboard'://occurs after a login or another question, this case handles generating a new question and friend
+    $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //database connection is established uisng credentials in config.php
+    $sql = "SELECT * FROM user WHERE UID=$uid"; //sql query that returns the string of the question in the table
+    $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
+    $st->execute();//executes query above
+    $data=$st->fetch(); //$question source is set to result of query
+    $dashboard=array();
+    print_r($data);
+    $dashboard["pic"]="http://graph.facebook.com/" . $uid . "/picture?width=300&height=300";
+    $_SESSION['dashboard']=$dashboard;
+    $conn=null;
+
+
+
+
+
+
+
+    header('Location: /templates/dashboard.php'); //sends browser to questions page with Session Data containing questions input above
     break;
   case 'submit'://a user submits a question
     $recipient=$_SESSION['recipient'];
@@ -174,8 +194,8 @@ function topFriends(){
 
 //getQuestion(int) returns an question using the $input as the upward bound of questions that can be pulled
 function getQuestion($input){
-    echo $attribute= rand(1,$input); //4andom is set to a number between 1 and $input
-    echo $random=rand(1,10);
+    $attribute= rand(1,$input); //4andom is set to a number between 1 and $input
+    $random=rand(1,10);
     $question="Question" . $random;
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //database connection is established uisng credentials in config.php
     $sql = "SELECT $question, Attribute FROM question WHERE id=$attribute"; //sql query that returns the string of the question in the table
