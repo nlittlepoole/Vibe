@@ -1,11 +1,22 @@
 <!DOCTYPE html>
+
+<?php 
+    session_start();
+    $path = $_SERVER['DOCUMENT_ROOT'];
+    require($path . "/config.php");
+    
+    $action = isset( $_GET['action'] ) ? $_GET['action'] : "Invite more Friends to Vibe for Comments"; //sets $action to "Action" url fragment string if action isn't null
+    $dashboard=$_SESSION['dashboard'];
+    $pic=$dashboard['pic'];
+    
+   ?>
  <html lang="en" class="no-js"> <!--<![endif]-->
 	<head>
 		<!--This PHP establishes the local variables necessary for the questions Don't worry about this code now. As it doesn't do anything since I never coded functions for it-->
 		<!--See the Questions file for the PHP -->
 		<meta charset="utf-8">
 		<title>Vibe</title>
-		<meta name="description" content="">
+		<meta name="description" content="Invite more Friends to Vibe for Comments">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<link rel="stylesheet" href="/css/bootstrap.css">
@@ -55,7 +66,7 @@
 				<!-- Main Navigation -->
 				<ul class="menu nav">
 					<li><a href="#questions">Dashboard</a></li>
-					<li><a href="#questions">Questions</a></li>
+					<li><a href="/index.php?action=question">Questions</a></li>
 				</ul>
 			</nav>
 		</header>
@@ -72,83 +83,130 @@
 						<div class="span6">
 								<div style="display: block; border-radius: 50%; margin-left: auto; margin-right: auto; height: 300px; 
 								width: 300px; overflow:hidden">
-	      							<img src="../img/profpic-sample1.jpg"/> 
+	      							<img src=<?php echo $pic ?> /> 
 	      						</div>	
 	
 	      						<div style="margin-top: 15px; text-align: left; margin-left: 20px">
 	      							<table style="margin: 0px">
-	      								<tr><td style="padding: 0px"><p><strong>Name: </strong></td><td style="padding-left: 8px">Noah Stebbins</p></td></tr>
-										<tr><td style="padding: 0px"><p><strong>Communities:</strong></td><td style="padding-left: 8px"><a href="http://www.google.com" style="color: #006699">Columbia</a>, <a href="http://www.google.com" style="color: #006699">Boeing</a>, <a href="http://www.google.com" style="color: #006699">New York</a></p></td></tr>
-										<tr><td style="padding: 0px" title="Points can be used for more feedback about how you fare among your communities."><p><strong>Points: </strong></td><td style="padding-left: 8px">824</p></td></tr>
-										<tr><td style="padding: 0px"><p><strong># of Questions Answered: </strong></td><td style="padding-left: 8px">387</p></td></tr>
-										<tr><td colspan="2"><p><button id="rounded_corners" class="btn btn-large btn-primary" style="background-color: #000033" >Go to Questions <i class="icon-circle-arrow-right" style="color: white" ></i></button></p></td></tr>
+	      								<tr><td style="padding: 0px"><p><strong>Name: </strong></td><td style="padding-left: 8px"><?php echo $_SESSION['dashboard']['Name'] ?></p></td></tr>
+										<tr><td style="padding: 0px"><p><strong>Communities:</strong></td><td style="padding-left: 8px"><?php echo $_SESSION['dashboard']['Communities'] ?></p></td></tr>
+										<tr><td style="padding: 0px" title="Points can be used for more feedback about how you fare among your communities."><p><strong>Points:</strong></td><td style="padding-left: 8px"><?php echo $dashboard['Points'] ?></p></td></tr>
+										<tr><td colspan="2"><p><button id="rounded_corners" class="btn btn-large btn-primary" style="background-color: #000033"  onclick="location.href='/index.php?action=question'">Go to Questions <i class="icon-circle-arrow-right" style="color: white" ></i></button></p></td></tr>
 									</table>
 								</div>
 						</div>
 						<div class="span6">
 							<h1 class="page-title" style="margin-top: 0px">My Vibes</h1>
 							<div id="accordion">
-							  <p style="text-align: left"><strong><span>Attractiveness </span></strong><span style="float: right">8.7</span></p>
+							  <p style="text-align: left"><strong><span>Attractiveness </span></strong><span style="float: right"><?php echo $_SESSION['dashboard']['Attractiveness'] ?></span></p>
 							  <div>
-							    <p style="text-align: left; margin-bottom: 0px"> Keywords: <em>Preppy, Nerdy, Professional</em></p>
+							    <p style="text-align: left; margin-bottom: 0px"> Vibes: <em></em></p>
 							    <p style="text-align: left; margin-bottom: 0px" > Comments: </p>
 							    <ul style="text-align: left">
-							    	<li>"You are fat."</li>
-							    	<li>"Bro, tone down on the polo."</li>
-							    	<li>"Bro, do you even lift?"</li>
-							    	<li>"Peter wuz here lolol"</li>
-							    	<li>"Bro, do you even Keanu?"</li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Attractiveness_Comments'][0]) ?  '"'.$_SESSION['dashboard']['Attractiveness_Comments'][0] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Attractiveness_Comments'][1]) ?  '"'.$_SESSION['dashboard']['Attractiveness_Comments'][1] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Attractiveness_Comments'][2]) ?  '"'.$_SESSION['dashboard']['Attractiveness_Comments'][2] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Attractiveness_Comments'][3]) ?  '"'.$_SESSION['dashboard']['Attractiveness_Comments'][3] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Attractiveness_Comments'][4]) ?  '"'.$_SESSION['dashboard']['Attractiveness_Comments'][4] .'"' : "Invite more Friends to Vibe for Comments"?></li>
 							    </ul>
 							  </div>
-							  <p style="text-align: left"><strong><span>Intelligence </span></strong><span style="float: right">8.7</span></p>
+							  <p style="text-align: left"><strong><span>Intelligence </span></strong><span style="float: right"><?php echo $_SESSION['dashboard']['Intelligence'] ?></span></p>
 							  <div>
-							    <p style="text-align: left; margin-bottom: 0px"> Keywords: <em>Preppy, Nerdy, Professional</em></p>
+							    <p style="text-align: left; margin-bottom: 0px"> Vibes: <?php echo isset($_SESSION['dashboard']['Intelligence_Keywords']) ?  $_SESSION['dashboard']['Intelligence_Keywords']: " " ?> <em></em></p>
 							    <p style="text-align: left; margin-bottom: 0px" > Comments: </p>
 							    <ul style="text-align: left">
-							    	<li>"You are fat."</li>
-							    	<li>"Bro, tone down on the polo."</li>
-							    	<li>"Bro, do you even lift?"</li>
-							    	<li>"Peter wuz here lolol"</li>
-							    	<li>"Bro, do you even Keanu?"</li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Intelligence_Comments'][0]) ?  '"'.$_SESSION['dashboard']['Intelligence_Comments'][0] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Intelligence_Comments'][1]) ?  '"'.$_SESSION['dashboard']['Intelligence_Comments'][1] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Intelligence_Comments'][2]) ?  '"'.$_SESSION['dashboard']['Intelligence_Comments'][2] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Intelligence_Comments'][3]) ?  '"'.$_SESSION['dashboard']['Intelligence_Comments'][3] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Intelligence_Comments'][4]) ?  '"'.$_SESSION['dashboard']['Intelligence_Comments'][4] .'"' : "Invite more Friends to Vibe for Comments"?></li>
 							    </ul>
 							  </div>
-							  <p style="text-align: left"><strong><span>Fashionability </span></strong><span style="float: right">7.7</span></p>
+							  <p style="text-align: left"><strong><span>Fashionability </span></strong><span style="float: right"><?php echo $_SESSION['dashboard']['Fashionability'] ?></span></p>
 							  <div>
-							    <p style="text-align: left; margin-bottom: 0px"> Keywords: <em>Preppy, Nerdy, Professional</em></p>
+							    <p style="text-align: left; margin-bottom: 0px"> Vibes:<?php echo  isset($_SESSION['dashboard']['Fashionability_Keywords']) ?  $_SESSION['dashboard']['Fashionability_Keywords']: " " ?> <em></em></p>
 							    <p style="text-align: left; margin-bottom: 0px" > Comments: </p>
 							    <ul style="text-align: left">
-							    	<li>"You are fat."</li>
-							    	<li>"Bro, tone down on the polo."</li>
-							    	<li>"Bro, do you even lift?"</li>
-							    	<li>"Peter wuz here lolol"</li>
-							    	<li>"Bro, do you even Keanu?"</li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Fashionability_Comments'][0]) ?  '"'.$_SESSION['dashboard']['Fashionability_Comments'][0] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Fashionability_Comments'][1]) ?  '"'.$_SESSION['dashboard']['Fashionability_Comments'][1] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Fashionability_Comments'][2]) ?  '"'.$_SESSION['dashboard']['Fashionability_Comments'][2] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Fashionability_Comments'][3]) ?  '"'.$_SESSION['dashboard']['Fashionability_Comments'][3] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Fashionability_Comments'][4]) ?  '"'.$_SESSION['dashboard']['Fashionability_Comments'][4] .'"' : "Invite more Friends to Vibe for Comments"?></li>
 							    </ul>
 							  </div>
-							  <p style="text-align: left"><strong><span>Ambition </span></strong><span style="float: right">8.7</span></p>
+							  <p style="text-align: left"><strong><span>Ambition </span></strong><span style="float: right"><?php echo $_SESSION['dashboard']['Ambition'] ?></span></p>
 							  <div>
-							    <p style="text-align: left; margin-bottom: 0px"> Keywords: <em>Preppy, Nerdy, Professional</em></p>
+							    <p style="text-align: left; margin-bottom: 0px"> Vibes: <?php echo isset($_SESSION['dashboard']['Ambition_Keywords']) ? $_SESSION['dashboard']['Ambition_Keywords']: " " ?><em></em></p>
 							    <p style="text-align: left; margin-bottom: 0px" > Comments: </p>
 							    <ul style="text-align: left">
-							    	<li>"You are fat."</li>
-							    	<li>"Bro, tone down on the polo."</li>
-							    	<li>"Bro, do you even lift?"</li>
-							    	<li>"Peter wuz here lolol"</li>
-							    	<li>"Bro, do you even Keanu?"</li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Ambition_Comments'][0]) ?  '"'.$_SESSION['dashboard']['Ambition_Comments'][0] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Ambition_Comments'][1]) ?  '"'.$_SESSION['dashboard']['Ambition_Comments'][1] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Ambition_Comments'][2]) ?  '"'.$_SESSION['dashboard']['Ambition_Comments'][2] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Ambition_Comments'][3]) ?  '"'.$_SESSION['dashboard']['Ambition_Comments'][3] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Ambition_Comments'][4]) ?  '"'.$_SESSION['dashboard']['Ambition_Comments'][4] .'"' : "Invite more Friends to Vibe for Comments"?></li>
 							    </ul>
 							  </div>
-							  <p style="text-align: left"><strong><span>Promiscuity </span></strong><span style="float: right">8.2</span></p>
+							  <p style="text-align: left"><strong><span>Promiscuity </span></strong><span style="float: right"><?php echo $_SESSION['dashboard']['Promiscuity'] ?></span></p>
 							  <div>
-							    <p style="text-align: left; margin-bottom: 0px"> Keywords: <em>Preppy, Nerdy, Professional</em></p>
+							    <p style="text-align: left; margin-bottom: 0px"> Vibes: <em><?php echo isset($_SESSION['dashboard']['Promiscuity_Keywords']) ? $_SESSION['dashboard']['Promiscuity_Keywords']: " " ?></em></p>
 							    <p style="text-align: left; margin-bottom: 0px" > Comments: </p>
 							    <ul style="text-align: left">
-							    	<li>"You are fat."</li>
-							    	<li>"Bro, tone down on the polo."</li>
-							    	<li>"Bro, do you even lift?"</li>
-							    	<li>"Peter wuz here lolol"</li>
-							    	<li>"Bro, do you even Keanu?"</li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Promiscuity_Comments'][0]) ?  '"'.$_SESSION['dashboard']['Promiscuity_Comments'][0] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Promiscuity_Comments'][1]) ?  '"'.$_SESSION['dashboard']['Promiscuity_Comments'][1] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Promiscuity_Comments'][2]) ?  '"'.$_SESSION['dashboard']['Promiscuity_Comments'][2] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Promiscuity_Comments'][3]) ?  '"'.$_SESSION['dashboard']['Promiscuity_Comments'][3] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Promiscuity_Comments'][4]) ?  '"'.$_SESSION['dashboard']['Promiscuity_Comments'][4] .'"' : "Invite more Friends to Vibe for Comments"?></li>
 							    </ul>
 							  </div>
-							  <p style="text-align: left"><strong><span>Humor </span></strong><span style="float: right">6.7</span></p>
+							  <p style="text-align: left"><strong><span>Humor </span></strong><span style="float: right"><?php echo $_SESSION['dashboard']['Humor'] ?></span></p>
+							  <div>
+							    <p style="text-align: left; margin-bottom: 0px"> Vibes: <em><?php echo isset($_SESSION['dashboard']['Humor_Keywords']) ? $_SESSION['dashboard']['Humor_Keywords']: " " ?></em></p>
+							    <p style="text-align: left; margin-bottom: 0px" > Comments: </p>
+							    <ul style="text-align: left">
+							    	<li><?php echo isset($_SESSION['dashboard']['Humor_Comments'][0]) ?  '"'.$_SESSION['dashboard']['Humor_Comments'][0] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Humor_Comments'][1]) ?  '"'.$_SESSION['dashboard']['Humor_Comments'][1] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Humor_Comments'][2]) ?  '"'.$_SESSION['dashboard']['Humor_Comments'][2] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Humor_Comments'][3]) ?  '"'.$_SESSION['dashboard']['Humor_Comments'][3] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Humor_Comments'][4]) ?  '"'.$_SESSION['dashboard']['Humor_Comments'][4] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    </ul>
+							  </div>
+							  <p style="text-align: left"><strong><span>Confidence </span></strong><span style="float: right"><?php echo $_SESSION['dashboard']['Confidence'] ?></span></p>
+							  <div>
+							    <p style="text-align: left; margin-bottom: 0px"> Vibes: <em><?php echo isset($_SESSION['dashboard']['Confidence_Keywords']) ? $_SESSION['dashboard']['Confidence_Keywords']: " " ?></em></p>
+							    <p style="text-align: left; margin-bottom: 0px" > Comments: </p>
+							    <ul style="text-align: left">
+							    	<li><?php echo isset($_SESSION['dashboard']['Confidence_Comments'][0]) ?  '"'.$_SESSION['dashboard']['Confidence_Comments'][0] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Confidence_Comments'][1]) ?  '"'.$_SESSION['dashboard']['Confidence_Comments'][1] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Confidence_Comments'][2]) ?  '"'.$_SESSION['dashboard']['Confidence_Comments'][2] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Confidence_Comments'][3]) ?  '"'.$_SESSION['dashboard']['Confidence_Comments'][3] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Confidence_Comments'][4]) ?  '"'.$_SESSION['dashboard']['Confidence_Comments'][4] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    </ul>
+							  </div>
+							  <p style="text-align: left"><strong><span>Confidence </span></strong><span style="float: right"><?php echo $_SESSION['dashboard']['Fun'] ?></span></p>
+							  <div>
+							    <p style="text-align: left; margin-bottom: 0px"> Vibes: <em><?php echo isset($_SESSION['dashboard']['Fun_Keywords']) ? $_SESSION['dashboard']['Fun_Keywords']: " " ?></em></p>
+							    <p style="text-align: left; margin-bottom: 0px" > Comments: </p>
+							    <ul style="text-align: left">
+							    	<li><?php echo isset($_SESSION['dashboard']['Fun_Comments'][0]) ?  '"'.$_SESSION['dashboard']['Fun_Comments'][0] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Fun_Comments'][1]) ?  '"'.$_SESSION['dashboard']['Fun_Comments'][1] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Fun_Comments'][2]) ?  '"'.$_SESSION['dashboard']['Fun_Comments'][2] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Fun_Comments'][3]) ?  '"'.$_SESSION['dashboard']['Fun_Comments'][3] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Fun_Comments'][4]) ?  '"'.$_SESSION['dashboard']['Fun_Comments'][4] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    </ul>
+							  </div>
+							  <p style="text-align: left"><strong><span>Kindness</span></strong><span style="float: right"><?php echo $_SESSION['dashboard']['Kindness'] ?></span></p>
+							  <div>
+							    <p style="text-align: left; margin-bottom: 0px"> Vibes: <em><?php echo isset($_SESSION['dashboard']['Kindness_Keywords']) ? $_SESSION['dashboard']['Kindness_Keywords']: " " ?></em></p>
+							    <p style="text-align: left; margin-bottom: 0px" > Comments: </p>
+							    <ul style="text-align: left">
+							    	<li><?php echo isset($_SESSION['dashboard']['Kindness_Comments'][0]) ?  '"'.$_SESSION['dashboard']['Kindness_Comments'][0] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Kindness_Comments'][1]) ?  '"'.$_SESSION['dashboard']['Kindness_Comments'][1] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Kindness_Comments'][2]) ?  '"'.$_SESSION['dashboard']['Kindness_Comments'][2] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Kindness_Comments'][3]) ?  '"'.$_SESSION['dashboard']['Kindness_Comments'][3] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    	<li><?php echo isset($_SESSION['dashboard']['Kindness_Comments'][4]) ?  '"'.$_SESSION['dashboard']['Kindness_Comments'][4] .'"' : "Invite more Friends to Vibe for Comments"?></li>
+							    </ul>
+							  </div>
+							  <p style="text-align: left"><strong><span>Awkwardness </span></strong><span style="float: right"><?php echo $_SESSION['dashboard']['Awkwardness'] ?></span></p>
 							  <div>
 							    <p>
 							    Cras dictum. Pellentesque habitant morbi tristique senectus et netus
@@ -158,7 +216,7 @@
 							    Suspendisse eu nisl. Nullam ut libero. 
 							    </p>
 							  </div>
-							  <p style="text-align: left"><strong><span>Confidence </span></strong><span style="float: right">8.7</span></p>
+							  <p style="text-align: left"><strong><span>Honesty </span></strong><span style="float: right"><?php echo $_SESSION['dashboard']['Honesty'] ?></span></p>
 							  <div>
 							    <p>
 							    Cras dictum. Pellentesque habitant morbi tristique senectus et netus
@@ -168,7 +226,7 @@
 							    Suspendisse eu nisl. Nullam ut libero. 
 							    </p>
 							  </div>
-							  <p style="text-align: left"><strong><span>Fun </span></strong><span style="float: right">8.7</span></p>
+							  <p style="text-align: left"><strong><span>Dependability </span></strong><span style="float: right"><?php echo $_SESSION['dashboard']['Dependability'] ?></span></p>
 							  <div>
 							    <p>
 							    Cras dictum. Pellentesque habitant morbi tristique senectus et netus
@@ -178,7 +236,7 @@
 							    Suspendisse eu nisl. Nullam ut libero. 
 							    </p>
 							  </div>
-							  <p style="text-align: left"><strong><span>Kindness </span></strong><span style="float: right">8.7</span></p>
+							  <p style="text-align: left"><strong><span>Humility </span></strong><span style="float: right"><?php echo $_SESSION['dashboard']['Humility'] ?></span></p>
 							  <div>
 							    <p>
 							    Cras dictum. Pellentesque habitant morbi tristique senectus et netus
@@ -188,47 +246,7 @@
 							    Suspendisse eu nisl. Nullam ut libero. 
 							    </p>
 							  </div>
-							  <p style="text-align: left"><strong><span>Awkwardness </span></strong><span style="float: right">8.7</span></p>
-							  <div>
-							    <p>
-							    Cras dictum. Pellentesque habitant morbi tristique senectus et netus
-							    et malesuada fames ac turpis egestas. 
-							    </p>
-							    <p>
-							    Suspendisse eu nisl. Nullam ut libero. 
-							    </p>
-							  </div>
-							  <p style="text-align: left"><strong><span>Honesty </span></strong><span style="float: right">8.7</span></p>
-							  <div>
-							    <p>
-							    Cras dictum. Pellentesque habitant morbi tristique senectus et netus
-							    et malesuada fames ac turpis egestas. 
-							    </p>
-							    <p>
-							    Suspendisse eu nisl. Nullam ut libero. 
-							    </p>
-							  </div>
-							  <p style="text-align: left"><strong><span>Dependability </span></strong><span style="float: right">8.7</span></p>
-							  <div>
-							    <p>
-							    Cras dictum. Pellentesque habitant morbi tristique senectus et netus
-							    et malesuada fames ac turpis egestas. 
-							    </p>
-							    <p>
-							    Suspendisse eu nisl. Nullam ut libero. 
-							    </p>
-							  </div>
-							  <p style="text-align: left"><strong><span>Humility </span></strong><span style="float: right">8.7</span></p>
-							  <div>
-							    <p>
-							    Cras dictum. Pellentesque habitant morbi tristique senectus et netus
-							    et malesuada fames ac turpis egestas. 
-							    </p>
-							    <p>
-							    Suspendisse eu nisl. Nullam ut libero. 
-							    </p>
-							  </div>
-							  <p style="text-align: left"><strong><span>Happiness </span></strong><span style="float: right">8.7</span></p>
+							  <p style="text-align: left"><strong><span>Happiness </span></strong><span style="float: right"><?php echo $_SESSION['dashboard']['Satisfaction'] ?></span></p>
 							  <div>
 							    <p>
 							    Cras dictum. Pellentesque habitant morbi tristique senectus et netus
