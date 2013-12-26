@@ -282,7 +282,7 @@ function question(){
             $_SESSION['keywords']=$question_source['keywords'];
             $random=rand(0,sizeof($result)-1); //random is set to an integer between 0(inclusive) and the size of the array of top friends(non inclusive)
             $recipient=$result[$random] ['uid']; //$random is used as the index of the top friends array and the user id is returned 
-            $grab='https://graph.facebook.com/' . $recipient."?access_token=" . $token; //$grab is set to the graph url of the friend selected
+            $grab='https://graph.facebook.com/' . $recipient; //$grab is set to the graph url of the friend selected
             $data = json_decode(file_get_contents($grab), true); //the graph data is natively a json file, the stock php decode method is used to decode the user's json data to a 2d array
             $name=$data['name']; //name is set to the user's name
         }
@@ -327,7 +327,6 @@ function getPictures($recipient){
 }
 //addUser(int) function checks if a user is in the Vibosphere database, it adds them if they are not, activates them if they are in there but not active, and ignores if they are in the database
 function addUser( $input_id ) {
-    global $token;
     $input_id=$input_id."";
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //initialies connection to the database using the credentials found in config.php
     $sql = "SELECT Active FROM user WHERE UID= $input_id"; //gets the active status of the user with $input_id as a user ID
@@ -336,7 +335,7 @@ function addUser( $input_id ) {
     $raw=$st->fetch(); //sets raw to be the raw data returned from the sql command, raw is always an array, even if only one element is being queried
     $active=$raw['Active']; //sets $active to the user's active status
     if(!$raw){ //if the user isn't in Vibosphere, they are added with a true active status
-        $graph_url="https://graph.facebook.com/" . $input_id . "/?fields=gender?access_token=" . $token; //facebook graph api link is created to find gender
+        $graph_url="https://graph.facebook.com/" . $input_id . "/?fields=gender"; //facebook graph api link is created to find gender
         $data = json_decode(file_get_contents($graph_url), true); //decoded json data is returned as an array using above graph api link
         $gender=$data['gender']; //$gender is set to user gender
         $affiliations=getAffiliations(); //$affiliations is set to result of affiliations function defined below
@@ -345,7 +344,7 @@ function addUser( $input_id ) {
           $st->execute(); //query is executed
     }
     else { //the user is in the database but not active, theyare simply set to active
-         $graph_url="https://graph.facebook.com/" . $input_id . "/?fields=gender?access_token=" . $token; //facebook graph api is used to create gender query
+         $graph_url="https://graph.facebook.com/" . $input_id . "/?fields=gender"; //facebook graph api is used to create gender query
         $data = json_decode(file_get_contents($graph_url), true); //user data json is decrypted and returned as an array
         $gender=$data['gender']; //gender is set
         $affiliations=getAffiliations(); //affiliations is set to the result of the affilations function defined below
