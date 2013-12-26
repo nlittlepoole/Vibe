@@ -63,7 +63,6 @@ switch ( $action ) {
         $max=0;
         $keywords=split('&&',$data['Intelligence_Keywords']);
         foreach($keywords as $keyword){
-            $count=split('(',$keyword)[0];
             if($keyword[0]>$max){
               $max=$keyword[0];
               $new_keyword=$keyword;
@@ -106,7 +105,6 @@ switch ( $action ) {
         $max=0;
         $keywords=split('&&',$data['Humor_Keywords']);
         foreach($keywords as $keyword){
-            $count=split('(',$keyword)[0];
             if($keyword[0]>$max){
               $max=$keyword[0];
               $new_keyword=$keyword;
