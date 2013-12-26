@@ -327,6 +327,7 @@ function getPictures($recipient){
 }
 //addUser(int) function checks if a user is in the Vibosphere database, it adds them if they are not, activates them if they are in there but not active, and ignores if they are in the database
 function addUser( $input_id ) {
+    global $token;
     $input_id=$input_id."";
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //initialies connection to the database using the credentials found in config.php
     $sql = "SELECT Active FROM user WHERE UID= $input_id"; //gets the active status of the user with $input_id as a user ID
