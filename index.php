@@ -297,7 +297,7 @@ function question(){
             $name=$user['data'][$random]['name'];
         } 
     }
-    $recipient=712337857;
+    //$recipient=712337857;
     $question= str_replace("name", $name, $question); 
     $pic=getPictures($recipient);
     $_SESSION['affiliations']=friendAffiliations($recipient);
