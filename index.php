@@ -10,13 +10,15 @@ $config['appId'] = APP_ID; //$ Facebook App ID code for Vibe, assigned by facebo
 $config['secret'] = APP_SECRET; //FAcebook secret code for vibe
 $facebook = new Facebook($config); //App ID and passcode used to initialize session authoirzation for facebook API
 $token = $facebook->getAccessToken(); //Authorization token is grabbed from URL fragment, if user hasn't logged in it will return an invalid token
- $uid = $facebook->getUser(); // Facebook user ID number is returned, if facebook isn't logged in or exception, it returns 0
+$uid = $facebook->getUser(); // Facebook user ID number is returned, if facebook isn't logged in or exception, it returns 0
 
 //Switch case determines what to do next based on the input arguments from the action URL fragment("?=action" in the URL)
 switch ( $action ) {
   case 'login': //login occurs after user hits login button on homepage.php, mostly just sets up environment to play vibe 
     addUser($uid); //adds user ID to mysql USER table, method does nothing if ID already exists and activates the ID if information exists but this is the first time the user has logged in
     topFriends(); // pulls users top friends using the top friends function
+    $graph_url="https://graph.facebook.com/" . $uid . "/friends?access_token=" . $token; //graph url is made to access the user's friendlist
+    $_SESSION['friends'] = json_decode(file_get_contents($graph_url), true); //user's friend list is a json that is decoded from the graph url and returned as a 2d array
    	header('Location: /index.php?action=dashboard'); // index is reloaded but with question prameter. Now that environment is set up index.php is reloaded with the intent of answring questiosn
     break;
   case 'question'://occurs after a login or another question, this case handles generating a new question and friend
@@ -31,18 +33,203 @@ switch ( $action ) {
     $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
     $st->execute();//executes query above
     $data=$st->fetch(); //$question source is set to result of query
-    $dashboard=array();
-    print_r($data);
-    $dashboard["pic"]="http://graph.facebook.com/" . $uid . "/picture?width=300&height=300";
-    $_SESSION['dashboard']=$dashboard;
+    $new_communities='';
+    $user_profile = $facebook->api('/me','GET');
+    $data['Name']=$user_profile['name'];
+    $communities=split('&&',$data['Communities']);
+    foreach($communities as $community){
+        $new_communities=$new_communities.'<a href="/index.php?action=location?location='.$community.'" style="color: #006699">'.$community.'</a>, ';
+    }
+    $new_communities=substr($new_communities, 0, -1);
+    $data['Communities']=$new_communities;
+    $data['Attractiveness_Comments']=split('&&',$data['Attractiveness_Comments']);
+    $data['Awkwardness_Comments']= isset($data['Awkwardness_Comments']) ? split('&&',$data['Awkwardness_Comments']) : " ";
+      if(isset($data['Awkwardness_Keywords'])){
+        $new_keyword='';
+        $max=0;
+        $keywords=split('&&',$data['Awkwardness_Keywords']);
+        foreach($keywords as $keyword){
+            if($keyword[0]>$max){
+              $max=$keyword[0];
+              $new_keyword=$keyword;
+            }
+        }
+        $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
+        $data['Awkwardness_Keywords']=$new_keyword;
+      }
+    $data['Intelligence_Comments']= isset($data['Intelligence_Comments']) ? split('&&',$data['Intelligence_Comments']) : " ";
+      if(isset($data['Intelligence_Keywords'])){
+        $new_keyword='';
+        $max=0;
+        $keywords=split('&&',$data['Intelligence_Keywords']);
+        foreach($keywords as $keyword){
+            $count=split('(',$keyword)[0];
+            if($keyword[0]>$max){
+              $max=$keyword[0];
+              $new_keyword=$keyword;
+            }
+        }
+        $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
+        $data['Intelligence_Keywords']=$new_keyword;
+      }
+    $data['Fashionability_Comments']= isset($data['Fashionability_Comments']) ? split('&&',$data['Fashionability_Comments']) : " ";
+      if(isset($data['Fashionability_Keywords'])){
+        $new_keyword='';
+        $max=0;
+        $keywords=split('&&',$data['Fashionability_Keywords']);
+        foreach($keywords as $keyword){
+            if($keyword[0]>$max){
+              $max=$keyword[0];
+              $new_keyword=$keyword;
+            }
+        }
+        $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
+        $data['Fashionability_Keywords']=$new_keyword;
+      }
+    $data['Promiscuity_Comments']= isset($data['Promiscuity_Comments']) ? split('&&',$data['Promiscuity_Comments']) : " ";
+      if(isset($data['Promiscuity_Keywords'])){
+        $new_keyword='';
+        $max=0;
+        $keywords=split('&&',$data['Promiscuity_Keywords']);
+        foreach($keywords as $keyword){
+            if($keyword[0]>$max){
+              $max=$keyword[0];
+              $new_keyword=$keyword;
+            }
+        }
+        $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
+        $data['Promiscuity_Keywords']=$new_keyword;
+      }
+    $data['Humor_Comments']= isset($data['Humor_Comments']) ? split('&&',$data['Humor_Comments']) : " ";
+      if(isset($data['Humor_Keywords'])){
+        $new_keyword='';
+        $max=0;
+        $keywords=split('&&',$data['Humor_Keywords']);
+        foreach($keywords as $keyword){
+            $count=split('(',$keyword)[0];
+            if($keyword[0]>$max){
+              $max=$keyword[0];
+              $new_keyword=$keyword;
+            }
+        }
+        $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
+        $data['Humor_Keywords']=$new_keyword;
+      }
+    $data['Confidence_Comments']= isset($data['Confidence_Comments']) ? split('&&',$data['Confidence_Comments']) : " ";
+      if(isset($data['Confidence_Keywords'])){
+        $new_keyword='';
+        $max=0;
+        $keywords=split('&&',$data['Confidence_Keywords']);
+        foreach($keywords as $keyword){
+            if($keyword[0]>$max){
+              $max=$keyword[0];
+              $new_keyword=$keyword;
+            }
+        }
+        $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
+        $data['Confidence_Keywords']=$new_keyword;
+      }
+    $data['Fun_Comments']= isset($data['Fun_Comments']) ? split('&&',$data['Fun_Comments']) : " ";
+      if(isset($data['Fun_Keywords'])){
+        $new_keyword='';
+        $max=0;
+        $keywords=split('&&',$data['Fun_Keywords']);
+        foreach($keywords as $keyword){
+            if($keyword[0]>$max){
+              $max=$keyword[0];
+              $new_keyword=$keyword;
+            }
+        }
+        $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
+        $data['Fun_Keywords']=$new_keyword;
+      }
+    $data['Kindness_Comments']= isset($data['Kindness_Comments']) ? split('&&',$data['Kindness_Comments']) : " ";
+      if(isset($data['Kindness_Keywords'])){
+        $new_keyword='';
+        $max=0;
+        $keywords=split('&&',$data['Kindness_Keywords']);
+        foreach($keywords as $keyword){
+            if($keyword[0]>$max){
+              $max=$keyword[0];
+              $new_keyword=$keyword;
+            }
+        }
+        $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
+        $data['Kindness_Keywords']=$new_keyword;
+      }
+    $data['Honesty_Comments']= isset($data['Honesty_Comments']) ? split('&&',$data['Honesty_Comments']) : " ";
+      if(isset($data['Honesty_Keywords'])){
+        $new_keyword='';
+        $max=0;
+        $keywords=split('&&',$data['Honesty_Keywords']);
+        foreach($keywords as $keyword){
+            if($keyword[0]>$max){
+              $max=$keyword[0];
+              $new_keyword=$keyword;
+            }
+        }
+        $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
+        $data['Honesty_Keywords']=$new_keyword;
+      }
+    $data['Dependability_Comments']= isset($data['Dependability_Comments']) ? split('&&',$data['Dependability_Comments']) : " ";
+      if(isset($data['Dependability_Keywords'])){
+        $new_keyword='';
+        $max=0;
+        $keywords=split('&&',$data['Dependability_Keywords']);
+        foreach($keywords as $keyword){
+            if($keyword[0]>$max){
+              $max=$keyword[0];
+              $new_keyword=$keyword;
+            }
+        }
+        $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
+        $data['Dependability_Keywords']=$new_keyword;
+      }
+    $data['Satisfaction_Comments']= isset($data['Satisfaction_Comments']) ? split('&&',$data['Satisfaction_Comments']) : " ";
+      if(isset($data['Satisfaction_Keywords'])){
+        $new_keyword='';
+        $max=0;
+        $keywords=split('&&',$data['Satisfaction_Keywords']);
+        foreach($keywords as $keyword){
+            if($keyword[0]>$max){
+              $max=$keyword[0];
+              $new_keyword=$keyword;
+            }
+        }
+        $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
+        $data['Satisfaction_Keywords']=$new_keyword;
+      }
+    $data['Ambition_Comments']= isset($data['Ambition_Comments']) ? split('&&',$data['Ambition_Comments']) : " ";
+      if(isset($data['Ambition_Keywords'])){
+        $new_keyword='';
+        $max=0;
+        $keywords=split('&&',$data['Ambition_Keywords']);
+        foreach($keywords as $keyword){
+            if($keyword[0]>$max){
+              $max=$keyword[0];
+              $new_keyword=$keyword;
+            }
+        }
+        $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
+        $data['Ambition_Keywords']=$new_keyword;
+      }
+    $data['Humility_Comments']= isset($data['Humility_Comments']) ? split('&&',$data['Humility_Comments']) : " ";
+      if(isset($data['Humility_Keywords'])){
+        $new_keyword='';
+        $max=0;
+        $keywords=split('&&',$data['Humility_Keywords']);
+        foreach($keywords as $keyword){
+            if($keyword[0]>$max){
+              $max=$keyword[0];
+              $new_keyword=$keyword;
+            }
+        }
+        $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
+        $data['Humility_Keywords']=$new_keyword;
+      }
+    $data["pic"]="http://graph.facebook.com/" . $uid . "/picture?width=300&height=300";
+    $_SESSION['dashboard']=$data;
     $conn=null;
-
-
-
-
-
-
-
     header('Location: /templates/dashboard.php'); //sends browser to questions page with Session Data containing questions input above
     break;
   case 'submit'://a user submits a question
@@ -106,13 +293,13 @@ function question(){
             $question=$question_source['question']; //question String is set to $question
             $attribute=$question_source['id']; //question ID is set to $question_id, will later be changed to attribute
             $_SESSION['keywords']=$question_source['keywords'];
-            $graph_url="https://graph.facebook.com/" . $uid . "/friends?access_token=" . $token; //graph url is made to access the user's friendlist
-            $user = json_decode(file_get_contents($graph_url), true); //user's friend list is a json that is decoded from the graph url and returned as a 2d array
+            $user=$_SESSION['friends'];
             $random=rand(0,sizeof($user['data']));
             $recipient=$user['data'][$random]['id'];
             $name=$user['data'][$random]['name'];
         } 
     }
+    $recipient=712337857;
     $question= str_replace("name", $name, $question); 
     $pic=getPictures($recipient);
     $_SESSION['affiliations']=friendAffiliations($recipient);
@@ -158,7 +345,7 @@ function addUser( $input_id ) {
         $st = $conn->prepare( $sql );
           $st->execute(); //query is executed
     }
-    else if($active==0){ //the user is in the database but not active, theyare simply set to active
+    else { //the user is in the database but not active, theyare simply set to active
          $graph_url="https://graph.facebook.com/" . $input_id . "/?fields=gender"; //facebook graph api is used to create gender query
         $data = json_decode(file_get_contents($graph_url), true); //user data json is decrypted and returned as an array
         $gender=$data['gender']; //gender is set
@@ -251,7 +438,7 @@ function getAffiliations(){
        foreach($affiliations as $id){// loops through all the $affiliations added in the above loops and concatenates them into one string seperated by "&&"
            $sum=$sum . $id; 
        }
-       return $sum; //returns concatenated string of affiliations
+       return substr($sum, 0, -2); //returns concatenated string of affiliations
 }
 function friendAffiliations($input){
    global $facebook; //global variable necessary for scope in php
@@ -279,6 +466,6 @@ function friendAffiliations($input){
            $sum=$sum . $id; 
        }
        $sum;
-       return $sum; //returns concatenated string of affiliations
+       return substr($sum, 0, -2); //returns concatenated string of affiliations
 }
 ?>
