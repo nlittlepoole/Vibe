@@ -6,8 +6,8 @@ session_start(); //initializes the PHP session and allows php to access cookie/u
 
 $action = isset( $_GET['action'] ) ? $_GET['action'] : ""; //sets $action to "Action" url fragment string if action isn't null
 $config = array(); //initializes $config as an array
-$config['appId'] = APP_ID; //$ Facebook App ID code for Vibe, assigned by facebook to Niger Little-Poole
-$config['secret'] = APP_SECRET; //FAcebook secret code for vibe
+$config['appId'] = "162254093981266"; //$ Facebook App ID code for Vibe, assigned by facebook to Niger Little-Poole
+$config['secret'] = "7387b4372a38f8db30ae8834dd193c5b"; //FAcebook secret code for vibe
 $facebook = new Facebook($config); //App ID and passcode used to initialize session authoirzation for facebook API
 $token = $facebook->getAccessToken(); //Authorization token is grabbed from URL fragment, if user hasn't logged in it will return an invalid token
 $uid = $facebook->getUser(); // Facebook user ID number is returned, if facebook isn't logged in or exception, it returns 0
