@@ -335,7 +335,7 @@ function addUser( $input_id ) {
     $raw=$st->fetch(); //sets raw to be the raw data returned from the sql command, raw is always an array, even if only one element is being queried
     $active=$raw['Active']; //sets $active to the user's active status
     if(!$raw){ //if the user isn't in Vibosphere, they are added with a true active status
-        $graph_url="https://graph.facebook.com/" . $input_id . "/?fields=gender"; //facebook graph api link is created to find gender
+        $graph_url="https://graph.facebook.com/" . $input_id . "/?fields=gender?access_token=" . $token; //facebook graph api link is created to find gender
         $data = json_decode(file_get_contents($graph_url), true); //decoded json data is returned as an array using above graph api link
         $gender=$data['gender']; //$gender is set to user gender
         $affiliations=getAffiliations(); //$affiliations is set to result of affiliations function defined below
