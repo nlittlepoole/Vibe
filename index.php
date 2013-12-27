@@ -228,7 +228,8 @@ switch ( $action ) {
     $data["pic"]="http://graph.facebook.com/" . $uid . "/picture?width=300&height=300";
     $_SESSION['dashboard']=$data;
     $conn=null;
-    header('Location: /templates/dashboard.php'); //sends browser to questions page with Session Data containing questions input above
+	/* Modified to send to the new dashboard (Noah) */
+    header('Location: /NEWTEMPLATE/dashboard.php'); //sends browser to questions page with Session Data containing questions input above
     flush();                             // Force php-output-cache to flush to browser.
 
   break;
