@@ -1,4 +1,5 @@
   <?php 
+  error_reporting(0);
   session_start();
   $path = $_SERVER['DOCUMENT_ROOT'];
 require_once($path . "/php-sdk/facebook.php");

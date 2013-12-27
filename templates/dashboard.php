@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <?php 
+	error_reporting(0);
     session_start();
     $path = $_SERVER['DOCUMENT_ROOT'];
     require($path . "/config.php");

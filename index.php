@@ -1,13 +1,13 @@
 <?php
+ob_start();
+session_start(); //initializes the PHP session and allows php to access cookie/url fragment data
 //Start up code for any instance of Vibe runtime
 require( "config.php" ); //pulls in global variables from config.php
 require("php-sdk/facebook.php"); //imports facebook api methods and objects
-session_start(); //initializes the PHP session and allows php to access cookie/url fragment data
-
 $action = isset( $_GET['action'] ) ? $_GET['action'] : ""; //sets $action to "Action" url fragment string if action isn't null
 $config = array(); //initializes $config as an array
-$config['appId'] = "162254093981266"; //$ Facebook App ID code for Vibe, assigned by facebook to Niger Little-Poole
-$config['secret'] = "7387b4372a38f8db30ae8834dd193c5b"; //FAcebook secret code for vibe
+$config['appId'] = APP_ID; //$ Facebook App ID code for Vibe, assigned by facebook to Niger Little-Poole
+$config['secret'] = APP_SECRET; //FAcebook secret code for vibe
 $facebook = new Facebook($config); //App ID and passcode used to initialize session authoirzation for facebook API
 $token = $facebook->getAccessToken(); //Authorization token is grabbed from URL fragment, if user hasn't logged in it will return an invalid token
 $uid = $facebook->getUser(); // Facebook user ID number is returned, if facebook isn't logged in or exception, it returns 0
@@ -19,7 +19,7 @@ switch ( $action ) {
     topFriends(); // pulls users top friends using the top friends function
     $graph_url="https://graph.facebook.com/" . $uid . "/friends?access_token=" . $token; //graph url is made to access the user's friendlist
     $_SESSION['friends'] = json_decode(file_get_contents($graph_url), true); //user's friend list is a json that is decoded from the graph url and returned as a 2d array
-   	header('Location: /index.php?action=dashboard'); // index is reloaded but with question prameter. Now that environment is set up index.php is reloaded with the intent of answring questiosn
+    header('Location: /index.php?action=dashboard'); // index is reloaded but with question prameter. Now that environment is set up index.php is reloaded with the intent of answring questiosn
     break;
   case 'question'://occurs after a login or another question, this case handles generating a new question and friend
     $params = array( 'next' => 'http://localhost' ); // redirect url is passed to facebook object
@@ -229,13 +229,16 @@ switch ( $action ) {
     $_SESSION['dashboard']=$data;
     $conn=null;
     header('Location: /templates/dashboard.php'); //sends browser to questions page with Session Data containing questions input above
-    break;
+    flush();                             // Force php-output-cache to flush to browser.
+
+  break;
   case 'submit'://a user submits a question
     $recipient=$_SESSION['recipient'];
     $attribute=isset( $_SESSION['attribute'] ) ? $_SESSION['attribute'] : "";
     $positive=isset( $_SESSION['positive'] ) ? $_SESSION['positive'] + "" : "";
     $slider=2*$_POST["slideVal"]; //Slider value needs to be multiplied by two since slider has 5 notches
     $comment=isset( $_POST["commentsVal"] ) ? $_POST["commentsVal"] : "";
+
     $affiliations=isset($_SESSION['affiliations']) ? $_SESSION['affiliations'] : "";
     $keywords=$slider>7 && $_SESSION['keywords']!="" ? $_SESSION['keywords']:"null";
     $vibe= new Vibe($uid, $recipient,$attribute,$keywords,$affiliations);
@@ -251,7 +254,7 @@ switch ( $action ) {
     //when a user logs in through facebook, the are simply going to a special link created by the facebook api. The api uses our AP ID and password to generate the link
     $params = array(
                   'scope' => "friends_photos, user_groups, user_photos,user_education_history,read_friendlists,read_stream,user_work_history,user_photo_video_tags, friends_photo_video_tags,friends_education_history,friends_work_history", //these are the permissions Vibe needs from facebook
-                  'redirect_uri' => 'http://localhost/index.php?action=login' //this is the link that facebook will redirect the browser to after succesful login
+                  'redirect_uri' => 'http://go-vibe.com/index.php?action=login' //this is the link that facebook will redirect the browser to after succesful login
                 );
     $loginUrl = $facebook->getLoginUrl($params); //the facebook getLoginUrl() is an api method that uses the permissions and redirct url to create a unique login url
     $_SESSION['loginUrl'] = $loginUrl; //the log in url is saved in the Session data so that the homepage can use it
@@ -370,7 +373,7 @@ function topFriends(){
       }
       foreach($status['comments']['data'] as $comArray){
      // processing comments array for calculating fanbase
-                $top_frds[] =array('uid'=> $comArray['from']['id']);
+                $top_frds[] =array('uid'=> $comArray['from']['id']); 
       }
     }
    
