@@ -31,7 +31,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <!-- BEGIN HEAD -->
 <head>
 <meta charset="utf-8"/>
-<title>Dashboard</title>
+<title>Communities</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="" name="description"/>
@@ -466,7 +466,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 			<!-- /.modal -->
 			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 			<!-- BEGIN STYLE CUSTOMIZER -->
-			<div class="theme-panel hidden-xs hidden-sm">
+			<div class="theme-panel hidden-xs hidden-sm" style="height: 50px">
 				<div class="toggler">
 				</div>
 				<div class="toggler-close">
@@ -539,12 +539,16 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 				</div>
 			</div>
 			<!-- END STYLE CUSTOMIZER -->
+			
+			
 			<!-- BEGIN PAGE HEADER-->
 			<div class="row">
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
-					Dashboard <small>personalized feedback</small>
+					Columbia University <small>communities</small>
+					<!-- FILL THIS WITH THE PROF PIC OF THE COMMUNITY'S FACEBOOK PAGE -->
+					<img style="float: right" height="100px" src="/NEWTEMPLATE/assets/img/columbiaTEMP.jpg" />
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li>
@@ -560,92 +564,645 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 				</div>
 			</div>
 			<!-- END PAGE HEADER-->
-			<!-- BEGIN DASHBOARD STATS -->
+			
 			<div class="row">
-				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-					<div class="dashboard-stat blue">
-						<div class="visual">
-							<i class="fa fa-star"></i>
-						</div>
-						<div class="details">
-							<div class="number">
-								 +1349
+				<div class="col-md-12">
+					<div class="portlet green box">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-cogs"></i>Your Ranking
 							</div>
-							<div class="desc">
-								 Answers
-							</div>
-						</div>
-						<a class="more" href="#">
-						View more <i class="m-icon-swapright m-icon-white"></i>
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-					<div class="dashboard-stat green">
-						<div class="visual">
-							<i class="fa fa-comments"></i>
-						</div>
-						<div class="details">
-							<div class="number">
-								+13
-							</div>
-							<div class="desc">
-								Comments
+							<div class="tools">
+								<a href="javascript:;" class="collapse"></a>
+								<a href="#portlet-config" data-toggle="modal" class="config"></a>
+								<a href="javascript:;" class="reload"></a>
+								<a href="javascript:;" class="remove"></a>
 							</div>
 						</div>
-						<a class="more" href="#">
-						View more <i class="m-icon-swapright m-icon-white"></i>
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-					<div class="dashboard-stat purple">
-						<div class="visual">
-							<i class="fa fa-question"></i>
-						</div>
-						<div class="details">
-							<div class="number">
-								+3
-							</div>
-							<div class="desc">
-								Questions
+						<div class="portlet-body">
+							<div class="note note-success">
+								<h4 class="block">Percentile: .95</h4>
 							</div>
 						</div>
-						<a class="more" href="#">
-						View more <i class="m-icon-swapright m-icon-white"></i>
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-					<div class="dashboard-stat yellow">
-						<div class="visual">
-							<i class="fa fa-trophy"></i>
-						</div>
-						<div class="details">
-							<div class="number">
-								+4
-							</div>
-							<div class="desc">
-								Achievements
-							</div>
-						</div>
-						<a class="more" href="#">
-						View more <i class="m-icon-swapright m-icon-white"></i>
-						</a>
 					</div>
 				</div>
 			</div>
-			<!-- END DASHBOARD STATS -->
+			
 			<div class="clearfix">
+			</div>
+			
+			<div class="row">
+				<div class="col-md-6">
+					<!-- BEGIN SAMPLE TABLE PORTLET-->
+					<div class="portlet box blue">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-comments"></i>Attractiveness (Guys)
+							</div>
+							<div class="tools">
+								<a href="javascript:;" class="collapse"></a>
+								<a href="#portlet-config" data-toggle="modal" class="config"></a>
+								<a href="javascript:;" class="reload"></a>
+								<a href="javascript:;" class="remove"></a>
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div class="table-responsive">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+									<th>
+										Overall Score
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										John Smith
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Attractiveness'] ? $_SESSION['dashboard']['Attractiveness']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										Brad Jones
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Awkwardness'] ? $_SESSION['dashboard']['Awkwardness']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										Carl Johnson
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Intelligence'] ? $_SESSION['dashboard']['Intelligence']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										Andrew Kerker
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Fashionability'] ? $_SESSION['dashboard']['Fashionability']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										AJ Simpson
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Promiscuity'] ? $_SESSION['dashboard']['Promiscuity']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										6
+									</td>
+									<td>
+										Allan Rovanik
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Humor'] ? $_SESSION['dashboard']['Humor']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										7
+									</td>
+									<td>
+										John Kramer
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Confidence'] ? $_SESSION['dashboard']['Confidence']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										8
+									</td>
+									<td>
+										Bob Sanders
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Fun'] ? $_SESSION['dashboard']['Fun']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										9
+									</td>
+									<td>
+										Ryan Cook
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Kindness'] ? $_SESSION['dashboard']['Kindness']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										10
+									</td>
+									<td>
+										Chris Heast
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Honesty'] ? $_SESSION['dashboard']['Honesty']: "--" ?>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<!-- END SAMPLE TABLE PORTLET-->
+				</div>
+				<div class="col-md-6">
+					<!-- BEGIN SAMPLE TABLE PORTLET-->
+					<div class="portlet box red">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-comments"></i>Attractiveness (Girls)
+							</div>
+							<div class="tools">
+								<a href="javascript:;" class="collapse"></a>
+								<a href="#portlet-config" data-toggle="modal" class="config"></a>
+								<a href="javascript:;" class="reload"></a>
+								<a href="javascript:;" class="remove"></a>
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div class="table-responsive">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+									<th>
+										Overall Score
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										Allie Simpson
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Attractiveness'] ? $_SESSION['dashboard']['Attractiveness']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										Kathryn Jones
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Awkwardness'] ? $_SESSION['dashboard']['Awkwardness']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										Megan Johnson
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Intelligence'] ? $_SESSION['dashboard']['Intelligence']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										Madison Baker
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Fashionability'] ? $_SESSION['dashboard']['Fashionability']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										Kate Minsing
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Promiscuity'] ? $_SESSION['dashboard']['Promiscuity']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										6
+									</td>
+									<td>
+										Alyssa Rovanik
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Humor'] ? $_SESSION['dashboard']['Humor']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										7
+									</td>
+									<td>
+										Patty Kramer
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Confidence'] ? $_SESSION['dashboard']['Confidence']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										8
+									</td>
+									<td>
+										Jill Sanders
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Fun'] ? $_SESSION['dashboard']['Fun']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										9
+									</td>
+									<td>
+										Jessica Cook
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Kindness'] ? $_SESSION['dashboard']['Kindness']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										10
+									</td>
+									<td>
+										Christine Heast
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Honesty'] ? $_SESSION['dashboard']['Honesty']: "--" ?>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<!-- END SAMPLE TABLE PORTLET-->
+				</div>
+			</div>
+			
+			<div class="clearfix">
+			</div>
+			
+			<div class="row">
+				<div class="col-md-6">
+					<!-- BEGIN SAMPLE TABLE PORTLET-->
+					<div class="portlet box blue">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-comments"></i>Fashionability (Guys)
+							</div>
+							<div class="tools">
+								<a href="javascript:;" class="collapse"></a>
+								<a href="#portlet-config" data-toggle="modal" class="config"></a>
+								<a href="javascript:;" class="reload"></a>
+								<a href="javascript:;" class="remove"></a>
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div class="table-responsive">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+									<th>
+										Overall Score
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										John Smith
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Attractiveness'] ? $_SESSION['dashboard']['Attractiveness']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										Brad Jones
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Awkwardness'] ? $_SESSION['dashboard']['Awkwardness']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										Carl Johnson
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Intelligence'] ? $_SESSION['dashboard']['Intelligence']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										Andrew Kerker
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Fashionability'] ? $_SESSION['dashboard']['Fashionability']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										AJ Simpson
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Promiscuity'] ? $_SESSION['dashboard']['Promiscuity']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										6
+									</td>
+									<td>
+										Allan Rovanik
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Humor'] ? $_SESSION['dashboard']['Humor']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										7
+									</td>
+									<td>
+										John Kramer
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Confidence'] ? $_SESSION['dashboard']['Confidence']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										8
+									</td>
+									<td>
+										Bob Sanders
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Fun'] ? $_SESSION['dashboard']['Fun']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										9
+									</td>
+									<td>
+										Ryan Cook
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Kindness'] ? $_SESSION['dashboard']['Kindness']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										10
+									</td>
+									<td>
+										Chris Heast
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Honesty'] ? $_SESSION['dashboard']['Honesty']: "--" ?>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<!-- END SAMPLE TABLE PORTLET-->
+				</div>
+				<div class="col-md-6">
+					<!-- BEGIN SAMPLE TABLE PORTLET-->
+					<div class="portlet box red">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-comments"></i>Fashionability (Girls)
+							</div>
+							<div class="tools">
+								<a href="javascript:;" class="collapse"></a>
+								<a href="#portlet-config" data-toggle="modal" class="config"></a>
+								<a href="javascript:;" class="reload"></a>
+								<a href="javascript:;" class="remove"></a>
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div class="table-responsive">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+									<th>
+										Overall Score
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										Allie Simpson
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Attractiveness'] ? $_SESSION['dashboard']['Attractiveness']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										Kathryn Jones
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Awkwardness'] ? $_SESSION['dashboard']['Awkwardness']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										Megan Johnson
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Intelligence'] ? $_SESSION['dashboard']['Intelligence']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										Madison Baker
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Fashionability'] ? $_SESSION['dashboard']['Fashionability']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										Kate Minsing
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Promiscuity'] ? $_SESSION['dashboard']['Promiscuity']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										6
+									</td>
+									<td>
+										Alyssa Rovanik
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Humor'] ? $_SESSION['dashboard']['Humor']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										7
+									</td>
+									<td>
+										Patty Kramer
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Confidence'] ? $_SESSION['dashboard']['Confidence']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										8
+									</td>
+									<td>
+										Jill Sanders
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Fun'] ? $_SESSION['dashboard']['Fun']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										9
+									</td>
+									<td>
+										Jessica Cook
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Kindness'] ? $_SESSION['dashboard']['Kindness']: "--" ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										10
+									</td>
+									<td>
+										Christine Heast
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Honesty'] ? $_SESSION['dashboard']['Honesty']: "--" ?>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<!-- END SAMPLE TABLE PORTLET-->
+				</div>
+			</div>
+			
+			<div class="clearfix">
+				
 			</div>
 			
 			<div class="row">
 				<div class="col-md-12">
 					<!-- BEGIN SAMPLE TABLE PORTLET-->
-					<div class="portlet box purple">
+					<div class="portlet box green">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="fa fa-comments"></i>Feedback
+								<i class="fa fa-comments"></i>Community Summary
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse"></a>
@@ -682,6 +1239,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Attractiveness
 									</td>
 									<td>
+										<!-- CHANGE ALL OF THESE SO THEY GRAB FROM THE COMMUNITY ASSOCIATIVE ARRAY -->
 										<?php echo $_SESSION['dashboard']['Attractiveness'] ? $_SESSION['dashboard']['Attractiveness']: "--" ?>
 									</td>
 									<td>
@@ -876,371 +1434,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 						</div>
 					</div>
 					<!-- END SAMPLE TABLE PORTLET-->
-				</div>
-			</div>
-			
-			<div class="clearfix">
-			</div>
-			
-			<div class="row ">
-				<div class="col-md-6 col-sm-6">
-					<div class="portlet box blue">
-						<div class="portlet-title">
-							<div class="caption">
-								<i class="fa fa-trophy"></i>Achievements
-							</div>
-						</div>
-						<div class="portlet-body">
-							<div class="scroller" style="height: 300px;" data-always-visible="1" data-rail-visible="0">
-								<ul class="feeds">
-									<li>
-										<div class="col1">
-											<div class="cont">
-												<div class="cont-col1">
-													<div class="label label-sm label-info">
-														<i class="fa fa-check"></i>
-													</div>
-												</div>
-												<div class="cont-col2">
-													<div class="desc">
-														 Viber Achievement!
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col2">
-											<div class="date">
-												 Just now
-											</div>
-										</div>
-									</li>
-									<li>
-										
-										<div class="col1">
-											<div class="cont">
-												<div class="cont-col1">
-													<div class="label label-sm label-success">
-														<i class="fa fa-user"></i>
-													</div>
-												</div>
-												<div class="cont-col2">
-													<div class="desc">
-														 Mother Teresa Achievement!
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col2">
-											<div class="date">
-												 20 mins
-											</div>
-										</div>
-										
-									</li>
-									<li>
-										
-										<div class="col1">
-											<div class="cont">
-												<div class="cont-col1">
-													<div class="label label-sm label-success">
-														<i class="fa fa-bolt"></i>
-													</div>
-												</div>
-												<div class="cont-col2">
-													<div class="desc">
-														 Visionary Achievement!
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col2">
-											<div class="date">
-												 20 mins
-											</div>
-										</div>
-										
-									</li>
-									<li>
-										
-										<div class="col1">
-											<div class="cont">
-												<div class="cont-col1">
-													<div class="label label-sm label-danger">
-														<i class="fa fa-bolt"></i>
-													</div>
-												</div>
-												<div class="cont-col2">
-													<div class="desc">
-														 Ideator Achievement!
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col2">
-											<div class="date">
-												 20 mins
-											</div>
-										</div>
-										
-									</li>
-									<li>
-										<div class="col1">
-											<div class="cont">
-												<div class="cont-col1">
-													<div class="label label-sm label-success">
-														<i class="fa fa-star"></i>
-													</div>
-												</div>
-												<div class="cont-col2">
-													<div class="desc">
-														 King of the Hill Achievement!
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col2">
-											<div class="date">
-												 24 mins
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="col1">
-											<div class="cont">
-												<div class="cont-col1">
-													<div class="label label-sm label-danger">
-														<i class="fa fa-user"></i>
-													</div>
-												</div>
-												<div class="cont-col2">
-													<div class="desc">
-														 Pal Achievement!
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col2">
-											<div class="date">
-												 30 mins
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="col1">
-											<div class="cont">
-												<div class="cont-col1">
-													<div class="label label-sm label-default">
-														<i class="fa fa-user"></i>
-													</div>
-												</div>
-												<div class="cont-col2">
-													<div class="desc">
-														 Helping Hand Achievement!
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col2">
-											<div class="date">
-												 2 hours
-											</div>
-										</div>
-									</li>
-									<li>
-										
-										<div class="col1">
-											<div class="cont">
-												<div class="cont-col1">
-													<div class="label label-sm label-danger">
-														<i class="fa fa-star"></i>
-													</div>
-												</div>
-												<div class="cont-col2">
-													<div class="desc">
-														 Diva Achievement!
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col2">
-											<div class="date">
-												 4 hours
-											</div>
-										</div>
-										
-									</li>
-								</ul>
-							</div>
-							<div class="scroller-footer">
-								<div class="pull-right">
-									<a href="#">See All Achievements <i class="m-icon-swapright m-icon-gray"></i></a> &nbsp;
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-sm-6">
-					<div class="portlet box green">
-						<div class="portlet-title">
-							<div class="caption">
-								<i class="fa fa-comments"></i>Comments
-							</div>
-						</div>
-						<div class="portlet-body">
-							<div class="scroller" style="height: 300px;" data-always-visible="1" data-rail-visible="0">
-								<ul class="feeds">
-									<li>
-										<div class="col1">
-											<div class="cont">
-												<div class="cont-col1">
-													<div class="desc">
-														 "Yo, lay off the tech shirts"
-														 <span class="label label-sm label-danger">Fashionability</span>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col2">
-											<div class="date">
-												 Just now
-											</div>
-										</div>
-									</li>
-									<li>
-										
-										<div class="col1">
-											<div class="cont">
-												<div class="cont-col1">
-													<div class="desc">
-														 "Bro, what's up with that hat?"
-														 <span class="label label-sm label-danger">Fashionability</span>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col2">
-											<div class="date">
-												 20 mins
-											</div>
-										</div>
-										
-									</li>
-									<li>
-										<div class="col1">
-											<div class="cont">
-												<div class="cont-col1">
-													<div class="desc">
-														 "Bro, do you even lift?"
-														 <span class="label label-sm label-primary">Attractiveness</span>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col2">
-											<div class="date">
-												 20 mins
-											</div>
-										</div>
-										
-									</li>
-									<li>
-										
-										<div class="col1">
-											<div class="cont">
-												<div class="cont-col1">
-													<div class="desc">
-														 "Your questions in Macro are so engaging"
-														 <span class="label label-sm label-info">Intelligence</span>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col2">
-											<div class="date">
-												 20 mins
-											</div>
-										</div>
-										
-									</li>
-									<li>
-										<div class="col1">
-											<div class="cont">
-												<div class="cont-col1">
-													<div class="desc">
-														 "Pretty chill overall"
-														 <span class="label label-sm label-success">Fun</span>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col2">
-											<div class="date">
-												 24 mins
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="col1">
-											<div class="cont">
-												<div class="cont-col1">
-													<div class="desc">
-														 "Always fun to go to bars with"
-														 <span class="label label-sm label-success">Fun</span>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col2">
-											<div class="date">
-												 30 mins
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="col1">
-											<div class="cont">
-												<div class="cont-col1">
-													<div class="desc">
-														 "Never an awkward convo with you lol"
-														 <span class="label label-sm label-default">Awkwardness</span>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col2">
-											<div class="date">
-												 2 hours
-											</div>
-										</div>
-									</li>
-									<li>
-									
-										<div class="col1">
-											<div class="cont">
-												<div class="cont-col1">
-													<div class="desc">
-														 "But, I'm not an alcoholic..."
-														 <span class="label label-sm label-primary">Honesty</span>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col2">
-											<div class="date">
-												 4 hours
-											</div>
-										</div>
-										
-									</li>
-								</ul>
-							</div>
-							<div class="scroller-footer">
-								<div class="pull-right">
-									<a href="#">See All Comments <i class="m-icon-swapright m-icon-gray"></i></a> &nbsp;
-								</div>
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
 			<div class="clearfix">
