@@ -380,7 +380,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					</a>
 				</li>
 				<li class="">
-					<a href="../templates/questions.php">
+					<a href="../view/questions.php">
 					<i class="fa fa-question"></i>
 					<span class="title">
 						Questions

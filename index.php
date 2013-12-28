@@ -25,7 +25,7 @@ switch ( $action ) {
     $params = array( 'next' => 'http://localhost' ); // redirect url is passed to facebook object
     $_SESSION['logoutUrl'] = $facebook->getLogoutUrl($params); //logout url is created and stored to the session data.
     question(); // calls the question function that pulls a user and question and places the data in the Session cache
-    header('Location: /templates/questions.php'); //sends browser to questions page with Session Data containing questions input above
+    header('Location: /view/questions.php'); //sends browser to questions page with Session Data containing questions input above
     break;
   case 'dashboard'://occurs after a login or another question, this case handles generating a new question and friend
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //database connection is established uisng credentials in config.php
@@ -259,7 +259,7 @@ switch ( $action ) {
                 );
     $loginUrl = $facebook->getLoginUrl($params); //the facebook getLoginUrl() is an api method that uses the permissions and redirct url to create a unique login url
     $_SESSION['loginUrl'] = $loginUrl; //the log in url is saved in the Session data so that the homepage can use it
-    header('Location: /templates/homepage.php'); //the browser is redirected to the homepage. 
+    header('Location: /view/homepage.php'); //the browser is redirected to the homepage. 
 }
 //question function responsible for using Vibe database and facebook fql database to generate a question and a user to ask the question about
 function question(){
