@@ -25,7 +25,7 @@ switch ( $action ) {
     $params = array( 'next' => 'http://localhost' ); // redirect url is passed to facebook object
     $_SESSION['logoutUrl'] = $facebook->getLogoutUrl($params); //logout url is created and stored to the session data.
     question(); // calls the question function that pulls a user and question and places the data in the Session cache
-    header('Location: /templates/questions.php'); //sends browser to questions page with Session Data containing questions input above
+    header('Location: /view/questions.php'); //sends browser to questions page with Session Data containing questions input above
     break;
   case 'dashboard'://occurs after a login or another question, this case handles generating a new question and friend
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //database connection is established uisng credentials in config.php
@@ -43,11 +43,11 @@ switch ( $action ) {
     $new_communities=substr($new_communities, 0, -1);
     $data['Communities']=$new_communities;
     $data['Attractiveness_Comments']=split('&&',$data['Attractiveness_Comments']);
-    $data['Awkwardness_Comments']= isset($data['Awkwardness_Comments']) ? split('&&',$data['Awkwardness_Comments']) : " ";
-      if(isset($data['Awkwardness_Keywords'])){
+    $data['Affability_Comments']= isset($data['Affability_Comments']) ? split('&&',$data['Affability_Comments']) : " ";
+      if(isset($data['Affability_Keywords'])){
         $new_keyword='';
         $max=0;
-        $keywords=split('&&',$data['Awkwardness_Keywords']);
+        $keywords=split('&&',$data['Affability_Keywords']);
         foreach($keywords as $keyword){
             if($keyword[0]>$max){
               $max=$keyword[0];
@@ -55,7 +55,7 @@ switch ( $action ) {
             }
         }
         $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
-        $data['Awkwardness_Keywords']=$new_keyword;
+        $data['Affability_Keywords']=$new_keyword;
       }
     $data['Intelligence_Comments']= isset($data['Intelligence_Comments']) ? split('&&',$data['Intelligence_Comments']) : " ";
       if(isset($data['Intelligence_Keywords'])){
@@ -71,11 +71,11 @@ switch ( $action ) {
         $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
         $data['Intelligence_Keywords']=$new_keyword;
       }
-    $data['Fashionability_Comments']= isset($data['Fashionability_Comments']) ? split('&&',$data['Fashionability_Comments']) : " ";
-      if(isset($data['Fashionability_Keywords'])){
+    $data['Style_Comments']= isset($data['Style_Comments']) ? split('&&',$data['Style_Comments']) : " ";
+      if(isset($data['Style_Keywords'])){
         $new_keyword='';
         $max=0;
-        $keywords=split('&&',$data['Fashionability_Keywords']);
+        $keywords=split('&&',$data['Style_Keywords']);
         foreach($keywords as $keyword){
             if($keyword[0]>$max){
               $max=$keyword[0];
@@ -83,7 +83,7 @@ switch ( $action ) {
             }
         }
         $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
-        $data['Fashionability_Keywords']=$new_keyword;
+        $data['Style_Keywords']=$new_keyword;
       }
     $data['Promiscuity_Comments']= isset($data['Promiscuity_Comments']) ? split('&&',$data['Promiscuity_Comments']) : " ";
       if(isset($data['Promiscuity_Keywords'])){
@@ -169,11 +169,11 @@ switch ( $action ) {
         $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
         $data['Honesty_Keywords']=$new_keyword;
       }
-    $data['Dependability_Comments']= isset($data['Dependability_Comments']) ? split('&&',$data['Dependability_Comments']) : " ";
-      if(isset($data['Dependability_Keywords'])){
+    $data['Reliability_Comments']= isset($data['Reliability_Comments']) ? split('&&',$data['Reliability_Comments']) : " ";
+      if(isset($data['Reliability_Keywords'])){
         $new_keyword='';
         $max=0;
-        $keywords=split('&&',$data['Dependability_Keywords']);
+        $keywords=split('&&',$data['Reliability_Keywords']);
         foreach($keywords as $keyword){
             if($keyword[0]>$max){
               $max=$keyword[0];
@@ -181,13 +181,13 @@ switch ( $action ) {
             }
         }
         $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
-        $data['Dependability_Keywords']=$new_keyword;
+        $data['Reliability_Keywords']=$new_keyword;
       }
-    $data['Satisfaction_Comments']= isset($data['Satisfaction_Comments']) ? split('&&',$data['Satisfaction_Comments']) : " ";
-      if(isset($data['Satisfaction_Keywords'])){
+    $data['Happiness_Comments']= isset($data['Happiness_Comments']) ? split('&&',$data['Happiness_Comments']) : " ";
+      if(isset($data['Happiness_Keywords'])){
         $new_keyword='';
         $max=0;
-        $keywords=split('&&',$data['Satisfaction_Keywords']);
+        $keywords=split('&&',$data['Happiness_Keywords']);
         foreach($keywords as $keyword){
             if($keyword[0]>$max){
               $max=$keyword[0];
@@ -195,7 +195,7 @@ switch ( $action ) {
             }
         }
         $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
-        $data['Satisfaction_Keywords']=$new_keyword;
+        $data['Happiness_Keywords']=$new_keyword;
       }
     $data['Ambition_Comments']= isset($data['Ambition_Comments']) ? split('&&',$data['Ambition_Comments']) : " ";
       if(isset($data['Ambition_Keywords'])){
@@ -259,7 +259,7 @@ switch ( $action ) {
                 );
     $loginUrl = $facebook->getLoginUrl($params); //the facebook getLoginUrl() is an api method that uses the permissions and redirct url to create a unique login url
     $_SESSION['loginUrl'] = $loginUrl; //the log in url is saved in the Session data so that the homepage can use it
-    header('Location: /templates/homepage.php'); //the browser is redirected to the homepage. 
+    header('Location: /view/homepage.php'); //the browser is redirected to the homepage. 
 }
 //question function responsible for using Vibe database and facebook fql database to generate a question and a user to ask the question about
 function question(){
@@ -384,7 +384,13 @@ function topFriends(){
 //getQuestion(int) returns an question using the $input as the upward bound of questions that can be pulled
 function getQuestion($input){
     $attribute= rand(1,$input); //4andom is set to a number between 1 and $input
-    $random=rand(1,10);
+    $random=rand(1,3);
+    if($random>1){
+      $random=rand(2,10);
+    }
+    else{
+      $random=1;
+    }
     $question="Question" . $random;
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //database connection is established uisng credentials in config.php
     $sql = "SELECT $question, Attribute FROM question WHERE id=$attribute"; //sql query that returns the string of the question in the table
