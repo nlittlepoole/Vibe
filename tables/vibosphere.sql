@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 28, 2013 at 08:03 PM
+-- Generation Time: Dec 29, 2013 at 12:26 AM
 -- Server version: 5.5.32
 -- PHP Version: 5.4.19
 
@@ -164,6 +164,82 @@ CREATE TABLE IF NOT EXISTS `transaction` (
   `Affiliations` varchar(1000) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE IF NOT EXISTS `user` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `UID` varchar(255) NOT NULL,
+  `Active` tinyint(1) NOT NULL DEFAULT '0',
+  `Points` int(10) NOT NULL DEFAULT '0',
+  `Communities` varchar(255) DEFAULT NULL,
+  `Gender` varchar(255) DEFAULT NULL,
+  `Age` varchar(255) DEFAULT NULL,
+  `Race` varchar(255) DEFAULT NULL,
+  `Attractiveness` float NOT NULL DEFAULT '0',
+  `Attractiveness_Total` int(10) unsigned NOT NULL DEFAULT '0',
+  `Attractiveness_Keywords` varchar(255) DEFAULT NULL,
+  `Affability` float NOT NULL DEFAULT '0',
+  `Affability_Total` int(10) unsigned NOT NULL DEFAULT '0',
+  `Affability_Keywords` varchar(255) DEFAULT NULL,
+  `Intelligence` float NOT NULL DEFAULT '0',
+  `Intelligence_Total` int(10) unsigned NOT NULL DEFAULT '0',
+  `Intelligence_Keywords` varchar(255) DEFAULT NULL,
+  `Intelligence_Comments` varchar(255) NOT NULL,
+  `Style` float NOT NULL DEFAULT '0',
+  `Style_Total` int(10) unsigned NOT NULL DEFAULT '0',
+  `Style_Keywords` varchar(255) DEFAULT NULL,
+  `Promiscuity` float NOT NULL DEFAULT '0',
+  `Promiscuity_Total` int(11) NOT NULL DEFAULT '0',
+  `Promiscuity_Keywords` varchar(255) DEFAULT NULL,
+  `Humor` float NOT NULL DEFAULT '0',
+  `Humor_Total` int(10) unsigned NOT NULL DEFAULT '0',
+  `Humor_Keywords` varchar(255) DEFAULT NULL,
+  `Confidence` float NOT NULL DEFAULT '0',
+  `Confidence_Total` int(10) unsigned NOT NULL DEFAULT '0',
+  `Confidence_Keywords` varchar(255) DEFAULT NULL,
+  `Fun` float NOT NULL DEFAULT '0',
+  `Fun_Total` int(10) unsigned NOT NULL DEFAULT '0',
+  `Fun_Keywords` varchar(255) DEFAULT NULL,
+  `Kindness` float NOT NULL DEFAULT '0',
+  `Kindness_Total` int(10) unsigned NOT NULL DEFAULT '0',
+  `Kindness_Keywords` varchar(255) DEFAULT NULL,
+  `Honesty` float NOT NULL DEFAULT '0',
+  `Honesty_Total` int(10) unsigned NOT NULL DEFAULT '0',
+  `Honesty_Keywords` varchar(255) DEFAULT NULL,
+  `Reliability` float NOT NULL DEFAULT '0',
+  `Reliability_Total` int(10) unsigned NOT NULL DEFAULT '0',
+  `Reliability_Keywords` varchar(255) DEFAULT NULL,
+  `Happiness` float NOT NULL DEFAULT '0',
+  `Happiness_Total` int(10) unsigned NOT NULL DEFAULT '0',
+  `Happiness_Keywords` varchar(255) DEFAULT NULL,
+  `Ambition` float NOT NULL DEFAULT '0',
+  `Ambition_Total` int(10) unsigned NOT NULL DEFAULT '0',
+  `Ambition_Keywords` varchar(255) DEFAULT NULL,
+  `Humility` float NOT NULL DEFAULT '0',
+  `Humility_Total` int(10) unsigned NOT NULL DEFAULT '0',
+  `Humility_Keywords` varchar(255) DEFAULT NULL,
+  `Comments` varchar(2000) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=156 ;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `UID`, `Active`, `Points`, `Communities`, `Gender`, `Age`, `Race`, `Attractiveness`, `Attractiveness_Total`, `Attractiveness_Keywords`, `Affability`, `Affability_Total`, `Affability_Keywords`, `Intelligence`, `Intelligence_Total`, `Intelligence_Keywords`, `Intelligence_Comments`, `Style`, `Style_Total`, `Style_Keywords`, `Promiscuity`, `Promiscuity_Total`, `Promiscuity_Keywords`, `Humor`, `Humor_Total`, `Humor_Keywords`, `Confidence`, `Confidence_Total`, `Confidence_Keywords`, `Fun`, `Fun_Total`, `Fun_Keywords`, `Kindness`, `Kindness_Total`, `Kindness_Keywords`, `Honesty`, `Honesty_Total`, `Honesty_Keywords`, `Reliability`, `Reliability_Total`, `Reliability_Keywords`, `Happiness`, `Happiness_Total`, `Happiness_Keywords`, `Ambition`, `Ambition_Total`, `Ambition_Keywords`, `Humility`, `Humility_Total`, `Humility_Keywords`, `Comments`) VALUES
+(148, '2147483647', 0, 0, NULL, NULL, NULL, NULL, 0, 0, NULL, 0.67, 3, NULL, 3.33, 3, '2(Quitter)', 'Droppd AP&&Droppd AP&&not at columbia&&Droppd AP&&not at columbia', 0, 0, NULL, 5, 2, 'null', 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, ''),
+(149, '597369485', 0, 0, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, '', 0, 0, NULL, 8, 1, '1(Flirty)', 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 2, 2, NULL, 8, 1, 'null', 4, 1, NULL, ''),
+(150, '712337857', 1, 54, 'Barack Obama Academy&&Columbia University&&Fluent Medical&&New York, New York', 'male', NULL, NULL, 5, 2, NULL, 4.86, 7, NULL, 9.14, 7, '1(Academic)', 'So smart', 4, 6, '2(Nerdy)', 4.5, 4, NULL, 8, 2, '1(Sarcastic)&&3(Goofy)&&4(Mean)', 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 4, 1, NULL, 8, 1, NULL, 0, 0, NULL, 9, 2, NULL, 0, 0, NULL, ''),
+(151, '1321015971', 0, 0, NULL, NULL, NULL, NULL, 4, 1, NULL, 4, 1, 'null', 0, 0, NULL, '', 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 6, 1, NULL, 0, 0, NULL, 0, 0, NULL, ''),
+(152, '698172322', 0, 0, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, '', 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 1, '1(Narcissistic)', ''),
+(153, '1534555849', 0, 0, NULL, NULL, NULL, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, '', 0, 0, NULL, 0, 0, NULL, 6, 1, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 4, 1, 'null', 0, 0, NULL, ''),
+(154, '1013850160', 0, 0, NULL, NULL, NULL, NULL, 6, 1, 'null', 0, 0, NULL, 0, 0, NULL, '', 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, ''),
+(155, '730405540', 0, 0, NULL, NULL, NULL, NULL, 0, 0, NULL, 6, 1, 'null', 0, 0, NULL, '', 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, 0, 0, NULL, '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
