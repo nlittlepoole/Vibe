@@ -384,7 +384,13 @@ function topFriends(){
 //getQuestion(int) returns an question using the $input as the upward bound of questions that can be pulled
 function getQuestion($input){
     $attribute= rand(1,$input); //4andom is set to a number between 1 and $input
-    $random=rand(1,10);
+    $random=rand(1,3);
+    if($random>1){
+      $random=rand(2,10);
+    }
+    else{
+      $random=1;
+    }
     $question="Question" . $random;
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //database connection is established uisng credentials in config.php
     $sql = "SELECT $question, Attribute FROM question WHERE id=$attribute"; //sql query that returns the string of the question in the table
