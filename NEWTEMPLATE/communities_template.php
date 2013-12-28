@@ -642,7 +642,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Brad Jones
 									</td>
 									<td>
-										<?php echo $_SESSION['dashboard']['Awkwardness'] ? $_SESSION['dashboard']['Awkwardness']: "--" ?>
+										<?php echo $_SESSION['dashboard']['Affability'] ? $_SESSION['dashboard']['Affability']: "--" ?>
 									</td>
 								</tr>
 								<tr>
@@ -664,7 +664,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Andrew Kerker
 									</td>
 									<td>
-										<?php echo $_SESSION['dashboard']['Fashionability'] ? $_SESSION['dashboard']['Fashionability']: "--" ?>
+										<?php echo $_SESSION['dashboard']['Style'] ? $_SESSION['dashboard']['Style']: "--" ?>
 									</td>
 								</tr>
 								<tr>
@@ -790,7 +790,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Kathryn Jones
 									</td>
 									<td>
-										<?php echo $_SESSION['dashboard']['Awkwardness'] ? $_SESSION['dashboard']['Awkwardness']: "--" ?>
+										<?php echo $_SESSION['dashboard']['Affability'] ? $_SESSION['dashboard']['Affability']: "--" ?>
 									</td>
 								</tr>
 								<tr>
@@ -812,7 +812,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Madison Baker
 									</td>
 									<td>
-										<?php echo $_SESSION['dashboard']['Fashionability'] ? $_SESSION['dashboard']['Fashionability']: "--" ?>
+										<?php echo $_SESSION['dashboard']['Style'] ? $_SESSION['dashboard']['Style']: "--" ?>
 									</td>
 								</tr>
 								<tr>
@@ -899,7 +899,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					<div class="portlet box blue">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="fa fa-comments"></i>Fashionability (Guys)
+								<i class="fa fa-comments"></i>Style (Guys)
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse"></a>
@@ -944,7 +944,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Brad Jones
 									</td>
 									<td>
-										<?php echo $_SESSION['dashboard']['Awkwardness'] ? $_SESSION['dashboard']['Awkwardness']: "--" ?>
+										<?php echo $_SESSION['dashboard']['Affability'] ? $_SESSION['dashboard']['Affability']: "--" ?>
 									</td>
 								</tr>
 								<tr>
@@ -966,7 +966,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Andrew Kerker
 									</td>
 									<td>
-										<?php echo $_SESSION['dashboard']['Fashionability'] ? $_SESSION['dashboard']['Fashionability']: "--" ?>
+										<?php echo $_SESSION['dashboard']['Style'] ? $_SESSION['dashboard']['Style']: "--" ?>
 									</td>
 								</tr>
 								<tr>
@@ -1047,7 +1047,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					<div class="portlet box red">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="fa fa-comments"></i>Fashionability (Girls)
+								<i class="fa fa-comments"></i>Style (Girls)
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse"></a>
@@ -1092,7 +1092,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Kathryn Jones
 									</td>
 									<td>
-										<?php echo $_SESSION['dashboard']['Awkwardness'] ? $_SESSION['dashboard']['Awkwardness']: "--" ?>
+										<?php echo $_SESSION['dashboard']['Affability'] ? $_SESSION['dashboard']['Affability']: "--" ?>
 									</td>
 								</tr>
 								<tr>
@@ -1114,7 +1114,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Madison Baker
 									</td>
 									<td>
-										<?php echo $_SESSION['dashboard']['Fashionability'] ? $_SESSION['dashboard']['Fashionability']: "--" ?>
+										<?php echo $_SESSION['dashboard']['Style'] ? $_SESSION['dashboard']['Style']: "--" ?>
 									</td>
 								</tr>
 								<tr>
@@ -1251,13 +1251,13 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										2
 									</td>
 									<td>
-										Awkwardness
+										Affability
 									</td>
 									<td>
-										<?php echo $_SESSION['dashboard']['Awkwardness'] ? $_SESSION['dashboard']['Awkwardness']: "--" ?>
+										<?php echo $_SESSION['dashboard']['Affability'] ? $_SESSION['dashboard']['Affability']: "--" ?>
 									</td>
 									<td>
-										<?php echo isset($_SESSION['dashboard']['Awkwardness_Keywords']) ? $_SESSION['dashboard']['Awkwardness_Keywords']: "N/A" ?>
+										<?php echo isset($_SESSION['dashboard']['Affability_Keywords']) ? $_SESSION['dashboard']['Affability_Keywords']: "N/A" ?>
 									</td>
 								</tr>
 								<tr>
@@ -1279,13 +1279,13 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										4
 									</td>
 									<td>
-										Fashionability
+										Style
 									</td>
 									<td>
-										<?php echo $_SESSION['dashboard']['Fashionability'] ? $_SESSION['dashboard']['Fashionability']: "--" ?>
+										<?php echo $_SESSION['dashboard']['Style'] ? $_SESSION['dashboard']['Style']: "--" ?>
 									</td>
 									<td>
-										<?php echo isset($_SESSION['dashboard']['Fashionability_Keywords']) ? $_SESSION['dashboard']['Fashionability_Keywords']: "N/A" ?>
+										<?php echo isset($_SESSION['dashboard']['Style_Keywords']) ? $_SESSION['dashboard']['Style_Keywords']: "N/A" ?>
 									</td>
 								</tr>
 								<tr>
@@ -1377,13 +1377,13 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										11
 									</td>
 									<td>
-										Dependability
+										Reliability
 									</td>
 									<td>
-										<?php echo $_SESSION['dashboard']['Dependability'] ? $_SESSION['dashboard']['Dependability']: "--" ?>
+										<?php echo $_SESSION['dashboard']['Reliability'] ? $_SESSION['dashboard']['Reliability']: "--" ?>
 									</td>
 									<td>
-										<?php echo isset($_SESSION['dashboard']['Dependability_Keywords']) ? $_SESSION['dashboard']['Dependability_Keywords']: "N/A" ?>
+										<?php echo isset($_SESSION['dashboard']['Reliability_Keywords']) ? $_SESSION['dashboard']['Reliability_Keywords']: "N/A" ?>
 									</td>
 								</tr>
 								<tr>
@@ -1391,13 +1391,13 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										12
 									</td>
 									<td>
-										Satisfaction
+										Happiness
 									</td>
 									<td>
-										<?php echo $_SESSION['dashboard']['Satisfaction'] ? $_SESSION['dashboard']['Satisfaction']: "--" ?>
+										<?php echo $_SESSION['dashboard']['Happiness'] ? $_SESSION['dashboard']['Happiness']: "--" ?>
 									</td>
 									<td>
-										<?php echo isset($_SESSION['dashboard']['Satisfaction_Keywords']) ? $_SESSION['dashboard']['Satisfaction_Keywords']: "N/A" ?>
+										<?php echo isset($_SESSION['dashboard']['Happiness_Keywords']) ? $_SESSION['dashboard']['Happiness_Keywords']: "N/A" ?>
 									</td>
 								</tr>
 								<tr>

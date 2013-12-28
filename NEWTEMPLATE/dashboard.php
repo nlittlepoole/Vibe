@@ -663,13 +663,13 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										#
 									</th>
 									<th>
-										Attribute
+										Vibe
 									</th>
 									<th>
-										Overall Score
+										Strength
 									</th>
 									<th>
-										Characteristics
+										Qualities
 									</th>
 								</tr>
 								</thead>
@@ -693,13 +693,13 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										2
 									</td>
 									<td>
-										Awkwardness
+										Affability
 									</td>
 									<td>
-										<?php echo $_SESSION['dashboard']['Awkwardness'] ? $_SESSION['dashboard']['Awkwardness']: "--" ?>
+										<?php echo $_SESSION['dashboard']['Affability'] ? $_SESSION['dashboard']['Affability']: "--" ?>
 									</td>
 									<td>
-										<?php echo isset($_SESSION['dashboard']['Awkwardness_Keywords']) ? $_SESSION['dashboard']['Awkwardness_Keywords']: "N/A" ?>
+										<?php echo isset($_SESSION['dashboard']['Affability_Keywords']) ? $_SESSION['dashboard']['Affability_Keywords']: "N/A" ?>
 									</td>
 								</tr>
 								<tr>
@@ -721,13 +721,13 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										4
 									</td>
 									<td>
-										Fashionability
+										Style
 									</td>
 									<td>
-										<?php echo $_SESSION['dashboard']['Fashionability'] ? $_SESSION['dashboard']['Fashionability']: "--" ?>
+										<?php echo $_SESSION['dashboard']['Style'] ? $_SESSION['dashboard']['Style']: "--" ?>
 									</td>
 									<td>
-										<?php echo isset($_SESSION['dashboard']['Fashionability_Keywords']) ? $_SESSION['dashboard']['Fashionability_Keywords']: "N/A" ?>
+										<?php echo isset($_SESSION['dashboard']['Style_Keywords']) ? $_SESSION['dashboard']['Style_Keywords']: "N/A" ?>
 									</td>
 								</tr>
 								<tr>
@@ -819,13 +819,13 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										11
 									</td>
 									<td>
-										Dependability
+										Reliability
 									</td>
 									<td>
-										<?php echo $_SESSION['dashboard']['Dependability'] ? $_SESSION['dashboard']['Dependability']: "--" ?>
+										<?php echo $_SESSION['dashboard']['Reliability'] ? $_SESSION['dashboard']['Reliability']: "--" ?>
 									</td>
 									<td>
-										<?php echo isset($_SESSION['dashboard']['Dependability_Keywords']) ? $_SESSION['dashboard']['Dependability_Keywords']: "N/A" ?>
+										<?php echo isset($_SESSION['dashboard']['Reliability_Keywords']) ? $_SESSION['dashboard']['Reliability_Keywords']: "N/A" ?>
 									</td>
 								</tr>
 								<tr>
@@ -833,13 +833,13 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										12
 									</td>
 									<td>
-										Satisfaction
+										Happiness
 									</td>
 									<td>
-										<?php echo $_SESSION['dashboard']['Satisfaction'] ? $_SESSION['dashboard']['Satisfaction']: "--" ?>
+										<?php echo $_SESSION['dashboard']['Happiness'] ? $_SESSION['dashboard']['Happiness']: "--" ?>
 									</td>
 									<td>
-										<?php echo isset($_SESSION['dashboard']['Satisfaction_Keywords']) ? $_SESSION['dashboard']['Satisfaction_Keywords']: "N/A" ?>
+										<?php echo isset($_SESSION['dashboard']['Happiness_Keywords']) ? $_SESSION['dashboard']['Happiness_Keywords']: "N/A" ?>
 									</td>
 								</tr>
 								<tr>
@@ -1095,7 +1095,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 												<div class="cont-col1">
 													<div class="desc">
 														 "Yo, lay off the tech shirts"
-														 <span class="label label-sm label-danger">Fashionability</span>
+														 <span class="label label-sm label-danger">Style</span>
 													</div>
 												</div>
 											</div>
@@ -1113,7 +1113,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 												<div class="cont-col1">
 													<div class="desc">
 														 "Bro, what's up with that hat?"
-														 <span class="label label-sm label-danger">Fashionability</span>
+														 <span class="label label-sm label-danger">Style</span>
 													</div>
 												</div>
 											</div>
@@ -1202,7 +1202,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 												<div class="cont-col1">
 													<div class="desc">
 														 "Never an awkward convo with you lol"
-														 <span class="label label-sm label-default">Awkwardness</span>
+														 <span class="label label-sm label-default">Affability</span>
 													</div>
 												</div>
 											</div>
