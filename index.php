@@ -237,14 +237,18 @@ switch ( $action ) {
     $recipient=$_SESSION['recipient'];
     $attribute=isset( $_SESSION['attribute'] ) ? $_SESSION['attribute'] : "";
     $positive=isset( $_SESSION['positive'] ) ? $_SESSION['positive'] + "" : "";
+    $null=isset( $_SESSION['null'] ) ? $_SESSION['null'] + "" : "";
     $slider=2*$_POST["slideVal"]; //Slider value needs to be multiplied by two since slider has 5 notches
-    $comment=isset( $_POST["commentsVal"] ) ? $_POST["commentsVal"] : "";
+    $comment=isset( $_POST["commentsVal"] ) && $_POST["commentsVal"]!="" ? $_SESSION['question'] . ": " . $_POST["commentsVal"] : "";
 
     $affiliations=isset($_SESSION['affiliations']) ? $_SESSION['affiliations'] : "";
     $keywords=$slider>7 && $_SESSION['keywords']!="" ? $_SESSION['keywords']:"null";
     $vibe= new Vibe($uid, $recipient,$attribute,$keywords,$affiliations);
     if(!$positive){
       $slider=10-$slider;
+    }
+    if(!$null){
+      $slider="null";
     }
     $vibe->setAnswer($slider,$comment);
     $vibe->recordToTable();
@@ -279,7 +283,7 @@ function question(){
     while(!$recipient){
         //if $random is 0, the code only uses top friends and picks from any of the vibe questions
         if($random==0){
-            $question_source=getQuestion(14); //calls the getQuestion(int) function to get the data of a question out of the Vibosphere database. This is a php array
+            $question_source=getQuestion(1); //calls the getQuestion(int) function to get the data of a question out of the Vibosphere database. This is a php array
             $attribute=$question_source['id']; // $question_id is set to the attribute number in the table, this will be changed later to Attribute
             $question=$question_source['question']; //$question is set to the string of the question picked
             $result=$_SESSION['topFriends']; //the top friends array, which contains a users top friends, is returned and set to $result
@@ -410,6 +414,13 @@ function getQuestion($input){
        $question=substr($question, 1);
       $_SESSION['positive']=0;
     }
+    if(strpos($question, '^') === FALSE){
+      $_SESSION['null']=1;
+    }
+    else{
+      $question=substr($question, 1);
+      $_SESSION['null']=0;
+    }    
     $attribute=$question_source[1]; //sets attribute
 
     $conn = null;
