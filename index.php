@@ -239,7 +239,7 @@ switch ( $action ) {
     $positive=isset( $_SESSION['positive'] ) ? $_SESSION['positive'] + "" : "";
     $null=isset( $_SESSION['null'] ) ? $_SESSION['null'] + "" : "";
     $slider=2*$_POST["slideVal"]; //Slider value needs to be multiplied by two since slider has 5 notches
-    $comment=isset( $_POST["commentsVal"] ) && $_POST["commentsVal"]!="" ? $_SESSION['question'] . ": " . $_POST["commentsVal"] : "";
+    $comment=isset( $_POST["commentsVal"] ) && $_POST["commentsVal"]!="" ? $_SESSION['question'] . ': "' . (str_replace(array('"',"'"),'',$_POST["commentsVal"]) . '"' : "";
 
     $affiliations=isset($_SESSION['affiliations']) ? $_SESSION['affiliations'] : "";
     $keywords=$slider>7 && $_SESSION['keywords']!="" ? $_SESSION['keywords']:"null";
