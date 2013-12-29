@@ -239,10 +239,13 @@ switch ( $action ) {
     $positive=isset( $_SESSION['positive'] ) ? $_SESSION['positive'] + "" : "";
     $null=isset( $_SESSION['null'] ) ? $_SESSION['null'] + "" : "";
     $slider=2*$_POST["slideVal"]; //Slider value needs to be multiplied by two since slider has 5 notches
-    $comment=isset( $_POST["commentsVal"] ) && $_POST["commentsVal"]!="" ? $_SESSION['question'] . ': "' . (str_replace(array('"',"'"),'',$_POST["commentsVal"]) . '"' : "";
+    $comment=isset( $_POST["commentsVal"] ) && $_POST["commentsVal"]!="" ? $_SESSION['question'] . ": " .'"' . str_replace(array('"',"'"),'',$_POST["commentsVal"]) . '"' : "";
 
     $affiliations=isset($_SESSION['affiliations']) ? $_SESSION['affiliations'] : "";
-    $keywords=$slider>7 && $_SESSION['keywords']!="" ? $_SESSION['keywords']:"null";
+    $keywords=$slider>7 && $_SESSION['keywords']!="" ? $_SESSION['keywords'][0]:"null";
+    if($keywords=="" || $keywords=="null"){
+      $keywords=$slider<3 && $_SESSION['keywords']!="" ? $_SESSION['keywords'][1]:"null";
+    }
     $vibe= new Vibe($uid, $recipient,$attribute,$keywords,$affiliations);
     if(!$positive){
       $slider=10-$slider;
@@ -276,6 +279,7 @@ function question(){
     $question;
     $attribute;
     $random=rand(0,1); //random is set to 0 or 1
+    //$random=0;
     $recipient=0;
     $name;
     
@@ -283,7 +287,7 @@ function question(){
     while(!$recipient){
         //if $random is 0, the code only uses top friends and picks from any of the vibe questions
         if($random==0){
-            $question_source=getQuestion(1); //calls the getQuestion(int) function to get the data of a question out of the Vibosphere database. This is a php array
+            $question_source=getQuestion(5); //calls the getQuestion(int) function to get the data of a question out of the Vibosphere database. This is a php array
             $attribute=$question_source['id']; // $question_id is set to the attribute number in the table, this will be changed later to Attribute
             $question=$question_source['question']; //$question is set to the string of the question picked
             $result=$_SESSION['topFriends']; //the top friends array, which contains a users top friends, is returned and set to $result
@@ -389,6 +393,7 @@ function topFriends(){
 function getQuestion($input){
     $attribute= rand(1,$input); //4andom is set to a number between 1 and $input
     $random=rand(1,3);
+    //$random=1;
     if($random>1){
       $random=rand(2,10);
     }
@@ -405,6 +410,11 @@ function getQuestion($input){
     $keywords="";
     if(strpos($question, '(')){
       $keywords=strrchr($question, "("); //sets keywords in question string equal to keywords
+      $keywords=split('&&',$keywords);
+      if(count($keywords)>1){
+        $keywords[0]=$keywords[0].")";
+        $keywords[1]="(".$keywords[1];
+      }
       $question=substr($question,0,strrpos($question, '(')); //takes out keyword from question string
     }
     if(strpos($question, '*') === FALSE){
