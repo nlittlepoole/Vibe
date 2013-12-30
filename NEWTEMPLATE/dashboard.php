@@ -671,6 +671,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<th>
 										Qualities
 									</th>
+									<th>
+										Percentile
+									</th>
+
 								</tr>
 								</thead>
 								<tbody>
@@ -687,6 +691,9 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<td>
 										<?php echo isset($_SESSION['dashboard']['Attractiveness_Keywords']) ? $_SESSION['dashboard']['Attractiveness_Keywords']: "N/A" ?>
 									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Percentiles']['Attractiveness'] ?>
+									</td>
 								</tr>
 								<tr>
 									<td>
@@ -700,6 +707,9 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									</td>
 									<td>
 										<?php echo isset($_SESSION['dashboard']['Affability_Keywords']) ? $_SESSION['dashboard']['Affability_Keywords']: "N/A" ?>
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Percentiles']['Affability'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -715,6 +725,9 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<td>
 										<?php echo isset($_SESSION['dashboard']['Intelligence_Keywords']) ? $_SESSION['dashboard']['Intelligence_Keywords']: "N/A" ?>
 									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Percentiles']['Intelligence'] ?>
+									</td>
 								</tr>
 								<tr>
 									<td>
@@ -729,6 +742,9 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<td>
 										<?php echo isset($_SESSION['dashboard']['Style_Keywords']) ? $_SESSION['dashboard']['Style_Keywords']: "N/A" ?>
 									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Percentiles']['Style'] ?>
+									</td>									
 								</tr>
 								<tr>
 									<td>
@@ -742,6 +758,9 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									</td>
 									<td>
 										<?php echo isset($_SESSION['dashboard']['Promiscuity_Keywords']) ? $_SESSION['dashboard']['Promiscuity_Keywords']: "N/A" ?>
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Percentiles']['Promiscuity'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -757,7 +776,11 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<td>
 										<?php echo isset($_SESSION['dashboard']['Humor_Keywords']) ? $_SESSION['dashboard']['Humor_Keywords']: "N/A" ?>
 									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Percentiles']['Humor'] ?>
+									</td>
 								</tr>
+								<tr>
 								<tr>
 									<td>
 										7
@@ -771,7 +794,11 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<td>
 										<?php echo isset($_SESSION['dashboard']['Confidence_Keywords']) ? $_SESSION['dashboard']['Confidence_Keywords']: "N/A" ?>
 									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Percentiles']['Confidence'] ?>
+									</td>
 								</tr>
+								<tr>
 								<tr>
 									<td>
 										8
@@ -785,7 +812,11 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<td>
 										<?php echo isset($_SESSION['dashboard']['Fun_Keywords']) ? $_SESSION['dashboard']['Fun_Keywords']: "N/A" ?>
 									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Percentiles']['Fun'] ?>
+									</td>
 								</tr>
+								<tr>
 								<tr>
 									<td>
 										9
@@ -799,7 +830,11 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<td>
 										<?php echo isset($_SESSION['dashboard']['Kindness_Keywords']) ? $_SESSION['dashboard']['Kindness_Keywords']: "N/A" ?>
 									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Percentiles']['Kindness'] ?>
+									</td>
 								</tr>
+								<tr>
 								<tr>
 									<td>
 										10
@@ -813,7 +848,11 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<td>
 										<?php echo isset($_SESSION['dashboard']['Honesty_Keywords']) ? $_SESSION['dashboard']['Honesty_Keywords']: "N/A" ?>
 									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Percentiles']['Honesty'] ?>
+									</td>
 								</tr>
+								<tr>
 								<tr>
 									<td>
 										11
@@ -827,7 +866,11 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<td>
 										<?php echo isset($_SESSION['dashboard']['Reliability_Keywords']) ? $_SESSION['dashboard']['Reliability_Keywords']: "N/A" ?>
 									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Percentiles']['Reliability'] ?>
+									</td>
 								</tr>
+								<tr>
 								<tr>
 									<td>
 										12
@@ -841,7 +884,11 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<td>
 										<?php echo isset($_SESSION['dashboard']['Happiness_Keywords']) ? $_SESSION['dashboard']['Happiness_Keywords']: "N/A" ?>
 									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Percentiles']['Happiness'] ?>
+									</td>
 								</tr>
+								<tr>
 								<tr>
 									<td>
 										13
@@ -855,7 +902,11 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<td>
 										<?php echo isset($_SESSION['dashboard']['Ambition_Keywords']) ? $_SESSION['dashboard']['Ambition_Keywords']: "N/A" ?> 
 									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Percentiles']['Ambition'] ?>
+									</td>
 								</tr>
+								<tr>
 								<tr>
 									<td>
 										14
@@ -869,6 +920,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<td>
 										<?php echo isset($_SESSION['dashboard']['Humility_Keywords']) ? $_SESSION['dashboard']['Humility_Keywords']: "N/A" ?>
 									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Percentiles']['Humility'] ?>
+									</td>
+								<tr>
 								</tr>
 								</tbody>
 								</table>

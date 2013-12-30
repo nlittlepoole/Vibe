@@ -42,6 +42,24 @@ switch ( $action ) {
     }
     $new_communities=substr($new_communities, 0, -1);
     $data['Communities']=$new_communities;
+
+    $scores=Array(
+      "Affability"=>$data['Affability'],
+      "Ambition"=>$data['Ambition'],
+      "Attractiveness"=>$data['Attractiveness'],
+      "Confidence"=>$data['Confidence'],
+      "Fun"=>$data['Fun'],
+      "Happiness"=>$data['Happiness'],
+      "Honesty"=>$data['Attractiveness'],
+      "Humility"=>$data['Humility'],
+      "Humor"=>$data['Humor'],
+      "Intelligence"=>$data['Intelligence'],
+      "Kindness"=>$data['Kindness'],
+      "Promiscuity"=>$data['Promiscuity'],
+      "Reliability"=>$data['Reliability'],
+      "Style"=>$data['Style'],
+      );
+    $data['Percentiles']=getPercentiles("global",$scores);
     $data['Attractiveness_Comments']=split('&&',$data['Attractiveness_Comments']);
     $data['Affability_Comments']= isset($data['Affability_Comments']) ? split('&&',$data['Affability_Comments']) : " ";
       if(isset($data['Affability_Keywords'])){
@@ -55,7 +73,7 @@ switch ( $action ) {
             }
         }
         $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
-        $data['Affability_Keywords']=$new_keyword;
+        $data['Affability_Keywords']="#".$new_keyword;
       }
     $data['Intelligence_Comments']= isset($data['Intelligence_Comments']) ? split('&&',$data['Intelligence_Comments']) : " ";
       if(isset($data['Intelligence_Keywords'])){
@@ -69,7 +87,7 @@ switch ( $action ) {
             }
         }
         $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
-        $data['Intelligence_Keywords']=$new_keyword;
+        $data['Intelligence_Keywords']="#".$new_keyword;
       }
     $data['Style_Comments']= isset($data['Style_Comments']) ? split('&&',$data['Style_Comments']) : " ";
       if(isset($data['Style_Keywords'])){
@@ -79,7 +97,7 @@ switch ( $action ) {
         foreach($keywords as $keyword){
             if($keyword[0]>$max){
               $max=$keyword[0];
-              $new_keyword=$keyword;
+              $new_keyword="#".$keyword;
             }
         }
         $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
@@ -97,7 +115,7 @@ switch ( $action ) {
             }
         }
         $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
-        $data['Promiscuity_Keywords']=$new_keyword;
+        $data['Promiscuity_Keywords']="#".$new_keyword;
       }
     $data['Humor_Comments']= isset($data['Humor_Comments']) ? split('&&',$data['Humor_Comments']) : " ";
       if(isset($data['Humor_Keywords'])){
@@ -111,7 +129,7 @@ switch ( $action ) {
             }
         }
         $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
-        $data['Humor_Keywords']=$new_keyword;
+        $data['Humor_Keywords']="#".$new_keyword;
       }
     $data['Confidence_Comments']= isset($data['Confidence_Comments']) ? split('&&',$data['Confidence_Comments']) : " ";
       if(isset($data['Confidence_Keywords'])){
@@ -125,7 +143,7 @@ switch ( $action ) {
             }
         }
         $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
-        $data['Confidence_Keywords']=$new_keyword;
+        $data['Confidence_Keywords']="#".$new_keyword;
       }
     $data['Fun_Comments']= isset($data['Fun_Comments']) ? split('&&',$data['Fun_Comments']) : " ";
       if(isset($data['Fun_Keywords'])){
@@ -139,7 +157,7 @@ switch ( $action ) {
             }
         }
         $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
-        $data['Fun_Keywords']=$new_keyword;
+        $data['Fun_Keywords']="#".$new_keyword;
       }
     $data['Kindness_Comments']= isset($data['Kindness_Comments']) ? split('&&',$data['Kindness_Comments']) : " ";
       if(isset($data['Kindness_Keywords'])){
@@ -153,7 +171,7 @@ switch ( $action ) {
             }
         }
         $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
-        $data['Kindness_Keywords']=$new_keyword;
+        $data['Kindness_Keywords']="#".$new_keyword;
       }
     $data['Honesty_Comments']= isset($data['Honesty_Comments']) ? split('&&',$data['Honesty_Comments']) : " ";
       if(isset($data['Honesty_Keywords'])){
@@ -167,7 +185,7 @@ switch ( $action ) {
             }
         }
         $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
-        $data['Honesty_Keywords']=$new_keyword;
+        $data['Honesty_Keywords']="#".$new_keyword;
       }
     $data['Reliability_Comments']= isset($data['Reliability_Comments']) ? split('&&',$data['Reliability_Comments']) : " ";
       if(isset($data['Reliability_Keywords'])){
@@ -181,7 +199,7 @@ switch ( $action ) {
             }
         }
         $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
-        $data['Reliability_Keywords']=$new_keyword;
+        $data['Reliability_Keywords']="#".$new_keyword;
       }
     $data['Happiness_Comments']= isset($data['Happiness_Comments']) ? split('&&',$data['Happiness_Comments']) : " ";
       if(isset($data['Happiness_Keywords'])){
@@ -195,7 +213,7 @@ switch ( $action ) {
             }
         }
         $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
-        $data['Happiness_Keywords']=$new_keyword;
+        $data['Happiness_Keywords']="#".$new_keyword;
       }
     $data['Ambition_Comments']= isset($data['Ambition_Comments']) ? split('&&',$data['Ambition_Comments']) : " ";
       if(isset($data['Ambition_Keywords'])){
@@ -209,7 +227,7 @@ switch ( $action ) {
             }
         }
         $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
-        $data['Ambition_Keywords']=$new_keyword;
+        $data['Ambition_Keywords']="#".$new_keyword;
       }
     $data['Humility_Comments']= isset($data['Humility_Comments']) ? split('&&',$data['Humility_Comments']) : " ";
       if(isset($data['Humility_Keywords'])){
@@ -223,7 +241,7 @@ switch ( $action ) {
             }
         }
         $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
-        $data['Humility_Keywords']=$new_keyword;
+        $data['Humility_Keywords']="#".$new_keyword;
       }
     $data["pic"]="http://graph.facebook.com/" . $uid . "/picture?width=300&height=300";
     $_SESSION['dashboard']=$data;
@@ -496,5 +514,64 @@ function friendAffiliations($input){
        }
        $sum;
        return substr($sum, 0, -2); //returns concatenated string of affiliations
+}
+function getPercentiles($community,$score){
+  $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //database connection is established uisng credentials in config.php
+  $sql = "SELECT Attribute,Average, Deviation FROM $community"; //sql query that returns the string of the question in the table
+  $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
+  $st->execute();//executes query above
+  $stats=$st->fetchAll(); //$question source is set to result of query
+  print_r($score);
+  $result=Array();
+  $positive=true;
+  foreach($stats as $stat){
+    if($stat[2]>0){
+      $avg=$stat[1];
+      $dev=$stat[2];
+      $temp=($score[$stat['Attribute']]-$avg)/$dev;
+      $positive=$temp>0;
+      $percentile=cdf_2tail($temp);
+      if($positive){
+        $percentile=1-$percentile/2;
+      }
+      else{
+        $percentile=$percentile/2;
+      }
+      $result[$stat['Attribute']]=$percentile>0.15 ? (int)($percentile*100)."%" :"N/A";
+    }
+    else{
+      $result[$stat['Attribute']]="N/A";
+    }
+
+  }
+    $conn = null;
+    return $result;
+}
+function erf($x)
+{
+    $pi = 3.1415927;
+    $a = (8*($pi - 3))/(3*$pi*(4 - $pi));
+    $x2 = $x * $x;
+
+    $ax2 = $a * $x2;
+    $num = (4/$pi) + $ax2;
+    $denom = 1 + $ax2;
+
+    $inner = (-$x2)*$num/$denom;
+    $erf2 = 1 - exp($inner);
+
+    return sqrt($erf2);
+}
+
+function cdf($n)
+{
+         return (1 - erf($n / sqrt(2)))/2;
+         //I removed the $n < 0 test which inverses the +1/-1
+}
+
+function cdf_2tail($n)
+{
+        return 2*cdf($n);
+            //After a little more digging around, the two tail test is simply 2 x the cdf.
 }
 ?>

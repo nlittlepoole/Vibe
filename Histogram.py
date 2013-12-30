@@ -21,8 +21,10 @@ for attribute in attributes:
     dev=-1
     if stats[0][0]:
         avg=stats[0][0]
+        avg="%.2f" % avg
     if stats[0][1]:
         dev=stats[0][1]
+        dev="%.2f" % dev
     cur.execute("SELECT * FROM global WHERE Attribute='"+attribute[0]+"'")
     exists=cur.fetchall()
     #print exists

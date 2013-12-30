@@ -1,6 +1,39 @@
 <?php
-$test=cdf_2tail(-.57);
-echo $test= (int)((1-$test)*100)."%";
+require( "config.php" );
+getPercentiles("global",9);
+function getPercentiles($community,$score){
+	$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //database connection is established uisng credentials in config.php
+	$sql = "SELECT Attribute,Average, Deviation FROM $community"; //sql query that returns the string of the question in the table
+	$st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
+	$st->execute();//executes query above
+	$stats=$st->fetchAll(); //$question source is set to result of query
+	print_r($stats);
+	$result=Array();
+	$positive=true;
+	foreach($stats as $stat){
+		if($stat[2]>0){
+			$avg=$stat[1];
+			$dev=$stat[2];
+			$temp=($score-$avg)/$dev;
+			$positive=$temp>0;
+			$percentile=cdf_2tail($temp);
+			if($positive){
+				$percentile=1-$percentile/2;
+			}
+			else{
+				$percentile=$percentile/2;
+			}
+			$result[$stat['Attribute']]=$percentile>0.3 ? (int)($percentile*100)."%" :"N/A";
+		}
+		else{
+			$result[$stat['Attribute']]="N/A";
+		}
+
+	}
+	print_r($result);	
+  	$conn = null;
+  	return $result;
+}
 function erf($x)
 {
     $pi = 3.1415927;
