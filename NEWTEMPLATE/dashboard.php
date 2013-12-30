@@ -569,14 +569,14 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 						</div>
 						<div class="details">
 							<div class="number">
-								 +1349
+								 <?php echo $_SESSION['dashboard']['Points'] ?>
 							</div>
 							<div class="desc">
-								 Answers
+								 Points
 							</div>
 						</div>
 						<a class="more" href="#">
-						View more <i class="m-icon-swapright m-icon-white"></i>
+						Spend Points <i class="m-icon-swapright m-icon-white"></i>
 						</a>
 					</div>
 				</div>
@@ -587,14 +587,14 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 						</div>
 						<div class="details">
 							<div class="number">
-								+13
+								<?php echo ($_SESSION['dashboard']['Comments_Size']) ?>
 							</div>
 							<div class="desc">
 								Comments
 							</div>
 						</div>
 						<a class="more" href="#">
-						View more <i class="m-icon-swapright m-icon-white"></i>
+						View Comments <i class="m-icon-swapright m-icon-white"></i>
 						</a>
 					</div>
 				</div>
@@ -605,14 +605,14 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 						</div>
 						<div class="details">
 							<div class="number">
-								+3
+								
 							</div>
 							<div class="desc">
 								Questions
 							</div>
 						</div>
-						<a class="more" href="#">
-						View more <i class="m-icon-swapright m-icon-white"></i>
+						<a class="more" href="/index.php?action=question">
+						Answer More <i class="m-icon-swapright m-icon-white"></i>
 						</a>
 					</div>
 				</div>

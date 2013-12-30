@@ -42,6 +42,7 @@ switch ( $action ) {
     }
     $new_communities=substr($new_communities, 0, -1);
     $data['Communities']=$new_communities;
+    $data['Comments_Size']=$data['Comments']!=''?sizeof($data['Comments']):0;
     $data['Comments']=comments($data['Comments']);
     print_r($data['Comments']);
     $scores=Array(
@@ -425,6 +426,7 @@ function keywords($keywords,$total,$split){
 function comments($comments){
   $comments=split('&&',$comments);
   $max=sizeof($comments);
+  if($comments[0]!=''){
     for ($x=0; $x<$max; $x++){
       $temp=split('##',$comments[$x]);
       print_r($temp);
@@ -458,6 +460,7 @@ function comments($comments){
                   </li>';
       //$comments[$x]=Array($temp[2],$temp[0], $time);
     }
+  }
     for ($x=$max; $x<9; $x++){
       $comments[$x]='                 <li>
                     <div class="col1">
