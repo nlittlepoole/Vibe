@@ -29,12 +29,12 @@ while count[0][0] != 0:
     #print attribute
     score=row[0][4]
     modifier=0
+    query="SELECT * FROM user WHERE UID=" + user2
+    cur.execute(query)
+    exists=cur.fetchall()
     if score:
         score=float(row[0][4])
     else:
-        query="SELECT * FROM user WHERE UID=" + user2
-        cur.execute(query)
-        exists=cur.fetchall()
         if exists:
             query="SELECT " +attribute + " FROM user WHERE UID=" + user2
             cur.execute(query)
@@ -62,8 +62,8 @@ while count[0][0] != 0:
         if len(data[0])>1 and len(data[1])>1:
             query="SELECT COUNT(1) FROM communities WHERE UID='" + (data[1]) + "'"
             cur.execute(query)
-            exists=cur.fetchall()
-            if exists[0][0]>0:
+            exist=cur.fetchall()
+            if exist[0][0]>0:
                 #print "exists"
                 query="SELECT Average,Sum,Keywords FROM `"+data[1] +"` WHERE Attribute= '" + attribute + "';"
                 cur.execute(query)
@@ -85,7 +85,10 @@ while count[0][0] != 0:
                     newcommunityKeyword="1"+keyword
                 else:
                     newcommunityKeyword=communityKeyword
-                query="UPDATE `" + data[1] + "` SET Average=" + str((score+int(old[0][0]))/(int(old[0][1])+1-modifier)) +",Sum=Sum+1, Keywords='" +newcommunityKeyword+"' WHERE Attribute='"+ attribute + "';"
+                sscore=old[0][0]
+                if old[0][1]-modifier>0:
+                    sscore=(score+int(old[0][0]))/(int(old[0][1])+1-modifier)
+                query="UPDATE `" + data[1] + "` SET Average=" + str(sscore) +",Sum=Sum+1, Keywords='" +newcommunityKeyword+"' WHERE Attribute='"+ attribute + "';"
                 cur.execute(query)
                 cur.connection.commit()
             else:
@@ -102,13 +105,15 @@ while count[0][0] != 0:
                 query="SELECT Average,Sum FROM `"+data[1] +"` WHERE Attribute= '" + attribute + "';"
                 cur.execute(query)
                 old=cur.fetchall()
+                sscore=old[0][0]
+                if old[0][1]-modifier>0:
+                    sscore=(score+int(old[0][0]))/(int(old[0][1])+1-modifier)
                 if not "null" in keyword:
-                    query="UPDATE `" +data[1] + "` SET Average=" + str((score+int(old[0][0]))/(int(old[0][1])+1-modifier)) +",Sum=Sum+1 , Keywords='" +str(1)+ keyword+"' WHERE Attribute='"+ attribute + "';"
+                    query="UPDATE `" +data[1] + "` SET Average=" + str(sscore) +",Sum=Sum+1 , Keywords='" +str(1)+ keyword+"' WHERE Attribute='"+ attribute + "';"
                 else:
-                    query="UPDATE `" +data[1] + "` SET Average=" + str((score+int(old[0][0]))/(int(old[0][1])+1-modifier)) +",Sum=Sum+1 , Keywords='" + keyword+"' WHERE Attribute='"+ attribute + "';"
+                    query="UPDATE `" +data[1] + "` SET Average=" + str(sscore) +",Sum=Sum+1 , Keywords='" + keyword+"' WHERE Attribute='"+ attribute + "';"
                 cur.execute(query)
                 cur.connection.commit()
-
     if exists:
         query="SELECT " +attribute + ","+ attribute+"_Total,"+ attribute+"_Keywords,Comments FROM user WHERE UID=" + user2
         cur.execute(query)
@@ -149,15 +154,17 @@ while count[0][0] != 0:
                     temp=temp+1
         else:
             comment=previous_comment
-        score=(score+(previous_score*total))/(total+1-modifier)
+        if total+1-modifier>0:
+            score=(score+(previous_score*total))/(total+1-modifier)
+        score=previous_score
         score="%.2f" % score
         score=str(score)
         #print score
         if newKeyword:
-            query="UPDATE user SET " + attribute + "=" +""+ score+ " , " + attribute + "_Total="+attribute+"_Total + 1 ," +attribute + "_Keywords='" +newKeyword + "',Comments='"+comment+"' WHERE UID="+ user2
+            query="UPDATE user SET " + attribute + "=" +""+ score+ " , " + attribute + "_Total="+attribute+"_Total + 1-"+str(modifier)+" ," +attribute + "_Keywords='" +newKeyword + "',Comments='"+comment+"' WHERE UID="+ user2
         #print query
         else:
-            query="UPDATE user SET " + attribute + "=" +""+ score+ " , " + attribute + "_Total="+attribute+"_Total + 1,Comments='"+comment+"' WHERE UID="+ user2
+            query="UPDATE user SET " + attribute + "=" +""+ score+ " , " + attribute + "_Total="+attribute+"_Total + 1-"+str(modifier)+",Comments='"+comment+"' WHERE UID="+ user2
         #print query
         cur.execute(query)
         cur.connection.commit()

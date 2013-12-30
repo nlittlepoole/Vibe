@@ -244,7 +244,7 @@ switch ( $action ) {
     $affiliations=isset($_SESSION['affiliations']) ? $_SESSION['affiliations'] : "";
     $keywords=$slider>7 && $_SESSION['keywords']!="" ? $_SESSION['keywords'][0]:"null";
     if($keywords=="" || $keywords=="null"){
-      $keywords=$slider<3 && $_SESSION['keywords']!="" ? $_SESSION['keywords'][1]:"null";
+      $keywords=$slider<3 && isset($_SESSION['keywords'][1])  ? $_SESSION['keywords'][1]:"null";
     }
     $vibe= new Vibe($uid, $recipient,$attribute,$keywords,$affiliations);
     if(!$positive){
@@ -278,7 +278,7 @@ function question(){
     //Useful variables are initialized here at the beginning of the code
     $question;
     $attribute;
-    $random=rand(0,1); //random is set to 0 or 1
+    $random=rand(0,2); //random is set to 0 or 1
     //$random=0;
     $recipient=0;
     $name;
@@ -286,8 +286,8 @@ function question(){
     //Placed in a while loop to make sure that php doesn't proceed without a valid user
     while(!$recipient){
         //if $random is 0, the code only uses top friends and picks from any of the vibe questions
-        if($random==0){
-            $question_source=getQuestion(5); //calls the getQuestion(int) function to get the data of a question out of the Vibosphere database. This is a php array
+        if($random>0){
+            $question_source=getQuestion(14); //calls the getQuestion(int) function to get the data of a question out of the Vibosphere database. This is a php array
             $attribute=$question_source['id']; // $question_id is set to the attribute number in the table, this will be changed later to Attribute
             $question=$question_source['question']; //$question is set to the string of the question picked
             $result=$_SESSION['topFriends']; //the top friends array, which contains a users top friends, is returned and set to $result
