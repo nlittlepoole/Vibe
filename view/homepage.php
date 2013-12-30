@@ -51,7 +51,7 @@ require_once($path . "/config.php");
 			  <!-- Messages -->
 			  <div class="carousel-inner">
 			    <div class="item active">
-			    	<span>We are Vibe<br /><p><button id="rounded_corners" class="btn btn-large btn-primary" style="background-color: #000033" onclick="location.href='<?php echo $loginUrl ?>'">Log in with Facebook <i class="icon-circle-arrow-right" style="color: white" ></i></button></p></span>
+			    	<span>Vibe: A Social Experiment<br /><p><button id="rounded_corners" class="btn btn-large btn-primary" style="background-color: #000033" onclick="location.href='<?php echo $loginUrl ?>'">Log in with Facebook <i class="icon-circle-arrow-right" style="color: white" ></i></button></p></span>
 			    </div>
 			  </div>
 			</div>
