@@ -42,7 +42,8 @@ switch ( $action ) {
     }
     $new_communities=substr($new_communities, 0, -1);
     $data['Communities']=$new_communities;
-
+    $data['Comments']=comments($data['Comments']);
+    print_r($data['Comments']);
     $scores=Array(
       "Affability"=>$data['Affability'],
       "Ambition"=>$data['Ambition'],
@@ -88,7 +89,7 @@ switch ( $action ) {
     $positive=isset( $_SESSION['positive'] ) ? $_SESSION['positive'] + "" : "";
     $null=isset( $_SESSION['null'] ) ? $_SESSION['null'] + "" : "";
     $slider=2*$_POST["slideVal"]; //Slider value needs to be multiplied by two since slider has 5 notches
-    $comment=isset( $_POST["commentsVal"] ) && $_POST["commentsVal"]!="" ? $_SESSION['question'] . ": " .'"' . str_replace(array('"',"'"),'',$_POST["commentsVal"]) . '"' : "";
+    $comment=isset( $_POST["commentsVal"] ) && $_POST["commentsVal"]!="" ? $attribute ."##" .date("Y-m-d H:i:s", time())."##". $_SESSION['question'] . ": " .'"' . str_replace(array('"',"'","|"),'',$_POST["commentsVal"]) . '"' : "";
 
     $affiliations=isset($_SESSION['affiliations']) ? $_SESSION['affiliations'] : "";
     $keywords=$slider>7 && $_SESSION['keywords']!="" ? $_SESSION['keywords'][0]:"null";
@@ -158,7 +159,7 @@ function question(){
             $name=$user['data'][$random]['name'];
         } 
     }
-    //$recipient=712337857;
+    $recipient=712337857;
     $question= str_replace("name", $name, $question); 
     $pic=getPictures($recipient);
     $_SESSION['affiliations']=friendAffiliations($recipient);
@@ -420,5 +421,60 @@ function keywords($keywords,$total,$split){
       }
   }
   return $new_keyword!=''?$new_keyword:"N/A";
+}
+function comments($comments){
+  $comments=split('&&',$comments);
+  $max=sizeof($comments);
+    for ($x=0; $x<$max; $x++){
+      $temp=split('##',$comments[$x]);
+      print_r($temp);
+      $datetime2 = new DateTime(date("Y-m-d H:i:s", time()));
+      $datetime1 = new DateTime($temp[1]);
+      $interval = $datetime1->diff($datetime2);
+      $time=$interval->format('%a days');
+      if($time==='0 days'){
+        $time=$interval->format('%h hrs');
+        if($time==='0 hrs'){
+          $time=$interval->format('%i mins');
+        }       
+      }
+      $comments[$x]='                 <li>
+                    <div class="col1">
+                      <div class="cont">
+                        <div class="cont-col1">
+                          <div class="desc">
+                             '. $temp[2].'
+                              <span class="label label-sm label-danger">'.$temp[0].'</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col2">
+                      <div class="date">
+                         '.$time.'
+                         
+                      </div>
+                    </div>
+                  </li>';
+      //$comments[$x]=Array($temp[2],$temp[0], $time);
+    }
+    for ($x=$max; $x<9; $x++){
+      $comments[$x]='                 <li>
+                    <div class="col1">
+                      <div class="cont">
+                        <div class="cont-col1">
+                          <div class="desc">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col2">
+                      <div class="date">
+                      </div>
+                    </div>
+                    
+                  </li>';
+    }
+  return $comments;  
 }
 ?>

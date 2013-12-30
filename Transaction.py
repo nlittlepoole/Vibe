@@ -144,10 +144,10 @@ while count[0][0] != 0:
         #print previous_list
         if len(comment)>1:
             if len(previous_comment) >1:
-                if len(previous_list)<5:
+                if len(previous_list)<9:
                     mtemp=len(previous_list)
                 else:
-                    mtemp=5
+                    mtemp=9
                 temp=0;
                 while temp<mtemp:
                     comment=comment +'&&' + previous_list[temp]
