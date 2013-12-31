@@ -1,7 +1,7 @@
 <?php
   // Define some constants
-  define( "RECIPIENT_NAME", "Your name" ); // Replace with your name
-  define( "RECIPIENT_EMAIL", "email@domain.com" ); // Replace with your email
+  define( "RECIPIENT_NAME", "Team Vibe" ); // Replace with your name
+  define( "RECIPIENT_EMAIL", "teamvibe@go-vibe.com" ); // Replace with your email
   define( "EMAIL_SUBJECT", "Visitor Message" );
   // Read the form values
   $success = false;

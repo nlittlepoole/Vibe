@@ -397,18 +397,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					</span>
 					</a>
 					<ul class="sub-menu">
-						<li>
-							<a href="layout_session_timeout.html">
-							Columbia University</a>
-						</li>
-						<li>
-							<a href="layout_idle_timeout.html">
-							Boeing</a>
-						</li>
-						<li>
-							<a href="layout_language_bar.html">
-							Bloomingdale High School</a>
-						</li>
+						<?php echo $_SESSION['dashboard']['Communities'] ?>
 					</ul>
 				</li>
 				<li id="frontend-link" class="tooltips" data-placement="right" data-original-title="Frontend&nbsp;Theme For&nbsp;Metronic&nbsp;Admin">
@@ -443,102 +432,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 	<!-- BEGIN CONTENT -->
 	<div class="page-content-wrapper">
 		<div class="page-content">
-			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-			<div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-							<h4 class="modal-title">Modal title</h4>
-						</div>
-						<div class="modal-body">
-							 Widget settings form goes here
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn blue">Save changes</button>
-							<button type="button" class="btn default" data-dismiss="modal">Close</button>
-						</div>
-					</div>
-					<!-- /.modal-content -->
-				</div>
-				<!-- /.modal-dialog -->
-			</div>
-			<!-- /.modal -->
-			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-			<!-- BEGIN STYLE CUSTOMIZER -->
-			<div class="theme-panel hidden-xs hidden-sm">
-				<div class="toggler">
-				</div>
-				<div class="toggler-close">
-				</div>
-				<div class="theme-options">
-					<div class="theme-option theme-colors clearfix">
-						<span>
-							THEME COLOR
-						</span>
-						<ul>
-							<li class="color-black current color-default" data-style="default">
-							</li>
-							<li class="color-blue" data-style="blue">
-							</li>
-							<li class="color-brown" data-style="brown">
-							</li>
-							<li class="color-purple" data-style="purple">
-							</li>
-							<li class="color-grey" data-style="grey">
-							</li>
-							<li class="color-white color-light" data-style="light">
-							</li>
-						</ul>
-					</div>
-					<div class="theme-option">
-						<span>
-							Layout
-						</span>
-						<select class="layout-option form-control input-small">
-							<option value="fluid" selected="selected">Fluid</option>
-							<option value="boxed">Boxed</option>
-						</select>
-					</div>
-					<div class="theme-option">
-						<span>
-							Header
-						</span>
-						<select class="header-option form-control input-small">
-							<option value="fixed" selected="selected">Fixed</option>
-							<option value="default">Default</option>
-						</select>
-					</div>
-					<div class="theme-option">
-						<span>
-							Sidebar
-						</span>
-						<select class="sidebar-option form-control input-small">
-							<option value="fixed">Fixed</option>
-							<option value="default" selected="selected">Default</option>
-						</select>
-					</div>
-					<div class="theme-option">
-						<span>
-							Sidebar Position
-						</span>
-						<select class="sidebar-pos-option form-control input-small">
-							<option value="left" selected="selected">Left</option>
-							<option value="right">Right</option>
-						</select>
-					</div>
-					<div class="theme-option">
-						<span>
-							Footer
-						</span>
-						<select class="footer-option form-control input-small">
-							<option value="fixed">Fixed</option>
-							<option value="default" selected="selected">Default</option>
-						</select>
-					</div>
-				</div>
-			</div>
-			<!-- END STYLE CUSTOMIZER -->
 			<!-- BEGIN PAGE HEADER-->
 			<div class="row">
 				<div class="col-md-12">
@@ -549,7 +442,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					<ul class="page-breadcrumb breadcrumb">
 						<li>
 							<i class="fa fa-home"></i>
-							<a href="index.html">Home</a>
+							<a href="/index.php">Home</a>
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
@@ -569,14 +462,14 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 						</div>
 						<div class="details">
 							<div class="number">
-								 +1349
+								 <?php echo $_SESSION['dashboard']['Points'] ?>
 							</div>
 							<div class="desc">
-								 Answers
+								 Points
 							</div>
 						</div>
 						<a class="more" href="#">
-						View more <i class="m-icon-swapright m-icon-white"></i>
+						Spend Points <i class="m-icon-swapright m-icon-white"></i>
 						</a>
 					</div>
 				</div>
@@ -587,14 +480,14 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 						</div>
 						<div class="details">
 							<div class="number">
-								+13
+								<?php echo ($_SESSION['dashboard']['Comments_Size']) ?>
 							</div>
 							<div class="desc">
 								Comments
 							</div>
 						</div>
 						<a class="more" href="#">
-						View more <i class="m-icon-swapright m-icon-white"></i>
+						View Comments <i class="m-icon-swapright m-icon-white"></i>
 						</a>
 					</div>
 				</div>
@@ -605,14 +498,14 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 						</div>
 						<div class="details">
 							<div class="number">
-								+3
+								
 							</div>
 							<div class="desc">
 								Questions
 							</div>
 						</div>
-						<a class="more" href="#">
-						View more <i class="m-icon-swapright m-icon-white"></i>
+						<a class="more" href="/index.php?action=question">
+						Answer More <i class="m-icon-swapright m-icon-white"></i>
 						</a>
 					</div>
 				</div>
@@ -648,10 +541,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								<i class="fa fa-comments"></i>Feedback
 							</div>
 							<div class="tools">
-								<a href="javascript:;" class="collapse"></a>
-								<a href="#portlet-config" data-toggle="modal" class="config"></a>
-								<a href="javascript:;" class="reload"></a>
-								<a href="javascript:;" class="remove"></a>
 							</div>
 						</div>
 						<div class="portlet-body">
@@ -671,6 +560,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<th>
 										Qualities
 									</th>
+									<th>
+										Percentile
+									</th>
+
 								</tr>
 								</thead>
 								<tbody>
@@ -687,6 +580,9 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<td>
 										<?php echo isset($_SESSION['dashboard']['Attractiveness_Keywords']) ? $_SESSION['dashboard']['Attractiveness_Keywords']: "N/A" ?>
 									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Percentiles']['Attractiveness'] ?>
+									</td>
 								</tr>
 								<tr>
 									<td>
@@ -700,6 +596,9 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									</td>
 									<td>
 										<?php echo isset($_SESSION['dashboard']['Affability_Keywords']) ? $_SESSION['dashboard']['Affability_Keywords']: "N/A" ?>
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Percentiles']['Affability'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -715,6 +614,9 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<td>
 										<?php echo isset($_SESSION['dashboard']['Intelligence_Keywords']) ? $_SESSION['dashboard']['Intelligence_Keywords']: "N/A" ?>
 									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Percentiles']['Intelligence'] ?>
+									</td>
 								</tr>
 								<tr>
 									<td>
@@ -729,6 +631,9 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<td>
 										<?php echo isset($_SESSION['dashboard']['Style_Keywords']) ? $_SESSION['dashboard']['Style_Keywords']: "N/A" ?>
 									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Percentiles']['Style'] ?>
+									</td>									
 								</tr>
 								<tr>
 									<td>
@@ -742,6 +647,9 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									</td>
 									<td>
 										<?php echo isset($_SESSION['dashboard']['Promiscuity_Keywords']) ? $_SESSION['dashboard']['Promiscuity_Keywords']: "N/A" ?>
+									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Percentiles']['Promiscuity'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -757,7 +665,11 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<td>
 										<?php echo isset($_SESSION['dashboard']['Humor_Keywords']) ? $_SESSION['dashboard']['Humor_Keywords']: "N/A" ?>
 									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Percentiles']['Humor'] ?>
+									</td>
 								</tr>
+								<tr>
 								<tr>
 									<td>
 										7
@@ -771,7 +683,11 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<td>
 										<?php echo isset($_SESSION['dashboard']['Confidence_Keywords']) ? $_SESSION['dashboard']['Confidence_Keywords']: "N/A" ?>
 									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Percentiles']['Confidence'] ?>
+									</td>
 								</tr>
+								<tr>
 								<tr>
 									<td>
 										8
@@ -785,7 +701,11 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<td>
 										<?php echo isset($_SESSION['dashboard']['Fun_Keywords']) ? $_SESSION['dashboard']['Fun_Keywords']: "N/A" ?>
 									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Percentiles']['Fun'] ?>
+									</td>
 								</tr>
+								<tr>
 								<tr>
 									<td>
 										9
@@ -799,7 +719,11 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<td>
 										<?php echo isset($_SESSION['dashboard']['Kindness_Keywords']) ? $_SESSION['dashboard']['Kindness_Keywords']: "N/A" ?>
 									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Percentiles']['Kindness'] ?>
+									</td>
 								</tr>
+								<tr>
 								<tr>
 									<td>
 										10
@@ -813,7 +737,11 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<td>
 										<?php echo isset($_SESSION['dashboard']['Honesty_Keywords']) ? $_SESSION['dashboard']['Honesty_Keywords']: "N/A" ?>
 									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Percentiles']['Honesty'] ?>
+									</td>
 								</tr>
+								<tr>
 								<tr>
 									<td>
 										11
@@ -827,7 +755,11 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<td>
 										<?php echo isset($_SESSION['dashboard']['Reliability_Keywords']) ? $_SESSION['dashboard']['Reliability_Keywords']: "N/A" ?>
 									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Percentiles']['Reliability'] ?>
+									</td>
 								</tr>
+								<tr>
 								<tr>
 									<td>
 										12
@@ -841,7 +773,11 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<td>
 										<?php echo isset($_SESSION['dashboard']['Happiness_Keywords']) ? $_SESSION['dashboard']['Happiness_Keywords']: "N/A" ?>
 									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Percentiles']['Happiness'] ?>
+									</td>
 								</tr>
+								<tr>
 								<tr>
 									<td>
 										13
@@ -855,7 +791,11 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<td>
 										<?php echo isset($_SESSION['dashboard']['Ambition_Keywords']) ? $_SESSION['dashboard']['Ambition_Keywords']: "N/A" ?> 
 									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Percentiles']['Ambition'] ?>
+									</td>
 								</tr>
+								<tr>
 								<tr>
 									<td>
 										14
@@ -869,6 +809,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<td>
 										<?php echo isset($_SESSION['dashboard']['Humility_Keywords']) ? $_SESSION['dashboard']['Humility_Keywords']: "N/A" ?>
 									</td>
+									<td>
+										<?php echo $_SESSION['dashboard']['Percentiles']['Humility'] ?>
+									</td>
+								<tr>
 								</tr>
 								</tbody>
 								</table>
@@ -1089,154 +1033,15 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 						<div class="portlet-body">
 							<div class="scroller" style="height: 300px;" data-always-visible="1" data-rail-visible="0">
 								<ul class="feeds">
-									<li>
-										<div class="col1">
-											<div class="cont">
-												<div class="cont-col1">
-													<div class="desc">
-														 "Yo, lay off the tech shirts"
-														 <span class="label label-sm label-danger">Style</span>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col2">
-											<div class="date">
-												 Just now
-											</div>
-										</div>
-									</li>
-									<li>
-										
-										<div class="col1">
-											<div class="cont">
-												<div class="cont-col1">
-													<div class="desc">
-														 "Bro, what's up with that hat?"
-														 <span class="label label-sm label-danger">Style</span>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col2">
-											<div class="date">
-												 20 mins
-											</div>
-										</div>
-										
-									</li>
-									<li>
-										<div class="col1">
-											<div class="cont">
-												<div class="cont-col1">
-													<div class="desc">
-														 "Bro, do you even lift?"
-														 <span class="label label-sm label-primary">Attractiveness</span>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col2">
-											<div class="date">
-												 20 mins
-											</div>
-										</div>
-										
-									</li>
-									<li>
-										
-										<div class="col1">
-											<div class="cont">
-												<div class="cont-col1">
-													<div class="desc">
-														 "Your questions in Macro are so engaging"
-														 <span class="label label-sm label-info">Intelligence</span>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col2">
-											<div class="date">
-												 20 mins
-											</div>
-										</div>
-										
-									</li>
-									<li>
-										<div class="col1">
-											<div class="cont">
-												<div class="cont-col1">
-													<div class="desc">
-														 "Pretty chill overall"
-														 <span class="label label-sm label-success">Fun</span>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col2">
-											<div class="date">
-												 24 mins
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="col1">
-											<div class="cont">
-												<div class="cont-col1">
-													<div class="desc">
-														 "Always fun to go to bars with"
-														 <span class="label label-sm label-success">Fun</span>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col2">
-											<div class="date">
-												 30 mins
-											</div>
-										</div>
-									</li>
-									<li>
-										<div class="col1">
-											<div class="cont">
-												<div class="cont-col1">
-													<div class="desc">
-														 "Never an awkward convo with you lol"
-														 <span class="label label-sm label-default">Affability</span>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col2">
-											<div class="date">
-												 2 hours
-											</div>
-										</div>
-									</li>
-									<li>
+									<?php 
+									foreach($_SESSION['dashboard']['Comments'] as $comment){
+										echo $comment;
+										} ?>
 									
-										<div class="col1">
-											<div class="cont">
-												<div class="cont-col1">
-													<div class="desc">
-														 "But, I'm not an alcoholic..."
-														 <span class="label label-sm label-primary">Honesty</span>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col2">
-											<div class="date">
-												 4 hours
-											</div>
-										</div>
-										
-									</li>
 								</ul>
 							</div>
 							<div class="scroller-footer">
 								<div class="pull-right">
-									<a href="#">See All Comments <i class="m-icon-swapright m-icon-gray"></i></a> &nbsp;
 								</div>
 							</div>
 						</div>

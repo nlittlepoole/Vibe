@@ -51,7 +51,7 @@ require_once($path . "/config.php");
 			  <!-- Messages -->
 			  <div class="carousel-inner">
 			    <div class="item active">
-			    	<span>We are Vibe<br /><p><button id="rounded_corners" class="btn btn-large btn-primary" style="background-color: #000033" onclick="location.href='<?php echo $loginUrl ?>'">Log in with Facebook <i class="icon-circle-arrow-right" style="color: white" ></i></button></p></span>
+			    	<span>Vibe: A Social Experiment<br /><p><button id="rounded_corners" class="btn btn-large btn-primary" style="background-color: #000033" onclick="location.href='<?php echo $loginUrl ?>'">Log in with Facebook <i class="icon-circle-arrow-right" style="color: white" ></i></button></p></span>
 			    </div>
 			  </div>
 			</div>
@@ -155,7 +155,7 @@ require_once($path . "/config.php");
 						<h3>Contact Info</h3>
 						<ul class="info-list">
 	            <li class="icon-map-marker">Columbia University<br>New York, NY<br>10027</li>
-	            <li class="icon-envelope">teamgovibe@gmail.com</li>
+	            <li class="icon-envelope">teamvibe@go-vibe.com</li>
 	          </ul>
 	          <h3>Social Media</h3>
 	          <ul class="icons-list">

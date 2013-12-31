@@ -27,7 +27,23 @@ while count[0][0] != 0:
     #print user2
     attribute=row[0][3]
     #print attribute
-    score=float(row[0][4])
+    score=row[0][4]
+    modifier=0
+    query="SELECT * FROM user WHERE UID=" + user2
+    cur.execute(query)
+    exists=cur.fetchall()
+    if score:
+        score=float(row[0][4])
+    else:
+        if exists:
+            query="SELECT " +attribute + " FROM user WHERE UID=" + user2
+            cur.execute(query)
+            raw=cur.fetchall()
+            score=float(raw[0][0])
+        else:
+            score=0
+            modifier=1   
+    #print exists
     #print score
     comment=row[0][5]
     #print comment
@@ -46,8 +62,8 @@ while count[0][0] != 0:
         if len(data[0])>1 and len(data[1])>1:
             query="SELECT COUNT(1) FROM communities WHERE UID='" + (data[1]) + "'"
             cur.execute(query)
-            exists=cur.fetchall()
-            if exists[0][0]>0:
+            exist=cur.fetchall()
+            if exist[0][0]>0:
                 #print "exists"
                 query="SELECT Average,Sum,Keywords FROM `"+data[1] +"` WHERE Attribute= '" + attribute + "';"
                 cur.execute(query)
@@ -69,7 +85,10 @@ while count[0][0] != 0:
                     newcommunityKeyword="1"+keyword
                 else:
                     newcommunityKeyword=communityKeyword
-                query="UPDATE `" + data[1] + "` SET Average=" + str((score+int(old[0][0]))/(int(old[0][1])+1)) +",Sum=Sum+1, Keywords='" +newcommunityKeyword+"' WHERE Attribute='"+ attribute + "';"
+                sscore=old[0][0]
+                if old[0][1]-modifier>0:
+                    sscore=(score+int(old[0][0]))/(int(old[0][1])+1-modifier)
+                query="UPDATE `" + data[1] + "` SET Average=" + str(sscore) +",Sum=Sum+1, Keywords='" +newcommunityKeyword+"' WHERE Attribute='"+ attribute + "';"
                 cur.execute(query)
                 cur.connection.commit()
             else:
@@ -86,18 +105,17 @@ while count[0][0] != 0:
                 query="SELECT Average,Sum FROM `"+data[1] +"` WHERE Attribute= '" + attribute + "';"
                 cur.execute(query)
                 old=cur.fetchall()
+                sscore=old[0][0]
+                if old[0][1]-modifier>0:
+                    sscore=(score+int(old[0][0]))/(int(old[0][1])+1-modifier)
                 if not "null" in keyword:
-                    query="UPDATE `" +data[1] + "` SET Average=" + str((score+int(old[0][0]))/(int(old[0][1])+1)) +",Sum=Sum+1 , Keywords='" +str(1)+ keyword+"' WHERE Attribute='"+ attribute + "';"
+                    query="UPDATE `" +data[1] + "` SET Average=" + str(sscore) +",Sum=Sum+1 , Keywords='" +str(1)+ keyword+"' WHERE Attribute='"+ attribute + "';"
                 else:
-                    query="UPDATE `" +data[1] + "` SET Average=" + str((score+int(old[0][0]))/(int(old[0][1])+1)) +",Sum=Sum+1 , Keywords='" + keyword+"' WHERE Attribute='"+ attribute + "';"
+                    query="UPDATE `" +data[1] + "` SET Average=" + str(sscore) +",Sum=Sum+1 , Keywords='" + keyword+"' WHERE Attribute='"+ attribute + "';"
                 cur.execute(query)
                 cur.connection.commit()
-    query="SELECT * FROM user WHERE UID=" + user2
-    cur.execute(query)
-    exists=cur.fetchall()
-    #print exists
     if exists:
-        query="SELECT " +attribute + ","+ attribute+"_Total,"+ attribute+"_Keywords,"+attribute+"_Comments FROM user WHERE UID=" + user2
+        query="SELECT " +attribute + ","+ attribute+"_Total,"+ attribute+"_Keywords,Comments FROM user WHERE UID=" + user2
         cur.execute(query)
         raw=cur.fetchall()
         previous_score=float(raw[0][0])
@@ -126,44 +144,40 @@ while count[0][0] != 0:
         #print previous_list
         if len(comment)>1:
             if len(previous_comment) >1:
-                if len(previous_list)<5:
+                if len(previous_list)<9:
                     mtemp=len(previous_list)
                 else:
-                    mtemp=5
+                    mtemp=9
                 temp=0;
                 while temp<mtemp:
                     comment=comment +'&&' + previous_list[temp]
                     temp=temp+1
         else:
             comment=previous_comment
-        score=(score+(previous_score*total))/(total+1)
+        if total+1-modifier>0:
+            score=(score+(previous_score*total))/(total+1-modifier)
         score="%.2f" % score
         score=str(score)
         #print score
         if newKeyword:
-            query="UPDATE user SET " + attribute + "=" +""+ score+ " , " + attribute + "_Total="+attribute+"_Total + 1 ," +attribute + "_Keywords='" +newKeyword + "'," + attribute + "_Comments='"+comment+"' WHERE UID="+ user2
+            query="UPDATE user SET " + attribute + "=" +""+ score+ " , " + attribute + "_Total="+attribute+"_Total + 1-"+str(modifier)+" ," +attribute + "_Keywords='" +newKeyword + "',Comments='"+comment+"' WHERE UID="+ user2
         #print query
         else:
-            query="UPDATE user SET " + attribute + "=" +""+ score+ " , " + attribute + "_Total="+attribute+"_Total + 1," + attribute + "_Comments='"+comment+"' WHERE UID="+ user2
-        #print query
+            query="UPDATE user SET " + attribute + "=" +""+ score+ " , " + attribute + "_Total="+attribute+"_Total + 1-"+str(modifier)+",Comments='"+comment+"' WHERE UID="+ user2
         cur.execute(query)
         cur.connection.commit()
     else:
         if not "null" in keyword:
             keyword="1"+keyword
-        query="INSERT INTO user (UID, ACTIVE, " + attribute + "," + attribute + "_Total ," + attribute+ "_Keywords," +attribute+"_Comments) VALUES (" + user2 + ",0,"+ str(score)+",1, '"+keyword+"','"+comment+"')"
+        query="INSERT INTO user (UID, ACTIVE, " + attribute + "," + attribute + "_Total ," + attribute+ "_Keywords,Comments) VALUES (" + user2 + ",0,"+ str(score)+","+str(1-modifier)+", '"+keyword+"','"+comment+"')"
         #print query
         cur.execute(query)
-        cur.connection.commit()
-        
+        cur.connection.commit() 
     cur.execute("DELETE FROM transaction LIMIT 1")#deletes transaction now that it is recorded
     cur.connection.commit()
     cur.execute("SELECT COUNT(id) FROM transaction") #python determines if there are any transactions to record
     count = cur.fetchall()
-    exists=None;
-
-
-    
+    exists=None;  
 query="ALTER TABLE transaction AUTO_INCREMENT = 1" #resets transaction tables id counter to 1
 cur.execute(query)
 cur.connection.commit()

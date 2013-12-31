@@ -38,193 +38,47 @@ switch ( $action ) {
     $data['Name']=$user_profile['name'];
     $communities=split('&&',$data['Communities']);
     foreach($communities as $community){
-        $new_communities=$new_communities.'<a href="/index.php?action=location?location='.$community.'" style="color: #006699">'.$community.'</a>, ';
+        $new_communities=$new_communities.
+                    '<li>
+              <a href="/index.php?action=location?location='.$community.'">
+              '.$community.'</a>
+            </li>';
     }
-    $new_communities=substr($new_communities, 0, -1);
     $data['Communities']=$new_communities;
-    $data['Attractiveness_Comments']=split('&&',$data['Attractiveness_Comments']);
-    $data['Affability_Comments']= isset($data['Affability_Comments']) ? split('&&',$data['Affability_Comments']) : " ";
-      if(isset($data['Affability_Keywords'])){
-        $new_keyword='';
-        $max=0;
-        $keywords=split('&&',$data['Affability_Keywords']);
-        foreach($keywords as $keyword){
-            if($keyword[0]>$max){
-              $max=$keyword[0];
-              $new_keyword=$keyword;
-            }
-        }
-        $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
-        $data['Affability_Keywords']=$new_keyword;
-      }
-    $data['Intelligence_Comments']= isset($data['Intelligence_Comments']) ? split('&&',$data['Intelligence_Comments']) : " ";
-      if(isset($data['Intelligence_Keywords'])){
-        $new_keyword='';
-        $max=0;
-        $keywords=split('&&',$data['Intelligence_Keywords']);
-        foreach($keywords as $keyword){
-            if($keyword[0]>$max){
-              $max=$keyword[0];
-              $new_keyword=$keyword;
-            }
-        }
-        $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
-        $data['Intelligence_Keywords']=$new_keyword;
-      }
-    $data['Style_Comments']= isset($data['Style_Comments']) ? split('&&',$data['Style_Comments']) : " ";
-      if(isset($data['Style_Keywords'])){
-        $new_keyword='';
-        $max=0;
-        $keywords=split('&&',$data['Style_Keywords']);
-        foreach($keywords as $keyword){
-            if($keyword[0]>$max){
-              $max=$keyword[0];
-              $new_keyword=$keyword;
-            }
-        }
-        $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
-        $data['Style_Keywords']=$new_keyword;
-      }
-    $data['Promiscuity_Comments']= isset($data['Promiscuity_Comments']) ? split('&&',$data['Promiscuity_Comments']) : " ";
-      if(isset($data['Promiscuity_Keywords'])){
-        $new_keyword='';
-        $max=0;
-        $keywords=split('&&',$data['Promiscuity_Keywords']);
-        foreach($keywords as $keyword){
-            if($keyword[0]>$max){
-              $max=$keyword[0];
-              $new_keyword=$keyword;
-            }
-        }
-        $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
-        $data['Promiscuity_Keywords']=$new_keyword;
-      }
-    $data['Humor_Comments']= isset($data['Humor_Comments']) ? split('&&',$data['Humor_Comments']) : " ";
-      if(isset($data['Humor_Keywords'])){
-        $new_keyword='';
-        $max=0;
-        $keywords=split('&&',$data['Humor_Keywords']);
-        foreach($keywords as $keyword){
-            if($keyword[0]>$max){
-              $max=$keyword[0];
-              $new_keyword=$keyword;
-            }
-        }
-        $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
-        $data['Humor_Keywords']=$new_keyword;
-      }
-    $data['Confidence_Comments']= isset($data['Confidence_Comments']) ? split('&&',$data['Confidence_Comments']) : " ";
-      if(isset($data['Confidence_Keywords'])){
-        $new_keyword='';
-        $max=0;
-        $keywords=split('&&',$data['Confidence_Keywords']);
-        foreach($keywords as $keyword){
-            if($keyword[0]>$max){
-              $max=$keyword[0];
-              $new_keyword=$keyword;
-            }
-        }
-        $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
-        $data['Confidence_Keywords']=$new_keyword;
-      }
-    $data['Fun_Comments']= isset($data['Fun_Comments']) ? split('&&',$data['Fun_Comments']) : " ";
-      if(isset($data['Fun_Keywords'])){
-        $new_keyword='';
-        $max=0;
-        $keywords=split('&&',$data['Fun_Keywords']);
-        foreach($keywords as $keyword){
-            if($keyword[0]>$max){
-              $max=$keyword[0];
-              $new_keyword=$keyword;
-            }
-        }
-        $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
-        $data['Fun_Keywords']=$new_keyword;
-      }
-    $data['Kindness_Comments']= isset($data['Kindness_Comments']) ? split('&&',$data['Kindness_Comments']) : " ";
-      if(isset($data['Kindness_Keywords'])){
-        $new_keyword='';
-        $max=0;
-        $keywords=split('&&',$data['Kindness_Keywords']);
-        foreach($keywords as $keyword){
-            if($keyword[0]>$max){
-              $max=$keyword[0];
-              $new_keyword=$keyword;
-            }
-        }
-        $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
-        $data['Kindness_Keywords']=$new_keyword;
-      }
-    $data['Honesty_Comments']= isset($data['Honesty_Comments']) ? split('&&',$data['Honesty_Comments']) : " ";
-      if(isset($data['Honesty_Keywords'])){
-        $new_keyword='';
-        $max=0;
-        $keywords=split('&&',$data['Honesty_Keywords']);
-        foreach($keywords as $keyword){
-            if($keyword[0]>$max){
-              $max=$keyword[0];
-              $new_keyword=$keyword;
-            }
-        }
-        $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
-        $data['Honesty_Keywords']=$new_keyword;
-      }
-    $data['Reliability_Comments']= isset($data['Reliability_Comments']) ? split('&&',$data['Reliability_Comments']) : " ";
-      if(isset($data['Reliability_Keywords'])){
-        $new_keyword='';
-        $max=0;
-        $keywords=split('&&',$data['Reliability_Keywords']);
-        foreach($keywords as $keyword){
-            if($keyword[0]>$max){
-              $max=$keyword[0];
-              $new_keyword=$keyword;
-            }
-        }
-        $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
-        $data['Reliability_Keywords']=$new_keyword;
-      }
-    $data['Happiness_Comments']= isset($data['Happiness_Comments']) ? split('&&',$data['Happiness_Comments']) : " ";
-      if(isset($data['Happiness_Keywords'])){
-        $new_keyword='';
-        $max=0;
-        $keywords=split('&&',$data['Happiness_Keywords']);
-        foreach($keywords as $keyword){
-            if($keyword[0]>$max){
-              $max=$keyword[0];
-              $new_keyword=$keyword;
-            }
-        }
-        $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
-        $data['Happiness_Keywords']=$new_keyword;
-      }
-    $data['Ambition_Comments']= isset($data['Ambition_Comments']) ? split('&&',$data['Ambition_Comments']) : " ";
-      if(isset($data['Ambition_Keywords'])){
-        $new_keyword='';
-        $max=0;
-        $keywords=split('&&',$data['Ambition_Keywords']);
-        foreach($keywords as $keyword){
-            if($keyword[0]>$max){
-              $max=$keyword[0];
-              $new_keyword=$keyword;
-            }
-        }
-        $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
-        $data['Ambition_Keywords']=$new_keyword;
-      }
-    $data['Humility_Comments']= isset($data['Humility_Comments']) ? split('&&',$data['Humility_Comments']) : " ";
-      if(isset($data['Humility_Keywords'])){
-        $new_keyword='';
-        $max=0;
-        $keywords=split('&&',$data['Humility_Keywords']);
-        foreach($keywords as $keyword){
-            if($keyword[0]>$max){
-              $max=$keyword[0];
-              $new_keyword=$keyword;
-            }
-        }
-        $new_keyword=str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'',$new_keyword );
-        $data['Humility_Keywords']=$new_keyword;
-      }
+    $data['Comments_Size']=$data['Comments']!=''?sizeof($data['Comments']):0;
+    $data['Comments']=comments($data['Comments']);
+    print_r($data['Comments']);
+    $scores=Array(
+      "Affability"=>$data['Affability'],
+      "Ambition"=>$data['Ambition'],
+      "Attractiveness"=>$data['Attractiveness'],
+      "Confidence"=>$data['Confidence'],
+      "Fun"=>$data['Fun'],
+      "Happiness"=>$data['Happiness'],
+      "Honesty"=>$data['Attractiveness'],
+      "Humility"=>$data['Humility'],
+      "Humor"=>$data['Humor'],
+      "Intelligence"=>$data['Intelligence'],
+      "Kindness"=>$data['Kindness'],
+      "Promiscuity"=>$data['Promiscuity'],
+      "Reliability"=>$data['Reliability'],
+      "Style"=>$data['Style'],
+      );
+    $data['Percentiles']=getPercentiles("global",$scores);
+    $data['Attractiveness_Keywords']=isset($data['Attractiveness_Keywords'])? keywords($data['Attractiveness_Keywords'],$data['Attractiveness_Total'],4) : "N/A";
+    $data['Affability_Keywords']=isset($data['Affability_Keywords'])? keywords($data['Affability_Keywords'],$data['Affability_Total'],3) : "N/A";
+    $data['Intelligence_Keywords']=isset($data['Intelligence_Keywords'])? keywords($data['Intelligence_Keywords'],$data['Intelligence_Total'],4) : "N/A";
+    $data['Style_Keywords']=isset($data['Style_Keywords'])? keywords($data['Style_Keywords'],$data['Style_Total'],2) : "N/A";
+    $data['Promiscuity_Keywords']=isset($data['Promiscuity_Keywords'])? keywords($data['Promiscuity_Keywords'],$data['Promiscuity_Total'],2) : "N/A";
+    $data['Humor_Keywords']=isset($data['Humor_Keywords'])? keywords($data['Humor_Keywords'],$data['Humor_Total'],2) : "N/A";
+    $data['Confidence_Keywords']=isset($data['Confidence_Keywords'])? keywords($data['Confidence_Keywords'],$data['Confidence_Total'],1) : "N/A";
+    $data['Fun_Keywords']=isset($data['Fun_Keywords'])? keywords($data['Fun_Keywords'],$data['Fun_Total'],2) : "N/A";
+    $data['Kindness_Keywords']=isset($data['Kindness_Keywords'])? keywords($data['Kindness_Keywords'],$data['Kindness_Total'],2) : "N/A";
+    $data['Honesty_Keywords']=isset($data['Honesty_Keywords'])? keywords($data['Honesty_Keywords'],$data['Honesty_Total'],2) : "N/A";
+    $data['Reliability_Keywords']=isset($data['Reliability_Keywords'])? keywords($data['Reliability_Keywords'],$data['Reliability_Total'],1) : "N/A";
+    $data['Happiness_Keywords']=isset($data['Happiness_Keywords'])? keywords($data['Happiness_Keywords'],$data['Happiness_Total'],2) : "N/A";
+    $data['Ambition_Keywords']=isset($data['Ambition_Keywords'])? keywords($data['Ambition_Keywords'],$data['Ambition_Total'],2) : "N/A";
+    $data['Humility_Keywords']=isset($data['Humility_Keywords'])? keywords($data['Humility_Keywords'],$data['Humility_Total'],2) : "N/A";
     $data["pic"]="http://graph.facebook.com/" . $uid . "/picture?width=300&height=300";
     $_SESSION['dashboard']=$data;
     $conn=null;
@@ -237,14 +91,21 @@ switch ( $action ) {
     $recipient=$_SESSION['recipient'];
     $attribute=isset( $_SESSION['attribute'] ) ? $_SESSION['attribute'] : "";
     $positive=isset( $_SESSION['positive'] ) ? $_SESSION['positive'] + "" : "";
+    $null=isset( $_SESSION['null'] ) ? $_SESSION['null'] + "" : "";
     $slider=2*$_POST["slideVal"]; //Slider value needs to be multiplied by two since slider has 5 notches
-    $comment=isset( $_POST["commentsVal"] ) ? $_POST["commentsVal"] : "";
+    $comment=isset( $_POST["commentsVal"] ) && $_POST["commentsVal"]!="" ? $attribute ."##" .date("Y-m-d H:i:s", time())."##". $_SESSION['question'] . ": " .'"' . str_replace(array('"',"'","|"),'',$_POST["commentsVal"]) . '"' : "";
 
     $affiliations=isset($_SESSION['affiliations']) ? $_SESSION['affiliations'] : "";
-    $keywords=$slider>7 && $_SESSION['keywords']!="" ? $_SESSION['keywords']:"null";
+    $keywords=$slider>7 && $_SESSION['keywords']!="" ? $_SESSION['keywords'][0]:"null";
+    if($keywords=="" || $keywords=="null"){
+      $keywords=$slider<3 && isset($_SESSION['keywords'][1])  ? $_SESSION['keywords'][1]:"null";
+    }
     $vibe= new Vibe($uid, $recipient,$attribute,$keywords,$affiliations);
     if(!$positive){
       $slider=10-$slider;
+    }
+    if(!$null){
+      $slider="null";
     }
     $vibe->setAnswer($slider,$comment);
     $vibe->recordToTable();
@@ -271,7 +132,8 @@ function question(){
     //Useful variables are initialized here at the beginning of the code
     $question;
     $attribute;
-    $random=rand(0,1); //random is set to 0 or 1
+    $random=rand(0,2); //random is set to 0 or 1
+    //$random=0;
     $recipient=0;
     $name;
     
@@ -279,7 +141,7 @@ function question(){
     while(!$recipient){
         //if $random is 0, the code only uses top friends and picks from any of the vibe questions
         if($random==0){
-            $question_source=getQuestion(14); //calls the getQuestion(int) function to get the data of a question out of the Vibosphere database. This is a php array
+            $question_source=getQuestion(5); //calls the getQuestion(int) function to get the data of a question out of the Vibosphere database. This is a php array
             $attribute=$question_source['id']; // $question_id is set to the attribute number in the table, this will be changed later to Attribute
             $question=$question_source['question']; //$question is set to the string of the question picked
             $result=$_SESSION['topFriends']; //the top friends array, which contains a users top friends, is returned and set to $result
@@ -291,7 +153,7 @@ function question(){
             $name=$data['name']; //name is set to the user's name
         }
         else{
-            $question_source=getQuestion(5); //only the first four questions, which are first vibe questions, are used to get question data
+            $question_source=getQuestion(14); //only the first four questions, which are first vibe questions, are used to get question data
             $question=$question_source['question']; //question String is set to $question
             $attribute=$question_source['id']; //question ID is set to $question_id, will later be changed to attribute
             $_SESSION['keywords']=$question_source['keywords'];
@@ -385,6 +247,7 @@ function topFriends(){
 function getQuestion($input){
     $attribute= rand(1,$input); //4andom is set to a number between 1 and $input
     $random=rand(1,3);
+    //$random=1;
     if($random>1){
       $random=rand(2,10);
     }
@@ -401,6 +264,11 @@ function getQuestion($input){
     $keywords="";
     if(strpos($question, '(')){
       $keywords=strrchr($question, "("); //sets keywords in question string equal to keywords
+      $keywords=split('&&',$keywords);
+      if(count($keywords)>1){
+        $keywords[0]=$keywords[0].")";
+        $keywords[1]="(".$keywords[1];
+      }
       $question=substr($question,0,strrpos($question, '(')); //takes out keyword from question string
     }
     if(strpos($question, '*') === FALSE){
@@ -410,6 +278,13 @@ function getQuestion($input){
        $question=substr($question, 1);
       $_SESSION['positive']=0;
     }
+    if(strpos($question, '^') === FALSE){
+      $_SESSION['null']=1;
+    }
+    else{
+      $question=substr($question, 1);
+      $_SESSION['null']=0;
+    }    
     $attribute=$question_source[1]; //sets attribute
 
     $conn = null;
@@ -475,5 +350,137 @@ function friendAffiliations($input){
        }
        $sum;
        return substr($sum, 0, -2); //returns concatenated string of affiliations
+}
+function getPercentiles($community,$score){
+  $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //database connection is established uisng credentials in config.php
+  $sql = "SELECT Attribute,Average, Deviation FROM $community"; //sql query that returns the string of the question in the table
+  $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
+  $st->execute();//executes query above
+  $stats=$st->fetchAll(); //$question source is set to result of query
+  print_r($score);
+  $result=Array();
+  $positive=true;
+  foreach($stats as $stat){
+    if($stat[2]>0){
+      $avg=$stat[1];
+      $dev=$stat[2];
+      $temp=($score[$stat['Attribute']]-$avg)/$dev;
+      $positive=$temp>0;
+      $percentile=cdf_2tail($temp);
+      if($positive){
+        $percentile=1-$percentile/2;
+      }
+      else{
+        $percentile=$percentile/2;
+      }
+      $result[$stat['Attribute']]=$percentile>0.15 ? (int)($percentile*100)."%" :"N/A";
+    }
+    else{
+      $result[$stat['Attribute']]="N/A";
+    }
+
+  }
+    $conn = null;
+    return $result;
+}
+function erf($x)
+{
+    $pi = 3.1415927;
+    $a = (8*($pi - 3))/(3*$pi*(4 - $pi));
+    $x2 = $x * $x;
+
+    $ax2 = $a * $x2;
+    $num = (4/$pi) + $ax2;
+    $denom = 1 + $ax2;
+
+    $inner = (-$x2)*$num/$denom;
+    $erf2 = 1 - exp($inner);
+
+    return sqrt($erf2);
+}
+
+function cdf($n)
+{
+         return (1 - erf($n / sqrt(2)))/2;
+         //I removed the $n < 0 test which inverses the +1/-1
+}
+
+function cdf_2tail($n)
+{
+        return 2*cdf($n);
+            //After a little more digging around, the two tail test is simply 2 x the cdf.
+}
+function keywords($keywords,$total,$split){
+  $new_keyword='';
+  $min=(2*$total/$split);
+  $keywords=split('&&',$keywords);
+  for ($x=0; $x<=count($keywords); $x++){
+      $min=$min+stristr($keywords[$x], '(',true);
+  }
+  for ($x=0; $x<=count($keywords); $x++){
+      $count=$min+stristr($keywords[$x], '(',true);
+      if($count>$min){
+        $temp="#".str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'', stristr($keywords[$x] ,'(') );
+        $new_keyword=$new_keyword=''? $temp: $new_keyword. " " . $temp;
+      }
+  }
+  return $new_keyword!=''?$new_keyword:"N/A";
+}
+function comments($comments){
+  $comments=split('&&',$comments);
+  $max=sizeof($comments);
+  if($comments[0]!=''){
+    for ($x=0; $x<$max; $x++){
+      $temp=split('##',$comments[$x]);
+      print_r($temp);
+      $datetime2 = new DateTime(date("Y-m-d H:i:s", time()));
+      $datetime1 = new DateTime($temp[1]);
+      $interval = $datetime1->diff($datetime2);
+      $time=$interval->format('%a days');
+      if($time==='0 days'){
+        $time=$interval->format('%h hrs');
+        if($time==='0 hrs'){
+          $time=$interval->format('%i mins');
+        }       
+      }
+      $comments[$x]='                 <li>
+                    <div class="col1">
+                      <div class="cont">
+                        <div class="cont-col1">
+                          <div class="desc">
+                             '. $temp[2].'
+                              <span class="label label-sm label-danger">'.$temp[0].'</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col2">
+                      <div class="date">
+                         '.$time.'
+                         
+                      </div>
+                    </div>
+                  </li>';
+      //$comments[$x]=Array($temp[2],$temp[0], $time);
+    }
+  }
+    for ($x=$max; $x<9; $x++){
+      $comments[$x]='                 <li>
+                    <div class="col1">
+                      <div class="cont">
+                        <div class="cont-col1">
+                          <div class="desc">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col2">
+                      <div class="date">
+                      </div>
+                    </div>
+                    
+                  </li>';
+    }
+  return $comments;  
 }
 ?>
