@@ -38,9 +38,12 @@ switch ( $action ) {
     $data['Name']=$user_profile['name'];
     $communities=split('&&',$data['Communities']);
     foreach($communities as $community){
-        $new_communities=$new_communities.'<a href="/index.php?action=location?location='.$community.'" style="color: #006699">'.$community.'</a>, ';
+        $new_communities=$new_communities.
+                    '<li>
+              <a href="/index.php?action=location?location='.$community.'">
+              '.$community.'</a>
+            </li>';
     }
-    $new_communities=substr($new_communities, 0, -1);
     $data['Communities']=$new_communities;
     $data['Comments_Size']=$data['Comments']!=''?sizeof($data['Comments']):0;
     $data['Comments']=comments($data['Comments']);

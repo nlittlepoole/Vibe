@@ -397,18 +397,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					</span>
 					</a>
 					<ul class="sub-menu">
-						<li>
-							<a href="layout_session_timeout.html">
-							Columbia University</a>
-						</li>
-						<li>
-							<a href="layout_idle_timeout.html">
-							Boeing</a>
-						</li>
-						<li>
-							<a href="layout_language_bar.html">
-							Bloomingdale High School</a>
-						</li>
+						<?php echo $_SESSION['dashboard']['Communities'] ?>
 					</ul>
 				</li>
 				<li id="frontend-link" class="tooltips" data-placement="right" data-original-title="Frontend&nbsp;Theme For&nbsp;Metronic&nbsp;Admin">
