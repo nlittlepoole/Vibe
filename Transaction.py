@@ -56,6 +56,7 @@ while count[0][0] != 0:
     cur.connection.commit()
     
     affiliation=row[0][7]
+    gender=row[0][8]
     affiliations=affiliation.split('&&')
     for affiliate in affiliations:
         data=affiliate.split('||')
@@ -160,16 +161,16 @@ while count[0][0] != 0:
         score=str(score)
         #print score
         if newKeyword:
-            query="UPDATE user SET " + attribute + "=" +""+ score+ " , " + attribute + "_Total="+attribute+"_Total + 1-"+str(modifier)+" ," +attribute + "_Keywords='" +newKeyword + "',Comments='"+comment+"' WHERE UID="+ user2
+            query="UPDATE user SET " + attribute + "=" +""+ score+ " , " + attribute + "_Total="+attribute+"_Total + 1-"+str(modifier)+" ," +attribute + "_Keywords='" +newKeyword + "',Comments='"+comment+"', Gender='"+gender+"' WHERE UID="+ user2
         #print query
         else:
-            query="UPDATE user SET " + attribute + "=" +""+ score+ " , " + attribute + "_Total="+attribute+"_Total + 1-"+str(modifier)+",Comments='"+comment+"' WHERE UID="+ user2
+            query="UPDATE user SET " + attribute + "=" +""+ score+ " , " + attribute + "_Total="+attribute+"_Total + 1-"+str(modifier)+",Comments='"+comment+"', Gender='"+gender+"' WHERE UID="+ user2
         cur.execute(query)
         cur.connection.commit()
     else:
         if not "null" in keyword:
             keyword="1"+keyword
-        query="INSERT INTO user (UID, ACTIVE, " + attribute + "," + attribute + "_Total ," + attribute+ "_Keywords,Comments) VALUES (" + user2 + ",0,"+ str(score)+","+str(1-modifier)+", '"+keyword+"','"+comment+"')"
+        query="INSERT INTO user (UID, ACTIVE, " + attribute + "," + attribute + "_Total ," + attribute+ "_Keywords,Comments,Communities,Gender) VALUES (" + user2 + ",0,"+ str(score)+","+str(1-modifier)+", '"+keyword+"','"+comment+"','"+affiliation+"','"+gender+"')"
         #print query
         cur.execute(query)
         cur.connection.commit() 
