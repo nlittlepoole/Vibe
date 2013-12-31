@@ -195,11 +195,10 @@ function getPictures($recipient){
 function addUser( $input_id ) {
     $input_id=$input_id."";
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //initialies connection to the database using the credentials found in config.php
-    $sql = "SELECT Active FROM user WHERE UID= $input_id"; //gets the active status of the user with $input_id as a user ID
+    $sql = "SELECT * FROM user WHERE UID= $input_id"; //gets the active status of the user with $input_id as a user ID
     $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
     $st->execute(); //executes the sql query found above
     $raw=$st->fetch(); //sets raw to be the raw data returned from the sql command, raw is always an array, even if only one element is being queried
-    $active=$raw['Active']; //sets $active to the user's active status
     if(!$raw){ //if the user isn't in Vibosphere, they are added with a true active status
         $graph_url="https://graph.facebook.com/" . $input_id . "/?fields=gender"; //facebook graph api link is created to find gender
         $data = json_decode(file_get_contents($graph_url), true); //decoded json data is returned as an array using above graph api link
@@ -210,11 +209,11 @@ function addUser( $input_id ) {
           $st->execute(); //query is executed
     }
     else { //the user is in the database but not active, theyare simply set to active
-         $graph_url="https://graph.facebook.com/" . $input_id . "/?fields=gender"; //facebook graph api is used to create gender query
+        $graph_url="https://graph.facebook.com/" . $input_id . "/?fields=gender"; //facebook graph api is used to create gender query
         $data = json_decode(file_get_contents($graph_url), true); //user data json is decrypted and returned as an array
         $gender=$data['gender']; //gender is set
         $affiliations=getAffiliations(); //affiliations is set to the result of the affilations function defined below
-            $sql = "UPDATE user SET Active=1,Gender=$gender, Communities=$affiliations WHERE =$input_id;"; //query is set to update the user to active and add their gender and communities
+            echo $sql = "UPDATE user SET Active='1',Gender='$gender', Communities='$affiliations' WHERE UID='$input_id';"; //query is set to update the user to active and add their gender and communities
              $st = $conn->prepare( $sql ); //protection line used to hide queries from browsers
              $st->execute(); //command above is executed
     }
