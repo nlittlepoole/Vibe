@@ -156,7 +156,6 @@ while count[0][0] != 0:
             comment=previous_comment
         if total+1-modifier>0:
             score=(score+(previous_score*total))/(total+1-modifier)
-        score=previous_score
         score="%.2f" % score
         score=str(score)
         #print score
@@ -165,7 +164,6 @@ while count[0][0] != 0:
         #print query
         else:
             query="UPDATE user SET " + attribute + "=" +""+ score+ " , " + attribute + "_Total="+attribute+"_Total + 1-"+str(modifier)+",Comments='"+comment+"' WHERE UID="+ user2
-        #print query
         cur.execute(query)
         cur.connection.commit()
     else:

@@ -137,8 +137,8 @@ function question(){
     //Placed in a while loop to make sure that php doesn't proceed without a valid user
     while(!$recipient){
         //if $random is 0, the code only uses top friends and picks from any of the vibe questions
-        if($random>0){
-            $question_source=getQuestion(14); //calls the getQuestion(int) function to get the data of a question out of the Vibosphere database. This is a php array
+        if($random==0){
+            $question_source=getQuestion(5); //calls the getQuestion(int) function to get the data of a question out of the Vibosphere database. This is a php array
             $attribute=$question_source['id']; // $question_id is set to the attribute number in the table, this will be changed later to Attribute
             $question=$question_source['question']; //$question is set to the string of the question picked
             $result=$_SESSION['topFriends']; //the top friends array, which contains a users top friends, is returned and set to $result
@@ -150,7 +150,7 @@ function question(){
             $name=$data['name']; //name is set to the user's name
         }
         else{
-            $question_source=getQuestion(5); //only the first four questions, which are first vibe questions, are used to get question data
+            $question_source=getQuestion(14); //only the first four questions, which are first vibe questions, are used to get question data
             $question=$question_source['question']; //question String is set to $question
             $attribute=$question_source['id']; //question ID is set to $question_id, will later be changed to attribute
             $_SESSION['keywords']=$question_source['keywords'];
@@ -160,7 +160,7 @@ function question(){
             $name=$user['data'][$random]['name'];
         } 
     }
-    $recipient=712337857;
+    //$recipient=712337857;
     $question= str_replace("name", $name, $question); 
     $pic=getPictures($recipient);
     $_SESSION['affiliations']=friendAffiliations($recipient);
