@@ -45,7 +45,7 @@ switch ( $action ) {
             </li>';
     }
     $data['Communities']=$new_communities;
-    $data['Comments_Size']=$data['Comments']!=''?sizeof($data['Comments']):0;
+    $data['Comments_Size']=$data['Comments']!=''?sizeof(split('&&',$data['Comments'])):0;
     $data['Comments']=comments($data['Comments']);
     print_r($data['Comments']);
     $scores=Array(
