@@ -8,10 +8,11 @@
     session_start();
     $path = $_SERVER['DOCUMENT_ROOT'];
     require($path . "/config.php");
-    
-    $action = isset( $_GET['action'] ) ? $_GET['action'] : "Invite more Friends to Vibe for Comments"; //sets $action to "Action" url fragment string if action isn't null
-    $dashboard=$_SESSION['dashboard'];
-    $pic=$dashboard['pic'];
+    $location= isset( $_GET['location'] ) ? $_GET['location'] : "";
+    $pic=$_SESSION['dashboard']['pic'];
+    if(!isset($_SESSION['location'])){
+    	header('Location:/index.php?action=location&location='.$location);
+    }
     
 ?>
 
@@ -370,7 +371,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					<!-- END RESPONSIVE QUICK SEARCH FORM -->
 				</li>
 				<li class="start active ">
-					<a href="index.html">
+					<a href="/index.php?action=dashboard">
 					<i class="fa fa-home"></i>
 					<span class="title">
 						Dashboard
@@ -380,7 +381,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					</a>
 				</li>
 				<li class="">
-					<a href="../templates/questions.php">
+					<a href="/index.php?action=question">
 					<i class="fa fa-question"></i>
 					<span class="title">
 						Questions
@@ -397,18 +398,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					</span>
 					</a>
 					<ul class="sub-menu">
-						<li>
-							<a href="layout_session_timeout.html">
-							Columbia University</a>
-						</li>
-						<li>
-							<a href="layout_idle_timeout.html">
-							Boeing</a>
-						</li>
-						<li>
-							<a href="layout_language_bar.html">
-							Bloomingdale High School</a>
-						</li>
+						<?php echo $_SESSION['dashboard']['Communities'] ?>
 					</ul>
 				</li>
 				<li id="frontend-link" class="tooltips" data-placement="right" data-original-title="Frontend&nbsp;Theme For&nbsp;Metronic&nbsp;Admin">
@@ -546,8 +536,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
-						<img height="100px" src="/NEWTEMPLATE/assets/img/columbiaTEMP.jpg" />
-					Columbia University <small>communities</small>
+						<img height="100px" src=<?php echo '"'.$_SESSION['location']['Picture'].'"' ?>  />
+					<?php echo $_SESSION['location']['Name'] ?> <small>communities</small>
 					<!-- FILL THIS WITH THE PROF PIC OF THE COMMUNITY'S FACEBOOK PAGE -->
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
@@ -620,7 +610,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 							<div class="tab-content">
 								<div class="tab-pane fade active in" id="tab_1_1">
 									<div class="note note-success">
-										<h4>Percentile: .95</h4>
+										<h4>Your Percentile: <?php echo $_SESSION['location']['Percentiles']['Attractiveness'] ?></h4>
 									</div>
 									<div style="display:inline-block; width:49%">
 										<h4>Guys</h4>
@@ -646,7 +636,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										1
 									</td>
 									<td>
-										John Smith
+										<?php echo $_SESSION['location'][0]['Rank1'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -654,7 +644,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										2
 									</td>
 									<td>
-										Brad Jones
+										<?php echo $_SESSION['location'][0]['Rank2'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -662,7 +652,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										3
 									</td>
 									<td>
-										Carl Johnson
+										<?php echo $_SESSION['location'][0]['Rank3'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -670,7 +660,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										4
 									</td>
 									<td>
-										Andrew Kerker
+										<?php echo $_SESSION['location'][0]['Rank4'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -678,7 +668,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										5
 									</td>
 									<td>
-										AJ Simpson
+										<?php echo $_SESSION['location'][0]['Rank5'] ?>
 									</td>
 								</tr>
 								</tbody>
@@ -702,7 +692,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										1
 									</td>
 									<td>
-										John Smith
+										<?php echo $_SESSION['location'][0]['Rank6'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -710,7 +700,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										2
 									</td>
 									<td>
-										Brad Jones
+										<?php echo $_SESSION['location'][0]['Rank7'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -718,7 +708,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										3
 									</td>
 									<td>
-										Carl Johnson
+										<?php echo $_SESSION['location'][0]['Rank8'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -726,7 +716,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										4
 									</td>
 									<td>
-										Andrew Kerker
+										<?php echo $_SESSION['location'][0]['Rank9'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -734,7 +724,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										5
 									</td>
 									<td>
-										AJ Simpson
+										<?php echo $_SESSION['location'][0]['Rank10'] ?>
 									</td>
 								</tr>
 								</tbody>
@@ -743,7 +733,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								</div>
 								<div class="tab-pane fade in" id="tab_1_2">
 									<div class="note note-success">
-										<h4>Percentile: .95</h4>
+										<h4>Your Percentile: <?php echo $_SESSION['location']['Percentiles']['Affability'] ?></h4>
 									</div>
 									<div style="display:inline-block; width:49%">
 										<h4>Guys</h4>
@@ -769,7 +759,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										1
 									</td>
 									<td>
-										John Smith
+										<?php echo $_SESSION['location'][1]['Rank1'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -777,7 +767,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										2
 									</td>
 									<td>
-										Brad Jones
+										<?php echo $_SESSION['location'][1]['Rank2'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -785,7 +775,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										3
 									</td>
 									<td>
-										Carl Johnson
+										<?php echo $_SESSION['location'][1]['Rank3'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -793,7 +783,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										4
 									</td>
 									<td>
-										Andrew Kerker
+										<?php echo $_SESSION['location'][1]['Rank4'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -801,7 +791,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										5
 									</td>
 									<td>
-										AJ Simpson
+										<?php echo $_SESSION['location'][1]['Rank5'] ?>
 									</td>
 								</tr>
 								</tbody>
@@ -825,7 +815,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										1
 									</td>
 									<td>
-										John Smith
+										<?php echo $_SESSION['location'][1]['Rank6'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -833,7 +823,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										2
 									</td>
 									<td>
-										Brad Jones
+										<?php echo $_SESSION['location'][1]['Rank7'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -841,7 +831,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										3
 									</td>
 									<td>
-										Carl Johnson
+										<?php echo $_SESSION['location'][1]['Rank8'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -849,7 +839,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										4
 									</td>
 									<td>
-										Andrew Kerker
+										<?php echo $_SESSION['location'][1]['Rank9'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -857,7 +847,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										5
 									</td>
 									<td>
-										AJ Simpson
+										<?php echo $_SESSION['location'][1]['Rank10'] ?>
 									</td>
 								</tr>
 								</tbody>
@@ -866,7 +856,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								</div>
 								<div class="tab-pane fade in" id="tab_1_3">
 									<div class="note note-success">
-										<h4>Percentile: .95</h4>
+										<h4>Your Percentile: <?php echo $_SESSION['location']['Percentiles']['Intelligence'] ?></h4>
 									</div>
 									<div style="display:inline-block; width:49%">
 										<h4>Guys</h4>
@@ -892,7 +882,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										1
 									</td>
 									<td>
-										John Smith
+										<?php echo $_SESSION['location'][2]['Rank1'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -900,7 +890,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										2
 									</td>
 									<td>
-										Brad Jones
+										<?php echo $_SESSION['location'][2]['Rank2'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -908,7 +898,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										3
 									</td>
 									<td>
-										Carl Johnson
+										<?php echo $_SESSION['location'][2]['Rank3'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -916,7 +906,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										4
 									</td>
 									<td>
-										Andrew Kerker
+										<?php echo $_SESSION['location'][2]['Rank4'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -924,7 +914,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										5
 									</td>
 									<td>
-										AJ Simpson
+										<?php echo $_SESSION['location'][2]['Rank5'] ?>
 									</td>
 								</tr>
 								</tbody>
@@ -948,7 +938,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										1
 									</td>
 									<td>
-										John Smith
+										<?php echo $_SESSION['location'][2]['Rank6'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -956,7 +946,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										2
 									</td>
 									<td>
-										Brad Jones
+										<?php echo $_SESSION['location'][2]['Rank7'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -964,7 +954,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										3
 									</td>
 									<td>
-										Carl Johnson
+										<?php echo $_SESSION['location'][2]['Rank8'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -972,7 +962,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										4
 									</td>
 									<td>
-										Andrew Kerker
+										<?php echo $_SESSION['location'][2]['Rank9'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -980,7 +970,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										5
 									</td>
 									<td>
-										AJ Simpson
+										<?php echo $_SESSION['location'][2]['Rank10'] ?>
 									</td>
 								</tr>
 								</tbody>
@@ -988,8 +978,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 							</div>
 								</div>
 								<div class="tab-pane fade in" id="tab_1_4">
-									<div class="note note-success">
-										<h4>Percentile: .95</h4>
+																		<div class="note note-success">
+										<h4>Your Percentile: <?php echo $_SESSION['location']['Percentiles']['Style'] ?></h4>
 									</div>
 									<div style="display:inline-block; width:49%">
 										<h4>Guys</h4>
@@ -1015,7 +1005,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										1
 									</td>
 									<td>
-										John Smith
+										<?php echo $_SESSION['location'][3]['Rank1'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1023,7 +1013,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										2
 									</td>
 									<td>
-										Brad Jones
+										<?php echo $_SESSION['location'][3]['Rank2'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1031,7 +1021,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										3
 									</td>
 									<td>
-										Carl Johnson
+										<?php echo $_SESSION['location'][3]['Rank3'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1039,7 +1029,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										4
 									</td>
 									<td>
-										Andrew Kerker
+										<?php echo $_SESSION['location'][3]['Rank4'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1047,7 +1037,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										5
 									</td>
 									<td>
-										AJ Simpson
+										<?php echo $_SESSION['location'][3]['Rank5'] ?>
 									</td>
 								</tr>
 								</tbody>
@@ -1071,7 +1061,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										1
 									</td>
 									<td>
-										John Smith
+										<?php echo $_SESSION['location'][3]['Rank6'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1079,7 +1069,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										2
 									</td>
 									<td>
-										Brad Jones
+										<?php echo $_SESSION['location'][3]['Rank7'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1087,7 +1077,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										3
 									</td>
 									<td>
-										Carl Johnson
+										<?php echo $_SESSION['location'][3]['Rank8'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1095,7 +1085,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										4
 									</td>
 									<td>
-										Andrew Kerker
+										<?php echo $_SESSION['location'][3]['Rank9'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1103,7 +1093,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										5
 									</td>
 									<td>
-										AJ Simpson
+										<?php echo $_SESSION['location'][3]['Rank10'] ?>
 									</td>
 								</tr>
 								</tbody>
@@ -1111,8 +1101,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 							</div>
 								</div>
 								<div class="tab-pane fade in" id="tab_1_5">
-									<div class="note note-success">
-										<h4>Percentile: .95</h4>
+																											<div class="note note-success">
+										<h4>Your Percentile: <?php echo $_SESSION['location']['Percentiles']['Humor'] ?></h4>
 									</div>
 									<div style="display:inline-block; width:49%">
 										<h4>Guys</h4>
@@ -1138,7 +1128,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										1
 									</td>
 									<td>
-										John Smith
+										<?php echo $_SESSION['location'][5]['Rank1'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1146,7 +1136,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										2
 									</td>
 									<td>
-										Brad Jones
+										<?php echo $_SESSION['location'][5]['Rank2'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1154,7 +1144,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										3
 									</td>
 									<td>
-										Carl Johnson
+										<?php echo $_SESSION['location'][5]['Rank3'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1162,7 +1152,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										4
 									</td>
 									<td>
-										Andrew Kerker
+										<?php echo $_SESSION['location'][5]['Rank4'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1170,7 +1160,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										5
 									</td>
 									<td>
-										AJ Simpson
+										<?php echo $_SESSION['location'][5]['Rank5'] ?>
 									</td>
 								</tr>
 								</tbody>
@@ -1194,7 +1184,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										1
 									</td>
 									<td>
-										John Smith
+										<?php echo $_SESSION['location'][5]['Rank6'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1202,7 +1192,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										2
 									</td>
 									<td>
-										Brad Jones
+										<?php echo $_SESSION['location'][5]['Rank7'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1210,7 +1200,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										3
 									</td>
 									<td>
-										Carl Johnson
+										<?php echo $_SESSION['location'][5]['Rank8'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1218,7 +1208,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										4
 									</td>
 									<td>
-										Andrew Kerker
+										<?php echo $_SESSION['location'][5]['Rank9'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1226,7 +1216,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										5
 									</td>
 									<td>
-										AJ Simpson
+										<?php echo $_SESSION['location'][5]['Rank10'] ?>
 									</td>
 								</tr>
 								</tbody>
@@ -1235,7 +1225,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								</div>
 								<div class="tab-pane fade in" id="tab_1_6">
 									<div class="note note-success">
-										<h4>Percentile: .95</h4>
+										<h4>Your Percentile: <?php echo $_SESSION['location']['Percentiles']['Confidence'] ?></h4>
 									</div>
 									<div style="display:inline-block; width:49%">
 										<h4>Guys</h4>
@@ -1261,7 +1251,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										1
 									</td>
 									<td>
-										John Smith
+										<?php echo $_SESSION['location'][6]['Rank1'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1269,7 +1259,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										2
 									</td>
 									<td>
-										Brad Jones
+										<?php echo $_SESSION['location'][6]['Rank2'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1277,7 +1267,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										3
 									</td>
 									<td>
-										Carl Johnson
+										<?php echo $_SESSION['location'][6]['Rank3'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1285,7 +1275,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										4
 									</td>
 									<td>
-										Andrew Kerker
+										<?php echo $_SESSION['location'][6]['Rank4'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1293,7 +1283,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										5
 									</td>
 									<td>
-										AJ Simpson
+										<?php echo $_SESSION['location'][6]['Rank5'] ?>
 									</td>
 								</tr>
 								</tbody>
@@ -1317,7 +1307,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										1
 									</td>
 									<td>
-										John Smith
+										<?php echo $_SESSION['location'][6]['Rank6'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1325,7 +1315,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										2
 									</td>
 									<td>
-										Brad Jones
+										<?php echo $_SESSION['location'][6]['Rank7'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1333,7 +1323,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										3
 									</td>
 									<td>
-										Carl Johnson
+										<?php echo $_SESSION['location'][6]['Rank8'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1341,7 +1331,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										4
 									</td>
 									<td>
-										Andrew Kerker
+										<?php echo $_SESSION['location'][6]['Rank9'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1349,7 +1339,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										5
 									</td>
 									<td>
-										AJ Simpson
+										<?php echo $_SESSION['location'][6]['Rank10'] ?>
 									</td>
 								</tr>
 								</tbody>
@@ -1358,7 +1348,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								</div>
 								<div class="tab-pane fade in" id="tab_1_7">
 									<div class="note note-success">
-										<h4>Percentile: .95</h4>
+										<h4>Your Percentile: <?php echo $_SESSION['location']['Percentiles']['Fun'] ?></h4>
 									</div>
 									<div style="display:inline-block; width:49%">
 										<h4>Guys</h4>
@@ -1384,7 +1374,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										1
 									</td>
 									<td>
-										John Smith
+										<?php echo $_SESSION['location'][7]['Rank1'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1392,7 +1382,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										2
 									</td>
 									<td>
-										Brad Jones
+										<?php echo $_SESSION['location'][7]['Rank2'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1400,7 +1390,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										3
 									</td>
 									<td>
-										Carl Johnson
+										<?php echo $_SESSION['location'][7]['Rank3'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1408,7 +1398,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										4
 									</td>
 									<td>
-										Andrew Kerker
+										<?php echo $_SESSION['location'][7]['Rank4'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1416,7 +1406,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										5
 									</td>
 									<td>
-										AJ Simpson
+										<?php echo $_SESSION['location'][7]['Rank5'] ?>
 									</td>
 								</tr>
 								</tbody>
@@ -1440,7 +1430,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										1
 									</td>
 									<td>
-										John Smith
+										<?php echo $_SESSION['location'][7]['Rank6'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1448,7 +1438,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										2
 									</td>
 									<td>
-										Brad Jones
+										<?php echo $_SESSION['location'][7]['Rank7'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1456,7 +1446,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										3
 									</td>
 									<td>
-										Carl Johnson
+										<?php echo $_SESSION['location'][7]['Rank8'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1464,7 +1454,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										4
 									</td>
 									<td>
-										Andrew Kerker
+										<?php echo $_SESSION['location'][7]['Rank9'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1472,7 +1462,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										5
 									</td>
 									<td>
-										AJ Simpson
+										<?php echo $_SESSION['location'][7]['Rank10'] ?>
 									</td>
 								</tr>
 								</tbody>
@@ -1481,7 +1471,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								</div>
 								<div class="tab-pane fade in" id="tab_1_8">
 									<div class="note note-success">
-										<h4>Percentile: .95</h4>
+										<h4>Your Percentile: <?php echo $_SESSION['location']['Percentiles']['Kindness'] ?></h4>
 									</div>
 									<div style="display:inline-block; width:49%">
 										<h4>Guys</h4>
@@ -1507,7 +1497,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										1
 									</td>
 									<td>
-										John Smith
+										<?php echo $_SESSION['location'][8]['Rank1'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1515,7 +1505,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										2
 									</td>
 									<td>
-										Brad Jones
+										<?php echo $_SESSION['location'][8]['Rank2'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1523,7 +1513,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										3
 									</td>
 									<td>
-										Carl Johnson
+										<?php echo $_SESSION['location'][8]['Rank3'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1531,7 +1521,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										4
 									</td>
 									<td>
-										Andrew Kerker
+										<?php echo $_SESSION['location'][8]['Rank4'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1539,7 +1529,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										5
 									</td>
 									<td>
-										AJ Simpson
+										<?php echo $_SESSION['location'][8]['Rank5'] ?>
 									</td>
 								</tr>
 								</tbody>
@@ -1563,7 +1553,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										1
 									</td>
 									<td>
-										John Smith
+										<?php echo $_SESSION['location'][8]['Rank6'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1571,7 +1561,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										2
 									</td>
 									<td>
-										Brad Jones
+										<?php echo $_SESSION['location'][8]['Rank7'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1579,7 +1569,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										3
 									</td>
 									<td>
-										Carl Johnson
+										<?php echo $_SESSION['location'][8]['Rank8'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1587,7 +1577,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										4
 									</td>
 									<td>
-										Andrew Kerker
+										<?php echo $_SESSION['location'][8]['Rank9'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1595,7 +1585,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										5
 									</td>
 									<td>
-										AJ Simpson
+										<?php echo $_SESSION['location'][8]['Rank10'] ?>
 									</td>
 								</tr>
 								</tbody>
@@ -1604,7 +1594,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								</div>
 								<div class="tab-pane fade in" id="tab_1_9">
 									<div class="note note-success">
-										<h4>Percentile: .95</h4>
+										<h4>Your Percentile: <?php echo $_SESSION['location']['Percentiles']['Honesty'] ?></h4>
 									</div>
 									<div style="display:inline-block; width:49%">
 										<h4>Guys</h4>
@@ -1630,7 +1620,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										1
 									</td>
 									<td>
-										John Smith
+										<?php echo $_SESSION['location'][9]['Rank1'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1638,7 +1628,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										2
 									</td>
 									<td>
-										Brad Jones
+										<?php echo $_SESSION['location'][9]['Rank2'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1646,7 +1636,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										3
 									</td>
 									<td>
-										Carl Johnson
+										<?php echo $_SESSION['location'][9]['Rank3'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1654,7 +1644,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										4
 									</td>
 									<td>
-										Andrew Kerker
+										<?php echo $_SESSION['location'][9]['Rank4'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1662,7 +1652,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										5
 									</td>
 									<td>
-										AJ Simpson
+										<?php echo $_SESSION['location'][9]['Rank5'] ?>
 									</td>
 								</tr>
 								</tbody>
@@ -1686,7 +1676,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										1
 									</td>
 									<td>
-										John Smith
+										<?php echo $_SESSION['location'][9]['Rank6'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1694,7 +1684,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										2
 									</td>
 									<td>
-										Brad Jones
+										<?php echo $_SESSION['location'][9]['Rank7'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1702,7 +1692,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										3
 									</td>
 									<td>
-										Carl Johnson
+										<?php echo $_SESSION['location'][9]['Rank8'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1710,7 +1700,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										4
 									</td>
 									<td>
-										Andrew Kerker
+										<?php echo $_SESSION['location'][9]['Rank9'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1718,7 +1708,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										5
 									</td>
 									<td>
-										AJ Simpson
+										<?php echo $_SESSION['location'][9]['Rank10'] ?>
 									</td>
 								</tr>
 								</tbody>
@@ -1727,7 +1717,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								</div>
 								<div class="tab-pane fade in" id="tab_1_10">
 									<div class="note note-success">
-										<h4>Percentile: .95</h4>
+										<h4>Your Percentile: <?php echo $_SESSION['location']['Percentiles']['Happiness'] ?></h4>
 									</div>
 									<div style="display:inline-block; width:49%">
 										<h4>Guys</h4>
@@ -1753,7 +1743,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										1
 									</td>
 									<td>
-										John Smith
+										<?php echo $_SESSION['location'][11]['Rank1'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1761,7 +1751,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										2
 									</td>
 									<td>
-										Brad Jones
+										<?php echo $_SESSION['location'][11]['Rank2'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1769,7 +1759,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										3
 									</td>
 									<td>
-										Carl Johnson
+										<?php echo $_SESSION['location'][11]['Rank3'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1777,7 +1767,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										4
 									</td>
 									<td>
-										Andrew Kerker
+										<?php echo $_SESSION['location'][11]['Rank4'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1785,7 +1775,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										5
 									</td>
 									<td>
-										AJ Simpson
+										<?php echo $_SESSION['location'][11]['Rank5'] ?>
 									</td>
 								</tr>
 								</tbody>
@@ -1809,7 +1799,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										1
 									</td>
 									<td>
-										John Smith
+										<?php echo $_SESSION['location'][11]['Rank6'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1817,7 +1807,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										2
 									</td>
 									<td>
-										Brad Jones
+										<?php echo $_SESSION['location'][11]['Rank7'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1825,7 +1815,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										3
 									</td>
 									<td>
-										Carl Johnson
+										<?php echo $_SESSION['location'][11]['Rank8'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1833,7 +1823,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										4
 									</td>
 									<td>
-										Andrew Kerker
+										<?php echo $_SESSION['location'][11]['Rank9'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1841,7 +1831,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										5
 									</td>
 									<td>
-										AJ Simpson
+										<?php echo $_SESSION['location'][11]['Rank10'] ?>
 									</td>
 								</tr>
 								</tbody>
@@ -1850,7 +1840,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								</div>
 								<div class="tab-pane fade in" id="tab_1_11">
 									<div class="note note-success">
-										<h4>Percentile: .95</h4>
+										<h4>Your Percentile: <?php echo $_SESSION['location']['Percentiles']['Ambition'] ?></h4>
 									</div>
 									<div style="display:inline-block; width:49%">
 										<h4>Guys</h4>
@@ -1876,7 +1866,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										1
 									</td>
 									<td>
-										John Smith
+										<?php echo $_SESSION['location'][12]['Rank1'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1884,7 +1874,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										2
 									</td>
 									<td>
-										Brad Jones
+										<?php echo $_SESSION['location'][12]['Rank2'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1892,7 +1882,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										3
 									</td>
 									<td>
-										Carl Johnson
+										<?php echo $_SESSION['location'][12]['Rank3'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1900,7 +1890,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										4
 									</td>
 									<td>
-										Andrew Kerker
+										<?php echo $_SESSION['location'][12]['Rank4'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1908,7 +1898,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										5
 									</td>
 									<td>
-										AJ Simpson
+										<?php echo $_SESSION['location'][12]['Rank5'] ?>
 									</td>
 								</tr>
 								</tbody>
@@ -1932,7 +1922,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										1
 									</td>
 									<td>
-										John Smith
+										<?php echo $_SESSION['location'][12]['Rank6'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1940,7 +1930,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										2
 									</td>
 									<td>
-										Brad Jones
+										<?php echo $_SESSION['location'][12]['Rank7'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1948,7 +1938,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										3
 									</td>
 									<td>
-										Carl Johnson
+										<?php echo $_SESSION['location'][12]['Rank8'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1956,7 +1946,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										4
 									</td>
 									<td>
-										Andrew Kerker
+										<?php echo $_SESSION['location'][12]['Rank9'] ?>
 									</td>
 								</tr>
 								<tr>
@@ -1964,7 +1954,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										5
 									</td>
 									<td>
-										AJ Simpson
+										<?php echo $_SESSION['location'][12]['Rank10'] ?>
 									</td>
 								</tr>
 								</tbody>
@@ -2023,11 +2013,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Attractiveness
 									</td>
 									<td>
-										<!-- CHANGE ALL OF THESE SO THEY GRAB FROM THE COMMUNITY ASSOCIATIVE ARRAY -->
-										<?php echo $_SESSION['dashboard']['Attractiveness'] ? $_SESSION['dashboard']['Attractiveness']: "--" ?>
+										<?php echo $_SESSION['location'][0]['Average'] ? $_SESSION['location'][0]['Average']: "--" ?>
 									</td>
 									<td>
-										<?php echo isset($_SESSION['dashboard']['Attractiveness_Keywords']) ? $_SESSION['dashboard']['Attractiveness_Keywords']: "N/A" ?>
+										<?php echo $_SESSION['location'][0]['Keywords'] ? $_SESSION['location'][0]['Keywords']: "N/A" ?>
 									</td>
 								</tr>
 								<tr>
@@ -2038,10 +2027,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Affability
 									</td>
 									<td>
-										<?php echo $_SESSION['dashboard']['Affability'] ? $_SESSION['dashboard']['Affability']: "--" ?>
+										<?php echo $_SESSION['location'][1]['Average'] ? $_SESSION['location'][1]['Average']: "--" ?>
 									</td>
 									<td>
-										<?php echo isset($_SESSION['dashboard']['Affability_Keywords']) ? $_SESSION['dashboard']['Affability_Keywords']: "N/A" ?>
+										<?php echo $_SESSION['location'][1]['Keywords'] ? $_SESSION['location'][1]['Keywords']: "N/A" ?>
 									</td>
 								</tr>
 								<tr>
@@ -2052,10 +2041,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Intelligence
 									</td>
 									<td>
-										<?php echo $_SESSION['dashboard']['Intelligence'] ? $_SESSION['dashboard']['Intelligence']: "--" ?>
+										<?php echo $_SESSION['location'][2]['Average'] ? $_SESSION['location'][2]['Average']: "--" ?>
 									</td>
 									<td>
-										<?php echo isset($_SESSION['dashboard']['Intelligence_Keywords']) ? $_SESSION['dashboard']['Intelligence_Keywords']: "N/A" ?>
+										<?php echo $_SESSION['location'][2]['Keywords'] ? $_SESSION['location'][2]['Keywords']: "N/A" ?>
 									</td>
 								</tr>
 								<tr>
@@ -2066,10 +2055,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Style
 									</td>
 									<td>
-										<?php echo $_SESSION['dashboard']['Style'] ? $_SESSION['dashboard']['Style']: "--" ?>
+										<?php echo $_SESSION['location'][3]['Average'] ? $_SESSION['location'][3]['Average']: "--" ?>
 									</td>
 									<td>
-										<?php echo isset($_SESSION['dashboard']['Style_Keywords']) ? $_SESSION['dashboard']['Style_Keywords']: "N/A" ?>
+										<?php echo $_SESSION['location'][3]['Keywords'] ? $_SESSION['location'][3]['Keywords']: "N/A" ?>
 									</td>
 								</tr>
 								<tr>
@@ -2080,10 +2069,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Promiscuity
 									</td>
 									<td>
-										<?php echo $_SESSION['dashboard']['Promiscuity'] ? $_SESSION['dashboard']['Promiscuity']: "--" ?>
+										<?php echo $_SESSION['location'][4]['Average'] ? $_SESSION['location'][4]['Average']: "--" ?>
 									</td>
 									<td>
-										<?php echo isset($_SESSION['dashboard']['Promiscuity_Keywords']) ? $_SESSION['dashboard']['Promiscuity_Keywords']: "N/A" ?>
+										<?php echo $_SESSION['location'][4]['Keywords'] ? $_SESSION['location'][4]['Keywords']: "N/A" ?>
 									</td>
 								</tr>
 								<tr>
@@ -2094,10 +2083,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Humor
 									</td>
 									<td>
-										<?php echo $_SESSION['dashboard']['Humor'] ? $_SESSION['dashboard']['Humor']: "--" ?>
+										<?php echo $_SESSION['location'][5]['Average'] ? $_SESSION['location'][5]['Average']: "--" ?>
 									</td>
 									<td>
-										<?php echo isset($_SESSION['dashboard']['Humor_Keywords']) ? $_SESSION['dashboard']['Humor_Keywords']: "N/A" ?>
+										<?php echo $_SESSION['location'][5]['Keywords'] ? $_SESSION['location'][5]['Keywords']: "N/A" ?>
 									</td>
 								</tr>
 								<tr>
@@ -2108,10 +2097,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Confidence
 									</td>
 									<td>
-										<?php echo $_SESSION['dashboard']['Confidence'] ? $_SESSION['dashboard']['Confidence']: "--" ?>
+										<?php echo $_SESSION['location'][6]['Average'] ? $_SESSION['location'][6]['Average']: "--" ?>
 									</td>
 									<td>
-										<?php echo isset($_SESSION['dashboard']['Confidence_Keywords']) ? $_SESSION['dashboard']['Confidence_Keywords']: "N/A" ?>
+										<?php echo $_SESSION['location'][6]['Keywords'] ? $_SESSION['location'][6]['Keywords']: "N/A" ?>
 									</td>
 								</tr>
 								<tr>
@@ -2122,10 +2111,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Fun
 									</td>
 									<td>
-										<?php echo $_SESSION['dashboard']['Fun'] ? $_SESSION['dashboard']['Fun']: "--" ?>
+										<?php echo $_SESSION['location'][7]['Average'] ? $_SESSION['location'][7]['Average']: "--" ?>
 									</td>
 									<td>
-										<?php echo isset($_SESSION['dashboard']['Fun_Keywords']) ? $_SESSION['dashboard']['Fun_Keywords']: "N/A" ?>
+										<?php echo $_SESSION['location'][7]['Keywords'] ? $_SESSION['location'][7]['Keywords']: "N/A" ?>
 									</td>
 								</tr>
 								<tr>
@@ -2136,10 +2125,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Kindness
 									</td>
 									<td>
-										<?php echo $_SESSION['dashboard']['Kindness'] ? $_SESSION['dashboard']['Kindness']: "--" ?>
+										<?php echo $_SESSION['location'][8]['Average'] ? $_SESSION['location'][8]['Average']: "--" ?>
 									</td>
 									<td>
-										<?php echo isset($_SESSION['dashboard']['Kindness_Keywords']) ? $_SESSION['dashboard']['Kindness_Keywords']: "N/A" ?>
+										<?php echo $_SESSION['location'][8]['Keywords'] ? $_SESSION['location'][8]['Keywords']: "N/A" ?>
 									</td>
 								</tr>
 								<tr>
@@ -2150,10 +2139,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Honesty
 									</td>
 									<td>
-										<?php echo $_SESSION['dashboard']['Honesty'] ? $_SESSION['dashboard']['Honesty']: "--" ?>
+										<?php echo $_SESSION['location'][9]['Average'] ? $_SESSION['location'][9]['Average']: "--" ?>
 									</td>
 									<td>
-										<?php echo isset($_SESSION['dashboard']['Honesty_Keywords']) ? $_SESSION['dashboard']['Honesty_Keywords']: "N/A" ?>
+										<?php echo $_SESSION['location'][9]['Keywords'] ? $_SESSION['location'][9]['Keywords']: "N/A" ?>
 									</td>
 								</tr>
 								<tr>
@@ -2164,10 +2153,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Reliability
 									</td>
 									<td>
-										<?php echo $_SESSION['dashboard']['Reliability'] ? $_SESSION['dashboard']['Reliability']: "--" ?>
+										<?php echo $_SESSION['location'][10]['Average'] ? $_SESSION['location'][10]['Average']: "--" ?>
 									</td>
 									<td>
-										<?php echo isset($_SESSION['dashboard']['Reliability_Keywords']) ? $_SESSION['dashboard']['Reliability_Keywords']: "N/A" ?>
+										<?php echo $_SESSION['location'][10]['Keywords'] ? $_SESSION['location'][10]['Keywords']: "N/A" ?>
 									</td>
 								</tr>
 								<tr>
@@ -2178,10 +2167,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Happiness
 									</td>
 									<td>
-										<?php echo $_SESSION['dashboard']['Happiness'] ? $_SESSION['dashboard']['Happiness']: "--" ?>
+										<?php echo $_SESSION['location'][11]['Average'] ? $_SESSION['location'][11]['Average']: "--" ?>
 									</td>
 									<td>
-										<?php echo isset($_SESSION['dashboard']['Happiness_Keywords']) ? $_SESSION['dashboard']['Happiness_Keywords']: "N/A" ?>
+										<?php echo $_SESSION['location'][11]['Keywords'] ? $_SESSION['location'][11]['Keywords']: "N/A" ?>
 									</td>
 								</tr>
 								<tr>
@@ -2192,10 +2181,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Ambition
 									</td>
 									<td>
-										<?php echo $_SESSION['dashboard']['Ambition'] ? $_SESSION['dashboard']['Ambition']: "--" ?>
+										<?php echo $_SESSION['location'][12]['Average'] ? $_SESSION['location'][12]['Average']: "--" ?>
 									</td>
 									<td>
-										<?php echo isset($_SESSION['dashboard']['Ambition_Keywords']) ? $_SESSION['dashboard']['Ambition_Keywords']: "N/A" ?> 
+										<?php echo $_SESSION['location'][12]['Keywords'] ? $_SESSION['location'][12]['Keywords']: "N/A" ?>
 									</td>
 								</tr>
 								<tr>
@@ -2206,10 +2195,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Humility
 									</td>
 									<td>
-										<?php echo $_SESSION['dashboard']['Humility'] ? $_SESSION['dashboard']['Humility']: "--" ?>
+										<?php echo $_SESSION['location'][13]['Average'] ? $_SESSION['location'][13]['Average']: "--" ?>
 									</td>
 									<td>
-										<?php echo isset($_SESSION['dashboard']['Humility_Keywords']) ? $_SESSION['dashboard']['Humility_Keywords']: "N/A" ?>
+										<?php echo $_SESSION['location'][13]['Keywords'] ? $_SESSION['location'][13 ]['Keywords']: "N/A" ?>
 									</td>
 								</tr>
 								</tbody>
@@ -2299,3 +2288,6 @@ jQuery(document).ready(function() {
 </body>
 <!-- END BODY -->
 </html>
+<?php 
+    $_SESSION['location']=null;  
+?>
