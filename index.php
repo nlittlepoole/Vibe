@@ -38,10 +38,11 @@ switch ( $action ) {
     $data['Name']=$user_profile['name'];
     $communities=split('&&',$data['Communities']);
     foreach($communities as $community){
+        echo $temp=stristr($community, "|", true);
         $new_communities=$new_communities.
                     '<li>
-              <a href="/index.php?action=location?location='.$community.'">
-              '.$community.'</a>
+              <a href="/index.php?action=location?location='.$temp.'">
+              '.$temp.'</a>
             </li>';
     }
     $data['Communities']=$new_communities;
