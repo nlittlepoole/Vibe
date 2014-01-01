@@ -86,10 +86,7 @@ while count[0][0] != 0:
                     newcommunityKeyword="1"+keyword
                 else:
                     newcommunityKeyword=communityKeyword
-                sscore=old[0][0]
-                if old[0][1]-modifier>0:
-                    sscore=(score+int(old[0][0]))/(int(old[0][1])+1-modifier)
-                query="UPDATE `" + data[1] + "` SET Average=" + str(sscore) +",Sum=Sum+1, Keywords='" +newcommunityKeyword+"' WHERE Attribute='"+ attribute + "';"
+                query="UPDATE `" + data[1] + "` SET Keywords='" +newcommunityKeyword+"' WHERE Attribute='"+ attribute + "';"
                 cur.execute(query)
                 cur.connection.commit()
             else:
@@ -106,13 +103,8 @@ while count[0][0] != 0:
                 query="SELECT Average,Sum FROM `"+data[1] +"` WHERE Attribute= '" + attribute + "';"
                 cur.execute(query)
                 old=cur.fetchall()
-                sscore=old[0][0]
-                if old[0][1]-modifier>0:
-                    sscore=(score+int(old[0][0]))/(int(old[0][1])+1-modifier)
                 if not "null" in keyword:
-                    query="UPDATE `" +data[1] + "` SET Average=" + str(sscore) +",Sum=Sum+1 , Keywords='" +str(1)+ keyword+"' WHERE Attribute='"+ attribute + "';"
-                else:
-                    query="UPDATE `" +data[1] + "` SET Average=" + str(sscore) +",Sum=Sum+1 , Keywords='" + keyword+"' WHERE Attribute='"+ attribute + "';"
+                    query="UPDATE `" +data[1] + "` SET Keywords='" +str(1)+ keyword+"' WHERE Attribute='"+ attribute + "';"
                 cur.execute(query)
                 cur.connection.commit()
     if exists:
