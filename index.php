@@ -313,13 +313,13 @@ function getAffiliations(){
        $education=$result[0]['education']; //education is set to the 3d education array that is 2 dimensions in from the result array
        foreach($education as $school){ //education array is iterated over and each school name is added to affiliations
            //php is shitty at concatenation so it is easier to add all the elements to an array and concatenate at the end
-           array_push($affiliations, $school['school']['name'] . "&&");
+           array_push($affiliations, $school['school']['name']."||". $school['school']['id'] . "&&");
        }
         $work=$result[0]['work']; //$ work is set to the 3d education array that is 2 dimensions in from result array
        foreach($work as $employer){ //work is iterated over and each employer name and location name is added to $affiliations
           $employer['employer']['id'];
-           array_push($affiliations, $employer['employer']['name'] . "&&");
-           array_push($affiliations, $employer['location']['name'] . "&&"); //I decided to the use the locations of a user's job because facebook doesn't have that info for schools
+           array_push($affiliations, $employer['employer']['name'] . "||" . $employer['employer']['id'] .  "&&");
+           array_push($affiliations, $employer['location']['name'] . "||". $employer['location']['id'] . "&&"); //I decided to the use the locations of a user's job because facebook doesn't have that info for schools
        }
        $sum=''; //sum is initialized
        foreach($affiliations as $id){// loops through all the $affiliations added in the above loops and concatenates them into one string seperated by "&&"

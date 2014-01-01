@@ -11,14 +11,18 @@ start_time = time.time()
 cur.execute("SELECT * FROM communities") 
 communities = cur.fetchall()
 for community in communities:
-    query="SELECT Count(*) FROM `user` WHERE `Communities` LIKE '%"+community[2]+ "%'"
+    query="SELECT Count(*) FROM `user` WHERE `Communities` LIKE '%"+community[1]+ "%'"
     cur.execute(query)
     count=cur.fetchall()[0][0]
     if count>10:
         query="SELECT * FROM directory WHERE UID='"+community[1]+"'"
         cur.execute(query)
         if not cur.fetchall():
-            query="INSERT INTO directory (UID, Name, Picture) VALUES ('"+community[1] +"','"+community[2]+"','"+community[3]+"')"
+            query="INSERT INTO directory (UID, Name, Picture,Users) VALUES ('"+community[1] +"','"+community[2]+"','"+community[3]+"',"+str(count)+")"
+            cur.execute(query)
+            cur.connection.commit()
+        else:
+            query="UPDATE directory SET Users="+str(count)
             cur.execute(query)
             cur.connection.commit()
 cur.execute("SELECT * FROM directory") 
@@ -41,16 +45,27 @@ for community in communities:
             dev="%.2f" % dev
 
         
-        query="SELECT UID FROM  `user` WHERE  `Communities` LIKE  '%"+community[2]+"%'  ORDER BY "+attribute[0]+" DESC LIMIT 10"
+        query="SELECT UID FROM  `user` WHERE  `Communities` LIKE  '%"+community[1]+"%' AND Gender='male'  ORDER BY "+attribute[0]+" DESC LIMIT 5"
         cur.execute(query)
         leaders=cur.fetchall()
-        boys=",Rank1='N/A',Rank2='N/A',Rank3='N/A',Rank4='N/A',Rank5='N/A',Rank6='N/A',Rank7='N/A',Rank8='N/A',Rank9='N/A',Rank10='N/A'"
-        if len(leaders)==10:
+        boys=",Rank1='N/A',Rank2='N/A',Rank3='N/A',Rank4='N/A',Rank5='N/A'"
+        if len(leaders)==5:
             boys=""
             count=1
             for leader in leaders:
                 boys=boys+",Rank"+str(count)+"='"+str(leader[0])+"'"
                 count=count+1
+        query="SELECT UID FROM  `user` WHERE  `Communities` LIKE  '%"+community[1]+"%' AND Gender='female'  ORDER BY "+attribute[0]+" DESC LIMIT 5"
+        cur.execute(query)
+        leaders=cur.fetchall()
+        girls=",Rank6='N/A',Rank7='N/A',Rank8='N/A',Rank9='N/A',Rank10='N/A'"
+        if len(leaders)==5:
+            girls=""
+            count=6
+            for leader in leaders:
+                boys=boys+",Rank"+str(count)+"='"+str(leader[0])+"'"
+                count=count+1
+        boys=boys+girls
         query="UPDATE `"+community[1]+"` SET Average="+str(avg)+",Deviation="+str(dev) + boys+" WHERE Attribute='"+attribute[0]+"'"
         print query
         cur.execute(query)
