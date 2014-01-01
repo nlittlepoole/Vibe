@@ -1,6 +1,7 @@
 <?php
 ob_start();
 session_start(); //initializes the PHP session and allows php to access cookie/url fragment data
+ini_set('max_execution_time', 300);
 //Start up code for any instance of Vibe runtime
 require( "config.php" ); //pulls in global variables from config.php
 require("php-sdk/facebook.php"); //imports facebook api methods and objects
@@ -27,6 +28,50 @@ switch ( $action ) {
     question(); // calls the question function that pulls a user and question and places the data in the Session cache
     header('Location: /view/questions.php'); //sends browser to questions page with Session Data containing questions input above
     break;
+  case 'location':
+    if(isset( $_GET['location']) && $uid){
+      $location =$_GET['location'];
+      $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //database connection is established uisng credentials in config.php
+      $sql = "SELECT * FROM directory WHERE UID=$location"; //sql query that returns the string of the question in the table
+      $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
+      $st->execute();//executes query above
+      $raw=$st->fetch();
+      if($raw){
+        $sql = "SELECT * FROM `$location`"; //sql query that returns the string of the question in the table
+        $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
+        $st->execute();//executes query above
+        $data=$st->fetchAll();
+        foreach($data as &$attribute){
+          $keywords=split('&&',$attribute['Keywords']);
+          $keyword="";
+          $max=0;
+          foreach($keywords as &$quality){
+            $count=stristr($quality,'(',true);
+            if($count>$max){
+              $max=$count;
+              $keyword="#".str_replace(array(1,2,3,4,5,6,7,8,9,0,')','(',' '),'', $quality);
+            }
+          }
+          
+        }
+
+        print_r($data);
+      }
+      else{
+        header('Location:/index.php?action=location');
+      }
+    }
+    else{
+      if(!$uid){
+        header('Location:/index.php');
+      }
+      else{
+        header('Location:/index.php?action=dashboard');
+      }
+      
+    }
+
+    break;
   case 'dashboard'://occurs after a login or another question, this case handles generating a new question and friend
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //database connection is established uisng credentials in config.php
     $sql = "SELECT * FROM user WHERE UID=$uid"; //sql query that returns the string of the question in the table
@@ -38,10 +83,11 @@ switch ( $action ) {
     $data['Name']=$user_profile['name'];
     $communities=split('&&',$data['Communities']);
     foreach($communities as $community){
-        echo $temp=stristr($community, "|", true);
+        $temp=stristr($community, "|", true);
+        $temp2=substr(stristr($community, "||"),2);
         $new_communities=$new_communities.
                     '<li>
-              <a href="/index.php?action=location?location='.$temp.'">
+              <a href="/index.php?action=location&location='.$temp2.'">
               '.$temp.'</a>
             </li>';
     }
@@ -96,13 +142,13 @@ switch ( $action ) {
     $null=isset( $_SESSION['null'] ) ? $_SESSION['null'] + "" : "";
     $slider=2*$_POST["slideVal"]; //Slider value needs to be multiplied by two since slider has 5 notches
     $comment=isset( $_POST["commentsVal"] ) && $_POST["commentsVal"]!="" ? $attribute ."##" .date("Y-m-d H:i:s", time())."##". $_SESSION['question'] . ": " .'"' . str_replace(array('"',"'","|"),'',$_POST["commentsVal"]) . '"' : "";
-
+    $name=isset($_SESSION['Name']) ?$_SESSION['Name']:"Unknown";
     $affiliations=isset($_SESSION['affiliations']) ? $_SESSION['affiliations'] : "";
     $keywords=$slider>7 && $_SESSION['keywords']!="" ? $_SESSION['keywords'][0]:"null";
     if($keywords=="" || $keywords=="null"){
       $keywords=$slider<3 && isset($_SESSION['keywords'][1])  ? $_SESSION['keywords'][1]:"null";
     }
-    $vibe= new Vibe($uid, $recipient,$attribute,$keywords,$affiliations,$gender);
+    $vibe= new Vibe($uid, $recipient,$attribute,$keywords,$affiliations,$gender,$name);
     if(!$positive){
       $slider=10-$slider;
     }
@@ -154,6 +200,7 @@ function question(){
             $data = json_decode(file_get_contents($grab), true); //the graph data is natively a json file, the stock php decode method is used to decode the user's json data to a 2d array
             $name=$data['name']; //name is set to the user's name
             $_SESSION['Gender']=$data['gender'];
+            $_SESSION['Name']=$name;
         }
         else{
             $question_source=getQuestion(5); //only the first four questions, which are first vibe questions, are used to get question data
@@ -164,6 +211,7 @@ function question(){
             $random=rand(0,sizeof($user['data']));
             $recipient=$user['data'][$random]['id'];
             $name=$user['data'][$random]['name'];
+            $_SESSION['Name']=$name;
             $grab='https://graph.facebook.com/' . $recipient; //$grab is set to the graph url of the friend selected
             $data = json_decode(file_get_contents($grab), true); //the graph data is natively a json file, the stock php decode method is used to decode the user's json data to a 2d array
             $_SESSION['Gender']=$data['gender'];
@@ -206,20 +254,22 @@ function addUser( $input_id ) {
     $st->execute(); //executes the sql query found above
     $raw=$st->fetch(); //sets raw to be the raw data returned from the sql command, raw is always an array, even if only one element is being queried
     if(!$raw){ //if the user isn't in Vibosphere, they are added with a true active status
-        $graph_url="https://graph.facebook.com/" . $input_id . "/?fields=gender"; //facebook graph api link is created to find gender
+        $graph_url="https://graph.facebook.com/" . $input_id . "/?fields=gender,name"; //facebook graph api link is created to find gender
         $data = json_decode(file_get_contents($graph_url), true); //decoded json data is returned as an array using above graph api link
         $gender=$data['gender']; //$gender is set to user gender
+        $name=$data['name'];
         $affiliations=getAffiliations(); //$affiliations is set to result of affiliations function defined below
-         $sql = "INSERT INTO user  (UID,Active,Gender,Communities) VALUES('$input_id','1','$gender','$affiliations')"; //user is added to Vibosphere database
+         $sql = "INSERT INTO user  (Name,UID,Active,Gender,Communities) VALUES('$name','$input_id','1','$gender','$affiliations')"; //user is added to Vibosphere database
         $st = $conn->prepare( $sql );
           $st->execute(); //query is executed
     }
     else { //the user is in the database but not active, theyare simply set to active
-        $graph_url="https://graph.facebook.com/" . $input_id . "/?fields=gender"; //facebook graph api is used to create gender query
+        $graph_url="https://graph.facebook.com/" . $input_id . "/?fields=gender,name"; //facebook graph api is used to create gender query
         $data = json_decode(file_get_contents($graph_url), true); //user data json is decrypted and returned as an array
         $gender=$data['gender']; //gender is set
+        $name=$data['name'];
         $affiliations=getAffiliations(); //affiliations is set to the result of the affilations function defined below
-            echo $sql = "UPDATE user SET Active='1',Gender='$gender', Communities='$affiliations' WHERE UID='$input_id';"; //query is set to update the user to active and add their gender and communities
+            echo $sql = "UPDATE user SET Active='1',Gender='$gender', Communities='$affiliations',  Name='$name' WHERE UID='$input_id';"; //query is set to update the user to active and add their gender and communities
              $st = $conn->prepare( $sql ); //protection line used to hide queries from browsers
              $st->execute(); //command above is executed
     }

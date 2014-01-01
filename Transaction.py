@@ -25,15 +25,16 @@ while count[0][0] != 0:
     #print user1
     user2=row[0][2]
     #print user2
-    attribute=row[0][3]
+    name=row[0][3]
+    attribute=row[0][4]
     #print attribute
-    score=row[0][4]
+    score=row[0][5]
     modifier=0
     query="SELECT * FROM user WHERE UID=" + user2
     cur.execute(query)
     exists=cur.fetchall()
     if score:
-        score=float(row[0][4])
+        score=float(row[0][5])
     else:
         if exists:
             query="SELECT " +attribute + " FROM user WHERE UID=" + user2
@@ -45,9 +46,9 @@ while count[0][0] != 0:
             modifier=1   
     #print exists
     #print score
-    comment=row[0][5]
+    comment=row[0][6]
     #print comment
-    keyword=row[0][6]
+    keyword=row[0][7]
     newKeyword=""
     #print keyword
 
@@ -55,8 +56,8 @@ while count[0][0] != 0:
     cur.execute(query)
     cur.connection.commit()
     
-    affiliation=row[0][7]
-    gender=row[0][8]
+    affiliation=row[0][8]
+    gender=row[0][9]
     affiliations=affiliation.split('&&')
     for affiliate in affiliations:
         data=affiliate.split('||')
@@ -162,7 +163,7 @@ while count[0][0] != 0:
     else:
         if not "null" in keyword:
             keyword="1"+keyword
-        query="INSERT INTO user (UID, ACTIVE, " + attribute + "," + attribute + "_Total ," + attribute+ "_Keywords,Comments,Communities,Gender) VALUES (" + user2 + ",0,"+ str(score)+","+str(1-modifier)+", '"+keyword+"','"+comment+"','"+affiliation+"','"+gender+"')"
+        query="INSERT INTO user (UID, ACTIVE, " + attribute + "," + attribute + "_Total ," + attribute+ "_Keywords,Comments,Communities,Gender,Name) VALUES (" + user2 + ",0,"+ str(score)+","+str(1-modifier)+", '"+keyword+"','"+comment+"','"+affiliation+"','"+gender+"','"+name+"')"
         #print query
         cur.execute(query)
         cur.connection.commit() 

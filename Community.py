@@ -45,7 +45,7 @@ for community in communities:
             dev="%.2f" % dev
 
         
-        query="SELECT UID FROM  `user` WHERE  `Communities` LIKE  '%"+community[1]+"%' AND Gender='male'  ORDER BY "+attribute[0]+" DESC LIMIT 5"
+        query="SELECT Name FROM  `user` WHERE  `Communities` LIKE  '%"+community[1]+"%' AND Gender='male'  ORDER BY "+attribute[0]+" DESC LIMIT 5"
         cur.execute(query)
         leaders=cur.fetchall()
         boys=",Rank1='N/A',Rank2='N/A',Rank3='N/A',Rank4='N/A',Rank5='N/A'"
@@ -55,7 +55,7 @@ for community in communities:
             for leader in leaders:
                 boys=boys+",Rank"+str(count)+"='"+str(leader[0])+"'"
                 count=count+1
-        query="SELECT UID FROM  `user` WHERE  `Communities` LIKE  '%"+community[1]+"%' AND Gender='female'  ORDER BY "+attribute[0]+" DESC LIMIT 5"
+        query="SELECT Name FROM  `user` WHERE  `Communities` LIKE  '%"+community[1]+"%' AND Gender='female'  ORDER BY "+attribute[0]+" DESC LIMIT 5"
         cur.execute(query)
         leaders=cur.fetchall()
         girls=",Rank6='N/A',Rank7='N/A',Rank8='N/A',Rank9='N/A',Rank10='N/A'"
