@@ -741,7 +741,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								</table>
 							</div>
 								</div>
-								<div class="tab-pane fade active in" id="tab_1_2">
+								<div class="tab-pane fade in" id="tab_1_2">
 									<div class="note note-success">
 										<h4>Percentile: .95</h4>
 									</div>
@@ -864,7 +864,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								</table>
 							</div>
 								</div>
-								<div class="tab-pane fade active in" id="tab_1_3">
+								<div class="tab-pane fade in" id="tab_1_3">
 									<div class="note note-success">
 										<h4>Percentile: .95</h4>
 									</div>
@@ -987,7 +987,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								</table>
 							</div>
 								</div>
-								<div class="tab-pane fade active in" id="tab_1_4">
+								<div class="tab-pane fade in" id="tab_1_4">
 									<div class="note note-success">
 										<h4>Percentile: .95</h4>
 									</div>
@@ -1110,7 +1110,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								</table>
 							</div>
 								</div>
-								<div class="tab-pane fade active in" id="tab_1_5">
+								<div class="tab-pane fade in" id="tab_1_5">
 									<div class="note note-success">
 										<h4>Percentile: .95</h4>
 									</div>
@@ -1233,7 +1233,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								</table>
 							</div>
 								</div>
-								<div class="tab-pane fade active in" id="tab_1_6">
+								<div class="tab-pane fade in" id="tab_1_6">
 									<div class="note note-success">
 										<h4>Percentile: .95</h4>
 									</div>
@@ -1356,7 +1356,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								</table>
 							</div>
 								</div>
-								<div class="tab-pane fade active in" id="tab_1_7">
+								<div class="tab-pane fade in" id="tab_1_7">
 									<div class="note note-success">
 										<h4>Percentile: .95</h4>
 									</div>
@@ -1479,7 +1479,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								</table>
 							</div>
 								</div>
-								<div class="tab-pane fade active in" id="tab_1_8">
+								<div class="tab-pane fade in" id="tab_1_8">
 									<div class="note note-success">
 										<h4>Percentile: .95</h4>
 									</div>
@@ -1602,7 +1602,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								</table>
 							</div>
 								</div>
-								<div class="tab-pane fade active in" id="tab_1_9">
+								<div class="tab-pane fade in" id="tab_1_9">
 									<div class="note note-success">
 										<h4>Percentile: .95</h4>
 									</div>
@@ -1725,7 +1725,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								</table>
 							</div>
 								</div>
-								<div class="tab-pane fade active in" id="tab_1_10">
+								<div class="tab-pane fade in" id="tab_1_10">
 									<div class="note note-success">
 										<h4>Percentile: .95</h4>
 									</div>
@@ -1848,7 +1848,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								</table>
 							</div>
 								</div>
-								<div class="tab-pane fade active in" id="tab_1_11">
+								<div class="tab-pane fade in" id="tab_1_11">
 									<div class="note note-success">
 										<h4>Percentile: .95</h4>
 									</div>
