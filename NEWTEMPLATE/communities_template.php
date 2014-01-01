@@ -546,9 +546,9 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
+						<img height="100px" src="/NEWTEMPLATE/assets/img/columbiaTEMP.jpg" />
 					Columbia University <small>communities</small>
 					<!-- FILL THIS WITH THE PROF PIC OF THE COMMUNITY'S FACEBOOK PAGE -->
-					<img style="float: right" height="100px" src="/NEWTEMPLATE/assets/img/columbiaTEMP.jpg" />
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li>
@@ -565,49 +565,70 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 			</div>
 			<!-- END PAGE HEADER-->
 			
+			<div class="clearfix">
+			</div>
+
+			<!-- REVAMPED RATINGS OF COMMUNITY - TEMPLATE -->
 			<div class="row">
 				<div class="col-md-12">
-					<div class="portlet green box">
-						<div class="portlet-title">
-							<div class="caption">
-								<i class="fa fa-cogs"></i>Your Ranking
-							</div>
-							<div class="tools">
-								<a href="javascript:;" class="collapse"></a>
-								<a href="#portlet-config" data-toggle="modal" class="config"></a>
-								<a href="javascript:;" class="reload"></a>
-								<a href="javascript:;" class="remove"></a>
-							</div>
-						</div>
-						<div class="portlet-body">
-							<div class="note note-success">
-								<h4 class="block">Percentile: .95</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			<div class="clearfix">
-			</div>
-			
-			<div class="row">
-				<div class="col-md-6">
-					<!-- BEGIN SAMPLE TABLE PORTLET-->
 					<div class="portlet box blue">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="fa fa-comments"></i>Attractiveness (Guys)
+								<i class="fa fa-reorder"></i>Voted Most
 							</div>
 							<div class="tools">
 								<a href="javascript:;" class="collapse"></a>
 								<a href="#portlet-config" data-toggle="modal" class="config"></a>
-								<a href="javascript:;" class="reload"></a>
-								<a href="javascript:;" class="remove"></a>
 							</div>
 						</div>
 						<div class="portlet-body">
-							<div class="table-responsive">
+							<ul class="nav nav-tabs">
+								<li class="active">
+									<a href="#tab_1_1" data-toggle="tab">Attractiveness</a>
+								</li>
+								<li class="">
+									<a href="#tab_1_2" data-toggle="tab">Affability</a>
+								</li>
+								<li class="">
+									<a href="#tab_1_3" data-toggle="tab">Intelligence</a>
+								</li>
+								<li class="">
+									<a href="#tab_1_4" data-toggle="tab">Style</a>
+								</li>
+								<li class="">
+									<a href="#tab_1_5" data-toggle="tab">Humor</a>
+								</li>
+								<li class="">
+									<a href="#tab_1_6" data-toggle="tab">Confidence</a>
+								</li>
+								<li class="">
+									<a href="#tab_1_7" data-toggle="tab">Fun</a>
+								</li>
+								<li class="">
+									<a href="#tab_1_8" data-toggle="tab">Kindness</a>
+								</li>
+								<li class="">
+									<a href="#tab_1_9" data-toggle="tab">Honesty</a>
+								</li>
+								<li class="">
+									<a href="#tab_1_10" data-toggle="tab">Happiness</a>
+								</li>
+								<li class="">
+									<a href="#tab_1_11" data-toggle="tab">Ambition</a>
+								</li>
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane fade active in" id="tab_1_1">
+									<div class="note note-success">
+										<h4>Percentile: .95</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Guys</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Girls</h4>
+									</div>
+									<div class="table-responsive" style="display:inline-block; width:49%">
 								<table class="table table-striped table-hover">
 								<thead>
 								<tr>
@@ -616,9 +637,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									</th>
 									<th>
 										Name
-									</th>
-									<th>
-										Overall Score
 									</th>
 								</tr>
 								</thead>
@@ -630,9 +648,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<td>
 										John Smith
 									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Attractiveness'] ? $_SESSION['dashboard']['Attractiveness']: "--" ?>
-									</td>
 								</tr>
 								<tr>
 									<td>
@@ -640,9 +655,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									</td>
 									<td>
 										Brad Jones
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Affability'] ? $_SESSION['dashboard']['Affability']: "--" ?>
 									</td>
 								</tr>
 								<tr>
@@ -652,9 +664,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<td>
 										Carl Johnson
 									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Intelligence'] ? $_SESSION['dashboard']['Intelligence']: "--" ?>
-									</td>
 								</tr>
 								<tr>
 									<td>
@@ -662,9 +671,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									</td>
 									<td>
 										Andrew Kerker
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Style'] ? $_SESSION['dashboard']['Style']: "--" ?>
 									</td>
 								</tr>
 								<tr>
@@ -674,88 +680,11 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<td>
 										AJ Simpson
 									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Promiscuity'] ? $_SESSION['dashboard']['Promiscuity']: "--" ?>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										6
-									</td>
-									<td>
-										Allan Rovanik
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Humor'] ? $_SESSION['dashboard']['Humor']: "--" ?>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										7
-									</td>
-									<td>
-										John Kramer
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Confidence'] ? $_SESSION['dashboard']['Confidence']: "--" ?>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										8
-									</td>
-									<td>
-										Bob Sanders
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Fun'] ? $_SESSION['dashboard']['Fun']: "--" ?>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										9
-									</td>
-									<td>
-										Ryan Cook
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Kindness'] ? $_SESSION['dashboard']['Kindness']: "--" ?>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										10
-									</td>
-									<td>
-										Chris Heast
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Honesty'] ? $_SESSION['dashboard']['Honesty']: "--" ?>
-									</td>
 								</tr>
 								</tbody>
 								</table>
 							</div>
-						</div>
-					</div>
-					<!-- END SAMPLE TABLE PORTLET-->
-				</div>
-				<div class="col-md-6">
-					<!-- BEGIN SAMPLE TABLE PORTLET-->
-					<div class="portlet box red">
-						<div class="portlet-title">
-							<div class="caption">
-								<i class="fa fa-comments"></i>Attractiveness (Girls)
-							</div>
-							<div class="tools">
-								<a href="javascript:;" class="collapse"></a>
-								<a href="#portlet-config" data-toggle="modal" class="config"></a>
-								<a href="javascript:;" class="reload"></a>
-								<a href="javascript:;" class="remove"></a>
-							</div>
-						</div>
-						<div class="portlet-body">
-							<div class="table-responsive">
+							<div class="table-responsive" style="display:inline-block; width:49%">
 								<table class="table table-striped table-hover">
 								<thead>
 								<tr>
@@ -764,163 +693,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									</th>
 									<th>
 										Name
-									</th>
-									<th>
-										Overall Score
-									</th>
-								</tr>
-								</thead>
-								<tbody>
-								<tr>
-									<td>
-										1
-									</td>
-									<td>
-										Allie Simpson
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Attractiveness'] ? $_SESSION['dashboard']['Attractiveness']: "--" ?>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										2
-									</td>
-									<td>
-										Kathryn Jones
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Affability'] ? $_SESSION['dashboard']['Affability']: "--" ?>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										3
-									</td>
-									<td>
-										Megan Johnson
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Intelligence'] ? $_SESSION['dashboard']['Intelligence']: "--" ?>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										4
-									</td>
-									<td>
-										Madison Baker
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Style'] ? $_SESSION['dashboard']['Style']: "--" ?>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										5
-									</td>
-									<td>
-										Kate Minsing
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Promiscuity'] ? $_SESSION['dashboard']['Promiscuity']: "--" ?>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										6
-									</td>
-									<td>
-										Alyssa Rovanik
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Humor'] ? $_SESSION['dashboard']['Humor']: "--" ?>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										7
-									</td>
-									<td>
-										Patty Kramer
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Confidence'] ? $_SESSION['dashboard']['Confidence']: "--" ?>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										8
-									</td>
-									<td>
-										Jill Sanders
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Fun'] ? $_SESSION['dashboard']['Fun']: "--" ?>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										9
-									</td>
-									<td>
-										Jessica Cook
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Kindness'] ? $_SESSION['dashboard']['Kindness']: "--" ?>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										10
-									</td>
-									<td>
-										Christine Heast
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Honesty'] ? $_SESSION['dashboard']['Honesty']: "--" ?>
-									</td>
-								</tr>
-								</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-					<!-- END SAMPLE TABLE PORTLET-->
-				</div>
-			</div>
-			
-			<div class="clearfix">
-			</div>
-			
-			<div class="row">
-				<div class="col-md-6">
-					<!-- BEGIN SAMPLE TABLE PORTLET-->
-					<div class="portlet box blue">
-						<div class="portlet-title">
-							<div class="caption">
-								<i class="fa fa-comments"></i>Style (Guys)
-							</div>
-							<div class="tools">
-								<a href="javascript:;" class="collapse"></a>
-								<a href="#portlet-config" data-toggle="modal" class="config"></a>
-								<a href="javascript:;" class="reload"></a>
-								<a href="javascript:;" class="remove"></a>
-							</div>
-						</div>
-						<div class="portlet-body">
-							<div class="table-responsive">
-								<table class="table table-striped table-hover">
-								<thead>
-								<tr>
-									<th>
-										#
-									</th>
-									<th>
-										Name
-									</th>
-									<th>
-										Overall Score
 									</th>
 								</tr>
 								</thead>
@@ -932,9 +704,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<td>
 										John Smith
 									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Attractiveness'] ? $_SESSION['dashboard']['Attractiveness']: "--" ?>
-									</td>
 								</tr>
 								<tr>
 									<td>
@@ -942,9 +711,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									</td>
 									<td>
 										Brad Jones
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Affability'] ? $_SESSION['dashboard']['Affability']: "--" ?>
 									</td>
 								</tr>
 								<tr>
@@ -954,9 +720,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<td>
 										Carl Johnson
 									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Intelligence'] ? $_SESSION['dashboard']['Intelligence']: "--" ?>
-									</td>
 								</tr>
 								<tr>
 									<td>
@@ -964,9 +727,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									</td>
 									<td>
 										Andrew Kerker
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Style'] ? $_SESSION['dashboard']['Style']: "--" ?>
 									</td>
 								</tr>
 								<tr>
@@ -976,88 +736,22 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<td>
 										AJ Simpson
 									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Promiscuity'] ? $_SESSION['dashboard']['Promiscuity']: "--" ?>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										6
-									</td>
-									<td>
-										Allan Rovanik
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Humor'] ? $_SESSION['dashboard']['Humor']: "--" ?>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										7
-									</td>
-									<td>
-										John Kramer
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Confidence'] ? $_SESSION['dashboard']['Confidence']: "--" ?>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										8
-									</td>
-									<td>
-										Bob Sanders
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Fun'] ? $_SESSION['dashboard']['Fun']: "--" ?>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										9
-									</td>
-									<td>
-										Ryan Cook
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Kindness'] ? $_SESSION['dashboard']['Kindness']: "--" ?>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										10
-									</td>
-									<td>
-										Chris Heast
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Honesty'] ? $_SESSION['dashboard']['Honesty']: "--" ?>
-									</td>
 								</tr>
 								</tbody>
 								</table>
 							</div>
-						</div>
-					</div>
-					<!-- END SAMPLE TABLE PORTLET-->
-				</div>
-				<div class="col-md-6">
-					<!-- BEGIN SAMPLE TABLE PORTLET-->
-					<div class="portlet box red">
-						<div class="portlet-title">
-							<div class="caption">
-								<i class="fa fa-comments"></i>Style (Girls)
-							</div>
-							<div class="tools">
-								<a href="javascript:;" class="collapse"></a>
-								<a href="#portlet-config" data-toggle="modal" class="config"></a>
-								<a href="javascript:;" class="reload"></a>
-								<a href="javascript:;" class="remove"></a>
-							</div>
-						</div>
-						<div class="portlet-body">
-							<div class="table-responsive">
+								</div>
+								<div class="tab-pane fade active in" id="tab_1_2">
+									<div class="note note-success">
+										<h4>Percentile: .95</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Guys</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Girls</h4>
+									</div>
+									<div class="table-responsive" style="display:inline-block; width:49%">
 								<table class="table table-striped table-hover">
 								<thead>
 								<tr>
@@ -1067,8 +761,61 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<th>
 										Name
 									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										John Smith
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										Brad Jones
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										Carl Johnson
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										Andrew Kerker
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										AJ Simpson
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+							<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
 									<th>
-										Overall Score
+										#
+									</th>
+									<th>
+										Name
 									</th>
 								</tr>
 								</thead>
@@ -1078,10 +825,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										1
 									</td>
 									<td>
-										Allie Simpson
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Attractiveness'] ? $_SESSION['dashboard']['Attractiveness']: "--" ?>
+										John Smith
 									</td>
 								</tr>
 								<tr>
@@ -1089,10 +833,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										2
 									</td>
 									<td>
-										Kathryn Jones
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Affability'] ? $_SESSION['dashboard']['Affability']: "--" ?>
+										Brad Jones
 									</td>
 								</tr>
 								<tr>
@@ -1100,10 +841,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										3
 									</td>
 									<td>
-										Megan Johnson
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Intelligence'] ? $_SESSION['dashboard']['Intelligence']: "--" ?>
+										Carl Johnson
 									</td>
 								</tr>
 								<tr>
@@ -1111,10 +849,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										4
 									</td>
 									<td>
-										Madison Baker
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Style'] ? $_SESSION['dashboard']['Style']: "--" ?>
+										Andrew Kerker
 									</td>
 								</tr>
 								<tr>
@@ -1122,78 +857,1127 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										5
 									</td>
 									<td>
-										Kate Minsing
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Promiscuity'] ? $_SESSION['dashboard']['Promiscuity']: "--" ?>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										6
-									</td>
-									<td>
-										Alyssa Rovanik
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Humor'] ? $_SESSION['dashboard']['Humor']: "--" ?>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										7
-									</td>
-									<td>
-										Patty Kramer
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Confidence'] ? $_SESSION['dashboard']['Confidence']: "--" ?>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										8
-									</td>
-									<td>
-										Jill Sanders
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Fun'] ? $_SESSION['dashboard']['Fun']: "--" ?>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										9
-									</td>
-									<td>
-										Jessica Cook
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Kindness'] ? $_SESSION['dashboard']['Kindness']: "--" ?>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										10
-									</td>
-									<td>
-										Christine Heast
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Honesty'] ? $_SESSION['dashboard']['Honesty']: "--" ?>
+										AJ Simpson
 									</td>
 								</tr>
 								</tbody>
 								</table>
 							</div>
+								</div>
+								<div class="tab-pane fade active in" id="tab_1_3">
+									<div class="note note-success">
+										<h4>Percentile: .95</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Guys</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Girls</h4>
+									</div>
+									<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										John Smith
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										Brad Jones
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										Carl Johnson
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										Andrew Kerker
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										AJ Simpson
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+							<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										John Smith
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										Brad Jones
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										Carl Johnson
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										Andrew Kerker
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										AJ Simpson
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+								</div>
+								<div class="tab-pane fade active in" id="tab_1_4">
+									<div class="note note-success">
+										<h4>Percentile: .95</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Guys</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Girls</h4>
+									</div>
+									<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										John Smith
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										Brad Jones
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										Carl Johnson
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										Andrew Kerker
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										AJ Simpson
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+							<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										John Smith
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										Brad Jones
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										Carl Johnson
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										Andrew Kerker
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										AJ Simpson
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+								</div>
+								<div class="tab-pane fade active in" id="tab_1_5">
+									<div class="note note-success">
+										<h4>Percentile: .95</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Guys</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Girls</h4>
+									</div>
+									<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										John Smith
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										Brad Jones
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										Carl Johnson
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										Andrew Kerker
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										AJ Simpson
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+							<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										John Smith
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										Brad Jones
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										Carl Johnson
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										Andrew Kerker
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										AJ Simpson
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+								</div>
+								<div class="tab-pane fade active in" id="tab_1_6">
+									<div class="note note-success">
+										<h4>Percentile: .95</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Guys</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Girls</h4>
+									</div>
+									<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										John Smith
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										Brad Jones
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										Carl Johnson
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										Andrew Kerker
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										AJ Simpson
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+							<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										John Smith
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										Brad Jones
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										Carl Johnson
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										Andrew Kerker
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										AJ Simpson
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+								</div>
+								<div class="tab-pane fade active in" id="tab_1_7">
+									<div class="note note-success">
+										<h4>Percentile: .95</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Guys</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Girls</h4>
+									</div>
+									<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										John Smith
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										Brad Jones
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										Carl Johnson
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										Andrew Kerker
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										AJ Simpson
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+							<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										John Smith
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										Brad Jones
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										Carl Johnson
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										Andrew Kerker
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										AJ Simpson
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+								</div>
+								<div class="tab-pane fade active in" id="tab_1_8">
+									<div class="note note-success">
+										<h4>Percentile: .95</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Guys</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Girls</h4>
+									</div>
+									<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										John Smith
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										Brad Jones
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										Carl Johnson
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										Andrew Kerker
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										AJ Simpson
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+							<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										John Smith
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										Brad Jones
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										Carl Johnson
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										Andrew Kerker
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										AJ Simpson
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+								</div>
+								<div class="tab-pane fade active in" id="tab_1_9">
+									<div class="note note-success">
+										<h4>Percentile: .95</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Guys</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Girls</h4>
+									</div>
+									<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										John Smith
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										Brad Jones
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										Carl Johnson
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										Andrew Kerker
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										AJ Simpson
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+							<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										John Smith
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										Brad Jones
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										Carl Johnson
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										Andrew Kerker
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										AJ Simpson
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+								</div>
+								<div class="tab-pane fade active in" id="tab_1_10">
+									<div class="note note-success">
+										<h4>Percentile: .95</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Guys</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Girls</h4>
+									</div>
+									<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										John Smith
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										Brad Jones
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										Carl Johnson
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										Andrew Kerker
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										AJ Simpson
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+							<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										John Smith
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										Brad Jones
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										Carl Johnson
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										Andrew Kerker
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										AJ Simpson
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+								</div>
+								<div class="tab-pane fade active in" id="tab_1_11">
+									<div class="note note-success">
+										<h4>Percentile: .95</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Guys</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Girls</h4>
+									</div>
+									<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										John Smith
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										Brad Jones
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										Carl Johnson
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										Andrew Kerker
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										AJ Simpson
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+							<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										John Smith
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										Brad Jones
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										Carl Johnson
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										Andrew Kerker
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										AJ Simpson
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+								</div>
+							</div>
 						</div>
 					</div>
-					<!-- END SAMPLE TABLE PORTLET-->
-				</div>
+				</div>			
 			</div>
-			
+
 			<div class="clearfix">
-				
 			</div>
 			
 			<div class="row">
