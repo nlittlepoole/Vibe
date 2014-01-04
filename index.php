@@ -162,7 +162,7 @@ switch ( $action ) {
     $_SESSION['dashboard']=$data;
     $conn=null;
 	/* Modified to send to the new dashboard (Noah) */
-    header('Location: /NEWTEMPLATE/dashboard.php'); //sends browser to questions page with Session Data containing questions input above
+    header('Location: /website/dashboard.php'); //sends browser to questions page with Session Data containing questions input above
     flush();                             // Force php-output-cache to flush to browser.
 
   break;
