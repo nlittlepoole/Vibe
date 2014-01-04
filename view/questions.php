@@ -97,7 +97,8 @@
 						<div class="span12">
 							<h3 class="page-subtitle" style="font-weight: normal" id="questions-header"><?php echo $question?></h3>
 							<div style="display: block; margin-left: auto; margin-right: auto; ">
-      							<img src=<?php echo $pic ?> style="height: 300px; width: 300px; overflow:hidden; border-radius: 50%"> 
+      							<img src="/img/profpic-sample1.jpg" style="height: 300px; width: 300px; overflow:hidden; border-radius: 50%"> 
+      							<!--<img src=<?php echo $pic ?> style="height: 300px; width: 300px; overflow:hidden; border-radius: 50%"> -->
       						</div>	
 
       <!-- Main hero unit for a primary marketing message or call to action -->

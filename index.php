@@ -25,7 +25,7 @@ switch ( $action ) {
     $params = array( 'next' => 'http://localhost' ); // redirect url is passed to facebook object
     $_SESSION['logoutUrl'] = $facebook->getLogoutUrl($params); //logout url is created and stored to the session data.
     question(); // calls the question function that pulls a user and question and places the data in the Session cache
-    header('Location: /view/questions.php'); //sends browser to questions page with Session Data containing questions input above
+    header('Location: /website/questions.php'); //sends browser to questions page with Session Data containing questions input above
     break;
   case 'dashboard'://occurs after a login or another question, this case handles generating a new question and friend
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //database connection is established uisng credentials in config.php
