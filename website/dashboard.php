@@ -370,7 +370,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					<!-- END RESPONSIVE QUICK SEARCH FORM -->
 				</li>
 				<li class="start active ">
-					<a href="index.html">
+					<a href="dashboard.php">
 					<i class="fa fa-home"></i>
 					<span class="title">
 						Dashboard
@@ -380,7 +380,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					</a>
 				</li>
 				<li class="">
-					<a href="../view/questions.php">
+					<a href="questions.php">
 					<i class="fa fa-question"></i>
 					<span class="title">
 						Questions
