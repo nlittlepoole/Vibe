@@ -26,7 +26,7 @@ switch ( $action ) {
     $params = array( 'next' => 'http://localhost' ); // redirect url is passed to facebook object
     $_SESSION['logoutUrl'] = $facebook->getLogoutUrl($params); //logout url is created and stored to the session data.
     question(); // calls the question function that pulls a user and question and places the data in the Session cache
-    header('Location: /view/questions.php'); //sends browser to questions page with Session Data containing questions input above
+    header('Location: /website/questions.php'); //sends browser to questions page with Session Data containing questions input above
     break;
   case 'location':
     if(isset( $_GET['location']) && $uid){

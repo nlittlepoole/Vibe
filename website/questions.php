@@ -1,18 +1,37 @@
 <!DOCTYPE html>
 
 <!-- START UP THE SESSION -->
+
 <?php 
-	error_reporting(0);
+    error_reporting(0);
     session_start();
     $path = $_SERVER['DOCUMENT_ROOT'];
     require($path . "/config.php");
     
-    $action = isset( $_GET['action'] ) ? $_GET['action'] : "Invite more Friends to Vibe for Comments"; //sets $action to "Action" url fragment string if action isn't null
-    $dashboard=$_SESSION['dashboard'];
-    $pic=$dashboard['pic'];
-    
+    $action = isset( $_GET['action'] ) ? $_GET['action'] : ""; //sets $action to "Action" url fragment string if action isn't null
+    $recipient;
+    $pic;
+    $question;
+    $question_id;
+    $vibe;
+    $next;
+    $logoutURL = $_SESSION['logoutUrl'];
+	
+	$dashboard=$_SESSION['dashboard'];
+    $profpic=$dashboard['pic'];
+	
+    switch ( $action ) {
+  		case 'test':
+	  	    $question="Is Noah Stebbins confident?";
+	    	$pic="/img/profpic-sample1.jpg";
+	    	$next="questions.php?action=test";
+	    break;
+	    default:
+		    $pic = $_SESSION['pic'];
+		    $question = $_SESSION['question'];
+		    $next="/index.php?action=question";
+    }
 ?>
-
 <!-- 
 Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.0.3
 Version: 1.5.5
@@ -296,7 +315,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 			<li class="dropdown user">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 				<!-- For now, I put in an image height and width limiter (Noah) -->
-				<img alt="" src=<?php echo $pic ?> style="height: 29px; width: 29px"/>
+				<img alt="" src=<?php echo $profpic ?> style="height: 29px; width: 29px"/>
 				<span class="username">
 					<?php echo $_SESSION['dashboard']['Name'] ?>
 				</span>
@@ -562,6 +581,12 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 							</div>
 						</div>
 						<div class="portlet-body form">
+							<div class="note note-info">
+								<h4 class="block"><?php echo $question ?></h4>
+							</div>
+							<div style="display: block; margin-left: auto; margin-right: auto">
+								<img src=<?php echo $pic ?> style="height: 300px; width: 300px; overflow:hidden; border-radius: 50%">
+							</div>
 							<form role="form" class="form-horizontal form-bordered">
 								<div class="form-body">
 									<div class="form-group">
