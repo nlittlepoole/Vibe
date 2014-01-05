@@ -324,12 +324,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					<li class="divider">
 					</li>
 					<li>
-						<a href="javascript:;" id="trigger_fullscreen"><i class="fa fa-move"></i> Full Screen</a>
-					</li>
-					<li>
-						<a href="extra_lock.html"><i class="fa fa-lock"></i> Lock Screen</a>
-					</li>
-					<li>
 						<a href="login.html"><i class="fa fa-key"></i> Log Out</a>
 					</li>
 				</ul>

@@ -369,8 +369,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					</form>
 					<!-- END RESPONSIVE QUICK SEARCH FORM -->
 				</li>
-				<li class="start active ">
-					<a href="index.html">
+				<li class="start">
+					<a href="dashboard.php">
 					<i class="fa fa-home"></i>
 					<span class="title">
 						Dashboard
@@ -380,14 +380,14 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					</a>
 				</li>
 				<li class="">
-					<a href="../templates/questions.php">
+					<a href="questions.php">
 					<i class="fa fa-question"></i>
 					<span class="title">
 						Questions
 					</span>
 					</a>
 				</li>
-				<li class="">
+				<li class="active">
 					<a href="javascript:;">
 					<i class="fa fa-heart"></i>
 					<span class="title">
@@ -546,7 +546,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
-						<img height="100px" src="/NEWTEMPLATE/assets/img/columbiaTEMP.jpg" />
+						<img height="100px" src="/website/assets/img/columbiaTEMP.jpg" />
 					Columbia University <small>communities</small>
 					<!-- FILL THIS WITH THE PROF PIC OF THE COMMUNITY'S FACEBOOK PAGE -->
 					</h3>
