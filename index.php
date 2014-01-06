@@ -81,7 +81,12 @@ switch ( $action ) {
     $data['Humility_Keywords']=isset($data['Humility_Keywords'])? keywords($data['Humility_Keywords'],$data['Humility_Total'],2) : "N/A";
     $data["pic"]="http://graph.facebook.com/" . $uid . "/picture?width=300&height=300";
     $_SESSION['dashboard']=$data;
-    $conn=null;
+    
+	
+	//Also set up the achievements too
+	$_SESSION['achievementsInfo'] = achievements();
+	
+	$conn=null;
 	/* Modified to send to the new dashboard (Noah) */
     header('Location: /website/dashboard.php'); //sends browser to questions page with Session Data containing questions input above
     flush();                             // Force php-output-cache to flush to browser.
@@ -122,6 +127,46 @@ switch ( $action ) {
     $_SESSION['loginUrl'] = $loginUrl; //the log in url is saved in the Session data so that the homepage can use it
     header('Location: /view/homepage.php'); //the browser is redirected to the homepage. 
 }
+
+function achievements() {
+	//return the proper two dimensional array of all the achievements	
+	$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
+	$achievements = array();
+	
+	for($i=1; $i<3; $i++) {
+		$sql = "SELECT * FROM achievements WHERE ID=$i"; 
+	    $st = $conn->prepare( $sql );
+	    $st->execute();
+	    $data=$st->fetch();
+		
+		//Update the session so that we can use the overall information in the future
+		$_SESSION['achievements'][$i - 1] = array(
+			"ID" => $data['ID'],
+			"name" => $data['name'],
+			"category" => $data['category'],
+			"description" => $data['description'],
+			"color" => $data['color'],
+		);
+		
+		$achievements[$i - 1] = '<div class="form-group">
+										<div class="col-md-4">
+											<h5>' . $data['name'] . '</h5>
+										</div>
+										<div class="col-md-4">
+											<h5>' . $data['category'] . '</h5>
+										</div>
+										<div class="col-md-4">
+											<h5>' . $data['description'] . '</h5>
+										</div>
+										
+									</div>';
+	}
+    
+    $conn=null;
+	
+	return $achievements;
+}
+
 //question function responsible for using Vibe database and facebook fql database to generate a question and a user to ask the question about
 function question(){
     //globals are necessary to maintain scope in PHP
