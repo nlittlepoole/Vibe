@@ -395,7 +395,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					</ul>
 				</li>
 				<li id="frontend-link" class="tooltips" data-placement="right" data-original-title="Frontend&nbsp;Theme For&nbsp;Metronic&nbsp;Admin">
-					<a href="http://keenthemes.com/preview/index.php?theme=metronic_frontend" target="_blank">
+					<a href="achievements.php">
 					<i class="fa fa-trophy"></i>
 					<span class="title">
 						Achievements

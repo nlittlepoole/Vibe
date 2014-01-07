@@ -133,7 +133,7 @@ function achievements() {
 	$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
 	$achievements = array();
 	
-	for($i=1; $i<3; $i++) {
+	for($i=1; $i<13; $i++) {
 		$sql = "SELECT * FROM achievements WHERE ID=$i"; 
 	    $st = $conn->prepare( $sql );
 	    $st->execute();
