@@ -190,7 +190,7 @@
 				</a>
 				<ul class="dropdown-menu">
 					<li>
-						<a href="extra_profile.html"><i class="fa fa-user"></i> Profile</a>
+						<a href="profile.php"><i class="fa fa-user"></i> Profile</a>
 					</li>
 					<li>
 						<a href="#"><i class="fa fa-tasks"></i> Achievements

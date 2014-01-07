@@ -228,7 +228,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 						</div>
 						<div class="details">
 							<div class="number">
-								
+								<!-- for now we just put 0, we'll track this later -->
+								0
 							</div>
 							<div class="desc">
 								Questions
@@ -291,7 +292,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Qualities
 									</th>
 									<th>
-										Percentile
+										Global Percentile
 									</th>
 
 								</tr>
