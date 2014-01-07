@@ -164,102 +164,12 @@
 						</p>
 					</li>
 					<li>
-						<ul class="dropdown-menu-list scroller" style="height: 250px;">
-							<li>
-								<a href="#">
-								<span class="task">
-									<span class="desc">
-										Mother Teresa
-									</span>
-									<span class="percent">
-										60%
-									</span>
-								</span>
-								<span class="progress">
-									<span style="width: 40%;" class="progress-bar progress-bar-success" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
-										<span class="sr-only">
-											60% Complete
-										</span>
-									</span>
-								</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-								<span class="task">
-									<span class="desc">
-										Diva
-									</span>
-									<span class="percent">
-										35%
-									</span>
-								</span>
-								<span class="progress progress-striped">
-									<span style="width: 65%;" class="progress-bar progress-bar-danger" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">
-										<span class="sr-only">
-											35% Complete
-										</span>
-									</span>
-								</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-								<span class="task">
-									<span class="desc">
-										Ideator
-									</span>
-									<span class="percent">
-										98%
-									</span>
-								</span>
-								<span class="progress">
-									<span style="width: 98%;" class="progress-bar progress-bar-success" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100">
-										<span class="sr-only">
-											98% Complete
-										</span>
-									</span>
-								</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-								<span class="task">
-									<span class="desc">
-										Viber
-									</span>
-									<span class="percent">
-										70%
-									</span>
-								</span>
-								<span class="progress progress-striped">
-									<span style="width: 10%;" class="progress-bar progress-bar-warning" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
-										<span class="sr-only">
-											70% Complete
-										</span>
-									</span>
-								</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-								<span class="task">
-									<span class="desc">
-										Top Contributor
-									</span>
-									<span class="percent">
-										50%
-									</span>
-								</span>
-								<span class="progress progress-striped">
-									<span style="width: 58%;" class="progress-bar progress-bar-info" aria-valuenow="58" aria-valuemin="0" aria-valuemax="100">
-										<span class="sr-only">
-											50% Complete
-										</span>
-									</span>
-								</span>
-								</a>
-							</li>
+						<ul class="dropdown-menu-list scroller" style="height: 270px;">
+							<?php 
+								foreach($_SESSION['achievementsNavBar'] as $achievementNav) {
+									echo $achievementNav;
+								}
+							?>
 						</ul>
 					</li>
 					<li class="external">

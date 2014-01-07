@@ -52,6 +52,37 @@ switch ( $action ) {
     $data['Diva_progress'], $data['King of the Hill_progress'], $data['Ideator_progress'], 
 	$data['Visionairy_progress'], $data['Blogger_progress'], $data['Commander of Words_progress'], 
 	$data['Viber_progress']);
+	
+	//Also set up the achievements too
+	$_SESSION['achievementsInfo'] = achievements();
+	
+	//Set up a modified achievements array to display in the nav bar
+	$achievementsNavBar = array();
+	$currSize = 0;
+	for($i = 0; $i < count($_SESSION['achievementsProgress']); $i++) {
+		if($_SESSION['achievementsProgress'][$i] < 10) {	
+			$achievementsNavBar[$currSize] = array($i + 1, $_SESSION['achievementsProgress'][$i]);	
+			$currSize++;
+		}
+	}
+
+	//organize achievementsNavBar from largest score to smallest
+	for($i = 0; $i < count($achievementsNavBar); $i++) {
+		$localMax = $achievementsNavBar[$i][1]; 
+		$localPos = $i;
+		for($j = $i; $j < count($achievementsNavBar); $j++) {
+			if($achievementsNavBar[$j][1] > $localMax) {
+				$localMax = $achievementsNavBar[$j][1];
+				$localPos = $j;
+			}
+		}
+		//swap the largest element with the element at i
+		$temp = $achievementsNavBar[$i];
+		$achievementsNavBar[$i] = $achievementsNavBar[$localPos];
+		$achievementsNavBar[$localPos] = $temp;
+	}
+	
+	achievementsNotificationCreator($achievementsNavBar); 
     
     $data['Comments_Size']=$data['Comments']!=''?sizeof($data['Comments']):0;
     $data['Comments']=comments($data['Comments']);
@@ -89,10 +120,6 @@ switch ( $action ) {
     $data['Humility_Keywords']=isset($data['Humility_Keywords'])? keywords($data['Humility_Keywords'],$data['Humility_Total'],2) : "N/A";
     $data["pic"]="http://graph.facebook.com/" . $uid . "/picture?width=300&height=300";
     $_SESSION['dashboard']=$data;
-    
-	
-	//Also set up the achievements too
-	$_SESSION['achievementsInfo'] = achievements();
 	
 	$conn=null;
 	/* Modified to send to the new dashboard (Noah) */
@@ -190,6 +217,41 @@ function achievements() {
     $conn=null;
 	
 	return $achievements;
+}
+
+function achievementsNotificationCreator($achievementsNavBar) {
+	$_SESSION['achievementsNavBar'] = array(); 
+	for($i = 0; $i < 5; $i++) {
+		$name = $_SESSION['achievements'][$achievementsNavBar[$i][0] - 1]["name"]; 
+		$score = $achievementsNavBar[$i][1] * 10; 
+		$sliderColor;
+		if($score <= 30) {
+			$sliderColor = "danger";
+		}
+		elseif($score > 30 && ($score <= 70)) {
+			$sliderColor = "warning";
+		}
+		else {
+			$sliderColor = "success";
+		}
+		$_SESSION['achievementsNavBar'][$i] = '
+		<li>
+			<a href="#">
+			<span class="task">
+				<span class="desc">
+					'. $name . '
+				</span>
+				<span class="percent">
+					' . $score . '%
+				</span>
+			</span>
+			<span class="progress">
+				<span style="width: ' . $score . '%;" class="progress-bar progress-bar-' . $sliderColor . '" aria-valuenow="' . $score . '" aria-valuemin="0" aria-valuemax="100">
+				</span>
+			</span>
+			</a>
+		</li>';
+	}
 }
 
 //question function responsible for using Vibe database and facebook fql database to generate a question and a user to ask the question about
