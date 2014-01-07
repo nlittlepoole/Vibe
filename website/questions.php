@@ -612,8 +612,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								</div>
 								<div class="form-actions fluid">
 									<div class="col-md-offset-3 col-md-9">
-										<button type="submit" class="btn green">Submit</button>
-										<button type="button" class="btn default">Cancel</button>
+										<button type="submit" onclick="location.href=/index.php?action=question" class="btn green">Submit</button>
+										<button type="button" onclick="location.href=<?php echo $logoutURL ?>" class="btn default">Skip</button>
 									</div>
 								</div>
 							</form>
