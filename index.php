@@ -45,6 +45,14 @@ switch ( $action ) {
             </li>';
     }
     $data['Communities']=$new_communities;
+    
+    //Pulling out achievements and storing them in SESSION
+    $_SESSION['achievementsProgress'] = array($data['Helping Hand_progress'], $data['Pal_progress'], 
+    $data['Advocate_progress'], $data['Comrade_progress'], $data['Mother Teresa_progress'], 
+    $data['Diva_progress'], $data['King of the Hill_progress'], $data['Ideator_progress'], 
+	$data['Visionairy_progress'], $data['Blogger_progress'], $data['Commander of Words_progress'], 
+	$data['Viber_progress']);
+    
     $data['Comments_Size']=$data['Comments']!=''?sizeof($data['Comments']):0;
     $data['Comments']=comments($data['Comments']);
     print_r($data['Comments']);
@@ -149,14 +157,17 @@ function achievements() {
 		);
 		
 		$achievements[$i - 1] = '<div class="form-group">
-										<div class="col-md-4">
+										<div class="col-md-3">
 											<h5>' . $data['name'] . '</h5>
 										</div>
-										<div class="col-md-4">
-											<h5>' . $data['category'] . '</h5>
+										<div class="col-md-3">
+											<h5><em>' . $data['category'] . '</em></h5>
 										</div>
-										<div class="col-md-4">
+										<div class="col-md-3">
 											<h5>' . $data['description'] . '</h5>
+										</div>
+										<div class="col-md-3">
+											<h5>' . $_SESSION['achievementsProgress'][$i - 1] . '</h5>
 										</div>
 										
 									</div>';

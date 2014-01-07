@@ -239,14 +239,17 @@
 								<div class="form-body">
 									
 									<div class="form-group">
-										<div class="col-md-4">
+										<div class="col-md-3">
 											<h4>Name</h4>
 										</div>
-										<div class="col-md-4">
+										<div class="col-md-3">
 											<h4>Category</h4>
 										</div>
-										<div class="col-md-4">
+										<div class="col-md-3">
 											<h4>Description</h4>
+										</div>
+										<div class="col-md-3">
+											<h4>Your Progress</h4>
 										</div>
 										
 									</div>
