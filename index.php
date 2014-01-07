@@ -155,6 +155,17 @@ function achievements() {
 			"description" => $data['description'],
 			"color" => $data['color'],
 		);
+		$sliderColor;
+		$tempPercent = $_SESSION['achievementsProgress'][$i - 1] * 10;
+		if($tempPercent <= 30) {
+			$sliderColor = "danger";
+		}
+		elseif($tempPercent > 30 && ($tempPercent <= 70)) {
+			$sliderColor = "warning";
+		}
+		else {
+			$sliderColor = "success";
+		}
 		
 		$achievements[$i - 1] = '<div class="form-group">
 										<div class="col-md-3">
@@ -167,7 +178,10 @@ function achievements() {
 											<h5>' . $data['description'] . '</h5>
 										</div>
 										<div class="col-md-3">
-											<h5>' . $_SESSION['achievementsProgress'][$i - 1] . '</h5>
+											<div class="progress progress-striped">
+												<div class="progress-bar progress-bar-' . $sliderColor . '" role="progressbar" aria-valuenow="' . $tempPercent . '" aria-valuemin="0" aria-valuemax="100" style="width: '. $tempPercent . '%">
+												</div>
+											</div>
 										</div>
 										
 									</div>';

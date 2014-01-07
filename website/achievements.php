@@ -112,7 +112,7 @@
 					</span>
 					</a>
 				</li>
-				<li class="active">
+				<li class="">
 					<a href="javascript:;">
 					<i class="fa fa-heart"></i>
 					<span class="title">
@@ -136,8 +136,8 @@
 						</li>
 					</ul>
 				</li>
-				<li id="frontend-link" class="tooltips" data-placement="right" data-original-title="Frontend&nbsp;Theme For&nbsp;Metronic&nbsp;Admin">
-					<a href="http://keenthemes.com/preview/index.php?theme=metronic_frontend" target="_blank">
+				<li id="frontend-link" class="tooltips active" data-placement="right" data-original-title="Frontend&nbsp;Theme For&nbsp;Metronic&nbsp;Admin">
+					<a href="achievements.php">
 					<i class="fa fa-trophy"></i>
 					<span class="title">
 						Achievements
@@ -265,12 +265,6 @@
 									
 									
 								</div>
-								<div class="form-actions fluid">
-									<div class="col-md-offset-3 col-md-9">
-										<button type="submit" class="btn green">Submit</button>
-										<button type="button" class="btn default">Cancel</button>
-									</div>
-								</div>
 							</form>
 						</div>
 					</div>
@@ -278,81 +272,6 @@
 				</div>
 			</div>
 			
-			<div class="clearfix">
-			</div>
-			
-			<div class="row">
-				<div class="col-md-12">
-					<!-- BEGIN SAMPLE TABLE PORTLET-->
-					<div class="portlet box green">
-						<div class="portlet-title">
-							<div class="caption">
-								<i class="fa fa-comments"></i>Community Summary
-							</div>
-							<div class="tools">
-								<a href="javascript:;" class="collapse"></a>
-								<a href="#portlet-config" data-toggle="modal" class="config"></a>
-								<a href="javascript:;" class="reload"></a>
-								<a href="javascript:;" class="remove"></a>
-							</div>
-						</div>
-						<div class="portlet-body">
-							<div class="table-responsive">
-								<table class="table table-striped table-hover">
-								<thead>
-								<tr>
-									<th>
-										#
-									</th>
-									<th>
-										Attribute
-									</th>
-									<th>
-										Overall Score
-									</th>
-									<th>
-										Characteristics
-									</th>
-								</tr>
-								</thead>
-								<tbody>
-								<tr>
-									<td>
-										1
-									</td>
-									<td>
-										Attractiveness
-									</td>
-									<td>
-										<!-- CHANGE ALL OF THESE SO THEY GRAB FROM THE COMMUNITY ASSOCIATIVE ARRAY -->
-										<?php echo $_SESSION['dashboard']['Attractiveness'] ? $_SESSION['dashboard']['Attractiveness']: "--" ?>
-									</td>
-									<td>
-										<?php echo isset($_SESSION['dashboard']['Attractiveness_Keywords']) ? $_SESSION['dashboard']['Attractiveness_Keywords']: "N/A" ?>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										2
-									</td>
-									<td>
-										Affability
-									</td>
-									<td>
-										<?php echo $_SESSION['dashboard']['Affability'] ? $_SESSION['dashboard']['Affability']: "--" ?>
-									</td>
-									<td>
-										<?php echo isset($_SESSION['dashboard']['Affability_Keywords']) ? $_SESSION['dashboard']['Affability_Keywords']: "N/A" ?>
-									</td>
-								</tr>
-								</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-					<!-- END SAMPLE TABLE PORTLET-->
-				</div>
-			</div>
 			<div class="clearfix">
 			</div>
 		</div>
