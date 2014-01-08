@@ -193,19 +193,16 @@
 						<a href="profile.php"><i class="fa fa-user"></i> Profile</a>
 					</li>
 					<li>
-						<a href="#"><i class="fa fa-tasks"></i> Achievements
+						<a href="achievements.php"><i class="fa fa-tasks"></i> Achievements
 						<span class="badge badge-success">
 							5
 						</span>
 						</a>
 					</li>
+					<li>
+						<a href="settings.php"><i class="fa fa-gear"></i> Settings</a>
+					</li>
 					<li class="divider">
-					</li>
-					<li>
-						<a href="javascript:;" id="trigger_fullscreen"><i class="fa fa-move"></i> Full Screen</a>
-					</li>
-					<li>
-						<a href="extra_lock.html"><i class="fa fa-lock"></i> Lock Screen</a>
 					</li>
 					<li>
 						<a href="login.html"><i class="fa fa-key"></i> Log Out</a>
