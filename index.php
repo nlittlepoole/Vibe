@@ -55,6 +55,7 @@ switch ( $action ) {
 	
 	//Also set up the achievements too
 	$_SESSION['achievementsInfo'] = achievements();
+	colorWithVibe();
 	
 	//Set up a modified achievements array to display in the nav bar
 	$achievementsNavBar = array();
@@ -252,6 +253,25 @@ function achievementsNotificationCreator($achievementsNavBar) {
 			</a>
 		</li>';
 	}
+}
+
+function colorWithVibe() {
+	$_SESSION['coloredVibes'] = array(
+		'Attractiveness'=>"crimson",
+		'Affability'=>"brown",
+		'Intelligence'=>"darkblue",
+		'Style'=>"darkcyan",
+		'Promiscuity'=>"darkgreen",
+		'Humor'=>"darkorange",
+		'Confidence'=>"darkviolet",
+		'Fun'=>"darkslateblue",
+		'Kindness'=>"deeppink",
+		'Honesty'=>"indigo",
+		'Reliability'=>"mediumorchid",
+		'Happiness'=>"palevioletred",
+		'Ambition'=>"seagreen",
+		'Humility'=>"black"
+	);
 }
 
 //question function responsible for using Vibe database and facebook fql database to generate a question and a user to ask the question about
@@ -585,8 +605,8 @@ function comments($comments){
                       <div class="cont">
                         <div class="cont-col1">
                           <div class="desc"><span style="color: #0d638f;" class="tooltips" data-container="body" data-original-title="' . $commentPair[0] . '">
-                             '. $commentPair[1].'
-                              <span class="label label-sm label-danger">'.$temp[0].'</span>
+                             '. $commentPair[1].'&nbsp;&nbsp;
+                              <span class="label label-sm" style="background-color: ' . $_SESSION['coloredVibes'][$temp[0]] . ';">'.$temp[0].'&nbsp;</span>
                           </span></div>
                         </div>
                       </div>
