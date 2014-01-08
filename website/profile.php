@@ -167,9 +167,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 			<div class="row">
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
-					<h3 class="page-title">
-					Dashboard <small>vibe</small>
-					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li>
 							<i class="fa fa-home"></i>
@@ -203,20 +200,11 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 												<img src=<?php echo $pic ?> class="img-responsive" alt=""/>
 											</li>
 											<li>
-												<a href="#">Projects</a>
-											</li>
-											<li>
-												<a href="#">Messages
+												<a href="#">Friends
 												<span>
-													3
+													1827
 												</span>
 												</a>
-											</li>
-											<li>
-												<a href="#">Friends</a>
-											</li>
-											<li>
-												<a href="#">Settings</a>
 											</li>
 										</ul>
 									</div>
@@ -246,23 +234,20 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 														<div class="caption">
 															Summary
 														</div>
-														<div class="tools">
-															<a class="reload" href="javascript:;"></a>
-														</div>
 													</div>
 													<div class="portlet-body">
 														<ul class="list-unstyled">
 															<li>
 																<span class="sale-info">
-																	TOTAL ANSWERS <i class="fa fa-img-up"></i>
+																	PEOPLE ANSWERED <i class="fa fa-img-up"></i>
 																</span>
 																<span class="sale-num">
-																	23
+																	2043
 																</span>
 															</li>
 															<li>
 																<span class="sale-info">
-																	 OTHER STUFF<i class="fa fa-img-down"></i>
+																	 TOTAL ACHIEVEMENTS<i class="fa fa-img-down"></i>
 																</span>
 																<span class="sale-num">
 																	87
@@ -270,18 +255,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 															</li>
 															<li>
 																<span class="sale-info">
-																	TOTAL SOLD
+																	POINTS
 																</span>
 																<span class="sale-num">
-																	2377
-																</span>
-															</li>
-															<li>
-																<span class="sale-info">
-																	EARNS
-																</span>
-																<span class="sale-num">
-																	$37.990
+																	238746
 																</span>
 															</li>
 														</ul>
@@ -307,142 +284,170 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 														<thead>
 														<tr>
 															<th>
-																<i class="fa fa-briefcase"></i> Company
+																<i class="fa fa-briefcase"></i> Vibe
 															</th>
 															<th class="hidden-xs">
-																<i class="fa fa-question"></i> Descrition
+																<i class="fa fa-question"></i> Strength
 															</th>
 															<th>
-																<i class="fa fa-bookmark"></i> Amount
-															</th>
-															<th>
+																<i class="fa fa-bookmark"></i> Qualities
 															</th>
 														</tr>
 														</thead>
 														<tbody>
 														<tr>
-															<td>
-																<a href="#">Pixel Ltd</a>
-															</td>
-															<td class="hidden-xs">
-																Server hardware purchase
+															<td style="color: #0d638f;">
+																Attractiveness
 															</td>
 															<td>
-																52560.10$
-																<span class="label label-success label-sm">
-																	Paid
-																</span>
+																<?php echo $_SESSION['dashboard']['Attractiveness'] ? $_SESSION['dashboard']['Attractiveness']: "--" ?>
 															</td>
-															<td>
-																<a class="btn default btn-xs green-stripe" href="#">View</a>
-															</td>
+															<td><em>
+																<?php echo isset($_SESSION['dashboard']['Attractiveness_Keywords']) ? $_SESSION['dashboard']['Attractiveness_Keywords']: "N/A" ?>
+															</em></td>
 														</tr>
 														<tr>
-															<td>
-																<a href="#">
-																Smart House </a>
-															</td>
-															<td class="hidden-xs">
-																Office furniture purchase
+															<td style="color: #0d638f;">
+																Affability
 															</td>
 															<td>
-																5760.00$
-																<span class="label label-warning label-sm">
-																	Pending
-																</span>
+																<?php echo $_SESSION['dashboard']['Affability'] ? $_SESSION['dashboard']['Affability']: "--" ?>
 															</td>
-															<td>
-																<a class="btn default btn-xs blue-stripe" href="#">View</a>
-															</td>
+															<td><em>
+																<?php echo isset($_SESSION['dashboard']['Affability_Keywords']) ? $_SESSION['dashboard']['Affability_Keywords']: "N/A" ?>
+															</em></td>
 														</tr>
 														<tr>
-															<td>
-																<a href="#">
-																FoodMaster Ltd </a>
-															</td>
-															<td class="hidden-xs">
-																Company Anual Dinner Catering
+															<td style="color: #0d638f;">
+																Intelligence
 															</td>
 															<td>
-																12400.00$
-																<span class="label label-success label-sm">
-																	Paid
-																</span>
+																<?php echo $_SESSION['dashboard']['Intelligence'] ? $_SESSION['dashboard']['Intelligence']: "--" ?>
 															</td>
-															<td>
-																<a class="btn default btn-xs blue-stripe" href="#">View</a>
-															</td>
+															<td><em>
+																<?php echo isset($_SESSION['dashboard']['Intelligence_Keywords']) ? $_SESSION['dashboard']['Intelligence_Keywords']: "N/A" ?>
+															</em></td>
 														</tr>
 														<tr>
-															<td>
-																<a href="#">
-																WaterPure Ltd </a>
-															</td>
-															<td class="hidden-xs">
-																Payment for Jan 2013
+															<td style="color: #0d638f;">
+																Style
 															</td>
 															<td>
-																610.50$
-																<span class="label label-danger label-sm">
-																	Overdue
-																</span>
+																<?php echo $_SESSION['dashboard']['Style'] ? $_SESSION['dashboard']['Style']: "--" ?>
 															</td>
-															<td>
-																<a class="btn default btn-xs red-stripe" href="#">View</a>
-															</td>
+															<td><em>
+																<?php echo isset($_SESSION['dashboard']['Style_Keywords']) ? $_SESSION['dashboard']['Style_Keywords']: "N/A" ?>
+															</em></td>
 														</tr>
 														<tr>
-															<td>
-																<a href="#">Pixel Ltd</a>
-															</td>
-															<td class="hidden-xs">
-																Server hardware purchase
+															<td style="color: #0d638f;">
+																Promiscuity
 															</td>
 															<td>
-																52560.10$
-																<span class="label label-success label-sm">
-																	Paid
-																</span>
+																<?php echo $_SESSION['dashboard']['Promiscuity'] ? $_SESSION['dashboard']['Promiscuity']: "--" ?>
 															</td>
-															<td>
-																<a class="btn default btn-xs green-stripe" href="#">View</a>
-															</td>
+															<td><em>
+																<?php echo isset($_SESSION['dashboard']['Promiscuity_Keywords']) ? $_SESSION['dashboard']['Promiscuity_Keywords']: "N/A" ?>
+															</em></td>
 														</tr>
 														<tr>
-															<td>
-																<a href="#">
-																Smart House </a>
-															</td>
-															<td class="hidden-xs">
-																Office furniture purchase
+															<td style="color: #0d638f;">
+																Humor
 															</td>
 															<td>
-																5760.00$
-																<span class="label label-warning label-sm">
-																	Pending
-																</span>
+																<?php echo $_SESSION['dashboard']['Humor'] ? $_SESSION['dashboard']['Humor']: "--" ?>
 															</td>
-															<td>
-																<a class="btn default btn-xs blue-stripe" href="#">View</a>
-															</td>
+															<td><em>
+																<?php echo isset($_SESSION['dashboard']['Humor_Keywords']) ? $_SESSION['dashboard']['Humor_Keywords']: "N/A" ?>
+															</em></td>
 														</tr>
 														<tr>
-															<td>
-																<a href="#">
-																FoodMaster Ltd </a>
-															</td>
-															<td class="hidden-xs">
-																Company Anual Dinner Catering
+															<td style="color: #0d638f;">
+																Confidence
 															</td>
 															<td>
-																12400.00$
-																<span class="label label-success label-sm">
-																	Paid
-																</span>
+																<?php echo $_SESSION['dashboard']['Confidence'] ? $_SESSION['dashboard']['Confidence']: "--" ?>
+															</td>
+															<td><em>
+																<?php echo isset($_SESSION['dashboard']['Confidence_Keywords']) ? $_SESSION['dashboard']['Confidence_Keywords']: "N/A" ?>
+															</em></td>
+														</tr>
+														<tr>
+															<td style="color: #0d638f;">
+																Fun
 															</td>
 															<td>
-																<a class="btn default btn-xs blue-stripe" href="#">View</a>
+																<?php echo $_SESSION['dashboard']['Fun'] ? $_SESSION['dashboard']['Fun']: "--" ?>
 															</td>
+															<td><em>
+																<?php echo isset($_SESSION['dashboard']['Fun_Keywords']) ? $_SESSION['dashboard']['Fun_Keywords']: "N/A" ?>
+															</em></td>
+														</tr>
+														<tr>
+															<td style="color: #0d638f;">
+																Kindness
+															</td>
+															<td>
+																<?php echo $_SESSION['dashboard']['Kindness'] ? $_SESSION['dashboard']['Kindness']: "--" ?>
+															</td>
+															<td><em>
+																<?php echo isset($_SESSION['dashboard']['Kindness_Keywords']) ? $_SESSION['dashboard']['Kindness_Keywords']: "N/A" ?>
+															</em></td>
+														</tr>
+														<tr>
+															<td style="color: #0d638f;">
+																Honesty
+															</td>
+															<td>
+																<?php echo $_SESSION['dashboard']['Honesty'] ? $_SESSION['dashboard']['Honesty']: "--" ?>
+															</td>
+															<td><em>
+																<?php echo isset($_SESSION['dashboard']['Honesty_Keywords']) ? $_SESSION['dashboard']['Honesty_Keywords']: "N/A" ?>
+															</em></td>
+														</tr>
+														<tr>
+															<td style="color: #0d638f;">
+																Reliability
+															</td>
+															<td>
+																<?php echo $_SESSION['dashboard']['Reliability'] ? $_SESSION['dashboard']['Reliability']: "--" ?>
+															</td>
+															<td><em>
+																<?php echo isset($_SESSION['dashboard']['Reliability_Keywords']) ? $_SESSION['dashboard']['Reliability_Keywords']: "N/A" ?>
+															</em></td>
+														</tr>
+														<tr>
+															<td style="color: #0d638f;">
+																Happiness
+															</td>
+															<td>
+																<?php echo $_SESSION['dashboard']['Happiness'] ? $_SESSION['dashboard']['Happiness']: "--" ?>
+															</td>
+															<td><em>
+																<?php echo isset($_SESSION['dashboard']['Happiness_Keywords']) ? $_SESSION['dashboard']['Happiness_Keywords']: "N/A" ?>
+															</em></td>
+														</tr>
+														<tr>
+															<td style="color: #0d638f;">
+																Ambition
+															</td>
+															<td>
+																<?php echo $_SESSION['dashboard']['Ambition'] ? $_SESSION['dashboard']['Ambition']: "--" ?>
+															</td>
+															<td><em>
+																<?php echo isset($_SESSION['dashboard']['Ambition_Keywords']) ? $_SESSION['dashboard']['Ambition_Keywords']: "N/A" ?>
+															</em></td>
+														</tr>
+														<tr>
+															<td style="color: #0d638f;">
+																Humility
+															</td>
+															<td>
+																<?php echo $_SESSION['dashboard']['Humility'] ? $_SESSION['dashboard']['Humility']: "--" ?>
+															</td>
+															<td><em>
+																<?php echo isset($_SESSION['dashboard']['Humility_Keywords']) ? $_SESSION['dashboard']['Humility_Keywords']: "N/A" ?>
+															</em></td>
 														</tr>
 														</tbody>
 														</table>

@@ -86,7 +86,7 @@ switch ( $action ) {
     
     $data['Comments_Size']=$data['Comments']!=''?sizeof($data['Comments']):0;
     $data['Comments']=comments($data['Comments']);
-    print_r($data['Comments']);
+    //print_r($data['Comments']);
     $scores=Array(
       "Affability"=>$data['Affability'],
       "Ambition"=>$data['Ambition'],
@@ -575,14 +575,19 @@ function comments($comments){
           $time=$interval->format('%i mins');
         }       
       }
-      $comments[$x]='                 <li>
+	  
+	  //splice the comment further to get a stylized comment
+	  $commentPair = split(':',$temp[2]); 
+	  
+      $comments[$x]='                 
+      			  <li>
                     <div class="col1">
                       <div class="cont">
                         <div class="cont-col1">
-                          <div class="desc">
-                             '. $temp[2].'
+                          <div class="desc"><span style="color: #0d638f;" class="tooltips" data-container="body" data-original-title="' . $commentPair[0] . '">
+                             '. $commentPair[1].'
                               <span class="label label-sm label-danger">'.$temp[0].'</span>
-                          </div>
+                          </span></div>
                         </div>
                       </div>
                     </div>
