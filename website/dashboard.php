@@ -100,7 +100,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					<!-- END RESPONSIVE QUICK SEARCH FORM -->
 				</li>
 				<li class="start active ">
-					<a href="dashboard.php">
+					<a href="/index.php?action=dashboard">
 					<i class="fa fa-home"></i>
 					<span class="title">
 						Dashboard
@@ -110,7 +110,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					</a>
 				</li>
 				<li class="">
-					<a href="questions.php">
+					<a href="/index.php?action=question">
 					<i class="fa fa-question"></i>
 					<span class="title">
 						Questions
@@ -147,7 +147,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					</a>
 				</li>
 				<li id="frontend-link" class="tooltips" data-placement="right" data-original-title="Vibe&nbsp;Community Blog">
-					<a href="javascript:;">
+					<a href="blog.go-vibe.com">
 					<i class="fa fa-book"></i>
 					<span class="title">
 						Blog
