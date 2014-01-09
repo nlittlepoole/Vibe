@@ -124,9 +124,7 @@ switch ( $action ) {
             </li>';
     }
     $data['Communities']=$new_communities;
-<<<<<<< HEAD
     $data['Comments_Size']=$data['Comments']!=''?sizeof(split('&&',$data['Comments'])):0;
-=======
     
     //Pulling out achievements and storing them in SESSION
     $_SESSION['achievementsProgress'] = array($data['Helping Hand_progress'], $data['Pal_progress'], 
@@ -168,7 +166,6 @@ switch ( $action ) {
 	achievementsNotificationCreator($achievementsNavBar); 
     
     $data['Comments_Size']=$data['Comments']!=''?sizeof($data['Comments']):0;
->>>>>>> Front-End
     $data['Comments']=comments($data['Comments']);
     //print_r($data['Comments']);
     $scores=Array(
