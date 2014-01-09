@@ -8,11 +8,26 @@
     session_start();
     $path = $_SERVER['DOCUMENT_ROOT'];
     require($path . "/config.php");
+	require($path . "/php-sdk/facebook.php"); //imports facebook api methods and objects
     
     $action = isset( $_GET['action'] ) ? $_GET['action'] : "Invite more Friends to Vibe for Comments"; //sets $action to "Action" url fragment string if action isn't null
     $dashboard=$_SESSION['dashboard'];
     $pic=$dashboard['pic'];
-    
+  
+  
+   function buildCheckBoxes(){
+   	   //CURRENTLY WORKING ON THIS -- DO NOT TOUCH!
+       $conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+	   $sql = "SELECT attractivenessDisableDate,affabilityDisableDate,intelligenceDisableDate,styleDisableDate,promiscuityDisableDate,humorDisableDate,confidenceDisableDate,funDisableDate,kindnessDisableDate,honestyDisableDate,reliabilityDisableDate,happinessDisableDate,ambitionDisableDate,humilityDisableDate FROM user WHERE UID=$uid";
+	   $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
+	   $st->execute();//executes query above
+	   $data=$st->fetch(); 
+	   
+	   $attractiveOn; $affableOn; $intelligenceOn; 
+	   if($data['attractivenessDisableDate'] != "") {
+	   	
+	   }
+   }  
 ?>
 
 

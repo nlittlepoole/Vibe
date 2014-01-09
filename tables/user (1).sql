@@ -1,23 +1,17 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.4.1
+-- version 3.5.1
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Dec 31, 2013 at 05:58 PM
--- Server version: 5.5.32
--- PHP Version: 5.4.19
+-- Host: localhost
+-- Generation Time: Jan 09, 2014 at 05:36 PM
+-- Server version: 5.5.25
+-- PHP Version: 5.4.4
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
 --
--- Database: `vibosphere`
+-- Database: `Vibosphere`
 --
 
 -- --------------------------------------------------------
@@ -26,7 +20,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `user`
 --
 
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE `user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `UID` varchar(255) NOT NULL,
   `Active` tinyint(1) NOT NULL DEFAULT '0',
@@ -79,6 +73,44 @@ CREATE TABLE IF NOT EXISTS `user` (
   `Humility_Total` int(10) unsigned NOT NULL DEFAULT '0',
   `Humility_Keywords` varchar(255) DEFAULT NULL,
   `Comments` varchar(2000) NOT NULL,
+  `Helping Hand` tinyint(4) NOT NULL,
+  `Helping Hand_progress` tinyint(4) NOT NULL,
+  `Pal` tinyint(4) NOT NULL,
+  `Pal_progress` tinyint(4) NOT NULL,
+  `Advocate` tinyint(4) NOT NULL,
+  `Advocate_progress` tinyint(4) NOT NULL,
+  `Comrade` tinyint(4) NOT NULL,
+  `Comrade_progress` tinyint(4) NOT NULL,
+  `Mother Teresa` tinyint(4) NOT NULL,
+  `Mother Teresa_progress` tinyint(4) NOT NULL,
+  `Diva` tinyint(4) NOT NULL,
+  `Diva_progress` tinyint(4) NOT NULL,
+  `King of the Hill` tinyint(4) NOT NULL,
+  `King of the Hill_progress` tinyint(4) NOT NULL,
+  `Ideator` tinyint(4) NOT NULL,
+  `Ideator_progress` tinyint(4) NOT NULL,
+  `Visionairy` tinyint(4) NOT NULL,
+  `Visionairy_progress` tinyint(4) NOT NULL,
+  `Blogger` tinyint(4) NOT NULL,
+  `Blogger_progress` tinyint(4) NOT NULL,
+  `Commander of Words` tinyint(4) NOT NULL,
+  `Commander of Words_progress` tinyint(4) NOT NULL,
+  `Viber` tinyint(4) NOT NULL,
+  `Viber_progress` tinyint(4) NOT NULL,
+  `attractivenessDisableDate` varchar(30) NOT NULL,
+  `affabilityDisableDate` varchar(30) NOT NULL,
+  `intelligenceDisableDate` varchar(30) NOT NULL,
+  `styleDisableDate` varchar(30) NOT NULL,
+  `promiscuityDisableDate` varchar(30) NOT NULL,
+  `humorDisableDate` varchar(30) NOT NULL,
+  `confidenceDisableDate` varchar(30) NOT NULL,
+  `funDisableDate` varchar(30) NOT NULL,
+  `kindnessDisableDate` varchar(30) NOT NULL,
+  `honestyDisableDate` varchar(30) NOT NULL,
+  `reliabilityDisableDate` varchar(30) NOT NULL,
+  `happinessDisableDate` varchar(30) NOT NULL,
+  `ambitionDisableDate` varchar(30) NOT NULL,
+  `humilityDisableDate` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=90 ;
 
@@ -86,10 +118,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `UID`, `Active`, `Points`, `Communities`, `Gender`, `Age`, `Race`, `Attractiveness`, `Attractiveness_Total`, `Attractiveness_Keywords`, `Affability`, `Affability_Total`, `Affability_Keywords`, `Intelligence`, `Intelligence_Total`, `Intelligence_Keywords`, `Intelligence_Comments`, `Style`, `Style_Total`, `Style_Keywords`, `Promiscuity`, `Promiscuity_Total`, `Promiscuity_Keywords`, `Humor`, `Humor_Total`, `Humor_Keywords`, `Confidence`, `Confidence_Total`, `Confidence_Keywords`, `Fun`, `Fun_Total`, `Fun_Keywords`, `Kindness`, `Kindness_Total`, `Kindness_Keywords`, `Honesty`, `Honesty_Total`, `Honesty_Keywords`, `Reliability`, `Reliability_Total`, `Reliability_Keywords`, `Happiness`, `Happiness_Total`, `Happiness_Keywords`, `Ambition`, `Ambition_Total`, `Ambition_Keywords`, `Humility`, `Humility_Total`, `Humility_Keywords`, `Comments`) VALUES
-(1, '712337857', 1, 313, 'Barack Obama Academy&&Columbia University&&Fluent Medical&&New York, New York', 'male', NULL, NULL, 5, 8, '2(Great Smile)', 7, 7, '1(Intense)', 9.2, 8, '1(Academic)', '', 5, 4, '3(Nerdy)', 2, 5, '1(Forever Alone)', 7, 3, '2(Witty)', 7, 6, '4(Self Assured)', 6, 3, NULL, 8, 4, NULL, 6.76, 6, '3(Secretive)&&4(Trustwrothy)', 9, 2, '1(Supportive)', 7, 5, '2(Enviable)', 9, 2, NULL, 5, 3, NULL, ''),
-(89, '100003582610055', 0, 0, NULL, NULL, NULL, NULL, 5.8, 10, NULL, 8, 6, '3(Hyped)', 8.5, 5, '3(Emotionally Intelligent)', '', 3, 4, '3(Nerdy)', 5.75, 10, '3(Down)', 6.67, 4, '1(Goofy)', 8.5, 4, NULL, 3, 2, '1(Crass)', 8, 2, '1(Helpful)', 7, 2, '1(Trustworthy)', 0, 0, NULL, 9.33, 3, '2(Good Career)', 10, 2, '1(Industrious)', 3.5, 4, '2(Narcissistic)', 'Happiness##2013-12-30 20:06:06##Is Noah Stebbins in the right school or career?: "Maybe he should switch to art history"&&Style##2013-12-30 20:05:47##Is Noah Stebbins stylish?: "Too many tech t shirts doe"&&Promiscuity##2013-12-30 20:05:19##Does Noah Stebbins have high romantic standards?: "Depends on how much he has had to drink"&&Promiscuity##2013-12-30 20:04:34##Would Noah Stebbins wait until marriage to have sex? : "LOL"&&Attractiveness##2013-12-30 20:02:41##Is Noah Stebbins attractive?: "Bro do you even lift?"&&Promiscuity##2013-12-30 19:50:50##Would Noah Stebbins wait until marriage to have sex? : "Noah is all about insertion"');
+INSERT INTO `user` (`id`, `UID`, `Active`, `Points`, `Communities`, `Gender`, `Age`, `Race`, `Attractiveness`, `Attractiveness_Total`, `Attractiveness_Keywords`, `Affability`, `Affability_Total`, `Affability_Keywords`, `Intelligence`, `Intelligence_Total`, `Intelligence_Keywords`, `Intelligence_Comments`, `Style`, `Style_Total`, `Style_Keywords`, `Promiscuity`, `Promiscuity_Total`, `Promiscuity_Keywords`, `Humor`, `Humor_Total`, `Humor_Keywords`, `Confidence`, `Confidence_Total`, `Confidence_Keywords`, `Fun`, `Fun_Total`, `Fun_Keywords`, `Kindness`, `Kindness_Total`, `Kindness_Keywords`, `Honesty`, `Honesty_Total`, `Honesty_Keywords`, `Reliability`, `Reliability_Total`, `Reliability_Keywords`, `Happiness`, `Happiness_Total`, `Happiness_Keywords`, `Ambition`, `Ambition_Total`, `Ambition_Keywords`, `Humility`, `Humility_Total`, `Humility_Keywords`, `Comments`, `Helping Hand`, `Helping Hand_progress`, `Pal`, `Pal_progress`, `Advocate`, `Advocate_progress`, `Comrade`, `Comrade_progress`, `Mother Teresa`, `Mother Teresa_progress`, `Diva`, `Diva_progress`, `King of the Hill`, `King of the Hill_progress`, `Ideator`, `Ideator_progress`, `Visionairy`, `Visionairy_progress`, `Blogger`, `Blogger_progress`, `Commander of Words`, `Commander of Words_progress`, `Viber`, `Viber_progress`, `attractivenessDisableDate`, `affabilityDisableDate`, `intelligenceDisableDate`, `styleDisableDate`, `promiscuityDisableDate`, `humorDisableDate`, `confidenceDisableDate`, `funDisableDate`, `kindnessDisableDate`, `honestyDisableDate`, `reliabilityDisableDate`, `happinessDisableDate`, `ambitionDisableDate`, `humilityDisableDate`) VALUES
+(1, '712337857', 1, 313, 'Barack Obama Academy&&Columbia University&&Fluent Medical&&New York, New York', 'male', NULL, NULL, 5, 8, '2(Great Smile)', 7, 7, '1(Intense)', 9.2, 8, '1(Academic)', '', 5, 4, '3(Nerdy)', 2, 5, '1(Forever Alone)', 7, 3, '2(Witty)', 7, 6, '4(Self Assured)', 6, 3, NULL, 8, 4, NULL, 6.76, 6, '3(Secretive)&&4(Trustwrothy)', 9, 2, '1(Supportive)', 7, 5, '2(Enviable)', 9, 2, NULL, 5, 3, NULL, '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', ''),
+(89, '100003582610055', 0, 0, NULL, NULL, NULL, NULL, 5.8, 10, NULL, 8, 6, '3(Hyped)', 8.5, 5, '3(Emotionally Intelligent)', '', 3, 4, '3(Nerdy)', 5.75, 10, '3(Down)', 6.67, 4, '1(Goofy)', 8.5, 4, NULL, 3, 2, '1(Crass)', 8, 2, '1(Helpful)', 7, 2, '1(Trustworthy)', 0, 0, NULL, 9.33, 3, '2(Good Career)', 10, 2, '1(Industrious)', 3.5, 4, '2(Narcissistic)', 'Happiness##2013-12-30 20:06:06##Is Noah Stebbins in the right school or career?: "Maybe he should switch to art history"&&Style##2013-12-30 20:05:47##Is Noah Stebbins stylish?: "Too many tech t shirts doe"&&Promiscuity##2013-12-30 20:05:19##Does Noah Stebbins have high romantic standards?: "Depends on how much he has had to drink"&&Promiscuity##2013-12-30 20:04:34##Would Noah Stebbins wait until marriage to have sex? : "LOL"&&Attractiveness##2013-12-30 20:02:41##Is Noah Stebbins attractive?: "Bro do you even lift?"&&Promiscuity##2013-12-30 19:50:50##Would Noah Stebbins wait until marriage to have sex? : "Noah is all about insertion"', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 7, 0, 4, 0, 0, 0, 3, 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', '', '', '', '', '');
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
