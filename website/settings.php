@@ -228,21 +228,28 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-md-3 control-label">Disable Vibe Scores</label>
+										<label class="col-md-3 control-label"><span class="tooltips" data-container="body" data-original-title="You can disable up to seven of your Vibe scores for a week each.">Disable Vibe Scores <i class="fa fa-question-circle"></i></span></label>
 										<div class="col-md-9">
 											<div class="checkbox-list">
+												<div class="col-md-3">
+												
 												<label class="checkbox">
 												<input type="checkbox" id="inlineCheckbox21" value="option1"> Attractiveness </label>
 												<label class="checkbox">
 												<input type="checkbox" id="inlineCheckbox22" value="option2"> Affability </label>
+												
 												<label class="checkbox">
-												<input type="checkbox" id="inlineCheckbox21" value="option3"> Intelligence </label>
+												<input type="checkbox" id="inlineCheckbox23" value="option3"> Intelligence </label>
 												<label class="checkbox">
-												<input type="checkbox" id="inlineCheckbox22" value="option4"> Style </label>
+												<input type="checkbox" id="inlineCheckbox24" value="option4"> Style </label>
 												<label class="checkbox">
-												<input type="checkbox" id="inlineCheckbox21" value="option5"> Promiscuity </label>
+												<input type="checkbox" id="inlineCheckbox25" value="option5"> Promiscuity </label>
+												
+												</div><div class="col-md-3">
 												<label class="checkbox">
-												<input type="checkbox" id="inlineCheckbox22" value="option6"> Humor </label>
+												<input type="checkbox" id="inlineCheckbox26" value="option6"> Humor </label>
+												
+												
 												<label class="checkbox">
 												<input type="checkbox" id="inlineCheckbox21" value="option7"> Confidence </label>
 												<label class="checkbox">
@@ -251,6 +258,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 												<input type="checkbox" id="inlineCheckbox21" value="option9"> Kindness </label>
 												<label class="checkbox">
 												<input type="checkbox" id="inlineCheckbox22" value="option10"> Honesty </label>
+												
+												</div><div class="col-md-3">
 												<label class="checkbox">
 												<input type="checkbox" id="inlineCheckbox21" value="option11"> Reliability </label>
 												<label class="checkbox">
@@ -259,6 +268,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 												<input type="checkbox" id="inlineCheckbox21" value="option13"> Ambition </label>
 												<label class="checkbox">
 												<input type="checkbox" id="inlineCheckbox22" value="option14"> Humility </label>
+												
+												</div>
 											</div>
 										</div>
 									</div>

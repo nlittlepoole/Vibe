@@ -216,7 +216,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								Comments
 							</div>
 						</div>
-						<a class="more" href="#">
+						<a class="more" href="#commentsSection">
 						View Comments <i class="m-icon-swapright m-icon-white"></i>
 						</a>
 					</div>
@@ -754,7 +754,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 						</div>
 					</div>
 				</div>
-				<div class="col-md-8 col-sm-8">
+				<div class="col-md-8 col-sm-8" id="commentsSection">
 					<div class="portlet box green">
 						<div class="portlet-title">
 							<div class="caption">
