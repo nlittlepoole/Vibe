@@ -16,6 +16,8 @@ $uid = $facebook->getUser(); // Facebook user ID number is returned, if facebook
 //Switch case determines what to do next based on the input arguments from the action URL fragment("?=action" in the URL)
 switch ( $action ) {
   case 'login': //login occurs after user hits login button on homepage.php, mostly just sets up environment to play vibe 
+    $params = array( 'next' => 'http://localhost' ); // redirect url is passed to facebook object
+    $_SESSION['logoutUrl'] = $facebook->getLogoutUrl($params); //logout url is created and stored to the session data.
     addUser($uid); //adds user ID to mysql USER table, method does nothing if ID already exists and activates the ID if information exists but this is the first time the user has logged in
     topFriends(); // pulls users top friends using the top friends function
     $graph_url="https://graph.facebook.com/" . $uid . "/friends?access_token=" . $token; //graph url is made to access the user's friendlist
@@ -23,8 +25,6 @@ switch ( $action ) {
     header('Location: /index.php?action=dashboard'); // index is reloaded but with question prameter. Now that environment is set up index.php is reloaded with the intent of answring questiosn
     break;
   case 'question'://occurs after a login or another question, this case handles generating a new question and friend
-    $params = array( 'next' => 'http://localhost' ); // redirect url is passed to facebook object
-    $_SESSION['logoutUrl'] = $facebook->getLogoutUrl($params); //logout url is created and stored to the session data.
     question(); // calls the question function that pulls a user and question and places the data in the Session cache
     header('Location: /website/questions.php'); //sends browser to questions page with Session Data containing questions input above
     break;
@@ -79,7 +79,7 @@ switch ( $action ) {
         $data['Picture']=$raw[0][1];
         $data['Name']=$raw[0][0];
         $_SESSION['location']=$data;
-         header('Location: /NEWTEMPLATE/communities_template.php?location='.$location); //sends browser to questions page with Session Data containing questions input above
+         header('Location: /website/communities.php?location='.$location); //sends browser to questions page with Session Data containing questions input above
         flush();                             // Force php-output-cache to flush to browser.
       }
       else{
@@ -115,8 +115,8 @@ switch ( $action ) {
     $data['Name']=$user_profile['name'];
     $communities=split('&&',$data['Communities']);
     foreach($communities as $community){
-        $temp=stristr($community, "|", true);
-        $temp2=substr(stristr($community, "||"),2);
+         $temp=stristr($community, "|", true);
+         $temp2=substr(stristr($community, "||"),2);
         $new_communities=$new_communities.
                     '<li>
               <a href="/index.php?action=location&location='.$temp2.'">
@@ -440,7 +440,7 @@ function getPictures($recipient){
 function addUser( $input_id ) {
     $input_id=$input_id."";
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //initialies connection to the database using the credentials found in config.php
-    $sql = "SELECT * FROM user WHERE UID= $input_id"; //gets the active status of the user with $input_id as a user ID
+    $sql = "SELECT id FROM user WHERE UID= $input_id"; //gets the active status of the user with $input_id as a user ID
     $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
     $st->execute(); //executes the sql query found above
     $raw=$st->fetch(); //sets raw to be the raw data returned from the sql command, raw is always an array, even if only one element is being queried

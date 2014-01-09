@@ -47,7 +47,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <!-- BEGIN HEAD -->
 <head>
 <meta charset="utf-8"/>
-<title>Questions | Vibe</title>
+<title>Question | Vibe</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="" name="description"/>
@@ -88,7 +88,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 </div>
 <!-- BEGIN CONTAINER -->
 <div class="page-container">
-	<!-- BEGIN SIDEBAR -->
+		<!-- BEGIN SIDEBAR -->
 	<div class="page-sidebar-wrapper">
 		<div class="page-sidebar navbar-collapse collapse">
 			<!-- BEGIN SIDEBAR MENU -->
@@ -112,8 +112,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					</form>
 					<!-- END RESPONSIVE QUICK SEARCH FORM -->
 				</li>
-				<li class="start ">
-					<a href="dashboard.php">
+				<li class="start active ">
+					<a href="/index.php?action=dashboard">
 					<i class="fa fa-home"></i>
 					<span class="title">
 						Dashboard
@@ -122,8 +122,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					</span>
 					</a>
 				</li>
-				<li class="active">
-					<a href="questions.php">
+				<li class="">
+					<a href="/index.php?action=question">
 					<i class="fa fa-question"></i>
 					<span class="title">
 						Questions
@@ -143,8 +143,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 						<?php echo $_SESSION['dashboard']['Communities'] ?>
 					</ul>
 				</li>
-				<li id="frontend-link" class="tooltips" data-placement="right" data-original-title="Frontend&nbsp;Theme For&nbsp;Metronic&nbsp;Admin">
-					<a href="http://keenthemes.com/preview/index.php?theme=metronic_frontend" target="_blank">
+				<li id="frontend-link" class="tooltips" data-placement="right" data-original-title="See your Achievements">
+					<a href="achievements.php">
 					<i class="fa fa-trophy"></i>
 					<span class="title">
 						Achievements
@@ -160,7 +160,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					</a>
 				</li>
 				<li id="frontend-link" class="tooltips" data-placement="right" data-original-title="Vibe&nbsp;Community Blog">
-					<a href="javascript:;">
+					<a href="http://blog.go-vibe.com">
 					<i class="fa fa-book"></i>
 					<span class="title">
 						Blog
@@ -207,7 +207,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					<ul class="page-breadcrumb breadcrumb">
 						<li>
 							<i class="fa fa-home"></i>
-							<a href="index.html">Home</a>
+							<a href="/index.php?action=dashboard">Home</a>
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
@@ -225,13 +225,9 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					<div class="portlet box blue">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="fa fa-reorder"></i>Questions
+								<i class="fa fa-reorder"></i>Question:
 							</div>
 							<div class="tools">
-								<a href="javascript:;" class="collapse"></a>
-								<a href="#portlet-config" data-toggle="modal" class="config"></a>
-								<a href="javascript:;" class="reload"></a>
-								<a href="javascript:;" class="remove"></a>
 							</div>
 						</div>
 						<div class="portlet-body form">
@@ -266,8 +262,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								</div>
 								<div class="form-actions fluid">
 									<div class="col-md-offset-3 col-md-9">
-										<button type="submit" onclick="location.href=/index.php?action=question" class="btn green">Submit</button>
-										<button type="button" onclick="location.href=<?php echo $logoutURL ?>" class="btn default">Skip</button>
+										<button type="submit" onclick="location.href='/index.php?action=submit'" class="btn green">Submit</button>
+										<button type="button" onclick="location.href='/index.php?action=question'" class="btn default">Skip</button>
 									</div>
 								</div>
 							</form>

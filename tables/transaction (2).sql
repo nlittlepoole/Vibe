@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 31, 2013 at 05:57 PM
+-- Generation Time: Jan 09, 2014 at 06:55 PM
 -- Server version: 5.5.32
 -- PHP Version: 5.4.19
 
@@ -30,11 +30,13 @@ CREATE TABLE IF NOT EXISTS `transaction` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `asked` varchar(255) DEFAULT NULL,
   `recipient` varchar(255) DEFAULT NULL,
+  `Name` varchar(255) NOT NULL,
   `attribute` varchar(255) DEFAULT NULL,
   `answer` int(10) unsigned DEFAULT NULL,
   `comment` varchar(255) DEFAULT NULL,
   `keywords` varchar(255) NOT NULL,
   `Affiliations` varchar(1000) NOT NULL,
+  `Gender` varchar(10) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
