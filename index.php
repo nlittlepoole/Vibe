@@ -124,9 +124,53 @@ switch ( $action ) {
             </li>';
     }
     $data['Communities']=$new_communities;
+<<<<<<< HEAD
     $data['Comments_Size']=$data['Comments']!=''?sizeof(split('&&',$data['Comments'])):0;
+=======
+    
+    //Pulling out achievements and storing them in SESSION
+    $_SESSION['achievementsProgress'] = array($data['Helping Hand_progress'], $data['Pal_progress'], 
+    $data['Advocate_progress'], $data['Comrade_progress'], $data['Mother Teresa_progress'], 
+    $data['Diva_progress'], $data['King of the Hill_progress'], $data['Ideator_progress'], 
+	$data['Visionairy_progress'], $data['Blogger_progress'], $data['Commander of Words_progress'], 
+	$data['Viber_progress']);
+	
+	//Also set up the achievements too
+	$_SESSION['achievementsInfo'] = achievements();
+	colorWithVibe();
+	
+	//Set up a modified achievements array to display in the nav bar
+	$achievementsNavBar = array();
+	$currSize = 0;
+	for($i = 0; $i < count($_SESSION['achievementsProgress']); $i++) {
+		if($_SESSION['achievementsProgress'][$i] < 10) {	
+			$achievementsNavBar[$currSize] = array($i + 1, $_SESSION['achievementsProgress'][$i]);	
+			$currSize++;
+		}
+	}
+
+	//organize achievementsNavBar from largest score to smallest
+	for($i = 0; $i < count($achievementsNavBar); $i++) {
+		$localMax = $achievementsNavBar[$i][1]; 
+		$localPos = $i;
+		for($j = $i; $j < count($achievementsNavBar); $j++) {
+			if($achievementsNavBar[$j][1] > $localMax) {
+				$localMax = $achievementsNavBar[$j][1];
+				$localPos = $j;
+			}
+		}
+		//swap the largest element with the element at i
+		$temp = $achievementsNavBar[$i];
+		$achievementsNavBar[$i] = $achievementsNavBar[$localPos];
+		$achievementsNavBar[$localPos] = $temp;
+	}
+	
+	achievementsNotificationCreator($achievementsNavBar); 
+    
+    $data['Comments_Size']=$data['Comments']!=''?sizeof($data['Comments']):0;
+>>>>>>> Front-End
     $data['Comments']=comments($data['Comments']);
-    print_r($data['Comments']);
+    //print_r($data['Comments']);
     $scores=Array(
       "Affability"=>$data['Affability'],
       "Ambition"=>$data['Ambition'],
@@ -160,7 +204,8 @@ switch ( $action ) {
     $data['Humility_Keywords']=isset($data['Humility_Keywords'])? keywords($data['Humility_Keywords'],$data['Humility_Total'],2) : "N/A";
     $data["pic"]="http://graph.facebook.com/" . $uid . "/picture?width=300&height=300";
     $_SESSION['dashboard']=$data;
-    $conn=null;
+	
+	$conn=null;
 	/* Modified to send to the new dashboard (Noah) */
     header('Location: /website/dashboard.php'); //sends browser to questions page with Session Data containing questions input above
     flush();                             // Force php-output-cache to flush to browser.
@@ -191,6 +236,12 @@ switch ( $action ) {
     $vibe->recordToTable();
     header('Location: /index.php?action=question');
     break;
+	
+  case 'submit2':
+	//The settings page has been populated with information  
+	  
+	break;	
+	
   default: //this is the default setting, it simply take sthe user to the homepage. It also creates the facebook login url 
     global $facebook; //global is necessary to maintain scope. PHP has slightly different scope rules than other high level languages and this line is necessary to keep accessing the facebook api
     //when a user logs in through facebook, the are simply going to a special link created by the facebook api. The api uses our AP ID and password to generate the link
@@ -202,6 +253,117 @@ switch ( $action ) {
     $_SESSION['loginUrl'] = $loginUrl; //the log in url is saved in the Session data so that the homepage can use it
     header('Location: /view/homepage.php'); //the browser is redirected to the homepage. 
 }
+
+function achievements() {
+	//return the proper two dimensional array of all the achievements	
+	$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
+	$achievements = array();
+	
+	for($i=1; $i<13; $i++) {
+		$sql = "SELECT * FROM achievements WHERE ID=$i"; 
+	    $st = $conn->prepare( $sql );
+	    $st->execute();
+	    $data=$st->fetch();
+		
+		//Update the session so that we can use the overall information in the future
+		$_SESSION['achievements'][$i - 1] = array(
+			"ID" => $data['ID'],
+			"name" => $data['name'],
+			"category" => $data['category'],
+			"description" => $data['description'],
+			"color" => $data['color'],
+		);
+		$sliderColor;
+		$tempPercent = $_SESSION['achievementsProgress'][$i - 1] * 10;
+		if($tempPercent <= 30) {
+			$sliderColor = "danger";
+		}
+		elseif($tempPercent > 30 && ($tempPercent <= 70)) {
+			$sliderColor = "warning";
+		}
+		else {
+			$sliderColor = "success";
+		}
+		
+		$achievements[$i - 1] = '<div class="form-group">
+										<div class="col-md-3">
+											<h5>' . $data['name'] . '</h5>
+										</div>
+										<div class="col-md-3">
+											<h5><em>' . $data['category'] . '</em></h5>
+										</div>
+										<div class="col-md-3">
+											<h5>' . $data['description'] . '</h5>
+										</div>
+										<div class="col-md-3">
+											<div class="progress progress-striped">
+												<div class="progress-bar progress-bar-' . $sliderColor . '" role="progressbar" aria-valuenow="' . $tempPercent . '" aria-valuemin="0" aria-valuemax="100" style="width: '. $tempPercent . '%">
+												</div>
+											</div>
+										</div>
+										
+									</div>';
+	}
+    
+    $conn=null;
+	
+	return $achievements;
+}
+
+function achievementsNotificationCreator($achievementsNavBar) {
+	$_SESSION['achievementsNavBar'] = array(); 
+	for($i = 0; $i < 5; $i++) {
+		$name = $_SESSION['achievements'][$achievementsNavBar[$i][0] - 1]["name"]; 
+		$score = $achievementsNavBar[$i][1] * 10; 
+		$sliderColor;
+		if($score <= 30) {
+			$sliderColor = "danger";
+		}
+		elseif($score > 30 && ($score <= 70)) {
+			$sliderColor = "warning";
+		}
+		else {
+			$sliderColor = "success";
+		}
+		$_SESSION['achievementsNavBar'][$i] = '
+		<li>
+			<a href="#">
+			<span class="task">
+				<span class="desc">
+					'. $name . '
+				</span>
+				<span class="percent">
+					' . $score . '%
+				</span>
+			</span>
+			<span class="progress">
+				<span style="width: ' . $score . '%;" class="progress-bar progress-bar-' . $sliderColor . '" aria-valuenow="' . $score . '" aria-valuemin="0" aria-valuemax="100">
+				</span>
+			</span>
+			</a>
+		</li>';
+	}
+}
+
+function colorWithVibe() {
+	$_SESSION['coloredVibes'] = array(
+		'Attractiveness'=>"crimson",
+		'Affability'=>"brown",
+		'Intelligence'=>"darkblue",
+		'Style'=>"darkcyan",
+		'Promiscuity'=>"darkgreen",
+		'Humor'=>"darkorange",
+		'Confidence'=>"darkviolet",
+		'Fun'=>"darkslateblue",
+		'Kindness'=>"deeppink",
+		'Honesty'=>"indigo",
+		'Reliability'=>"mediumorchid",
+		'Happiness'=>"palevioletred",
+		'Ambition'=>"seagreen",
+		'Humility'=>"black"
+	);
+}
+
 //question function responsible for using Vibe database and facebook fql database to generate a question and a user to ask the question about
 function question(){
     //globals are necessary to maintain scope in PHP
@@ -529,14 +691,19 @@ function comments($comments){
           $time=$interval->format('%i mins');
         }       
       }
-      $comments[$x]='                 <li>
+	  
+	  //splice the comment further to get a stylized comment
+	  $commentPair = split(':',$temp[2]); 
+	  
+      $comments[$x]='                 
+      			  <li>
                     <div class="col1">
                       <div class="cont">
                         <div class="cont-col1">
-                          <div class="desc">
-                             '. $temp[2].'
-                              <span class="label label-sm label-danger">'.$temp[0].'</span>
-                          </div>
+                          <div class="desc"><span style="color: #0d638f;" class="tooltips" data-container="body" data-original-title="' . $commentPair[0] . '">
+                             '. $commentPair[1].'&nbsp;&nbsp;
+                              <span class="label label-sm" style="background-color: ' . $_SESSION['coloredVibes'][$temp[0]] . ';">'.$temp[0].'&nbsp;</span>
+                          </span></div>
                         </div>
                       </div>
                     </div>

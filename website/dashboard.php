@@ -63,286 +63,16 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="page-header-fixed">
-<!-- BEGIN HEADER -->
-<div class="header navbar navbar-inverse navbar-fixed-top">
-	<!-- BEGIN TOP NAVIGATION BAR -->
-	<div class="header-inner">
-		<!-- BEGIN LOGO -->
-		<a class="navbar-brand" href="index.html">
-		<img src="assets/img/logo.png" alt="logo" class="img-responsive"/>
-		</a>
-		<!-- END LOGO -->
-		<!-- BEGIN RESPONSIVE MENU TOGGLER -->
-		<a href="javascript:;" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-		<img src="assets/img/menu-toggler.png" alt=""/>
-		</a>
-		<!-- END RESPONSIVE MENU TOGGLER -->
-		<!-- BEGIN TOP NAVIGATION MENU -->
-		<ul class="nav navbar-nav pull-right">
-			<!-- BEGIN NOTIFICATION DROPDOWN -->
-			<li class="dropdown" id="header_notification_bar">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-				<i class="fa fa-warning"></i>
-				<span class="badge">
-					4
-				</span>
-				</a>
-				<ul class="dropdown-menu extended notification">
-					<li>
-						<p>
-							You have 14 new notifications
-						</p>
-					</li>
-					<li>
-						<ul class="dropdown-menu-list scroller" style="height: 250px;">
-							<li>
-								<a href="#">
-								<span class="label label-sm label-icon label-success">
-									<i class="fa fa-plus"></i>
-								</span>
-								 Two questions answered about you.
-								<span class="time">
-									Just now
-								</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-								<span class="label label-sm label-icon label-danger">
-									<i class="fa fa-bolt"></i>
-								</span>
-								 New achievement unlocked!
-								<span class="time">
-									15 mins
-								</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-								<span class="label label-sm label-icon label-warning">
-									<i class="fa fa-bell-o"></i>
-								</span>
-								 You made the leaderboards for Columbia!
-								<span class="time">
-									22 mins
-								</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-								<span class="label label-sm label-icon label-info">
-									<i class="fa fa-bullhorn"></i>
-								</span>
-								 One question answered about you.
-								<span class="time">
-									40 mins
-								</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-								<span class="label label-sm label-icon label-danger">
-									<i class="fa fa-bolt"></i>
-								</span>
-								 New achievement unlocked!
-								<span class="time">
-									2 hrs
-								</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-								<span class="label label-sm label-icon label-danger">
-									<i class="fa fa-bolt"></i>
-								</span>
-								 New comment in Honesty.
-								<span class="time">
-									5 hrs
-								</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-								<span class="label label-sm label-icon label-warning">
-									<i class="fa fa-bell-o"></i>
-								</span>
-								 Three questions answered about you!
-								<span class="time">
-									45 mins
-								</span>
-								</a>
-							</li>
-						</ul>
-					</li>
-					<li class="external">
-						<!-- Insert link to general achievements page -->
-						<a href="#">See all notifications <i class="m-icon-swapright"></i></a>
-					</li>
-				</ul>
-			</li>
-			<!-- END NOTIFICATION DROPDOWN -->
-			<!-- BEGIN TODO DROPDOWN -->
-			<li class="dropdown" id="header_task_bar">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-				<i class="fa fa-tasks"></i>
-				<span class="badge">
-					5
-				</span>
-				</a>
-				<ul class="dropdown-menu extended tasks">
-					<li>
-						<p>
-							Achievements
-						</p>
-					</li>
-					<li>
-						<ul class="dropdown-menu-list scroller" style="height: 250px;">
-							<li>
-								<a href="#">
-								<span class="task">
-									<span class="desc">
-										Mother Teresa
-									</span>
-									<span class="percent">
-										60%
-									</span>
-								</span>
-								<span class="progress">
-									<span style="width: 40%;" class="progress-bar progress-bar-success" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
-										<span class="sr-only">
-											60% Complete
-										</span>
-									</span>
-								</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-								<span class="task">
-									<span class="desc">
-										Diva
-									</span>
-									<span class="percent">
-										35%
-									</span>
-								</span>
-								<span class="progress progress-striped">
-									<span style="width: 65%;" class="progress-bar progress-bar-danger" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">
-										<span class="sr-only">
-											35% Complete
-										</span>
-									</span>
-								</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-								<span class="task">
-									<span class="desc">
-										Ideator
-									</span>
-									<span class="percent">
-										98%
-									</span>
-								</span>
-								<span class="progress">
-									<span style="width: 98%;" class="progress-bar progress-bar-success" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100">
-										<span class="sr-only">
-											98% Complete
-										</span>
-									</span>
-								</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-								<span class="task">
-									<span class="desc">
-										Viber
-									</span>
-									<span class="percent">
-										70%
-									</span>
-								</span>
-								<span class="progress progress-striped">
-									<span style="width: 10%;" class="progress-bar progress-bar-warning" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
-										<span class="sr-only">
-											70% Complete
-										</span>
-									</span>
-								</span>
-								</a>
-							</li>
-							<li>
-								<a href="#">
-								<span class="task">
-									<span class="desc">
-										Top Contributor
-									</span>
-									<span class="percent">
-										50%
-									</span>
-								</span>
-								<span class="progress progress-striped">
-									<span style="width: 58%;" class="progress-bar progress-bar-info" aria-valuenow="58" aria-valuemin="0" aria-valuemax="100">
-										<span class="sr-only">
-											50% Complete
-										</span>
-									</span>
-								</span>
-								</a>
-							</li>
-						</ul>
-					</li>
-					<li class="external">
-						<a href="#">See All Achievements <i class="m-icon-swapright"></i></a>
-					</li>
-				</ul>
-			</li>
-			<!-- END TODO DROPDOWN -->
-			<!-- BEGIN USER LOGIN DROPDOWN -->
-			<li class="dropdown user">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-				<!-- For now, I put in an image height and width limiter (Noah) -->
-				<img alt="" src=<?php echo $pic ?> style="height: 29px; width: 29px"/>
-				<span class="username">
-					<?php echo $_SESSION['dashboard']['Name'] ?>
-				</span>
-				<i class="fa fa-angle-down"></i>
-				</a>
-				<ul class="dropdown-menu">
-					<li>
-						<a href="extra_profile.html"><i class="fa fa-user"></i> Profile</a>
-					</li>
-					<li>
-						<a href="#"><i class="fa fa-tasks"></i> Achievements
-						<span class="badge badge-success">
-							5
-						</span>
-						</a>
-					</li>
-					<li class="divider">
-					</li>
-					<li>
-						<a href="javascript:;" id="trigger_fullscreen"><i class="fa fa-move"></i> Full Screen</a>
-					</li>
-					<li>
-						<a href="extra_lock.html"><i class="fa fa-lock"></i> Lock Screen</a>
-					</li>
-					<li>
-						<a href="login.html"><i class="fa fa-key"></i> Log Out</a>
-					</li>
-				</ul>
-			</li>
-			<!-- END USER LOGIN DROPDOWN -->
-		</ul>
-		<!-- END TOP NAVIGATION MENU -->
-	</div>
-	<!-- END TOP NAVIGATION BAR -->
-</div>
-<!-- END HEADER -->
-<div class="clearfix">
-</div>
+	
+	<script src="../jQuery/jquery.js"></script> 
+    <script> 
+    $(function(){
+      $("#includedContent").load("header.php"); 
+    });
+    </script> 
+    
+    <div id="includedContent"></div>
+
 <!-- BEGIN CONTAINER -->
 <div class="page-container">
 	<!-- BEGIN SIDEBAR -->
@@ -401,7 +131,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					</ul>
 				</li>
 				<li id="frontend-link" class="tooltips" data-placement="right" data-original-title="Frontend&nbsp;Theme For&nbsp;Metronic&nbsp;Admin">
-					<a href="http://keenthemes.com/preview/index.php?theme=metronic_frontend" target="_blank">
+					<a href="achievements.php">
 					<i class="fa fa-trophy"></i>
 					<span class="title">
 						Achievements
@@ -486,7 +216,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								Comments
 							</div>
 						</div>
-						<a class="more" href="#">
+						<a class="more" href="#commentsSection">
 						View Comments <i class="m-icon-swapright m-icon-white"></i>
 						</a>
 					</div>
@@ -498,7 +228,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 						</div>
 						<div class="details">
 							<div class="number">
-								
+								<!-- for now we just put 0, we'll track this later -->
+								0
 							</div>
 							<div class="desc">
 								Questions
@@ -561,7 +292,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Qualities
 									</th>
 									<th>
-										Percentile
+										Global Percentile
 									</th>
 
 								</tr>
@@ -827,7 +558,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 			</div>
 			
 			<div class="row ">
-				<div class="col-md-6 col-sm-6">
+				<div class="col-md-4 col-sm-4">
 					<div class="portlet box blue">
 						<div class="portlet-title">
 							<div class="caption">
@@ -1023,7 +754,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6 col-sm-6">
+				<div class="col-md-8 col-sm-8" id="commentsSection">
 					<div class="portlet box green">
 						<div class="portlet-title">
 							<div class="caption">
