@@ -16,6 +16,8 @@ $uid = $facebook->getUser(); // Facebook user ID number is returned, if facebook
 //Switch case determines what to do next based on the input arguments from the action URL fragment("?=action" in the URL)
 switch ( $action ) {
   case 'login': //login occurs after user hits login button on homepage.php, mostly just sets up environment to play vibe 
+    $params = array( 'next' => 'http://localhost' ); // redirect url is passed to facebook object
+    $_SESSION['logoutUrl'] = $facebook->getLogoutUrl($params); //logout url is created and stored to the session data.
     addUser($uid); //adds user ID to mysql USER table, method does nothing if ID already exists and activates the ID if information exists but this is the first time the user has logged in
     topFriends(); // pulls users top friends using the top friends function
     $graph_url="https://graph.facebook.com/" . $uid . "/friends?access_token=" . $token; //graph url is made to access the user's friendlist
@@ -113,8 +115,8 @@ switch ( $action ) {
     $data['Name']=$user_profile['name'];
     $communities=split('&&',$data['Communities']);
     foreach($communities as $community){
-        $temp=stristr($community, "|", true);
-        $temp2=substr(stristr($community, "||"),2);
+         $temp=stristr($community, "|", true);
+         $temp2=substr(stristr($community, "||"),2);
         $new_communities=$new_communities.
                     '<li>
               <a href="/index.php?action=location&location='.$temp2.'">
