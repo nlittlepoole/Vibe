@@ -23,8 +23,6 @@ switch ( $action ) {
     header('Location: /index.php?action=dashboard'); // index is reloaded but with question prameter. Now that environment is set up index.php is reloaded with the intent of answring questiosn
     break;
   case 'question'://occurs after a login or another question, this case handles generating a new question and friend
-    $params = array( 'next' => 'http://localhost' ); // redirect url is passed to facebook object
-    $_SESSION['logoutUrl'] = $facebook->getLogoutUrl($params); //logout url is created and stored to the session data.
     question(); // calls the question function that pulls a user and question and places the data in the Session cache
     header('Location: /website/questions.php'); //sends browser to questions page with Session Data containing questions input above
     break;
