@@ -23,8 +23,80 @@
 	   $st->execute();//executes query above
 	   $data=$st->fetch(); 
 	   
-	   $attractiveOn; $affableOn; $intelligenceOn; 
+	   $traitsOn = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0); 
+	   $attractivenessOn = 0; $affabilityOn = 0; $intelligenceOn = 0; $styleOn = 0; $promiscuityOn = 0; $humorOn = 0; $confidenceOn = 0; 
+	   $funOn = 0; $kindnessOn = 0; $honestyOn = 0; $reliabilityOn = 0; $happinessOn = 0; $ambitionOn = 0; $humilityOn = 0;
 	   if($data['attractivenessDisableDate'] != "") {
+	       $traitsOn[0] = 1; 
+	   }
+	   if($data['affabilityDisableDate'] != "") {
+	       $traitsOn[1] = 1; 
+	   }
+	   if($data['intelligenceDisableDate'] != "") {
+	       $traitsOn[2] = 1; 
+	   }
+	   if($data['styleDisableDate'] != "") {
+	       $traitsOn[3] = 1; 
+	   }
+	   if($data['promiscuityDisableDate'] != "") {
+	       $traitsOn[4] = 1; 
+	   }
+	   if($data['humorDisableDate'] != "") {
+	       $traitsOn[5] = 1; 
+	   }
+	   if($data['confidenceDisableDate'] != "") {
+	       $traitsOn[6] = 1; 
+	   }
+	   if($data['funDisableDate'] != "") {
+	       $traitsOn[7] = 1; 
+	   }
+	   if($data['kindnessDisableDate'] != "") {
+	       $traitsOn[8] = 1; 
+	   }
+	   if($data['honestyDisableDate'] != "") {
+	       $traitsOn[9] = 1; 
+	   }
+	   if($data['reliabilityDisableDate'] != "") {
+	       $traitsOn[10] = 1; 
+	   }
+	   if($data['happinessDisableDate'] != "") {
+	       $traitsOn[11] = 1; 
+	   }
+	   if($data['ambitionDisableDate'] != "") {
+	       $traitsOn[12] = 1; 
+	   }
+	   if($data['humilityDisableDate'] != "") {
+	       $traitsOn[13] = 1; 
+	   }
+	   
+	   $_SESSION['vibetraits'] = array("attractiveness", "affability", "intelligence", "style", 
+	   "promiscuity", "humor", "confidence", "fun", "kindness", "honesty", "reliability", 
+	   "happiness", "ambition", "humility");
+	   
+	   
+	   
+	   $_SESSION['traitsSettings'] = array(); 
+	   for($i = 0; $i < 14; $i++) {
+	       $purchase = "Purchase now for 30 points";
+		   $disabled = ""; 
+		   if($traitsOn[$i] == 1) {
+		   	   $purchase = " days remaining";
+			   $disabled = "disabled"; 
+		   }   	
+		
+	       $_SESSION['traitsSettings'][i] = '<tr>
+				<td>
+					' . $_SESSION['vibtraits'][$i] . '
+				</td>
+				<td>
+					Purchase now for 30 points
+				</td>
+				<td>
+					<label class="checkbox" ' . $disabled . '>
+					<input type="checkbox" id="inlineCheckbox21" value="option1" ' . $disabled . '> 
+					</label>
+				</td>
+			</tr>';
 	   	
 	   }
    }  
