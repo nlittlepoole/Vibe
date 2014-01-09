@@ -39,7 +39,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <meta name="MobileOptimized" content="320">
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-<link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="assets/plugins/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
 <link href="assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
 <!-- END GLOBAL MANDATORY STYLES -->
 <!-- BEGIN PAGE LEVEL PLUGIN STYLES -->
@@ -204,7 +204,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 							</div>
 						</div>
 						<div class="portlet-body form">
-							<form class="form-horizontal" role="form">
+							<form class="form-horizontal" role="form" method="post" action="index.php?action=submit2">
 								<div class="form-body">
 									<div class="form-group">
 										<label class="col-md-3 control-label">Blurb</label>
@@ -229,47 +229,200 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									</div>
 									<div class="form-group">
 										<label class="col-md-3 control-label"><span class="tooltips" data-container="body" data-original-title="You can disable up to seven of your Vibe scores for a week each.">Disable Vibe Scores <i class="fa fa-question-circle"></i></span></label>
-										<div class="col-md-9">
+										
 											<div class="checkbox-list">
-												<div class="col-md-3">
-												
-												<label class="checkbox">
-												<input type="checkbox" id="inlineCheckbox21" value="option1"> Attractiveness </label>
-												<label class="checkbox">
-												<input type="checkbox" id="inlineCheckbox22" value="option2"> Affability </label>
-												
-												<label class="checkbox">
-												<input type="checkbox" id="inlineCheckbox23" value="option3"> Intelligence </label>
-												<label class="checkbox">
-												<input type="checkbox" id="inlineCheckbox24" value="option4"> Style </label>
-												<label class="checkbox">
-												<input type="checkbox" id="inlineCheckbox25" value="option5"> Promiscuity </label>
-												
-												</div><div class="col-md-3">
-												<label class="checkbox">
-												<input type="checkbox" id="inlineCheckbox26" value="option6"> Humor </label>
-												
-												
-												<label class="checkbox">
-												<input type="checkbox" id="inlineCheckbox21" value="option7"> Confidence </label>
-												<label class="checkbox">
-												<input type="checkbox" id="inlineCheckbox22" value="option8"> Fun </label>
-												<label class="checkbox">
-												<input type="checkbox" id="inlineCheckbox21" value="option9"> Kindness </label>
-												<label class="checkbox">
-												<input type="checkbox" id="inlineCheckbox22" value="option10"> Honesty </label>
-												
-												</div><div class="col-md-3">
-												<label class="checkbox">
-												<input type="checkbox" id="inlineCheckbox21" value="option11"> Reliability </label>
-												<label class="checkbox">
-												<input type="checkbox" id="inlineCheckbox22" value="option12"> Happiness </label>
-												<label class="checkbox">
-												<input type="checkbox" id="inlineCheckbox21" value="option13"> Ambition </label>
-												<label class="checkbox">
-												<input type="checkbox" id="inlineCheckbox22" value="option14"> Humility </label>
-												
+												<div class="table-responsive">
+													<table class="table table-striped table-hover">
+													<tbody>
+													<tr>
+														<td>
+															Attractiveness
+														</td>
+														<td>
+															Purchase now for 30 points
+														</td>
+														<td>
+															<label class="checkbox">
+															<input type="checkbox" id="inlineCheckbox21" value="option1"> 
+															</label>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															Affability
+														</td>
+														<td>
+															<em>4 days remaining</em>
+														</td>
+														<td>
+															<label class="checkbox" disabled>
+															<input type="checkbox" id="inlineCheckbox22" value="option2" disabled> 
+															</label>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															Intelligence
+														</td>
+														<td>
+															Purchase now for 30 points
+														</td>
+														<td>
+															<label class="checkbox">
+															<input type="checkbox" id="inlineCheckbox21" value="option1"> 
+															</label>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															Style
+														</td>
+														<td>
+															Purchase now for 30 points
+														</td>
+														<td>
+															<label class="checkbox">
+															<input type="checkbox" id="inlineCheckbox21" value="option1"> 
+															</label>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															Promiscuity
+														</td>
+														<td>
+															Purchase now for 30 points
+														</td>
+														<td>
+															<label class="checkbox">
+															<input type="checkbox" id="inlineCheckbox21" value="option1"> 
+															</label>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															Humor
+														</td>
+														<td>
+															Purchase now for 30 points
+														</td>
+														<td>
+															<label class="checkbox">
+															<input type="checkbox" id="inlineCheckbox21" value="option1"> 
+															</label>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															Confidence
+														</td>
+														<td>
+															Purchase now for 30 points
+														</td>
+														<td>
+															<label class="checkbox">
+															<input type="checkbox" id="inlineCheckbox21" value="option1"> 
+															</label>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															Fun
+														</td>
+														<td>
+															Purchase now for 30 points
+														</td>
+														<td>
+															<label class="checkbox">
+															<input type="checkbox" id="inlineCheckbox21" value="option1"> 
+															</label>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															Kindness
+														</td>
+														<td>
+															Purchase now for 30 points
+														</td>
+														<td>
+															<label class="checkbox">
+															<input type="checkbox" id="inlineCheckbox21" value="option1"> 
+															</label>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															Honesty
+														</td>
+														<td>
+															Purchase now for 30 points
+														</td>
+														<td>
+															<label class="checkbox">
+															<input type="checkbox" id="inlineCheckbox21" value="option1"> 
+															</label>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															Reliability
+														</td>
+														<td>
+															Purchase now for 30 points
+														</td>
+														<td>
+															<label class="checkbox">
+															<input type="checkbox" id="inlineCheckbox21" value="option1"> 
+															</label>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															Happiness
+														</td>
+														<td>
+															Purchase now for 30 points
+														</td>
+														<td>
+															<label class="checkbox">
+															<input type="checkbox" id="inlineCheckbox21" value="option1"> 
+															</label>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															Ambition
+														</td>
+														<td>
+															Purchase now for 30 points
+														</td>
+														<td>
+															<label class="checkbox">
+															<input type="checkbox" id="inlineCheckbox21" value="option1"> 
+															</label>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															Humility
+														</td>
+														<td>
+															Purchase now for 30 points
+														</td>
+														<td>
+															<label class="checkbox">
+															<input type="checkbox" name="attributesCheckbox" id="inlineCheckbox21" value="option1"> 
+															</label>
+														</td>
+													</tr>
+													</tbody>
+													</table>
 												</div>
+												
+												
+												
+											
 											</div>
 										</div>
 									</div>

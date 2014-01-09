@@ -152,6 +152,12 @@ switch ( $action ) {
     $vibe->recordToTable();
     header('Location: /index.php?action=question');
     break;
+	
+  case 'submit2':
+	//The settings page has been populated with information  
+	  
+	break;	
+	
   default: //this is the default setting, it simply take sthe user to the homepage. It also creates the facebook login url 
     global $facebook; //global is necessary to maintain scope. PHP has slightly different scope rules than other high level languages and this line is necessary to keep accessing the facebook api
     //when a user logs in through facebook, the are simply going to a special link created by the facebook api. The api uses our AP ID and password to generate the link
