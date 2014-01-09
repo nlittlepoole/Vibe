@@ -147,7 +147,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					</a>
 				</li>
 				<li id="frontend-link" class="tooltips" data-placement="right" data-original-title="Vibe&nbsp;Community Blog">
-					<a href="blog.go-vibe.com">
+					<a href="http://blog.go-vibe.com">
 					<i class="fa fa-book"></i>
 					<span class="title">
 						Blog

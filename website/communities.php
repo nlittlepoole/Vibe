@@ -8,20 +8,14 @@
     session_start();
     $path = $_SERVER['DOCUMENT_ROOT'];
     require($path . "/config.php");
-<<<<<<< HEAD
     $location= isset( $_GET['location'] ) ? $_GET['location'] : "";
     $pic=$_SESSION['dashboard']['pic'];
     if(!isset($_SESSION['location'])){
     	header('Location:/index.php?action=location&location='.$location);
-    }
-=======
-    
+    }  
     $action = isset( $_GET['action'] ) ? $_GET['action'] : "Invite more Friends to Vibe for Comments"; //sets $action to "Action" url fragment string if action isn't null
     $dashboard=$_SESSION['dashboard'];
-    $pic=$dashboard['pic'];
-	
->>>>>>> Front-End
-    
+    $pic=$dashboard['pic'];  
 ?>
 
 
@@ -86,7 +80,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 </div>
 <!-- BEGIN CONTAINER -->
 <div class="page-container">
-	<!-- BEGIN SIDEBAR -->
+		<!-- BEGIN SIDEBAR -->
 	<div class="page-sidebar-wrapper">
 		<div class="page-sidebar navbar-collapse collapse">
 			<!-- BEGIN SIDEBAR MENU -->
@@ -110,13 +104,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					</form>
 					<!-- END RESPONSIVE QUICK SEARCH FORM -->
 				</li>
-<<<<<<< HEAD
 				<li class="start active ">
 					<a href="/index.php?action=dashboard">
-=======
-				<li class="start">
-					<a href="dashboard.php">
->>>>>>> Front-End
 					<i class="fa fa-home"></i>
 					<span class="title">
 						Dashboard
@@ -126,18 +115,14 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					</a>
 				</li>
 				<li class="">
-<<<<<<< HEAD
 					<a href="/index.php?action=question">
-=======
-					<a href="questions.php">
->>>>>>> Front-End
 					<i class="fa fa-question"></i>
 					<span class="title">
 						Questions
 					</span>
 					</a>
 				</li>
-				<li class="active">
+				<li class="">
 					<a href="javascript:;">
 					<i class="fa fa-heart"></i>
 					<span class="title">
@@ -151,7 +136,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					</ul>
 				</li>
 				<li id="frontend-link" class="tooltips" data-placement="right" data-original-title="Frontend&nbsp;Theme For&nbsp;Metronic&nbsp;Admin">
-					<a href="http://keenthemes.com/preview/index.php?theme=metronic_frontend" target="_blank">
+					<a href="achievements.php">
 					<i class="fa fa-trophy"></i>
 					<span class="title">
 						Achievements
@@ -167,7 +152,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					</a>
 				</li>
 				<li id="frontend-link" class="tooltips" data-placement="right" data-original-title="Vibe&nbsp;Community Blog">
-					<a href="javascript:;">
+					<a href="http://blog.go-vibe.com">
 					<i class="fa fa-book"></i>
 					<span class="title">
 						Blog
@@ -285,13 +270,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
-<<<<<<< HEAD
 						<img height="100px" src=<?php echo '"'.$_SESSION['location']['Picture'].'"' ?>  />
 					<?php echo $_SESSION['location']['Name'] ?> <small>communities</small>
-=======
-						<img height="100px" src="/website/assets/img/columbiaTEMP.jpg" />
-					Columbia University <small>communities</small>
->>>>>>> Front-End
 					<!-- FILL THIS WITH THE PROF PIC OF THE COMMUNITY'S FACEBOOK PAGE -->
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">

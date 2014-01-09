@@ -70,7 +70,7 @@
 </div>
 <!-- BEGIN CONTAINER -->
 <div class="page-container">
-	<!-- BEGIN SIDEBAR -->
+			<!-- BEGIN SIDEBAR -->
 	<div class="page-sidebar-wrapper">
 		<div class="page-sidebar navbar-collapse collapse">
 			<!-- BEGIN SIDEBAR MENU -->
@@ -94,8 +94,8 @@
 					</form>
 					<!-- END RESPONSIVE QUICK SEARCH FORM -->
 				</li>
-				<li class="start">
-					<a href="dashboard.php">
+				<li class="start active ">
+					<a href="/index.php?action=dashboard">
 					<i class="fa fa-home"></i>
 					<span class="title">
 						Dashboard
@@ -105,7 +105,7 @@
 					</a>
 				</li>
 				<li class="">
-					<a href="questions.php">
+					<a href="/index.php?action=question">
 					<i class="fa fa-question"></i>
 					<span class="title">
 						Questions
@@ -122,21 +122,10 @@
 					</span>
 					</a>
 					<ul class="sub-menu">
-						<li>
-							<a href="layout_session_timeout.html">
-							Columbia University</a>
-						</li>
-						<li>
-							<a href="layout_idle_timeout.html">
-							Boeing</a>
-						</li>
-						<li>
-							<a href="layout_language_bar.html">
-							Bloomingdale High School</a>
-						</li>
+						<?php echo $_SESSION['dashboard']['Communities'] ?>
 					</ul>
 				</li>
-				<li id="frontend-link" class="tooltips active" data-placement="right" data-original-title="Frontend&nbsp;Theme For&nbsp;Metronic&nbsp;Admin">
+				<li id="frontend-link" class="tooltips" data-placement="right" data-original-title="Frontend&nbsp;Theme For&nbsp;Metronic&nbsp;Admin">
 					<a href="achievements.php">
 					<i class="fa fa-trophy"></i>
 					<span class="title">
@@ -153,7 +142,7 @@
 					</a>
 				</li>
 				<li id="frontend-link" class="tooltips" data-placement="right" data-original-title="Vibe&nbsp;Community Blog">
-					<a href="javascript:;">
+					<a href="http://blog.go-vibe.com">
 					<i class="fa fa-book"></i>
 					<span class="title">
 						Blog
