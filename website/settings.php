@@ -10,6 +10,8 @@
     require($path . "/config.php");
 	require($path . "/php-sdk/facebook.php"); //imports facebook api methods and objects
     
+    buildCheckBoxes();
+    
     $action = isset( $_GET['action'] ) ? $_GET['action'] : "Invite more Friends to Vibe for Comments"; //sets $action to "Action" url fragment string if action isn't null
     $dashboard=$_SESSION['dashboard'];
     $pic=$dashboard['pic'];
@@ -18,7 +20,7 @@
    function buildCheckBoxes(){
    	   //CURRENTLY WORKING ON THIS -- DO NOT TOUCH!
        $conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-	   $sql = "SELECT attractivenessDisableDate,affabilityDisableDate,intelligenceDisableDate,styleDisableDate,promiscuityDisableDate,humorDisableDate,confidenceDisableDate,funDisableDate,kindnessDisableDate,honestyDisableDate,reliabilityDisableDate,happinessDisableDate,ambitionDisableDate,humilityDisableDate FROM user WHERE UID=$uid";
+	   $sql = "SELECT attractivenessDisableDate,affabilityDisableDate,intelligenceDisableDate,styleDisableDate,promiscuityDisableDate,humorDisableDate,confidenceDisableDate,funDisableDate,kindnessDisableDate,honestyDisableDate,reliabilityDisableDate,happinessDisableDate,ambitionDisableDate,humilityDisableDate FROM user WHERE UID=" . $_SESSION['userID'];
 	   $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
 	   $st->execute();//executes query above
 	   $data=$st->fetch(); 
@@ -26,6 +28,8 @@
 	   $traitsOn = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0); 
 	   $attractivenessOn = 0; $affabilityOn = 0; $intelligenceOn = 0; $styleOn = 0; $promiscuityOn = 0; $humorOn = 0; $confidenceOn = 0; 
 	   $funOn = 0; $kindnessOn = 0; $honestyOn = 0; $reliabilityOn = 0; $happinessOn = 0; $ambitionOn = 0; $humilityOn = 0;
+	   
+	   $test = 0;
 	   if($data['attractivenessDisableDate'] != "") {
 	       $traitsOn[0] = 1; 
 	   }
@@ -43,6 +47,7 @@
 	   }
 	   if($data['humorDisableDate'] != "") {
 	       $traitsOn[5] = 1; 
+	       $test = 1; 
 	   }
 	   if($data['confidenceDisableDate'] != "") {
 	       $traitsOn[6] = 1; 
@@ -69,6 +74,8 @@
 	       $traitsOn[13] = 1; 
 	   }
 	   
+	   $conn = null; 
+	   
 	   $_SESSION['vibetraits'] = array("attractiveness", "affability", "intelligence", "style", 
 	   "promiscuity", "humor", "confidence", "fun", "kindness", "honesty", "reliability", 
 	   "happiness", "ambition", "humility");
@@ -77,19 +84,33 @@
 	   
 	   $_SESSION['traitsSettings'] = array(); 
 	   for($i = 0; $i < 14; $i++) {
-	       $purchase = "Purchase now for 30 points";
+	       $purchase = "Purchase now for " . 30 . " points";
 		   $disabled = ""; 
 		   if($traitsOn[$i] == 1) {
-		   	   $purchase = " days remaining";
+		   	  	
+		   	  $datetime2 = new DateTime(date("Y-m-d H:i:s", time()));
+		      $datetime1 = new DateTime($data[$_SESSION['vibetraits'][$i] . "DisableDate"]);
+		      $interval = $datetime1->diff($datetime2);
+		      
+		      $time=$interval->format('%a');
+			  $timeRemaining = 7 - $time; 
+		      if($time==='0 days'){
+		        $time=$interval->format('%h hrs');
+		        if($time==='0 hrs'){
+		          $time=$interval->format('%i mins');
+		        }       
+		      }
+			   
+		   	   $purchase = $timeRemaining . " days remaining";
 			   $disabled = "disabled"; 
 		   }   	
 		
-	       $_SESSION['traitsSettings'][i] = '<tr>
+	       $_SESSION['traitsSettings'][$i] = '<tr>
 				<td>
-					' . $_SESSION['vibtraits'][$i] . '
+					' . $_SESSION['vibetraits'][$i] . '
 				</td>
 				<td>
-					Purchase now for 30 points
+					' . $purchase . '
 				</td>
 				<td>
 					<label class="checkbox" ' . $disabled . '>
@@ -321,188 +342,11 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 												<div class="table-responsive">
 													<table class="table table-striped table-hover">
 													<tbody>
-													<tr>
-														<td>
-															Attractiveness
-														</td>
-														<td>
-															Purchase now for 30 points
-														</td>
-														<td>
-															<label class="checkbox">
-															<input type="checkbox" id="inlineCheckbox21" value="option1"> 
-															</label>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															Affability
-														</td>
-														<td>
-															<em>4 days remaining</em>
-														</td>
-														<td>
-															<label class="checkbox" disabled>
-															<input type="checkbox" id="inlineCheckbox22" value="option2" disabled> 
-															</label>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															Intelligence
-														</td>
-														<td>
-															Purchase now for 30 points
-														</td>
-														<td>
-															<label class="checkbox">
-															<input type="checkbox" id="inlineCheckbox21" value="option1"> 
-															</label>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															Style
-														</td>
-														<td>
-															Purchase now for 30 points
-														</td>
-														<td>
-															<label class="checkbox">
-															<input type="checkbox" id="inlineCheckbox21" value="option1"> 
-															</label>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															Promiscuity
-														</td>
-														<td>
-															Purchase now for 30 points
-														</td>
-														<td>
-															<label class="checkbox">
-															<input type="checkbox" id="inlineCheckbox21" value="option1"> 
-															</label>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															Humor
-														</td>
-														<td>
-															Purchase now for 30 points
-														</td>
-														<td>
-															<label class="checkbox">
-															<input type="checkbox" id="inlineCheckbox21" value="option1"> 
-															</label>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															Confidence
-														</td>
-														<td>
-															Purchase now for 30 points
-														</td>
-														<td>
-															<label class="checkbox">
-															<input type="checkbox" id="inlineCheckbox21" value="option1"> 
-															</label>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															Fun
-														</td>
-														<td>
-															Purchase now for 30 points
-														</td>
-														<td>
-															<label class="checkbox">
-															<input type="checkbox" id="inlineCheckbox21" value="option1"> 
-															</label>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															Kindness
-														</td>
-														<td>
-															Purchase now for 30 points
-														</td>
-														<td>
-															<label class="checkbox">
-															<input type="checkbox" id="inlineCheckbox21" value="option1"> 
-															</label>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															Honesty
-														</td>
-														<td>
-															Purchase now for 30 points
-														</td>
-														<td>
-															<label class="checkbox">
-															<input type="checkbox" id="inlineCheckbox21" value="option1"> 
-															</label>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															Reliability
-														</td>
-														<td>
-															Purchase now for 30 points
-														</td>
-														<td>
-															<label class="checkbox">
-															<input type="checkbox" id="inlineCheckbox21" value="option1"> 
-															</label>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															Happiness
-														</td>
-														<td>
-															Purchase now for 30 points
-														</td>
-														<td>
-															<label class="checkbox">
-															<input type="checkbox" id="inlineCheckbox21" value="option1"> 
-															</label>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															Ambition
-														</td>
-														<td>
-															Purchase now for 30 points
-														</td>
-														<td>
-															<label class="checkbox">
-															<input type="checkbox" id="inlineCheckbox21" value="option1"> 
-															</label>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															Humility
-														</td>
-														<td>
-															Purchase now for 30 points
-														</td>
-														<td>
-															<label class="checkbox">
-															<input type="checkbox" name="attributesCheckbox" id="inlineCheckbox21" value="option1"> 
-															</label>
-														</td>
-													</tr>
+														<?php 
+															foreach($_SESSION['traitsSettings'] as $traitSet){
+																echo $traitSet;
+															} 
+														?>
 													</tbody>
 													</table>
 												</div>
