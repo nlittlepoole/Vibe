@@ -440,7 +440,7 @@ function getPictures($recipient){
 function addUser( $input_id ) {
     $input_id=$input_id."";
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //initialies connection to the database using the credentials found in config.php
-    $sql = "SELECT * FROM user WHERE UID= $input_id"; //gets the active status of the user with $input_id as a user ID
+    $sql = "SELECT id FROM user WHERE UID= $input_id"; //gets the active status of the user with $input_id as a user ID
     $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
     $st->execute(); //executes the sql query found above
     $raw=$st->fetch(); //sets raw to be the raw data returned from the sql command, raw is always an array, even if only one element is being queried
