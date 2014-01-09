@@ -8,119 +8,11 @@
     session_start();
     $path = $_SERVER['DOCUMENT_ROOT'];
     require($path . "/config.php");
-	require($path . "/php-sdk/facebook.php"); //imports facebook api methods and objects
-    
-    buildCheckBoxes();
     
     $action = isset( $_GET['action'] ) ? $_GET['action'] : "Invite more Friends to Vibe for Comments"; //sets $action to "Action" url fragment string if action isn't null
     $dashboard=$_SESSION['dashboard'];
     $pic=$dashboard['pic'];
-  
-  
-   function buildCheckBoxes(){
-   	   //CURRENTLY WORKING ON THIS -- DO NOT TOUCH!
-       $conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-	   $sql = "SELECT attractivenessDisableDate,affabilityDisableDate,intelligenceDisableDate,styleDisableDate,promiscuityDisableDate,humorDisableDate,confidenceDisableDate,funDisableDate,kindnessDisableDate,honestyDisableDate,reliabilityDisableDate,happinessDisableDate,ambitionDisableDate,humilityDisableDate FROM user WHERE UID=" . $_SESSION['userID'];
-	   $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
-	   $st->execute();//executes query above
-	   $data=$st->fetch(); 
-	   
-	   $traitsOn = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0); 
-	   $attractivenessOn = 0; $affabilityOn = 0; $intelligenceOn = 0; $styleOn = 0; $promiscuityOn = 0; $humorOn = 0; $confidenceOn = 0; 
-	   $funOn = 0; $kindnessOn = 0; $honestyOn = 0; $reliabilityOn = 0; $happinessOn = 0; $ambitionOn = 0; $humilityOn = 0;
-	   
-	   $test = 0;
-	   if($data['attractivenessDisableDate'] != "") {
-	       $traitsOn[0] = 1; 
-	   }
-	   if($data['affabilityDisableDate'] != "") {
-	       $traitsOn[1] = 1; 
-	   }
-	   if($data['intelligenceDisableDate'] != "") {
-	       $traitsOn[2] = 1; 
-	   }
-	   if($data['styleDisableDate'] != "") {
-	       $traitsOn[3] = 1; 
-	   }
-	   if($data['promiscuityDisableDate'] != "") {
-	       $traitsOn[4] = 1; 
-	   }
-	   if($data['humorDisableDate'] != "") {
-	       $traitsOn[5] = 1; 
-	       $test = 1; 
-	   }
-	   if($data['confidenceDisableDate'] != "") {
-	       $traitsOn[6] = 1; 
-	   }
-	   if($data['funDisableDate'] != "") {
-	       $traitsOn[7] = 1; 
-	   }
-	   if($data['kindnessDisableDate'] != "") {
-	       $traitsOn[8] = 1; 
-	   }
-	   if($data['honestyDisableDate'] != "") {
-	       $traitsOn[9] = 1; 
-	   }
-	   if($data['reliabilityDisableDate'] != "") {
-	       $traitsOn[10] = 1; 
-	   }
-	   if($data['happinessDisableDate'] != "") {
-	       $traitsOn[11] = 1; 
-	   }
-	   if($data['ambitionDisableDate'] != "") {
-	       $traitsOn[12] = 1; 
-	   }
-	   if($data['humilityDisableDate'] != "") {
-	       $traitsOn[13] = 1; 
-	   }
-	   
-	   $conn = null; 
-	   
-	   $_SESSION['vibetraits'] = array("attractiveness", "affability", "intelligence", "style", 
-	   "promiscuity", "humor", "confidence", "fun", "kindness", "honesty", "reliability", 
-	   "happiness", "ambition", "humility");
-	   
-	   
-	   
-	   $_SESSION['traitsSettings'] = array(); 
-	   for($i = 0; $i < 14; $i++) {
-	       $purchase = "Purchase now for " . 30 . " points";
-		   $disabled = ""; 
-		   if($traitsOn[$i] == 1) {
-		   	  	
-		   	  $datetime2 = new DateTime(date("Y-m-d H:i:s", time()));
-		      $datetime1 = new DateTime($data[$_SESSION['vibetraits'][$i] . "DisableDate"]);
-		      $interval = $datetime1->diff($datetime2);
-		      
-		      $time=$interval->format('%a');
-			  $timeRemaining = 7 - $time; 
-		      if($time==='0 days'){
-		        $time=$interval->format('%h hrs');
-		        if($time==='0 hrs'){
-		          $time=$interval->format('%i mins');
-		        }       
-		      }
-			   
-		   	   $purchase = $timeRemaining . " days remaining";
-			   $disabled = "disabled"; 
-		   }   	
-		
-	       $_SESSION['traitsSettings'][$i] = '<tr>
-				<td>
-					' . $_SESSION['vibetraits'][$i] . '
-				</td>
-				<td>
-					' . $purchase . '
-				</td>
-				<td>
-					<label class="checkbox" ' . $disabled . '>
-					<input type="checkbox" id="inlineCheckbox21" value="option1" ' . $disabled . '> 
-					</label>
-				</td>
-			</tr>';
-	   	
-	   }
-   }  
+    
 ?>
 
 
@@ -139,7 +31,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <!-- BEGIN HEAD -->
 <head>
 <meta charset="utf-8"/>
-<title>Settings</title>
+<title>Search | Vibe</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="" name="description"/>
@@ -147,7 +39,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <meta name="MobileOptimized" content="320">
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-<link href="assets/plugins/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+<link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <link href="assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
 <!-- END GLOBAL MANDATORY STYLES -->
 <!-- BEGIN PAGE LEVEL PLUGIN STYLES -->
@@ -207,8 +99,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					</form>
 					<!-- END RESPONSIVE QUICK SEARCH FORM -->
 				</li>
-				<li class="start ">
-					<a href="dashboard.php">
+				<li class="start">
+					<a href="/index.php?action=dashboard">
 					<i class="fa fa-home"></i>
 					<span class="title">
 						Dashboard
@@ -218,7 +110,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					</a>
 				</li>
 				<li class="">
-					<a href="questions.php">
+					<a href="/index.php?action=question">
 					<i class="fa fa-question"></i>
 					<span class="title">
 						Questions
@@ -255,7 +147,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					</a>
 				</li>
 				<li id="frontend-link" class="tooltips" data-placement="right" data-original-title="Vibe&nbsp;Community Blog">
-					<a href="javascript:;">
+					<a href="http://blog.go-vibe.com">
 					<i class="fa fa-book"></i>
 					<span class="title">
 						Blog
@@ -275,7 +167,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
-					Settings <small>vibe</small>
+					Search <small>vibe</small>
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li>
@@ -284,124 +176,52 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 							<i class="fa fa-angle-right"></i>
 						</li>
 						<li>
-							<a href="#">Settings</a>
+							<a href="#">Search</a>
 						</li>
 					</ul>
 					<!-- END PAGE TITLE & BREADCRUMB-->
 				</div>
 			</div>
 			<!-- END PAGE HEADER-->
-			<!-- BEGIN DASHBOARD STATS -->
-			<!-- END DASHBOARD STATS -->
 			<div class="clearfix">
 			</div>
 			
 			<div class="row">
-				<div class="col-md-12 ">
-					<!-- BEGIN SAMPLE FORM PORTLET-->
-					<div class="portlet box green ">
+				<div class="col-md-12">
+					<!-- BEGIN SAMPLE TABLE PORTLET-->
+					<div class="portlet box blue">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="fa fa-reorder"></i> User Settings
+								<i class="fa fa-comments"></i>Search
 							</div>
 							<div class="tools">
-								<a href="" class="collapse"></a>
-								<a href="#portlet-config" data-toggle="modal" class="config"></a>
-								<a href="" class="reload"></a>
-								<a href="" class="remove"></a>
 							</div>
 						</div>
-						<div class="portlet-body form">
-							<form class="form-horizontal" role="form" method="post" action="index.php?action=submit2">
+						<div class="portlet-body" style="background-image: url(../img/sf.jpg); background-size: 100%; height: 500px; background-repeat: no-repeat;">
+							<div class="note note-success">
+								<h4 class="block">Search any community or person on Vibe. Right here.</h4>
+								<form role="form">
 								<div class="form-body">
-									<div class="form-group">
-										<label class="col-md-3 control-label">Blurb</label>
-										<div class="col-md-9">
-											<input type="text" class="form-control" placeholder="Enter blurb" maxlength="100">
-											<span class="help-block">
-												This is a short blurb that will appear under your name on your profile.
+									<div class="form-group" style="width: 40%">
+										<span class="input-group">
+											<span class="input-group-addon">
+												<i class="fa fa-question-circle"></i>
 											</span>
-										</div>
+											<input type="text" class="form-control" placeholder="Enter text">
+										</span>
 									</div>
-									<div class="form-group">
-										<label class="col-md-3 control-label">Website</label>
-										<div class="col-md-9">
-											<div class="input-icon left">
-												<i class="fa fa-laptop"></i>
-												<input type="text" class="form-control" placeholder="Website URL">
-												<span class="help-block">
-												A link to your website that will appear on your profile. Optional.
-												</span>
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-md-3 control-label"><span class="tooltips" data-container="body" data-original-title="You can disable up to seven of your Vibe scores for a week each.">Disable Vibe Scores <i class="fa fa-question-circle"></i></span></label>
-										
-											<div class="checkbox-list">
-												<div class="table-responsive">
-													<table class="table table-striped table-hover">
-													<tbody>
-														<?php 
-															foreach($_SESSION['traitsSettings'] as $traitSet){
-																echo $traitSet;
-															} 
-														?>
-													</tbody>
-													</table>
-												</div>
-												
-												
-												
-											
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-md-3 control-label">Display location?</label>
-										<div class="col-md-9">
-											<div class="radio-list">
-												<label class="radio-inline">
-												<input type="radio" name="optionsLocations" id="optionsLocations1" value="option1"> Yes </label>
-												<label class="radio-inline">
-												<input type="radio" name="optionsLocations" id="optionsLocations2" value="option2" checked> No </label>
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-md-3 control-label">Display birthdate?</label>
-										<div class="col-md-9">
-											<div class="radio-list">
-												<label class="radio-inline">
-												<input type="radio" name="optionsBirthdate" id="optionsBirthdate1" value="option1"> Yes </label>
-												<label class="radio-inline">
-												<input type="radio" name="optionsBirthdate" id="optionsBirthdate2" value="option2" checked> No </label>
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-md-3 control-label">Display # of friends?</label>
-										<div class="col-md-9">
-											<div class="radio-list">
-												<label class="radio-inline">
-												<input type="radio" name="optionsFriends" id="optionsFriends1" value="option1" checked> Yes </label>
-												<label class="radio-inline">
-												<input type="radio" name="optionsFriends" id="optionsFriends2" value="option2"> No </label>
-											</div>
-										</div>
+									<div class="form-actions">
+										<button type="submit" class="btn blue">Submit</button>
 									</div>
 								</div>
-								<div class="form-actions fluid">
-									<div class="col-md-offset-3 col-md-9">
-										<button type="submit" class="btn green">Submit</button>
-										<button type="button" class="btn default">Cancel</button>
-									</div>
-								</div>
-							</form>
+								</form>
+							</div>
+							<!--<img src="../img/sf.jpg" style="display: block; margin-left: auto; margin-right: auto; width: 70%" />-->
 						</div>
 					</div>
+					<!-- END SAMPLE TABLE PORTLET-->
+				</div>
 			</div>
-			
 			<div class="clearfix">
 			</div>
 		</div>

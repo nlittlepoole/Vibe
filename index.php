@@ -12,6 +12,7 @@ $config['secret'] = APP_SECRET; //FAcebook secret code for vibe
 $facebook = new Facebook($config); //App ID and passcode used to initialize session authoirzation for facebook API
 $token = $facebook->getAccessToken(); //Authorization token is grabbed from URL fragment, if user hasn't logged in it will return an invalid token
 $uid = $facebook->getUser(); // Facebook user ID number is returned, if facebook isn't logged in or exception, it returns 0
+$_SESSION['userID'] = $uid; 
 
 //Switch case determines what to do next based on the input arguments from the action URL fragment("?=action" in the URL)
 switch ( $action ) {
