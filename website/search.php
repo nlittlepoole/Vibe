@@ -216,7 +216,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								</div>
 								</form>
 							</div>
-							<!--<img src="../img/sf.jpg" style="display: block; margin-left: auto; margin-right: auto; width: 70%" />-->
 						</div>
 					</div>
 					<!-- END SAMPLE TABLE PORTLET-->

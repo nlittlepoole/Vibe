@@ -202,7 +202,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 											<li>
 												<a href="#">Friends
 												<span>
-													1827
+													<?php echo $_SESSION['numberOfFriends'] ?>
 												</span>
 												</a>
 											</li>
