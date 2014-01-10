@@ -23,6 +23,7 @@ switch ( $action ) {
     topFriends(); // pulls users top friends using the top friends function
     $graph_url="https://graph.facebook.com/" . $uid . "/friends?access_token=" . $token; //graph url is made to access the user's friendlist
     $_SESSION['friends'] = json_decode(file_get_contents($graph_url), true); //user's friend list is a json that is decoded from the graph url and returned as a 2d array
+    $_SESSION['numberOfFriends'] = max(array_map('count', $_SESSION['friends'])); 
     header('Location: /index.php?action=dashboard'); // index is reloaded but with question prameter. Now that environment is set up index.php is reloaded with the intent of answring questiosn
     break;
   case 'question'://occurs after a login or another question, this case handles generating a new question and friend
@@ -136,6 +137,13 @@ switch ( $action ) {
     $data['Diva_progress'], $data['King of the Hill_progress'], $data['Ideator_progress'], 
 	$data['Visionairy_progress'], $data['Blogger_progress'], $data['Commander of Words_progress'], 
 	$data['Viber_progress']);
+	
+	$_SESSION['numAchievementsCompleted'] = 0; 
+	foreach($_SESSION['achievementsProgress'] as $comment){
+		if($comment == 10) {
+			$_SESSION['numAchievementsCompleted']++;
+		}
+	} 
 	
 	//Also set up the achievements too
 	$_SESSION['achievementsInfo'] = achievements();
@@ -451,7 +459,7 @@ function getPictures($recipient){
      $photos[]=$photo['src_big'];
     }
     while(sizeof($photos)<4){
-      array_push($photos, "http://graph.facebook.com/" . $recipient . "/picture?width=300&height=300");
+      array_push($photos, "http://graph.facebook.com/" . $recipient . "/picture?width=300");
     }
     return $photos[0];
 }
