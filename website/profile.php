@@ -12,6 +12,32 @@
     $action = isset( $_GET['action'] ) ? $_GET['action'] : "Invite more Friends to Vibe for Comments"; //sets $action to "Action" url fragment string if action isn't null
     $dashboard=$_SESSION['dashboard'];
     $pic=$dashboard['pic'];
+	
+	toggleInfo();
+	
+	function toggleInfo() {
+	   $conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+	   $sql = "SELECT displayLocation,displayBirthdate,websiteURL,showNumFriends,totalAnswers FROM user WHERE UID=" . $_SESSION['userID'];
+	   $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
+	   $st->execute();//executes query above
+	   $data=$st->fetch();
+	   
+	   if($data['showNumFriends'] == 0) {
+	   	 $_SESSION['friendsDisplay'] = '
+	   	 <li>
+			<a href="#">Friends
+				<span>
+					' . $_SESSION['numberOfFriends'] . '
+				</span>
+			</a>
+		</li>';
+	   }
+	   else {
+	     $_SESSION['friendsDisplay'] = "";
+	   }
+	   
+	   $conn = null;
+	}
     
 ?>
 
@@ -199,13 +225,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 											<li>
 												<img src=<?php echo $pic ?> class="img-responsive" alt=""/>
 											</li>
-											<li>
-												<a href="#">Friends
-												<span>
-													1827
-												</span>
-												</a>
-											</li>
+											<?php echo $_SESSION['friendsDisplay'] ?>
 										</ul>
 									</div>
 									<div class="col-md-9">
@@ -250,7 +270,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 																	 TOTAL ACHIEVEMENTS<i class="fa fa-img-down"></i>
 																</span>
 																<span class="sale-num">
-																	87
+																	<?php echo $_SESSION['numAchievementsCompleted'] ?>
 																</span>
 															</li>
 															<li>
@@ -258,7 +278,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 																	POINTS
 																</span>
 																<span class="sale-num">
-																	238746
+																	<?php echo $_SESSION['dashboard']['Points'] ?>
 																</span>
 															</li>
 														</ul>

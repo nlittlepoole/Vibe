@@ -26,8 +26,6 @@
 	   $data=$st->fetch(); 
 	   
 	   $traitsOn = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0); 
-	   $attractivenessOn = 0; $affabilityOn = 0; $intelligenceOn = 0; $styleOn = 0; $promiscuityOn = 0; $humorOn = 0; $confidenceOn = 0; 
-	   $funOn = 0; $kindnessOn = 0; $honestyOn = 0; $reliabilityOn = 0; $happinessOn = 0; $ambitionOn = 0; $humilityOn = 0;
 	   
 	   $test = 0;
 	   if($data['attractivenessDisableDate'] != "") {
@@ -114,7 +112,7 @@
 				</td>
 				<td>
 					<label class="checkbox" ' . $disabled . '>
-					<input type="checkbox" id="inlineCheckbox21" value="option1" ' . $disabled . '> 
+					<input type="checkbox" name="checkbox' . ($i + 1) . '" value="option' . ($i + 1) . '" ' . $disabled . '> 
 					</label>
 				</td>
 			</tr>';
@@ -167,6 +165,21 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <link href="assets/css/custom.css" rel="stylesheet" type="text/css"/>
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="favicon.ico"/>
+
+<script text="text/javascript">
+function validateForm()
+{
+	var x = document.forms["settingsform"]["websitelink"].value;
+	if (x.indexOf('.com') < 0 || x.indexOf('.edu') < 0 || x.indexOf('.org') < 0 || x.indexOf('.us') < 0 || x.indexOf('.net') < 0)
+	{
+		//alert("Problem!"); 
+	    document.getElementById("websiteURL").className+=' has-error';
+	    document.getElementById("helpWebsite").innerHTML='Please enter a valid website URL!'; 
+	    return false;
+	}
+}
+</script>
+
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -312,24 +325,24 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 							</div>
 						</div>
 						<div class="portlet-body form">
-							<form class="form-horizontal" role="form" method="post" action="index.php?action=submit2">
+							<form class="form-horizontal" role="form" method="post" action="searchresults.php" onsubmit="return validateForm()" name="settingsform">
 								<div class="form-body">
 									<div class="form-group">
 										<label class="col-md-3 control-label">Blurb</label>
 										<div class="col-md-9">
-											<input type="text" class="form-control" placeholder="Enter blurb" maxlength="100">
+											<input type="text" class="form-control" name="blurb" placeholder="Enter blurb" maxlength="100">
 											<span class="help-block">
 												This is a short blurb that will appear under your name on your profile.
 											</span>
 										</div>
 									</div>
-									<div class="form-group">
+									<div class="form-group" id="websiteURL">
 										<label class="col-md-3 control-label">Website</label>
 										<div class="col-md-9">
 											<div class="input-icon left">
 												<i class="fa fa-laptop"></i>
-												<input type="text" class="form-control" placeholder="Website URL">
-												<span class="help-block">
+												<input type="text" class="form-control" name="websitelink" placeholder="Website URL">
+												<span class="help-block" id="helpWebsite">
 												A link to your website that will appear on your profile. Optional.
 												</span>
 											</div>
@@ -373,9 +386,9 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										<div class="col-md-9">
 											<div class="radio-list">
 												<label class="radio-inline">
-												<input type="radio" name="optionsBirthdate" id="optionsBirthdate1" value="option1"> Yes </label>
+												<input type="radio" name="optionsBirthdate" value="bdate1"> Yes </label>
 												<label class="radio-inline">
-												<input type="radio" name="optionsBirthdate" id="optionsBirthdate2" value="option2" checked> No </label>
+												<input type="radio" name="optionsBirthdate" value="bdate2" checked> No </label>
 											</div>
 										</div>
 									</div>
@@ -393,8 +406,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								</div>
 								<div class="form-actions fluid">
 									<div class="col-md-offset-3 col-md-9">
-										<button type="submit" class="btn green">Submit</button>
-										<button type="button" class="btn default">Cancel</button>
+										<input type="submit" class="btn green" />
+										<!-- <input type="button" class="btn default" /> -->
 									</div>
 								</div>
 							</form>
