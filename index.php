@@ -111,7 +111,10 @@ switch ( $action ) {
     $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
     $st->execute();//executes query above
     $data=$st->fetch(); //$question source is set to result of query
-    $new_communities='';
+    $new_communities='<li>
+              <a href="/website/search.php"><u>
+              Search for Communities</u></a>
+            </li>';
     $user_profile = $facebook->api('/me','GET');
     $data['Name']=$user_profile['name'];
     $communities=split('&&',$data['Communities']);
@@ -239,6 +242,21 @@ switch ( $action ) {
 	//The settings page has been populated with information  
 	  
 	break;	
+  case 'search':
+    $searched="Niger";
+    $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //initialies connection to the database using the credentials found in config.php
+    $sql = "SELECT Name, UID FROM user WHERE UID LIKE %".$input_id."%"; //gets the active status of the user with $input_id as a user ID
+    $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
+    $st->execute(); //executes the sql query found above
+    $result=$st->fetch();
+    if($result){
+        
+    }
+    else{
+      $_SESSION['Searched'][0]="No Results";
+    }
+    
+  break;
 	
   default: //this is the default setting, it simply take sthe user to the homepage. It also creates the facebook login url 
     global $facebook; //global is necessary to maintain scope. PHP has slightly different scope rules than other high level languages and this line is necessary to keep accessing the facebook api

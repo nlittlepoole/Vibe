@@ -211,7 +211,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										</span>
 									</div>
 									<div class="form-actions">
-										<button type="submit" class="btn blue">Submit</button>
+										<button type="submit" class="btn blue">Submit</button>	
 									</div>
 								</div>
 								</form>
