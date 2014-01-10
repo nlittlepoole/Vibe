@@ -54,22 +54,9 @@ switch ( $action ) {
 	  
 	break;	
   case 'search':
-    $searched="Niger";
-    $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //initialies connection to the database using the credentials found in config.php
-    $sql = "SELECT Name, UID FROM user WHERE Name LIKE %".$input_id."%"; //gets the active status of the user with $input_id as a user ID
-    $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
-    $st->execute(); //executes the sql query found above
-    $result=$st->fetch();
-    $sql = "SELECT Name, UID FROM directory WHERE Name LIKE %".$input_id."%"; //gets the active status of the user with $input_id as a user ID
-    $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
-    $st->execute(); //executes the sql query found above
-    $result=$st->fetch();
-    if($result){
+    require( CLASS_PATH . "/Web/Search.php");
+    print_r(search($_POST["Query"]));
 
-    }
-    else{
-      $_SESSION['Searched'][0]="No Results";
-    }
     
   break;
 	
