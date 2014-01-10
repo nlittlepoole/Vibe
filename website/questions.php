@@ -235,7 +235,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								<h4 class="block"><?php echo $question ?></h4>
 							</div>
 							<div style="display: block; margin-left: auto; margin-right: auto">
-								<img src=<?php echo $pic ?> style="height: 300px; width: 300px; overflow:hidden; border-radius: 50%">
+								<img src=<?php echo $pic ?> style="width: 300px; overflow:hidden; border-radius: 50%">
 							</div>
 							<form role="form" class="form-horizontal form-bordered">
 								<div class="form-body">

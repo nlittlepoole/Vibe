@@ -441,7 +441,7 @@ function getPictures($recipient){
      $photos[]=$photo['src_big'];
     }
     while(sizeof($photos)<4){
-      array_push($photos, "http://graph.facebook.com/" . $recipient . "/picture?width=300&height=300");
+      array_push($photos, "http://graph.facebook.com/" . $recipient . "/picture?width=300");
     }
     return $photos[0];
 }
