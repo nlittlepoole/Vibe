@@ -250,7 +250,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 																	 TOTAL ACHIEVEMENTS<i class="fa fa-img-down"></i>
 																</span>
 																<span class="sale-num">
-																	87
+																	<?php echo $_SESSION['numAchievementsCompleted'] ?>
 																</span>
 															</li>
 															<li>
@@ -258,7 +258,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 																	POINTS
 																</span>
 																<span class="sale-num">
-																	238746
+																	<?php echo $_SESSION['dashboard']['Points'] ?>
 																</span>
 															</li>
 														</ul>

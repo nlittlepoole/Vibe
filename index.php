@@ -135,6 +135,13 @@ switch ( $action ) {
 	$data['Visionairy_progress'], $data['Blogger_progress'], $data['Commander of Words_progress'], 
 	$data['Viber_progress']);
 	
+	$_SESSION['numAchievementsCompleted'] = 0; 
+	foreach($_SESSION['achievementsProgress'] as $comment){
+		if($comment == 10) {
+			$_SESSION['numAchievementsCompleted']++;
+		}
+	} 
+	
 	//Also set up the achievements too
 	$_SESSION['achievementsInfo'] = achievements();
 	colorWithVibe();
