@@ -6,13 +6,15 @@ define( "DB_DSN", "mysql:host=localhost;dbname=Vibosphere" );
 define( "DB_USERNAME", "Vibosphere" );
 define( "DB_PASSWORD", "Carman4ever!" );
 define( "CLASS_PATH", "classes" );
-define( "TEMPLATE_PATH", "templates" );
-define( "HOMEPAGE_NUM_ARTICLES", 5 );
 define( "ADMIN_USERNAME", "teamvibe" );
 define( "ADMIN_PASSWORD", "Carman4ever" );
 define( "APP_ID", "257473684410281" );
 define( "APP_SECRET", "beeb8e7913c442c8ae1dd08bb05d74d5" );
 require( CLASS_PATH . "/Vibe.php" );
+require( CLASS_PATH . "/Web/User.php");
+require( CLASS_PATH . "/Web/Question.php");
+require( CLASS_PATH . "/Web/String.php");
+require( CLASS_PATH . "/Web/Achievments.php");
  
 function handleException( $exception ) {
   echo "Sorry, a problem occurred. Please try later.";
