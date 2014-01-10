@@ -200,7 +200,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 						<div class="portlet-body" style="background-image: url(../img/sf.jpg); background-size: 100%; height: 500px; background-repeat: no-repeat;">
 							<div class="note note-success">
 								<h4 class="block">Search any community or person on Vibe. Right here.</h4>
-								<form role="form">
+								<form role="form" action="questions.php" method="post">
 								<div class="form-body">
 									<div class="form-group" style="width: 40%">
 										<span class="input-group">
@@ -211,6 +211,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										</span>
 									</div>
 									<div class="form-actions">
+										<form >
+
 										<button type="submit" class="btn blue">Submit</button>	
 									</div>
 								</div>
