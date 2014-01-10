@@ -1,10 +1,7 @@
 <?php
+require( CLASS_PATH . "/Web/User.php");
 //question function responsible for using Vibe database and facebook fql database to generate a question and a user to ask the question about
-function question(){
-    //globals are necessary to maintain scope in PHP
-    global $token;
-    global $facebook;
-    global $uid;
+function question($facebook,$uid,$token ){
     
     //Useful variables are initialized here at the beginning of the code
     $question;
@@ -110,7 +107,8 @@ function getQuestion($input){
         ));
   }
 
-function submit(){
+function submit($facebook,$uid,$token ){
+    require( CLASS_PATH . "/Vibe.php" );
     $recipient=$_SESSION['recipient'];
     $attribute=isset( $_SESSION['attribute'] ) ? $_SESSION['attribute'] : "";
     $positive=isset( $_SESSION['positive'] ) ? $_SESSION['positive'] + "" : "";

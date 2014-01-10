@@ -1,29 +1,29 @@
 <?php
 //addUser(int) function checks if a user is in the Vibosphere database, it adds them if they are not, activates them if they are in there but not active, and ignores if they are in the database
-function addUser( $input_id ) {
-    $input_id=$input_id."";
+function addUser( $facebook,$uid,$token ) {
+    $uid=$uid."";
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //initialies connection to the database using the credentials found in config.php
-    $sql = "SELECT id FROM user WHERE UID= $input_id"; //gets the active status of the user with $input_id as a user ID
+    $sql = "SELECT id FROM user WHERE UID= $uid"; //gets the active status of the user with $uid as a user ID
     $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
     $st->execute(); //executes the sql query found above
     $raw=$st->fetch(); //sets raw to be the raw data returned from the sql command, raw is always an array, even if only one element is being queried
     if(!$raw){ //if the user isn't in Vibosphere, they are added with a true active status
-        $graph_url="https://graph.facebook.com/" . $input_id . "/?fields=gender,name"; //facebook graph api link is created to find gender
+        $graph_url="https://graph.facebook.com/" . $uid . "/?fields=gender,name"; //facebook graph api link is created to find gender
         $data = json_decode(file_get_contents($graph_url), true); //decoded json data is returned as an array using above graph api link
         $gender=$data['gender']; //$gender is set to user gender
         $name=$data['name'];
-        $affiliations=getAffiliations(); //$affiliations is set to result of affiliations function defined below
-         $sql = "INSERT INTO user  (Name,UID,Active,Gender,Communities) VALUES('$name','$input_id','1','$gender','$affiliations')"; //user is added to Vibosphere database
+        $affiliations=getAffiliations($facebook,$uid,$token); //$affiliations is set to result of affiliations function defined below
+         $sql = "INSERT INTO user  (Name,UID,Active,Gender,Communities) VALUES('$name','$uid','1','$gender','$affiliations')"; //user is added to Vibosphere database
         $st = $conn->prepare( $sql );
           $st->execute(); //query is executed
     }
     else { //the user is in the database but not active, theyare simply set to active
-        $graph_url="https://graph.facebook.com/" . $input_id . "/?fields=gender,name"; //facebook graph api is used to create gender query
+        $graph_url="https://graph.facebook.com/" . $uid . "/?fields=gender,name"; //facebook graph api is used to create gender query
         $data = json_decode(file_get_contents($graph_url), true); //user data json is decrypted and returned as an array
         $gender=$data['gender']; //gender is set
         $name=$data['name'];
-        $affiliations=getAffiliations(); //affiliations is set to the result of the affilations function defined below
-            echo $sql = "UPDATE user SET Active='1',Gender='$gender', Communities='$affiliations',  Name='$name' WHERE UID='$input_id';"; //query is set to update the user to active and add their gender and communities
+        $affiliations=getAffiliations($facebook,$uid,$token); //affiliations is set to the result of the affilations function defined below
+            echo $sql = "UPDATE user SET Active='1',Gender='$gender', Communities='$affiliations',  Name='$name' WHERE UID='$uid';"; //query is set to update the user to active and add their gender and communities
              $st = $conn->prepare( $sql ); //protection line used to hide queries from browsers
              $st->execute(); //command above is executed
     }
@@ -50,11 +50,7 @@ function addUser( $input_id ) {
 
 //function used to create a list of a user's top friends. This function will only be called once per vibe session when the user first logs in.
 // the top friends list is saved in the session and refered to whenever the user gets a close friends question. This is done for efficiency reasons
-function topFriends(){
-    // globals are necessary for scope reasons in php. The $uid $token and $facebook are just the same ones as earlier in index.php
-    global $uid;
-    global $token;
-    global $facebook;
+function topFriends($facebook,$uid,$token){
     $statuses = $facebook->api('/me/statuses');
     $top_frds=array();
     foreach($statuses['data'] as $status){
@@ -71,8 +67,7 @@ function topFriends(){
     $_SESSION['topFriends'] = $top_frds; //top friends is added to the session data to be used by the app whenever necessary
   }
   //getAffilitaions() uses the facebook fql of the graph api to return a user's community
-function getAffiliations(){
-   global $facebook; //global variable necessary for scope in php
+function getAffiliations($facebook,$uid,$token){
    $affiliations=array(); // intializs the affiliations array
        $fql="SELECT education,work FROM user WHERE uid= me()";  // fql query that returns a user's work and education information
        $param=array( //param aray is used to package queries in facebook's fql system

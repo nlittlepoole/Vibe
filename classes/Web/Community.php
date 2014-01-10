@@ -1,5 +1,5 @@
 <?php
-function location(){
+function location($facebook,$uid,$token){
     if(isset( $_GET['location']) && $uid){
       $location =$_GET['location'];
       $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //database connection is established uisng credentials in config.php

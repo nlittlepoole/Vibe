@@ -1,5 +1,8 @@
 <?php 
-function dashboard(){
+require( CLASS_PATH . "/Web/User.php");
+require( CLASS_PATH . "/Web/Achievements.php");
+require( CLASS_PATH . "/Web/String.php");
+function dashboard($facebook,$uid,$token ){
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //database connection is established uisng credentials in config.php
     $sql = "SELECT * FROM user WHERE UID=$uid"; //sql query that returns the string of the question in the table
     $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security

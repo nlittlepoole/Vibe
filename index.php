@@ -17,25 +17,26 @@ $_SESSION['userID'] = $uid;
 //Switch case determines what to do next based on the input arguments from the action URL fragment("?=action" in the URL)
 switch ( $action ) {
   case 'login': //login occurs after user hits login button on homepage.php, mostly just sets up environment to play vibe 
-    $params = array( 'next' => 'http://localhost' ); // redirect url is passed to facebook object
-    $_SESSION['logoutUrl'] = $facebook->getLogoutUrl($params); //logout url is created and stored to the session data.
-    addUser($uid); //adds user ID to mysql USER table, method does nothing if ID already exists and activates the ID if information exists but this is the first time the user has logged in
-    topFriends(); // pulls users top friends using the top friends function
-    $graph_url="https://graph.facebook.com/" . $uid . "/friends?access_token=" . $token; //graph url is made to access the user's friendlist
-    $_SESSION['friends'] = json_decode(file_get_contents($graph_url), true); //user's friend list is a json that is decoded from the graph url and returned as a 2d array
+    require( CLASS_PATH . "/Web/User.php");
+    $_SESSION['logoutUrl'] = $facebook->getLogoutUrl(array( 'next' => 'http://localhost') ); //logout url is created and stored to the session data.
+    addUser($facebook,$uid,$token); //adds user ID to mysql USER table, method does nothing if ID already exists and activates the ID if information exists but this is the first time the user has logged in
+    topFriends($facebook,$uid,$token); // pulls users top friends using the top friends function
+    $_SESSION['friends'] = json_decode(file_get_contents("https://graph.facebook.com/" . $uid . "/friends?access_token=" . $token), true); //user's friend list is a json that is decoded from the graph url and returned as a 2d array
     $_SESSION['numberOfFriends'] = max(array_map('count', $_SESSION['friends'])); 
     header('Location: /index.php?action=dashboard'); // index is reloaded but with question prameter. Now that environment is set up index.php is reloaded with the intent of answring questiosn
     break;
   case 'question'://occurs after a login or another question, this case handles generating a new question and friend
-    question(); // calls the question function that pulls a user and question and places the data in the Session cache
+    require( CLASS_PATH . "/Web/Question.php");
+    question($facebook,$uid,$token); // calls the question function that pulls a user and question and places the data in the Session cache
     header('Location: /website/questions.php'); //sends browser to questions page with Session Data containing questions input above
     break;
   case 'location':
-  location();
-
+  require( CLASS_PATH . "/Web/Community.php");
+  location($facebook,$uid,$token);
     break;
   case 'dashboard'://occurs after a login or another question, this case handles generating a new question and friend
-    dashboard();
+      require( CLASS_PATH . "/Web/Dashboard.php");
+    dashboard($facebook,$uid,$token);
 
 	/* Modified to send to the new dashboard (Noah) */
     header('Location: /website/dashboard.php'); //sends browser to questions page with Session Data containing questions input above
@@ -43,7 +44,8 @@ switch ( $action ) {
 
   break;
   case 'submit'://a user submits a question
-    submit();
+    require( CLASS_PATH . "/Web/Question.php");
+    submit($facebook,$uid,$token );
     header('Location: /index.php?action=question');
     break;
 	
@@ -72,7 +74,6 @@ switch ( $action ) {
   break;
 	
   default: //this is the default setting, it simply take sthe user to the homepage. It also creates the facebook login url 
-    global $facebook; //global is necessary to maintain scope. PHP has slightly different scope rules than other high level languages and this line is necessary to keep accessing the facebook api
     //when a user logs in through facebook, the are simply going to a special link created by the facebook api. The api uses our AP ID and password to generate the link
     $params = array(
                   'scope' => "friends_photos, user_groups, user_photos,user_education_history,read_friendlists,read_stream,user_work_history,user_photo_video_tags, friends_photo_video_tags,friends_education_history,friends_work_history", //these are the permissions Vibe needs from facebook
