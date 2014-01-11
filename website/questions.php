@@ -101,32 +101,33 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 				</li>
 				<li class="sidebar-search-wrapper">
 					<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-					<form class="sidebar-search" action="extra_search.html" method="POST">
+					<form class="sidebar-search" action="/index.php?action=search" method="POST">
 						<div class="form-container">
 							<div class="input-box">
 								<a href="javascript:;" class="remove"></a>
-								<input type="text" placeholder="Search..."/>
+								<input type="text" name="Query" placeholder="Search..."/>
 								<input type="button" class="submit" value=" "/>
 							</div>
 						</div>
 					</form>
 					<!-- END RESPONSIVE QUICK SEARCH FORM -->
 				</li>
-				<li class="start active ">
+				<li class="">
 					<a href="/index.php?action=dashboard">
 					<i class="fa fa-home"></i>
 					<span class="title">
 						Dashboard
 					</span>
-					<span class="selected">
-					</span>
+					
 					</a>
 				</li>
-				<li class="">
+				<li class="start active ">
 					<a href="/index.php?action=question">
 					<i class="fa fa-question"></i>
 					<span class="title">
 						Questions
+					</span>
+					<span class="selected">
 					</span>
 					</a>
 				</li>
@@ -237,23 +238,20 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 							<div style="display: block; margin-left: auto; margin-right: auto">
 								<img src=<?php echo $pic ?> style="width: 300px; overflow:hidden; border-radius: 50%">
 							</div>
-							<form role="form" class="form-horizontal form-bordered">
+							<form role="form" class="form-horizontal form-bordered" action="/index.php?action=submit" method="post">
 								<div class="form-body">
 									<div class="form-group">
 										<label class="col-md-3 control-label">Vibe Score</label>
 										<div class="col-md-4">
 											<div id="slider-snap-inc" class="slider bg-green">
 											</div>
-											<div class="slider-value">
-												<span id="slider-snap-inc-amount">
-												</span>
-											</div>
+											<input type="hidden" id="slider-snap-inc-amount" name="slideVal"/>
 										</div>
 									</div>
 									<div class="form-group last">
 										<label class="col-md-3 control-label">Comments</label>
 										<div class="col-md-9">
-											<input type="text" class="form-control" placeholder="Enter comments" maxlength="60">
+											<input type="text" class="form-control" name="commentsVal" placeholder="Enter comments" maxlength="60">
 											<span class="help-block">
 												Please enter any comments above.
 											</span>
@@ -262,7 +260,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								</div>
 								<div class="form-actions fluid">
 									<div class="col-md-offset-3 col-md-9">
-										<button type="submit" onclick="location.href='/index.php?action=submit'" class="btn green">Submit</button>
+										<input type="submit"  class="btn green">
 										<button type="button" onclick="location.href='/index.php?action=question'" class="btn default">Skip</button>
 									</div>
 								</div>

@@ -88,11 +88,11 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 				</li>
 				<li class="sidebar-search-wrapper">
 					<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-					<form class="sidebar-search" action="extra_search.html" method="POST">
+					<form class="sidebar-search" action="/index.php?action=search" method="POST">
 						<div class="form-container">
 							<div class="input-box">
 								<a href="javascript:;" class="remove"></a>
-								<input type="text" placeholder="Search..."/>
+								<input type="text" name="Query" placeholder="Search..."/>
 								<input type="button" class="submit" value=" "/>
 							</div>
 						</div>
@@ -200,18 +200,19 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 						<div class="portlet-body" style="background-image: url(../img/sf.jpg); background-size: 100%; height: 500px; background-repeat: no-repeat;">
 							<div class="note note-success">
 								<h4 class="block">Search any community or person on Vibe. Right here.</h4>
-								<form role="form">
+								<form role="form" action="/index.php?action=search" method="post">
 								<div class="form-body">
 									<div class="form-group" style="width: 40%">
 										<span class="input-group">
 											<span class="input-group-addon">
 												<i class="fa fa-question-circle"></i>
 											</span>
-											<input type="text" class="form-control" placeholder="Enter text">
+											<input type="text" class="form-control" placeholder="Enter text" name="Query">
 										</span>
 									</div>
 									<div class="form-actions">
-										<button type="submit" class="btn blue">Submit</button>
+
+										<button type="submit" class="btn blue">Submit</button>	
 									</div>
 								</div>
 								</form>

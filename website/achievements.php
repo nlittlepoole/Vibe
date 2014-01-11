@@ -83,25 +83,24 @@
 				</li>
 				<li class="sidebar-search-wrapper">
 					<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-					<form class="sidebar-search" action="extra_search.html" method="POST">
+					<form class="sidebar-search" action="/index.php?action=search" method="POST">
 						<div class="form-container">
 							<div class="input-box">
 								<a href="javascript:;" class="remove"></a>
-								<input type="text" placeholder="Search..."/>
+								<input type="text" name="Query" placeholder="Search..."/>
 								<input type="button" class="submit" value=" "/>
 							</div>
 						</div>
 					</form>
 					<!-- END RESPONSIVE QUICK SEARCH FORM -->
 				</li>
-				<li class="start active ">
+				<li class="">
 					<a href="/index.php?action=dashboard">
 					<i class="fa fa-home"></i>
 					<span class="title">
 						Dashboard
 					</span>
-					<span class="selected">
-					</span>
+					
 					</a>
 				</li>
 				<li class="">
@@ -110,6 +109,7 @@
 					<span class="title">
 						Questions
 					</span>
+					
 					</a>
 				</li>
 				<li class="">
@@ -125,11 +125,13 @@
 						<?php echo $_SESSION['dashboard']['Communities'] ?>
 					</ul>
 				</li>
-				<li id="frontend-link" class="tooltips" data-placement="right" data-original-title="Frontend&nbsp;Theme For&nbsp;Metronic&nbsp;Admin">
+				<li id="frontend-link" class="start active" data-placement="right" data-original-title="See Achievements">
 					<a href="achievements.php">
 					<i class="fa fa-trophy"></i>
 					<span class="title">
 						Achievements
+					</span>
+					<span class="selected">
 					</span>
 					</a>
 				</li>

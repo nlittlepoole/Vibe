@@ -25,11 +25,11 @@ var UIjQueryUISliders = function () {
                 max: 5,
                 step: 1,
                 slide: function (event, ui) {
-                    //$("#slider-snap-inc-amount").text(ui.value);
+                    $("#slider-snap-inc-amount").text(ui.value);
                 }
             });
 
-            //$("#slider-snap-inc-amount").text($("#slider-snap-inc").slider("value"));
+            $("#slider-snap-inc-amount").text($("#slider-snap-inc").slider("value"));
 
             // range slider
             $("#slider-range").slider({
