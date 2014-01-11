@@ -51,14 +51,16 @@ switch ( $action ) {
 	
   case 'submit2':
 	//The settings page has been populated with information  
+	require( CLASS_PATH . "/Web/Settings.php");
+	header('Location: /index.php?action=profile&profile=' . $_SESSION['userID']);
 	  
-	break;	
+  break;	
   case 'search':
     require( CLASS_PATH . "/Web/Search.php");
     print_r(search($_POST["Query"],$facebook,$uid,$token));  
   break;
   case 'profile':
-  require( CLASS_PATH . "/Web/Dashboard.php");
+  	require( CLASS_PATH . "/Web/Dashboard.php");
     if($uid){
         $user=$uid;
         if(isset($_GET['profile']) && $_GET['profile']!=$user ){
@@ -69,10 +71,12 @@ switch ( $action ) {
             $_SESSION['profile']=$_SESSION['dashboard'];
         }
         header('Location: /website/profile.php?user='.$user);
+		flush(); 
     }
     else{
       $_SESSION['profile']=null;
       header('Location: /index.php');
+	  flush(); 
     }
 
   break;

@@ -190,7 +190,7 @@
 				</a>
 				<ul class="dropdown-menu">
 					<li>
-						<a href="profile.php"><i class="fa fa-user"></i> Profile</a>
+						<?php echo '<a href="/index.php?action=profile&profile=' . $_SESSION['userID'] . '"><i class="fa fa-user"></i> Profile</a>' ?>
 					</li>
 					<li>
 						<a href="achievements.php"><i class="fa fa-tasks"></i> Achievements
