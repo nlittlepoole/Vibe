@@ -4,7 +4,8 @@
 
 <!-- START UP THE SESSION -->
 <?php 
-	error_reporting(0);
+	ob_start();
+	//error_reporting(0);
     session_start();
     $path = $_SERVER['DOCUMENT_ROOT'];
     require($path . "/config.php");
@@ -12,7 +13,9 @@
     $action = isset( $_GET['action'] ) ? $_GET['action'] : "Invite more Friends to Vibe for Comments"; //sets $action to "Action" url fragment string if action isn't null
     $profile= isset( $_GET['user'] ) ? $_GET['user'] : "";
     if(!$profile || !$_SESSION['profile']){
-    	header('Location:/index.php?action=profile');
+    	//header('Location: /index.php?action=profile');
+		header('Location: http://www.google.com');
+		flush(); 
     }  
     $action = isset( $_GET['action'] ) ? $_GET['action'] : "Invite more Friends to Vibe for Comments"; //sets $action to "Action" url fragment string if action isn't null
     $pic="http://graph.facebook.com/" . $profile . "/picture?width=300&height=300";
@@ -269,6 +272,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-profile-template
 																	2043
 																</span>
 															</li>
+															<!--
 															<li>
 																<span class="sale-info">
 																	 TOTAL ACHIEVEMENTS<i class="fa fa-img-down"></i>
@@ -277,13 +281,16 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-profile-template
 																	<?php echo $_SESSION['numAchievementsCompleted'] ?>
 																</span>
 															</li>
+															-->
 															<li>
+																
 																<span class="sale-info">
 																	POINTS
 																</span>
 																<span class="sale-num">
 																	<?php echo $_SESSION['profile']['Points'] ?>
 																</span>
+																
 															</li>
 														</ul>
 													</div>

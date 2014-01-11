@@ -4,18 +4,82 @@
 
 <!-- START UP THE SESSION -->
 <?php 
+	ob_start();
 	error_reporting(0);
     session_start();
     $path = $_SERVER['DOCUMENT_ROOT'];
     require($path . "/config.php");
 	require($path . "/php-sdk/facebook.php"); //imports facebook api methods and objects
     
+    buildSettings();
     buildCheckBoxes();
     
     $action = isset( $_GET['action'] ) ? $_GET['action'] : "Invite more Friends to Vibe for Comments"; //sets $action to "Action" url fragment string if action isn't null
     $dashboard=$_SESSION['dashboard'];
     $pic=$dashboard['pic'];
   
+  
+   function buildSettings() {
+       $conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+	   $sql = "SELECT websiteURL,displayLocation,displayBirthdate,blurb,showNumFriends FROM user WHERE UID=" . $_SESSION['userID'];
+	   $st = $conn->prepare($sql);
+	   $st->execute();
+	   
+	   //All the data for settings is now in the associative array of name settingsData
+	   $settingsData = $st->fetch();
+	   
+	   //WEBSITE URL
+	   $_SESSION['tempURL'] = $settingsData['websiteURL']; 
+	   if($settingsData['websiteURL'] == "") {
+	   	   $_SESSION['tempURL'] = "Website URL"; 
+	   }
+	   
+	   //BLURB
+	   $_SESSION['tempBlurb'] = $settingsData['blurb']; 
+	   if($settingsData['blurb'] == "") {
+	   	   $_SESSION['tempBlurb'] = "Enter blurb"; 
+	   }
+	   
+	   //DISPLAY LOCATION
+	   $_SESSION['displayLocYes']; 
+	   $_SESSION['displayLocNo']; 
+	   if($settingsData['displayLocation'] == 1) {
+	       $_SESSION['displayLocYes'] = "checked";
+	       $_SESSION['displayLocNo'] = "";	
+	   }
+	   else {
+	   	   $_SESSION['displayLocNo'] = "checked";
+	       $_SESSION['displayLocYes'] = "";	
+	   }
+	   
+	   //DISPLAY BIRTHDATE
+	   $_SESSION['displayBDateYes']; 
+	   $_SESSION['displayBDateNo']; 
+	   if($settingsData['displayBirthdate'] == 1) {
+	       $_SESSION['displayBDateYes'] = "checked";
+	       $_SESSION['displayBDateNo'] = "";	
+	   }
+	   else {
+	   	   $_SESSION['displayBDateNo'] = "checked";
+	       $_SESSION['displayBDateYes'] = "";	
+	   }
+	   
+	   //DISPLAY FRIENDS
+	   $_SESSION['displayFriendsYes']; 
+	   $_SESSION['displayFriendsNo']; 
+	   if($settingsData['showNumFriends'] == 1) {
+	       $_SESSION['displayFriendsYes'] = "";
+	       $_SESSION['displayFriendsNo'] = "checked";	
+	   }
+	   else {
+	   	   $_SESSION['displayFriendsYes'] = "checked";
+	       $_SESSION['displayFriendsNo'] = "";	
+	   }
+	   
+	   
+	   $conn = null;
+	   
+   }
   
    function buildCheckBoxes(){
    	   //CURRENTLY WORKING ON THIS -- DO NOT TOUCH!
@@ -170,7 +234,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 function validateForm()
 {
 	var x = document.forms["settingsform"]["websitelink"].value;
-	if (x.indexOf('.com') < 0 || x.indexOf('.edu') < 0 || x.indexOf('.org') < 0 || x.indexOf('.us') < 0 || x.indexOf('.net') < 0)
+	if (x.indexOf('.com') < 0 && x.indexOf('.edu') < 0 && x.indexOf('.org') < 0 && x.indexOf('.us') < 0 && x.indexOf('.net') < 0)
 	{
 		//alert("Problem!"); 
 	    document.getElementById("websiteURL").className+=' has-error';
@@ -325,7 +389,7 @@ function validateForm()
 							</div>
 						</div>
 						<div class="portlet-body form">
-							<form class="form-horizontal" role="form" method="post" action="searchresults.php" onsubmit="return validateForm()" name="settingsform">
+							<form class="form-horizontal" role="form" method="post" action="/index.php?action=submit2" onsubmit="return validateForm()" name="settingsform">
 								<div class="form-body">
 									<div class="form-group">
 										<label class="col-md-3 control-label">Blurb</label>
@@ -375,9 +439,9 @@ function validateForm()
 										<div class="col-md-9">
 											<div class="radio-list">
 												<label class="radio-inline">
-												<input type="radio" name="optionsLocations" id="optionsLocations1" value="option1"> Yes </label>
+												<input type="radio" name="optionsLocations" id="optionsLocations1" value="option1" <?php echo $_SESSION['displayLocYes'] ?>> Yes </label>
 												<label class="radio-inline">
-												<input type="radio" name="optionsLocations" id="optionsLocations2" value="option2" checked> No </label>
+												<input type="radio" name="optionsLocations" id="optionsLocations2" value="option2" <?php echo $_SESSION['displayLocNo'] ?>> No </label>
 											</div>
 										</div>
 									</div>
@@ -386,9 +450,9 @@ function validateForm()
 										<div class="col-md-9">
 											<div class="radio-list">
 												<label class="radio-inline">
-												<input type="radio" name="optionsBirthdate" value="bdate1"> Yes </label>
+												<input type="radio" name="optionsBirthdate" value="bdate1" <?php echo $_SESSION['displayBDateYes'] ?>> Yes </label>
 												<label class="radio-inline">
-												<input type="radio" name="optionsBirthdate" value="bdate2" checked> No </label>
+												<input type="radio" name="optionsBirthdate" value="bdate2" <?php echo $_SESSION['displayBDateNo'] ?>> No </label>
 											</div>
 										</div>
 									</div>
@@ -397,9 +461,9 @@ function validateForm()
 										<div class="col-md-9">
 											<div class="radio-list">
 												<label class="radio-inline">
-												<input type="radio" name="optionsFriends" id="optionsFriends1" value="option1" checked> Yes </label>
+												<input type="radio" name="optionsFriends" id="optionsFriends1" value="option1" <?php echo $_SESSION['displayFriendsYes'] ?>> Yes </label>
 												<label class="radio-inline">
-												<input type="radio" name="optionsFriends" id="optionsFriends2" value="option2"> No </label>
+												<input type="radio" name="optionsFriends" id="optionsFriends2" value="option2" <?php echo $_SESSION['displayFriendsNo'] ?>> No </label>
 											</div>
 										</div>
 									</div>
