@@ -5,7 +5,7 @@ date_default_timezone_set( "America/New_York" );  // http://www.php.net/manual/e
 define( "DB_DSN", "mysql:host=localhost;dbname=Vibosphere" );
 define( "DB_USERNAME", "Vibosphere" );
 define( "DB_PASSWORD", "Carman4ever!" );
-define( "CLASS_PATH", "/classes" );
+define( "CLASS_PATH", "classes" );
 define( "ADMIN_USERNAME", "teamvibe" );
 define( "ADMIN_PASSWORD", "Carman4ever" );
 define( "APP_ID", "257473684410281" );
