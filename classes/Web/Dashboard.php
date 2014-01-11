@@ -105,4 +105,49 @@ function dashboard($facebook,$uid,$token ){
     
     $conn=null;
  }
-    ?>
+  function profile($facebook,$uid,$token ){
+    $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //database connection is established uisng credentials in config.php
+    $sql = "SELECT * FROM user WHERE UID=$uid"; //sql query that returns the string of the question in the table
+    $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
+    $st->execute();//executes query above
+    $data=$st->fetch(); //$question source is set to result of query
+    $data['Comments_Size']=$data['Comments']!=''?sizeof(split('&&',$data['Comments'])):0;
+    $data['Comments_Size']=$data['Comments']!=''?sizeof($data['Comments']):0;
+    $data['Comments']=comments($data['Comments']);
+    //print_r($data['Comments']);
+    $scores=Array(
+      "Affability"=>$data['Affability'],
+      "Ambition"=>$data['Ambition'],
+      "Attractiveness"=>$data['Attractiveness'],
+      "Confidence"=>$data['Confidence'],
+      "Fun"=>$data['Fun'],
+      "Happiness"=>$data['Happiness'],
+      "Honesty"=>$data['Attractiveness'],
+      "Humility"=>$data['Humility'],
+      "Humor"=>$data['Humor'],
+      "Intelligence"=>$data['Intelligence'],
+      "Kindness"=>$data['Kindness'],
+      "Promiscuity"=>$data['Promiscuity'],
+      "Reliability"=>$data['Reliability'],
+      "Style"=>$data['Style'],
+      );
+    $data['Percentiles']=getPercentiles("global",$scores);
+    $data['Attractiveness_Keywords']=isset($data['Attractiveness_Keywords'])? keywords($data['Attractiveness_Keywords'],$data['Attractiveness_Total'],4) : "N/A";
+    $data['Affability_Keywords']=isset($data['Affability_Keywords'])? keywords($data['Affability_Keywords'],$data['Affability_Total'],3) : "N/A";
+    $data['Intelligence_Keywords']=isset($data['Intelligence_Keywords'])? keywords($data['Intelligence_Keywords'],$data['Intelligence_Total'],4) : "N/A";
+    $data['Style_Keywords']=isset($data['Style_Keywords'])? keywords($data['Style_Keywords'],$data['Style_Total'],2) : "N/A";
+    $data['Promiscuity_Keywords']=isset($data['Promiscuity_Keywords'])? keywords($data['Promiscuity_Keywords'],$data['Promiscuity_Total'],2) : "N/A";
+    $data['Humor_Keywords']=isset($data['Humor_Keywords'])? keywords($data['Humor_Keywords'],$data['Humor_Total'],2) : "N/A";
+    $data['Confidence_Keywords']=isset($data['Confidence_Keywords'])? keywords($data['Confidence_Keywords'],$data['Confidence_Total'],1) : "N/A";
+    $data['Fun_Keywords']=isset($data['Fun_Keywords'])? keywords($data['Fun_Keywords'],$data['Fun_Total'],2) : "N/A";
+    $data['Kindness_Keywords']=isset($data['Kindness_Keywords'])? keywords($data['Kindness_Keywords'],$data['Kindness_Total'],2) : "N/A";
+    $data['Honesty_Keywords']=isset($data['Honesty_Keywords'])? keywords($data['Honesty_Keywords'],$data['Honesty_Total'],2) : "N/A";
+    $data['Reliability_Keywords']=isset($data['Reliability_Keywords'])? keywords($data['Reliability_Keywords'],$data['Reliability_Total'],1) : "N/A";
+    $data['Happiness_Keywords']=isset($data['Happiness_Keywords'])? keywords($data['Happiness_Keywords'],$data['Happiness_Total'],2) : "N/A";
+    $data['Ambition_Keywords']=isset($data['Ambition_Keywords'])? keywords($data['Ambition_Keywords'],$data['Ambition_Total'],2) : "N/A";
+    $data['Humility_Keywords']=isset($data['Humility_Keywords'])? keywords($data['Humility_Keywords'],$data['Humility_Total'],2) : "N/A";
+    $data["pic"]="http://graph.facebook.com/" . $uid . "/picture?width=300&height=300";
+    $conn=null;
+    return $data;
+ }
+    ?> 

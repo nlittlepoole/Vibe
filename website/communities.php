@@ -8,10 +8,10 @@
     session_start();
     $path = $_SERVER['DOCUMENT_ROOT'];
     require($path . "/config.php");
-    $location= isset( $_GET['location'] ) ? $_GET['location'] : "";
+    $location= isset( $_GET['profile'] ) ? $_GET['profile'] : "";
     $pic=$_SESSION['dashboard']['pic'];
-    if(!isset($_SESSION['location'])){
-    	header('Location:/index.php?action=location&location='.$location);
+    if(!isset($_SESSION['profile'])){
+    	header('Location:/index.php?action=profile');
     }  
     $action = isset( $_GET['action'] ) ? $_GET['action'] : "Invite more Friends to Vibe for Comments"; //sets $action to "Action" url fragment string if action isn't null
     $dashboard=$_SESSION['dashboard'];

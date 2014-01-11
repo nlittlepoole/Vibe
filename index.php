@@ -57,6 +57,25 @@ switch ( $action ) {
     require( CLASS_PATH . "/Web/Search.php");
     print_r(search($_POST["Query"],$facebook,$uid,$token));  
   break;
+  case 'profile':
+  require( CLASS_PATH . "/Web/Dashboard.php");
+    if($uid){
+        $user=$uid;
+        if(isset($_GET['profile']) && $_GET['profile']!=$user ){
+         $user=$_GET['profile'];
+         $_SESSION['profile']=profile($facebook,$user,$token );
+        }
+        else{
+            $_SESSION['profile']=$_SESSION['dashboard'];
+        }
+        header('Location: /website/profile.php?user='.$user);
+    }
+    else{
+      $_SESSION['profile']=null;
+      header('Location: /index.php');
+    }
+
+  break;
 	
   default: //this is the default setting, it simply take sthe user to the homepage. It also creates the facebook login url 
     //when a user logs in through facebook, the are simply going to a special link created by the facebook api. The api uses our AP ID and password to generate the link
