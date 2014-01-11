@@ -213,10 +213,6 @@ function validateForm()
 								<i class="fa fa-comments"></i>Query Results
 							</div>
 							<div class="tools">
-								<a href="javascript:;" class="collapse"></a>
-								<a href="#portlet-config" data-toggle="modal" class="config"></a>
-								<a href="javascript:;" class="reload"></a>
-								<a href="javascript:;" class="remove"></a>
 							</div>
 						</div>
 						<div class="portlet-body">
@@ -228,16 +224,7 @@ function validateForm()
 										#
 									</th>
 									<th>
-										First Name
-									</th>
-									<th>
-										Last Name
-									</th>
-									<th>
-										Username
-									</th>
-									<th>
-										Status
+										Name
 									</th>
 								</tr>
 								</thead>
