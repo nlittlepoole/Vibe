@@ -10,14 +10,18 @@
     require($path . "/config.php");
     
     $action = isset( $_GET['action'] ) ? $_GET['action'] : "Invite more Friends to Vibe for Comments"; //sets $action to "Action" url fragment string if action isn't null
-    $dashboard=$_SESSION['dashboard'];
-    $pic=$dashboard['pic'];
+    $profile= isset( $_GET['user'] ) ? $_GET['user'] : "";
+    if(!$profile || !$_SESSION['profile']){
+    	header('Location:/index.php?action=profile');
+    }  
+    $action = isset( $_GET['action'] ) ? $_GET['action'] : "Invite more Friends to Vibe for Comments"; //sets $action to "Action" url fragment string if action isn't null
+    $pic="http://graph.facebook.com/" . $profile . "/picture?width=300&height=300";
+	toggleInfo($profile);
+
 	
-	toggleInfo();
-	
-	function toggleInfo() {
+	function toggleInfo($uid) {
 	   $conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-	   $sql = "SELECT displayLocation,displayBirthdate,websiteURL,showNumFriends,totalAnswers FROM user WHERE UID=" . $_SESSION['userID'];
+	   $sql = "SELECT displayLocation,displayBirthdate,websiteURL,showNumFriends,totalAnswers FROM user WHERE UID=" . $uid;
 	   $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
 	   $st->execute();//executes query above
 	   $data=$st->fetch();
@@ -43,11 +47,11 @@
 
 
 <!-- 
-Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.0.3
+Template Name: Metronic - Responsive Admin profile Template build with Twitter Bootstrap 3.0.3
 Version: 1.5.5
 Author: KeenThemes
 Website: http://www.keenthemes.com/
-Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
+Purchase: http://themeforest.net/item/metronic-responsive-admin-profile-template/4021469?ref=keenthemes
 -->
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
@@ -154,7 +158,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					</span>
 					</a>
 					<ul class="sub-menu">
-						<?php echo $_SESSION['dashboard']['Communities'] ?>
+						<?php echo $_SESSION['profile']['Communities'] ?>
 					</ul>
 				</li>
 				<li id="frontend-link" class="tooltips" data-placement="right" data-original-title="Frontend&nbsp;Theme For&nbsp;Metronic&nbsp;Admin">
@@ -231,7 +235,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<div class="col-md-9">
 										<div class="row">
 											<div class="col-md-8 profile-info">
-												<h1><?php echo $_SESSION['dashboard']['Name'] ?></h1>
+												<h1><?php echo $_SESSION['profile']['Name'] ?></h1>
 												<p>
 													Some possible description of the person. And a website link below if they want to include one.
 												</p>
@@ -278,7 +282,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 																	POINTS
 																</span>
 																<span class="sale-num">
-																	<?php echo $_SESSION['dashboard']['Points'] ?>
+																	<?php echo $_SESSION['profile']['Points'] ?>
 																</span>
 															</li>
 														</ul>
@@ -320,10 +324,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 																Attractiveness
 															</td>
 															<td>
-																<?php echo $_SESSION['dashboard']['Attractiveness'] ? $_SESSION['dashboard']['Attractiveness']: "--" ?>
+																<?php echo $_SESSION['profile']['Attractiveness'] ? $_SESSION['profile']['Attractiveness']: "--" ?>
 															</td>
 															<td><em>
-																<?php echo isset($_SESSION['dashboard']['Attractiveness_Keywords']) ? $_SESSION['dashboard']['Attractiveness_Keywords']: "N/A" ?>
+																<?php echo isset($_SESSION['profile']['Attractiveness_Keywords']) ? $_SESSION['profile']['Attractiveness_Keywords']: "N/A" ?>
 															</em></td>
 														</tr>
 														<tr>
@@ -331,10 +335,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 																Affability
 															</td>
 															<td>
-																<?php echo $_SESSION['dashboard']['Affability'] ? $_SESSION['dashboard']['Affability']: "--" ?>
+																<?php echo $_SESSION['profile']['Affability'] ? $_SESSION['profile']['Affability']: "--" ?>
 															</td>
 															<td><em>
-																<?php echo isset($_SESSION['dashboard']['Affability_Keywords']) ? $_SESSION['dashboard']['Affability_Keywords']: "N/A" ?>
+																<?php echo isset($_SESSION['profile']['Affability_Keywords']) ? $_SESSION['profile']['Affability_Keywords']: "N/A" ?>
 															</em></td>
 														</tr>
 														<tr>
@@ -342,10 +346,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 																Intelligence
 															</td>
 															<td>
-																<?php echo $_SESSION['dashboard']['Intelligence'] ? $_SESSION['dashboard']['Intelligence']: "--" ?>
+																<?php echo $_SESSION['profile']['Intelligence'] ? $_SESSION['profile']['Intelligence']: "--" ?>
 															</td>
 															<td><em>
-																<?php echo isset($_SESSION['dashboard']['Intelligence_Keywords']) ? $_SESSION['dashboard']['Intelligence_Keywords']: "N/A" ?>
+																<?php echo isset($_SESSION['profile']['Intelligence_Keywords']) ? $_SESSION['profile']['Intelligence_Keywords']: "N/A" ?>
 															</em></td>
 														</tr>
 														<tr>
@@ -353,10 +357,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 																Style
 															</td>
 															<td>
-																<?php echo $_SESSION['dashboard']['Style'] ? $_SESSION['dashboard']['Style']: "--" ?>
+																<?php echo $_SESSION['profile']['Style'] ? $_SESSION['profile']['Style']: "--" ?>
 															</td>
 															<td><em>
-																<?php echo isset($_SESSION['dashboard']['Style_Keywords']) ? $_SESSION['dashboard']['Style_Keywords']: "N/A" ?>
+																<?php echo isset($_SESSION['profile']['Style_Keywords']) ? $_SESSION['profile']['Style_Keywords']: "N/A" ?>
 															</em></td>
 														</tr>
 														<tr>
@@ -364,10 +368,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 																Promiscuity
 															</td>
 															<td>
-																<?php echo $_SESSION['dashboard']['Promiscuity'] ? $_SESSION['dashboard']['Promiscuity']: "--" ?>
+																<?php echo $_SESSION['profile']['Promiscuity'] ? $_SESSION['profile']['Promiscuity']: "--" ?>
 															</td>
 															<td><em>
-																<?php echo isset($_SESSION['dashboard']['Promiscuity_Keywords']) ? $_SESSION['dashboard']['Promiscuity_Keywords']: "N/A" ?>
+																<?php echo isset($_SESSION['profile']['Promiscuity_Keywords']) ? $_SESSION['profile']['Promiscuity_Keywords']: "N/A" ?>
 															</em></td>
 														</tr>
 														<tr>
@@ -375,10 +379,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 																Humor
 															</td>
 															<td>
-																<?php echo $_SESSION['dashboard']['Humor'] ? $_SESSION['dashboard']['Humor']: "--" ?>
+																<?php echo $_SESSION['profile']['Humor'] ? $_SESSION['profile']['Humor']: "--" ?>
 															</td>
 															<td><em>
-																<?php echo isset($_SESSION['dashboard']['Humor_Keywords']) ? $_SESSION['dashboard']['Humor_Keywords']: "N/A" ?>
+																<?php echo isset($_SESSION['profile']['Humor_Keywords']) ? $_SESSION['profile']['Humor_Keywords']: "N/A" ?>
 															</em></td>
 														</tr>
 														<tr>
@@ -386,10 +390,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 																Confidence
 															</td>
 															<td>
-																<?php echo $_SESSION['dashboard']['Confidence'] ? $_SESSION['dashboard']['Confidence']: "--" ?>
+																<?php echo $_SESSION['profile']['Confidence'] ? $_SESSION['profile']['Confidence']: "--" ?>
 															</td>
 															<td><em>
-																<?php echo isset($_SESSION['dashboard']['Confidence_Keywords']) ? $_SESSION['dashboard']['Confidence_Keywords']: "N/A" ?>
+																<?php echo isset($_SESSION['profile']['Confidence_Keywords']) ? $_SESSION['profile']['Confidence_Keywords']: "N/A" ?>
 															</em></td>
 														</tr>
 														<tr>
@@ -397,10 +401,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 																Fun
 															</td>
 															<td>
-																<?php echo $_SESSION['dashboard']['Fun'] ? $_SESSION['dashboard']['Fun']: "--" ?>
+																<?php echo $_SESSION['profile']['Fun'] ? $_SESSION['profile']['Fun']: "--" ?>
 															</td>
 															<td><em>
-																<?php echo isset($_SESSION['dashboard']['Fun_Keywords']) ? $_SESSION['dashboard']['Fun_Keywords']: "N/A" ?>
+																<?php echo isset($_SESSION['profile']['Fun_Keywords']) ? $_SESSION['profile']['Fun_Keywords']: "N/A" ?>
 															</em></td>
 														</tr>
 														<tr>
@@ -408,10 +412,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 																Kindness
 															</td>
 															<td>
-																<?php echo $_SESSION['dashboard']['Kindness'] ? $_SESSION['dashboard']['Kindness']: "--" ?>
+																<?php echo $_SESSION['profile']['Kindness'] ? $_SESSION['profile']['Kindness']: "--" ?>
 															</td>
 															<td><em>
-																<?php echo isset($_SESSION['dashboard']['Kindness_Keywords']) ? $_SESSION['dashboard']['Kindness_Keywords']: "N/A" ?>
+																<?php echo isset($_SESSION['profile']['Kindness_Keywords']) ? $_SESSION['profile']['Kindness_Keywords']: "N/A" ?>
 															</em></td>
 														</tr>
 														<tr>
@@ -419,10 +423,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 																Honesty
 															</td>
 															<td>
-																<?php echo $_SESSION['dashboard']['Honesty'] ? $_SESSION['dashboard']['Honesty']: "--" ?>
+																<?php echo $_SESSION['profile']['Honesty'] ? $_SESSION['profile']['Honesty']: "--" ?>
 															</td>
 															<td><em>
-																<?php echo isset($_SESSION['dashboard']['Honesty_Keywords']) ? $_SESSION['dashboard']['Honesty_Keywords']: "N/A" ?>
+																<?php echo isset($_SESSION['profile']['Honesty_Keywords']) ? $_SESSION['profile']['Honesty_Keywords']: "N/A" ?>
 															</em></td>
 														</tr>
 														<tr>
@@ -430,10 +434,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 																Reliability
 															</td>
 															<td>
-																<?php echo $_SESSION['dashboard']['Reliability'] ? $_SESSION['dashboard']['Reliability']: "--" ?>
+																<?php echo $_SESSION['profile']['Reliability'] ? $_SESSION['profile']['Reliability']: "--" ?>
 															</td>
 															<td><em>
-																<?php echo isset($_SESSION['dashboard']['Reliability_Keywords']) ? $_SESSION['dashboard']['Reliability_Keywords']: "N/A" ?>
+																<?php echo isset($_SESSION['profile']['Reliability_Keywords']) ? $_SESSION['profile']['Reliability_Keywords']: "N/A" ?>
 															</em></td>
 														</tr>
 														<tr>
@@ -441,10 +445,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 																Happiness
 															</td>
 															<td>
-																<?php echo $_SESSION['dashboard']['Happiness'] ? $_SESSION['dashboard']['Happiness']: "--" ?>
+																<?php echo $_SESSION['profile']['Happiness'] ? $_SESSION['profile']['Happiness']: "--" ?>
 															</td>
 															<td><em>
-																<?php echo isset($_SESSION['dashboard']['Happiness_Keywords']) ? $_SESSION['dashboard']['Happiness_Keywords']: "N/A" ?>
+																<?php echo isset($_SESSION['profile']['Happiness_Keywords']) ? $_SESSION['profile']['Happiness_Keywords']: "N/A" ?>
 															</em></td>
 														</tr>
 														<tr>
@@ -452,10 +456,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 																Ambition
 															</td>
 															<td>
-																<?php echo $_SESSION['dashboard']['Ambition'] ? $_SESSION['dashboard']['Ambition']: "--" ?>
+																<?php echo $_SESSION['profile']['Ambition'] ? $_SESSION['profile']['Ambition']: "--" ?>
 															</td>
 															<td><em>
-																<?php echo isset($_SESSION['dashboard']['Ambition_Keywords']) ? $_SESSION['dashboard']['Ambition_Keywords']: "N/A" ?>
+																<?php echo isset($_SESSION['profile']['Ambition_Keywords']) ? $_SESSION['profile']['Ambition_Keywords']: "N/A" ?>
 															</em></td>
 														</tr>
 														<tr>
@@ -463,10 +467,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 																Humility
 															</td>
 															<td>
-																<?php echo $_SESSION['dashboard']['Humility'] ? $_SESSION['dashboard']['Humility']: "--" ?>
+																<?php echo $_SESSION['profile']['Humility'] ? $_SESSION['profile']['Humility']: "--" ?>
 															</td>
 															<td><em>
-																<?php echo isset($_SESSION['dashboard']['Humility_Keywords']) ? $_SESSION['dashboard']['Humility_Keywords']: "N/A" ?>
+																<?php echo isset($_SESSION['profile']['Humility_Keywords']) ? $_SESSION['profile']['Humility_Keywords']: "N/A" ?>
 															</em></td>
 														</tr>
 														</tbody>
@@ -479,7 +483,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 														<div class="scroller" data-height="290px" data-always-visible="1" data-rail-visible1="1">
 															<ul class="feeds">
 																<?php 
-																foreach($_SESSION['dashboard']['Comments'] as $comment){
+																foreach($_SESSION['profile']['Comments'] as $comment){
 																	echo $comment;
 																} ?>
 															</ul>
