@@ -1,7 +1,6 @@
 <?php 
 
-	$profile= isset( $_GET['user'] ) ? $_GET['user'] : "";
-	recordSettings($profile);
+	recordSettings($_SESSION['userID']);
 
 	function recordSettings($uid) {
 	   $conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
