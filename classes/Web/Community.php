@@ -1,4 +1,5 @@
 <?php
+require_once( CLASS_PATH . "/Web/User.php");
 function location($facebook,$uid,$token){
     if(isset( $_GET['location']) && $uid){
       $location =$_GET['location'];
@@ -7,7 +8,7 @@ function location($facebook,$uid,$token){
       $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
       $st->execute();//executes query above
       $raw=$st->fetchAll();
-      print_r($raw);
+      //print_r($raw);
       if($raw){
         $sql = "SELECT * FROM `$location`"; //sql query that returns the string of the question in the table
         $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
@@ -54,21 +55,22 @@ function location($facebook,$uid,$token){
         flush();                             // Force php-output-cache to flush to browser.
       }
       else{
-        sleep(5);
+        echo $location;
         echo "<script type='text/javascript'>alert('Sorry this Community does not have Vibe data yet!');</script>";
-        header('Location:/index.php?action=location');
+        header('Location:/index.php?action=location&location=-1');
       }
     }
     else{
       if(!$uid){
-        sleep(5);
-        echo "<script type='text/javascript'>alert('Log in to use Vibe Communities!');</script>";
+        $location =$_GET['location'];
+        $_SESSION['redirect']="/index.php?action=location&location=".$location;
         header('Location:/index.php');
       }
       else{
+        echo $location;
         sleep(5);
         echo "<script type='text/javascript'>alert('Invalid Request');</script>";
-        header('Location:/index.php?action=dashboard');
+        header('Location:/index.php?action=location&location=-1');
 
       }
       

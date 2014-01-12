@@ -24,7 +24,7 @@ switch ( $action ) {
     $_SESSION['friends'] = json_decode(file_get_contents("https://graph.facebook.com/" . $uid . "/friends?access_token=" . $token), true); //user's friend list is a json that is decoded from the graph url and returned as a 2d array
     $_SESSION['numberOfFriends'] = max(array_map('count', $_SESSION['friends'])); 
     header('Location: /index.php?action=dashboard'); // index is reloaded but with question prameter. Now that environment is set up index.php is reloaded with the intent of answring questiosn
-    break;
+break;
   case 'question'://occurs after a login or another question, this case handles generating a new question and friend
     require( CLASS_PATH . "/Web/Question.php");
     question($facebook,$uid,$token); // calls the question function that pulls a user and question and places the data in the Session cache
@@ -39,7 +39,14 @@ switch ( $action ) {
     dashboard($facebook,$uid,$token);
 
 	/* Modified to send to the new dashboard (Noah) */
-    header('Location: /website/dashboard.php'); //sends browser to questions page with Session Data containing questions input above
+    if($_SESSION['redirect']){
+        echo $redirect=$_SESSION['redirect'];
+        $_SESSION['redirect']=null;
+        header('Location:'.$redirect);
+    }
+    else{
+      header('Location: /website/dashboard.php');
+    }
     flush();                             // Force php-output-cache to flush to browser.
 
   break;
