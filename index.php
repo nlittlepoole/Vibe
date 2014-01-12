@@ -9,8 +9,10 @@ $action = isset( $_GET['action'] ) ? $_GET['action'] : ""; //sets $action to "Ac
 $config = array(); //initializes $config as an array
   $config['appId'] = APP_ID; //$ Facebook App ID code for Vibe, assigned by facebook to Niger Little-Poole
   $config['secret'] = APP_SECRET; //FAcebook secret code for vibe
-$facebook = new Facebook($config); //App ID and passcode used to initialize session authoirzation for facebook API
+$_SESSION['configArray'] = $config;
+  $facebook = new Facebook($config); //App ID and passcode used to initialize session authoirzation for facebook API
 $token = $facebook->getAccessToken(); //Authorization token is grabbed from URL fragment, if user hasn't logged in it will return an invalid token
+$_SESSION['myToken'] = $token;
 $uid = $facebook->getUser(); // Facebook user ID number is returned, if facebook isn't logged in or exception, it returns 0
 $_SESSION['userID'] = $uid; 
 
@@ -84,7 +86,7 @@ switch ( $action ) {
   default: //this is the default setting, it simply take sthe user to the homepage. It also creates the facebook login url 
     //when a user logs in through facebook, the are simply going to a special link created by the facebook api. The api uses our AP ID and password to generate the link
     $params = array(
-                  'scope' => "friends_photos, user_groups, user_photos,user_education_history,read_friendlists,read_stream,user_work_history,user_photo_video_tags, friends_photo_video_tags,friends_education_history,friends_work_history", //these are the permissions Vibe needs from facebook
+                  'scope' => "friends_photos, user_groups, user_photos,user_education_history,read_friendlists,read_stream,user_work_history,user_photo_video_tags, friends_photo_video_tags,friends_education_history,friends_work_history,user_birthday,friends_birthday,user_location,friends_location", //these are the permissions Vibe needs from facebook
                   'redirect_uri' => 'http://localhost/index.php?action=login' //this is the link that facebook will redirect the browser to after succesful login
                 );
     $loginUrl = $facebook->getLoginUrl($params); //the facebook getLoginUrl() is an api method that uses the permissions and redirct url to create a unique login url
