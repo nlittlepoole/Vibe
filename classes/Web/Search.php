@@ -2,17 +2,18 @@
 function profiled($facebook,$uid,$token){
     require_once( CLASS_PATH . "/Web/Dashboard.php");
     require_once( CLASS_PATH . "/Web/User.php");
+    require_once( CLASS_PATH . "/Web/Notification.php");
     if($uid){
         $user=$uid;
         if(isset($_GET['profile']) && $_GET['profile']!=$user ){
          $user=$_GET['profile'];
          if(checkActive($_GET['profile'])){
            $_SESSION['profile']=profile($facebook,$user,$token ); 
+           pushNotification($uid,"Testing","Search");
          }
          else{
             $_SESSION['profile']=profile($facebook,-1,$token );
          }
-         //profile function in dashboard
         }
         else{
             $_SESSION['profile']=$_SESSION['dashboard'];
