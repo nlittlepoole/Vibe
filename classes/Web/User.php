@@ -1,5 +1,7 @@
 <?php
-//addUser(int) function checks if a user is in the Vibosphere database, it adds them if they are not, activates them if they are in there but not active, and ignores if they are in the database
+/*
+Checks if user is in the database
+*/
 function checkUID($uid){
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //initialies connection to the database using the credentials found in config.php
     $sql = "SELECT id FROM user WHERE UID= $uid"; //gets the active status of the user with $uid as a user ID
@@ -13,7 +15,23 @@ function checkUID($uid){
      return true; 
     } 
 }
-
+/*
+Returns true if user exists and is active, otherwise false
+*/
+function checkActive($uid){
+    $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //initialies connection to the database using the credentials found in config.php
+    $sql = "SELECT Active FROM user WHERE UID= $uid"; //gets the active status of the user with $uid as a user ID
+    $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
+    $st->execute(); //executes the sql query found above
+    $raw=$st->fetch();
+    if(!$raw){
+      return false;
+    }
+    else{
+     return true; 
+    } 
+}
+//addUser(int) function checks if a user is in the Vibosphere database, it adds them if they are not, activates them if they are in there but not active, and ignores if they are in the database
 function addUser( $facebook,$uid,$token ) {
     $check=checkUID($uid);
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
