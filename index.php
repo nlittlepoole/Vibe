@@ -57,28 +57,13 @@ switch ( $action ) {
   break;	
   case 'search':
     require( CLASS_PATH . "/Web/Search.php");
-    print_r(search($_POST["Query"],$facebook,$uid,$token));  
+    $_SESSION['Results']=search($_POST["Query"],$facebook,$uid,$token);
+    header('Location:/website/results.php');
   break;
   case 'profile':
-  	require( CLASS_PATH . "/Web/Dashboard.php");
-    if($uid){
-        $user=$uid;
-        if(isset($_GET['profile']) && $_GET['profile']!=$user ){
-         $user=$_GET['profile'];
-         $_SESSION['profile']=profile($facebook,$user,$token );
-        }
-        else{
-            $_SESSION['profile']=$_SESSION['dashboard'];
-        }
-        header('Location: /website/profile.php?user='.$user);
-		flush(); 
-    }
-    else{
-      $_SESSION['profile']=null;
-      header('Location: /index.php');
-	  flush(); 
-    }
-
+    require( CLASS_PATH . "/Web/Search.php");
+    $redirect=profiled($facebook,$uid,$token);
+    header($redirect);
   break;
 	
   default: //this is the default setting, it simply take sthe user to the homepage. It also creates the facebook login url 
