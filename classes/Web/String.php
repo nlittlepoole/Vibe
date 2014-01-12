@@ -44,7 +44,8 @@ function comments($comments){
                           <div class="desc"><span style="color: #0d638f;" class="tooltips" data-container="body" data-original-title="' . $commentPair[0] . '">
                              '. $commentPair[1].'&nbsp;&nbsp;
                               <span class="label label-sm" style="background-color: ' . $_SESSION['coloredVibes'][$temp[0]] . ';">'.$temp[0].'&nbsp;</span>
-                          </span></div>
+                          </span>
+                          <a style="color: #FF0000" href="/index.php?action=removeComment&comment='.$x.'">Remove</a></div>
                         </div>
                       </div>
                     </div>

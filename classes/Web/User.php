@@ -1,4 +1,14 @@
 <?php
+function removeComment($comments,$index){
+  $comments=split('&&',$comments);
+  unset($comments[$index]); // remove item at index 0
+  $comments = array_values($comments);
+  $result='';
+  foreach($comments as $comment){
+    $result=$result.$comment."&&";
+  }
+  return substr($result,0,-2);
+}
 /*
 Checks if user is in the database
 */
