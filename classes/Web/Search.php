@@ -9,7 +9,6 @@ function profiled($facebook,$uid,$token){
          $user=$_GET['profile'];
          if(checkActive($_GET['profile'])){
            $_SESSION['profile']=profile($facebook,$user,$token ); 
-           pushNotification($uid,"Testing","Search");
          }
          else{
             $_SESSION['profile']=profile($facebook,-1,$token );
@@ -23,6 +22,7 @@ function profiled($facebook,$uid,$token){
     }
     else{
       $_SESSION['profile']=null;
+      echo $_SESSION['redirect']="index.php?action=profile&profile=".$_GET['profile'];
       return "Location: /index.php";
     }
 }

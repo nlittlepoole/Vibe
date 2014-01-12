@@ -88,7 +88,6 @@ break;
     }
     header('Location: /index.php?action=dashboard');
   break;
-	
   default: //this is the default setting, it simply take sthe user to the homepage. It also creates the facebook login url 
     //when a user logs in through facebook, the are simply going to a special link created by the facebook api. The api uses our AP ID and password to generate the link
     $params = array(
