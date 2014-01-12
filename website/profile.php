@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-
-<!-- File has been changed to a PHP file -->
-
-<!-- START UP THE SESSION -->
 <?php 
-	ob_start();
-	//error_reporting(0);
+	error_reporting(0);
     session_start();
     $path = $_SERVER['DOCUMENT_ROOT'];
     require($path . "/config.php");
@@ -15,7 +9,7 @@
     if(!$profile || !$_SESSION['profile']){
     	header('Location: /index.php?action=profile');
 		//header('Location: http://www.google.com');
-		flush(); 
+		exit(0); 
     }  
     $action = isset( $_GET['action'] ) ? $_GET['action'] : "Invite more Friends to Vibe for Comments"; //sets $action to "Action" url fragment string if action isn't null
     $pic="http://graph.facebook.com/" . $profile . "/picture?width=300&height=300";
@@ -47,7 +41,11 @@
 	}
     
 ?>
+<!DOCTYPE html>
 
+<!-- File has been changed to a PHP file -->
+
+<!-- START UP THE SESSION -->
 
 <!-- 
 Template Name: Metronic - Responsive Admin profile Template build with Twitter Bootstrap 3.0.3
