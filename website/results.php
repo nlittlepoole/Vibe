@@ -210,7 +210,7 @@ function validateForm()
 					<div class="portlet box purple">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="fa fa-comments"></i>Query Results
+								<i class="fa fa-comments"></i>Search Results
 							</div>
 							<div class="tools">
 							</div>
