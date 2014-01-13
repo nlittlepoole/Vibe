@@ -7,9 +7,8 @@
     
     $action = isset( $_GET['action'] ) ? $_GET['action'] : "Invite more Friends to Vibe for Comments"; //sets $action to "Action" url fragment string if action isn't null
     $profile= isset( $_GET['user'] ) ? $_GET['user'] : "";
-	$_SESSION['test'] = $profile;
     if(!$profile || !$_SESSION['profile']){
-    	header('Location: /index.php?action=profile');
+    	header('Location: /index.php?action=profile&profile='.$profile);
     	//header('Location: /index.php?action=profile&profile='.$profile);
 		exit(0); 
     }  

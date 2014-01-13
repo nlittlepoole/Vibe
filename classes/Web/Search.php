@@ -15,6 +15,8 @@ function profiled($facebook,$uid,$token){
          }
          else{
             $_SESSION['profile']=profile($facebook,-1,$token );
+            $_SESSION['profile']['Name']=json_decode(file_get_contents("https://graph.facebook.com/" . $_GET['profile'] . "/?fields=name"), true);
+            $_SESSION['profile']['Name']=$_SESSION['profile']['Name']['name']?$_SESSION['profile']['Name']['name']:"Invalid User";
          }
         }
         else{
