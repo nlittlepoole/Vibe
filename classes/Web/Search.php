@@ -7,8 +7,11 @@ function profiled($facebook,$uid,$token){
         $user=$uid;
         if(isset($_GET['profile']) && $_GET['profile']!=$user ){
          $user=$_GET['profile'];
-         if(checkActive($_GET['profile'])){
+         if(checkFriend($_GET['profile']) && checkUID($_GET['profile'])){
            $_SESSION['profile']=profile($facebook,$user,$token ); 
+         }
+         else if(checkActive($_GET['profile'])){
+            $_SESSION['profile']=profile($facebook,$user,$token );
          }
          else{
             $_SESSION['profile']=profile($facebook,-1,$token );

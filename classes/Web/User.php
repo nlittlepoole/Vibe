@@ -26,6 +26,18 @@ function checkUID($uid){
     } 
 }
 /*
+Checks if user is in the database
+*/
+function checkFriend($uid){
+    $friends=$_SESSION['friends']['data'];
+    foreach($friends as $friend){
+      if($friend['id']=$uid){
+        return true;
+      }
+    }
+    return false;
+}
+/*
 Returns true if user exists and is active, otherwise false
 */
 function checkActive($uid){
