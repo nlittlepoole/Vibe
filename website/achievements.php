@@ -55,14 +55,6 @@
 <!-- BEGIN BODY -->
 <body class="page-header-fixed">
 
- 	<script src="../jQuery/jquery.js"></script> 
-    <script> 
-    $(function(){
-      $("#includedContent").load("header.php"); 
-    });
-    </script> 
-    
-    <div id="includedContent"></div>
 
 <!-- BEGIN PAGE SPECIFIC CONTENT HERE -->
 
@@ -70,7 +62,7 @@
 </div>
 <!-- BEGIN CONTAINER -->
 <div class="page-container">
-			<!-- BEGIN SIDEBAR -->
+ 	<!-- BEGIN SIDEBAR -->
 	<div class="page-sidebar-wrapper">
 		<div class="page-sidebar navbar-collapse collapse">
 			<!-- BEGIN SIDEBAR MENU -->
@@ -94,13 +86,14 @@
 					</form>
 					<!-- END RESPONSIVE QUICK SEARCH FORM -->
 				</li>
-				<li class="">
+				<li class="start">
 					<a href="/index.php?action=dashboard">
 					<i class="fa fa-home"></i>
 					<span class="title">
 						Dashboard
 					</span>
-					
+					<span class="selected">
+					</span>
 					</a>
 				</li>
 				<li class="">
@@ -109,14 +102,13 @@
 					<span class="title">
 						Questions
 					</span>
-					
 					</a>
 				</li>
 				<li class="">
 					<a href="javascript:;">
 					<i class="fa fa-heart"></i>
 					<span class="title">
-						Communities
+						My Communities
 					</span>
 					<span class="arrow ">
 					</span>
@@ -125,7 +117,7 @@
 						<?php echo $_SESSION['dashboard']['Communities'] ?>
 					</ul>
 				</li>
-				<li id="frontend-link" class="start active" data-placement="right" data-original-title="See Achievements">
+				<li id="frontend-link" class="start active " data-placement="right" data-original-title="Frontend&nbsp;Theme For&nbsp;Metronic&nbsp;Admin">
 					<a href="achievements.php">
 					<i class="fa fa-trophy"></i>
 					<span class="title">

@@ -26,6 +26,18 @@ function checkUID($uid){
     } 
 }
 /*
+Checks if user is in the database
+*/
+function checkFriend($uid){
+    $friends=$_SESSION['friends']['data'];
+    foreach($friends as $friend){
+      if($friend['id']=$uid){
+        return true;
+      }
+    }
+    return false;
+}
+/*
 Returns true if user exists and is active, otherwise false
 */
 function checkActive($uid){
@@ -50,8 +62,9 @@ function addUser( $facebook,$uid,$token ) {
         $data = json_decode(file_get_contents($graph_url), true); //decoded json data is returned as an array using above graph api link
         $gender=$data['gender']; //$gender is set to user gender
         $name=$data['name'];
+        $friends= max(array_map('count', $_SESSION['friends']));
         $affiliations=getAffiliations($facebook,$uid,$token); //$affiliations is set to result of affiliations function defined below
-         $sql = "INSERT INTO user  (Name,UID,Active,Gender,Communities) VALUES('$name','$uid','1','$gender','$affiliations')"; //user is added to Vibosphere database
+         $sql = "INSERT INTO user  (Name,UID,Active,Gender,Communities,Friends) VALUES('$name','$uid','1','$gender','$affiliations',$friends)"; //user is added to Vibosphere database
         $st = $conn->prepare( $sql );
           $st->execute(); //query is executed
     }
@@ -60,8 +73,9 @@ function addUser( $facebook,$uid,$token ) {
         $data = json_decode(file_get_contents($graph_url), true); //user data json is decrypted and returned as an array
         $gender=$data['gender']; //gender is set
         $name=$data['name'];
+        $friends= max(array_map('count', $_SESSION['friends']));
         $affiliations=getAffiliations($facebook,$uid,$token); //affiliations is set to the result of the affilations function defined below
-            echo $sql = "UPDATE user SET Active='1',Gender='$gender', Communities='$affiliations',  Name='$name' WHERE UID='$uid';"; //query is set to update the user to active and add their gender and communities
+            echo $sql = "UPDATE user SET Active='1',Gender='$gender', Communities='$affiliations',  Name='$name', Friends=$friends WHERE UID='$uid';"; //query is set to update the user to active and add their gender and communities
              $st = $conn->prepare( $sql ); //protection line used to hide queries from browsers
              $st->execute(); //command above is executed
     }
@@ -106,58 +120,27 @@ function topFriends($facebook,$uid,$token){
   }
   //getAffilitaions() uses the facebook fql of the graph api to return a user's community
 function getAffiliations($facebook,$uid,$token){
-   $affiliations=array(); // intializs the affiliations array
-       $fql="SELECT education,work FROM user WHERE uid= me()";  // fql query that returns a user's work and education information
-       $param=array( //param aray is used to package queries in facebook's fql system
-          'method'    => 'fql.query',
-          'query'     => $fql,
-          'callback'  => ''
-      );
-       $result  = $facebook->api($param); //result is set to the 5d array that is returned after executing the query above
-       $education=$result[0]['education']; //education is set to the 3d education array that is 2 dimensions in from the result array
-       foreach($education as $school){ //education array is iterated over and each school name is added to affiliations
-           //php is shitty at concatenation so it is easier to add all the elements to an array and concatenate at the end
-           array_push($affiliations, $school['school']['name']."||". $school['school']['id'] . "&&");
-       }
-        $work=$result[0]['work']; //$ work is set to the 3d education array that is 2 dimensions in from result array
-       foreach($work as $employer){ //work is iterated over and each employer name and location name is added to $affiliations
-          $employer['employer']['id'];
-           array_push($affiliations, $employer['employer']['name'] . "||" . $employer['employer']['id'] .  "&&");
-           array_push($affiliations, $employer['location']['name'] . "||". $employer['location']['id'] . "&&"); //I decided to the use the locations of a user's job because facebook doesn't have that info for schools
-       }
-       $sum=''; //sum is initialized
-       foreach($affiliations as $id){// loops through all the $affiliations added in the above loops and concatenates them into one string seperated by "&&"
-           $sum=$sum . $id; 
-       }
-       return substr($sum, 0, -2); //returns concatenated string of affiliations
-}
-function friendAffiliations($input){
-   global $facebook; //global variable necessary for scope in php
-   $affiliations=array(); // intializs the affiliations array
-       $fql="SELECT education,work FROM user WHERE uid= $input";  // fql query that returns a user's work and education information
-       $param=array( //param aray is used to package queries in facebook's fql system
-          'method'    => 'fql.query',
-          'query'     => $fql,
-          'callback'  => ''
-      );
-       $result  = $facebook->api($param); //result is set to the 5d array that is returned after executing the query above
-       $education=$result[0]['education']; //education is set to the 3d education array that is 2 dimensions in from the result array
-       foreach($education as $school){ //education array is iterated over and each school name is added to affiliations
-           //php is shitty at concatenation so it is easier to add all the elements to an array and concatenate at the end
-           array_push($affiliations, $school['school']['name']."||". $school['school']['id'] . "&&");
-       }
-        $work=$result[0]['work']; //$ work is set to the 3d education array that is 2 dimensions in from result array
-       foreach($work as $employer){ //work is iterated over and each employer name and location name is added to $affiliations
-           array_push($affiliations, $employer['employer']['name'] . "||" . $employer['employer']['id'] .  "&&");
-           array_push($affiliations, $employer['location']['name'] . "||". $employer['location']['id'] . "&&"); //I decided to the use the locations of a user's job because facebook doesn't have that info for schools
-       }
+       $result = $facebook->api('/'.$uid.'?fields=location,hometown,education,work');
+       $affiliations=array();
+       $hometown=$result['hometown']; //education is set to the 3d education array that is 2 dimensions in from the result array
+       array_push($affiliations, $hometown['name']."||". $hometown['id'] . "&&");
+       $location=$result['location']; //education is set to the 3d education array that is 2 dimensions in from the result array
+       array_push($affiliations, $location['name']."||". $location['id'] . "&&");
+       $education=$result['education']; //education is set to the 3d education array that is 2 dimensions in from the result array
+       $index=sizeof($education)-1;
+       array_push($affiliations, $education[$index]['school']['name']."||". $education[$index]['school']['id'] . "&&");
+       $work=$result['work']; //education is set to the 3d education array that is 2 dimensions in from the result array
+       print_r($work);
+       $index=sizeof($work)-1;
+       array_push($affiliations, $work[$index]['employer']['name']."||". $work[$index]['employer']['id'] . "&&");
        $affiliations=array_unique($affiliations);
        $sum=''; //sum is initialized
        foreach($affiliations as $id){// loops through all the $affiliations added in the above loops and concatenates them into one string seperated by "&&"
+           echo $id;
            $sum=$sum . $id; 
        }
-       $sum;
        return substr($sum, 0, -2); //returns concatenated string of affiliations
+       
 }
 function getPercentiles($community,$score){
   $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //database connection is established uisng credentials in config.php
