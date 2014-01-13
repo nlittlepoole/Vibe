@@ -533,7 +533,7 @@
 											<div class="col-md-8 profile-info">
 												<h1><?php echo $_SESSION['profile']['Name'] ?></h1>
 												<?php echo $_SESSION['dispBlurb'] ?>
-												<?php echo $_SESSION['disabledTest'] ?>
+												<!-- FOR DEBUGGING<?php echo $_SESSION['disabledTest'] ?> -->
 												<ul class="list-inline">
 													<?php echo $_SESSION['displayLocation'] ?>
 													<?php echo $_SESSION['displayBirthday'] ?>
