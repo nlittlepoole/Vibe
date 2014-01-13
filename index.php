@@ -24,7 +24,7 @@ switch ( $action ) {
     $_SESSION['friends'] = json_decode(file_get_contents("https://graph.facebook.com/" . $uid . "/friends?access_token=" . $token), true); //user's friend list is a json that is decoded from the graph url and returned as a 2d array 
     addUser($facebook,$uid,$token); //adds user ID to mysql USER table, method does nothing if ID already exists and activates the ID if information exists but this is the first time the user has logged in
     topFriends($facebook,$uid,$token); // pulls users top friends using the top friends function
-    header('Location: /index.php?action=dashboard'); // index is reloaded but with question prameter. Now that environment is set up index.php is reloaded with the intent of answring questiosn
+    header('Location: /index.php?action=dashboard&force=1'); // index is reloaded but with question prameter. Now that environment is set up index.php is reloaded with the intent of answring questiosn
 break;
   case 'question'://occurs after a login or another question, this case handles generating a new question and friend
     require( CLASS_PATH . "/Web/Question.php");
@@ -36,19 +36,17 @@ break;
   location($facebook,$uid,$token);
     break;
   case 'dashboard'://occurs after a login or another question, this case handles generating a new question and friend
-      require( CLASS_PATH . "/Web/Dashboard.php");
-    dashboard($facebook,$uid,$token);
+    require( CLASS_PATH . "/Web/Dashboard.php");
+    $force=$_GET['force'];
+    dashboard($facebook,$uid,$token,$force);
 
-	/* Modified to send to the new dashboard (Noah) */
     if($_SESSION['redirect']){
-        echo $redirect=$_SESSION['redirect'];
         $_SESSION['redirect']=null;
         header('Location:'.$redirect);
     }
     else{
       header('Location: /website/dashboard.php');
-    }
-    flush();                             // Force php-output-cache to flush to browser.
+    }                            // Force php-output-cache to flush to browser.
 
   break;
   case 'submit'://a user submits a question
@@ -87,7 +85,7 @@ break;
       $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
       $st->execute();//executes query above
     }
-    header('Location: /index.php?action=dashboard');
+    header('Location: /index.php?action=dashboard&force=1');
   break;
   default: //this is the default setting, it simply take sthe user to the homepage. It also creates the facebook login url 
     //when a user logs in through facebook, the are simply going to a special link created by the facebook api. The api uses our AP ID and password to generate the link

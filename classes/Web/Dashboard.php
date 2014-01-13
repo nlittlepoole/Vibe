@@ -2,7 +2,8 @@
 require_once( CLASS_PATH . "/Web/User.php");
 require_once( CLASS_PATH . "/Web/Achievements.php");
 require_once( CLASS_PATH . "/Web/String.php");
-function dashboard($facebook,$uid,$token ){
+function dashboard($facebook,$uid,$token,$force){
+if(refresh($uid) ||$force){
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //database connection is established uisng credentials in config.php
     $sql = "SELECT * FROM user WHERE UID=$uid"; //sql query that returns the string of the question in the table
     $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
@@ -102,8 +103,11 @@ function dashboard($facebook,$uid,$token ){
     $data['Humility_Keywords']=isset($data['Humility_Keywords'])? keywords($data['Humility_Keywords'],$data['Humility_Total'],2) : "N/A";
     $data["pic"]="http://graph.facebook.com/" . $uid . "/picture?width=300&height=300";
     $_SESSION['dashboard']=$data;
-    
     $conn=null;
+  }
+  else{
+    return $_SESSION['dashboard'];
+  }
  }
   function profile($facebook,$uid,$token ){
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //database connection is established uisng credentials in config.php
@@ -149,5 +153,6 @@ function dashboard($facebook,$uid,$token ){
     $data["pic"]="http://graph.facebook.com/" . $uid . "/picture?width=300&height=300";
     $conn=null;
     return $data;
+
  }
     ?> 
