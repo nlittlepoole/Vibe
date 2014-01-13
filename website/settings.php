@@ -30,12 +30,14 @@
 	   
 	   //WEBSITE URL
 	   $_SESSION['tempURL'] = $settingsData['websiteURL']; 
+	   $_SESSION['formSentURL'] = $settingsData['websiteURL'];
 	   if($settingsData['websiteURL'] == "") {
 	   	   $_SESSION['tempURL'] = "Website URL"; 
 	   }
 	   
 	   //BLURB
 	   $_SESSION['tempBlurb'] = $settingsData['blurb']; 
+	   $_SESSION['formSentBlurb'] = $settingsData['blurb'];
 	   if($settingsData['blurb'] == "") {
 	   	   $_SESSION['tempBlurb'] = "Enter blurb"; 
 	   }
@@ -145,6 +147,8 @@
 	   
 	   
 	   $_SESSION['traitsSettings'] = array(); 
+	   $_SESSION['disabledOnes'] = array(); 
+	   
 	   for($i = 0; $i < 14; $i++) {
 	       $purchase = "Purchase now for " . 30 . " points";
 		   $disabled = ""; 
@@ -165,7 +169,15 @@
 			   
 		   	   $purchase = $timeRemaining . " days remaining";
 			   $disabled = "disabled"; 
-		   }   	
+		   }   
+		   
+		   //CHECK IF A CHECKBOX IS DISABLED SO YOU CAN STILL COUNT IT IN THE SUBMIT FORM	
+		   if($disabled == "disabled") {
+		       $_SESSION['disabledOnes'][$i] = "true"; 
+		   }
+		   else {
+		   	   $_SESSION['disabledOnes'][$i] = "false"; 
+		   }
 		
 	       $_SESSION['traitsSettings'][$i] = '<tr>
 				<td>
@@ -176,7 +188,7 @@
 				</td>
 				<td>
 					<label class="checkbox" ' . $disabled . '>
-					<input type="checkbox" name="checkbox' . ($i + 1) . '" value="option' . ($i + 1) . '" ' . $disabled . '> 
+					<input type="checkbox" name="checkbox' . ($i + 1) . '" id="checkbox' . ($i + 1) . '" value="option' . ($i + 1) . '" ' . $disabled . '> 
 					</label>
 				</td>
 			</tr>';
@@ -231,16 +243,110 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <link rel="shortcut icon" href="favicon.ico"/>
 
 <script text="text/javascript">
+function findPos(obj) {
+    
+    var curtop = 0;
+    
+    if (obj.offsetParent) {
+        do {
+            curtop += obj.offsetTop;
+        } while (obj = obj.offsetParent);
+    	return [curtop];
+    }
+}
+
 function validateForm()
 {
 	var x = document.forms["settingsform"]["websitelink"].value;
-	if (x.indexOf('.com') < 0 && x.indexOf('.edu') < 0 && x.indexOf('.org') < 0 && x.indexOf('.us') < 0 && x.indexOf('.net') < 0)
+	if (x.indexOf('.com') < 0 && x.indexOf('.edu') < 0 && x.indexOf('.org') < 0 && x.indexOf('.us') < 0 && x.indexOf('.net') < 0 && x != "")
 	{
 		//alert("Problem!"); 
 	    document.getElementById("websiteURL").className+=' has-error';
 	    document.getElementById("helpWebsite").innerHTML='Please enter a valid website URL!'; 
+	    window.scroll(0,findPos(document.getElementById("topOfForm")));
 	    return false;
 	}
+	else if(x == "") {
+		document.forms["settingsform"]["websitelink"].value = <?php echo json_encode($_SESSION['formSentURL']); ?>;
+	}
+	
+	var y = document.forms["settingsform"]["blurb"].value;
+	if (y.indexOf('shit') != -1 || y.indexOf('fuck') != -1 || y.indexOf('bitch') != -1 || y.indexOf('cunt') != -1 || y.indexOf('damn') != -1)
+	{
+		//alert("Problem!"); 
+	    document.getElementById("blurbElement").className+=' has-error';
+	    document.getElementById("helpBlurb").innerHTML='Please do not write any foul language'; 
+	    window.scroll(0,findPos(document.getElementById("topOfForm")));
+	    return false;
+	}
+	else if(y == "") {
+		document.forms["settingsform"]["blurb"].value = <?php echo json_encode($_SESSION['formSentBlurb']); ?>;
+	}
+	
+	//CODE TO CHECK OFF THE CHECKBOXES THAT ARE DISABLED
+	
+	//OVERRIDING VALUE
+	
+	if(<?php echo json_encode($_SESSION['disabledOnes'][0]); ?> == "true") {
+		document.getElementById("checkbox1").disabled = false;
+		document.getElementById("checkbox1").checked = true; 
+	}
+	
+	if(<?php echo json_encode($_SESSION['disabledOnes'][1]); ?> == "true") {
+		document.getElementById("checkbox2").disabled = false;
+		document.getElementById("checkbox2").checked = true; 
+	}
+	
+	if(<?php echo json_encode($_SESSION['disabledOnes'][2]); ?> == "true") {
+		document.getElementById("checkbox3").disabled = false;
+		document.getElementById("checkbox3").checked = true; 
+	}
+	
+	if(<?php echo json_encode($_SESSION['disabledOnes'][3]); ?> == "true") {
+		document.getElementById("checkbox4").disabled = false;
+		document.getElementById("checkbox4").checked = true;  
+	}
+	if(<?php echo json_encode($_SESSION['disabledOnes'][4]); ?> == "true") {
+		document.getElementById("checkbox5").disabled = false;
+		document.getElementById("checkbox5").checked = true;  
+	}
+	if(<?php echo json_encode($_SESSION['disabledOnes'][5]); ?> == "true") {
+		document.getElementById("checkbox6").disabled = false;
+		document.getElementById("checkbox6").checked = true; 
+	}
+	if(<?php echo json_encode($_SESSION['disabledOnes'][6]); ?> == "true") {
+		document.getElementById("checkbox7").disabled = false;
+		document.getElementById("checkbox7").checked = true; 
+	}
+	if(<?php echo json_encode($_SESSION['disabledOnes'][7]); ?> == "true") {
+		document.getElementById("checkbox8").disabled = false;
+		document.getElementById("checkbox8").checked = true;  
+	}
+	if(<?php echo json_encode($_SESSION['disabledOnes'][8]); ?> == "true") {
+		document.getElementById("checkbox9").disabled = false;
+		document.getElementById("checkbox9").checked = true; 
+	}
+	if(<?php echo json_encode($_SESSION['disabledOnes'][9]); ?> == "true") {
+		document.getElementById("checkbox10").disabled = false;
+		document.getElementById("checkbox10").checked = true; 
+	}
+	if(<?php echo json_encode($_SESSION['disabledOnes'][10]); ?> == "true") {
+		document.getElementById("checkbox11").disabled = false;
+		document.getElementById("checkbox11").checked = true; 
+	}
+	if(<?php echo json_encode($_SESSION['disabledOnes'][11]); ?> == "true") {
+		document.getElementById("checkbox12").disabled = false;
+		document.getElementById("checkbox12").checked = true; 
+	}
+	if(<?php echo json_encode($_SESSION['disabledOnes'][12]); ?> == "true") {
+		document.getElementById("checkbox13").disabled = false;
+		document.getElementById("checkbox13").checked = true; 
+	}
+	if(<?php echo json_encode($_SESSION['disabledOnes'][13]); ?> == "true") {
+		document.getElementById("checkbox14").disabled = false;
+		document.getElementById("checkbox14").checked = true;  
+	}
+	
 }
 </script>
 
@@ -351,7 +457,7 @@ function validateForm()
 			<div class="row">
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
-					<h3 class="page-title">
+					<h3 class="page-title" id="topOfForm">
 					Settings <small>vibe</small>
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
@@ -391,11 +497,11 @@ function validateForm()
 						<div class="portlet-body form">
 							<form class="form-horizontal" role="form" method="post" action="/index.php?action=submit2" onsubmit="return validateForm()" name="settingsform">
 								<div class="form-body">
-									<div class="form-group">
+									<div class="form-group" id="blurbElement">
 										<label class="col-md-3 control-label">Blurb</label>
 										<div class="col-md-9">
-											<input type="text" class="form-control" name="blurb" placeholder="Enter blurb" maxlength="100">
-											<span class="help-block">
+											<input type="text" class="form-control" name="blurb" placeholder="<?php echo $_SESSION['tempBlurb'] ?>" maxlength="100">
+											<span class="help-block" id="helpBlurb">
 												This is a short blurb that will appear under your name on your profile.
 											</span>
 										</div>
@@ -405,7 +511,7 @@ function validateForm()
 										<div class="col-md-9">
 											<div class="input-icon left">
 												<i class="fa fa-laptop"></i>
-												<input type="text" class="form-control" name="websitelink" placeholder="Website URL">
+												<input type="text" class="form-control" name="websitelink" placeholder="<?php echo $_SESSION['tempURL'] ?>">
 												<span class="help-block" id="helpWebsite">
 												A link to your website that will appear on your profile. Optional.
 												</span>

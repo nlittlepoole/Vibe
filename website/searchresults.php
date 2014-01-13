@@ -18,7 +18,7 @@
 	<?php
 		echo "<br />"; 
 		for($i = 0; $i < 14; $i++){
-			echo $_POST['checkbox' . ($i + 1)];
+			echo $_POST['checkbox' . ($i + 1)] . " ";
 		}
 	?>
 

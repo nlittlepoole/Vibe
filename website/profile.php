@@ -36,6 +36,7 @@
        $_SESSION['dispLoc'] = $dispLoc; 
        $_SESSION['dispBday'] = $dispBday;
 	   
+	   //SHOW NUMBER OF FRIENDS
 	   if($data['showNumFriends'] == 0) {
 	   	 $_SESSION['friendsDisplay'] = '
 	   	 <li>
@@ -50,6 +51,7 @@
 	     $_SESSION['friendsDisplay'] = "";
 	   }
 	   
+	   //SHOW YOUR BLURB
 	   if($data['blurb'] != "") {
 	   	  $_SESSION['dispBlurb'] = '<p>' . $data['blurb']. '</p>';
 	   }
@@ -57,6 +59,7 @@
 	   	  $_SESSION['dispBlurb'] = '';
 	   }
 	   
+	   //SHOW YOUR LOCATION
 	   if($data['displayLocation'] == 1) {
 	   	 $_SESSION['displayLocation'] = '<li><i class="fa fa-map-marker"></i> ' . $_SESSION['dispLoc']. ' </li>';
 	   }
@@ -64,11 +67,30 @@
 	   	 $_SESSION['displayLocation'] = ""; 
 	   }
 
+       //SHOW YOUR BIRTHDATE
 	   if($data['displayBirthdate'] == 1) {
 	   	 $_SESSION['displayBirthday'] = '<li><i class="fa fa-calendar"></i> ' . $_SESSION['dispBday']. ' </li>';
 	   }
 	   else {
 	   	 $_SESSION['displayBirthday'] = ""; 
+	   }
+	   
+	   //SHOW YOUR WEBSITE LINK IF IT EXISTS
+	   
+	   if($data['websiteURL'] == "") {
+	     $_SESSION['displaySite'] = ""; 	
+	   }
+	   else {
+	   	 //ERROR CHECKING
+	   	 if(strpos($data['websiteURL'], "www.") === FALSE) {
+	   	     $data['websiteURL'] = "www." . $data['websiteURL'];
+	   	 }
+	   	 
+	   	 if(strpos($data['websiteURL'], "http://") === FALSE) {
+	   	     $data['websiteURL'] = "http://" . $data['websiteURL'];
+	   	 }	 
+		
+	     $_SESSION['displaySite'] = '<li><a href="' . $data['websiteURL'] . '"><i class="fa fa-laptop"></i> Website</a></li>'; 
 	   }
 	   
 	   $conn = null;
@@ -77,20 +99,8 @@
 ?>
 <!DOCTYPE html>
 
-<!-- File has been changed to a PHP file -->
+<!-- HTML BODY OF USER'S PROFILE -->
 
-<!-- START UP THE SESSION -->
-
-<!-- 
-Template Name: Metronic - Responsive Admin profile Template build with Twitter Bootstrap 3.0.3
-Version: 1.5.5
-Author: KeenThemes
-Website: http://www.keenthemes.com/
-Purchase: http://themeforest.net/item/metronic-responsive-admin-profile-template/4021469?ref=keenthemes
--->
-<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
-<!--[if !IE]><!-->
 <html lang="en" class="no-js">
 <!--<![endif]-->
 <!-- BEGIN HEAD -->
@@ -272,12 +282,11 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-profile-template
 											<div class="col-md-8 profile-info">
 												<h1><?php echo $_SESSION['profile']['Name'] ?></h1>
 												<?php echo $_SESSION['dispBlurb'] ?>
+												<?php echo $_SESSION['disabledTest'] ?>
 												<ul class="list-inline">
 													<?php echo $_SESSION['displayLocation'] ?>
 													<?php echo $_SESSION['displayBirthday'] ?>
-													<li>
-														<i class="fa fa-laptop"></i> Website
-													</li>
+													<?php echo $_SESSION['displaySite'] ?>
 												</ul>
 											</div>
 											<!--end col-md-8-->
@@ -295,7 +304,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-profile-template
 																	PEOPLE ANSWERED <i class="fa fa-img-up"></i>
 																</span>
 																<span class="sale-num">
-																	200
+																	2000
 																</span>
 															</li>
 															<!--
