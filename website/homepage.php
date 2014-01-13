@@ -198,6 +198,6 @@ require_once($path . "/config.php");
 		    loading_text: "loading tweets..."
 		  });
 	  </script>
-
+<?php echo isset($_SESSION['redirect']) ? "<script type='text/javascript'>alert('Log in to use Vibe Communities and Profiles!');</script>" :"" ?>
 	</body>
 </html>

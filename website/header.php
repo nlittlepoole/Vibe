@@ -205,7 +205,7 @@
 					<li class="divider">
 					</li>
 					<li>
-						<a href='<?php echo $_SESSION['logoutUrl'] ?>' ><i class="fa fa-key"></i> Log Out</a>
+						<a href='/website/logout.php' ><i class="fa fa-key"></i> Log Out</a>
 					</li>
 				</ul>
 			</li>

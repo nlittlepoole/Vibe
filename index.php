@@ -26,7 +26,7 @@ switch ( $action ) {
     $_SESSION['friends'] = json_decode(file_get_contents("https://graph.facebook.com/" . $uid . "/friends?access_token=" . $token), true); //user's friend list is a json that is decoded from the graph url and returned as a 2d array
     $_SESSION['numberOfFriends'] = max(array_map('count', $_SESSION['friends'])); 
     header('Location: /index.php?action=dashboard'); // index is reloaded but with question prameter. Now that environment is set up index.php is reloaded with the intent of answring questiosn
-    break;
+break;
   case 'question'://occurs after a login or another question, this case handles generating a new question and friend
     require( CLASS_PATH . "/Web/Question.php");
     question($facebook,$uid,$token); // calls the question function that pulls a user and question and places the data in the Session cache
@@ -41,7 +41,14 @@ switch ( $action ) {
     dashboard($facebook,$uid,$token);
 
 	/* Modified to send to the new dashboard (Noah) */
-    header('Location: /website/dashboard.php'); //sends browser to questions page with Session Data containing questions input above
+    if($_SESSION['redirect']){
+        echo $redirect=$_SESSION['redirect'];
+        $_SESSION['redirect']=null;
+        header('Location:'.$redirect);
+    }
+    else{
+      header('Location: /website/dashboard.php');
+    }
     flush();                             // Force php-output-cache to flush to browser.
 
   break;
@@ -67,7 +74,22 @@ switch ( $action ) {
     $redirect=profiled($facebook,$uid,$token);
     header($redirect);
   break;
-	
+  case 'removeComment':
+    require( CLASS_PATH . "/Web/User.php");
+    $index=$_GET['comment'];
+    if(isset($_GET['comment'])){
+      $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //database connection is established uisng credentials in config.php
+      $sql = "SELECT Comments FROM user WHERE UID=$uid"; //sql query that returns the string of the question in the table
+      $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
+      $st->execute();//executes query above
+      $data=$st->fetch();
+      $comments=removeComment($data['Comments'],$index);
+      $sql = "UPDATE user SET Comments='$comments' WHERE UID='$uid';";
+      $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
+      $st->execute();//executes query above
+    }
+    header('Location: /index.php?action=dashboard');
+  break;
   default: //this is the default setting, it simply take sthe user to the homepage. It also creates the facebook login url 
     //when a user logs in through facebook, the are simply going to a special link created by the facebook api. The api uses our AP ID and password to generate the link
     $params = array(

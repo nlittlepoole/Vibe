@@ -67,7 +67,7 @@ function dashboard($facebook,$uid,$token ){
 	achievementsNotificationCreator($achievementsNavBar); 
     
     $data['Comments_Size']=$data['Comments']!=''?sizeof($data['Comments']):0;
-    $data['Comments']=comments($data['Comments']);
+    $data['Comments']=dashboardComments($data['Comments']);
     //print_r($data['Comments']);
     $scores=Array(
       "Affability"=>$data['Affability'],
