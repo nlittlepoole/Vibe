@@ -75,7 +75,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 
 <!-- BEGIN CONTAINER -->
 <div class="page-container">
-	<!-- BEGIN SIDEBAR -->
+	 	<!-- BEGIN SIDEBAR -->
 	<div class="page-sidebar-wrapper">
 		<div class="page-sidebar navbar-collapse collapse">
 			<!-- BEGIN SIDEBAR MENU -->
@@ -121,7 +121,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					<a href="javascript:;">
 					<i class="fa fa-heart"></i>
 					<span class="title">
-						Communities
+						My Communities
 					</span>
 					<span class="arrow ">
 					</span>

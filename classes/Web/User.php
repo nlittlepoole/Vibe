@@ -142,34 +142,6 @@ function getAffiliations($facebook,$uid,$token){
        return substr($sum, 0, -2); //returns concatenated string of affiliations
        
 }
-function friendAffiliations($input){
-   global $facebook; //global variable necessary for scope in php
-   $affiliations=array(); // intializs the affiliations array
-       $fql="SELECT education,work,location,hometown FROM user WHERE uid= $input";  // fql query that returns a user's work and education information
-       $param=array( //param aray is used to package queries in facebook's fql system
-          'method'    => 'fql.query',
-          'query'     => $fql,
-          'callback'  => ''
-      );
-       $result  = $facebook->api($param); //result is set to the 5d array that is returned after executing the query above
-       $education=$result[0]['education']; //education is set to the 3d education array that is 2 dimensions in from the result array
-       foreach($education as $school){ //education array is iterated over and each school name is added to affiliations
-           //php is shitty at concatenation so it is easier to add all the elements to an array and concatenate at the end
-           array_push($affiliations, $school['school']['name']."||". $school['school']['id'] . "&&");
-       }
-        $work=$result[0]['work']; //$ work is set to the 3d education array that is 2 dimensions in from result array
-       foreach($work as $employer){ //work is iterated over and each employer name and location name is added to $affiliations
-           array_push($affiliations, $employer['employer']['name'] . "||" . $employer['employer']['id'] .  "&&");
-           array_push($affiliations, $employer['location']['name'] . "||". $employer['location']['id'] . "&&"); //I decided to the use the locations of a user's job because facebook doesn't have that info for schools
-       }
-       $affiliations=array_unique($affiliations);
-       $sum=''; //sum is initialized
-       foreach($affiliations as $id){// loops through all the $affiliations added in the above loops and concatenates them into one string seperated by "&&"
-           $sum=$sum . $id; 
-       }
-       $sum;
-       return substr($sum, 0, -2); //returns concatenated string of affiliations
-}
 function getPercentiles($community,$score){
   $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //database connection is established uisng credentials in config.php
   echo $sql = "SELECT Attribute,Average, Deviation FROM `$community`"; //sql query that returns the string of the question in the table

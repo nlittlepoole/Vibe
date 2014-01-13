@@ -64,14 +64,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <!-- BEGIN BODY -->
 <body class="page-header-fixed">
 	
-	<script src="../jQuery/jquery.js"></script> 
-    <script> 
-    $(function(){
-      $("#includedContent").load("header.php"); 
-    });
-    </script> 
-    
-    <div id="includedContent"></div>
 
 <!-- BEGIN CONTAINER -->
 <div class="page-container">
