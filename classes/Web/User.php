@@ -53,9 +53,22 @@ function checkActive($uid){
      return true; 
     } 
 }
+function refresh($uid){
+  $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //initialies connection to the database using the credentials found in config.php
+  $sql = "SELECT LastLogin FROM user WHERE UID= $uid"; //gets the active status of the user with $uid as a user ID
+  $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
+  $st->execute(); //executes the sql query found above
+  $raw=$st->fetch();
+  $datetime2 = new DateTime(date("Y-m-d H:i:s", time()));
+  $datetime1 = new DateTime($raw[0]);
+  $interval = $datetime1->diff($datetime2);
+  $time=$interval->format('%i');
+  return ((int)$time)>5;
+}
 //addUser(int) function checks if a user is in the Vibosphere database, it adds them if they are not, activates them if they are in there but not active, and ignores if they are in the database
 function addUser( $facebook,$uid,$token ) {
     $check=checkUID($uid);
+    $now=date("Y-m-d H:i:s", time());
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
     if(!$check){ //if the user isn't in Vibosphere, they are added with a true active status
         $graph_url="https://graph.facebook.com/" . $uid . "/?fields=gender,name"; //facebook graph api link is created to find gender
@@ -64,7 +77,7 @@ function addUser( $facebook,$uid,$token ) {
         $name=$data['name'];
         $friends= max(array_map('count', $_SESSION['friends']));
         $affiliations=getAffiliations($facebook,$uid,$token); //$affiliations is set to result of affiliations function defined below
-         $sql = "INSERT INTO user  (Name,UID,Active,Gender,Communities,Friends) VALUES('$name','$uid','1','$gender','$affiliations',$friends)"; //user is added to Vibosphere database
+         $sql = "INSERT INTO user  (Name,UID,Active,Gender,Communities,Friends,LastLogin) VALUES('$name','$uid','1','$gender','$affiliations',$friends,'$now')"; //user is added to Vibosphere database
         $st = $conn->prepare( $sql );
           $st->execute(); //query is executed
     }
@@ -75,7 +88,7 @@ function addUser( $facebook,$uid,$token ) {
         $name=$data['name'];
         $friends= max(array_map('count', $_SESSION['friends']));
         $affiliations=getAffiliations($facebook,$uid,$token); //affiliations is set to the result of the affilations function defined below
-            echo $sql = "UPDATE user SET Active='1',Gender='$gender', Communities='$affiliations',  Name='$name', Friends=$friends WHERE UID='$uid';"; //query is set to update the user to active and add their gender and communities
+            echo $sql = "UPDATE user SET Active='1',Gender='$gender', Communities='$affiliations',  Name='$name', Friends=$friends, LastLogin='$now' WHERE UID='$uid';"; //query is set to update the user to active and add their gender and communities
              $st = $conn->prepare( $sql ); //protection line used to hide queries from browsers
              $st->execute(); //command above is executed
     }
