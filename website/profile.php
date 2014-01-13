@@ -16,6 +16,258 @@
     $pic="http://graph.facebook.com/" . $profile . "/picture?width=300&height=300";
 
 	toggleInfo($profile, $_SESSION['myToken']);
+	displayVibes($profile); 
+	
+	function displayVibes($uid) {
+		//Grab the vibes from the database that are not toggled off
+		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+	   	$sql = "SELECT attractivenessDisableDate,affabilityDisableDate,intelligenceDisableDate,styleDisableDate,promiscuityDisableDate,humorDisableDate,confidenceDisableDate,funDisableDate,kindnessDisableDate,honestyDisableDate,reliabilityDisableDate,happinessDisableDate,ambitionDisableDate,humilityDisableDate FROM user WHERE UID=" . $uid;
+	   	//$sql = "SELECT attractivenessDisableDate FROM user WHERE UID=" . $uid;
+	   	$st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
+	   	$st->execute();//executes query above
+	   
+	   	$data=$st->fetch();
+		
+		$conn = null;
+		
+		//AMBITION
+		$ambitionKeys;
+		if(isset($_SESSION['profile']['Ambition_Keywords'])) {$ambitionKeys = $_SESSION['profile']['Ambition_Keywords']; }
+		else {$ambitionKeys = ""; }
+		
+		$ambitionScore;
+		if($_SESSION['profile']['Ambition']) {$ambitionScore = $_SESSION['profile']['Ambition'];}
+		else {$ambitionScore = "--"; }
+		
+		if($data['ambitionDisableDate'] == "") {
+			$_SESSION['ambitionDisp'] = '<tr><td style="color: #0d638f;">Ambition</td><td>' . 
+			$ambitionScore . '</td><td><em>' . $ambitionKeys .'</em></td></tr>'; 
+		}
+		else {
+			$_SESSION['ambitionDisp'] = ""; 
+		}
+		
+		//AFFABILITY
+		$affabilityKeys;
+		if(isset($_SESSION['profile']['Affability_Keywords'])) {$affabilityKeys = $_SESSION['profile']['Affability_Keywords']; }
+		else {$affabilityKeys = ""; }
+		
+		$affabilityScore;
+		if($_SESSION['profile']['Affability']) {$affabilityScore = $_SESSION['profile']['Affability'];}
+		else {$affabilityScore = "--"; }
+		
+		if($data['affabilityDisableDate'] == "") {
+			$_SESSION['affableDisp'] = '<tr><td style="color: #0d638f;">Affability</td><td>' . 
+			$affabilityScore . '</td><td><em>' . $affabilityKeys .'</em></td></tr>'; 
+		}
+		else {
+			$_SESSION['affableDisp'] = ""; 
+		}
+		
+		//INTELLIGENCE
+		$intelligenceKeys;
+		if(isset($_SESSION['profile']['Intelligence_Keywords'])) {$intelligenceKeys = $_SESSION['profile']['Intelligence_Keywords']; }
+		else {$intelligenceKeys = ""; }
+		
+		$intelligenceScore;
+		if($_SESSION['profile']['Intelligence']) {$intelligenceScore = $_SESSION['profile']['Intelligence'];}
+		else {$intelligenceScore = "--"; }
+		
+		if($data['intelligenceDisableDate'] == "") {
+			$_SESSION['intelligenceDisp'] = '<tr><td style="color: #0d638f;">Intelligence</td><td>' . 
+			$intelligenceScore . '</td><td><em>' . $intelligenceKeys .'</em></td></tr>'; 
+		}
+		else {
+			$_SESSION['intelligenceDisp'] = ""; 
+		}
+		
+		//STYLE
+		$styleKeys;
+		if(isset($_SESSION['profile']['Style_Keywords'])) {$styleKeys = $_SESSION['profile']['Style_Keywords']; }
+		else {$styleKeys = ""; }
+		
+		$styleScore;
+		if($_SESSION['profile']['Style']) {$styleScore = $_SESSION['profile']['Style'];}
+		else {$styleScore = "--"; }
+		
+		if($data['styleDisableDate'] == "") {
+			$_SESSION['styleDisp'] = '<tr><td style="color: #0d638f;">Style</td><td>' . 
+			$styleScore . '</td><td><em>' . $styleKeys .'</em></td></tr>'; 
+		}
+		else {
+			$_SESSION['styleDisp'] = ""; 
+		}
+		
+		//PROMISCUITY
+		$promiscuityKeys;
+		if(isset($_SESSION['profile']['Promiscuity_Keywords'])) {$promiscuityKeys = $_SESSION['profile']['Promiscuity_Keywords']; }
+		else {$promiscuityKeys = ""; }
+		
+		$promiscuityScore;
+		if($_SESSION['profile']['Promiscuity']) {$promiscuityScore = $_SESSION['profile']['Promiscuity'];}
+		else {$promiscuityScore = "--"; }
+		
+		if($data['promiscuityDisableDate'] == "") {
+			$_SESSION['promiscuityDisp'] = '<tr><td style="color: #0d638f;">Promiscuity</td><td>' . 
+			$promiscuityScore . '</td><td><em>' . $promiscuityKeys .'</em></td></tr>'; 
+		}
+		else {
+			$_SESSION['promiscuityDisp'] = ""; 
+		}
+		
+		//HUMOR
+		$humorKeys;
+		if(isset($_SESSION['profile']['Humor_Keywords'])) {$humorKeys = $_SESSION['profile']['Humor_Keywords']; }
+		else {$humorKeys = ""; }
+		
+		$humorScore;
+		if($_SESSION['profile']['Humor']) {$humorScore = $_SESSION['profile']['Humor'];}
+		else {$humorScore = "--"; }
+		
+		if($data['humorDisableDate'] == "") {
+			$_SESSION['humorDisp'] = '<tr><td style="color: #0d638f;">Humor</td><td>' . 
+			$humorScore . '</td><td><em>' . $humorKeys .'</em></td></tr>'; 
+		}
+		else {
+			$_SESSION['humorDisp'] = ""; 
+		}
+		
+		//CONFIDENCE
+		$confidenceKeys;
+		if(isset($_SESSION['profile']['Confidence_Keywords'])) {$confidenceKeys = $_SESSION['profile']['Confidence_Keywords']; }
+		else {$confidenceKeys = ""; }
+		
+		$confidenceScore;
+		if($_SESSION['profile']['Confidence']) {$confidenceScore = $_SESSION['profile']['Confidence'];}
+		else {$confidenceScore = "--"; }
+		
+		if($data['confidenceDisableDate'] == "") {
+			$_SESSION['confidenceDisp'] = '<tr><td style="color: #0d638f;">Confidence</td><td>' . 
+			$confidenceScore . '</td><td><em>' . $confidenceKeys .'</em></td></tr>'; 
+		}
+		else {
+			$_SESSION['confidenceDisp'] = ""; 
+		}
+		
+		//FUN
+		$funKeys;
+		if(isset($_SESSION['profile']['Fun_Keywords'])) {$funKeys = $_SESSION['profile']['Fun_Keywords']; }
+		else {$funKeys = ""; }
+		
+		$funScore;
+		if($_SESSION['profile']['Fun']) {$funScore = $_SESSION['profile']['Fun'];}
+		else {$funScore = "--"; }
+		
+		if($data['funDisableDate'] == "") {
+			$_SESSION['funDisp'] = '<tr><td style="color: #0d638f;">Fun</td><td>' . 
+			$funScore . '</td><td><em>' . $funKeys .'</em></td></tr>'; 
+		}
+		else {
+			$_SESSION['funDisp'] = ""; 
+		}
+		
+		//KINDNESS
+		$kindnessKeys;
+		if(isset($_SESSION['profile']['Kindness_Keywords'])) {$kindnessKeys = $_SESSION['profile']['Kindness_Keywords']; }
+		else {$kindnessKeys = ""; }
+		
+		$kindnessScore;
+		if($_SESSION['profile']['Kindness']) {$kindnessScore = $_SESSION['profile']['Kindness'];}
+		else {$kindnessScore = "--"; }
+		
+		if($data['kindnessDisableDate'] == "") {
+			$_SESSION['kindnessDisp'] = '<tr><td style="color: #0d638f;">Kindness</td><td>' . 
+			$kindnessScore . '</td><td><em>' . $kindnessKeys .'</em></td></tr>'; 
+		}
+		else {
+			$_SESSION['kindnessDisp'] = ""; 
+		}
+		
+		//HONESTY
+		$honestyKeys;
+		if(isset($_SESSION['profile']['Honesty_Keywords'])) {$honestyKeys = $_SESSION['profile']['Honesty_Keywords']; }
+		else {$honestyKeys = ""; }
+		
+		$honestyScore;
+		if($_SESSION['profile']['Honesty']) {$honestyScore = $_SESSION['profile']['Honesty'];}
+		else {$honestyScore = "--"; }
+		
+		if($data['honestyDisableDate'] == "") {
+			$_SESSION['honestyDisp'] = '<tr><td style="color: #0d638f;">Honesty</td><td>' . 
+			$honestyScore . '</td><td><em>' . $honestyKeys .'</em></td></tr>'; 
+		}
+		else {
+			$_SESSION['honestyDisp'] = ""; 
+		}
+		
+		//RELIABILITY
+		$reliabilityKeys;
+		if(isset($_SESSION['profile']['Reliability_Keywords'])) {$reliabilityKeys = $_SESSION['profile']['Reliability_Keywords']; }
+		else {$reliabilityKeys = ""; }
+		
+		$reliabilityScore;
+		if($_SESSION['profile']['Reliability']) {$reliabilityScore = $_SESSION['profile']['Reliability'];}
+		else {$reliabilityScore = "--"; }
+		
+		if($data['reliabilityDisableDate'] == "") {
+			$_SESSION['reliabilityDisp'] = '<tr><td style="color: #0d638f;">Reliability</td><td>' . 
+			$reliabilityScore . '</td><td><em>' . $reliabilityKeys .'</em></td></tr>'; 
+		}
+		else {
+			$_SESSION['reliabilityDisp'] = ""; 
+		}
+		
+		//HAPPINESS
+		$happinessKeys;
+		if(isset($_SESSION['profile']['Happiness_Keywords'])) {$happinessKeys = $_SESSION['profile']['Happiness_Keywords']; }
+		else {$happinessKeys = ""; }
+		
+		$happinessScore;
+		if($_SESSION['profile']['Happiness']) {$happinessScore = $_SESSION['profile']['Happiness'];}
+		else {$happinessScore = "--"; }
+		
+		if($data['happinessDisableDate'] == "") {
+			$_SESSION['happinessDisp'] = '<tr><td style="color: #0d638f;">Happiness</td><td>' . 
+			$happinessScore . '</td><td><em>' . $happinessKeys .'</em></td></tr>'; 
+		}
+		else {
+			$_SESSION['happinessDisp'] = ""; 
+		}
+		
+		//ATTRACTIVENESS
+		$attractiveKeys;
+		if(isset($_SESSION['profile']['Attractiveness_Keywords'])) {$attractiveKeys = $_SESSION['profile']['Attractiveness_Keywords']; }
+		else {$attractiveKeys = ""; }
+		
+		$attractiveScore;
+		if($_SESSION['profile']['Attractiveness']) {$attractiveScore = $_SESSION['profile']['Attractiveness'];}
+		else {$attractiveScore = "--"; }
+		
+		if($data['attractivenessDisableDate'] == null) {
+			$_SESSION['attractiveDisp'] = '<tr><td style="color: #0d638f;">Attractiveness</td><td>' . 
+			$attractiveScore . '</td><td><em>' . $attractiveKeys .'</em></td></tr>'; 
+		}
+		else {
+			$_SESSION['attractiveDisp'] = ""; 
+		}
+		
+		//HUMILITY
+		$humilityKeys;
+		if(isset($_SESSION['profile']['Humility_Keywords'])) {$humilityKeys = $_SESSION['profile']['Humility_Keywords']; }
+		else {$humilityKeys = ""; }
+		
+		$humilityScore;
+		if($_SESSION['profile']['Humility']) {$humilityScore = $_SESSION['profile']['Humility'];}
+		else {$humilityScore = "--"; }
+		
+		if($data['humilityDisableDate'] == "") {
+			$_SESSION['humilityDisp'] = '<tr><td style="color: #0d638f;">Humility</td><td>' . 
+			$humilityScore . '</td><td><em>' . $humilityKeys .'</em></td></tr>'; 
+		}
+		else {
+			$_SESSION['humilityDisp'] = ""; 
+		}
+	}
 
 	function toggleInfo($uid, $token) {
 	   $conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
@@ -281,7 +533,7 @@
 											<div class="col-md-8 profile-info">
 												<h1><?php echo $_SESSION['profile']['Name'] ?></h1>
 												<?php echo $_SESSION['dispBlurb'] ?>
-												<?php echo $_SESSION['disabledTest'] ?>
+												<!-- FOR DEBUGGING<?php echo $_SESSION['disabledTest'] ?> -->
 												<ul class="list-inline">
 													<?php echo $_SESSION['displayLocation'] ?>
 													<?php echo $_SESSION['displayBirthday'] ?>
@@ -360,160 +612,20 @@
 														</tr>
 														</thead>
 														<tbody>
-														<tr>
-															<td style="color: #0d638f;">
-																Attractiveness
-															</td>
-															<td>
-																<?php echo $_SESSION['profile']['Attractiveness'] ? $_SESSION['profile']['Attractiveness']: "--" ?>
-															</td>
-															<td><em>
-																<?php echo isset($_SESSION['profile']['Attractiveness_Keywords']) ? $_SESSION['profile']['Attractiveness_Keywords']: "N/A" ?>
-															</em></td>
-														</tr>
-														<tr>
-															<td style="color: #0d638f;">
-																Affability
-															</td>
-															<td>
-																<?php echo $_SESSION['profile']['Affability'] ? $_SESSION['profile']['Affability']: "--" ?>
-															</td>
-															<td><em>
-																<?php echo isset($_SESSION['profile']['Affability_Keywords']) ? $_SESSION['profile']['Affability_Keywords']: "N/A" ?>
-															</em></td>
-														</tr>
-														<tr>
-															<td style="color: #0d638f;">
-																Intelligence
-															</td>
-															<td>
-																<?php echo $_SESSION['profile']['Intelligence'] ? $_SESSION['profile']['Intelligence']: "--" ?>
-															</td>
-															<td><em>
-																<?php echo isset($_SESSION['profile']['Intelligence_Keywords']) ? $_SESSION['profile']['Intelligence_Keywords']: "N/A" ?>
-															</em></td>
-														</tr>
-														<tr>
-															<td style="color: #0d638f;">
-																Style
-															</td>
-															<td>
-																<?php echo $_SESSION['profile']['Style'] ? $_SESSION['profile']['Style']: "--" ?>
-															</td>
-															<td><em>
-																<?php echo isset($_SESSION['profile']['Style_Keywords']) ? $_SESSION['profile']['Style_Keywords']: "N/A" ?>
-															</em></td>
-														</tr>
-														<tr>
-															<td style="color: #0d638f;">
-																Promiscuity
-															</td>
-															<td>
-																<?php echo $_SESSION['profile']['Promiscuity'] ? $_SESSION['profile']['Promiscuity']: "--" ?>
-															</td>
-															<td><em>
-																<?php echo isset($_SESSION['profile']['Promiscuity_Keywords']) ? $_SESSION['profile']['Promiscuity_Keywords']: "N/A" ?>
-															</em></td>
-														</tr>
-														<tr>
-															<td style="color: #0d638f;">
-																Humor
-															</td>
-															<td>
-																<?php echo $_SESSION['profile']['Humor'] ? $_SESSION['profile']['Humor']: "--" ?>
-															</td>
-															<td><em>
-																<?php echo isset($_SESSION['profile']['Humor_Keywords']) ? $_SESSION['profile']['Humor_Keywords']: "N/A" ?>
-															</em></td>
-														</tr>
-														<tr>
-															<td style="color: #0d638f;">
-																Confidence
-															</td>
-															<td>
-																<?php echo $_SESSION['profile']['Confidence'] ? $_SESSION['profile']['Confidence']: "--" ?>
-															</td>
-															<td><em>
-																<?php echo isset($_SESSION['profile']['Confidence_Keywords']) ? $_SESSION['profile']['Confidence_Keywords']: "N/A" ?>
-															</em></td>
-														</tr>
-														<tr>
-															<td style="color: #0d638f;">
-																Fun
-															</td>
-															<td>
-																<?php echo $_SESSION['profile']['Fun'] ? $_SESSION['profile']['Fun']: "--" ?>
-															</td>
-															<td><em>
-																<?php echo isset($_SESSION['profile']['Fun_Keywords']) ? $_SESSION['profile']['Fun_Keywords']: "N/A" ?>
-															</em></td>
-														</tr>
-														<tr>
-															<td style="color: #0d638f;">
-																Kindness
-															</td>
-															<td>
-																<?php echo $_SESSION['profile']['Kindness'] ? $_SESSION['profile']['Kindness']: "--" ?>
-															</td>
-															<td><em>
-																<?php echo isset($_SESSION['profile']['Kindness_Keywords']) ? $_SESSION['profile']['Kindness_Keywords']: "N/A" ?>
-															</em></td>
-														</tr>
-														<tr>
-															<td style="color: #0d638f;">
-																Honesty
-															</td>
-															<td>
-																<?php echo $_SESSION['profile']['Honesty'] ? $_SESSION['profile']['Honesty']: "--" ?>
-															</td>
-															<td><em>
-																<?php echo isset($_SESSION['profile']['Honesty_Keywords']) ? $_SESSION['profile']['Honesty_Keywords']: "N/A" ?>
-															</em></td>
-														</tr>
-														<tr>
-															<td style="color: #0d638f;">
-																Reliability
-															</td>
-															<td>
-																<?php echo $_SESSION['profile']['Reliability'] ? $_SESSION['profile']['Reliability']: "--" ?>
-															</td>
-															<td><em>
-																<?php echo isset($_SESSION['profile']['Reliability_Keywords']) ? $_SESSION['profile']['Reliability_Keywords']: "N/A" ?>
-															</em></td>
-														</tr>
-														<tr>
-															<td style="color: #0d638f;">
-																Happiness
-															</td>
-															<td>
-																<?php echo $_SESSION['profile']['Happiness'] ? $_SESSION['profile']['Happiness']: "--" ?>
-															</td>
-															<td><em>
-																<?php echo isset($_SESSION['profile']['Happiness_Keywords']) ? $_SESSION['profile']['Happiness_Keywords']: "N/A" ?>
-															</em></td>
-														</tr>
-														<tr>
-															<td style="color: #0d638f;">
-																Ambition
-															</td>
-															<td>
-																<?php echo $_SESSION['profile']['Ambition'] ? $_SESSION['profile']['Ambition']: "--" ?>
-															</td>
-															<td><em>
-																<?php echo isset($_SESSION['profile']['Ambition_Keywords']) ? $_SESSION['profile']['Ambition_Keywords']: "N/A" ?>
-															</em></td>
-														</tr>
-														<tr>
-															<td style="color: #0d638f;">
-																Humility
-															</td>
-															<td>
-																<?php echo $_SESSION['profile']['Humility'] ? $_SESSION['profile']['Humility']: "--" ?>
-															</td>
-															<td><em>
-																<?php echo isset($_SESSION['profile']['Humility_Keywords']) ? $_SESSION['profile']['Humility_Keywords']: "N/A" ?>
-															</em></td>
-														</tr>
+														<?php echo $_SESSION['attractiveDisp'] ?>
+														<?php echo $_SESSION['affabilityDisp'] ?>
+														<?php echo $_SESSION['intelligenceDisp'] ?>
+														<?php echo $_SESSION['styleDisp'] ?>
+														<?php echo $_SESSION['promiscuityDisp'] ?>
+														<?php echo $_SESSION['humorDisp'] ?>
+														<?php echo $_SESSION['confidenceDisp'] ?>
+														<?php echo $_SESSION['funDisp'] ?>
+														<?php echo $_SESSION['kindnessDisp'] ?>
+														<?php echo $_SESSION['honestyDisp'] ?>
+														<?php echo $_SESSION['reliabilityDisp'] ?>
+														<?php echo $_SESSION['happinessDisp'] ?>
+														<?php echo $_SESSION['ambitionDisp'] ?>
+														<?php echo $_SESSION['humilityDisp'] ?>
 														</tbody>
 														</table>
 													</div>
