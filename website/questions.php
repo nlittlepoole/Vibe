@@ -1,7 +1,3 @@
-<!DOCTYPE html>
-
-<!-- START UP THE SESSION -->
-
 <?php 
     error_reporting(0);
     session_start();
@@ -32,6 +28,9 @@
 		    $next="/index.php?action=question";
     }
 ?>
+<!DOCTYPE html>
+
+<!-- START UP THE SESSION -->
 <!-- 
 Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.0.3
 Version: 1.5.5
@@ -88,14 +87,94 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 </div>
 <!-- BEGIN CONTAINER -->
 <div class="page-container">
-	<script src="../jQuery/jquery.js"></script> 
-    <script> 
-    $(function(){
-      $("#includedContent2").load("sidebar.php"); 
-    });
-    </script> 
-    
-    <div id="includedContent2"></div>
+	<!-- BEGIN SIDEBAR -->
+	<div class="page-sidebar-wrapper">
+		<div class="page-sidebar navbar-collapse collapse">
+			<!-- BEGIN SIDEBAR MENU -->
+			<ul class="page-sidebar-menu">
+				<li class="sidebar-toggler-wrapper">
+					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+					<div class="sidebar-toggler hidden-phone">
+					</div>
+					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+				</li>
+				<li class="sidebar-search-wrapper">
+					<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+					<form class="sidebar-search" action="/index.php?action=search" method="POST">
+						<div class="form-container">
+							<div class="input-box">
+								<a href="javascript:;" class="remove"></a>
+								<input type="text" name="Query" placeholder="Search..."/>
+								<input type="button" class="submit" value=" "/>
+							</div>
+						</div>
+					</form>
+					<!-- END RESPONSIVE QUICK SEARCH FORM -->
+				</li>
+				<li class="start">
+					<a href="/index.php?action=dashboard">
+					<i class="fa fa-home"></i>
+					<span class="title">
+						Dashboard
+					</span>
+					<span class="selected">
+					</span>
+					</a>
+				</li>
+				<li class="start active ">
+					<a href="/index.php?action=question">
+					<i class="fa fa-question"></i>
+					<span class="title">
+						Questions
+					</span>
+					<span class="selected">
+					</span>
+					</a>
+				</li>
+				<li class="">
+					<a href="javascript:;">
+					<i class="fa fa-heart"></i>
+					<span class="title">
+						My Communities
+					</span>
+					<span class="arrow ">
+					</span>
+					</a>
+					<ul class="sub-menu">
+						<?php echo $_SESSION['dashboard']['Communities'] ?>
+					</ul>
+				</li>
+				<li id="frontend-link" class="" data-placement="right" data-original-title="Frontend&nbsp;Theme For&nbsp;Metronic&nbsp;Admin">
+					<a href="achievements.php">
+					<i class="fa fa-trophy"></i>
+					<span class="title">
+						Achievements
+					</span>
+					<span class="selected">
+					</span>
+					</a>
+				</li>
+				<li id="forum-link" class="tooltips" data-placement="right" data-original-title="Community&nbsp;Question Request&nbsp;Forum">
+					<a href="javascript:;">
+					<i class="fa fa-comments"></i>
+					<span class="title">
+						Forum
+					</span>
+					</a>
+				</li>
+				<li id="frontend-link" class="tooltips" data-placement="right" data-original-title="Vibe&nbsp;Community Blog">
+					<a href="http://blog.go-vibe.com">
+					<i class="fa fa-book"></i>
+					<span class="title">
+						Blog
+					</span>
+					</a>
+				</li>
+			</ul>
+			<!-- END SIDEBAR MENU -->
+		</div>
+	</div>
+	<!-- END SIDEBAR -->
 	<!-- BEGIN CONTENT -->
 	<div class="page-content-wrapper">
 		<div class="page-content">

@@ -54,7 +54,14 @@
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="page-header-fixed">
-
+<script src="../jQuery/jquery.js"></script> 
+    <script> 
+    $(function(){
+      $("#includedContent").load("header.php"); 
+    });
+    </script> 
+    
+    <div id="includedContent"></div>
 
 <!-- BEGIN PAGE SPECIFIC CONTENT HERE -->
 
