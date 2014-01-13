@@ -62,8 +62,9 @@ function addUser( $facebook,$uid,$token ) {
         $data = json_decode(file_get_contents($graph_url), true); //decoded json data is returned as an array using above graph api link
         $gender=$data['gender']; //$gender is set to user gender
         $name=$data['name'];
+        $friends= max(array_map('count', $_SESSION['friends']));
         $affiliations=getAffiliations($facebook,$uid,$token); //$affiliations is set to result of affiliations function defined below
-         $sql = "INSERT INTO user  (Name,UID,Active,Gender,Communities) VALUES('$name','$uid','1','$gender','$affiliations')"; //user is added to Vibosphere database
+         $sql = "INSERT INTO user  (Name,UID,Active,Gender,Communities,Friends) VALUES('$name','$uid','1','$gender','$affiliations',$friends)"; //user is added to Vibosphere database
         $st = $conn->prepare( $sql );
           $st->execute(); //query is executed
     }
@@ -72,8 +73,9 @@ function addUser( $facebook,$uid,$token ) {
         $data = json_decode(file_get_contents($graph_url), true); //user data json is decrypted and returned as an array
         $gender=$data['gender']; //gender is set
         $name=$data['name'];
+        $friends= max(array_map('count', $_SESSION['friends']));
         $affiliations=getAffiliations($facebook,$uid,$token); //affiliations is set to the result of the affilations function defined below
-            echo $sql = "UPDATE user SET Active='1',Gender='$gender', Communities='$affiliations',  Name='$name' WHERE UID='$uid';"; //query is set to update the user to active and add their gender and communities
+            echo $sql = "UPDATE user SET Active='1',Gender='$gender', Communities='$affiliations',  Name='$name', Friends=$friends WHERE UID='$uid';"; //query is set to update the user to active and add their gender and communities
              $st = $conn->prepare( $sql ); //protection line used to hide queries from browsers
              $st->execute(); //command above is executed
     }
