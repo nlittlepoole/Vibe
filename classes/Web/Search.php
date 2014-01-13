@@ -1,4 +1,31 @@
 <?php
+function profiled($facebook,$uid,$token){
+    require_once( CLASS_PATH . "/Web/Dashboard.php");
+    require_once( CLASS_PATH . "/Web/User.php");
+    require_once( CLASS_PATH . "/Web/Notification.php");
+    if($uid){
+        $user=$uid;
+        if(isset($_GET['profile']) && $_GET['profile']!=$user ){
+         $user=$_GET['profile'];
+         if(checkActive($_GET['profile'])){
+           $_SESSION['profile']=profile($facebook,$user,$token ); 
+         }
+         else{
+            $_SESSION['profile']=profile($facebook,-1,$token );
+         }
+        }
+        else{
+            $_SESSION['profile']=$_SESSION['dashboard'];
+        }
+    return 'Location: /website/profile.php?user='.$user;
+    flush(); 
+    }
+    else{
+      $_SESSION['profile']=null;
+      echo $_SESSION['redirect']="index.php?action=profile&profile=".$_GET['profile'];
+      return "Location: /index.php";
+    }
+}
 function search($query,$facebook,$uid,$token){
     $users=friendsExact($query);
     $users=array_unique(array_merge($users,affiliatesExact($query,$uid)));
@@ -13,7 +40,7 @@ function friendsExact($query){
     $result=Array();
     for($x=0;$x<sizeof($friends['data']);$x++){
         if(stristr($friends['data'][$x]['name'], $query)){
-            $result[$x]= $friends['data'][$x]['name'] . ":" .$friends['data'][$x]['id'];
+            $result[$x]= '<tr><td>1</td><td><a href="/index.php?action=profile&profile='.$friends['data'][$x]['id'].'""><img src="http://graph.facebook.com/'.$friends['data'][$x]['id'].'/picture"  height="42" width="42">'.$friends['data'][$x]['name'].'</a></td></tr>';
         }
     }
     return $result;
@@ -26,7 +53,7 @@ function friendsLoose($query){
     for($x=0;$x<sizeof($friends['data']);$x++){
         foreach($queries as $test){
             if(stristr($friends['data'][$x]['name'], $test)){
-                $result[$x]= $friends['data'][$x]['name'] . ":" .$friends['data'][$x]['id'];
+                $result[$x]= '<tr><td>1</td><td><a href="/index.php?action=profile&profile='.$friends['data'][$x]['id'].'""><img src="http://graph.facebook.com/'.$friends['data'][$x]['id'].'/picture"  height="42" width="42">'.$friends['data'][$x]['name'].'</a></td></tr>';
             } 
         }
 
@@ -49,7 +76,7 @@ function affiliatesExact($query, $uid){
 
     }
     for($x=0;$x<sizeof($users);$x++){
-        $users[$x]= $users[$x]['Name'] . ":" .$users[$x]['UID'];
+        $users[$x]='<tr><td>1</td><td><a href="/index.php?action=profile&profile='.$users[$x]['UID'].'""><img src="http://graph.facebook.com/'.$users[$x]['UID'].'/picture"  height="42" width="42">'.$users[$x]['Name'].'</a></td></tr>';
     }
     return $users;
 } 
@@ -77,7 +104,7 @@ function affiliatesLoose($query, $uid){
 
     }
     for($x=0;$x<sizeof($users);$x++){
-        $users[$x]= $users[$x]['Name'] . ":" .$users[$x]['UID'];
+        $users[$x]= '<tr><td>1</td><td><a href="/index.php?action=profile&profile='.$users[$x]['UID'].'""><img src="http://graph.facebook.com/'.$users[$x]['UID'].'/picture"  height="42" width="42">'.$users[$x]['Name'].'</a></td></tr>'  ;$users[$x]['Name'] . ":" .$users[$x]['UID'];
     }
     return $users;
 } 
@@ -88,7 +115,7 @@ function everyone($query){
     $st->execute(); //executes the sql query found above
     $users=$st->fetchAll();
     for($x=0;$x<sizeof($users);$x++){
-        $users[$x]= $users[$x]['Name'] . ":" .$users[$x]['UID'];
+        $users[$x]= '<tr><td>1</td><td><a href="/index.php?action=profile&profile='.$users[$x]['UID'].'""><img src="http://graph.facebook.com/'.$users[$x]['UID'].'/picture"  height="42" width="42">'.$users[$x]['Name'].'</a></td></tr>'  ;
     }
     return isset($users) ? $users : Array();
 }

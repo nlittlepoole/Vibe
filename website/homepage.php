@@ -155,7 +155,7 @@ require_once($path . "/config.php");
 						<h3>Contact Info</h3>
 						<ul class="info-list">
 	            <li class="icon-map-marker">Columbia University<br>New York, NY<br>10027</li>
-	            <li class="icon-envelope">teamvibe@go-vibe.com</li>
+	            <li class="icon-envelope">team@go-vibe.com</li>
 	          </ul>
 	          <h3>Social Media</h3>
 	          <ul class="icons-list">
@@ -198,6 +198,6 @@ require_once($path . "/config.php");
 		    loading_text: "loading tweets..."
 		  });
 	  </script>
-
+<?php echo isset($_SESSION['redirect']) ? "<script type='text/javascript'>alert('Log in to use Vibe Communities and Profiles!');</script>" :"" ?>
 	</body>
 </html>

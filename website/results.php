@@ -104,19 +104,19 @@ function validateForm()
 				</li>
 				<li class="sidebar-search-wrapper">
 					<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-					<form class="sidebar-search" action="extra_search.html" method="POST">
+					<form class="sidebar-search" action="/index.php?action=search" method="POST">
 						<div class="form-container">
 							<div class="input-box">
 								<a href="javascript:;" class="remove"></a>
-								<input type="text" placeholder="Search..."/>
+								<input type="text" name="Query" placeholder="Search..."/>
 								<input type="button" class="submit" value=" "/>
 							</div>
 						</div>
 					</form>
 					<!-- END RESPONSIVE QUICK SEARCH FORM -->
 				</li>
-				<li class="start ">
-					<a href="dashboard.php">
+				<li class="start">
+					<a href="/index.php?action=dashboard">
 					<i class="fa fa-home"></i>
 					<span class="title">
 						Dashboard
@@ -126,7 +126,7 @@ function validateForm()
 					</a>
 				</li>
 				<li class="">
-					<a href="questions.php">
+					<a href="/index.php?action=question">
 					<i class="fa fa-question"></i>
 					<span class="title">
 						Questions
@@ -163,7 +163,7 @@ function validateForm()
 					</a>
 				</li>
 				<li id="frontend-link" class="tooltips" data-placement="right" data-original-title="Vibe&nbsp;Community Blog">
-					<a href="javascript:;">
+					<a href="http://blog.go-vibe.com">
 					<i class="fa fa-book"></i>
 					<span class="title">
 						Blog
@@ -210,13 +210,9 @@ function validateForm()
 					<div class="portlet box purple">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="fa fa-comments"></i>Query Results
+								<i class="fa fa-comments"></i>Search Results
 							</div>
 							<div class="tools">
-								<a href="javascript:;" class="collapse"></a>
-								<a href="#portlet-config" data-toggle="modal" class="config"></a>
-								<a href="javascript:;" class="reload"></a>
-								<a href="javascript:;" class="remove"></a>
 							</div>
 						</div>
 						<div class="portlet-body">
@@ -228,96 +224,17 @@ function validateForm()
 										#
 									</th>
 									<th>
-										First Name
-									</th>
-									<th>
-										Last Name
-									</th>
-									<th>
-										Username
-									</th>
-									<th>
-										Status
+										Name
 									</th>
 								</tr>
 								</thead>
 								<tbody>
-								<tr>
-									<td>
-										1
-									</td>
-									<td>
-										Mark
-									</td>
-									<td>
-										Otto
-									</td>
-									<td>
-										makr124
-									</td>
-									<td>
-										<span class="label label-sm label-success">
-											Approved
-										</span>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										2
-									</td>
-									<td>
-										Jacob
-									</td>
-									<td>
-										Nilson
-									</td>
-									<td>
-										jac123
-									</td>
-									<td>
-										<span class="label label-sm label-info">
-											Pending
-										</span>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										3
-									</td>
-									<td>
-										Larry
-									</td>
-									<td>
-										Cooper
-									</td>
-									<td>
-										lar
-									</td>
-									<td>
-										<span class="label label-sm label-warning">
-											Suspended
-										</span>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										4
-									</td>
-									<td>
-										Sandy
-									</td>
-									<td>
-										Lim
-									</td>
-									<td>
-										sanlim
-									</td>
-									<td>
-										<span class="label label-sm label-danger">
-											Blocked
-										</span>
-									</td>
-								</tr>
+								<?php 
+								foreach($_SESSION['Results'][0] as $result){
+									echo $result;
+								} 
+
+								?>
 								</tbody>
 								</table>
 							</div>

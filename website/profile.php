@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-
-<!-- File has been changed to a PHP file -->
-
-<!-- START UP THE SESSION -->
 <?php 
-	ob_start();
-	//error_reporting(0);
+	error_reporting(0);
     session_start();
     $path = $_SERVER['DOCUMENT_ROOT'];
     require($path . "/config.php");
@@ -15,9 +9,9 @@
     $profile= isset( $_GET['user'] ) ? $_GET['user'] : "";
 	$_SESSION['test'] = $profile;
     if(!$profile || !$_SESSION['profile']){
-    	//header('Location: /index.php?action=profile');
-		//header('Location: http://www.google.com');
-		flush(); 
+    	header('Location: /index.php?action=profile');
+    	//header('Location: /index.php?action=profile&profile='.$profile);
+		exit(0); 
     }  
     $action = isset( $_GET['action'] ) ? $_GET['action'] : "Invite more Friends to Vibe for Comments"; 
     $pic="http://graph.facebook.com/" . $profile . "/picture?width=300&height=300";
@@ -81,7 +75,11 @@
 	}
     
 ?>
+<!DOCTYPE html>
 
+<!-- File has been changed to a PHP file -->
+
+<!-- START UP THE SESSION -->
 
 <!-- 
 Template Name: Metronic - Responsive Admin profile Template build with Twitter Bootstrap 3.0.3
@@ -156,11 +154,11 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-profile-template
 				</li>
 				<li class="sidebar-search-wrapper">
 					<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-					<form class="sidebar-search" action="extra_search.html" method="POST">
+					<form class="sidebar-search" action="/index.php?action=search" method="POST">
 						<div class="form-container">
 							<div class="input-box">
 								<a href="javascript:;" class="remove"></a>
-								<input type="text" placeholder="Search..."/>
+								<input type="text" name="Query" placeholder="Search..."/>
 								<input type="button" class="submit" value=" "/>
 							</div>
 						</div>
@@ -168,7 +166,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-profile-template
 					<!-- END RESPONSIVE QUICK SEARCH FORM -->
 				</li>
 				<li class="start">
-					<a href="dashboard.php">
+					<a href="/index.php?action=dashboard">
 					<i class="fa fa-home"></i>
 					<span class="title">
 						Dashboard
@@ -178,7 +176,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-profile-template
 					</a>
 				</li>
 				<li class="">
-					<a href="questions.php">
+					<a href="/index.php?action=question">
 					<i class="fa fa-question"></i>
 					<span class="title">
 						Questions
@@ -195,7 +193,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-profile-template
 					</span>
 					</a>
 					<ul class="sub-menu">
-						<?php echo $_SESSION['profile']['Communities'] ?>
+						<?php echo $_SESSION['dashboard']['Communities'] ?>
 					</ul>
 				</li>
 				<li id="frontend-link" class="tooltips" data-placement="right" data-original-title="Frontend&nbsp;Theme For&nbsp;Metronic&nbsp;Admin">
@@ -215,7 +213,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-profile-template
 					</a>
 				</li>
 				<li id="frontend-link" class="tooltips" data-placement="right" data-original-title="Vibe&nbsp;Community Blog">
-					<a href="javascript:;">
+					<a href="http://blog.go-vibe.com">
 					<i class="fa fa-book"></i>
 					<span class="title">
 						Blog
@@ -586,3 +584,4 @@ jQuery(document).ready(function() {
 </body>
 <!-- END BODY -->
 </html>
+<?php $_SESSION['profile']=null ?>
