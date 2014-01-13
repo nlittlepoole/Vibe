@@ -9,25 +9,42 @@
     session_start();
     $path = $_SERVER['DOCUMENT_ROOT'];
     require($path . "/config.php");
+	require($path . "/php-sdk/facebook.php");
     
     $action = isset( $_GET['action'] ) ? $_GET['action'] : "Invite more Friends to Vibe for Comments"; //sets $action to "Action" url fragment string if action isn't null
     $profile= isset( $_GET['user'] ) ? $_GET['user'] : "";
+	$_SESSION['test'] = $profile;
     if(!$profile || !$_SESSION['profile']){
+<<<<<<< HEAD
     	header('Location: /index.php?action=profile');
+=======
+    	//header('Location: /index.php?action=profile');
+>>>>>>> Front-End
 		//header('Location: http://www.google.com');
 		flush(); 
     }  
-    $action = isset( $_GET['action'] ) ? $_GET['action'] : "Invite more Friends to Vibe for Comments"; //sets $action to "Action" url fragment string if action isn't null
+    $action = isset( $_GET['action'] ) ? $_GET['action'] : "Invite more Friends to Vibe for Comments"; 
     $pic="http://graph.facebook.com/" . $profile . "/picture?width=300&height=300";
-	toggleInfo($profile);
 
-	
-	function toggleInfo($uid) {
+	toggleInfo($profile, $_SESSION['myToken']);
+
+	function toggleInfo($uid, $token) {
 	   $conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-	   $sql = "SELECT displayLocation,displayBirthdate,websiteURL,showNumFriends,totalAnswers FROM user WHERE UID=" . $uid;
+	   $sql = "SELECT displayLocation,displayBirthdate,websiteURL,blurb,showNumFriends,totalAnswers FROM user WHERE UID=" . $uid;
 	   $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
 	   $st->execute();//executes query above
+	   
 	   $data=$st->fetch();
+	   
+	   //Graph API Request for person's birth date and location
+	   $graph_url = "https://graph.facebook.com/" . $uid . "/?fields=location,birthday,gender&access_token=" . $token; 
+       $facebookBDateAndLoc = json_decode(file_get_contents($graph_url), true); 
+	   
+	   $dispBday = $facebookBDateAndLoc['birthday'];
+	   $dispLoc = $facebookBDateAndLoc['location']['name'];
+	   
+       $_SESSION['dispLoc'] = $dispLoc; 
+       $_SESSION['dispBday'] = $dispBday;
 	   
 	   if($data['showNumFriends'] == 0) {
 	   	 $_SESSION['friendsDisplay'] = '
@@ -41,6 +58,27 @@
 	   }
 	   else {
 	     $_SESSION['friendsDisplay'] = "";
+	   }
+	   
+	   if($data['blurb'] != "") {
+	   	  $_SESSION['dispBlurb'] = '<p>' . $data['blurb']. '</p>';
+	   }
+	   else {
+	   	  $_SESSION['dispBlurb'] = '';
+	   }
+	   
+	   if($data['displayLocation'] == 1) {
+	   	 $_SESSION['displayLocation'] = '<li><i class="fa fa-map-marker"></i> ' . $_SESSION['dispLoc']. ' </li>';
+	   }
+	   else {
+	   	 $_SESSION['displayLocation'] = ""; 
+	   }
+
+	   if($data['displayBirthdate'] == 1) {
+	   	 $_SESSION['displayBirthday'] = '<li><i class="fa fa-calendar"></i> ' . $_SESSION['dispBday']. ' </li>';
+	   }
+	   else {
+	   	 $_SESSION['displayBirthday'] = ""; 
 	   }
 	   
 	   $conn = null;
@@ -239,16 +277,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-profile-template
 										<div class="row">
 											<div class="col-md-8 profile-info">
 												<h1><?php echo $_SESSION['profile']['Name'] ?></h1>
-												<p>
-													Some possible description of the person. And a website link below if they want to include one.
-												</p>
+												<?php echo $_SESSION['dispBlurb'] ?>
 												<ul class="list-inline">
-													<li>
-														<i class="fa fa-map-marker"></i> Spain
-													</li>
-													<li>
-														<i class="fa fa-calendar"></i> 18 Jan 1982
-													</li>
+													<?php echo $_SESSION['displayLocation'] ?>
+													<?php echo $_SESSION['displayBirthday'] ?>
 													<li>
 														<i class="fa fa-laptop"></i> Website
 													</li>
@@ -269,7 +301,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-profile-template
 																	PEOPLE ANSWERED <i class="fa fa-img-up"></i>
 																</span>
 																<span class="sale-num">
-																	2043
+																	200
 																</span>
 															</li>
 															<!--
