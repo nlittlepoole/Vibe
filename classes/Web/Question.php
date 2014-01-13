@@ -46,7 +46,7 @@ function question($facebook,$uid,$token ){
     //$recipient=712337857;
     $question= str_replace("name", $name, $question); 
     $pic=getPictures($recipient);
-    $_SESSION['affiliations']=friendAffiliations($recipient);
+    $_SESSION['affiliations']=getAffiliations($facebook,$recipient,$token);
     $_SESSION['question'] = $question;
     $_SESSION['attribute'] = $attribute;
     $_SESSION['pic'] = $pic;

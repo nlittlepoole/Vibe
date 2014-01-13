@@ -92,7 +92,7 @@ break;
   default: //this is the default setting, it simply take sthe user to the homepage. It also creates the facebook login url 
     //when a user logs in through facebook, the are simply going to a special link created by the facebook api. The api uses our AP ID and password to generate the link
     $params = array(
-                  'scope' => "friends_photos, user_groups, user_photos,user_education_history,read_friendlists,read_stream,user_work_history,user_photo_video_tags, friends_photo_video_tags,friends_education_history,friends_work_history,user_birthday,friends_birthday,user_location,friends_location", //these are the permissions Vibe needs from facebook
+                  'scope' => "friends_photos, user_photos,user_education_history,read_friendlists,read_stream,user_work_history,user_photo_video_tags, friends_photo_video_tags,friends_education_history,friends_work_history,user_birthday,friends_birthday,user_location,friends_location,friends_hometown,user_hometown", //these are the permissions Vibe needs from facebook
                   'redirect_uri' => 'http://localhost/index.php?action=login' //this is the link that facebook will redirect the browser to after succesful login
                 );
     $loginUrl = $facebook->getLoginUrl($params); //the facebook getLoginUrl() is an api method that uses the permissions and redirct url to create a unique login url
