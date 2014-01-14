@@ -101,7 +101,7 @@ if(refresh($uid) ||$force){
     $data['Ambition_Keywords']=isset($data['Ambition_Keywords'])? keywords($data['Ambition_Keywords'],$data['Ambition_Total'],2) : "N/A";
     $data['Humility_Keywords']=isset($data['Humility_Keywords'])? keywords($data['Humility_Keywords'],$data['Humility_Total'],2) : "N/A";
     $data["pic"]="http://graph.facebook.com/" . $uid . "/picture?width=300&height=300";
-    $_SESSION['refresh']=DateTime(date("Y-m-d H:i:s", time()));
+    $_SESSION['refresh']=new DateTime(date("Y-m-d H:i:s", time()));
     $_SESSION['dashboard']=$data;
     $conn=null;
   }
