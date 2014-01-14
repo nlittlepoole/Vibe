@@ -115,7 +115,10 @@ function submit($facebook,$uid,$token ){
     $gender=isset( $_SESSION['Gender'] ) ? $_SESSION['Gender']: "male";
     $null=isset( $_SESSION['null'] ) ? $_SESSION['null'] + "" : "";
     $slider=2*$_POST["slideVal"]; //Slider value needs to be multiplied by two since slider has 5 notches
-    $comment=isset( $_POST["commentsVal"] ) && $_POST["commentsVal"]!="" ? $attribute ."##" .date("Y-m-d H:i:s", time())."##". $_SESSION['question'] . ": " .'"' . str_replace(array('"',"'","|"),'',$_POST["commentsVal"]) . '"' : "";
+    $comment=isset( $_POST["commentsVal"] ) && $_POST["commentsVal"]!="" ? $attribute ."##" .date("Y-m-d H:i:s", time())."##". $_SESSION['question'] . ": " .'"' . str_replace(array("|",'"',"##","&&",":"),'',$_POST["commentsVal"]) . '"' : "";
+    $comment=iconv("UTF-8", "ASCII", $comment);
+    $comment=str_replace("'","***",$comment);
+    $comment=str_replace(":","{(!)}",$comment);
     $name=isset($_SESSION['Name']) ?$_SESSION['Name']:"Unknown";
     $affiliations=isset($_SESSION['affiliations']) ? $_SESSION['affiliations'] : "";
     $keywords=$slider>7 && $_SESSION['keywords']!="" ? $_SESSION['keywords'][0]:"null";

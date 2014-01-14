@@ -164,7 +164,7 @@ while count[0][0] != 0:
         if not "null" in keyword:
             keyword="1"+keyword
         query="INSERT INTO user (UID, ACTIVE, " + attribute + "," + attribute + "_Total ," + attribute+ "_Keywords,Comments,Communities,Gender,Name) VALUES (" + user2 + ",0,"+ str(score)+","+str(1-modifier)+", '"+keyword+"','"+comment+"','"+affiliation+"','"+gender+"','"+name+"')"
-        #print query
+        print query
         cur.execute(query)
         cur.connection.commit() 
     cur.execute("DELETE FROM transaction LIMIT 1")#deletes transaction now that it is recorded
