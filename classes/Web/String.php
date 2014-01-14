@@ -35,7 +35,8 @@ function dashboardComments($comments){
     
     //splice the comment further to get a stylized comment
     $commentPair = split(':',$temp[2]); 
-    
+    $commentPair[1]=str_replace("***","'",$commentPair[1]);
+    $commentPair[1]=str_replace("{(!)}",":",$commentPair[1]);
       $comments[$x]='                 
               <li>
                     <div class="col1">
@@ -98,7 +99,8 @@ function comments($comments){
 	  
 	  //splice the comment further to get a stylized comment
 	  $commentPair = split(':',$temp[2]); 
-	  
+	  $commentPair[1]=str_replace("***","'",$commentPair[1]);
+    $commentPair[1]=str_replace("{(!)}",":",$commentPair[1]);
       $comments[$x]='                 
       			  <li>
                     <div class="col1">

@@ -39,8 +39,8 @@ break;
     require( CLASS_PATH . "/Web/Dashboard.php");
     $force=$_GET['force'];
     dashboard($facebook,$uid,$token,$force);
-
     if($_SESSION['redirect']){
+        $redirect=$_SESSION['redirect'];
         $_SESSION['redirect']=null;
         header('Location:'.$redirect);
     }

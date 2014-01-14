@@ -308,7 +308,7 @@
 	   	 <li>
 			<a href="#">Friends
 				<span>
-					' . $_SESSION['numberOfFriends'] . '
+					' . $_SESSION['profile']['Friends'] . '
 				</span>
 			</a>
 		</li>';
@@ -567,10 +567,10 @@
 														<ul class="list-unstyled">
 															<li>
 																<span class="sale-info">
-																	PEOPLE ANSWERED <i class="fa fa-img-up"></i>
+																	 Questions Answered about User <i class="fa fa-img-up"></i>
 																</span>
 																<span class="sale-num">
-																	2000
+																	<?php echo $_SESSION['profile']['totalAnswers'] ?>
 																</span>
 															</li>
 															<!--

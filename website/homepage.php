@@ -114,10 +114,10 @@ require_once($path . "/config.php");
 							<h4 style="color: white">Co-founder</h4>
 							<p style="color: white">Niger is a sophomore studying Operations Research with a minor in Computer Science. When he's
 								not watching Legend of Korra, he's probably playing ping pong, surfing subreddits, or listening
-								to Drake's new album.</p>
+								to some Childish Gambino.</p>
 							<ul class="icons-list">
 								<li><a href="http://www.facebook.com/nlittlepoole" class="icon-facebook">Facebook</a></li>
-								<li><a href="#" class="icon-twitter">Twitter</a></li>
+								<li><a href="https://twitter.com/AlwayScheming" class="icon-twitter">Twitter</a></li>
 								<li><a href="http://www.linkedin.com/pub/niger-little-poole/55/803/557" class="icon-linkedin">LinkedIn</a></li>
 							</ul>
 						</div>
