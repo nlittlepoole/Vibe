@@ -30,17 +30,8 @@
 ?>
 <!DOCTYPE html>
 
-<!-- START UP THE SESSION -->
-<!-- 
-Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.0.3
-Version: 1.5.5
-Author: KeenThemes
-Website: http://www.keenthemes.com/
-Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
--->
-<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
-<!--[if !IE]><!-->
+<!-- HTML CONTENT BELOW -->
+
 <html lang="en" class="no-js">
 <!--<![endif]-->
 <!-- BEGIN HEAD -->
@@ -69,10 +60,46 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <link href="assets/css/custom.css" rel="stylesheet" type="text/css"/>
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="favicon.ico"/>
+
+<style>
+	img {
+		width: 250px; 
+		height: auto;
+	}
+</style>
+
+<script text="text/javascript">
+	function findPos(obj) {
+	    
+	    var curtop = 0;
+	    
+	    if (obj.offsetParent) {
+	        do {
+	            curtop += obj.offsetTop;
+	        } while (obj = obj.offsetParent);
+	    	return [curtop];
+	    }
+	}
+
+	function validateQuestion()
+	{
+		var x = document.forms["questionsform"]["commentsVal"].value;
+		if (x.indexOf('retard') != -1 || x.indexOf('stupid') != -1 || x.indexOf('fag') != -1 || x.indexOf('jerk') != -1 || x.indexOf('pussy') != -1 || x.indexOf('bitch') != -1 || x.indexOf('cock') != -1 || x.indexOf('dick') != -1 || x.indexOf('pussy') != -1 || x.indexOf('kill yourself') != -1)
+		{
+			//return false;
+			//alert("Problem!"); 
+		    document.getElementById("commentsSection").className+=' has-error';
+		    document.getElementById("helpQuestion").innerHTML='Please do not enter any degrading language!'; 
+		    window.scroll(0,findPos(document.getElementById("topOfForm")));
+		    return false;
+		}
+	}
+</script>
+
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
-<body class="page-header-fixed">
+<body class="page-header-fixed" id="topOfForm">
 
 <script src="../jQuery/jquery.js"></script> 
     <script> 
@@ -233,36 +260,38 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 							<div class="tools">
 							</div>
 						</div>
-						<div class="portlet-body form">
+						<div class="portlet-body">
 							<div class="note note-info">
 								<h4 class="block"><?php echo $question ?></h4>
 							</div>
-							<div style="display: block; margin-left: auto; margin-right: auto">
-								<img src=<?php echo $pic ?> style="width: 300px; overflow:hidden; border-radius: 50%">
-							</div>
-							<form role="form" class="form-horizontal form-bordered" action="/index.php?action=submit" method="post">
-								<div class="form-body">
+							<form role="form" class="form-horizontal form-bordered" action="/index.php?action=submit" method="post" onsubmit="return validateQuestion()" name="questionsform">
+								<div class="form-body" style="float: left; width: 50%">
 									<div class="form-group">
 										<label class="col-md-3 control-label">Vibe Score</label>
-										<div class="col-md-4">
-											<div id="slider-snap-inc" class="slider bg-green">
-											</div>
-											<input type="hidden" id="slider-snap-inc-amount" name="slideVal"/>
+										<div class="col-md-9">
+											<div id="slider-snap-inc" class="slider bg-green"></div>
+											<!--<input type="text" id="slider-snap-inc-amount" name="slideVal"/>-->
+											<input type="hidden" id="amount" name="slideVal" />
 										</div>
 									</div>
-									<div class="form-group last">
+									<div class="form-group last" id="commentsSection">
 										<label class="col-md-3 control-label">Comments</label>
 										<div class="col-md-9">
 											<input type="text" class="form-control" name="commentsVal" placeholder="Enter comments" maxlength="60">
-											<span class="help-block">
+											<span class="help-block" id="helpQuestion">
 												Please enter any comments above.
 											</span>
 										</div>
 									</div>
 								</div>
+								<div style="width: 50%; float: left; margin-top: 20px">
+									<div style="width: 250px; height: 250px; overflow: hidden">
+										<img src=<?php echo $pic ?> />
+									</div>
+								</div>
 								<div class="form-actions fluid">
 									<div class="col-md-offset-3 col-md-9">
-										<input type="submit"  class="btn green">
+										<input type="submit"  class="btn green" />
 										<button type="button" onclick="location.href='/index.php?action=question'" class="btn default">Skip</button>
 									</div>
 								</div>
