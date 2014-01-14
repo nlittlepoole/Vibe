@@ -17,6 +17,21 @@
 
 	toggleInfo($profile, $_SESSION['myToken']);
 	displayVibes($profile); 
+	totalPoints(); 
+	
+	function totalPoints() {
+	   $conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+	   
+	   //GET TOTAL NUMBER OF POINTS AND CHANGE THAT IN ADDITION TO SESSION DATA
+	   $sql = "SELECT Points FROM user WHERE UID=" . $_SESSION['userID'];
+	   $st = $conn->prepare($sql);
+	   $st->execute();
+	   
+	   $data=$st->fetch(); 
+	   $_SESSION['pointsTracker'] = $data['Points'];
+	   
+	   $conn = null; 
+	}
 	
 	function displayVibes($uid) {
 		//Grab the vibes from the database that are not toggled off
@@ -574,7 +589,7 @@
 																	POINTS
 																</span>
 																<span class="sale-num">
-																	<?php echo $_SESSION['profile']['Points'] ?>
+																	<?php echo $_SESSION['pointsTracker'] ?>
 																</span>
 																
 															</li>

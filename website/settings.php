@@ -13,13 +13,28 @@
     
     buildSettings();
     buildCheckBoxes();
+	totalPoints();
     
     $action = isset( $_GET['action'] ) ? $_GET['action'] : "Invite more Friends to Vibe for Comments"; //sets $action to "Action" url fragment string if action isn't null
     $dashboard=$_SESSION['dashboard'];
     $pic=$dashboard['pic'];
+	
+	function totalPoints() {
+	   $conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+	   
+	   //GET TOTAL NUMBER OF POINTS AND CHANGE THAT IN ADDITION TO SESSION DATA
+	   $sql = "SELECT Points FROM user WHERE UID=" . $_SESSION['userID'];
+	   $st = $conn->prepare($sql);
+	   $st->execute();
+	   
+	   $data=$st->fetch(); 
+	   $_SESSION['pointsTracker'] = $data['Points'];
+	   
+	   $conn = null;
+	}
   
   
-   function buildSettings() {
+    function buildSettings() {
        $conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
 	   $sql = "SELECT websiteURL,displayLocation,displayBirthdate,blurb,showNumFriends FROM user WHERE UID=" . $_SESSION['userID'];
 	   $st = $conn->prepare($sql);
@@ -261,7 +276,7 @@ function validateForm()
 	}
 	
 	var y = document.forms["settingsform"]["blurb"].value;
-	if (y.indexOf('shit') != -1 || y.indexOf('fuck') != -1 || y.indexOf('bitch') != -1 || y.indexOf('cunt') != -1 || y.indexOf('damn') != -1)
+	if (y.indexOf('shit') != -1 || y.indexOf('fuck') != -1 || y.indexOf('bitch') != -1 || y.indexOf('cunt') != -1 || y.indexOf('damn') != -1 || y.indexOf('ass') != -1 || y.indexOf('cock') != -1 || y.indexOf('fag') != -1 || y.indexOf('pimp') != -1)
 	{
 		//alert("Problem!"); 
 	    document.getElementById("blurbElement").className+=' has-error';
@@ -336,6 +351,32 @@ function validateForm()
 		document.getElementById("checkbox14").disabled = false;
 		document.getElementById("checkbox14").checked = true;  
 	}
+	
+	//TOTAL NUMBER OF CHECKED BOXES MUST NOT EXCEED FIVE OR USER'S POINTS'
+	
+	var totalChecked = 0; 
+	for(var i = 0; i < 14; i++) {
+		var temp = "checkbox" + (i + 1);
+		if(document.getElementById(temp).checked === true) {
+			totalChecked++;
+		}
+	}
+	var pointsTotal = <?php echo json_encode($_SESSION['pointsTracker']); ?>;
+	
+	if(totalChecked > 5) {
+		document.getElementById("checkBoxElement").className+=' has-error';
+		document.getElementById("checkboxHeader").innerHTML='You many only disable a maximum of five points.';
+	    window.scroll(0,findPos(document.getElementById("topOfForm")));
+	    return false;
+	}
+	else if((pointsTotal - (totalChecked * 30)) < 0) {
+		document.getElementById("checkBoxElement").className+=' has-error';
+		document.getElementById("checkboxHeader").innerHTML='You do not have enough points to disable this many traits.';
+	    window.scroll(0,findPos(document.getElementById("topOfForm")));
+	    return false;
+	}
+	
+	
 	
 }
 </script>
@@ -490,7 +531,7 @@ function validateForm()
 									<div class="form-group" id="blurbElement">
 										<label class="col-md-3 control-label">Blurb</label>
 										<div class="col-md-9">
-											<input type="text" class="form-control" name="blurb" placeholder="<?php echo $_SESSION['tempBlurb'] ?>" maxlength="100">
+											<input type="text" class="form-control" name="blurb" id="BlurbInput" placeholder="<?php echo $_SESSION['tempBlurb'] ?>" maxlength="100">
 											<span class="help-block" id="helpBlurb">
 												This is a short blurb that will appear under your name on your profile.
 											</span>
@@ -508,8 +549,9 @@ function validateForm()
 											</div>
 										</div>
 									</div>
-									<div class="form-group">
-										<label class="col-md-3 control-label"><span class="tooltips" data-container="body" data-original-title="You can disable up to seven of your Vibe scores for a week each.">Disable Vibe Scores <i class="fa fa-question-circle"></i></span></label>
+									<div class="form-group" id="checkBoxElement">
+										<label class="col-md-3 control-label"><span class="tooltips" data-container="body" data-original-title="You can disable up to five of your Vibe scores for a week each.">Disable Vibe Scores
+											<i class="fa fa-question-circle"></i><em><p id="checkboxHeader"></p></em></span></label>
 										
 											<div class="checkbox-list">
 												<div class="table-responsive">
@@ -522,11 +564,7 @@ function validateForm()
 														?>
 													</tbody>
 													</table>
-												</div>
-												
-												
-												
-											
+												</div>					
 											</div>
 										</div>
 									</div>
