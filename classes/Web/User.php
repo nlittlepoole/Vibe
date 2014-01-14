@@ -54,11 +54,14 @@ function checkActive($uid){
     } 
 }
 function refresh($uid){
-  $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //initialies connection to the database using the credentials found in config.php
-  $sql = "SELECT LastLogin FROM user WHERE UID= $uid"; //gets the active status of the user with $uid as a user ID
-  $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
-  $st->execute(); //executes the sql query found above
-  $raw=$st->fetch();
+  $time;
+  if(!$_SESSION['refresh']){
+    $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //initialies connection to the database using the credentials found in config.php
+    $sql = "SELECT LastLogin FROM user WHERE UID= $uid"; //gets the active status of the user with $uid as a user ID
+    $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
+    $st->execute(); //executes the sql query found above
+    $raw=$st->fetch();
+  }
   $datetime2 = new DateTime(date("Y-m-d H:i:s", time()));
   $datetime1 = new DateTime($raw[0]);
   $interval = $datetime1->diff($datetime2);

@@ -26,7 +26,6 @@ if(refresh($uid) ||$force){
             </li>';
     }
     $data['Communities']=$new_communities;
-    $data['Comments_Size']=$data['Comments']!=''?sizeof(split('&&',$data['Comments'])):0;
     
     //Pulling out achievements and storing them in SESSION
     $_SESSION['achievementsProgress'] = array($data['Helping Hand_progress'], $data['Pal_progress'], 
@@ -67,7 +66,7 @@ if(refresh($uid) ||$force){
 	
 	achievementsNotificationCreator($achievementsNavBar); 
     
-    $data['Comments_Size']=$data['Comments']!=''?sizeof($data['Comments']):0;
+    $data['Comments_Size']=$data['Comments']!=''?sizeof(split('&&',$data['Comments'])):0;
     $data['Comments']=dashboardComments($data['Comments']);
     //print_r($data['Comments']);
     $scores=Array(
@@ -102,6 +101,7 @@ if(refresh($uid) ||$force){
     $data['Ambition_Keywords']=isset($data['Ambition_Keywords'])? keywords($data['Ambition_Keywords'],$data['Ambition_Total'],2) : "N/A";
     $data['Humility_Keywords']=isset($data['Humility_Keywords'])? keywords($data['Humility_Keywords'],$data['Humility_Total'],2) : "N/A";
     $data["pic"]="http://graph.facebook.com/" . $uid . "/picture?width=300&height=300";
+    $_SESSION['refresh']=DateTime(date("Y-m-d H:i:s", time()));
     $_SESSION['dashboard']=$data;
     $conn=null;
   }
@@ -116,7 +116,6 @@ if(refresh($uid) ||$force){
     $st->execute();//executes query above
     $data=$st->fetch(); //$question source is set to result of query
     $data['Comments_Size']=$data['Comments']!=''?sizeof(split('&&',$data['Comments'])):0;
-    $data['Comments_Size']=$data['Comments']!=''?sizeof($data['Comments']):0;
     $data['Comments']=comments($data['Comments']);
     //print_r($data['Comments']);
     $scores=Array(
