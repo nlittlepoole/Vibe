@@ -82,9 +82,9 @@ function addUser( $facebook,$uid,$token ) {
         $data = json_decode(file_get_contents($graph_url), true); //decoded json data is returned as an array using above graph api link
         $gender=$data['gender']; //$gender is set to user gender
         $name=$data['name'];
-        $friends= max(array_map('count', $_SESSION['friends']));
+        $friends= sizeof($_SESSION['friends']['data']);
         $affiliations=getAffiliations($facebook,$uid,$token); //$affiliations is set to result of affiliations function defined below
-         $sql = "INSERT INTO user  (Name,UID,Active,Gender,Communities,Friends,LastLogin) VALUES('$name','$uid','1','$gender','$affiliations',$friends,'$now')"; //user is added to Vibosphere database
+         echo $sql = "INSERT INTO user  (Name,UID,Active,Gender,Communities,Friends,LastLogin) VALUES('$name','$uid','1','$gender','$affiliations',$friends,'$now')"; //user is added to Vibosphere database
         $st = $conn->prepare( $sql );
           $st->execute(); //query is executed
     }
@@ -93,9 +93,9 @@ function addUser( $facebook,$uid,$token ) {
         $data = json_decode(file_get_contents($graph_url), true); //user data json is decrypted and returned as an array
         $gender=$data['gender']; //gender is set
         $name=$data['name'];
-        $friends= max(array_map('count', $_SESSION['friends']));
+        $friends= sizeof($_SESSION['friends']['data']);
         $affiliations=getAffiliations($facebook,$uid,$token); //affiliations is set to the result of the affilations function defined below
-            echo $sql = "UPDATE user SET Active='1',Gender='$gender', Communities='$affiliations',  Name='$name', Friends=$friends, LastLogin='$now', WHERE UID='$uid';"; //query is set to update the user to active and add their gender and communities
+             echo $sql = "UPDATE user SET Active='1',Gender='$gender', Communities='$affiliations',  Name='$name', Friends=$friends, LastLogin='$now' WHERE UID='$uid';"; //query is set to update the user to active and add their gender and communities
              $st = $conn->prepare( $sql ); //protection line used to hide queries from browsers
              $st->execute(); //command above is executed
     }
@@ -150,7 +150,6 @@ function getAffiliations($facebook,$uid,$token){
        $index=sizeof($education)-1;
        array_push($affiliations, $education[$index]['school']['name']."||". $education[$index]['school']['id'] . "&&");
        $work=$result['work']; //education is set to the 3d education array that is 2 dimensions in from the result array
-       print_r($work);
        $index=sizeof($work)-1;
        array_push($affiliations, $work[$index]['employer']['name']."||". $work[$index]['employer']['id'] . "&&");
        $affiliations=array_unique($affiliations);
