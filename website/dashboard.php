@@ -228,10 +228,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 						<div class="details">
 							<div class="number">
 								<!-- for now we just put 0, we'll track this later -->
-								0
+								<?php echo $_SESSION['dashboard']['newAnswers'] ?>
 							</div>
 							<div class="desc">
-								Questions
+								New Answers
 							</div>
 						</div>
 						<a class="more" href="/index.php?action=question">

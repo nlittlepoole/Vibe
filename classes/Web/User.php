@@ -54,16 +54,20 @@ function checkActive($uid){
     } 
 }
 function refresh($uid){
-  $time;
+  $datetime1;
   if(!$_SESSION['refresh']){
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //initialies connection to the database using the credentials found in config.php
     $sql = "SELECT LastLogin FROM user WHERE UID= $uid"; //gets the active status of the user with $uid as a user ID
     $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
     $st->execute(); //executes the sql query found above
     $raw=$st->fetch();
+    $datetime1 = new DateTime($raw[0]);
+  }
+  else{
+    $datetime1=$_SESSION['refresh'];
   }
   $datetime2 = new DateTime(date("Y-m-d H:i:s", time()));
-  $datetime1 = new DateTime($raw[0]);
+  
   $interval = $datetime1->diff($datetime2);
   $time=$interval->format('%i');
   return ((int)$time)>5;
@@ -91,7 +95,7 @@ function addUser( $facebook,$uid,$token ) {
         $name=$data['name'];
         $friends= max(array_map('count', $_SESSION['friends']));
         $affiliations=getAffiliations($facebook,$uid,$token); //affiliations is set to the result of the affilations function defined below
-            echo $sql = "UPDATE user SET Active='1',Gender='$gender', Communities='$affiliations',  Name='$name', Friends=$friends, LastLogin='$now' WHERE UID='$uid';"; //query is set to update the user to active and add their gender and communities
+            echo $sql = "UPDATE user SET Active='1',Gender='$gender', Communities='$affiliations',  Name='$name', Friends=$friends, LastLogin='$now', WHERE UID='$uid';"; //query is set to update the user to active and add their gender and communities
              $st = $conn->prepare( $sql ); //protection line used to hide queries from browsers
              $st->execute(); //command above is executed
     }
