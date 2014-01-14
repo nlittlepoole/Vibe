@@ -18,6 +18,18 @@
 	toggleInfo($profile, $_SESSION['myToken']);
 	displayVibes($profile); 
 	totalPoints(); 
+
+	function curPageURL() {
+	 $pageURL = 'http';
+	 if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
+	 $pageURL .= "://";
+	 if ($_SERVER["SERVER_PORT"] != "80") {
+	  $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+	 } else {
+	  $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+	 }
+	 return $pageURL;
+	}
 	
 	function totalPoints() {
 	   $conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
@@ -405,7 +417,6 @@
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="page-header-fixed">
-	
 	<script src="../jQuery/jquery.js"></script> 
     <script> 
     $(function(){
@@ -414,6 +425,8 @@
     </script> 
     
     <div id="includedContent"></div>
+    <div id="fb-root"></div>
+
 
 <!-- BEGIN CONTAINER -->
 <div class="page-container">
@@ -553,6 +566,9 @@
 													<?php echo $_SESSION['displayLocation'] ?>
 													<?php echo $_SESSION['displayBirthday'] ?>
 													<?php echo $_SESSION['displaySite'] ?>
+													<li><a href= <?php echo '"https://www.facebook.com/sharer/sharer.php?u='. curPageURL(). '"' ?> target="_blank"><img src="/img/facebook_share.gif" alt="Facebook" width="140" height="24"></a></li>
+													<li><a href= <?php echo '"http://twitter.com/share?url='. curPageURL(). '&text=&hashtags=Vibe,dummy"' ?> target="_blank"><img src="/img/share_twitter.jpg" alt="Twitter" width="100" height="25"></a></li>
+													<li><a href="http://www.reddit.com/submit" onclick="window.location = 'http://www.reddit.com/submit?url=' + encodeURIComponent(window.location); return false"> <img src="http://www.reddit.com/static/spreddit10.gif" height="25" alt="submit to reddit" border="0" /> </a></li>
 												</ul>
 											</div>
 											<!--end col-md-8-->

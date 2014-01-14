@@ -10,6 +10,17 @@
     }  
 	$dashboard=$_SESSION['dashboard'];
     $pic=$dashboard['pic'];  
+    	function curPageURL() {
+	 $pageURL = 'http';
+	 if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
+	 $pageURL .= "://";
+	 if ($_SERVER["SERVER_PORT"] != "80") {
+	  $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+	 } else {
+	  $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+	 }
+	 return $pageURL;
+	}
 ?>
 <!DOCTYPE html>
 
@@ -169,111 +180,14 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 	<!-- BEGIN CONTENT -->
 	<div class="page-content-wrapper">
 		<div class="page-content">
-			<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-			<div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-							<h4 class="modal-title">Modal title</h4>
-						</div>
-						<div class="modal-body">
-							 Widget settings form goes here
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn blue">Save changes</button>
-							<button type="button" class="btn default" data-dismiss="modal">Close</button>
-						</div>
-					</div>
-					<!-- /.modal-content -->
-				</div>
-				<!-- /.modal-dialog -->
-			</div>
-			<!-- /.modal -->
-			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-			<!-- BEGIN STYLE CUSTOMIZER -->
-			<div class="theme-panel hidden-xs hidden-sm" style="height: 50px">
-				<div class="toggler">
-				</div>
-				<div class="toggler-close">
-				</div>
-				<div class="theme-options">
-					<div class="theme-option theme-colors clearfix">
-						<span>
-							THEME COLOR
-						</span>
-						<ul>
-							<li class="color-black current color-default" data-style="default">
-							</li>
-							<li class="color-blue" data-style="blue">
-							</li>
-							<li class="color-brown" data-style="brown">
-							</li>
-							<li class="color-purple" data-style="purple">
-							</li>
-							<li class="color-grey" data-style="grey">
-							</li>
-							<li class="color-white color-light" data-style="light">
-							</li>
-						</ul>
-					</div>
-					<div class="theme-option">
-						<span>
-							Layout
-						</span>
-						<select class="layout-option form-control input-small">
-							<option value="fluid" selected="selected">Fluid</option>
-							<option value="boxed">Boxed</option>
-						</select>
-					</div>
-					<div class="theme-option">
-						<span>
-							Header
-						</span>
-						<select class="header-option form-control input-small">
-							<option value="fixed" selected="selected">Fixed</option>
-							<option value="default">Default</option>
-						</select>
-					</div>
-					<div class="theme-option">
-						<span>
-							Sidebar
-						</span>
-						<select class="sidebar-option form-control input-small">
-							<option value="fixed">Fixed</option>
-							<option value="default" selected="selected">Default</option>
-						</select>
-					</div>
-					<div class="theme-option">
-						<span>
-							Sidebar Position
-						</span>
-						<select class="sidebar-pos-option form-control input-small">
-							<option value="left" selected="selected">Left</option>
-							<option value="right">Right</option>
-						</select>
-					</div>
-					<div class="theme-option">
-						<span>
-							Footer
-						</span>
-						<select class="footer-option form-control input-small">
-							<option value="fixed">Fixed</option>
-							<option value="default" selected="selected">Default</option>
-						</select>
-					</div>
-				</div>
-			</div>
-			<!-- END STYLE CUSTOMIZER -->
-			
-			
 			<!-- BEGIN PAGE HEADER-->
 			<div class="row">
 				<div class="col-md-12">
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
 						<img height="100px" src=<?php echo '"'.$_SESSION['location']['Picture'].'"' ?>  />
-					<?php echo $_SESSION['location']['Name'] ?> <small>communities</small>
+					<?php echo $_SESSION['location']['Name'] ?> <small>Communities</small> <a href= <?php echo '"https://www.facebook.com/sharer/sharer.php?u='. curPageURL(). '"' ?> target="_blank"><img src="/img/facebook_share.gif" alt="Facebook" width="140" height="24"></a><a href= <?php echo '"http://twitter.com/share?url='. curPageURL(). '&text=&hashtags=Vibe,dummy"' ?> target="_blank"><img src="/img/share_twitter.jpg" alt="Twitter" width="100" height="25"></a>
+					<a href="http://www.reddit.com/submit" onclick="window.location = 'http://www.reddit.com/submit?url=' + encodeURIComponent(window.location); return false"> <img src="http://www.reddit.com/static/spreddit10.gif" height="25" alt="submit to reddit" border="0" /></a>
 					<!-- FILL THIS WITH THE PROF PIC OF THE COMMUNITY'S FACEBOOK PAGE -->
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
