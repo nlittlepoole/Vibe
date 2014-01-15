@@ -389,10 +389,6 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="" name="description"/>
 <meta content="" name="author"/>
-<meta property="og:title" content=<?php  echo $_SESSION['profile']['Name'] . "'s Profile'" ?> />
-<meta property="og:type" content="website" />
-<meta property="og:url" content= <?php  echo '"'. curPageURL(). '"' ?>
-<meta property="og:image" content="/img/Niger1.jpg" />
 <meta name="MobileOptimized" content="320">
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
