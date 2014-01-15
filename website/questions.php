@@ -101,7 +101,7 @@
 <!-- BEGIN BODY -->
 <body class="page-header-fixed" id="topOfForm">
 
-<script src="../jQuery/jquery.js"></script> 
+	<script src="../jQuery/jquery.js"></script> 
     <script> 
     $(function(){
       $("#includedContent").load("header.php"); 

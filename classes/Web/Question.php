@@ -104,33 +104,128 @@ function getQuestion($input){
             'id'    => $attribute,
             'question' => $question,
             'keywords' =>$keywords,
-        ));
-  }
+    ));
+}
+
+function advocateTracker() {
+	
+	$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+    $sql = "SELECT fiveblockAdvocate,Advocate_progress,counterAdvocate,lastdateAdvocate FROM user WHERE UID=" . $_SESSION['userID'];
+    $st = $conn->prepare($sql);
+    $st->execute();
+    $data = $st->fetch();
+	
+	$conn = null; 
+	
+	if($data['Advocate_progress'] != 10) {
+		if($data['fiveblockAdvocate'] != 5) {
+			// the five-block is not yet full so your question will increment five block
+			$data['fiveblockAdvocate']++;
+			// now check if five-block is 5 so you can increment counter!
+			if($data['fiveblockAdvocate'] == 5) {
+				  // the user now has answered five questions so increment counter, but only if it has been one day GMT
+				  
+				  // GIVEN THAT THE USER HAS ALREADY DONE A PREVIOUS FIVE BLOCK --> ALSO CHECK IF "" IS INDEED NULL CONDITION
+				  if($data['lastdateAdvocate'] != "") {
+					  $currentDatetime = date('Y-m-d');
+				      $datetime1 = $data['lastdateAdvocate'];
+					  
+					  $currentTime = explode("-", $currentDatetime);
+					  $currentYear = $currentTime[0]; 
+					  $currentMonth = $currentTime[1]; 
+					  $currentDay = $currentTime[2]; 
+					  
+					  $prevTime = explode("-", $datetime1);
+					  $prevYear = $prevTime[0]; 
+					  $prevMonth = $prevTime[1]; 
+					  $prevDay = $prevTime[2]; 
+					  
+					  if(($currentYear - $prevYear == 0) && ($currentMonth - $prevMonth == 0) && ($currentDay - $prevDay == 1)) {
+					      // the user has indeed completed their last five-block yesterday GMT
+					      
+					      // so now we can increment counter for them, but first we must check if now they have the achievement
+					      
+					      // do they have the achievement?
+					      
+					  }
+					  else {
+					  	  // the user has been inconsistent
+					  	  $data['counterAdvocate'] = 1; // reset counter
+					  	  $data['Advocate_progress'] = 3; // reset progress
+					  	  
+					  	  $newDate = date('Y-m-d'); 
+					  	  
+					  	  // Update the user's progress, his counter, and his last date of completed five block
+					  	  $conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+    					  $sql = "UPDATE user SET counterAdvocate=1, Advocate_progress=3,lastdateAdvocate='$newDate' WHERE UID=" . $_SESSION['userID'];
+    					  $st = $conn->prepare($sql);
+					      $st->execute();
+						
+						  $conn = null;   	  
+					  }      
+				  }
+				  else {
+				  	// the user does not have a previous five-block, this will be his first one!
+				  	$data['counterAdvocate'] = 1; // reset counter
+					$data['Advocate_progress'] = 3; // reset progress
+					
+					$newDate = date('Y-m-d'); 
+					
+					//Update the user's progress, his counter, and his last date of completed five block
+					
+					$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+				    $sql = "UPDATE user SET counterAdvocate=1, Advocate_progress=3,lastdateAdvocate='$newDate' WHERE UID=" . $_SESSION['userID'];
+				    $st = $conn->prepare($sql);
+			        $st->execute();
+				  }
+			}
+			// Update the user's five block number in the database since now it is indeed one higher!
+		}
+	    else {
+	    	// the five block is already 5 so do not do anything
+	    	// the user has already capped out the number of questions for the day and counter has already been incremented
+	    }
+	}
+	else {
+		// do nothing because the user already has the achievement
+	}
+	
+}
 
 function submit($facebook,$uid,$token ){
+	//This is the function that gets called when the user submits a question.
+	
     require( CLASS_PATH . "/Vibe.php" );
+	
     $recipient=$_SESSION['recipient'];
     $attribute=isset( $_SESSION['attribute'] ) ? $_SESSION['attribute'] : "";
     $positive=isset( $_SESSION['positive'] ) ? $_SESSION['positive'] + "" : "";
     $gender=isset( $_SESSION['Gender'] ) ? $_SESSION['Gender']: "male";
     $null=isset( $_SESSION['null'] ) ? $_SESSION['null'] + "" : "";
+    
     $slider=2*$_POST["slideVal"]; //Slider value needs to be multiplied by two since slider has 5 notches
     $comment=isset( $_POST["commentsVal"] ) && $_POST["commentsVal"]!="" ? $attribute ."##" .date("Y-m-d H:i:s", time())."##". $_SESSION['question'] . ": " .'"' .str_replace(":","{(!)}",(str_replace(array("|",'"',"##","&&",":"),'',$_POST["commentsVal"]) . '"')) : "";
     $comment=iconv("UTF-8", "ISO_8859-1", $comment);
     $comment=str_replace("'","***",$comment);
+    
     $name=isset($_SESSION['Name']) ?$_SESSION['Name']:"Unknown";
     $affiliations=isset($_SESSION['affiliations']) ? $_SESSION['affiliations'] : "";
     $keywords=$slider>7 && $_SESSION['keywords']!="" ? $_SESSION['keywords'][0]:"null";
+    
     if($keywords=="" || $keywords=="null"){
       $keywords=$slider<3 && isset($_SESSION['keywords'][1])  ? $_SESSION['keywords'][1]:"null";
     }
+    
     $vibe= new Vibe($uid, $recipient,$attribute,$keywords,$affiliations,$gender,$name);
+    
     if(!$positive){
       $slider=10-$slider;
     }
+	
     if(!$null){
       $slider="null";
     }
+	
     $vibe->setAnswer($slider,$comment);
     $vibe->recordToTable();
 }
