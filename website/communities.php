@@ -50,9 +50,9 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="" name="description"/>
 <meta content="" name="author"/>
-<meta property="og:title" content=<?php  echo $_SESSION['location']['Name'] . "'s Profile'" ?> />
+<meta property="og:title" content=<?php  echo '"'. $_SESSION['profile']['Name'] . "'s". 'Profile"' ?> />
 <meta property="og:type" content="website" />
-<meta property="og:url" content= <?php  echo '"'. curPageURL(). '"' ?>
+<meta type="og:url" content= <?php  echo '"'. curPageURL() ?>.'"' ?> >
 <meta property="og:image" content="/img/Niger1.jpg" />
 <meta name="MobileOptimized" content="320">
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
@@ -81,6 +81,14 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="page-header-fixed">
+		<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=257473684410281";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
  	<script src="../jQuery/jquery.js"></script> 
     <script> 
@@ -88,7 +96,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
       $("#includedContent").load("header.php"); 
     });
     </script> 
-    
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
     <div id="includedContent"></div>
 
 <div class="clearfix">
@@ -190,7 +198,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
 						<img height="100px" src=<?php echo '"'.$_SESSION['location']['Picture'].'"' ?>  />
-					<?php echo $_SESSION['location']['Name'] ?> <small>Communities</small> <li><div class="fb-share-button" data-href=<?php echo '"'. curPageURL(). '"' ?> data-type="button_count"></div></li></a><a href= <?php echo '"http://twitter.com/share?url='. curPageURL(). '&text=&hashtags=Vibe,dummy"' ?> target="_blank"><img src="/img/share_twitter.jpg" alt="Twitter" width="100" height="25"></a>
+					<?php echo $_SESSION['location']['Name'] ?> <small>Communities</small><!--<div class="fb-share-button" data-href=<?php echo '"'. curPageURL(). '"' ?> data-type="button_count"></div>--><a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="Vibe">Tweet</a>
 					<a href="http://www.reddit.com/submit" onclick="window.location = 'http://www.reddit.com/submit?url=' + encodeURIComponent(window.location); return false"> <img src="http://www.reddit.com/static/spreddit10.gif" height="25" alt="submit to reddit" border="0" /></a>
 					<!-- FILL THIS WITH THE PROF PIC OF THE COMMUNITY'S FACEBOOK PAGE -->
 					</h3>
