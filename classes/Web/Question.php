@@ -13,7 +13,7 @@ function question($facebook,$uid,$token ){
     $name;
     
     //Placed in a while loop to make sure that php doesn't proceed without a valid user
-    while(!$recipient){
+    while(!$recipient || $recipient==$uid){
         //if $random is 0, the code only uses top friends and picks from any of the vibe questions
         if($random>0){
             $question_source=getQuestion(14); //calls the getQuestion(int) function to get the data of a question out of the Vibosphere database. This is a php array
