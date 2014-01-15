@@ -155,8 +155,9 @@ function getAffiliations($facebook,$uid,$token){
        $affiliations=array_unique($affiliations);
        $sum=''; //sum is initialized
        foreach($affiliations as $id){// loops through all the $affiliations added in the above loops and concatenates them into one string seperated by "&&"
-           echo $id;
-           $sum=$sum . $id; 
+           if($id!="||"){
+              $sum=$sum . $id; 
+           }
        }
        return substr($sum, 0, -2); //returns concatenated string of affiliations
        
