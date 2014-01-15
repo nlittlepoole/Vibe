@@ -417,6 +417,15 @@
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="page-header-fixed">
+	<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=257473684410281";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 	<script src="../jQuery/jquery.js"></script> 
     <script> 
     $(function(){
@@ -566,12 +575,12 @@
 													<?php echo $_SESSION['displayLocation'] ?>
 													<?php echo $_SESSION['displayBirthday'] ?>
 													<?php echo $_SESSION['displaySite'] ?>
-													<!-- SHARE BUTTONS FOR FACEBOOK, TWITTER, AND REDDIT -->
-													<!--
+													
+													<li><div class="fb-share-button" data-href=<?php echo '"'. curPageURL(). '"' ?> data-type="button_count"></div></li>
 													<li><a href= <?php echo '"https://www.facebook.com/sharer/sharer.php?u='. curPageURL(). '"' ?> target="_blank"><img src="/img/facebook_share.gif" alt="Facebook" width="140" height="24"></a></li>
 													<li><a href= <?php echo '"http://twitter.com/share?url='. curPageURL(). '&text=&hashtags=Vibe,dummy"' ?> target="_blank"><img src="/img/share_twitter.jpg" alt="Twitter" width="100" height="25"></a></li>
 													<li><a href="http://www.reddit.com/submit" onclick="window.location = 'http://www.reddit.com/submit?url=' + encodeURIComponent(window.location); return false"> <img src="http://www.reddit.com/static/spreddit10.gif" height="25" alt="submit to reddit" border="0" /> </a></li>
-													-->
+													
 												</ul>
 											</div>
 											<!--end col-md-8-->

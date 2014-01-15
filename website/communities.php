@@ -186,7 +186,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
 						<img height="100px" src=<?php echo '"'.$_SESSION['location']['Picture'].'"' ?>  />
-					<?php echo $_SESSION['location']['Name'] ?> <small>Communities</small> <a href= <?php echo '"https://www.facebook.com/sharer/sharer.php?u='. curPageURL(). '"' ?> target="_blank"><img src="/img/facebook_share.gif" alt="Facebook" width="140" height="24"></a><a href= <?php echo '"http://twitter.com/share?url='. curPageURL(). '&text=&hashtags=Vibe,dummy"' ?> target="_blank"><img src="/img/share_twitter.jpg" alt="Twitter" width="100" height="25"></a>
+					<?php echo $_SESSION['location']['Name'] ?> <small>Communities</small> <li><div class="fb-share-button" data-href=<?php echo '"'. curPageURL(). '"' ?> data-type="button_count"></div></li></a><a href= <?php echo '"http://twitter.com/share?url='. curPageURL(). '&text=&hashtags=Vibe,dummy"' ?> target="_blank"><img src="/img/share_twitter.jpg" alt="Twitter" width="100" height="25"></a>
 					<a href="http://www.reddit.com/submit" onclick="window.location = 'http://www.reddit.com/submit?url=' + encodeURIComponent(window.location); return false"> <img src="http://www.reddit.com/static/spreddit10.gif" height="25" alt="submit to reddit" border="0" /></a>
 					<!-- FILL THIS WITH THE PROF PIC OF THE COMMUNITY'S FACEBOOK PAGE -->
 					</h3>
