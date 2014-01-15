@@ -111,7 +111,7 @@
 					<a href="javascript:;">
 					<i class="fa fa-heart"></i>
 					<span class="title">
-						Communities
+						My Leaderboards
 					</span>
 					<span class="arrow ">
 					</span>
@@ -279,7 +279,7 @@
 										Strength
 									</th>
 									<th>
-										Qualities
+										Impressions
 									</th>
 									<th>
 										Global Percentile

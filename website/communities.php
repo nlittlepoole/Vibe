@@ -149,7 +149,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					<a href="javascript:;">
 					<i class="fa fa-heart"></i>
 					<span class="title">
-						Communities
+						Leaderboards
 					</span>
 					<span class="selected">
 					</span>
@@ -1662,7 +1662,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Overall Score
 									</th>
 									<th>
-										Characteristics
+										Impressions
 									</th>
 								</tr>
 								</thead>
