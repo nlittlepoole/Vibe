@@ -46,6 +46,17 @@ function question($facebook,$uid,$token ){
     }
     //$recipient=712337857;
     $question= str_replace("name", $name, $question); 
+    if($_SESSION['Gender']=="female"){
+        $question= str_replace("their", "her", $question);
+        $question= str_replace("them", "her", $question);  
+        $question= str_replace("themselves", "herself", $question); 
+    }
+    else{
+        $question= str_replace("their", "his", $question); 
+        $question= str_replace("themselves", "himself", $question);
+        $question= str_replace("attractive", "handsome", $question); 
+        $question= str_replace("them", "him", $question);  
+    }
     $pic=getPictures($recipient);
     $_SESSION['affiliations']=getAffiliations($facebook,$recipient,$token);
     $_SESSION['question'] = $question;
