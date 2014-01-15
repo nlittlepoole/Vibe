@@ -1,5 +1,6 @@
 <?php
 require( CLASS_PATH . "/Web/User.php");
+require( CLASS_PATH . "/Web/AchievementTrackers.php");
 //question function responsible for using Vibe database and facebook fql database to generate a question and a user to ask the question about
 function question($facebook,$uid,$token ){
     
@@ -107,93 +108,11 @@ function getQuestion($input){
     ));
 }
 
-function advocateTracker() {
-	
-	$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-    $sql = "SELECT fiveblockAdvocate,Advocate_progress,counterAdvocate,lastdateAdvocate FROM user WHERE UID=" . $_SESSION['userID'];
-    $st = $conn->prepare($sql);
-    $st->execute();
-    $data = $st->fetch();
-	
-	$conn = null; 
-	
-	if($data['Advocate_progress'] != 10) {
-		if($data['fiveblockAdvocate'] != 5) {
-			// the five-block is not yet full so your question will increment five block
-			$data['fiveblockAdvocate']++;
-			// now check if five-block is 5 so you can increment counter!
-			if($data['fiveblockAdvocate'] == 5) {
-				  // the user now has answered five questions so increment counter, but only if it has been one day GMT
-				  
-				  // GIVEN THAT THE USER HAS ALREADY DONE A PREVIOUS FIVE BLOCK --> ALSO CHECK IF "" IS INDEED NULL CONDITION
-				  if($data['lastdateAdvocate'] != "") {
-					  $currentDatetime = date('Y-m-d');
-				      $datetime1 = $data['lastdateAdvocate'];
-					  
-					  $currentTime = explode("-", $currentDatetime);
-					  $currentYear = $currentTime[0]; 
-					  $currentMonth = $currentTime[1]; 
-					  $currentDay = $currentTime[2]; 
-					  
-					  $prevTime = explode("-", $datetime1);
-					  $prevYear = $prevTime[0]; 
-					  $prevMonth = $prevTime[1]; 
-					  $prevDay = $prevTime[2]; 
-					  
-					  if(($currentYear - $prevYear == 0) && ($currentMonth - $prevMonth == 0) && ($currentDay - $prevDay == 1)) {
-					      // the user has indeed completed their last five-block yesterday GMT
-					      
-					      // so now we can increment counter for them, but first we must check if now they have the achievement
-					      
-					      // do they have the achievement?
-					      
-					  }
-					  else {
-					  	  // the user has been inconsistent
-					  	  $data['counterAdvocate'] = 1; // reset counter
-					  	  $data['Advocate_progress'] = 3; // reset progress
-					  	  
-					  	  $newDate = date('Y-m-d'); 
-					  	  
-					  	  // Update the user's progress, his counter, and his last date of completed five block
-					  	  $conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-    					  $sql = "UPDATE user SET counterAdvocate=1, Advocate_progress=3,lastdateAdvocate='$newDate' WHERE UID=" . $_SESSION['userID'];
-    					  $st = $conn->prepare($sql);
-					      $st->execute();
-						
-						  $conn = null;   	  
-					  }      
-				  }
-				  else {
-				  	// the user does not have a previous five-block, this will be his first one!
-				  	$data['counterAdvocate'] = 1; // reset counter
-					$data['Advocate_progress'] = 3; // reset progress
-					
-					$newDate = date('Y-m-d'); 
-					
-					//Update the user's progress, his counter, and his last date of completed five block
-					
-					$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-				    $sql = "UPDATE user SET counterAdvocate=1, Advocate_progress=3,lastdateAdvocate='$newDate' WHERE UID=" . $_SESSION['userID'];
-				    $st = $conn->prepare($sql);
-			        $st->execute();
-				  }
-			}
-			// Update the user's five block number in the database since now it is indeed one higher!
-		}
-	    else {
-	    	// the five block is already 5 so do not do anything
-	    	// the user has already capped out the number of questions for the day and counter has already been incremented
-	    }
-	}
-	else {
-		// do nothing because the user already has the achievement
-	}
-	
-}
-
 function submit($facebook,$uid,$token ){
 	//This is the function that gets called when the user submits a question.
+	
+	helpinghandTracker(); 
+	advocateTracker(); 
 	
     require( CLASS_PATH . "/Vibe.php" );
 	

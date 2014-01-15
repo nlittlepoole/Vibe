@@ -12,7 +12,10 @@
     $dashboard=$_SESSION['dashboard'];
     $pic=$dashboard['pic'];
 	
-    
+	//FOR NOW I CANNOT GET ADVOCATES TO CALL ITSELF ON THE ACHIEVEMENTS PAGE
+    //require($path . "/" . CLASS_PATH . "/Web/Achievements.php");
+	//achievementsNotificationCreator($achievementsNavBar); 
+	//$_SESSION['achievementsInfo'] = achievements();
 ?>
 
 <!-- ACHIEVEMENTS -->

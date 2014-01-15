@@ -28,7 +28,7 @@ if(refresh($uid) ||$force){
     $data['Communities']=$new_communities;
     
     //Pulling out achievements and storing them in SESSION
-    $_SESSION['achievementsProgress'] = array($data['Helping Hand_progress'], $data['Pal_progress'], 
+    $_SESSION['achievementsProgress'] = array($data['HelpingHand_progress'], $data['Pal_progress'], 
     $data['Advocate_progress'], $data['Comrade_progress'], $data['Mother Teresa_progress'], 
     $data['Diva_progress'], $data['King of the Hill_progress'], $data['Ideator_progress'], 
 	$data['Visionairy_progress'], $data['Blogger_progress'], $data['Commander of Words_progress'], 
