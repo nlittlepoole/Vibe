@@ -163,7 +163,7 @@ while count[0][0] != 0:
     else:
         if not "null" in keyword:
             keyword="1"+keyword
-        query="INSERT INTO user (UID, ACTIVE, " + attribute + "," + attribute + "_Total ," + attribute+ "_Keywords,Comments,Communities,Gender,Name,newAnswers,totalAnswers) VALUES (" + user2 + ",0,"+ str(score)+","+str(1-modifier)+", '"+keyword+"','"+comment+"','"+affiliation+"','"+gender+"','"+name+",1,1')"
+        query="INSERT INTO user (UID, ACTIVE, " + attribute + "," + attribute + "_Total ," + attribute+ "_Keywords,Comments,Communities,Gender,Name,newAnswers,totalAnswers) VALUES (" + user2 + ",0,"+ str(score)+","+str(1-modifier)+", '"+keyword+"','"+comment+"','"+affiliation+"','"+gender+"','"+name+"',1,1)"
         print query
         cur.execute(query)
         cur.connection.commit() 

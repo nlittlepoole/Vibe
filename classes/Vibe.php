@@ -76,7 +76,7 @@ class Vibe
  
   public function recordToTable(){
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
-    $sql = "INSERT INTO transaction (asked,recipient,attribute,answer,comment,keywords,Affiliations,Gender,Name) VALUES('$this->user_id_1', '$this->user_id_2','$this->attribute' ,$this->answer,'$this->comment', '$this->keywords','$this->affiliations','$this->gender','$this->name')";
+    echo $sql = "INSERT INTO transaction (asked,recipient,attribute,answer,comment,keywords,Affiliations,Gender,Name) VALUES('$this->user_id_1', '$this->user_id_2','$this->attribute' ,$this->answer,'$this->comment', '$this->keywords','$this->affiliations','$this->gender','$this->name')";
     $st = $conn->prepare( $sql );
     $st->execute();
     $conn = null;

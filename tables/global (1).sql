@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 31, 2013 at 05:57 PM
+-- Generation Time: Jan 15, 2014 at 02:38 AM
 -- Server version: 5.5.32
 -- PHP Version: 5.4.19
 
@@ -39,20 +39,20 @@ CREATE TABLE IF NOT EXISTS `global` (
 --
 
 INSERT INTO `global` (`ID`, `Attribute`, `Average`, `Deviation`) VALUES
-(1, 'Affability', 6.05, 3.5),
-(2, 'Ambition', 4.83, 4.84),
-(3, 'Attractiveness', 5.75, 3.38),
-(4, 'Confidence', 2.21, 3.52),
-(5, 'Fun', 1.29, 2.19),
-(6, 'Happiness', 2.04, 3.58),
-(7, 'Honesty', 3.96, 2.96),
-(8, 'Humility', 3.08, 3.66),
-(9, 'Humor', 4.56, 3.22),
-(10, 'Intelligence', 5.76, 3.62),
-(11, 'Kindness', 6, 3.46),
-(12, 'Promiscuity', 5.84, 2.77),
-(13, 'Reliability', 1.5, 3.35),
-(14, 'Style', 3.29, 3.1);
+(1, 'Affability', 8.2, 0.98),
+(2, 'Ambition', 7.07, 1.87),
+(3, 'Attractiveness', 6.71, 1.94),
+(4, 'Confidence', 6.55, 1.88),
+(5, 'Fun', 5.66, 0.34),
+(6, 'Happiness', 5.66, 3.29),
+(7, 'Honesty', 8.44, 1.56),
+(8, 'Humility', 6.17, 2.78),
+(9, 'Humor', 6.84, 0.16),
+(10, 'Intelligence', 8.46, 1.52),
+(11, 'Kindness', 8.1, 0.17),
+(12, 'Promiscuity', 4.35, 1.92),
+(13, 'Reliability', 7.25, 1.92),
+(14, 'Style', 2.67, 2.05);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

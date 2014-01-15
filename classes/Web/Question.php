@@ -124,7 +124,6 @@ function submit($facebook,$uid,$token ){
     
     $slider=2*$_POST["slideVal"]; //Slider value needs to be multiplied by two since slider has 5 notches
     $comment=isset( $_POST["commentsVal"] ) && $_POST["commentsVal"]!="" ? $attribute ."##" .date("Y-m-d H:i:s", time())."##". $_SESSION['question'] . ": " .'"' .str_replace(":","{(!)}",(str_replace(array("|",'"',"##","&&",":"),'',$_POST["commentsVal"]) . '"')) : "";
-    $comment=iconv("UTF-8", "ISO_8859-1", $comment);
     $comment=str_replace("'","***",$comment);
     
     $name=isset($_SESSION['Name']) ?$_SESSION['Name']:"Unknown";
