@@ -84,7 +84,7 @@
 		else {$affabilityScore = "--"; }
 		
 		if($data['affabilityDisableDate'] == "") {
-			$_SESSION['affableDisp'] = '<tr><td style="color: #0d638f;">Affability</td><td>' . 
+			$_SESSION['affableDisp'] = '<tr><td style="color: #0d638f;">Approachability</td><td>' . 
 			$affabilityScore . '</td><td><em>' . $affabilityKeys .'</em></td></tr>'; 
 		}
 		else {
@@ -288,7 +288,7 @@
 		else {$humilityScore = "--"; }
 		
 		if($data['humilityDisableDate'] == "") {
-			$_SESSION['humilityDisp'] = '<tr><td style="color: #0d638f;">Humility</td><td>' . 
+			$_SESSION['humilityDisp'] = '<tr><td style="color: #0d638f;">Modesty</td><td>' . 
 			$humilityScore . '</td><td><em>' . $humilityKeys .'</em></td></tr>'; 
 		}
 		else {

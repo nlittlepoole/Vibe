@@ -310,7 +310,7 @@
 										2
 									</td>
 									<td>
-										Affability
+										Approachability
 									</td>
 									<td>
 										<?php echo $_SESSION['dashboard']['Affability'] ? $_SESSION['dashboard']['Affability']: "--" ?>
@@ -522,7 +522,7 @@
 										14
 									</td>
 									<td>
-										Humility
+										Modesty
 									</td>
 									<td>
 										<?php echo $_SESSION['dashboard']['Humility'] ? $_SESSION['dashboard']['Humility']: "--" ?>

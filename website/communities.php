@@ -229,8 +229,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								<i class="fa fa-reorder"></i>Voted Most
 							</div>
 							<div class="tools">
-								<a href="javascript:;" class="collapse"></a>
-								<a href="#portlet-config" data-toggle="modal" class="config"></a>
 							</div>
 						</div>
 						<div class="portlet-body">
@@ -239,7 +237,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<a href="#tab_1_1" data-toggle="tab">Attractiveness</a>
 								</li>
 								<li class="">
-									<a href="#tab_1_2" data-toggle="tab">Affability</a>
+									<a href="#tab_1_2" data-toggle="tab">Approachability</a>
 								</li>
 								<li class="">
 									<a href="#tab_1_3" data-toggle="tab">Intelligence</a>
@@ -1641,10 +1639,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								<i class="fa fa-comments"></i>Community Summary
 							</div>
 							<div class="tools">
-								<a href="javascript:;" class="collapse"></a>
-								<a href="#portlet-config" data-toggle="modal" class="config"></a>
-								<a href="javascript:;" class="reload"></a>
-								<a href="javascript:;" class="remove"></a>
 							</div>
 						</div>
 						<div class="portlet-body">
@@ -1686,7 +1680,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										2
 									</td>
 									<td>
-										Affability
+										Approachability
 									</td>
 									<td>
 										<?php echo $_SESSION['location'][1]['Average'] ? $_SESSION['location'][1]['Average']: "--" ?>
@@ -1854,7 +1848,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										14
 									</td>
 									<td>
-										Humility
+										Modesty
 									</td>
 									<td>
 										<?php echo $_SESSION['location'][13]['Average'] ? $_SESSION['location'][13]['Average']: "--" ?>
