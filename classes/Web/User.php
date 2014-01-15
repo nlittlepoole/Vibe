@@ -119,6 +119,9 @@ function addUser( $facebook,$uid,$token ) {
     }
     return $photos[0];
 }
+function array_delete($array, $element) {
+    return array_diff($array, [$element]);
+}
 
 //function used to create a list of a user's top friends. This function will only be called once per vibe session when the user first logs in.
 // the top friends list is saved in the session and refered to whenever the user gets a close friends question. This is done for efficiency reasons
@@ -135,8 +138,9 @@ function topFriends($facebook,$uid,$token){
                 $top_frds[] =array('uid'=> $comArray['from']['id']); 
       }
     }
-   
-    $_SESSION['topFriends'] = array_unique($top_frds); //top friends is added to the session data to be used by the app whenever necessary
+    $top_frds=array_delete($top_frds,$uid);
+    $_SESSION['topFriends'] = $top_frds;
+    print_r($_SESSION['topFriends']); //top friends is added to the session data to be used by the app whenever necessary
   }
   //getAffilitaions() uses the facebook fql of the graph api to return a user's community
 function getAffiliations($facebook,$uid,$token){

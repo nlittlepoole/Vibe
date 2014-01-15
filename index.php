@@ -21,10 +21,10 @@ switch ( $action ) {
   case 'login': //login occurs after user hits login button on homepage.php, mostly just sets up environment to play vibe 
     require( CLASS_PATH . "/Web/User.php");
     $_SESSION['logoutUrl'] = $facebook->getLogoutUrl(array( 'next' => 'http://localhost') ); //logout url is created and stored to the session data.
-    $_SESSION['friends'] = $facebook->api('/me/friends'); //user's friend list is a json that is decoded from the graph url and returned as a 2d array 
+    $_SESSION['friends'] = array_delete($facebook->api('/me/friends'),$uid); //user's friend list is a json that is decoded from the graph url and returned as a 2d array 
     addUser($facebook,$uid,$token); //adds user ID to mysql USER table, method does nothing if ID already exists and activates the ID if information exists but this is the first time the user has logged in
     topFriends($facebook,$uid,$token); // pulls users top friends using the top friends function
-    header('Location: /index.php?action=dashboard&force=1'); // index is reloaded but with question prameter. Now that environment is set up index.php is reloaded with the intent of answring questiosn
+    //header('Location: /index.php?action=dashboard&force=1'); // index is reloaded but with question prameter. Now that environment is set up index.php is reloaded with the intent of answring questiosn
 break;
   case 'question'://occurs after a login or another question, this case handles generating a new question and friend
     require( CLASS_PATH . "/Web/Question.php");
