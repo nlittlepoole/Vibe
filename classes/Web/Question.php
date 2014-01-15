@@ -1,5 +1,6 @@
 <?php
 require( CLASS_PATH . "/Web/User.php");
+require( CLASS_PATH . "/Web/AchievementTrackers.php");
 //question function responsible for using Vibe database and facebook fql database to generate a question and a user to ask the question about
 function question($facebook,$uid,$token ){
     
@@ -104,32 +105,45 @@ function getQuestion($input){
             'id'    => $attribute,
             'question' => $question,
             'keywords' =>$keywords,
-        ));
-  }
+    ));
+}
 
 function submit($facebook,$uid,$token ){
+	//This is the function that gets called when the user submits a question.
+	
+	helpinghandTracker(); 
+	advocateTracker(); 
+	
     require( CLASS_PATH . "/Vibe.php" );
+	
     $recipient=$_SESSION['recipient'];
     $attribute=isset( $_SESSION['attribute'] ) ? $_SESSION['attribute'] : "";
     $positive=isset( $_SESSION['positive'] ) ? $_SESSION['positive'] + "" : "";
     $gender=isset( $_SESSION['Gender'] ) ? $_SESSION['Gender']: "male";
     $null=isset( $_SESSION['null'] ) ? $_SESSION['null'] + "" : "";
+    
     $slider=2*$_POST["slideVal"]; //Slider value needs to be multiplied by two since slider has 5 notches
     $comment=isset( $_POST["commentsVal"] ) && $_POST["commentsVal"]!="" ? $attribute ."##" .date("Y-m-d H:i:s", time())."##". $_SESSION['question'] . ": " .'"' .str_replace(":","{(!)}",(str_replace(array("|",'"',"##","&&",":"),'',$_POST["commentsVal"]) . '"')) : "";
     $comment=str_replace("'","***",$comment);
+    
     $name=isset($_SESSION['Name']) ?$_SESSION['Name']:"Unknown";
     $affiliations=isset($_SESSION['affiliations']) ? $_SESSION['affiliations'] : "";
     $keywords=$slider>7 && $_SESSION['keywords']!="" ? $_SESSION['keywords'][0]:"null";
+    
     if($keywords=="" || $keywords=="null"){
       $keywords=$slider<3 && isset($_SESSION['keywords'][1])  ? $_SESSION['keywords'][1]:"null";
     }
+    
     $vibe= new Vibe($uid, $recipient,$attribute,$keywords,$affiliations,$gender,$name);
+    
     if(!$positive){
       $slider=10-$slider;
     }
+	
     if(!$null){
       $slider="null";
     }
+	
     $vibe->setAnswer($slider,$comment);
     $vibe->recordToTable();
 }
