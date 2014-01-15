@@ -1,17 +1,23 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.1
+-- version 4.0.4.1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Jan 09, 2014 at 05:37 PM
--- Server version: 5.5.25
--- PHP Version: 5.4.4
+-- Host: 127.0.0.1
+-- Generation Time: Jan 15, 2014 at 02:38 AM
+-- Server version: 5.5.32
+-- PHP Version: 5.4.19
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
 --
--- Database: `Vibosphere`
+-- Database: `vibosphere`
 --
 
 -- --------------------------------------------------------
@@ -20,7 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `achievements`
 --
 
-CREATE TABLE `achievements` (
+CREATE TABLE IF NOT EXISTS `achievements` (
   `ID` int(11) NOT NULL,
   `name` varchar(20) NOT NULL,
   `category` varchar(20) NOT NULL,
@@ -46,3 +52,7 @@ INSERT INTO `achievements` (`ID`, `name`, `category`, `description`, `color`) VA
 (10, 'Blogger', 'Blog', 'Write one approved blog post', 'Silver'),
 (11, 'Commander of Words', 'Blog', 'Write three approved blog posts', 'Gold'),
 (12, 'Viber', 'Overall', 'Four approved blog posts, ten invitations, and five answers for ten consecutive days', 'Black');
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
