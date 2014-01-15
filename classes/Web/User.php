@@ -136,7 +136,7 @@ function topFriends($facebook,$uid,$token){
       }
     }
    
-    $_SESSION['topFriends'] = $top_frds; //top friends is added to the session data to be used by the app whenever necessary
+    $_SESSION['topFriends'] = array_unique($top_frds); //top friends is added to the session data to be used by the app whenever necessary
   }
   //getAffilitaions() uses the facebook fql of the graph api to return a user's community
 function getAffiliations($facebook,$uid,$token){
