@@ -51,7 +51,7 @@ function location($facebook,$uid,$token){
         $data['Picture']=$raw[0][1];
         $data['Name']=$raw[0][0];
         $_SESSION['location']=$data;
-         header('Location: /website/communities.php?location='.$location); //sends browser to questions page with Session Data containing questions input above
+        header('Location: /website/communities.php?location='.$location); //sends browser to questions page with Session Data containing questions input above
         flush();                             // Force php-output-cache to flush to browser.
       }
       else{
