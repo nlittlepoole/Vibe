@@ -568,7 +568,7 @@
 							</div>
 							<div class="scroller-footer">
 								<div class="pull-right">
-									<a href="#">See All Achievements <i class="m-icon-swapright m-icon-gray"></i></a> &nbsp;
+									<a href="achievements.php">See All Achievements <i class="m-icon-swapright m-icon-gray"></i></a> &nbsp;
 								</div>
 							</div>
 						</div>
