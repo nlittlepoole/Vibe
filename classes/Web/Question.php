@@ -123,7 +123,10 @@ function submit($facebook,$uid,$token ){
 	//This is the function that gets called when the user submits a question.
 	
 	helpinghandTracker(); 
+	palTracker();
 	advocateTracker(); 
+	comradeTracker();
+	motherteresaTracker(); 
 	
     require( CLASS_PATH . "/Vibe.php" );
 	
