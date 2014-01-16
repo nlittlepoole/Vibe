@@ -52,8 +52,14 @@ for community in communities:
         if len(leaders)==5:
             boys=""
             count=1
+            query="UPDATE `user` SET KingOfTheHill_progres=10 WHERE UID='"+leaders[0][0]+"'"
+            cur.execute(query)
+            cur.connection.commit()
             for leader in leaders:
                 boys=boys+",Rank"+str(count)+"='"+str(leader[0])+"'"
+                query="UPDATE `user` SET Diva_progres=10 WHERE UID='"+leader[0]+"'"
+                cur.execute(query)
+                cur.connection.commit()
                 count=count+1
         query="SELECT Name FROM  `user` WHERE  `Communities` LIKE  '%"+community[1]+"%' AND Gender='female'  ORDER BY "+attribute[0]+" DESC LIMIT 5"
         cur.execute(query)
