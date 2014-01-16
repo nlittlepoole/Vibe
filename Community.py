@@ -49,15 +49,16 @@ for community in communities:
         cur.execute(query)
         leaders=cur.fetchall()
         boys=",Rank1='N/A',Rank2='N/A',Rank3='N/A',Rank4='N/A',Rank5='N/A'"
+        time=time.strftime("%Y-%m-%d")
         if len(leaders)==5:
             boys=""
             count=1
-            query="UPDATE `user` SET KingOfTheHill_progres=10 WHERE UID='"+leaders[0][0]+"'"
+            query="UPDATE `user` SET KingOfTheHill_progress=10, lastdateKingOfTheHill='"+time+"' WHERE UID='"+leaders[0][0]+"'"
             cur.execute(query)
             cur.connection.commit()
             for leader in leaders:
                 boys=boys+",Rank"+str(count)+"='"+str(leader[0])+"'"
-                query="UPDATE `user` SET Diva_progres=10 WHERE UID='"+leader[0]+"'"
+                query="UPDATE `user` SET Diva_progress=10 , lastdateKingOfTheHill='"+time+"' WHERE UID='"+leader[0]+"'"
                 cur.execute(query)
                 cur.connection.commit()
                 count=count+1
@@ -68,8 +69,14 @@ for community in communities:
         if len(leaders)==5:
             girls=""
             count=6
+            query="UPDATE `user` SET KingOfTheHill_progress=10, lastdateKingOfTheHill='"+time+"' WHERE UID='"+leaders[0][0]+"'"
+            cur.execute(query)
+            cur.connection.commit()
             for leader in leaders:
                 boys=boys+",Rank"+str(count)+"='"+str(leader[0])+"'"
+                query="UPDATE `user` SET Diva_progress=10 , lastdateKingOfTheHill='"+time+"' WHERE UID='"+leader[0]+"'"
+                cur.execute(query)
+                cur.connection.commit()
                 count=count+1
         boys=boys+girls
         query="UPDATE `"+community[1]+"` SET Average="+str(avg)+",Deviation="+str(dev) + boys+" WHERE Attribute='"+attribute[0]+"'"
