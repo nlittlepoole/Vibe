@@ -5,7 +5,6 @@ ini_set('max_execution_time', 300);
 //Start up code for any instance of Vibe runtime
 require( "config.php" ); //pulls in global variables from config.php
 require("php-sdk/facebook.php"); //imports facebook api methods and objects
-$action = isset( $_GET['action'] ) ? $_GET['action'] : ""; //sets $action to "Action" url fragment string if action isn't null
 $config = array(); //initializes $config as an array
 $config['appId'] = APP_ID; //$ Facebook App ID code for Vibe, assigned by facebook to Niger Little-Poole
 $config['secret'] = APP_SECRET; //FAcebook secret code for vibe
@@ -15,6 +14,7 @@ $token = $facebook->getAccessToken(); //Authorization token is grabbed from URL 
 $_SESSION['myToken'] = $token;
 $uid = $facebook->getUser(); // Facebook user ID number is returned, if facebook isn't logged in or exception, it returns 0
 $_SESSION['userID'] = $uid; 
+$action = isset( $_GET['action'] ) && $uid ? $_GET['action'] : ""; //sets $action to "Action" url fragment string if action isn't null
 
 //Switch case determines what to do next based on the input arguments from the action URL fragment("?=action" in the URL)
 switch ( $action ) {
