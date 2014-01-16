@@ -34,7 +34,7 @@ for community in communities:
         query=""
         cur.execute("SELECT AVG(" +attribute[0]+"), STD("+attribute[0]+") FROM user WHERE "+attribute[0]+"_Total>0 AND `Communities` LIKE '%"+community[2]+ "%'")
         stats=cur.fetchall()
-        print stats
+        #print stats
         avg=-1
         dev=-1
         if stats[0][0]:
@@ -45,20 +45,21 @@ for community in communities:
             dev="%.2f" % dev
 
         
-        query="SELECT Name FROM  `user` WHERE  `Communities` LIKE  '%"+community[1]+"%' AND Gender='male'  ORDER BY "+attribute[0]+" DESC LIMIT 5"
+        query="SELECT Name,UID FROM  `user` WHERE  `Communities` LIKE  '%"+community[1]+"%' AND Gender='male'  ORDER BY "+attribute[0]+" DESC LIMIT 5"
         cur.execute(query)
         leaders=cur.fetchall()
         boys=",Rank1='N/A',Rank2='N/A',Rank3='N/A',Rank4='N/A',Rank5='N/A'"
-        time=time.strftime("%Y-%m-%d")
+        now=time.strftime("%Y-%m-%d")
         if len(leaders)==5:
             boys=""
             count=1
-            query="UPDATE `user` SET KingOfTheHill_progress=10, lastdateKingOfTheHill='"+time+"' WHERE UID='"+leaders[0][0]+"'"
+            query="UPDATE `user` SET KingOfTheHill_progress=10, lastdateKingOfTheHill='"+now+"' WHERE UID='"+leaders[0][1]+"'"
             cur.execute(query)
             cur.connection.commit()
             for leader in leaders:
                 boys=boys+",Rank"+str(count)+"='"+str(leader[0])+"'"
-                query="UPDATE `user` SET Diva_progress=10 , lastdateKingOfTheHill='"+time+"' WHERE UID='"+leader[0]+"'"
+                query="UPDATE `user` SET Diva_progress=10 , lastdateDiva='"+now+"' WHERE UID='"+leader[1]+"'"
+                #print query
                 cur.execute(query)
                 cur.connection.commit()
                 count=count+1
@@ -69,18 +70,17 @@ for community in communities:
         if len(leaders)==5:
             girls=""
             count=6
-            query="UPDATE `user` SET KingOfTheHill_progress=10, lastdateKingOfTheHill='"+time+"' WHERE UID='"+leaders[0][0]+"'"
+            query="UPDATE `user` SET KingOfTheHill_progress=10, lastdateDiva='"+now+"' WHERE UID='"+leaders[0][1]+"'"
             cur.execute(query)
             cur.connection.commit()
             for leader in leaders:
                 boys=boys+",Rank"+str(count)+"='"+str(leader[0])+"'"
-                query="UPDATE `user` SET Diva_progress=10 , lastdateKingOfTheHill='"+time+"' WHERE UID='"+leader[0]+"'"
+                query="UPDATE `user` SET Diva_progress=10 , lastdateKingOfTheHill='"+now+"' WHERE UID='"+leader[1]+"'"
                 cur.execute(query)
                 cur.connection.commit()
                 count=count+1
         boys=boys+girls
         query="UPDATE `"+community[1]+"` SET Average="+str(avg)+",Deviation="+str(dev) + boys+" WHERE Attribute='"+attribute[0]+"'"
-        print query
         cur.execute(query)
         cur.connection.commit()
         #query="SELECT UID FROM  `user` WHERE  `Communities` LIKE  '%Columbia University%' ORDER BY Attractiveness DESC LIMIT 5"
