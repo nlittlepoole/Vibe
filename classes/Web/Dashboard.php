@@ -10,17 +10,43 @@ function achievementsBox() {
 	
 	$_SESSION['msgBox'] = array(); 
 	
+	$_SESSION['achievementNames'] = array("HelpingHand", "Pal", "Advocate", "Comrade", "MotherTeresa", "Diva", 
+	"KingOfTheHill", "Ideator", "Visionairy", "Blogger", "CommanderOfWords", "Viber");
+	
 	for($i = 0; $i < 12; $i++) {
-		$ID = $i + 1; 
+		$ID = $_SESSION['userID']; 
+		
+		$traitSearch = $_SESSION['achievementNames'][$i] . "_progress"; 
+		
+		// GRAB CURRENT PROGRESS
 		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-		$sql = "SELECT * FROM achievements WHERE ID=$ID";
+		$sql = "SELECT $traitSearch FROM user WHERE ID=$ID";
 		
 		$st = $conn->prepare($sql);
 	    $st->execute();
-	    $data=$st->fetch(); 
+	    $data = $st->fetch(); 
+		
+		// GRAB ACHIEVED DATE TO USE IF RELEVANT
+		$dateQuery = "lastdate" . $_SESSION['achievementNames'][$i]; 
+		
+		$sql2 = "SELECT $dateQuery FROM user WHERE ID=$ID";
+		
+		$st2 = $conn->prepare($sql2);
+	    $st2->execute();
+	    $data2 = $st2->fetch(); 
+		
+		$achievedDate = $data2[$dateQuery]; 
+		
+		if($data[$traitSearch] == 10) {
+			// the user has that achievement so add that to the array
+			// first element => name of achievement, second element => time ago that person got achievement
+			array_push(array($_SESSION['achievementNames'][$i], $achievedDate)); 
+		}
 		
 		$conn = null; 
 	}
+	
+	// NOW SORT THE ARRAY BY ACHIEVED DATES
 	
 	$message = '<li>
 					<div class="col1">
