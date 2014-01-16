@@ -10,8 +10,8 @@
     require($path . "/config.php");
     
     $action = isset( $_GET['action'] ) ? $_GET['action'] : "Invite more Friends to Vibe for Comments"; //sets $action to "Action" url fragment string if action isn't null
-    $dashboard=$_SESSION['dashboard'];
-    $pic=$dashboard['pic'];
+    $dashboard = $_SESSION['dashboard'];
+    $pic = $dashboard['pic'];
     
 ?>
 
@@ -563,7 +563,7 @@
 										<div class="col1">
 											<div class="cont">
 												<div class="cont-col1">
-													<div class="label label-sm label-info">
+													<div class="label label-sm" style="background-color: orange">
 														<i class="fa fa-check"></i>
 													</div>
 												</div>
