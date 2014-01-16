@@ -565,7 +565,7 @@
 										<div class="col1">
 											<div class="cont">
 												<div class="cont-col1">
-													<div class="label label-sm" style="background-color: orange">
+													<div class="label label-sm">
 														<i class="fa fa-check"></i>
 													</div>
 												</div>
