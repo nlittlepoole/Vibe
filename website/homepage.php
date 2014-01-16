@@ -14,7 +14,7 @@ require_once($path . "/config.php");
 	<head>
 		<meta charset="utf-8">
 		<title>Vibe</title>
-		<meta name="description" content="">
+		<meta name="description" content="A Social Directory">
 		<meta property="og:title" content="Vibe" />
 		<meta property="og:type" content="website" />
 		<meta property="og:image" content="http://go-vibe.com/img/vibe.jpg" />
