@@ -2,6 +2,37 @@
 require_once( CLASS_PATH . "/Web/User.php");
 require_once( CLASS_PATH . "/Web/Achievements.php");
 require_once( CLASS_PATH . "/Web/String.php");
+
+// WORKING ON THE ACHIEVEMENTS BOX IN DASHBOARD
+function achievementsBox() {
+	
+	$_SESSION['messageBox'] = array(); 
+	
+	
+	
+	$message = '<li>
+					<div class="col1">
+						<div class="cont">
+							<div class="cont-col1">
+								<div class="label label-sm" style="background-color: orange">
+									<i class="fa fa-check"></i>
+								</div>
+							</div>
+							<div class="cont-col2">
+								<div class="desc">
+									 Viber Achievement!
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col2">
+						<div class="date">
+							 Just now
+						</div>
+					</div>
+				</li>"';
+}
+
 function dashboard($facebook,$uid,$token,$force){
 if(refresh($uid) ||$force){
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //database connection is established uisng credentials in config.php
