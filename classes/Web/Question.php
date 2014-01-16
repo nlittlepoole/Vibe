@@ -7,15 +7,15 @@ function question($facebook,$uid,$token ){
     //Useful variables are initialized here at the beginning of the code
     $question;
     $attribute;
-    $random=rand(0,2); //random is set to 0 or 1
+    $random=rand(0,4); //random is set to 0 or 1
     //$random=0;
     $recipient=0;
     $name;
     
     //Placed in a while loop to make sure that php doesn't proceed without a valid user
-    while(!$recipient){
+    while(!$recipient || $recipient==$uid){
         //if $random is 0, the code only uses top friends and picks from any of the vibe questions
-        if($random>0){
+        if($random>1){
             $question_source=getQuestion(14); //calls the getQuestion(int) function to get the data of a question out of the Vibosphere database. This is a php array
             $attribute=$question_source['id']; // $question_id is set to the attribute number in the table, this will be changed later to Attribute
             $question=$question_source['question']; //$question is set to the string of the question picked
@@ -46,6 +46,17 @@ function question($facebook,$uid,$token ){
     }
     //$recipient=712337857;
     $question= str_replace("name", $name, $question); 
+    if($_SESSION['Gender']=="female"){
+        $question= str_replace("their", "her", $question);
+        $question= str_replace("them", "her", $question);  
+        $question= str_replace("themselves", "herself", $question); 
+    }
+    else{
+        $question= str_replace("their", "his", $question); 
+        $question= str_replace("themselves", "himself", $question);
+        $question= str_replace("attractive", "handsome", $question); 
+        $question= str_replace("them", "him", $question);  
+    }
     $pic=getPictures($recipient);
     $_SESSION['affiliations']=getAffiliations($facebook,$recipient,$token);
     $_SESSION['question'] = $question;

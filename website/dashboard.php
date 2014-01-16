@@ -28,6 +28,7 @@
 <meta content="" name="description"/>
 <meta content="" name="author"/>
 <meta name="MobileOptimized" content="320">
+<link href="/vibe.ico" rel="SHORTCUT ICON">
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -111,7 +112,7 @@
 					<a href="javascript:;">
 					<i class="fa fa-heart"></i>
 					<span class="title">
-						Communities
+						My Leaderboards
 					</span>
 					<span class="arrow ">
 					</span>
@@ -279,7 +280,7 @@
 										Strength
 									</th>
 									<th>
-										Qualities
+										Impressions
 									</th>
 									<th>
 										Global Percentile
@@ -310,7 +311,7 @@
 										2
 									</td>
 									<td>
-										Affability
+										Approachability
 									</td>
 									<td>
 										<?php echo $_SESSION['dashboard']['Affability'] ? $_SESSION['dashboard']['Affability']: "--" ?>
@@ -522,7 +523,7 @@
 										14
 									</td>
 									<td>
-										Humility
+										Modesty
 									</td>
 									<td>
 										<?php echo $_SESSION['dashboard']['Humility'] ? $_SESSION['dashboard']['Humility']: "--" ?>

@@ -50,7 +50,12 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="" name="description"/>
 <meta content="" name="author"/>
+<meta property="og:title" content=<?php  echo '"'. $_SESSION['profile']['Name'] . "'s". 'Profile"' ?> />
+<meta property="og:type" content="website" />
+<meta type="og:url" content= <?php  echo '"'. curPageURL() ?>.'"' ?> >
+<meta property="og:image" content="/img/Niger1.jpg" />
 <meta name="MobileOptimized" content="320">
+<link href="/vibe.ico" rel="SHORTCUT ICON">
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -77,6 +82,14 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="page-header-fixed">
+		<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=257473684410281";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
  	<script src="../jQuery/jquery.js"></script> 
     <script> 
@@ -84,7 +97,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
       $("#includedContent").load("header.php"); 
     });
     </script> 
-    
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
     <div id="includedContent"></div>
 
 <div class="clearfix">
@@ -137,7 +150,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					<a href="javascript:;">
 					<i class="fa fa-heart"></i>
 					<span class="title">
-						Communities
+						Leaderboards
 					</span>
 					<span class="selected">
 					</span>
@@ -186,7 +199,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
 						<img height="100px" src=<?php echo '"'.$_SESSION['location']['Picture'].'"' ?>  />
-					<?php echo $_SESSION['location']['Name'] ?> <small>Communities</small> <a href= <?php echo '"https://www.facebook.com/sharer/sharer.php?u='. curPageURL(). '"' ?> target="_blank"><img src="/img/facebook_share.gif" alt="Facebook" width="140" height="24"></a><a href= <?php echo '"http://twitter.com/share?url='. curPageURL(). '&text=&hashtags=Vibe,dummy"' ?> target="_blank"><img src="/img/share_twitter.jpg" alt="Twitter" width="100" height="25"></a>
+					<?php echo $_SESSION['location']['Name'] ?> <small>Communities</small><div class="fb-share-button" data-href=<?php echo '"'. curPageURL(). '"' ?> data-type="button_count"></div><a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="Vibe">Tweet</a>
 					<a href="http://www.reddit.com/submit" onclick="window.location = 'http://www.reddit.com/submit?url=' + encodeURIComponent(window.location); return false"> <img src="http://www.reddit.com/static/spreddit10.gif" height="25" alt="submit to reddit" border="0" /></a>
 					<!-- FILL THIS WITH THE PROF PIC OF THE COMMUNITY'S FACEBOOK PAGE -->
 					</h3>
@@ -217,8 +230,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								<i class="fa fa-reorder"></i>Voted Most
 							</div>
 							<div class="tools">
-								<a href="javascript:;" class="collapse"></a>
-								<a href="#portlet-config" data-toggle="modal" class="config"></a>
 							</div>
 						</div>
 						<div class="portlet-body">
@@ -227,7 +238,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 									<a href="#tab_1_1" data-toggle="tab">Attractiveness</a>
 								</li>
 								<li class="">
-									<a href="#tab_1_2" data-toggle="tab">Affability</a>
+									<a href="#tab_1_2" data-toggle="tab">Approachability</a>
 								</li>
 								<li class="">
 									<a href="#tab_1_3" data-toggle="tab">Intelligence</a>
@@ -1629,10 +1640,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 								<i class="fa fa-comments"></i>Community Summary
 							</div>
 							<div class="tools">
-								<a href="javascript:;" class="collapse"></a>
-								<a href="#portlet-config" data-toggle="modal" class="config"></a>
-								<a href="javascript:;" class="reload"></a>
-								<a href="javascript:;" class="remove"></a>
 							</div>
 						</div>
 						<div class="portlet-body">
@@ -1650,7 +1657,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Overall Score
 									</th>
 									<th>
-										Characteristics
+										Impressions
 									</th>
 								</tr>
 								</thead>
@@ -1674,7 +1681,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										2
 									</td>
 									<td>
-										Affability
+										Approachability
 									</td>
 									<td>
 										<?php echo $_SESSION['location'][1]['Average'] ? $_SESSION['location'][1]['Average']: "--" ?>
@@ -1842,7 +1849,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										14
 									</td>
 									<td>
-										Humility
+										Modesty
 									</td>
 									<td>
 										<?php echo $_SESSION['location'][13]['Average'] ? $_SESSION['location'][13]['Average']: "--" ?>

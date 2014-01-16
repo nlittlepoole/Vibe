@@ -93,7 +93,7 @@ function achievementsNotificationCreator($achievementsNavBar) {
 function colorWithVibe() {
 	$_SESSION['coloredVibes'] = array(
 		'Attractiveness'=>"crimson",
-		'Affability'=>"brown",
+		'Approachability'=>"brown",
 		'Intelligence'=>"darkblue",
 		'Style'=>"darkcyan",
 		'Promiscuity'=>"darkgreen",
@@ -105,7 +105,7 @@ function colorWithVibe() {
 		'Reliability'=>"mediumorchid",
 		'Happiness'=>"palevioletred",
 		'Ambition'=>"seagreen",
-		'Humility'=>"black"
+		'Modesty'=>"black"
 	);
 }
 

@@ -84,7 +84,7 @@
 		else {$affabilityScore = "--"; }
 		
 		if($data['affabilityDisableDate'] == "") {
-			$_SESSION['affableDisp'] = '<tr><td style="color: #0d638f;">Affability</td><td>' . 
+			$_SESSION['affableDisp'] = '<tr><td style="color: #0d638f;">Approachability</td><td>' . 
 			$affabilityScore . '</td><td><em>' . $affabilityKeys .'</em></td></tr>'; 
 		}
 		else {
@@ -288,7 +288,7 @@
 		else {$humilityScore = "--"; }
 		
 		if($data['humilityDisableDate'] == "") {
-			$_SESSION['humilityDisp'] = '<tr><td style="color: #0d638f;">Humility</td><td>' . 
+			$_SESSION['humilityDisp'] = '<tr><td style="color: #0d638f;">Modesty</td><td>' . 
 			$humilityScore . '</td><td><em>' . $humilityKeys .'</em></td></tr>'; 
 		}
 		else {
@@ -389,7 +389,12 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="" name="description"/>
 <meta content="" name="author"/>
+<meta property="og:title" content=<?php  echo '"'. $_SESSION['profile']['Name'] . "'s". 'Profile"' ?> />
+<meta property="og:type" content="website" />
+<meta type="og:url" content= <?php  echo '"'.curPageURL() ?>.'"' ?> >
+<meta property="og:image" content="/img/Niger1.jpg" />
 <meta name="MobileOptimized" content="320">
+<link href="/vibe.ico" rel="SHORTCUT ICON">
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -417,15 +422,24 @@
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="page-header-fixed">
-	<script src="../jQuery/jquery.js"></script> 
-    <script> 
+		<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=257473684410281";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+ 	<script src="../jQuery/jquery.js"></script> 
+<script src="../jQuery/jquery.js"></script> 
+    <script>  
     $(function(){
       $("#includedContent").load("header.php"); 
     });
     </script> 
-    
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
     <div id="includedContent"></div>
-    <div id="fb-root"></div>
 
 
 <!-- BEGIN CONTAINER -->
@@ -476,7 +490,7 @@
 					<a href="javascript:;">
 					<i class="fa fa-heart"></i>
 					<span class="title">
-						Communities
+						My Leaderboards
 					</span>
 					<span class="arrow ">
 					</span>
@@ -566,12 +580,12 @@
 													<?php echo $_SESSION['displayLocation'] ?>
 													<?php echo $_SESSION['displayBirthday'] ?>
 													<?php echo $_SESSION['displaySite'] ?>
-													<!-- SHARE BUTTONS FOR FACEBOOK, TWITTER, AND REDDIT -->
-													<!--
-													<li><a href= <?php echo '"https://www.facebook.com/sharer/sharer.php?u='. curPageURL(). '"' ?> target="_blank"><img src="/img/facebook_share.gif" alt="Facebook" width="140" height="24"></a></li>
-													<li><a href= <?php echo '"http://twitter.com/share?url='. curPageURL(). '&text=&hashtags=Vibe,dummy"' ?> target="_blank"><img src="/img/share_twitter.jpg" alt="Twitter" width="100" height="25"></a></li>
+													
+													<li><div class="fb-share-button" data-href=<?php echo '"'. curPageURL(). '"' ?> data-type="button_count"></div></li>
+													
+													<li><a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="Vibe">Tweet</a></li>
 													<li><a href="http://www.reddit.com/submit" onclick="window.location = 'http://www.reddit.com/submit?url=' + encodeURIComponent(window.location); return false"> <img src="http://www.reddit.com/static/spreddit10.gif" height="25" alt="submit to reddit" border="0" /> </a></li>
-													-->
+													
 												</ul>
 											</div>
 											<!--end col-md-8-->
@@ -641,7 +655,7 @@
 																Strength
 															</th>
 															<th>
-																Qualities
+																Impressions
 															</th>
 														</tr>
 														</thead>

@@ -67,6 +67,8 @@ if(refresh($uid) ||$force){
 	achievementsNotificationCreator($achievementsNavBar); 
     
     $data['Comments_Size']=$data['Comments']!=''?sizeof(split('&&',$data['Comments'])):0;
+    $data['Comments']=str_replace("Affability", "Approachability", $data['Comments']);
+    $data['Comments']=str_replace("Humility", "Modesty", $data['Comments']);
     $data['Comments']=dashboardComments($data['Comments']);
     //print_r($data['Comments']);
     $scores=Array(
@@ -119,6 +121,8 @@ if(refresh($uid) ||$force){
     $st->execute();//executes query above
     $data=$st->fetch(); //$question source is set to result of query
     $data['Comments_Size']=$data['Comments']!=''?sizeof(split('&&',$data['Comments'])):0;
+    $data['Comments']=str_replace("Affability", "Approachability", $data['Comments']);
+    $data['Comments']=str_replace("Humility", "Modesty", $data['Comments']);
     $data['Comments']=comments($data['Comments']);
     //print_r($data['Comments']);
     $scores=Array(

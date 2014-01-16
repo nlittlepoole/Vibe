@@ -14,9 +14,13 @@ require_once($path . "/config.php");
 	<head>
 		<meta charset="utf-8">
 		<title>Vibe</title>
-		<meta name="description" content="">
+		<meta name="description" content="A Social Directory">
+		<meta property="og:title" content="Vibe" />
+		<meta property="og:type" content="website" />
+		<meta property="og:image" content="http://go-vibe.com/img/vibe.jpg" />
+		<meta name="MobileOptimized" content="320">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+		<link href="/vibe.ico" rel="SHORTCUT ICON">
 		<link rel="stylesheet" href="/css/bootstrap.css">
 		<link rel="stylesheet" href="/css/bootstrap-responsive.css">
 		<link rel="stylesheet" href="/css/font-awesome.min.css">
@@ -64,8 +68,8 @@ require_once($path . "/config.php");
 					<h1 class="page-title">About</h1>
 					<h2 class="page-subtitle">Feedback for Everyone</h2>
 					<div class="text-section">
-						<p>Have you ever wondered how you came across during an interview? Were you making eye contact? Did you maintain a consistent tone? At Vibe, we believe you should have access to this information. It's helpful to have feedback from a third party.</p>
-						<p>Vibe sets you up with a list of questions about you that your peers will answer. Over time, responses from your friends will generate a summary of the vibe you give off to your community. We protect and privatize your feedback so only <em>you</em> receive it. Set up an account for free with us today!</p>
+						<p>Have you ever wondered how you came across to an interviewer? Have you ever wanted to know how honest a potential date may be? Vibe gives you access to this information. It's helpful to have feedback from a third party.</p>
+						<p>Vibe sets you up with a list of questions about you that your peers will answer. Over time, responses from your friends will generate a summary of the vibe you give off to your community. These <em>vibes</em> are compiled to create a Social Directory availible to any user. Set up an account for free with us today!</p>
 					</div>
 				</div> <!-- end row-fluid -->
 				<!-- Services -->
@@ -76,8 +80,8 @@ require_once($path . "/config.php");
 							<p>Get a third party perspective with a summary of question results on your own privatized dashboard.</p>
 						</div>
 						<div class="span4">
-							<h3 class="icon-heart">Communities</h3>
-							<p>Answer questions from both your peers and people in your local community.</p>
+							<h3 class="icon-heart">Profiles</h3>
+							<p>View the Vibe scores of other users to see what a person may be like before you meet</p>
 						</div>
 						<div class="span4">
 							<h3 class="icon-trophy">Leaderboards</h3>
