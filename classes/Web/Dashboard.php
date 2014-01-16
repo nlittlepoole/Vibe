@@ -4,45 +4,163 @@ require_once( CLASS_PATH . "/Web/Achievements.php");
 require_once( CLASS_PATH . "/Web/String.php");
 
 // WORKING ON THE ACHIEVEMENTS BOX IN DASHBOARD
-
+function cmpAchieve($a, $b) {
+	// user entered two dates
+	
+	$componentsA = explode("-", $a); 
+	$componentsB = explode("-", $b); 
+	
+	$yearA = $componentsA[0];
+	$monthA = $componentsA[1];
+	$dayA = $componentsA[2];
+	
+	$yearB = $componentsB[0];
+	$monthB = $componentsB[1];
+	$dayB = $componentsB[2];
+	
+	if($yearA < $yearB) {
+		return 1;
+	}
+	else if($yearA == $yearB) {
+		// now test if months are the same
+		if($monthA < $monthB) {
+			return 1;
+		}
+		else if($monthA == $monthB) {
+			// now test if days are the same
+			if($dayA < $dayB) {
+				return 1; 
+			}
+			else if($dayA == $dayB) {
+				return 0; 
+			}
+			else {
+				return -1; 
+			}
+		}
+		else {
+			return -1;
+		}
+	}
+	else {
+		return -1;
+	}
+}
 
 function achievementsBox() {
 	
 	$_SESSION['msgBox'] = array(); 
 	
+	$_SESSION['achievementNames'] = array("HelpingHand", "Pal", "Advocate", "Comrade", "MotherTeresa", "Diva", 
+	"KingOfTheHill", "Ideator", "Visionairy", "Blogger", "CommanderOfWords", "Viber");
+	
 	for($i = 0; $i < 12; $i++) {
-		$ID = $i + 1; 
+		$ID = $_SESSION['userID']; 
+		
+		$traitSearch = $_SESSION['achievementNames'][$i] . "_progress"; 
+		
+		// GRAB CURRENT PROGRESS
 		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-		$sql = "SELECT * FROM achievements WHERE ID=$ID";
+		$sql = "SELECT $traitSearch FROM user WHERE UID=$ID";
 		
 		$st = $conn->prepare($sql);
 	    $st->execute();
-	    $data=$st->fetch(); 
+	    $data = $st->fetch(); 
+		
+		// GRAB ACHIEVED DATE TO USE IF RELEVANT
+		$dateQuery = "lastdate" . $_SESSION['achievementNames'][$i]; 
+		
+		$sql2 = "SELECT $dateQuery FROM user WHERE UID=$ID";
+		
+		$st2 = $conn->prepare($sql2);
+	    $st2->execute();
+	    $data2 = $st2->fetch(); 
+		
+		$achievedDate = $data2[$dateQuery]; 
+		
+		if($data[$traitSearch] == 10) {
+			// the user has that achievement so add that to the array
+			// first element => name of achievement, second element => time ago that person got achievement
+			$_SESSION['msgBox'][$achievedDate] = $_SESSION['achievementNames'][$i];
+		}
 		
 		$conn = null; 
+		
 	}
 	
-	$message = '<li>
-					<div class="col1">
-						<div class="cont">
-							<div class="cont-col1">
-								<div class="label label-sm" style="background-color: orange">
-									<i class="fa fa-check"></i>
-								</div>
-							</div>
-							<div class="cont-col2">
-								<div class="desc">
-									 Viber Achievement!
-								</div>
-							</div>
+	// NOW SORT THE ARRAY BY ACHIEVED DATES --> each element has a name of an achievement and a corresponding date
+	uksort($_SESSION['msgBox'], "cmpAchieve"); 
+	
+	$_SESSION['msgBoxDisp'] = array(); 
+	
+	// NOW LOOP THROUGH ALL NEW VALUES AND PRINT THEM OUT
+	foreach($_SESSION['msgBox'] as $key => $value) {
+		$dateObtained = $key; 
+		$nameOfAchievement = $value; 
+		
+		$currentDate = date('Y-m-d');
+		
+		$start = strtotime($dateObtained); 
+		$end = strtotime($currentDate); 
+		
+		$days_between = ceil(abs($end - $start) / 86400); 
+		
+		if($nameOfAchievement == "HelpingHand") {
+			$nameOfAchievement = "Helping Hand"; 
+		}
+		else if($nameOfAchievement == "KingOfTheHill") {
+			$nameOfAchievement = "King of the Hill"; 
+		}
+		else if($nameOfAchievement == "MotherTeresa") {
+			$nameOfAchievement = "Mother Teresa"; 
+		}
+		else if($nameOfAchievement == "CommanderOfWords") {
+			$nameOfAchievement = "Commander of Words"; 
+		}
+		
+		if($days_between == 0) {
+			$days_between = "just now"; 
+		}
+		else if($days_between == 1){
+			$days_between = $days_between . " day"; 
+		}
+		else {
+			$days_between = $days_between . " days";
+		}
+		
+		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+		//$sql = "SELECT color FROM achievements WHERE name=$nameOfAchievement";
+		$sql = "SELECT color FROM achievements WHERE name='" . $nameOfAchievement . "'";
+		$st = $conn->prepare($sql);
+	    $st->execute();
+	    $data = $st->fetch(); 
+		
+		$color = $data['color']; 
+		
+		$conn = null; 
+		
+		$achievementDisp = '<li>
+			<div class="col1">
+				<div class="cont">
+					<div class="cont-col1">
+						<div class="label label-sm" style="background-color: ' . $color . '">
+							<i class="fa fa-check"></i>
 						</div>
 					</div>
-					<div class="col2">
-						<div class="date">
-							 Just now
-						</div>
+					<div class="cont-col2">
+						<div class="desc"> ' . $nameOfAchievement . '</div>
 					</div>
-				</li>"';
+				</div>
+			</div>
+			<div class="col2">
+				<div class="date">' . $days_between . '</div>
+			</div>
+		</li>';
+		
+		array_push($_SESSION['msgBoxDisp'], $achievementDisp); 
+		
+	}
+	
 }
 
 function dashboard($facebook,$uid,$token,$force){
