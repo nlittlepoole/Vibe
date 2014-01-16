@@ -37,6 +37,7 @@ break;
     break;
   case 'dashboard'://occurs after a login or another question, this case handles generating a new question and friend
     require( CLASS_PATH . "/Web/Dashboard.php");
+    achievementsBox(); 
     $force=$_GET['force'];
     dashboard($facebook,$uid,$token,$force);
     if($_SESSION['redirect']){

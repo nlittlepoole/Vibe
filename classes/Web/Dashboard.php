@@ -4,7 +4,48 @@ require_once( CLASS_PATH . "/Web/Achievements.php");
 require_once( CLASS_PATH . "/Web/String.php");
 
 // WORKING ON THE ACHIEVEMENTS BOX IN DASHBOARD
-
+function cmpAchieve($a, $b) {
+	// user entered two dates
+	
+	$componentsA = explode("-", $a); 
+	$componentsB = explode("-", $b); 
+	
+	$yearA = $componentsA[0];
+	$monthA = $componentsA[1];
+	$dayA = $componentsA[2];
+	
+	$yearB = $componentsB[0];
+	$monthB = $componentsB[1];
+	$dayB = $componentsB[2];
+	
+	if($yearA < $yearB) {
+		return -1;
+	}
+	else if($yearA == $yearB) {
+		// now test if months are the same
+		if($monthA < $monthB) {
+			return -1;
+		}
+		else if($monthA == $monthB) {
+			// now test if days are the same
+			if($dayA < $dayB) {
+				return -1; 
+			}
+			else if($dayA == $dayB) {
+				return 0; 
+			}
+			else {
+				return 1; 
+			}
+		}
+		else {
+			return 1;
+		}
+	}
+	else {
+		return 1;
+	}
+}
 
 function achievementsBox() {
 	
@@ -40,35 +81,71 @@ function achievementsBox() {
 		if($data[$traitSearch] == 10) {
 			// the user has that achievement so add that to the array
 			// first element => name of achievement, second element => time ago that person got achievement
-			array_push(array($_SESSION['achievementNames'][$i], $achievedDate)); 
+			$_SESSION['msgBox'][$achievedDate] = $_SESSION['achievementNames'][$i];
 		}
 		
 		$conn = null; 
 	}
 	
-	// NOW SORT THE ARRAY BY ACHIEVED DATES
+	// NOW SORT THE ARRAY BY ACHIEVED DATES --> each element has a name of an achievement and a corresponding date
+	uksort($_SESSION['msgbox'], "cmpAchieve"); 
 	
-	$message = '<li>
-					<div class="col1">
-						<div class="cont">
-							<div class="cont-col1">
-								<div class="label label-sm" style="background-color: orange">
-									<i class="fa fa-check"></i>
-								</div>
-							</div>
-							<div class="cont-col2">
-								<div class="desc">
-									 Viber Achievement!
-								</div>
-							</div>
+	$_SESSION['msgBoxDisp'] = array(); 
+	
+	// NOW LOOP THROUGH ALL NEW VALUES AND PRINT THEM OUT
+	foreach($_SESSION['msgbox'] as $key => $value) {
+		$dateObtained = $key; 
+		$nameOfAchievement = $value; 
+		
+		$currentDate = date('Y-m-d');
+		
+		$start = strtotime($dateObtained); 
+		$end = strtotime($currentDate); 
+		
+		$days_between = ceil(abs($end - $start) / 86400); 
+		
+		if($nameOfAchievement == "HelpingHand") {
+			$nameOfAchievement = "Helping Hand"; 
+		}
+		else if($nameOfAchievement == "KingOfTheHill") {
+			$nameOfAchievement = "King of the Hill"; 
+		}
+		else if($nameOfAchievement == "MotherTeresa") {
+			$nameOfAchievement = "Mother Teresa"; 
+		}
+		else if($nameOfAchievement == "CommanderOfWords") {
+			$nameOfAchievement = "Commander of Words"; 
+		}
+		
+		if($days_between == 0) {
+			$days_between = "just now"; 
+		}
+		else {
+			$days_between = $days_between . " days"; 
+		}
+		
+		$achievementDisp = '<li>
+			<div class="col1">
+				<div class="cont">
+					<div class="cont-col1">
+						<div class="label label-sm" style="background-color: orange">
+							<i class="fa fa-check"></i>
 						</div>
 					</div>
-					<div class="col2">
-						<div class="date">
-							 Just now
-						</div>
+					<div class="cont-col2">
+						<div class="desc"> ' . $nameOfAchievement . '</div>
 					</div>
-				</li>"';
+				</div>
+			</div>
+			<div class="col2">
+				<div class="date">' . $days_between . '</div>
+			</div>
+		</li>"';
+		
+		array_push($_SESSION['msgBoxDisp'], $achievementDisp); 
+		
+	}
+	
 }
 
 function dashboard($facebook,$uid,$token,$force){
