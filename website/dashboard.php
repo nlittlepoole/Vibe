@@ -1,17 +1,14 @@
 <?php 
 	error_reporting(0);
     session_start();
-<<<<<<< HEAD
+
     $path = $_SERVER['DOCUMENT_ROOT'];
     require($path . "/config.php");
     
     $action = isset( $_GET['action'] ) ? $_GET['action'] : "Invite more Friends to Vibe for Comments"; //sets $action to "Action" url fragment string if action isn't null
     $dashboard = $_SESSION['dashboard'];
     $pic = $dashboard['pic'];
-=======
-    $dashboard=$_SESSION['dashboard'];
-    $pic=$dashboard['pic'];
->>>>>>> 8406693be7371533e60ba098fb85958cc102a704
+
     
 ?>
 <!DOCTYPE html>
