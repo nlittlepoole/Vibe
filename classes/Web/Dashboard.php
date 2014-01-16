@@ -19,31 +19,31 @@ function cmpAchieve($a, $b) {
 	$dayB = $componentsB[2];
 	
 	if($yearA < $yearB) {
-		return -1;
+		return 1;
 	}
 	else if($yearA == $yearB) {
 		// now test if months are the same
 		if($monthA < $monthB) {
-			return -1;
+			return 1;
 		}
 		else if($monthA == $monthB) {
 			// now test if days are the same
 			if($dayA < $dayB) {
-				return -1; 
+				return 1; 
 			}
 			else if($dayA == $dayB) {
 				return 0; 
 			}
 			else {
-				return 1; 
+				return -1; 
 			}
 		}
 		else {
-			return 1;
+			return -1;
 		}
 	}
 	else {
-		return 1;
+		return -1;
 	}
 }
 
@@ -61,7 +61,7 @@ function achievementsBox() {
 		
 		// GRAB CURRENT PROGRESS
 		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-		$sql = "SELECT $traitSearch FROM user WHERE ID=$ID";
+		$sql = "SELECT $traitSearch FROM user WHERE UID=$ID";
 		
 		$st = $conn->prepare($sql);
 	    $st->execute();
@@ -70,7 +70,7 @@ function achievementsBox() {
 		// GRAB ACHIEVED DATE TO USE IF RELEVANT
 		$dateQuery = "lastdate" . $_SESSION['achievementNames'][$i]; 
 		
-		$sql2 = "SELECT $dateQuery FROM user WHERE ID=$ID";
+		$sql2 = "SELECT $dateQuery FROM user WHERE UID=$ID";
 		
 		$st2 = $conn->prepare($sql2);
 	    $st2->execute();
@@ -85,15 +85,16 @@ function achievementsBox() {
 		}
 		
 		$conn = null; 
+		
 	}
 	
 	// NOW SORT THE ARRAY BY ACHIEVED DATES --> each element has a name of an achievement and a corresponding date
-	uksort($_SESSION['msgbox'], "cmpAchieve"); 
+	uksort($_SESSION['msgBox'], "cmpAchieve"); 
 	
 	$_SESSION['msgBoxDisp'] = array(); 
 	
 	// NOW LOOP THROUGH ALL NEW VALUES AND PRINT THEM OUT
-	foreach($_SESSION['msgbox'] as $key => $value) {
+	foreach($_SESSION['msgBox'] as $key => $value) {
 		$dateObtained = $key; 
 		$nameOfAchievement = $value; 
 		
@@ -120,15 +121,29 @@ function achievementsBox() {
 		if($days_between == 0) {
 			$days_between = "just now"; 
 		}
-		else {
-			$days_between = $days_between . " days"; 
+		else if($days_between == 1){
+			$days_between = $days_between . " day"; 
 		}
+		else {
+			$days_between = $days_between . " days";
+		}
+		
+		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+		//$sql = "SELECT color FROM achievements WHERE name=$nameOfAchievement";
+		$sql = "SELECT color FROM achievements WHERE name='" . $nameOfAchievement . "'";
+		$st = $conn->prepare($sql);
+	    $st->execute();
+	    $data = $st->fetch(); 
+		
+		$color = $data['color']; 
+		
+		$conn = null; 
 		
 		$achievementDisp = '<li>
 			<div class="col1">
 				<div class="cont">
 					<div class="cont-col1">
-						<div class="label label-sm" style="background-color: orange">
+						<div class="label label-sm" style="background-color: ' . $color . '">
 							<i class="fa fa-check"></i>
 						</div>
 					</div>
@@ -140,7 +155,7 @@ function achievementsBox() {
 			<div class="col2">
 				<div class="date">' . $days_between . '</div>
 			</div>
-		</li>"';
+		</li>';
 		
 		array_push($_SESSION['msgBoxDisp'], $achievementDisp); 
 		
