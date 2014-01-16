@@ -1,19 +1,15 @@
+<?php 
+	error_reporting(0);
+    session_start();
+    $dashboard=$_SESSION['dashboard'];
+    $pic=$dashboard['pic'];
+    
+?>
 <!DOCTYPE html>
 
 <!-- File has been changed to a PHP file -->
 
 <!-- START UP THE SESSION -->
-<?php 
-	error_reporting(0);
-    session_start();
-    $path = $_SERVER['DOCUMENT_ROOT'];
-    require($path . "/config.php");
-    
-    $action = isset( $_GET['action'] ) ? $_GET['action'] : "Invite more Friends to Vibe for Comments"; //sets $action to "Action" url fragment string if action isn't null
-    $dashboard=$_SESSION['dashboard'];
-    $pic=$dashboard['pic'];
-    
-?>
 
 <!-- HTML CONTENT -->
 
