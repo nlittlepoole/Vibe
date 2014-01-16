@@ -17,7 +17,6 @@
 
 	toggleInfo($profile, $_SESSION['myToken']);
 	displayVibes($profile); 
-	totalPoints(); 
 
 	function curPageURL() {
 	 $pageURL = 'http';
@@ -31,19 +30,6 @@
 	 return $pageURL;
 	}
 	
-	function totalPoints() {
-	   $conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-	   
-	   //GET TOTAL NUMBER OF POINTS AND CHANGE THAT IN ADDITION TO SESSION DATA
-	   $sql = "SELECT Points FROM user WHERE UID=" . $_SESSION['userID'];
-	   $st = $conn->prepare($sql);
-	   $st->execute();
-	   
-	   $data=$st->fetch(); 
-	   $_SESSION['pointsTracker'] = $data['Points'];
-	   
-	   $conn = null; 
-	}
 	
 	function displayVibes($uid) {
 		//Grab the vibes from the database that are not toggled off
@@ -583,7 +569,7 @@
 													
 													<li><div class="fb-share-button" data-href=<?php echo '"'. curPageURL(). '"' ?> data-type="button_count"></div></li>
 													
-													<li><a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="Vibe">Tweet</a></li>
+													<li><a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="Vibe" style="text-align:bottom">Tweet</a></li>
 													<li><a href="http://www.reddit.com/submit" onclick="window.location = 'http://www.reddit.com/submit?url=' + encodeURIComponent(window.location); return false"> <img src="http://www.reddit.com/static/spreddit10.gif" height="25" alt="submit to reddit" border="0" /> </a></li>
 													
 												</ul>
@@ -622,7 +608,7 @@
 																	POINTS
 																</span>
 																<span class="sale-num">
-																	<?php echo $_SESSION['pointsTracker'] ?>
+																	<?php echo $_SESSION['profile']['Points'] ?>
 																</span>
 																
 															</li>
