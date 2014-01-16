@@ -28,6 +28,7 @@
 <meta content="" name="description"/>
 <meta content="" name="author"/>
 <meta name="MobileOptimized" content="320">
+<link href="/vibe.ico" rel="SHORTCUT ICON">
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>

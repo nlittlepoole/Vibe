@@ -15,10 +15,12 @@ require_once($path . "/config.php");
 		<meta charset="utf-8">
 		<title>Vibe</title>
 		<meta name="description" content="">
-
+		<meta property="og:title" content="Vibe" />
+		<meta property="og:type" content="website" />
+		<meta property="og:image" content="http://go-vibe.com/img/vibe.jpg" />
 		<meta name="MobileOptimized" content="320">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
+		<link href="/vibe.ico" rel="SHORTCUT ICON">
 		<link rel="stylesheet" href="/css/bootstrap.css">
 		<link rel="stylesheet" href="/css/bootstrap-responsive.css">
 		<link rel="stylesheet" href="/css/font-awesome.min.css">

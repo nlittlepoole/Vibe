@@ -394,6 +394,7 @@
 <meta type="og:url" content= <?php  echo '"'.curPageURL() ?>.'"' ?> >
 <meta property="og:image" content="/img/Niger1.jpg" />
 <meta name="MobileOptimized" content="320">
+<link href="/vibe.ico" rel="SHORTCUT ICON">
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -569,9 +570,9 @@
 													<?php echo $_SESSION['displayLocation'] ?>
 													<?php echo $_SESSION['displayBirthday'] ?>
 													<?php echo $_SESSION['displaySite'] ?>
-													<!--
-													<li><a href=<?php echo '"http://www.facebook.com/sharer/sharer.php?s=100&p[url]='.curPageURL().'&p[images][0]='.$pic.'&p[title]=&p[summary]='.curPageURL().'"' ?> >Share on Facebook</a></li>
-													-->
+													
+													<li><div class="fb-share-button" data-href=<?php echo '"'. curPageURL(). '"' ?> data-type="button_count"></div></li>
+													
 													<li><a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="Vibe">Tweet</a></li>
 													<li><a href="http://www.reddit.com/submit" onclick="window.location = 'http://www.reddit.com/submit?url=' + encodeURIComponent(window.location); return false"> <img src="http://www.reddit.com/static/spreddit10.gif" height="25" alt="submit to reddit" border="0" /> </a></li>
 													

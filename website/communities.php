@@ -55,6 +55,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <meta type="og:url" content= <?php  echo '"'. curPageURL() ?>.'"' ?> >
 <meta property="og:image" content="/img/Niger1.jpg" />
 <meta name="MobileOptimized" content="320">
+<link href="/vibe.ico" rel="SHORTCUT ICON">
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -198,7 +199,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
 						<img height="100px" src=<?php echo '"'.$_SESSION['location']['Picture'].'"' ?>  />
-					<?php echo $_SESSION['location']['Name'] ?> <small>Communities</small><!--<div class="fb-share-button" data-href=<?php echo '"'. curPageURL(). '"' ?> data-type="button_count"></div>--><a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="Vibe">Tweet</a>
+					<?php echo $_SESSION['location']['Name'] ?> <small>Communities</small><div class="fb-share-button" data-href=<?php echo '"'. curPageURL(). '"' ?> data-type="button_count"></div><a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="Vibe">Tweet</a>
 					<a href="http://www.reddit.com/submit" onclick="window.location = 'http://www.reddit.com/submit?url=' + encodeURIComponent(window.location); return false"> <img src="http://www.reddit.com/static/spreddit10.gif" height="25" alt="submit to reddit" border="0" /></a>
 					<!-- FILL THIS WITH THE PROF PIC OF THE COMMUNITY'S FACEBOOK PAGE -->
 					</h3>
