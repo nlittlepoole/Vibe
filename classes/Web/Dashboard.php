@@ -4,11 +4,23 @@ require_once( CLASS_PATH . "/Web/Achievements.php");
 require_once( CLASS_PATH . "/Web/String.php");
 
 // WORKING ON THE ACHIEVEMENTS BOX IN DASHBOARD
+
+
 function achievementsBox() {
 	
-	$_SESSION['messageBox'] = array(); 
+	$_SESSION['msgBox'] = array(); 
 	
-	
+	for($i = 0; $i < 12; $i++) {
+		$ID = $i + 1; 
+		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+		$sql = "SELECT * FROM achievements WHERE ID=$ID";
+		
+		$st = $conn->prepare($sql);
+	    $st->execute();
+	    $data=$st->fetch(); 
+		
+		$conn = null; 
+	}
 	
 	$message = '<li>
 					<div class="col1">
