@@ -26,6 +26,20 @@ function checkUID($uid){
     } 
 }
 /*
+Reports user for spam
+*/
+function reportSpam($id,$id2){
+    $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //initialies connection to the database using the credentials found in config.php
+    $sql = "SELECT Spam FROM user WHERE UID= $id2"; //gets the active status of the user with $uid as a user ID
+    $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
+    $st->execute(); //executes the sql query found above
+    $raw=$st->fetch();
+    $spam=strpos($raw[0], $id) !== FALSE ? $raw[0] : $raw[0] ."##" . $id;
+    echo $sql = "UPDATE user SET Spam='$spam' WHERE UID= '$id2'"; //gets the active status of the user with $uid as a user ID
+    $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
+    $st->execute(); //executes the sql query found above
+}
+/*
 Checks if user is in the database
 */
 function checkFriend($uid){

@@ -88,6 +88,15 @@ break;
     }
     header('Location: /index.php?action=dashboard&force=1');
   break;
+  case 'spam':
+  require( CLASS_PATH . "/Web/User.php");
+  $id=$_GET['id'];
+  $id2=$_GET['id2'];
+  if(checkUID($id) && checkUID($id2)){
+    reportSpam($id,$id2);
+  }
+  header('Location: /index.php?action=dashboard');
+  break;
   default: //this is the default setting, it simply take sthe user to the homepage. It also creates the facebook login url 
     //when a user logs in through facebook, the are simply going to a special link created by the facebook api. The api uses our AP ID and password to generate the link
     $params = array(
