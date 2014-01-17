@@ -15,7 +15,7 @@ function keywords($keywords,$total,$split){
   }
   return $new_keyword!=''?$new_keyword:"N/A";
 }
-function dashboardComments($comments){
+function dashboardComments($comments,$uid){
   $comments=split('&&',$comments);
   $max=sizeof($comments);
   if($comments[0]!=''){
@@ -48,7 +48,7 @@ function dashboardComments($comments){
                           </span>
                           </div>
                         <a style="color: tomato" href="/index.php?action=removeComment&comment='.$x.'"><em>Remove&nbsp;&nbsp;&nbsp;&nbsp;</em></a>
-                        <a style="color: darkred" href="#"><em>Mark Spam</em></a>
+                        <a style="color: darkred" href="/index.php?action=spam&id='.$uid.'&id2='.$temp[3].'"><em>Mark Spam</em></a>
                         </div>
                       </div>
                     </div>

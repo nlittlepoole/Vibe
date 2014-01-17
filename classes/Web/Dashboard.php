@@ -230,7 +230,7 @@ if(refresh($uid) ||$force){
     $data['Comments_Size']=$data['Comments']!=''?sizeof(split('&&',$data['Comments'])):0;
     $data['Comments']=str_replace("Affability", "Approachability", $data['Comments']);
     $data['Comments']=str_replace("Humility", "Modesty", $data['Comments']);
-    $data['Comments']=dashboardComments($data['Comments']);
+    $data['Comments']=dashboardComments($data['Comments'],$uid);
     //print_r($data['Comments']);
     $scores=Array(
       "Affability"=>$data['Affability'],
