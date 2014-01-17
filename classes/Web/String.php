@@ -47,7 +47,9 @@ function dashboardComments($comments){
                               <span class="label label-sm" style="background-color: ' . $_SESSION['coloredVibes'][$temp[0]] . ';">'.$temp[0].'&nbsp;</span>
                           </span>
                           </div>
-                        <a style="color: #FF0000" href="/index.php?action=removeComment&comment='.$x.'"><em>Remove</em></a></div>
+                        <a style="color: tomato" href="/index.php?action=removeComment&comment='.$x.'"><em>Remove&nbsp;&nbsp;&nbsp;&nbsp;</em></a>
+                        <a style="color: darkred" href="#"><em>Mark Spam</em></a>
+                        </div>
                       </div>
                     </div>
                     <div class="col2">
