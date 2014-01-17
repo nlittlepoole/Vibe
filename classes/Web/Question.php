@@ -84,6 +84,7 @@ function getQuestion($input){
     $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
     $st->execute();//executes query above
     $question_source=$st->fetch(); //$question source is set to result of query
+    $conn = null;
     $question=$question_source[0]; //sets question to the question field of the question table
     $keywords="";
     if(strpos($question, '(')){
@@ -111,7 +112,6 @@ function getQuestion($input){
     }    
     $attribute=$question_source[1]; //sets attribute
 
-    $conn = null;
     return (array( // returns the the sql table id # of the question and its string. Will be changed later to return attribute and not ID #
             'id'    => $attribute,
             'question' => $question,

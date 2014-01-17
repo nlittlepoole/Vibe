@@ -18,6 +18,7 @@ function checkUID($uid){
     $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
     $st->execute(); //executes the sql query found above
     $raw=$st->fetch();
+    $conn=null;
     if(!$raw){
       return false;
     }
@@ -38,6 +39,7 @@ function reportSpam($id,$id2){
     echo $sql = "UPDATE user SET Spam='$spam' WHERE UID= '$id2'"; //gets the active status of the user with $uid as a user ID
     $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
     $st->execute(); //executes the sql query found above
+     $conn=null;
 }
 /*
 Checks if user is in the database
@@ -60,6 +62,7 @@ function checkActive($uid){
     $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
     $st->execute(); //executes the sql query found above
     $raw=$st->fetch();
+     $conn=null;
     if(!$raw){
       return false;
     }
@@ -75,6 +78,7 @@ function refresh($uid){
     $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
     $st->execute(); //executes the sql query found above
     $raw=$st->fetch();
+     $conn=null;
     $datetime1 = new DateTime($raw[0]);
   }
   else{
@@ -98,7 +102,7 @@ function addUser( $facebook,$uid,$token ) {
         $name=$data['name'];
         $friends= sizeof($_SESSION['friends']['data']);
         $affiliations=getAffiliations($facebook,$uid,$token); //$affiliations is set to result of affiliations function defined below
-         echo $sql = "INSERT INTO user  (Name,UID,Active,Gender,Communities,Friends,LastLogin) VALUES('$name','$uid','1','$gender','$affiliations',$friends,'$now')"; //user is added to Vibosphere database
+         $sql = "INSERT INTO user  (Name,UID,Active,Gender,Communities,Friends,LastLogin) VALUES('$name','$uid','1','$gender','$affiliations',$friends,'$now')"; //user is added to Vibosphere database
         $st = $conn->prepare( $sql );
           $st->execute(); //query is executed
     }
@@ -109,7 +113,7 @@ function addUser( $facebook,$uid,$token ) {
         $name=$data['name'];
         $friends= sizeof($_SESSION['friends']['data']);
         $affiliations=getAffiliations($facebook,$uid,$token); //affiliations is set to the result of the affilations function defined below
-             echo $sql = "UPDATE user SET Active='1',Gender='$gender', Communities='$affiliations',  Name='$name', Friends=$friends, LastLogin='$now' WHERE UID='$uid';"; //query is set to update the user to active and add their gender and communities
+             $sql = "UPDATE user SET Active='1',Gender='$gender', Communities='$affiliations',  Name='$name', Friends=$friends, LastLogin='$now' WHERE UID='$uid';"; //query is set to update the user to active and add their gender and communities
              $st = $conn->prepare( $sql ); //protection line used to hide queries from browsers
              $st->execute(); //command above is executed
     }
@@ -154,7 +158,6 @@ function topFriends($facebook,$uid,$token){
     }
     $top_frds=array_delete($top_frds,$uid);
     $_SESSION['topFriends'] = $top_frds;
-    print_r($_SESSION['topFriends']); //top friends is added to the session data to be used by the app whenever necessary
   }
   //getAffilitaions() uses the facebook fql of the graph api to return a user's community
 function getAffiliations($facebook,$uid,$token){
@@ -186,6 +189,7 @@ function getPercentiles($community,$score){
   $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
   $st->execute();//executes query above
   $stats=$st->fetchAll(); //$question source is set to result of query
+  $conn = null;
   $result=Array();
   $positive=true;
   foreach($stats as $stat){
@@ -208,7 +212,6 @@ function getPercentiles($community,$score){
     }
 
   }
-    $conn = null;
     return $result;
 }
 function erf($x)

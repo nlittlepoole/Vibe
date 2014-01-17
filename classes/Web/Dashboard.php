@@ -170,6 +170,7 @@ if(refresh($uid) ||$force){
     $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
     $st->execute();//executes query above
     $data=$st->fetch(); //$question source is set to result of query
+    $conn=null;
     $new_communities='<li>
               <a href="/website/search.php"><u>
               Search for Communities</u></a>
@@ -264,6 +265,7 @@ if(refresh($uid) ||$force){
     $data['Ambition_Keywords']=isset($data['Ambition_Keywords'])? keywords($data['Ambition_Keywords'],$data['Ambition_Total'],2) : "N/A";
     $data['Humility_Keywords']=isset($data['Humility_Keywords'])? keywords($data['Humility_Keywords'],$data['Humility_Total'],2) : "N/A";
     $data["pic"]="http://graph.facebook.com/" . $uid . "/picture?width=300&height=300";
+    $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
     $sql = "UPDATE user SET newAnswers=0 WHERE UID='$uid';";
     $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
     $st->execute();
@@ -281,6 +283,7 @@ if(refresh($uid) ||$force){
     $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
     $st->execute();//executes query above
     $data=$st->fetch(); //$question source is set to result of query
+    $conn=null;
     $data['Comments_Size']=$data['Comments']!=''?sizeof(split('&&',$data['Comments'])):0;
     $data['Comments']=str_replace("Affability", "Approachability", $data['Comments']);
     $data['Comments']=str_replace("Humility", "Modesty", $data['Comments']);
@@ -318,7 +321,6 @@ if(refresh($uid) ||$force){
     $data['Ambition_Keywords']=isset($data['Ambition_Keywords'])? keywords($data['Ambition_Keywords'],$data['Ambition_Total'],2) : "N/A";
     $data['Humility_Keywords']=isset($data['Humility_Keywords'])? keywords($data['Humility_Keywords'],$data['Humility_Total'],2) : "N/A";
     $data["pic"]="http://graph.facebook.com/" . $uid . "/picture?width=300&height=300";
-    $conn=null;
     return $data;
 
  }
