@@ -70,7 +70,14 @@
 		height: auto;
 	}
 	.gradient {
-		background: -webkit-gradient(linear, 0% 0%, 100% 0%, from(#CC130C), to(#0ACF11));
+		background: #005a00; /* Old browsers */
+		background: -moz-linear-gradient(left, #f72213 0%, #41f22e 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, right top, color-stop(0%,#f72213), color-stop(100%,#41f22e)); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(left, #f72213 0%,#41f22e 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(left, #f72213 0%,#41f22e 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(left, #f72213 0%,#41f22e 100%); /* IE10+ */
+		background: linear-gradient(to right, #f72213 0%,#41f22e 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f72213', endColorstr='#41f22e',GradientType=1 ); /* IE6-9 */
 	}
 </style>
 
