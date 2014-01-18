@@ -435,12 +435,7 @@
 		<div class="page-sidebar navbar-collapse collapse">
 			<!-- BEGIN SIDEBAR MENU -->
 			<ul class="page-sidebar-menu">
-				<li class="sidebar-toggler-wrapper">
-					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-					<div class="sidebar-toggler hidden-phone">
-					</div>
-					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-				</li>
+				<li class="start"><span class="title"><h2 style="text-align: center; color: white">VIBE</h2></span></li>
 				<li class="sidebar-search-wrapper">
 					<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
 					<form class="sidebar-search" action="/index.php?action=search" method="POST">
@@ -555,6 +550,13 @@
 											</li>
 											<?php echo $_SESSION['friendsDisplay'] ?>
 										</ul>
+										<a href="https://twitter.com/share" style="text-align:bottom">
+											<img src="/img/icon-twitter.png" height="36px" />
+										</a>
+										<a href="http://www.reddit.com/submit" onclick="window.location = 'http://www.reddit.com/submit?url=' + encodeURIComponent(window.location); return false"> 
+											<img src="/img/icon-reddit.png" height="36px"/>
+										</a>
+										<div class="fb-share-button" style="height: 36px" data-href=<?php echo '"'. curPageURL(). '"' ?> data-type="button_count"></div>
 									</div>
 									<div class="col-md-9">
 										<div class="row">
@@ -566,12 +568,6 @@
 													<?php echo $_SESSION['displayLocation'] ?>
 													<?php echo $_SESSION['displayBirthday'] ?>
 													<?php echo $_SESSION['displaySite'] ?>
-													
-													<li><div class="fb-share-button" data-href=<?php echo '"'. curPageURL(). '"' ?> data-type="button_count"></div></li>
-													
-													<li><a href="https://twitter.com/share" class="twitter-share-button" data-hashtags="Vibe" style="text-align:bottom">Tweet</a></li>
-													<li><a href="http://www.reddit.com/submit" onclick="window.location = 'http://www.reddit.com/submit?url=' + encodeURIComponent(window.location); return false"> <img src="http://www.reddit.com/static/spreddit10.gif" height="25" alt="submit to reddit" border="0" /> </a></li>
-													
 												</ul>
 											</div>
 											<!--end col-md-8-->
@@ -695,21 +691,14 @@
 	<!-- END CONTENT -->
 </div>
 <!-- END CONTAINER -->
-<!-- BEGIN FOOTER -->
-<div class="footer">
-	<div class="footer-inner">
-		 		 2013 &copy; Metronic by keenthemes.  &nbsp;&nbsp;&nbsp;  2014 &copy; Vibe LLC. &nbsp;&nbsp;&nbsp;
-
-		 <a href="/website/terms.php">Terms and Conditions</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		 <a href="/website/privacy.php">Privacy Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;
-	</div>
-	<div class="footer-tools">
-		<span class="go-top">
-			<i class="fa fa-angle-up"></i>
-		</span>
-	</div>
-</div>
-<!-- END FOOTER -->
+<!-- FOOTER -->
+    <script> 
+    $(function(){
+      $("#footerContent").load("footer.php"); 
+    });
+    </script> 
+    
+    <div id="footerContent"></div>
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 <!-- BEGIN CORE PLUGINS -->
 <!--[if lt IE 9]>

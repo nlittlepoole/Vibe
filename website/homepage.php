@@ -168,11 +168,18 @@
 				</div> <!-- end row-fluid -->
 			</div> <!-- end container -->
 		</section>
-
-		<!-- Footer -->
+		
+		<!-- BEGIN FOOTER -->
 		<footer id="main-footer">
-			<p>&copy; 2013 Strand by <a href="http://www.glorm.com">Glorm</a></p>
+			 <p style="text-align: center; color: #999999;">
+				 2014 &copy; Vibe LLC. &nbsp;&nbsp;&nbsp;
+		
+				 <a href="/website/terms.php">Terms and Conditions</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				 <a href="/website/privacy.php">Privacy Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			 </p>
 		</footer>
+		<!-- END FOOTER -->
+		
 
 		<!-- Preloader -->
 		<div id="preloader"></div>
