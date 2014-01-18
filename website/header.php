@@ -53,11 +53,9 @@
 			<li class="dropdown" id="header_task_bar">
 				<a href="/website/achievements.php" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 				<i class="fa fa-tasks"></i>
-				<!--
-				<span class="badge">
-					5
-				</span>
-				-->
+				
+				<?php echo $_SESSION['achievementsToAchieve']; ?>
+				
 				</a>
 				<ul class="dropdown-menu extended tasks">
 					<li>

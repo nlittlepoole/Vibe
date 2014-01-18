@@ -4,6 +4,8 @@ function achievements() {
 	$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
 	$achievements = array();
 	
+	$_SESSION['achievementsToAchieve'] = 0; 
+	
 	for($i=1; $i<13; $i++) {
 		$sql = "SELECT * FROM achievements WHERE ID=$i"; 
 	    $st = $conn->prepare( $sql );
@@ -30,6 +32,10 @@ function achievements() {
 			$sliderColor = "success";
 		}
 		
+		if($tempPercent < 100) {
+			$_SESSION['achievementsToAchieve']++; 
+		}
+		
 		$achievements[$i - 1] = '<div class="form-group">
 										<div class="col-md-3">
 											<h5>' . $data['name'] . '</h5>
@@ -48,6 +54,16 @@ function achievements() {
 										</div>
 										
 									</div>';
+	}
+
+	if($_SESSION['achievementsToAchieve'] > 5) {
+		$_SESSION['achievementsToAchieve'] = '<span class="badge">5+</span>';
+	}
+	else if($_SESSION['achievementsToAchieve'] == 0) {
+		$_SESSION['achievementsToAchieve'] = ""; 
+	}
+	else {
+		$_SESSION['achievementsToAchieve'] = '<span class="badge">' .  $_SESSION['achievementsToAchieve'] . '</span>';
 	}
     
     $conn=null;
