@@ -32,7 +32,7 @@ function profiled($facebook,$uid,$token){
     }
 }
 function search($query,$facebook,$uid,$token){
-    if($search){
+    if($query){
         $users=friendsExact($query);
         $users=array_unique(array_merge($users,affiliatesExact($query,$uid)));
         $users=array_unique(array_merge($users,friendsLoose($query)));
@@ -77,7 +77,6 @@ function affiliatesExact($query, $uid){
     $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
     $st->execute(); //executes the sql query found above
     $communities=$st->fetch();
-    $conn = null;
     $communities=split('&&',$communities['Communities']);
     $users=Array();
     foreach($communities as $community){
@@ -98,7 +97,6 @@ function affiliatesLoose($query, $uid){
     $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
     $st->execute(); //executes the sql query found above
     $communities=$st->fetch();
-    $conn = null;
     $communities=split('&&',$communities['Communities']);
     $users=Array();
     $queries=split(' ',$query);

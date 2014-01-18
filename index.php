@@ -85,6 +85,7 @@ break;
       $sql = "UPDATE user SET Comments='$comments' WHERE UID='$uid';";
       $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
       $st->execute();//executes query above
+      $conn=null;
     }
     header('Location: /index.php?action=dashboard&force=1');
   break;
