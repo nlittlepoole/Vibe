@@ -32,13 +32,19 @@ function profiled($facebook,$uid,$token){
     }
 }
 function search($query,$facebook,$uid,$token){
-    $users=friendsExact($query);
-    $users=array_unique(array_merge($users,affiliatesExact($query,$uid)));
-    $users=array_unique(array_merge($users,friendsLoose($query)));
-    $users=array_unique(array_merge($users,affiliatesLoose($query,$uid)));
-    $users=array_unique(array_merge($users,everyone($query)));
-    $communities=communities($query);
-    return Array($users,$communities);
+    if($search){
+        $users=friendsExact($query);
+        $users=array_unique(array_merge($users,affiliatesExact($query,$uid)));
+        $users=array_unique(array_merge($users,friendsLoose($query)));
+        $users=array_unique(array_merge($users,affiliatesLoose($query,$uid)));
+        $users=array_unique(array_merge($users,everyone($query)));
+        $communities=communities($query);
+        return Array($users,$communities);
+    }
+    else{
+        return Array(array("No Results"),array("No Results"));
+    }
+
 }
 function friendsExact($query){
     $friends=$_SESSION['friends'];

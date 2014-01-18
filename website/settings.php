@@ -1,8 +1,3 @@
-<!DOCTYPE html>
-
-<!-- File has been changed to a PHP file -->
-
-<!-- START UP THE SESSION -->
 <?php 
 	ob_start();
 	error_reporting(0);
@@ -10,7 +5,9 @@
     $path = $_SERVER['DOCUMENT_ROOT'];
     require($path . "/config.php");
 	require($path . "/php-sdk/facebook.php"); //imports facebook api methods and objects
-    
+    if(!$_SESSION['userID']){
+    	header('Location:/index.php'); 
+    }
     buildSettings();
     buildCheckBoxes();
 	totalPoints();
@@ -20,17 +17,7 @@
     $pic=$dashboard['pic'];
 	
 	function totalPoints() {
-	   $conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-	   
-	   //GET TOTAL NUMBER OF POINTS AND CHANGE THAT IN ADDITION TO SESSION DATA
-	   $sql = "SELECT Points FROM user WHERE UID=" . $_SESSION['userID'];
-	   $st = $conn->prepare($sql);
-	   $st->execute();
-	   
-	   $data=$st->fetch(); 
-	   $_SESSION['pointsTracker'] = $data['Points'];
-	   
-	   $conn = null;
+	   $_SESSION['pointsTracker'] = $_SESSION['dashboard']['Points'];
 	}
   
   
@@ -211,6 +198,12 @@
 	   }
    }  
 ?>
+<!DOCTYPE html>
+
+<!-- File has been changed to a PHP file -->
+
+<!-- START UP THE SESSION -->
+
 
 
 <html lang="en" class="no-js">
@@ -453,7 +446,7 @@ function validateForm()
 						<?php echo $_SESSION['dashboard']['Communities'] ?>
 					</ul>
 				</li>
-				<li id="frontend-link" class="tooltips" data-placement="right" data-original-title="Frontend&nbsp;Theme For&nbsp;Metronic&nbsp;Admin">
+				<li id="frontend-link" class="tooltips" data-placement="right" data-original-title="View all Achievements">
 					<a href="achievements.php">
 					<i class="fa fa-trophy"></i>
 					<span class="title">
@@ -520,10 +513,6 @@ function validateForm()
 								<i class="fa fa-reorder"></i> User Settings
 							</div>
 							<div class="tools">
-								<a href="" class="collapse"></a>
-								<a href="#portlet-config" data-toggle="modal" class="config"></a>
-								<a href="" class="reload"></a>
-								<a href="" class="remove"></a>
 							</div>
 						</div>
 						<div class="portlet-body form">
@@ -624,7 +613,10 @@ function validateForm()
 <!-- BEGIN FOOTER -->
 <div class="footer">
 	<div class="footer-inner">
-		 2013 &copy; Metronic by keenthemes.
+		 2013 &copy; Metronic by keenthemes.  &nbsp;&nbsp;&nbsp;  2014 &copy; Vibe LLC. &nbsp;&nbsp;&nbsp;
+
+		 <a href="/website/terms.php">Terms and Conditions</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		 <a href="/website/privacy.php">Privacy Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;
 	</div>
 	<div class="footer-tools">
 		<span class="go-top">

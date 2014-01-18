@@ -1,11 +1,9 @@
 <?php 
 	error_reporting(0);
     session_start();
-
-    $path = $_SERVER['DOCUMENT_ROOT'];
-    require($path . "/config.php");
-    
-    $action = isset( $_GET['action'] ) ? $_GET['action'] : "Invite more Friends to Vibe for Comments"; //sets $action to "Action" url fragment string if action isn't null
+    if(!$_SESSION['userID']){
+    	header('Location:/index.php'); 
+    }
     $dashboard = $_SESSION['dashboard'];
     $pic = $dashboard['pic'];
 
@@ -123,7 +121,7 @@
 						<?php echo $_SESSION['dashboard']['Communities'] ?>
 					</ul>
 				</li>
-				<li id="frontend-link" class="tooltips" data-placement="right" data-original-title="Frontend&nbsp;Theme For&nbsp;Metronic&nbsp;Admin">
+				<li id="frontend-link" class="tooltips" data-placement="right" data-original-title="View Achievements">
 					<a href="achievements.php">
 					<i class="fa fa-trophy"></i>
 					<span class="title">
@@ -246,7 +244,7 @@
 								Achievements
 							</div>
 						</div>
-						<a class="more" href="#">
+						<a class="more" href="/website/achievements.php">
 						View more <i class="m-icon-swapright m-icon-white"></i>
 						</a>
 					</div>
@@ -296,6 +294,7 @@
 										1
 									</td>
 									<td>
+										<span style="color: #0d638f;" class="tooltips" data-container="body" data-original-title="Represents an individuals perceived physical attractiveness">
 										Attractiveness
 									</td>
 									<td>
@@ -313,6 +312,7 @@
 										2
 									</td>
 									<td>
+										<span style="color: #0d638f;" class="tooltips" data-container="body" data-original-title="Represents how an individual is perceived in conversation and other social interaction">
 										Approachability
 									</td>
 									<td>
@@ -330,6 +330,7 @@
 										3
 									</td>
 									<td>
+										<span style="color: #0d638f;" class="tooltips" data-container="body" data-original-title="Represents the amount and type of intelligence an individual is perceived to have">
 										Intelligence
 									</td>
 									<td>
@@ -347,6 +348,7 @@
 										4
 									</td>
 									<td>
+										<span style="color: #0d638f;" class="tooltips" data-container="body" data-original-title="Represents the amount and type of style an individual is perceived to have">
 										Style
 									</td>
 									<td>
@@ -364,6 +366,7 @@
 										5
 									</td>
 									<td>
+										<span style="color: #0d638f;" class="tooltips" data-container="body" data-original-title="Represents the nature and amount of romantic engagements in an individual's life">
 										Promiscuity
 									</td>
 									<td>
@@ -381,6 +384,7 @@
 										6
 									</td>
 									<td>
+										<span style="color: #0d638f;" class="tooltips" data-container="body" data-original-title="Represents how funny a user is perceived to be and why">
 										Humor
 									</td>
 									<td>
@@ -399,6 +403,7 @@
 										7
 									</td>
 									<td>
+										<span style="color: #0d638f;" class="tooltips" data-container="body" data-original-title="Represents an individual's inner and outer confidence">
 										Confidence
 									</td>
 									<td>
@@ -417,6 +422,7 @@
 										8
 									</td>
 									<td>
+										<span style="color: #0d638f;" class="tooltips" data-container="body" data-original-title="Represents how much an individual's friends enjoy their company and why">
 										Fun
 									</td>
 									<td>
@@ -435,6 +441,7 @@
 										9
 									</td>
 									<td>
+										<span style="color: #0d638f;" class="tooltips" data-container="body" data-original-title="Represents how kind an individual is to other">
 										Kindness
 									</td>
 									<td>
@@ -453,6 +460,7 @@
 										10
 									</td>
 									<td>
+										<span style="color: #0d638f;" class="tooltips" data-container="body" data-original-title="Represents how honest an individual is with their friends">
 										Honesty
 									</td>
 									<td>
@@ -471,6 +479,7 @@
 										11
 									</td>
 									<td>
+										<span style="color: #0d638f;" class="tooltips" data-container="body" data-original-title="Represents how dependable an individual is">
 										Reliability
 									</td>
 									<td>
@@ -489,6 +498,7 @@
 										12
 									</td>
 									<td>
+										<span style="color: #0d638f;" class="tooltips" data-container="body" data-original-title="Represents how happy an individual is perceived to be and why">
 										Happiness
 									</td>
 									<td>
@@ -507,6 +517,7 @@
 										13
 									</td>
 									<td>
+										<span style="color: #0d638f;" class="tooltips" data-container="body" data-original-title="Represents how much  ambition an individual is perceived to be and how">
 										Ambition
 									</td>
 									<td>
@@ -525,6 +536,7 @@
 										14
 									</td>
 									<td>
+										<span style="color: #0d638f;" class="tooltips" data-container="body" data-original-title="Represents an individual's humility">
 										Modesty
 									</td>
 									<td>
@@ -609,7 +621,10 @@
 <!-- BEGIN FOOTER -->
 <div class="footer">
 	<div class="footer-inner">
-		 2013 &copy; Metronic by keenthemes.
+		 2013 &copy; Metronic by keenthemes.  &nbsp;&nbsp;&nbsp;  2014 &copy; Vibe LLC. &nbsp;&nbsp;&nbsp;
+
+		 <a href="/website/terms.php">Terms and Conditions</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		 <a href="/website/privacy.php">Privacy Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;
 	</div>
 	<div class="footer-tools">
 		<span class="go-top">

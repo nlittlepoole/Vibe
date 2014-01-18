@@ -3,7 +3,9 @@
     session_start();
     $path = $_SERVER['DOCUMENT_ROOT'];
     require($path . "/config.php");
-    
+    if(!$_SESSION['userID']){
+    	header('Location:/index.php'); 
+    } 
     $action = isset( $_GET['action'] ) ? $_GET['action'] : ""; //sets $action to "Action" url fragment string if action isn't null
     $recipient;
     $pic;
@@ -310,7 +312,10 @@
 	<!-- BEGIN FOOTER -->
 	<div class="footer">
 		<div class="footer-inner">
-			 2013 &copy; Metronic by keenthemes.
+			 2013 &copy; Metronic by keenthemes.  &nbsp;&nbsp;&nbsp;  2014 &copy; Vibe LLC. &nbsp;&nbsp;&nbsp;
+
+		 <a href="/website/terms.php">Terms and Conditions</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		 <a href="/website/privacy.php">Privacy Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;
 		</div>
 		<div class="footer-tools">
 			<span class="go-top">

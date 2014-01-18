@@ -1,0 +1,100 @@
+<li class="dropdown" id="header_notification_bar">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+				<i class="fa fa-warning"></i>
+				<span class="badge">
+					4
+				</span>
+				</a>
+				<ul class="dropdown-menu extended notification">
+					<li>
+						<p>
+							You have 14 new notifications
+						</p>
+					</li>
+					<li>
+						<ul class="dropdown-menu-list scroller" style="height: 250px;">
+							<li>
+								<a href="#">
+								<span class="label label-sm label-icon label-success">
+									<i class="fa fa-plus"></i>
+								</span>
+								 Two questions answered about you.
+								<span class="time">
+									Just now
+								</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+								<span class="label label-sm label-icon label-danger">
+									<i class="fa fa-bolt"></i>
+								</span>
+								 New achievement unlocked!
+								<span class="time">
+									15 mins
+								</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+								<span class="label label-sm label-icon label-warning">
+									<i class="fa fa-bell-o"></i>
+								</span>
+								 You made the leaderboards for Columbia!
+								<span class="time">
+									22 mins
+								</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+								<span class="label label-sm label-icon label-info">
+									<i class="fa fa-bullhorn"></i>
+								</span>
+								 One question answered about you.
+								<span class="time">
+									40 mins
+								</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+								<span class="label label-sm label-icon label-danger">
+									<i class="fa fa-bolt"></i>
+								</span>
+								 New achievement unlocked!
+								<span class="time">
+									2 hrs
+								</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+								<span class="label label-sm label-icon label-danger">
+									<i class="fa fa-bolt"></i>
+								</span>
+								 New comment in Honesty.
+								<span class="time">
+									5 hrs
+								</span>
+								</a>
+							</li>
+							<li>
+								<a href="#">
+								<span class="label label-sm label-icon label-warning">
+									<i class="fa fa-bell-o"></i>
+								</span>
+								 Three questions answered about you!
+								<span class="time">
+									45 mins
+								</span>
+								</a>
+							</li>
+						</ul>
+					</li>
+					<li class="external">
+						<!-- Insert link to general achievements page -->
+						<a href="#">See all notifications <i class="m-icon-swapright"></i></a>
+					</li>
+				</ul>
+			</li>
