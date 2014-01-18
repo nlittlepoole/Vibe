@@ -550,13 +550,15 @@
 											</li>
 											<?php echo $_SESSION['friendsDisplay'] ?>
 										</ul>
-										<a href="https://twitter.com/share" style="text-align:bottom">
+										<a href= <?php echo '"http://www.facebook.com/sharer/sharer.php?s=100&p[url]='. curPageURL(). '&p[title]='. $_SESSION['profile']['Name'].' &#39;s Vibe Profile&p[summary]="' ?>  target="_blank">
+											<img src="/img/facebook-logo.png" height="36px" />
+										</a>&nbsp;
+										<a href=<?php echo '"https://twitter.com/share?url='. curPageURL(). '&text=&hashtags=Vibe" style="text-align:bottom"' ?>>
 											<img src="/img/icon-twitter.png" height="36px" />
 										</a>
 										<a href="http://www.reddit.com/submit" onclick="window.location = 'http://www.reddit.com/submit?url=' + encodeURIComponent(window.location); return false"> 
 											<img src="/img/icon-reddit.png" height="36px"/>
 										</a>
-										<div class="fb-share-button" style="height: 36px" data-href=<?php echo '"'. curPageURL(). '"' ?> data-type="button_count"></div>
 									</div>
 									<div class="col-md-9">
 										<div class="row">
