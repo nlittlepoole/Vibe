@@ -273,17 +273,12 @@
 <!-- END CONTAINER -->
 <!-- BEGIN FOOTER -->
 <div class="footer">
-	<div class="footer-inner">
-		 2013 &copy; Metronic by keenthemes.  &nbsp;&nbsp;&nbsp;  2014 &copy; Vibe LLC. &nbsp;&nbsp;&nbsp;
-
-		 <a href="/website/terms.php">Terms and Conditions</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		 <a href="/website/privacy.php">Privacy Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;
-	</div>
-	<div class="footer-tools">
-		<span class="go-top">
-			<i class="fa fa-angle-up"></i>
-		</span>
-	</div>
+		 <p style="text-align: center; color: #999999;">
+			 2014 &copy; Vibe LLC. &nbsp;&nbsp;&nbsp;
+	
+			 <a href="/website/terms.php">Terms and Conditions</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			 <a href="/website/privacy.php">Privacy Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		 </p>
 </div>
 <!-- END FOOTER -->
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
