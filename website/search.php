@@ -1,7 +1,6 @@
 <?php 
 	error_reporting(0);
     session_start();
-    $path = $_SERVER['DOCUMENT_ROOT'];
     require($path . "/config.php");
     if(!$_SESSION['userID']){
     	header('Location:/index.php'); 
@@ -197,7 +196,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 						</div>
 						<div class="portlet-body" style="background-image: url(../img/sf.jpg); background-size: 100%; height: 500px; background-repeat: no-repeat;">
 							<div class="note note-success">
-								<h4 class="block">Search any community or person on Vibe. Right here.</h4>
+								<h4 class="block">Search any community or facebook friend or Vibe user. Right here.</h4>
 								<form role="form" action="/index.php?action=search" method="post">
 								<div class="form-body">
 									<div class="form-group" style="width: 40%">
@@ -205,7 +204,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 											<span class="input-group-addon">
 												<i class="fa fa-question-circle"></i>
 											</span>
-											<input type="text" class="form-control" placeholder="Enter text" name="Query">
+											<input type="text" class="form-control" placeholder="Search..." name="Query">
 										</span>
 									</div>
 									<div class="form-actions">
