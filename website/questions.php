@@ -270,10 +270,10 @@
 									<div class="form-group">
 										<label class="col-md-3 control-label" style="padding-bottom: 20px">Vibe Score</label>
 										<div class="col-md-9" style="padding-top: 16px">
-											<div style="width: 80%; margin: auto;">
+											<div style="width: 90%; margin: auto;">
 												<!-- <div id="slider-snap-inc" class="slider bg-green gradient"></div> -->
 												<span style="font-size: 15px"><strong>NO&nbsp;&nbsp;</strong></span>
-												<span id="slider-snap-inc" class="slider gradient" style="width: 70%; margin: 0px 0px;"></span> 
+												<span id="slider-snap-inc" class="slider gradient" style="width: 65%; margin: 0px 0px;"></span> 
 												<span style="font-size: 15px"><strong>&nbsp;&nbsp;YES</strong></span>
 												<!--<input type="text" id="slider-snap-inc-amount" name="slideVal"/>-->
 												<input type="hidden" id="amount" name="slideVal" />
