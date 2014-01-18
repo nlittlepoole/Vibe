@@ -566,11 +566,18 @@
 							</div>
 						</div>
 						<div class="portlet-body">
-							<div class="scroller" style="height: 300px;" data-always-visible="1" data-rail-visible="0">
+							<div class="scroller" style="height: 282px;" data-always-visible="1" data-rail-visible="0">
 								<ul class="feeds">
-									<?php foreach($_SESSION['msgBoxDisp'] as $achievementDisp){
-										echo $achievementDisp;
-									} ?>
+									<?php 
+									if(count($_SESSION['msgBoxDisp']) == 0) {
+										echo "<em>You do not have any achievements yet. Check your progress on the <a href='achievements.php'>Achievements page</a>!</em>";
+									}
+									else {
+										foreach($_SESSION['msgBoxDisp'] as $achievementDisp){
+											echo $achievementDisp;
+										} 
+									}
+									?>
 								</ul>
 							</div>
 							<div class="scroller-footer">
