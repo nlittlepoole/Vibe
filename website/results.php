@@ -245,7 +245,1411 @@ function validateForm()
 						</div>
 					</div>
 					<!-- END SAMPLE TABLE PORTLET-->
-					
+					<div class="row">
+				<div class="col-md-12">
+					<div class="portlet box blue">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-reorder"></i>Voted Most
+							</div>
+							<div class="tools">
+							</div>
+						</div>
+						<div class="portlet-body">
+							<ul class="nav nav-tabs">
+								<li class="active">
+									<a href="#tab_1_1" data-toggle="tab">Attractiveness</a>
+								</li>
+								<li class="">
+									<a href="#tab_1_2" data-toggle="tab">Approachability</a>
+								</li>
+								<li class="">
+									<a href="#tab_1_3" data-toggle="tab">Intelligence</a>
+								</li>
+								<li class="">
+									<a href="#tab_1_4" data-toggle="tab">Style</a>
+								</li>
+								<li class="">
+									<a href="#tab_1_5" data-toggle="tab">Humor</a>
+								</li>
+								<li class="">
+									<a href="#tab_1_6" data-toggle="tab">Confidence</a>
+								</li>
+								<li class="">
+									<a href="#tab_1_7" data-toggle="tab">Fun</a>
+								</li>
+								<li class="">
+									<a href="#tab_1_8" data-toggle="tab">Kindness</a>
+								</li>
+								<li class="">
+									<a href="#tab_1_9" data-toggle="tab">Honesty</a>
+								</li>
+								<li class="">
+									<a href="#tab_1_10" data-toggle="tab">Happiness</a>
+								</li>
+								<li class="">
+									<a href="#tab_1_11" data-toggle="tab">Ambition</a>
+								</li>
+							</ul>
+							<div class="tab-content">
+								<div class="tab-pane fade active in" id="tab_1_1">
+									<div class="note note-success">
+										<h4>Your Percentile: <?php echo $_SESSION['location']['Percentiles']['Attractiveness'] ?></h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Guys</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Girls</h4>
+									</div>
+									<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][0]['Rank1'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][0]['Rank2'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][0]['Rank3'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][0]['Rank4'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][0]['Rank5'] ?>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+							<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][0]['Rank6'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][0]['Rank7'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][0]['Rank8'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][0]['Rank9'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][0]['Rank10'] ?>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+								</div>
+								<div class="tab-pane fade in" id="tab_1_2">
+									<div class="note note-success">
+										<h4>Your Percentile: <?php echo $_SESSION['location']['Percentiles']['Affability'] ?></h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Guys</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Girls</h4>
+									</div>
+									<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][1]['Rank1'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][1]['Rank2'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][1]['Rank3'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][1]['Rank4'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][1]['Rank5'] ?>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+							<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][1]['Rank6'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][1]['Rank7'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][1]['Rank8'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][1]['Rank9'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][1]['Rank10'] ?>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+								</div>
+								<div class="tab-pane fade in" id="tab_1_3">
+									<div class="note note-success">
+										<h4>Your Percentile: <?php echo $_SESSION['location']['Percentiles']['Intelligence'] ?></h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Guys</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Girls</h4>
+									</div>
+									<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][2]['Rank1'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][2]['Rank2'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][2]['Rank3'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][2]['Rank4'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][2]['Rank5'] ?>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+							<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][2]['Rank6'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][2]['Rank7'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][2]['Rank8'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][2]['Rank9'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][2]['Rank10'] ?>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+								</div>
+								<div class="tab-pane fade in" id="tab_1_4">
+																		<div class="note note-success">
+										<h4>Your Percentile: <?php echo $_SESSION['location']['Percentiles']['Style'] ?></h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Guys</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Girls</h4>
+									</div>
+									<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][3]['Rank1'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][3]['Rank2'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][3]['Rank3'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][3]['Rank4'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][3]['Rank5'] ?>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+							<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][3]['Rank6'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][3]['Rank7'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][3]['Rank8'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][3]['Rank9'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][3]['Rank10'] ?>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+								</div>
+								<div class="tab-pane fade in" id="tab_1_5">
+																											<div class="note note-success">
+										<h4>Your Percentile: <?php echo $_SESSION['location']['Percentiles']['Humor'] ?></h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Guys</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Girls</h4>
+									</div>
+									<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][5]['Rank1'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][5]['Rank2'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][5]['Rank3'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][5]['Rank4'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][5]['Rank5'] ?>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+							<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][5]['Rank6'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][5]['Rank7'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][5]['Rank8'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][5]['Rank9'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][5]['Rank10'] ?>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+								</div>
+								<div class="tab-pane fade in" id="tab_1_6">
+									<div class="note note-success">
+										<h4>Your Percentile: <?php echo $_SESSION['location']['Percentiles']['Confidence'] ?></h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Guys</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Girls</h4>
+									</div>
+									<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][6]['Rank1'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][6]['Rank2'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][6]['Rank3'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][6]['Rank4'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][6]['Rank5'] ?>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+							<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][6]['Rank6'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][6]['Rank7'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][6]['Rank8'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][6]['Rank9'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][6]['Rank10'] ?>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+								</div>
+								<div class="tab-pane fade in" id="tab_1_7">
+									<div class="note note-success">
+										<h4>Your Percentile: <?php echo $_SESSION['location']['Percentiles']['Fun'] ?></h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Guys</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Girls</h4>
+									</div>
+									<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][7]['Rank1'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][7]['Rank2'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][7]['Rank3'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][7]['Rank4'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][7]['Rank5'] ?>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+							<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][7]['Rank6'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][7]['Rank7'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][7]['Rank8'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][7]['Rank9'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][7]['Rank10'] ?>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+								</div>
+								<div class="tab-pane fade in" id="tab_1_8">
+									<div class="note note-success">
+										<h4>Your Percentile: <?php echo $_SESSION['location']['Percentiles']['Kindness'] ?></h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Guys</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Girls</h4>
+									</div>
+									<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][8]['Rank1'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][8]['Rank2'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][8]['Rank3'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][8]['Rank4'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][8]['Rank5'] ?>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+							<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][8]['Rank6'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][8]['Rank7'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][8]['Rank8'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][8]['Rank9'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][8]['Rank10'] ?>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+								</div>
+								<div class="tab-pane fade in" id="tab_1_9">
+									<div class="note note-success">
+										<h4>Your Percentile: <?php echo $_SESSION['location']['Percentiles']['Honesty'] ?></h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Guys</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Girls</h4>
+									</div>
+									<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][9]['Rank1'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][9]['Rank2'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][9]['Rank3'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][9]['Rank4'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][9]['Rank5'] ?>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+							<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][9]['Rank6'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][9]['Rank7'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][9]['Rank8'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][9]['Rank9'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][9]['Rank10'] ?>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+								</div>
+								<div class="tab-pane fade in" id="tab_1_10">
+									<div class="note note-success">
+										<h4>Your Percentile: <?php echo $_SESSION['location']['Percentiles']['Happiness'] ?></h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Guys</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Girls</h4>
+									</div>
+									<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][11]['Rank1'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][11]['Rank2'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][11]['Rank3'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][11]['Rank4'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][11]['Rank5'] ?>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+							<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][11]['Rank6'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][11]['Rank7'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][11]['Rank8'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][11]['Rank9'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][11]['Rank10'] ?>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+								</div>
+								<div class="tab-pane fade in" id="tab_1_11">
+									<div class="note note-success">
+										<h4>Your Percentile: <?php echo $_SESSION['location']['Percentiles']['Ambition'] ?></h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Guys</h4>
+									</div>
+									<div style="display:inline-block; width:49%">
+										<h4>Girls</h4>
+									</div>
+									<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][12]['Rank1'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][12]['Rank2'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][12]['Rank3'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][12]['Rank4'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][12]['Rank5'] ?>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+							<div class="table-responsive" style="display:inline-block; width:49%">
+								<table class="table table-striped table-hover">
+								<thead>
+								<tr>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>
+										1
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][12]['Rank6'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										2
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][12]['Rank7'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										3
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][12]['Rank8'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										4
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][12]['Rank9'] ?>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										5
+									</td>
+									<td>
+										<?php echo $_SESSION['location'][12]['Rank10'] ?>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>			
+			</div>	
 			</div>
 			
 			<div class="clearfix">

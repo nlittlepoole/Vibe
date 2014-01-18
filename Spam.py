@@ -24,7 +24,7 @@ for person in data:
     else:
         spam=(person[0]).split('##')
         if(len(spam)>5):
-            now=time.strftime("%Y-%m-%d");
+            now=time.strftime("%Y-%m-%d")
             query="UPDATE user SET Disable='"+now+"' WHERE UID='"+person[2]+"'"
             cur.execute(query)
             cur.connection.commit()
