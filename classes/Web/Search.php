@@ -6,18 +6,18 @@ function profiled($facebook,$uid,$token){
     if($uid){
         $user=$uid;
         if(isset($_GET['profile']) && $_GET['profile']!=$user ){
-         $user=$_GET['profile'];
-         if(checkFriend($_GET['profile']) && checkUID($_GET['profile'])){
-           $_SESSION['profile']=profile($facebook,$user,$token ); 
-         }
-         else if(checkActive($_GET['profile'])){
-            $_SESSION['profile']=profile($facebook,$user,$token );
-         }
-         else{
-            $_SESSION['profile']=profile($facebook,-1,$token );
-            $_SESSION['profile']['Name']=json_decode(file_get_contents("https://graph.facebook.com/" . $_GET['profile'] . "/?fields=name"), true);
-            $_SESSION['profile']['Name']=$_SESSION['profile']['Name']['name']?$_SESSION['profile']['Name']['name']:"Invalid User";
-         }
+             $user=$_GET['profile'];
+             if(checkFriend($_GET['profile']) && checkUID($_GET['profile'])){
+               $_SESSION['profile']=profile($facebook,$user,$token ); 
+             }
+             else if(checkActive($_GET['profile'])){
+                $_SESSION['profile']=profile($facebook,$user,$token );
+             }
+             else{
+                $_SESSION['profile']=profile($facebook,-1,$token );
+                $_SESSION['profile']['Name']=json_decode(file_get_contents("https://graph.facebook.com/" . $_GET['profile'] . "/?fields=name"), true);
+                $_SESSION['profile']['Name']=$_SESSION['profile']['Name']['name']?$_SESSION['profile']['Name']['name']:"Invalid User";
+             }
         }
         else{
             $_SESSION['profile']=$_SESSION['dashboard'];
