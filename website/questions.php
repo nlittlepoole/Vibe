@@ -69,6 +69,9 @@
 		width: 250px; 
 		height: auto;
 	}
+	.gradient {
+		background: -webkit-gradient(linear, 0% 0%, 100% 0%, from(#CC130C), to(#0ACF11));
+	}
 </style>
 
 <script text="text/javascript">
@@ -92,7 +95,7 @@
 			//return false;
 			//alert("Problem!"); 
 		    document.getElementById("commentsSection").className+=' has-error';
-		    document.getElementById("helpQuestion").innerHTML='Please do not enter any degrading language!'; 
+		    document.getElementById("helpQuestion").innerHTML='Please do not enter any foul language!'; 
 		    window.scroll(0,findPos(document.getElementById("topOfForm")));
 		    return false;
 		}
@@ -265,19 +268,24 @@
 							<form role="form" class="form-horizontal form-bordered" action="/index.php?action=submit" method="post" onsubmit="return validateQuestion()" name="questionsform">
 								<div class="form-body" style="float: left; width: 50%">
 									<div class="form-group">
-										<label class="col-md-3 control-label">Vibe Score</label>
-										<div class="col-md-9">
-											<div id="slider-snap-inc" class="slider bg-green"></div>
-											<!--<input type="text" id="slider-snap-inc-amount" name="slideVal"/>-->
-											<input type="hidden" id="amount" name="slideVal" />
+										<label class="col-md-3 control-label" style="padding-bottom: 20px">Vibe Score</label>
+										<div class="col-md-9" style="padding-top: 16px">
+											<div style="width: 80%; margin: auto;">
+												<!-- <div id="slider-snap-inc" class="slider bg-green gradient"></div> -->
+												<span style="font-size: 15px"><strong>NO&nbsp;&nbsp;</strong></span>
+												<span id="slider-snap-inc" class="slider gradient" style="width: 70%; margin: 0px 0px;"></span> 
+												<span style="font-size: 15px"><strong>&nbsp;&nbsp;YES</strong></span>
+												<!--<input type="text" id="slider-snap-inc-amount" name="slideVal"/>-->
+												<input type="hidden" id="amount" name="slideVal" />
+											</div>
 										</div>
 									</div>
 									<div class="form-group last" id="commentsSection">
 										<label class="col-md-3 control-label">Comments</label>
 										<div class="col-md-9">
-											<input type="text" class="form-control" name="commentsVal" placeholder="Enter comments" maxlength="60">
+											<input type="text" class="form-control" name="commentsVal" placeholder="Any additional remarks?" maxlength="60">
 											<span class="help-block" id="helpQuestion">
-												Please enter any comments above.
+												Please refrain from foul language
 											</span>
 										</div>
 									</div>
