@@ -309,16 +309,14 @@
 		<!-- BEGIN CONTENT -->
 	</div>
 	<!-- END CONTAINER -->
-	<!-- BEGIN FOOTER -->
-	<div class="footer">
-		 <p style="text-align: center; color: #999999;">
-			 2014 &copy; Vibe LLC. &nbsp;&nbsp;&nbsp;
-	
-			 <a href="/website/terms.php">Terms and Conditions</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			 <a href="/website/privacy.php">Privacy Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;
-		 </p>
-	</div>
-<!-- END FOOTER -->
+	<!-- FOOTER -->
+    <script> 
+    $(function(){
+      $("#footerContent").load("footer.php"); 
+    });
+    </script> 
+    
+    <div id="footerContent"></div>
 	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 	<!-- BEGIN CORE PLUGINS -->
 	<!--[if lt IE 9]>
