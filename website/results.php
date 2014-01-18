@@ -216,13 +216,10 @@ function validateForm()
 						</div>
 						<div class="portlet-body">
 							<div class="table-responsive">
-								<table class="table table-striped table-hover">
+								<table class="table table-striped table-hover" style="width: 100%">
 								<thead>
 								<tr>
-									<th>
-										#
-									</th>
-									<th>
+									<th style="padding-left: 82px">
 										Name
 									</th>
 								</tr>
