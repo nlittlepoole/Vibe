@@ -588,7 +588,7 @@ jQuery UI Sliders(new in v1.1.1)
 .slider {
   border: 0;
   padding: 0;
-  display: block;
+  display: inline-block;
   margin: 12px 5px;
   min-height: 11px; 
 }
