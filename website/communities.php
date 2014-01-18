@@ -109,12 +109,6 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 		<div class="page-sidebar navbar-collapse collapse">
 			<!-- BEGIN SIDEBAR MENU -->
 			<ul class="page-sidebar-menu">
-				<li class="sidebar-toggler-wrapper">
-					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-					<div class="sidebar-toggler hidden-phone">
-					</div>
-					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-				</li>
 				<li class="sidebar-search-wrapper">
 					<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
 					<form class="sidebar-search" action="/index.php?action=search" method="POST">
