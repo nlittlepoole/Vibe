@@ -1,19 +1,21 @@
-<!DOCTYPE html>
-
-<!-- File has been changed to a PHP file -->
-
-<!-- START UP THE SESSION -->
 <?php 
 	error_reporting(0);
     session_start();
     $path = $_SERVER['DOCUMENT_ROOT'];
     require($path . "/config.php");
-    
+    if(!$_SESSION['userID']){
+    	header('Location:/index.php'); 
+    }
     $action = isset( $_GET['action'] ) ? $_GET['action'] : "Invite more Friends to Vibe for Comments"; //sets $action to "Action" url fragment string if action isn't null
     $dashboard=$_SESSION['dashboard'];
     $pic=$dashboard['pic'];
     
 ?>
+<!DOCTYPE html>
+
+<!-- File has been changed to a PHP file -->
+
+<!-- START UP THE SESSION -->
 
 
 <!-- 
@@ -131,7 +133,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 						<?php echo $_SESSION['dashboard']['Communities'] ?>
 					</ul>
 				</li>
-				<li id="frontend-link" class="tooltips" data-placement="right" data-original-title="Frontend&nbsp;Theme For&nbsp;Metronic&nbsp;Admin">
+				<li id="frontend-link" class="tooltips" data-placement="right" data-original-title="View all Achievements">
 					<a href="achievements.php">
 					<i class="fa fa-trophy"></i>
 					<span class="title">
@@ -233,7 +235,10 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <!-- BEGIN FOOTER -->
 <div class="footer">
 	<div class="footer-inner">
-		 2013 &copy; Metronic by keenthemes.
+		 2013 &copy; Metronic by keenthemes.  &nbsp;&nbsp;&nbsp;  2014 &copy; Vibe LLC. &nbsp;&nbsp;&nbsp;
+
+		 <a href="/website/terms.php">Terms and Conditions</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		 <a href="/website/privacy.php">Privacy Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;
 	</div>
 	<div class="footer-tools">
 		<span class="go-top">

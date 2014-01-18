@@ -32,13 +32,19 @@ function profiled($facebook,$uid,$token){
     }
 }
 function search($query,$facebook,$uid,$token){
-    $users=friendsExact($query);
-    $users=array_unique(array_merge($users,affiliatesExact($query,$uid)));
-    $users=array_unique(array_merge($users,friendsLoose($query)));
-    $users=array_unique(array_merge($users,affiliatesLoose($query,$uid)));
-    $users=array_unique(array_merge($users,everyone($query)));
-    $communities=communities($query);
-    return Array($users,$communities);
+    if($search){
+        $users=friendsExact($query);
+        $users=array_unique(array_merge($users,affiliatesExact($query,$uid)));
+        $users=array_unique(array_merge($users,friendsLoose($query)));
+        $users=array_unique(array_merge($users,affiliatesLoose($query,$uid)));
+        $users=array_unique(array_merge($users,everyone($query)));
+        $communities=communities($query);
+        return Array($users,$communities);
+    }
+    else{
+        return Array(array("No Results"),array("No Results"));
+    }
+
 }
 function friendsExact($query){
     $friends=$_SESSION['friends'];
@@ -71,10 +77,11 @@ function affiliatesExact($query, $uid){
     $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
     $st->execute(); //executes the sql query found above
     $communities=$st->fetch();
+    $conn = null;
     $communities=split('&&',$communities['Communities']);
     $users=Array();
     foreach($communities as $community){
-            $sql = "SELECT Name,UID FROM user WHERE Communities LIKE '%".$community."%' AND Name LIKE '%".$query."%'"; //gets the active status of the user with $input_id as a user ID
+            $sql = "SELECT Name,UID FROM user WHERE Communities LIKE '%".$community."%' AND Name LIKE '%".$query."%' LIMIT 50"; //gets the active status of the user with $input_id as a user ID
             $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
             $st->execute(); //executes the sql query found above
             $users=array_unique(array_merge($users,$st->fetchAll()));
@@ -91,6 +98,7 @@ function affiliatesLoose($query, $uid){
     $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
     $st->execute(); //executes the sql query found above
     $communities=$st->fetch();
+    $conn = null;
     $communities=split('&&',$communities['Communities']);
     $users=Array();
     $queries=split(' ',$query);
@@ -101,13 +109,15 @@ function affiliatesLoose($query, $uid){
         }
     }
      $query=substr($query,3);
+    $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
     foreach($communities as $community){
-            $sql = "SELECT Name,UID FROM user WHERE Communities LIKE '%".$community."%' AND $query"; //gets the active status of the user with $input_id as a user ID
+            $sql = "SELECT Name,UID FROM user WHERE Communities LIKE '%".$community."%' AND $query LIMIT 50"; //gets the active status of the user with $input_id as a user ID
             $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
             $st->execute(); //executes the sql query found above
             $users=array_unique(array_merge($users,$st->fetchAll()));
 
     }
+    $conn = null;
     for($x=0;$x<sizeof($users);$x++){
         $users[$x]= '<tr><td>1</td><td><a href="/index.php?action=profile&profile='.$users[$x]['UID'].'""><img src="http://graph.facebook.com/'.$users[$x]['UID'].'/picture"  height="42" width="42">'.$users[$x]['Name'].'</a></td></tr>'  ;$users[$x]['Name'] . ":" .$users[$x]['UID'];
     }
@@ -115,10 +125,11 @@ function affiliatesLoose($query, $uid){
 } 
 function everyone($query){
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //initialies connection to the database using the credentials found in config.php
-    $sql = "SELECT Name, UID FROM user WHERE Name LIKE '%".$query."%'"; //gets the active status of the user with $input_id as a user ID
+    $sql = "SELECT Name, UID FROM user WHERE Name LIKE '%".$query."%' LIMIT 50"; //gets the active status of the user with $input_id as a user ID
     $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
     $st->execute(); //executes the sql query found above
     $users=$st->fetchAll();
+    $conn = null;
     for($x=0;$x<sizeof($users);$x++){
         $users[$x]= '<tr><td>1</td><td><a href="/index.php?action=profile&profile='.$users[$x]['UID'].'""><img src="http://graph.facebook.com/'.$users[$x]['UID'].'/picture"  height="42" width="42">'.$users[$x]['Name'].'</a></td></tr>'  ;
     }
@@ -129,6 +140,7 @@ function communities($query){
     $sql = "SELECT Name, UID FROM directory WHERE Name LIKE '%".$query."%'"; //gets the active status of the user with $input_id as a user ID
     $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
     $st->execute(); //executes the sql query found above
+    $conn = null;
     $communities=$st->fetchAll();
 }
 ?>

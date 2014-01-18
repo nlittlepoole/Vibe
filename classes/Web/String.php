@@ -15,7 +15,7 @@ function keywords($keywords,$total,$split){
   }
   return $new_keyword!=''?$new_keyword:"N/A";
 }
-function dashboardComments($comments){
+function dashboardComments($comments,$uid){
   $comments=split('&&',$comments);
   $max=sizeof($comments);
   if($comments[0]!=''){
@@ -48,7 +48,7 @@ function dashboardComments($comments){
                           </span>
                           </div>
                         <a style="color: tomato" href="/index.php?action=removeComment&comment='.$x.'"><em>Remove&nbsp;&nbsp;&nbsp;&nbsp;</em></a>
-                        <a style="color: darkred" href="#"><em>Mark Spam</em></a>
+                        <a style="color: darkred" href="/index.php?action=spam&id='.$uid.'&id2='.$temp[3].'"><em>Mark Spam</em></a>
                         </div>
                       </div>
                     </div>
@@ -62,23 +62,26 @@ function dashboardComments($comments){
       //$comments[$x]=Array($temp[2],$temp[0], $time);
     }
   }
-    for ($x=$max; $x<9; $x++){
-      $comments[$x]='                 <li>
+  else{
+    $comments=array();
+    $comments[0]='                 
+              <li>
                     <div class="col1">
                       <div class="cont">
                         <div class="cont-col1">
-                          <div class="desc">
+                          <div class="desc"><span style="color: #0d638f;" class="tooltips" data-container="body" >
+                             No Comments Left Yet &nbsp;&nbsp;
+                          </span>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div class="col2">
-                      <div class="date">
+                      <div class="date">                         
                       </div>
                     </div>
-                    
                   </li>';
-    }
+  }
   return $comments;  
 }
 function comments($comments){
