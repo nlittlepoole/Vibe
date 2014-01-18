@@ -44,10 +44,10 @@ function reportSpam($id,$id2){
 /*
 Checks if user is in the database
 */
-function checkFriend($uid){
+function checkFriend($id){
     $friends=$_SESSION['friends']['data'];
     foreach($friends as $friend){
-      if($friend['id']=$uid){
+      if($friend['id']==$id){
         return true;
       }
     }
@@ -58,16 +58,16 @@ Returns true if user exists and is active, otherwise false
 */
 function checkActive($uid){
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //initialies connection to the database using the credentials found in config.php
-    $sql = "SELECT Active FROM user WHERE UID= $uid"; //gets the active status of the user with $uid as a user ID
+    echo $sql = "SELECT Active FROM user WHERE UID= $uid"; //gets the active status of the user with $uid as a user ID
     $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
     $st->execute(); //executes the sql query found above
     $raw=$st->fetch();
      $conn=null;
-    if(!$raw){
-      return false;
+    if($raw[0]){
+      return true;
     }
     else{
-     return true; 
+     return false; 
     } 
 }
 function refresh($uid){
