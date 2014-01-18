@@ -257,7 +257,7 @@ function findPos(obj) {
 function validateForm()
 {
 	var x = document.forms["settingsform"]["websitelink"].value;
-	if (x.indexOf('.com') < 0 && x.indexOf('.edu') < 0 && x.indexOf('.org') < 0 && x.indexOf('.us') < 0 && x.indexOf('.net') < 0 && x != "")
+	if (x.indexOf('.com') < 0 && x.indexOf('.edu') < 0 && x.indexOf('.org') < 0 && x.indexOf('.us') < 0 && x.indexOf('.net') < 0 && (x.indexOf('.me')<0  && (x.indexOf('.co')<0  && (x.indexOf('.ly') < 0 && (x.indexOf('.gov') < 0 && x != "")
 	{
 		//alert("Problem!"); 
 	    document.getElementById("websiteURL").className+=' has-error';
