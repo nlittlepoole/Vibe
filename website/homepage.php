@@ -63,10 +63,12 @@
 			<div class="container">
 				<div class="row-fluid">
 					<h1 class="page-title">About</h1>
-					<h2 class="page-subtitle">Feedback for Everyone</h2>
+					<h2 class="page-subtitle">the Yelp of people</h2>
 					<div class="text-section">
-						<p>Have you ever wondered how you came across to an interviewer? Have you ever wanted to know how honest a potential date may be? Vibe gives you access to this information. It's helpful to have feedback from a third party.</p>
-						<p>Vibe sets you up with a list of questions about you that your peers will answer. Over time, responses from your friends will generate a summary of the vibe you give off to your community. These <em>vibes</em> are compiled to create a Social Directory availible to any user. Set up an account for free with us today!</p>
+						<p>Have you ever wondered what impression you leave on an interviewer, friend, or relative? 
+								Vibe gives you a concise summary of feedback from your peers by tracking specific traits. 
+								You can also answer questions about others to give them feedback. And all answers are anonymous!
+							You can browse the profiles of your friends and communities to see what people said about them.</p>	
 					</div>
 				</div> <!-- end row-fluid -->
 				<!-- Services -->
@@ -74,15 +76,15 @@
 					<div class="row-fluid">
 						<div class="span4">
 							<h3 class="icon-thumbs-up">Feedback</h3>
-							<p>Get a third party perspective with a summary of question results on your own privatized dashboard.</p>
+							<p>Get anonymous feedback from your peers!</p>
 						</div>
 						<div class="span4">
 							<h3 class="icon-heart">Profiles</h3>
-							<p>View the Vibe scores of other users to see what a person may be like before you meet</p>
+							<p>View peoples' profiles to see what others said about them!</p>
 						</div>
 						<div class="span4">
 							<h3 class="icon-trophy">Leaderboards</h3>
-							<p>See how you fare for a particular question in the local community.</p>
+							<p>See how you compare to your communities!</p>
 						</div>
 					</div> <!-- end row-fluid -->
 				</div> <!-- end grid -->
@@ -90,11 +92,12 @@
 		</section>
 
 		<!-- Team Section -->
+		<!--
 		<section id="team" style="background: url(../img/greenwall1.jpg) no-repeat center center fixed" class="page">
 			<div class="container">
 				<h1 class="page-title" style="color: white">Team</h1>
 				<h2 class="page-subtitle" style="color: white">Our Thinkers and Makers</h2>
-				<!-- Team Members -->
+				
 				<div class="grid">
 					<div class="row-fluid">
 						<div class="span4">
@@ -128,13 +131,14 @@
 							<h4 style="color: white">An Awesome Person</h4>
 							<p style="color: white">Join Vibe today! Become a part of the next big thing in social feedback.</p>
 						</div>
-					</div> <!-- end row-fluid -->
-				</div> <!-- end grid -->
-			</div> <!-- end container -->
+					</div> 
+				</div> 
+			</div> 
 		</section>
+		-->
 
 		<!-- Contact Section -->
-		<section id="contact" class="page">
+		<section id="contact" style="background: url(../img/greenwall1.jpg) no-repeat center center fixed" class="page">
 			<div class="container">
 				<h1 class="page-title">Contact</h1>
 				<h2 class="page-subtitle">Get in Touch!</h2>
