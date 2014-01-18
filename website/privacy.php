@@ -103,6 +103,16 @@
 					</span>
 					</a>
 				</li>
+				<li class="start">
+					<a href="terms.php">
+					<i class="fa fa-book"></i>
+					<span class="title">
+						Terms and Conditions
+					</span>
+					<span class="selected">
+					</span>
+					</a>
+				</li>
 				
 			</ul>
 			<!-- END SIDEBAR MENU -->
