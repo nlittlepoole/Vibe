@@ -65,7 +65,7 @@
 <link rel="shortcut icon" href="favicon.ico"/>
 
 <style>
-	img {
+	img.askedQuestion {
 		width: 250px; 
 		height: auto;
 	}
@@ -122,6 +122,7 @@
 		<div class="page-sidebar navbar-collapse collapse">
 			<!-- BEGIN SIDEBAR MENU -->
 			<ul class="page-sidebar-menu">
+				<li class="start"><span class="title"><h2 style="text-align: center; color: white">VIBE</h2></span></li>
 				<li class="sidebar-search-wrapper">
 					<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
 					<form class="sidebar-search" action="/index.php?action=search" method="POST">
@@ -283,7 +284,7 @@
 								</div>
 								<div style="width: 50%; float: left; margin-top: 20px">
 									<div style="width: 250px; height: 250px; overflow: hidden">
-										<img src=<?php echo $pic ?> />
+										<img class="askedQuestion" src=<?php echo $pic ?> />
 									</div>
 								</div>
 								<div class="form-actions fluid">

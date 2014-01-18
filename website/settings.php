@@ -396,6 +396,7 @@ function validateForm()
 		<div class="page-sidebar navbar-collapse collapse">
 			<!-- BEGIN SIDEBAR MENU -->
 			<ul class="page-sidebar-menu">
+				<li class="start"><span class="title"><h2 style="text-align: center; color: white">VIBE</h2></span></li>
 				<li class="sidebar-search-wrapper">
 					<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
 					<form class="sidebar-search" action="extra_search.html" method="POST">
