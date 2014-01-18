@@ -105,7 +105,6 @@ function addUser( $facebook,$uid,$token ) {
         $sql = "INSERT INTO user  (Name,UID,Active,Gender,Communities,Friends,LastLogin) VALUES('$name','$uid','1','$gender','$affiliations',$friends,'$now')"; //user is added to Vibosphere database
         $st = $conn->prepare( $sql );
         $st->execute(); //query is executed
-        $_SESSION['redirect']="/index.php?action=question.php";
     }
     else { //the user is in the database but not active, theyare simply set to active
         $graph_url="https://graph.facebook.com/" . $uid . "/?fields=gender,name"; //facebook graph api is used to create gender query
