@@ -180,6 +180,14 @@
 		   else {
 		   	   $_SESSION['disabledOnes'][$i] = "false"; 
 		   }
+
+		   if($_SESSION['vibetraits'][$i] == "humility") {
+		   	   $_SESSION['vibetraits'][$i] = "modesty"; 
+		   }
+		   
+		   if($_SESSION['vibetraits'][$i] == "affability") {
+		   	   $_SESSION['vibetraits'][$i] = "approachability"; 
+		   }
 		
 	       $_SESSION['traitsSettings'][$i] = '<tr>
 				<td>
@@ -257,7 +265,7 @@ function findPos(obj) {
 function validateForm()
 {
 	var x = document.forms["settingsform"]["websitelink"].value;
-	if (x.indexOf('.com') < 0 && x.indexOf('.edu') < 0 && x.indexOf('.org') < 0 && x.indexOf('.us') < 0 && x.indexOf('.net') < 0 && (x.indexOf('.me')<0  && (x.indexOf('.co')<0  && (x.indexOf('.ly') < 0 && (x.indexOf('.gov') < 0 && x != "")
+	if (x.indexOf('.com') < 0 && x.indexOf('.edu') < 0 && x.indexOf('.org') < 0 && x.indexOf('.us') < 0 && x.indexOf('.net') < 0 && x.indexOf('.me')<0  && x.indexOf('.co')<0  && x.indexOf('.ly') < 0 && x.indexOf('.gov') < 0 && x != "")
 	{
 		//alert("Problem!"); 
 	    document.getElementById("websiteURL").className+=' has-error';
@@ -270,7 +278,7 @@ function validateForm()
 	}
 	
 	var y = document.forms["settingsform"]["blurb"].value;
-	if (y.indexOf('shit') != -1 || y.indexOf('fuck') != -1 || y.indexOf('bitch') != -1 || y.indexOf('cunt') != -1 || y.indexOf('damn') != -1 || y.indexOf('ass') != -1 || y.indexOf('cock') != -1 || y.indexOf('fag') != -1 || y.indexOf('pimp') != -1)
+	if (y.indexOf('shit') != -1 || y.indexOf('fuck') != -1 || y.indexOf('bitch') != -1 || y.indexOf('cunt') != -1 || y.indexOf('damn') != -1 || y.indexOf('ass') != -1)
 	{
 		//alert("Problem!"); 
 	    document.getElementById("blurbElement").className+=' has-error';

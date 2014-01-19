@@ -184,7 +184,7 @@
 								 Points
 							</div>
 						</div>
-						<a class="more" href="#">
+						<a class="more" href="/website/settings.php">
 						Spend Points <i class="m-icon-swapright m-icon-white"></i>
 						</a>
 					</div>

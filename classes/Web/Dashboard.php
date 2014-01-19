@@ -1,6 +1,6 @@
 <?php 
 require_once( CLASS_PATH . "/Web/User.php");
-require_once( CLASS_PATH . "/Web/Achievements.php");
+require( CLASS_PATH . "/Web/Achievements.php");
 require_once( CLASS_PATH . "/Web/String.php");
 
 // WORKING ON THE ACHIEVEMENTS BOX IN DASHBOARD
@@ -189,44 +189,13 @@ if(refresh($uid) ||$force){
     }
     $data['Communities']=$new_communities;
     
-    //Pulling out achievements and storing them in SESSION
-    $_SESSION['achievementsProgress'] = array($data['HelpingHand_progress'], $data['Pal_progress'], 
-    $data['Advocate_progress'], $data['Comrade_progress'], $data['MotherTeresa_progress'], 
-    $data['Diva_progress'], $data['King of the Hill_progress'], $data['Ideator_progress'], 
-	$data['Visionairy_progress'], $data['Blogger_progress'], $data['Commander of Words_progress'], 
-	$data['Viber_progress']);
+	// EVERYTHING ACHIEVEMENTS --> TWO METHOD CALLS
 	
-	//Also set up the achievements too
-	$_SESSION['achievementsInfo'] = achievements();
-	colorWithVibe();
-	
-	//Set up a modified achievements array to display in the nav bar
-	$achievementsNavBar = array();
-	$currSize = 0;
-	for($i = 0; $i < count($_SESSION['achievementsProgress']); $i++) {
-		if($_SESSION['achievementsProgress'][$i] < 10) {	
-			$achievementsNavBar[$currSize] = array($i + 1, $_SESSION['achievementsProgress'][$i]);	
-			$currSize++;
-		}
-	}
+    // GRAB INFORMATION FROM DATABASE INITIALLY
+    $achievementsNavBar = initAchievementsCreate(); 
 
-	//organize achievementsNavBar from largest score to smallest
-	for($i = 0; $i < count($achievementsNavBar); $i++) {
-		$localMax = $achievementsNavBar[$i][1]; 
-		$localPos = $i;
-		for($j = $i; $j < count($achievementsNavBar); $j++) {
-			if($achievementsNavBar[$j][1] > $localMax) {
-				$localMax = $achievementsNavBar[$j][1];
-				$localPos = $j;
-			}
-		}
-		//swap the largest element with the element at i
-		$temp = $achievementsNavBar[$i];
-		$achievementsNavBar[$i] = $achievementsNavBar[$localPos];
-		$achievementsNavBar[$localPos] = $temp;
-	}
-	
-	achievementsNotificationCreator($achievementsNavBar); 
+	// ORGANIZE NAV BAR APPROPRIATELY
+	$achievementsNavBar = organizeNavBar($achievementsNavBar);
     
     $data['Comments_Size']=$data['Comments']!=''?sizeof(split('&&',$data['Comments'])):0;
     $data['Comments']=str_replace("Affability", "Approachability", $data['Comments']);

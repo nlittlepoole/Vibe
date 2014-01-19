@@ -126,7 +126,7 @@ function submit($facebook,$uid,$token ){
 	palTracker();
 	advocateTracker(); 
 	comradeTracker();
-	motherteresaTracker(); 
+	motherteresaTracker();
 	
     require( CLASS_PATH . "/Vibe.php" );
 	

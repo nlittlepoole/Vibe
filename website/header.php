@@ -3,11 +3,19 @@
     session_start();
     $path = $_SERVER['DOCUMENT_ROOT'];
     require($path . "/config.php");
+	require( $path . "/classes/Web/Achievements.php"); 
     
     $action = isset( $_GET['action'] ) ? $_GET['action'] : "Invite more Friends to Vibe for Comments"; //sets $action to "Action" url fragment string if action isn't null
     $dashboard=$_SESSION['dashboard'];
     $pic=$dashboard['pic'];
 	
+	// EVERYTHING ACHIEVEMENTS --> TWO METHOD CALLS
+	
+    // GRAB INFORMATION FROM DATABASE INITIALLY
+    $achievementsNavBar = initAchievementsCreate(); 
+
+	// ORGANIZE NAV BAR APPROPRIATELY
+	$achievementsNavBar = organizeNavBar($achievementsNavBar);
     
 ?>
 

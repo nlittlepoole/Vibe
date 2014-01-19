@@ -27,7 +27,7 @@ switch ( $action ) {
     header('Location: /index.php?action=dashboard&force=1'); // index is reloaded but with question prameter. Now that environment is set up index.php is reloaded with the intent of answring questiosn
 break;
   case 'question'://occurs after a login or another question, this case handles generating a new question and friend
-    require( CLASS_PATH . "/Web/Question.php");
+    require( CLASS_PATH . "/Web/Question.php"); 
     question($facebook,$uid,$token); // calls the question function that pulls a user and question and places the data in the Session cache
     header('Location: /website/questions.php'); //sends browser to questions page with Session Data containing questions input above
     break;
@@ -59,7 +59,7 @@ break;
   case 'submit2':
 	//The settings page has been populated with information  
 	require( CLASS_PATH . "/Web/Settings.php");
-  $_SESSION['redirect']=' /index.php?action=profile&profile=' . $_SESSION['userID'];
+  	$_SESSION['redirect']=' /index.php?action=profile&profile=' . $_SESSION['userID'];
 	header('Location:/index.php?action=dashboard&force=1');
 	  
   break;	

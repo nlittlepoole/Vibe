@@ -564,6 +564,11 @@
 										<div class="row">
 											<div class="col-md-8 profile-info">
 												<h1><?php echo $_SESSION['profile']['Name'] ?></h1>
+												<!-- ADD SOME SMART CODE TO SHOW USER FIRST NAME -->
+												<?php 
+													$tempName = explode(" ", $_SESSION['profile']['Name']); 
+													$_SESSION['nameFirst'] = $tempName[0];
+												?>
 												<?php echo $_SESSION['dispBlurb'] ?>
 												<!-- FOR DEBUGGING<?php echo $_SESSION['disabledTest'] ?> -->
 												<ul class="list-inline">
@@ -584,22 +589,22 @@
 														<ul class="list-unstyled">
 															<li>
 																<span class="sale-info">
-																	 Questions Answered about User <i class="fa fa-img-up"></i>
+																	 Questions Answered about <?php echo $_SESSION['nameFirst']; ?> <i class="fa fa-img-up"></i>
 																</span>
 																<span class="sale-num">
 																	<?php echo $_SESSION['profile']['totalAnswers'] ?>
 																</span>
 															</li>
-															<!--
+															
 															<li>
 																<span class="sale-info">
 																	 TOTAL ACHIEVEMENTS<i class="fa fa-img-down"></i>
 																</span>
 																<span class="sale-num">
-																	<?php echo $_SESSION['numAchievementsCompleted'] ?>
+																	<?php echo $_SESSION['achievementsDone'] ?>
 																</span>
 															</li>
-															-->
+															
 															<li>
 																
 																<span class="sale-info">
