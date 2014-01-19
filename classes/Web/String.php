@@ -69,8 +69,8 @@ function dashboardComments($comments,$uid){
                     <div class="col1">
                       <div class="cont">
                         <div class="cont-col1">
-                          <div class="desc"><span style="color: #0d638f;" class="tooltips" data-container="body" >
-                             No Comments Left Yet &nbsp;&nbsp;
+                          <div class="desc"><span>
+                             <em>Yo do not have any comments yet.</em>
                           </span>
                           </div>
                         </div>
