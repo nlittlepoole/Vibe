@@ -180,6 +180,14 @@
 		   else {
 		   	   $_SESSION['disabledOnes'][$i] = "false"; 
 		   }
+
+		   if($_SESSION['vibetraits'][$i] == "humility") {
+		   	   $_SESSION['vibetraits'][$i] = "modesty"; 
+		   }
+		   
+		   if($_SESSION['vibetraits'][$i] == "affability") {
+		   	   $_SESSION['vibetraits'][$i] = "approachability"; 
+		   }
 		
 	       $_SESSION['traitsSettings'][$i] = '<tr>
 				<td>
