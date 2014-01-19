@@ -114,6 +114,12 @@ function achievements() {
 	}
 
 	$_SESSION['achievementsDone'] = 12 - $_SESSION['achievementsToAchieve']; 
+	
+	$_SESSION['achievementsToAchieveNum'] = '<span class="badge badge-success">' . $_SESSION['achievementsDone'] . '</span>';
+	if($_SESSION['achievementsDone'] == 0) {
+		$_SESSION['achievementsToAchieveNum'] = ""; 
+	}
+	
 
 	if($_SESSION['achievementsToAchieve'] > 5) {
 		$_SESSION['achievementsToAchieve'] = '<span class="badge">5+</span>';

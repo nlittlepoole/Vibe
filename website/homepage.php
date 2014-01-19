@@ -46,17 +46,22 @@
 		</header>
 
 		<!-- Home Section -->
-		<section id="home" class="page parallax">
+		<section id="home" class="page parallax"><div>
 			<!-- Messaging Carousel -->
-			<div id="home-messages" class="carousel slide" data-interval="3000">
+			<div id="home-messages" style="top: 40%;" class="carousel slide" data-interval="3000">
 			  <!-- Messages -->
 			  <div class="carousel-inner">
 			    <div class="item active">
-			    	<span>Vibe<br /><p><button id="rounded_corners" class="btn btn-large btn-primary" style="background-color: #000033" onclick="location.href='<?php echo $loginUrl ?>'">Log in with Facebook <i class="icon-circle-arrow-right" style="color: white" ></i></button></p></span>
+			    	<span>Vibe<br /><span style="font-size: 32px" class="stylized">the Peer feedback network.</span>
+			    		<p style="margin-bottom: 0em"><button id="rounded_corners" class="btn btn-large btn-primary" style="background-color: #000033" onclick="location.href='<?php echo $loginUrl ?>'">Log in with Facebook 
+			    			<i class="icon-circle-arrow-right" style="color: white" ></i>
+		    			</button></p>
+	    			</span>
 			    </div>
 			  </div>
 			</div>
-		</section>
+			<div style="font-family: sans-serif;font-size: 18px; color: white; bottom: 3%; position: absolute; width: 100%; text-align: center">We promise we won't post anything to Facebook!</div>
+		</div></section>
 
 		<!-- About Section -->
 		<section id="about" class="page">

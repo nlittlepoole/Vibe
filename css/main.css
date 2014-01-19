@@ -497,7 +497,7 @@ label, input[type="reset"], input[type="submit"] {
 	margin-top: -40px;
 	text-align: center;
 }
-#home-messages .carousel-inner .item span{
+#home-messages .carousel-inner .item span.stylized{
 	background: #000;
 	color: #fff;
 	text-transform: uppercase;
@@ -505,6 +505,12 @@ label, input[type="reset"], input[type="submit"] {
 	letter-spacing: 1px;
 	-webkit-box-shadow:  15px 0px 0px 0px #000, -15px 0px 0px 0px #000;
 	box-shadow:  15px 0px 0px 0px #000, -15px 0px 0px 0px #000;
+}
+#home-messages .carousel-inner .item span{
+	color: #fff;
+	text-transform: uppercase;
+	font: bold 72px "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	letter-spacing: 1px;
 }
 .carousel-indicators {
 	bottom: -40px;
