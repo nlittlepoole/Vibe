@@ -38,6 +38,7 @@ function search($query,$facebook,$uid,$token){
         $users=array_unique(array_merge($users,friendsLoose($query)));
         $users=array_unique(array_merge($users,affiliatesLoose($query,$uid)));
         $users=array_unique(array_merge($users,everyone($query)));
+        $users=array_slice($users, 0, 100);
         $communities=communities($query);
         return Array($users,$communities);
     }
