@@ -59,7 +59,7 @@ break;
   case 'submit2':
 	//The settings page has been populated with information  
 	require( CLASS_PATH . "/Web/Settings.php");
-  $_SESSION['redirect']=' /index.php?action=profile&profile=' . $_SESSION['userID'];
+  	$_SESSION['redirect']=' /index.php?action=profile&profile=' . $_SESSION['userID'];
 	header('Location:/index.php?action=dashboard&force=1');
 	  
   break;	
