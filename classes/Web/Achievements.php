@@ -1,4 +1,61 @@
 <?php
+
+function initAchievementsCreate() {
+	$uid = $_SESSION['userID']; 	
+	$conn2 = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //database connection is established uisng credentials in config.php
+    $sql2 = "SELECT * FROM user WHERE UID=$uid"; //sql query that returns the string of the question in the table
+    $st2 = $conn2->prepare( $sql2 );// prevents user browser from seeing queries. Useful for security
+    $st2->execute();//executes query above
+    $data=$st2->fetch(); //$question source is set to result of query
+    $conn2=null;
+	
+	//Pulling out achievements and storing them in SESSION
+    $_SESSION['achievementsProgress'] = array($data['HelpingHand_progress'], $data['Pal_progress'], 
+    $data['Advocate_progress'], $data['Comrade_progress'], $data['MotherTeresa_progress'], 
+    $data['Diva_progress'], $data['King of the Hill_progress'], $data['Ideator_progress'], 
+	$data['Visionairy_progress'], $data['Blogger_progress'], $data['Commander of Words_progress'], 
+	$data['Viber_progress']);
+	
+	//Also set up the achievements too
+	$_SESSION['achievementsInfo'] = achievements();
+	
+	colorWithVibe();
+	
+	//Set up a modified achievements array to display in the nav bar
+	$achievementsNavBar = array();
+	$currSize = 0;
+	for($i = 0; $i < count($_SESSION['achievementsProgress']); $i++) {
+		if($_SESSION['achievementsProgress'][$i] < 10) {	
+			$achievementsNavBar[$currSize] = array($i + 1, $_SESSION['achievementsProgress'][$i]);	
+			$currSize++;
+		}
+	}
+	
+	return $achievementsNavBar; 
+}
+
+function organizeNavBar($achievementsNavBar) {
+	for($i = 0; $i < count($achievementsNavBar); $i++) {
+		$localMax = $achievementsNavBar[$i][1]; 
+		$localPos = $i;
+		for($j = $i; $j < count($achievementsNavBar); $j++) {
+			if($achievementsNavBar[$j][1] > $localMax) {
+				$localMax = $achievementsNavBar[$j][1];
+				$localPos = $j;
+			}
+		}
+		//swap the largest element with the element at i
+		$temp = $achievementsNavBar[$i];
+		$achievementsNavBar[$i] = $achievementsNavBar[$localPos];
+		$achievementsNavBar[$localPos] = $temp;
+	}
+	
+	// PRESENT THE NAV BAR UP TOP!
+	achievementsNotificationCreator($achievementsNavBar); 
+	
+	return $achievementsNavBar;
+}
+
 function achievements() {
 	//return the proper two dimensional array of all the achievements	
 	$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
@@ -21,7 +78,7 @@ function achievements() {
 			"color" => $data['color'],
 		);
 		$sliderColor;
-		$tempPercent = $_SESSION['achievementsProgress'][$i - 1] * 10;
+		$tempPercent = $_SESSION['achievementsProgress'] [$i - 1] * 10;
 		if($tempPercent <= 30) {
 			$sliderColor = "danger";
 		}
@@ -55,6 +112,8 @@ function achievements() {
 										
 									</div>';
 	}
+
+	$_SESSION['achievementsDone'] = 12 - $_SESSION['achievementsToAchieve']; 
 
 	if($_SESSION['achievementsToAchieve'] > 5) {
 		$_SESSION['achievementsToAchieve'] = '<span class="badge">5+</span>';

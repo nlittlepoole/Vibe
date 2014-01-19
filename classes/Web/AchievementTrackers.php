@@ -23,6 +23,7 @@ function helpinghandTracker() {
 		if($data['fiveblockHelpingHand'] != 5) {
 			// the five-block is not yet full so your question will increment five block
 			$fiveblockVar = $data['fiveblockHelpingHand'] + 1;
+			$updatedProgress = $data['HelpingHand_progress'] + 2; 
 			// now check if five-block is 5 so you can increment counter!
 			if($fiveblockVar == 5) {
 
@@ -43,7 +44,7 @@ function helpinghandTracker() {
 				// Update the user's five block number in the database since now it is indeed one higher!
 				$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
 			
-			    $sql = "UPDATE user SET fiveblockHelpingHand=$fiveblockVar WHERE UID=" . $_SESSION['userID'];
+			    $sql = "UPDATE user SET fiveblockHelpingHand=$fiveblockVar, HelpingHand_progress=$updatedProgress WHERE UID=" . $_SESSION['userID'];
 			    $st = $conn->prepare($sql);
 		        $st->execute();
 				
