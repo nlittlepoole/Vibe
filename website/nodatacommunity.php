@@ -1,3 +1,13 @@
+<?php 
+	error_reporting(0);
+    session_start();
+	$path = $_SERVER['DOCUMENT_ROOT'];
+    require($path . "/config.php");
+    if(!$_SESSION['userID']){
+    	header('Location:/index.php'); 
+    }
+    
+?>
 <!DOCTYPE html>
 
 <!-- File has been changed to a PHP file -->
@@ -160,8 +170,8 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
 					<h3 class="page-title">
 						
-					<img src="/img/princetontest.jpg" width="100px"/>
-					Princeton University <small>Communities</small>
+					<img src=<?php echo '"'. $_SESSION['location']['pic']. '"' ?> width="100px"/>
+					 <?php echo $_SESSION['location']['Name'] ?><small> Communities</small>
 					</h3>
 					<ul class="page-breadcrumb breadcrumb">
 						<li>
@@ -187,7 +197,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					<div class="portlet box blue">
 						<div class="portlet-title">
 							<div class="caption">
-								<i class="fa fa-reorder"></i>Princeton University
+								<i class="fa fa-reorder"></i><?php echo $_SESSION['location']['Name'] ?>
 							</div>
 							<div class="tools">
 							</div>
