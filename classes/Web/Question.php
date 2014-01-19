@@ -54,7 +54,7 @@ function question($facebook,$uid,$token ){
     else{
         $question= str_replace("their", "his", $question); 
         $question= str_replace("themselves", "himself", $question);
-        $question= str_replace("attractive", "handsome", $question); 
+        $question= str_replace("attractive", "good looking", $question); 
         $question= str_replace("them", "him", $question);  
     }
     $pic=getPictures($recipient);
