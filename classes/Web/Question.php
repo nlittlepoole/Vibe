@@ -121,7 +121,7 @@ function getQuestion($input){
 
 function submit($facebook,$uid,$token ){
 	//This is the function that gets called when the user submits a question.
-	
+	$_SESSION['dashboard']['Points']=$_SESSION['dashboard']['Points']+1;
 	helpinghandTracker(); 
 	palTracker();
 	advocateTracker(); 
