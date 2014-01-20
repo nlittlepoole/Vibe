@@ -136,6 +136,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					</span>
 					</a>
 				</li>
+				<!--
 				<li id="forum-link" class="tooltips" data-placement="right" data-original-title="Community&nbsp;Question Request&nbsp;Forum">
 					<a href="javascript:;">
 					<i class="fa fa-comments"></i>
@@ -152,6 +153,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					</span>
 					</a>
 				</li>
+				-->
 			</ul>
 			<!-- END SIDEBAR MENU -->
 		</div>

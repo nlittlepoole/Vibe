@@ -135,6 +135,7 @@
 					</span>
 					</a>
 				</li>
+				<!--
 				<li id="forum-link" class="tooltips" data-placement="right" data-original-title="Community&nbsp;Question Request&nbsp;Forum">
 					<a href="javascript:;">
 					<i class="fa fa-comments"></i>
@@ -151,6 +152,7 @@
 					</span>
 					</a>
 				</li>
+				-->
 			</ul>
 			<!-- END SIDEBAR MENU -->
 		</div>

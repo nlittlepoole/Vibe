@@ -65,7 +65,7 @@ function friendsLoose($query){
     for($x=0;$x<sizeof($friends['data']);$x++){
         foreach($queries as $test){
             if(stristr($friends['data'][$x]['name'], $test)){
-                $result[$x]= '<tr><td><a href="/index.php?action=profile&profile='.$friends['data'][$x]['id'].'""><img src="http://graph.facebook.com/'.$friends['data'][$x]['id'].'/picture" height="62" width="62" /></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/index.php?action=profile&profile='.$users[$x]['UID'].'"">'.$friends['data'][$x]['name'].'</a></td></tr>';
+                $result[$x]= '<tr><td><a href="/index.php?action=profile&profile='.$friends['data'][$x]['id'].'""><img src="http://graph.facebook.com/'.$friends['data'][$x]['id'].'/picture" height="62" width="62" /></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/index.php?action=profile&profile='.$users[$x]['UID'].'"">'.$friends['data'][$x]['name'].'</a></td></tr>'  ;
             } 
         }
 
@@ -88,9 +88,7 @@ function affiliatesExact($query, $uid){
 
     }
     for($x=0;$x<sizeof($users);$x++){
-        $users[$x]='<tr><td><a href="/index.php?action=profile&profile='.$users[$x]['UID'].'"">
-        <img src="http://graph.facebook.com/'.$users[$x]['UID'].'/picture" height="62" width="62" /></a>
-        &nbsp;&nbsp;&nbsp;&nbsp;<a href="/index.php?action=profile&profile='.$users[$x]['UID'].'"">'.$users[$x]['Name'].'</a></td></tr>';
+        $users[$x]='<tr><td><a href="/index.php?action=profile&profile='.$users[$x]['UID'].'""><img src="http://graph.facebook.com/'.$users[$x]['UID'].'/picture" height="62" width="62" /></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/index.php?action=profile&profile='.$users[$x]['UID'].'"">'.$users[$x]['Name'].'</a></td></tr>'  ;
     }
     return $users;
 } 
