@@ -206,6 +206,7 @@ function validateForm()
 			<div class="row">
 				<div class="col-md-12 ">
 					<!-- BEGIN SAMPLE FORM PORTLET-->
+					<?php if($_SESSION['Results'][0]){echo '
 					<div class="portlet box purple">
 						<div class="portlet-title">
 							<div class="caption">
@@ -224,18 +225,20 @@ function validateForm()
 									</th>
 								</tr>
 								</thead>
-								<tbody>
-								<?php 
+								<tbody>';
 								foreach($_SESSION['Results'][0] as $result){
 									echo $result;
 								} 
-
-								?>
+								 echo '
 								</tbody>
 								</table>
 							</div>
 						</div>
-					</div>
+					</div>';}
+					else{
+						echo "<br>No Results";
+					}
+					?>
 					<!-- END SAMPLE TABLE PORTLET-->
 						
 			</div>
