@@ -1855,7 +1855,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Modesty
 									</td>
 									<td>
-										<?php echo $_SESSION['location'][13]['Average'] && $_SESSION['location'][12]['Average']!=-1 ? $_SESSION['location'][13]['Average']: "--" ?>
+										<?php echo $_SESSION['location'][13]['Average'] && $_SESSION['location'][13]['Average']!=-1 ? $_SESSION['location'][13]['Average']: "--" ?>
 									</td>
 									<td>
 										<?php echo $_SESSION['location'][13]['Keywords'] ? $_SESSION['location'][13 ]['Keywords']: "N/A" ?>
