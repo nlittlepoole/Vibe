@@ -95,6 +95,7 @@ function addUser( $facebook,$uid,$token ) {
     $check=checkUID($uid);
     $now=date("Y-m-d H:i:s", time());
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
+    $_SESSION['redirect']= checkActive($uid)?""  :"/website/dashboard_new.php";
     if(!$check){ //if the user isn't in Vibosphere, they are added with a true active status
         $graph_url="https://graph.facebook.com/" . $uid . "/?fields=gender,name"; //facebook graph api link is created to find gender
         $data = json_decode(file_get_contents($graph_url), true); //decoded json data is returned as an array using above graph api link
