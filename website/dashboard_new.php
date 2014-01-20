@@ -243,7 +243,7 @@
 						</div>
 						<div class="details">
 							<div class="number">
-								+4
+								+<?php echo $_SESSION['achievementsDone']; ?>
 							</div>
 							<div class="desc">
 								Achievements
