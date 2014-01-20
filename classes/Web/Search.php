@@ -143,5 +143,10 @@ function communities($query){
     $st->execute(); //executes the sql query found above
     $conn = null;
     $communities=$st->fetchAll();
+    for($x=0;$x<sizeof($communities);$x++){
+        $communities[$x]= '<tr><td><a href="/index.php?action=profile&profile='.$communities[$x]['UID'].'""><img src="http://graph.facebook.com/'.$communities[$x]['UID'].'/picture" height="62" width="62" /></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/index.php?action=location&location='.$communities[$x]['UID'].'"">'.$communities[$x]['Name'].'</a></td></tr>'  ;
+    }
+    return isset($communities) ? $communities : Array();
+
 }
 ?>

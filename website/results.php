@@ -205,8 +205,24 @@ function validateForm()
 			
 			<div class="row">
 				<div class="col-md-12 ">
-					<!-- BEGIN SAMPLE FORM PORTLET-->
-					<?php if($_SESSION['Results'][0]){echo '
+				</div>
+			</div>
+			
+			<div class="clearfix">
+			</div>
+			
+			<div class="tabbable tabbable-custom tabbable-custom-profile">
+				<ul class="nav nav-tabs">
+					<li class="active">
+						<a href="#tab_1_11" data-toggle="tab">People</a>
+					</li>
+					<li>
+						<a href="#tab_1_22" data-toggle="tab">Communities</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="tab_1_11">
+							<?php if($_SESSION['Results'][0]){echo '
 					<div class="portlet box purple">
 						<div class="portlet-title">
 							<div class="caption">
@@ -239,56 +255,13 @@ function validateForm()
 						echo "<br>No Results";
 					}
 					?>
-					<!-- END SAMPLE TABLE PORTLET-->
-				</div>
-			</div>
-			
-			<div class="clearfix">
-			</div>
-			
-			<div class="tabbable tabbable-custom tabbable-custom-profile">
-				<ul class="nav nav-tabs">
-					<li class="active">
-						<a href="#tab_1_11" data-toggle="tab">Vibes</a>
-					</li>
-					<li>
-						<a href="#tab_1_22" data-toggle="tab">Comments</a>
-					</li>
-				</ul>
-				<div class="tab-content">
-					<div class="tab-pane active" id="tab_1_11">
-							<div class="portlet box purple">
-						<div class="portlet-title">
-							<div class="caption">
-								<i class="fa fa-comments"></i>Search Results
-							</div>
-							<div class="tools">
-							</div>
-						</div>
-						<div class="portlet-body">
-							<div class="table-responsive">
-								<table class="table table-striped table-hover" style="width: 100%">
-								<thead>
-								<tr>
-									<th style="padding-left: 82px">
-										Name
-									</th>
-								</tr>
-								</thead>
-								<tbody>
-								<tr>
-									<td>Hello</td>
-								</tr>
-								</tbody>
-								</table>
-							</div>
-						</div>
 					</div>
-					</div>
+					
 					<!--tab-pane-->
 					<div class="tab-pane" id="tab_1_22">
 						<div class="tab-pane active" id="tab_1_1_1">
 							<!-- BEGIN SAMPLE FORM PORTLET-->
+					<?php if($_SESSION['Results'][1]){echo '
 					<div class="portlet box purple">
 						<div class="portlet-title">
 							<div class="caption">
@@ -307,14 +280,20 @@ function validateForm()
 									</th>
 								</tr>
 								</thead>
-								<tbody>
-								<tr>
-									<td>Hello</td>
-								</tr>
+								<tbody>';
+								foreach($_SESSION['Results'][1] as $result){
+									echo $result;
+								} 
+								 echo '
 								</tbody>
 								</table>
 							</div>
 						</div>
+					</div>';}
+					else{
+						echo "<br>No Results";
+					}
+					?>
 					</div>
 					<!-- END SAMPLE TABLE PORTLET-->
 						</div>
