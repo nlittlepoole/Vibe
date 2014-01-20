@@ -48,8 +48,8 @@ function question($facebook,$uid,$token ){
     $question= str_replace("name", $name, $question); 
     if($_SESSION['Gender']=="female"){
         $question= str_replace("their", "her", $question);
-        $question= str_replace("them", "her", $question);  
         $question= str_replace("themselves", "herself", $question); 
+        $question= str_replace("them", "her", $question);  
     }
     else{
         $question= str_replace("their", "his", $question); 
