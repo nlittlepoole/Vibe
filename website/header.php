@@ -87,7 +87,7 @@
 			</li>
 			<!-- END TODO DROPDOWN -->
 			<!-- BEGIN USER LOGIN DROPDOWN -->
-			<li class="dropdown user">
+			<li class="dropdown user" id="nameTitle">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 				<!-- For now, I put in an image height and width limiter (Noah) -->
 				<img alt="" src=<?php echo $pic ?> style="height: 29px; width: 29px"/>
@@ -102,9 +102,7 @@
 					</li>
 					<li>
 						<a href="achievements.php"><i class="fa fa-tasks"></i> Achievements
-						<span class="badge badge-success">
-							5
-						</span>
+						<?php echo $_SESSION['achievementsToAchieveNum']; ?>
 						</a>
 					</li>
 					<li>

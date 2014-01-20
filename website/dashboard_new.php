@@ -180,7 +180,7 @@
 			<!-- BEGIN DASHBOARD STATS -->
 			<div class="row">
 				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-					<div class="dashboard-stat blue">
+					<div class="dashboard-stat blue" id="pointsTitle">
 						<div class="visual">
 							<i class="fa fa-star"></i>
 						</div>
@@ -628,6 +628,48 @@
 	<!-- END CONTENT -->
 </div>
 
+<!-- Tour -->
+<ol id="joyRideTipContent" style="display: none" data-joyride>
+  <li data-button="Next: Vibes">
+        <h2>Vibe</h2>
+        <p>We'll give you an overview to help you get started!</p>
+  </li>
+  <li data-id="vibeTitle" data-options="tipLocation:top;" data-text="Next: Strengths">
+        <h2>Vibes or Traits</h2>
+        <p>Your friends answer questions about you. Each question falls into one of these traits.</p>
+  </li>
+  <li data-id="strengthTitle" data-options="tipLocation:top;" data-text="Next: Impressions">
+        <h2>Strengths</h2>
+        <p>The responses from all the answers in a particular category are averaged, giving you a Vibe score from 1 to 10.</p>
+  </li>
+  <li data-id="impressionsTitle" data-options="tipLocation:top;" data-text="Next: Global Percentile">
+        <h2>Impressions</h2>
+        <p>Within each trait are different sub-traits, which we call impressions, which are based on your friends' answers.</p>
+  </li>
+  <li data-id="globalTitle" data-options="tipLocation:top;" data-text="Next: Search">
+        <h2>Percentile within Vibe</h2>
+        <p>We also give you your percentile within Vibe of your score. 71% for example means that you have a higher score than 71% of people on Vibe for that trait.</p>
+  </li>
+  <li data-id="searchTitle" data-options="tipLocation:bottom;" data-text="Next: Questions">
+        <h2>Search</h2>
+        <p>View the Vibe strengths of any of your Facebook friends by searching them here!</p>
+  </li>
+  <li data-id="questionsTitle" data-options="tipLocation:bottom;" data-text="Next: Points">
+        <h2>Questions and Leaderboards</h2>
+        <p>The Questions page is where you go to answer questions about your friends!</p>
+        <p>See how you fare within each of your communities within My Leaderboards</p>
+  </li>
+  <li data-id="pointsTitle" data-options="tipLocation:right;" data-text="Last: Profile/Settings">
+        <h2>Points</h2>
+        <p>You get a point for every question you answer. You can then use these points in Settings to hide certain traits on your Profile.</p>
+  </li>
+  <li data-id="nameTitle" data-options="tipLocation:left;" data-text="Finish">
+        <h2>Profile/Settings</h2>
+        <p>Hover over your name to access your Profile and Settings!</p>
+  </li>
+</ol>
+<!-- /Tour -->
+
 <!-- END CONTAINER -->
 <!-- FOOTER -->
     <script> 
@@ -694,6 +736,29 @@ jQuery(document).ready(function() {
 });
 </script>
 
+
+<!-- jQuery needs to be attached -->
+<script src="../zurb-joyride-9685a1e/jquery-1.10.1.js"></script>
+
+<!-- Then attach the Joyride plugin -->
+<script src="../zurb-joyride-9685a1e/jquery.joyride-2.1.js"></script>
+
+<!-- JOYRIDE CODE -->
+<!-- Launching joyride when to page is loaded -->
+<script>
+      $(window).load(function() {
+        $('#joyRideTipContent').joyride({
+          autoStart : true,
+          //postStepCallback : function (index, tip) {
+          //if (index == 2) {
+            //$(this).joyride('set_li', false, 1);
+          //}
+        //},
+        //modal:true,
+        expose: true
+        });
+      });
+</script>
 <!-- END JAVASCRIPTS -->
 </body>
 <!-- END BODY -->
