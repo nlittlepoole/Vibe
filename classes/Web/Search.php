@@ -136,13 +136,13 @@ function everyone($query){
 }
 function communities($query){
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
-    $sql = "SELECT Name, UID FROM directory WHERE Name LIKE '%".$query."%'"; //gets the active status of the user with $input_id as a user ID
+    $sql = "SELECT Name, UID FROM directory WHERE Name LIKE '%".$query."%' LIMIT 50"; //gets the active status of the user with $input_id as a user ID
     $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
     $st->execute(); //executes the sql query found above
     $conn = null;
     $communities=$st->fetchAll();
     for($x=0;$x<sizeof($communities);$x++){
-        $communities[$x]= '<tr><td><a href="/index.php?action=profile&profile='.$communities[$x]['UID'].'""><img src="http://graph.facebook.com/'.$communities[$x]['UID'].'/picture" height="62" width="62" /></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/index.php?action=location&location='.$communities[$x]['UID'].'"">'.$communities[$x]['Name'].'</a></td></tr>'  ;
+        $communities[$x]= '<tr><td><a href="/index.php?action=location&location='.$communities[$x]['UID'].'""><img src="http://graph.facebook.com/'.$communities[$x]['UID'].'/picture" height="62" width="62" /></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/index.php?action=location&location='.$communities[$x]['UID'].'"">'.$communities[$x]['Name'].'</a></td></tr>'  ;
     }
     return isset($communities) ? $communities : Array();
 
