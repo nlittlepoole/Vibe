@@ -194,7 +194,7 @@ function getPercentiles($community,$score){
   $result=Array();
   $positive=true;
   foreach($stats as $stat){
-    if($stat[2]>0){
+    if($stat[2]>0 && $score[$stat['Attribute']]>0){
       $avg=$stat[1];
       $dev=$stat[2];
       $temp=($score[$stat['Attribute']]-$avg)/$dev;
