@@ -26,7 +26,6 @@
 		<!--[if lt IE 9]>
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		
 	</head>
 	<body data-spy="scroll" data-target="#top-bar">
 		<!-- Header -->
@@ -39,7 +38,6 @@
 				<ul class="menu nav">
 					<li><a href="#home">Home</a></li>
 					<li><a href="#about">About</a></li>
-					<li><a href="#team">Team</a></li>
 					<li><a href="#contact">Contact</a></li>
 				</ul>
 			</nav>
@@ -52,23 +50,24 @@
 			  <!-- Messages -->
 			  <div class="carousel-inner">
 			    <div class="item active">
-			    	<span>Vibe<br /><span style="font-size: 32px" class="stylized">the Peer feedback network.</span>
-			    		<p style="margin-bottom: 0em"><button id="rounded_corners" class="btn btn-large btn-primary" style="background-color: #000033" onclick="location.href='<?php echo $loginUrl ?>'">Log in with Facebook 
+			    	<span>Vibe<br /><span style="font-size: 32px" class="stylized">the anonymous peer feedback network</span>
+			    		<p style="margin-bottom: 0.1em"><button id="rounded_corners" class="btn btn-large btn-primary" style="background-color: #000033" onclick="location.href='<?php echo $loginUrl ?>'">Log in with Facebook 
 			    			<i class="icon-circle-arrow-right" style="color: white" ></i>
 		    			</button></p>
+		    				<a style="font-size: 13px; font-weight: normal; font-family: sans-serif; color: white; text-transform: lowercase; text-decoration: underline" href="#about" id="aboutlink">Learn more</a>
 	    			</span>
 			    </div>
 			  </div>
 			</div>
-			<div style="font-family: sans-serif;font-size: 18px; color: white; bottom: 3%; position: absolute; width: 100%; text-align: center">We promise we won't post anything to Facebook!</div>
+			<div style="font-family: sans-serif; font-size: 13px; color: white; bottom: 3%; position: absolute; width: 100%; text-align: center">We promise we won't post anything to Facebook!</div>
 		</div></section>
 
 		<!-- About Section -->
-		<section id="about" class="page">
-			<div class="container">
+		<section class="page">
+			<div class="container" id="about">
 				<div class="row-fluid">
 					<h1 class="page-title">About</h1>
-					<h2 class="page-subtitle">the Yelp of people</h2>
+					<h2 class="page-subtitle">the yelp of people</h2>
 					<div class="text-section">
 						<p>Have you ever wondered what impression you leave on an interviewer, friend, or relative? 
 								Vibe gives you a concise summary of feedback from your peers by tracking specific traits. 
@@ -164,7 +163,7 @@
 					<div class="span4 sidebar">
 						<h3>Contact Info</h3>
 						<ul class="info-list">
-	            <li class="icon-map-marker">Columbia University<br>New York, NY<br>10027</li>
+	            <li class="icon-map-marker">6536 Lerner Hall<br />2920 Broadway<br>New York, NY<br>10027</li>
 	            <li class="icon-envelope">team@go-vibe.com</li>
 	          </ul>
 	          <h3>Social Media</h3>

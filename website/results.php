@@ -240,11 +240,90 @@ function validateForm()
 					}
 					?>
 					<!-- END SAMPLE TABLE PORTLET-->
-						
+				</div>
 			</div>
 			
 			<div class="clearfix">
 			</div>
+			
+			<div class="tabbable tabbable-custom tabbable-custom-profile">
+				<ul class="nav nav-tabs">
+					<li class="active">
+						<a href="#tab_1_11" data-toggle="tab">Vibes</a>
+					</li>
+					<li>
+						<a href="#tab_1_22" data-toggle="tab">Comments</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="tab_1_11">
+							<div class="portlet box purple">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-comments"></i>Search Results
+							</div>
+							<div class="tools">
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div class="table-responsive">
+								<table class="table table-striped table-hover" style="width: 100%">
+								<thead>
+								<tr>
+									<th style="padding-left: 82px">
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>Hello</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					</div>
+					<!--tab-pane-->
+					<div class="tab-pane" id="tab_1_22">
+						<div class="tab-pane active" id="tab_1_1_1">
+							<!-- BEGIN SAMPLE FORM PORTLET-->
+					<div class="portlet box purple">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-comments"></i>Search Results
+							</div>
+							<div class="tools">
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div class="table-responsive">
+								<table class="table table-striped table-hover" style="width: 100%">
+								<thead>
+								<tr>
+									<th style="padding-left: 82px">
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr>
+									<td>Hello</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<!-- END SAMPLE TABLE PORTLET-->
+						</div>
+					</div>
+					<!--tab-pane-->
+				</div>
+				<!-- tab content -->
+			</div>
+			
 		</div>
 	</div>
 	<!-- END CONTENT -->
