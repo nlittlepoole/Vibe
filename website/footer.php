@@ -21,7 +21,7 @@
 	
 			 <a href="/website/terms.php">Terms and Conditions</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			 <a href="/website/privacy.php">Privacy Policy</a>&nbsp;&nbsp;&nbsp;&nbsp;
-			 <a href="index.php?action=disable">Disable Account</a>
+			 <a href="/index.php?action=disable">Disable Account</a>
 		 </p>
 </div>
 <!-- END FOOTER -->

@@ -28,7 +28,7 @@ function checkUID($uid){
 }
 function disable($uid){
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //initialies connection to the database using the credentials found in config.php
-    $sql = "UPDATE user SET Disable='2099-01-01', showNumFriends=0,websiteURL='',displayLocation=0,displayLocation=0,displayBirthday=0, blurb='' WHERE UID='$uid';"; //gets the active status of the user with $uid as a user ID
+    $sql = "UPDATE user SET Disable='2099-01-01', showNumFriends=0,websiteURL='',displayLocation=0,displayLocation=0,displayBirthdate=0, blurb='' WHERE UID='$uid';"; //gets the active status of the user with $uid as a user ID
     $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
     $st->execute(); //executes the sql query found above
     $conn=null;
