@@ -613,7 +613,7 @@
 																	POINTS
 																</span>
 																<span class="sale-num">
-																	<?php echo $_SESSION['profile']['Points'] ?>
+																	<?php echo $_SESSION['profile']['Points'] ?>3
 																</span>
 																
 															</li>
