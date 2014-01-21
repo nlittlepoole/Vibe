@@ -597,7 +597,7 @@
 																	<?php echo $_SESSION['profile']['totalAnswers'] ?>
 																</span>
 															</li>
-															
+															<!--
 															<li>
 																<span class="sale-info">
 																	 TOTAL ACHIEVEMENTS<i class="fa fa-img-down"></i>
@@ -606,7 +606,7 @@
 																	<?php echo $_SESSION['achievementsDone'] ?>
 																</span>
 															</li>
-															
+															-->
 															<li>
 																
 																<span class="sale-info">
