@@ -50,7 +50,7 @@
 			  <!-- Messages -->
 			  <div class="carousel-inner">
 			    <div class="item active">
-			    	<span><span style="color: white">Vibe</span><br /><span style="font-size: 32px" class="stylized">vibe: the anonymous peer feedback network</span>
+			    	<span><span style="color: white">Vibe</span><br /><span style="font-size: 32px" class="stylized">the anonymous peer feedback network</span>
 			    		<p style="margin-bottom: 0.1em"><button id="rounded_corners" class="btn btn-large btn-primary" style="background-color: #000033" onclick="location.href='<?php echo $loginUrl ?>'">Log in with Facebook 
 			    			<i class="icon-circle-arrow-right" style="color: white" ></i>
 		    			</button></p>
@@ -67,7 +67,7 @@
 			<div class="container" id="about">
 				<div class="row-fluid">
 					<h1 class="page-title">About</h1>
-					<h2 class="page-subtitle">the online people guide</h2>
+					<h2 class="page-subtitle">all about the first impression.</h2>
 					<div class="text-section">
 						<p>Have you ever wondered what impression you leave on an interviewer, friend, or relative? 
 								Vibe gives you a concise summary of feedback from your peers by tracking specific traits. 
@@ -145,7 +145,7 @@
 		<section id="contact" style="background: url(../img/greenwall1.jpg) no-repeat center center fixed" class="page">
 			<div class="container">
 				<h1 class="page-title">Contact</h1>
-				<h2 class="page-subtitle">Get in Touch!</h2>
+				<h2 class="page-subtitle">get in touch!</h2>
 				<div class="row-fluid">
 					<div class="span8 main-form">
 						<h3>Send Us a Message</h3>
