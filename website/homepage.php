@@ -50,16 +50,16 @@
 			  <!-- Messages -->
 			  <div class="carousel-inner">
 			    <div class="item active">
-			    	<span>Vibe<br /><span style="font-size: 32px" class="stylized">the anonymous peer feedback network</span>
+			    	<span><span style="color: white">Vibe</span><br /><span style="font-size: 32px" class="stylized">vibe: the anonymous peer feedback network</span>
 			    		<p style="margin-bottom: 0.1em"><button id="rounded_corners" class="btn btn-large btn-primary" style="background-color: #000033" onclick="location.href='<?php echo $loginUrl ?>'">Log in with Facebook 
 			    			<i class="icon-circle-arrow-right" style="color: white" ></i>
 		    			</button></p>
-		    				<a style="font-size: 13px; font-weight: normal; font-family: sans-serif; color: white; text-transform: lowercase; text-decoration: underline" href="#about" id="aboutlink">Learn more</a>
+		    				<a style="font-size: 14px; font-weight: normal; font-family: sans-serif; color: white; text-transform: lowercase; text-decoration: underline" href="#about" id="aboutlink">Learn more</a>
 	    			</span>
 			    </div>
 			  </div>
 			</div>
-			<div style="font-family: sans-serif; font-size: 13px; color: white; bottom: 3%; position: absolute; width: 100%; text-align: center">We promise we won't post anything to Facebook!</div>
+			<div style="font-family: sans-serif; font-size: 14px; color: white; bottom: 3%; position: absolute; width: 100%; text-align: center">We promise we won't post anything to Facebook!</div>
 		</div></section>
 
 		<!-- About Section -->

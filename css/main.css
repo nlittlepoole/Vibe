@@ -131,7 +131,8 @@ label, input[type="reset"], input[type="submit"] {
 /* =Parallax Background Images
 ----------------------------------------------- */
 #home {
-	background-image: url(../img/bg-sample1.jpg);
+	/*background-image: url(../img/bg-sample1.jpg);*/
+	background-image: url(../img/galaxy.jpg);
 	height: 100%;
 }
 #home.plain {
