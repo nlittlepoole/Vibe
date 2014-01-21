@@ -67,7 +67,7 @@
 			<div class="container" id="about">
 				<div class="row-fluid">
 					<h1 class="page-title">About</h1>
-					<h2 class="page-subtitle">the yelp of people</h2>
+					<h2 class="page-subtitle">the online people guide</h2>
 					<div class="text-section">
 						<p>Have you ever wondered what impression you leave on an interviewer, friend, or relative? 
 								Vibe gives you a concise summary of feedback from your peers by tracking specific traits. 
