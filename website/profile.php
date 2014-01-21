@@ -301,7 +301,7 @@
        $_SESSION['dispBday'] = $dispBday;
 	   
 	   //SHOW NUMBER OF FRIENDS
-	   if($_SESSION['profile']['showNumFriends']) {
+	   if(!$_SESSION['profile']['showNumFriends']) {
 	   //if($data['showNumFriends'] == 0) {
 	   	 $_SESSION['friendsDisplay'] = '
 	   	 <li>
@@ -614,7 +614,7 @@
 																	POINTS
 																</span>
 																<span class="sale-num">
-																	<?php echo $_SESSION['profile']['Points'] ?>3
+																	<?php echo $_SESSION['profile']['Points'] ?>
 																</span>
 																
 															</li>
