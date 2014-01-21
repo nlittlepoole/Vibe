@@ -105,19 +105,6 @@ function achievementsBox() {
 		
 		$days_between = ceil(abs($end - $start) / 86400); 
 		
-		if($nameOfAchievement == "HelpingHand") {
-			$nameOfAchievement = "Helping Hand"; 
-		}
-		else if($nameOfAchievement == "KingOfTheHill") {
-			$nameOfAchievement = "King of the Hill"; 
-		}
-		else if($nameOfAchievement == "MotherTeresa") {
-			$nameOfAchievement = "Mother Teresa"; 
-		}
-		else if($nameOfAchievement == "CommanderOfWords") {
-			$nameOfAchievement = "Commander of Words"; 
-		}
-		
 		if($days_between == 0) {
 			$days_between = "just now"; 
 		}
@@ -138,6 +125,19 @@ function achievementsBox() {
 		$color = $data['color']; 
 		
 		$conn = null; 
+		
+		if($nameOfAchievement == "HelpingHand") {
+			$nameOfAchievement = "Helping Hand"; 
+		}
+		else if($nameOfAchievement == "KingOfTheHill") {
+			$nameOfAchievement = "King of the Hill"; 
+		}
+		else if($nameOfAchievement == "MotherTeresa") {
+			$nameOfAchievement = "Mother Teresa"; 
+		}
+		else if($nameOfAchievement == "CommanderOfWords") {
+			$nameOfAchievement = "Commander of Words"; 
+		}
 		
 		$achievementDisp = '<li>
 			<div class="col1">
