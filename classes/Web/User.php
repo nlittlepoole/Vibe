@@ -167,6 +167,7 @@ function addUser( $facebook,$uid,$token ) {
 }
 function array_delete($array, $element) {
     return array_diff($array, [$element]);
+    //return array_diff($array, $element);
 }
 
 //function used to create a list of a user's top friends. This function will only be called once per vibe session when the user first logs in.
