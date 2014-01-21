@@ -301,7 +301,8 @@
        $_SESSION['dispBday'] = $dispBday;
 	   
 	   //SHOW NUMBER OF FRIENDS
-	   if($data['showNumFriends'] == 0) {
+	   if($_SESSION['profile']['showNumFriends']) {
+	   //if($data['showNumFriends'] == 0) {
 	   	 $_SESSION['friendsDisplay'] = '
 	   	 <li>
 			<a href="#">Friends
