@@ -24,7 +24,7 @@ switch ( $action ) {
     $_SESSION['friends'] = array_delete($facebook->api('/me/friends'),$uid); //user's friend list is a json that is decoded from the graph url and returned as a 2d array 
     addUser($facebook,$uid,$token); //adds user ID to mysql USER table, method does nothing if ID already exists and activates the ID if information exists but this is the first time the user has logged in
     topFriends($facebook,$uid,$token); // pulls users top friends using the top friends function
-    header('Location: /index.php?action=dashboard&force=1'); // index is reloaded but with question prameter. Now that environment is set up index.php is reloaded with the intent of answring questiosn
+    //header('Location: /index.php?action=dashboard&force=1'); // index is reloaded but with question prameter. Now that environment is set up index.php is reloaded with the intent of answring questiosn
 break;
   case 'question'://occurs after a login or another question, this case handles generating a new question and friend
     require( CLASS_PATH . "/Web/Question.php"); 
@@ -72,6 +72,11 @@ break;
     require( CLASS_PATH . "/Web/Search.php");
     $redirect=profiled($facebook,$uid,$token);
     header($redirect);
+  break;
+  case 'disable':
+  require( CLASS_PATH . "/Web/User.php");
+  disable($uid);
+  header('Location:'.$_SESSION['logoutUrl'] );
   break;
   case 'removeComment':
     require( CLASS_PATH . "/Web/User.php");

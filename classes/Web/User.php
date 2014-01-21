@@ -14,6 +14,27 @@ Checks if user is in the database
 */
 function checkUID($uid){
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //initialies connection to the database using the credentials found in config.php
+    $sql = "SELECT id FROM user WHERE UID= $uid AND  Disable IS NULL"; //gets the active status of the user with $uid as a user ID
+    $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
+    $st->execute(); //executes the sql query found above
+    $raw=$st->fetch();
+    $conn=null;
+    if(!$raw){
+      return false;
+    }
+    else{
+     return true; 
+    } 
+}
+function disable($uid){
+    $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //initialies connection to the database using the credentials found in config.php
+    $sql = "UPDATE user SET Disable='2099-01-01', showNumFriends=0,websiteURL='',displayLocation=0,displayLocation=0,displayBirthday=0, blurb='' WHERE UID='$uid';"; //gets the active status of the user with $uid as a user ID
+    $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
+    $st->execute(); //executes the sql query found above
+    $conn=null;
+}
+function checkUID2($uid){
+    $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //initialies connection to the database using the credentials found in config.php
     $sql = "SELECT id FROM user WHERE UID= $uid"; //gets the active status of the user with $uid as a user ID
     $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
     $st->execute(); //executes the sql query found above
@@ -58,7 +79,7 @@ Returns true if user exists and is active, otherwise false
 */
 function checkActive($uid){
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //initialies connection to the database using the credentials found in config.php
-    echo $sql = "SELECT Active FROM user WHERE UID= $uid"; //gets the active status of the user with $uid as a user ID
+    $sql = "SELECT Active FROM user WHERE UID= $uid AND  Disable IS NULL"; //gets the active status of the user with $uid as a user ID
     $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
     $st->execute(); //executes the sql query found above
     $raw=$st->fetch();
@@ -92,7 +113,7 @@ function refresh($uid){
 }
 //addUser(int) function checks if a user is in the Vibosphere database, it adds them if they are not, activates them if they are in there but not active, and ignores if they are in the database
 function addUser( $facebook,$uid,$token ) {
-    $check=checkUID($uid);
+    $check=checkUID2($uid);
     $now=date("Y-m-d H:i:s", time());
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
     $_SESSION['redirect']= checkActive($uid)?""  :"/website/dashboard_new.php";
@@ -108,6 +129,8 @@ function addUser( $facebook,$uid,$token ) {
         $st->execute(); //query is executed
     }
     else { //the user is in the database but not active, theyare simply set to active
+      if(checkUID($uid)){
+        echo "fail";
         $graph_url="https://graph.facebook.com/" . $uid . "/?fields=gender,name"; //facebook graph api is used to create gender query
         $data = json_decode(file_get_contents($graph_url), true); //user data json is decrypted and returned as an array
         $gender=$data['gender']; //gender is set
@@ -117,6 +140,10 @@ function addUser( $facebook,$uid,$token ) {
              $sql = "UPDATE user SET Active='1',Gender='$gender', Communities='$affiliations',  Name='$name', Friends=$friends, LastLogin='$now' WHERE UID='$uid';"; //query is set to update the user to active and add their gender and communities
              $st = $conn->prepare( $sql ); //protection line used to hide queries from browsers
              $st->execute(); //command above is executed
+        }
+      else{
+        header("Location:/index.php");
+      }
     }
     $conn=null; //connection to the database is closed. Must do this to prevent memory leaks and performance slowdowns
   }
