@@ -12,8 +12,8 @@ function initAchievementsCreate() {
 	//Pulling out achievements and storing them in SESSION
     $_SESSION['achievementsProgress'] = array($data['HelpingHand_progress'], $data['Pal_progress'], 
     $data['Advocate_progress'], $data['Comrade_progress'], $data['MotherTeresa_progress'], 
-    $data['Diva_progress'], $data['King of the Hill_progress'], $data['Ideator_progress'], 
-	$data['Visionairy_progress'], $data['Blogger_progress'], $data['Commander of Words_progress'], 
+    $data['Diva_progress'], $data['KingOfTheHill_progress'], $data['Ideator_progress'], 
+	$data['Visionairy_progress'], $data['Blogger_progress'], $data['CommanderOfWords_progress'], 
 	$data['Viber_progress']);
 	
 	//Also set up the achievements too

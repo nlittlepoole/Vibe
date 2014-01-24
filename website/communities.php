@@ -50,7 +50,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="" name="description"/>
 <meta content="" name="author"/>
-<meta property="og:title" content=<?php  echo '"'. $_SESSION['profile']['Name'] . "'s". 'Profile"' ?> />
+<meta property="og:title" content=<?php  echo '"'. $_SESSION['loction']['Name'] . "'s". 'Profile"' ?> />
 <meta property="og:type" content="website" />
 <meta type="og:url" content= <?php  echo '"'. curPageURL() ?>.'"' ?> >
 <meta property="og:image" content="/img/Niger1.jpg" />
@@ -164,6 +164,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					</span>
 					</a>
 				</li>
+				<!--
 				<li id="forum-link" class="tooltips" data-placement="right" data-original-title="Community&nbsp;Question Request&nbsp;Forum">
 					<a href="javascript:;">
 					<i class="fa fa-comments"></i>
@@ -180,6 +181,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 					</span>
 					</a>
 				</li>
+				-->
 			</ul>
 			<!-- END SIDEBAR MENU -->
 		</div>
@@ -1673,7 +1675,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Attractiveness
 									</td>
 									<td>
-										<?php echo $_SESSION['location'][0]['Average'] ? $_SESSION['location'][0]['Average']: "--" ?>
+										<?php echo $_SESSION['location'][0]['Average'] && $_SESSION['location'][0]['Average']!=-1 ? $_SESSION['location'][0]['Average']: "--" ?>
 									</td>
 									<td>
 										<?php echo $_SESSION['location'][0]['Keywords'] ? $_SESSION['location'][0]['Keywords']: "N/A" ?>
@@ -1687,7 +1689,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Approachability
 									</td>
 									<td>
-										<?php echo $_SESSION['location'][1]['Average'] ? $_SESSION['location'][1]['Average']: "--" ?>
+										<?php echo $_SESSION['location'][1]['Average'] && $_SESSION['location'][1]['Average']!=-1 ? $_SESSION['location'][1]['Average']: "--" ?>
 									</td>
 									<td>
 										<?php echo $_SESSION['location'][1]['Keywords'] ? $_SESSION['location'][1]['Keywords']: "N/A" ?>
@@ -1701,7 +1703,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Intelligence
 									</td>
 									<td>
-										<?php echo $_SESSION['location'][2]['Average'] ? $_SESSION['location'][2]['Average']: "--" ?>
+										<?php echo $_SESSION['location'][2]['Average'] && $_SESSION['location'][2]['Average']!=-1? $_SESSION['location'][2]['Average']: "--" ?>
 									</td>
 									<td>
 										<?php echo $_SESSION['location'][2]['Keywords'] ? $_SESSION['location'][2]['Keywords']: "N/A" ?>
@@ -1715,7 +1717,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Style
 									</td>
 									<td>
-										<?php echo $_SESSION['location'][3]['Average'] ? $_SESSION['location'][3]['Average']: "--" ?>
+										<?php echo $_SESSION['location'][3]['Average'] && $_SESSION['location'][3]['Average']!=-1? $_SESSION['location'][3]['Average']: "--" ?>
 									</td>
 									<td>
 										<?php echo $_SESSION['location'][3]['Keywords'] ? $_SESSION['location'][3]['Keywords']: "N/A" ?>
@@ -1729,7 +1731,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Promiscuity
 									</td>
 									<td>
-										<?php echo $_SESSION['location'][4]['Average'] ? $_SESSION['location'][4]['Average']: "--" ?>
+										<?php echo $_SESSION['location'][4]['Average'] && $_SESSION['location'][4]['Average']!=-1? $_SESSION['location'][4]['Average']: "--" ?>
 									</td>
 									<td>
 										<?php echo $_SESSION['location'][4]['Keywords'] ? $_SESSION['location'][4]['Keywords']: "N/A" ?>
@@ -1743,7 +1745,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Humor
 									</td>
 									<td>
-										<?php echo $_SESSION['location'][5]['Average'] ? $_SESSION['location'][5]['Average']: "--" ?>
+										<?php echo $_SESSION['location'][5]['Average'] && $_SESSION['location'][5]['Average']!=-1? $_SESSION['location'][5]['Average']: "--" ?>
 									</td>
 									<td>
 										<?php echo $_SESSION['location'][5]['Keywords'] ? $_SESSION['location'][5]['Keywords']: "N/A" ?>
@@ -1757,7 +1759,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Confidence
 									</td>
 									<td>
-										<?php echo $_SESSION['location'][6]['Average'] ? $_SESSION['location'][6]['Average']: "--" ?>
+										<?php echo $_SESSION['location'][6]['Average'] && $_SESSION['location'][6]['Average']!=-1? $_SESSION['location'][6]['Average']: "--" ?>
 									</td>
 									<td>
 										<?php echo $_SESSION['location'][6]['Keywords'] ? $_SESSION['location'][6]['Keywords']: "N/A" ?>
@@ -1771,7 +1773,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Fun
 									</td>
 									<td>
-										<?php echo $_SESSION['location'][7]['Average'] ? $_SESSION['location'][7]['Average']: "--" ?>
+										<?php echo $_SESSION['location'][7]['Average'] && $_SESSION['location'][7]['Average']!=-1? $_SESSION['location'][7]['Average']: "--" ?>
 									</td>
 									<td>
 										<?php echo $_SESSION['location'][7]['Keywords'] ? $_SESSION['location'][7]['Keywords']: "N/A" ?>
@@ -1785,7 +1787,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Kindness
 									</td>
 									<td>
-										<?php echo $_SESSION['location'][8]['Average'] ? $_SESSION['location'][8]['Average']: "--" ?>
+										<?php echo $_SESSION['location'][8]['Average'] && $_SESSION['location'][8]['Average']!=-1? $_SESSION['location'][8]['Average']: "--" ?>
 									</td>
 									<td>
 										<?php echo $_SESSION['location'][8]['Keywords'] ? $_SESSION['location'][8]['Keywords']: "N/A" ?>
@@ -1799,7 +1801,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Honesty
 									</td>
 									<td>
-										<?php echo $_SESSION['location'][9]['Average'] ? $_SESSION['location'][9]['Average']: "--" ?>
+										<?php echo $_SESSION['location'][9]['Average'] && $_SESSION['location'][9]['Average']!=-1? $_SESSION['location'][9]['Average']: "--" ?>
 									</td>
 									<td>
 										<?php echo $_SESSION['location'][9]['Keywords'] ? $_SESSION['location'][9]['Keywords']: "N/A" ?>
@@ -1813,7 +1815,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Reliability
 									</td>
 									<td>
-										<?php echo $_SESSION['location'][10]['Average'] ? $_SESSION['location'][10]['Average']: "--" ?>
+										<?php echo $_SESSION['location'][10]['Average'] && $_SESSION['location'][10]['Average']!=-1? $_SESSION['location'][10]['Average']: "--" ?>
 									</td>
 									<td>
 										<?php echo $_SESSION['location'][10]['Keywords'] ? $_SESSION['location'][10]['Keywords']: "N/A" ?>
@@ -1827,7 +1829,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Happiness
 									</td>
 									<td>
-										<?php echo $_SESSION['location'][11]['Average'] ? $_SESSION['location'][11]['Average']: "--" ?>
+										<?php echo $_SESSION['location'][11]['Average'] && $_SESSION['location'][11]['Average']!=-1? $_SESSION['location'][11]['Average']: "--" ?>
 									</td>
 									<td>
 										<?php echo $_SESSION['location'][11]['Keywords'] ? $_SESSION['location'][11]['Keywords']: "N/A" ?>
@@ -1841,7 +1843,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Ambition
 									</td>
 									<td>
-										<?php echo $_SESSION['location'][12]['Average'] ? $_SESSION['location'][12]['Average']: "--" ?>
+										<?php echo $_SESSION['location'][12]['Average'] && $_SESSION['location'][12]['Average']!=-1? $_SESSION['location'][12]['Average']: "--" ?>
 									</td>
 									<td>
 										<?php echo $_SESSION['location'][12]['Keywords'] ? $_SESSION['location'][12]['Keywords']: "N/A" ?>
@@ -1855,7 +1857,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 										Modesty
 									</td>
 									<td>
-										<?php echo $_SESSION['location'][13]['Average'] ? $_SESSION['location'][13]['Average']: "--" ?>
+										<?php echo $_SESSION['location'][13]['Average'] && $_SESSION['location'][13]['Average']!=-1 ? $_SESSION['location'][13]['Average']: "--" ?>
 									</td>
 									<td>
 										<?php echo $_SESSION['location'][13]['Keywords'] ? $_SESSION['location'][13 ]['Keywords']: "N/A" ?>

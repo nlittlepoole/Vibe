@@ -38,6 +38,7 @@ function search($query,$facebook,$uid,$token){
         $users=array_unique(array_merge($users,friendsLoose($query)));
         $users=array_unique(array_merge($users,affiliatesLoose($query,$uid)));
         $users=array_unique(array_merge($users,everyone($query)));
+        $users=array_slice($users, 0, 100);
         $communities=communities($query);
         return Array($users,$communities);
     }
@@ -51,7 +52,7 @@ function friendsExact($query){
     $result=Array();
     for($x=0;$x<sizeof($friends['data']);$x++){
         if(stristr($friends['data'][$x]['name'], $query)){
-            $result[$x]= '<tr><td><a href="/index.php?action=profile&profile='.$friends['data'][$x]['id'].'""><img src="http://graph.facebook.com/'.$friends['data'][$x]['id'].'/picture" height="62" width="62" />&nbsp;&nbsp;&nbsp;&nbsp;'.$friends['data'][$x]['name'].'</a></td></tr>';
+            $result[$x]= '<tr><td><a href="/index.php?action=profile&profile='.$friends['data'][$x]['id'].'""><img src="http://graph.facebook.com/'.$friends['data'][$x]['id'].'/picture" height="62" width="62" /></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/index.php?action=profile&profile='.$friends['data'][$x]['id'].'"">'.$friends['data'][$x]['name'].'</a></td></tr>';
         }
     }
     return $result;
@@ -64,7 +65,7 @@ function friendsLoose($query){
     for($x=0;$x<sizeof($friends['data']);$x++){
         foreach($queries as $test){
             if(stristr($friends['data'][$x]['name'], $test)){
-                $result[$x]= '<tr><td><a href="/index.php?action=profile&profile='.$friends['data'][$x]['id'].'""><img src="http://graph.facebook.com/'.$friends['data'][$x]['id'].'/picture"  height="62" width="62" />&nbsp;&nbsp;&nbsp;&nbsp;'.$friends['data'][$x]['name'].'</a></td></tr>';
+                $result[$x]= '<tr><td><a href="/index.php?action=profile&profile='.$friends['data'][$x]['id'].'""><img src="http://graph.facebook.com/'.$friends['data'][$x]['id'].'/picture" height="62" width="62" /></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/index.php?action=profile&profile='.$friends['data'][$x]['id'].'"">'.$friends['data'][$x]['name'].'</a></td></tr>'  ;
             } 
         }
 
@@ -87,7 +88,7 @@ function affiliatesExact($query, $uid){
 
     }
     for($x=0;$x<sizeof($users);$x++){
-        $users[$x]='<tr><td><a href="/index.php?action=profile&profile='.$users[$x]['UID'].'""><img src="http://graph.facebook.com/'.$users[$x]['UID'].'/picture" height="42" width="42">&nbsp;&nbsp;&nbsp;&nbsp;'.$users[$x]['Name'].'</a></td></tr>';
+        $users[$x]='<tr><td><a href="/index.php?action=profile&profile='.$users[$x]['UID'].'""><img src="http://graph.facebook.com/'.$users[$x]['UID'].'/picture" height="62" width="62" /></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/index.php?action=profile&profile='.$users[$x]['UID'].'"">'.$users[$x]['Name'].'</a></td></tr>'  ;
     }
     return $users;
 } 
@@ -117,7 +118,7 @@ function affiliatesLoose($query, $uid){
     }
     $conn = null;
     for($x=0;$x<sizeof($users);$x++){
-        $users[$x]= '<tr><td><a href="/index.php?action=profile&profile='.$users[$x]['UID'].'""><img src="http://graph.facebook.com/'.$users[$x]['UID'].'/picture"  height="42" width="42" />&nbsp;&nbsp;&nbsp;&nbsp;'.$users[$x]['Name'].'</a></td></tr>'  ;$users[$x]['Name'] . ":" .$users[$x]['UID'];
+        $users[$x]= '<tr><td><a href="/index.php?action=profile&profile='.$users[$x]['UID'].'""><img src="http://graph.facebook.com/'.$users[$x]['UID'].'/picture" height="62" width="62" /></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/index.php?action=profile&profile='.$users[$x]['UID'].'"">'.$users[$x]['Name'].'</a></td></tr>'  ;
     }
     return $users;
 } 
@@ -129,16 +130,30 @@ function everyone($query){
     $users=$st->fetchAll();
     $conn = null;
     for($x=0;$x<sizeof($users);$x++){
-        $users[$x]= '<tr><td><a href="/index.php?action=profile&profile='.$users[$x]['UID'].'""><img src="http://graph.facebook.com/'.$users[$x]['UID'].'/picture"  height="42" width="42" />&nbsp;&nbsp;&nbsp;&nbsp;'.$users[$x]['Name'].'</a></td></tr>'  ;
+        $users[$x]= '<tr><td><a href="/index.php?action=profile&profile='.$users[$x]['UID'].'""><img src="http://graph.facebook.com/'.$users[$x]['UID'].'/picture" height="62" width="62" /></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/index.php?action=profile&profile='.$users[$x]['UID'].'"">'.$users[$x]['Name'].'</a></td></tr>'  ;
     }
     return isset($users) ? $users : Array();
 }
 function communities($query){
+    $queries=split(' ',$query);
+    $query='';
+    for($x=0;$x<sizeof($queries);$x++){ 
+        if($queries[$x]){
+            $query=$query." OR Name LIKE '%". $queries[$x] ."%'";
+        }
+    }
+    $query=substr($query,3);
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
-    $sql = "SELECT Name, UID FROM directory WHERE Name LIKE '%".$query."%'"; //gets the active status of the user with $input_id as a user ID
+    $sql = "SELECT Name, UID FROM directory WHERE ".$query." LIMIT 50"; //gets the active status of the user with $input_id as a user ID
     $st = $conn->prepare( $sql ); //this is a useful security line, hides the sql commands from browser consoles
     $st->execute(); //executes the sql query found above
     $conn = null;
     $communities=$st->fetchAll();
+
+    for($x=0;$x<sizeof($communities);$x++){
+        $communities[$x]= '<tr><td><a href="/index.php?action=location&location='.$communities[$x]['UID'].'""><img src="http://graph.facebook.com/'.$communities[$x]['UID'].'/picture" height="62" width="62" /></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="/index.php?action=location&location='.$communities[$x]['UID'].'"">'.$communities[$x]['Name'].'</a></td></tr>'  ;
+    }
+    return isset($communities) ? $communities : Array();
+
 }
 ?>

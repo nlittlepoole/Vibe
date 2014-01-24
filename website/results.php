@@ -153,6 +153,7 @@ function validateForm()
 					</span>
 					</a>
 				</li>
+				<!--
 				<li id="forum-link" class="tooltips" data-placement="right" data-original-title="Community&nbsp;Question Request&nbsp;Forum">
 					<a href="javascript:;">
 					<i class="fa fa-comments"></i>
@@ -169,6 +170,7 @@ function validateForm()
 					</span>
 					</a>
 				</li>
+				-->
 			</ul>
 			<!-- END SIDEBAR MENU -->
 		</div>
@@ -205,7 +207,24 @@ function validateForm()
 			
 			<div class="row">
 				<div class="col-md-12 ">
-					<!-- BEGIN SAMPLE FORM PORTLET-->
+				</div>
+			</div>
+			
+			<div class="clearfix">
+			</div>
+			
+			<div class="tabbable tabbable-custom tabbable-custom-profile">
+				<ul class="nav nav-tabs">
+					<li class="active">
+						<a href="#tab_1_11" data-toggle="tab">People</a>
+					</li>
+					<li>
+						<a href="#tab_1_22" data-toggle="tab">Communities</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="tab_1_11">
+							<?php if($_SESSION['Results'][0]){echo '
 					<div class="portlet box purple">
 						<div class="portlet-title">
 							<div class="caption">
@@ -224,24 +243,68 @@ function validateForm()
 									</th>
 								</tr>
 								</thead>
-								<tbody>
-								<?php 
+								<tbody>';
 								foreach($_SESSION['Results'][0] as $result){
 									echo $result;
 								} 
-
-								?>
+								 echo '
 								</tbody>
 								</table>
 							</div>
 						</div>
+					</div>';}
+					else{
+						echo "<br>No Results";
+					}
+					?>
+					</div>
+					
+					<!--tab-pane-->
+					<div class="tab-pane" id="tab_1_22">
+						<div class="tab-pane active" id="tab_1_1_1">
+							<!-- BEGIN SAMPLE FORM PORTLET-->
+					<?php if($_SESSION['Results'][1]){echo '
+					<div class="portlet box purple">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-comments"></i>Search Results
+							</div>
+							<div class="tools">
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div class="table-responsive">
+								<table class="table table-striped table-hover" style="width: 100%">
+								<thead>
+								<tr>
+									<th style="padding-left: 82px">
+										Name
+									</th>
+								</tr>
+								</thead>
+								<tbody>';
+								foreach($_SESSION['Results'][1] as $result){
+									echo $result;
+								} 
+								 echo '
+								</tbody>
+								</table>
+							</div>
+						</div>
+					</div>';}
+					else{
+						echo "<br>No Results";
+					}
+					?>
 					</div>
 					<!-- END SAMPLE TABLE PORTLET-->
-						
+						</div>
+					</div>
+					<!--tab-pane-->
+				</div>
+				<!-- tab content -->
 			</div>
 			
-			<div class="clearfix">
-			</div>
 		</div>
 	</div>
 	<!-- END CONTENT -->

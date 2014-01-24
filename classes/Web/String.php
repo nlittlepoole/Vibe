@@ -70,7 +70,7 @@ function dashboardComments($comments,$uid){
                       <div class="cont">
                         <div class="cont-col1">
                           <div class="desc"><span>
-                             <em>Yo do not have any comments yet.</em>
+                             <em>There are not have any comments yet.</em>
                           </span>
                           </div>
                         </div>
@@ -129,23 +129,26 @@ function comments($comments){
       //$comments[$x]=Array($temp[2],$temp[0], $time);
     }
   }
-    for ($x=$max; $x<9; $x++){
-      $comments[$x]='                 <li>
+  else{
+    $comments=array();
+    $comments[0]='                 
+              <li>
                     <div class="col1">
                       <div class="cont">
                         <div class="cont-col1">
-                          <div class="desc">
+                          <div class="desc"><span>
+                             <em>You do not have any comments yet.</em>
+                          </span>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div class="col2">
-                      <div class="date">
+                      <div class="date">                         
                       </div>
                     </div>
-                    
                   </li>';
-    }
+  }
   return $comments;  
 }
 ?>

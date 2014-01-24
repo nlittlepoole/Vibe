@@ -48,13 +48,13 @@ function question($facebook,$uid,$token ){
     $question= str_replace("name", $name, $question); 
     if($_SESSION['Gender']=="female"){
         $question= str_replace("their", "her", $question);
-        $question= str_replace("them", "her", $question);  
         $question= str_replace("themselves", "herself", $question); 
+        $question= str_replace("them", "her", $question);  
     }
     else{
         $question= str_replace("their", "his", $question); 
         $question= str_replace("themselves", "himself", $question);
-        $question= str_replace("attractive", "handsome", $question); 
+        $question= str_replace("attractive", "good looking", $question); 
         $question= str_replace("them", "him", $question);  
     }
     $pic=getPictures($recipient);
@@ -121,7 +121,7 @@ function getQuestion($input){
 
 function submit($facebook,$uid,$token ){
 	//This is the function that gets called when the user submits a question.
-	
+	$_SESSION['dashboard']['Points']=$_SESSION['dashboard']['Points']+1;
 	helpinghandTracker(); 
 	palTracker();
 	advocateTracker(); 

@@ -55,9 +55,11 @@ function location($facebook,$uid,$token){
         flush();                             // Force php-output-cache to flush to browser.
       }
       else{
-        echo $location;
-        echo "<script type='text/javascript'>alert('Sorry this Community does not have Vibe data yet!');</script>";
-        header('Location:/index.php?action=location&location=-1');
+        $location =$_GET['location'];
+        $data = $facebook->api('/'.$location.'/?fields=name');
+        $_SESSION['location']['Name']=$data['name'];
+        $_SESSION['location']['pic']="http://graph.facebook.com/".$location."/picture";
+        header('Location:/website/nodatacommunity.php');
       }
     }
     else{
@@ -67,10 +69,8 @@ function location($facebook,$uid,$token){
         header('Location:/index.php');
       }
       else{
-        echo $location;
-        sleep(5);
-        echo "<script type='text/javascript'>alert('Invalid Request');</script>";
-        header('Location:/index.php?action=location&location=-1');
+         $_SESSION['profile']['Name']="";
+        header('Location:/website/nodatacommunity.php');
 
       }
       

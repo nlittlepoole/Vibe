@@ -73,6 +73,11 @@ break;
     $redirect=profiled($facebook,$uid,$token);
     header($redirect);
   break;
+  case 'disable':
+  require( CLASS_PATH . "/Web/User.php");
+  disable($uid);
+  header('Location:'.$_SESSION['logoutUrl'] );
+  break;
   case 'removeComment':
     require( CLASS_PATH . "/Web/User.php");
     $index=$_GET['comment'];

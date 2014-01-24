@@ -301,7 +301,8 @@
        $_SESSION['dispBday'] = $dispBday;
 	   
 	   //SHOW NUMBER OF FRIENDS
-	   if($data['showNumFriends'] == 0) {
+	   if(!$_SESSION['profile']['showNumFriends']) {
+	   //if($data['showNumFriends'] == 0) {
 	   	 $_SESSION['friendsDisplay'] = '
 	   	 <li>
 			<a href="#">Friends
@@ -488,6 +489,7 @@
 					</span>
 					</a>
 				</li>
+				<!--
 				<li id="forum-link" class="tooltips" data-placement="right" data-original-title="Community&nbsp;Question Request&nbsp;Forum">
 					<a href="javascript:;">
 					<i class="fa fa-comments"></i>
@@ -504,6 +506,7 @@
 					</span>
 					</a>
 				</li>
+				-->
 			</ul>
 			<!-- END SIDEBAR MENU -->
 		</div>
@@ -595,7 +598,7 @@
 																	<?php echo $_SESSION['profile']['totalAnswers'] ?>
 																</span>
 															</li>
-															
+															<!--
 															<li>
 																<span class="sale-info">
 																	 TOTAL ACHIEVEMENTS<i class="fa fa-img-down"></i>
@@ -604,7 +607,7 @@
 																	<?php echo $_SESSION['achievementsDone'] ?>
 																</span>
 															</li>
-															
+															-->
 															<li>
 																
 																<span class="sale-info">

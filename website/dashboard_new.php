@@ -132,6 +132,7 @@
 					</span>
 					</a>
 				</li>
+				<!--
 				<li id="forum-link" class="tooltips" data-placement="right" data-original-title="Community&nbsp;Question Request&nbsp;Forum">
 					<a href="javascript:;">
 					<i class="fa fa-comments"></i>
@@ -148,6 +149,7 @@
 					</span>
 					</a>
 				</li>
+				-->
 			</ul>
 			<!-- END SIDEBAR MENU -->
 		</div>
@@ -241,7 +243,7 @@
 						</div>
 						<div class="details">
 							<div class="number">
-								+4
+								+<?php echo $_SESSION['achievementsDone']; ?>
 							</div>
 							<div class="desc">
 								Achievements
@@ -650,7 +652,7 @@
         <h2>Percentile within Vibe</h2>
         <p>We also give you your percentile within Vibe of your score. 71% for example means that you have a higher score than 71% of people on Vibe for that trait.</p>
   </li>
-  <li data-id="searchTitle" data-options="tipLocation:bottom;" data-text="Next: Questions">
+  <li data-id="searchTitle" data-options="tipLocation:right;" data-text="Next: Questions">
         <h2>Search</h2>
         <p>View the Vibe strengths of any of your Facebook friends by searching them here!</p>
   </li>
