@@ -98,7 +98,7 @@ while count[0][0] != 0:
                 cur.execute(query)
                 cur.connection.commit()
                 query= "INSERT INTO `" + data[1] + "`(`ID`, `Attribute`, `Keywords`, `Average`, `Sum`, `Squares`, `Deviation`, `Rank1`, `Rank2`, `Rank3`, `Rank4`, `Rank5`, `Rank6`, `Rank7`, `Rank8`, `Rank9`, `Rank10`) VALUES(1, 'Attractiveness', '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', ''),(2, 'Affability', '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', ''),(3, 'Intelligence', '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', ''),(4, 'Style', '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', ''),(5, 'Promiscuity', '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', ''),(6, 'Humor', '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', ''),(7, 'Confidence', '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', ''),(8, 'Fun', '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', ''),(9, 'Kindness', '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', ''),(10, 'Honesty', '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', ''),(11, 'Reliability', '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', ''),(12, 'Happiness', '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', ''),(13, 'Ambition', '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', ''),(14, 'Humility', '', 0, 0, 0, 0, '', '', '', '', '', '', '', '', '', '');"
-                #print query
+                print query
                 cur.execute(query)
                 cur.connection.commit()
                 query="SELECT Average,Sum FROM `"+data[1] +"` WHERE Attribute= '" + attribute + "';"
