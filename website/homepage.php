@@ -193,27 +193,17 @@
 		<div id="preloader"></div>
 		
 		<!-- Plugins & Scripts -->
+		
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
 		<script>window.jQuery || document.write('<script src="/js/jquery.min.js" type="text/javascript"><\/script>')</script>
 		<script src="/js/bootstrap.min.js" type="text/javascript"></script>
 		<script src="/js/jquery.parallax-1.1.3.js" type="text/javascript"></script>
 		<script src="/js/jquery.flexslider-min.js" type="text/javascript"></script>
 		<script src="/js/jquery.isotope.min.js" type="text/javascript"></script>
-		<script src="/js/jquery.magnific-popup.min.js" type="text/javascript"></script>
+		<!--<script src="/js/jquery.magnific-popup.min.js" type="text/javascript"></script>-->
 		<script src="/js/main.js" type="text/javascript"></script>
-
-		<script type="text/javascript">
-			//Twitter feed
-		  $('#tweets').tweet({
-		  	modpath: 'twitter/index.php',
-		    username: 'twitter', // Enter Twitter Username Here
-		    count: 1,
-		    template: [
-					'{text}{time}'
-				].join( '' ), 
-		    loading_text: "loading tweets..."
-		  });
-	  </script>
-<?php echo isset($_SESSION['redirect']) ? "<script type='text/javascript'>alert('Log in to use Vibe Communities and Profiles!');</script>" :"" ?>
+		
+		
+<!--<?php echo isset($_SESSION['redirect']) ? "<script type='text/javascript'>alert('Log in to use Vibe Communities and Profiles!');</script>" :"" ?>-->
 	</body>
 </html>
