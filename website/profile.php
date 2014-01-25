@@ -70,11 +70,11 @@
 		else {$affabilityScore = "--"; }
 		
 		if($data['affabilityDisableDate'] == "") {
-			$_SESSION['affableDisp'] = '<tr><td style="color: #0d638f;">Approachability</td><td>' . 
+			$_SESSION['affabilityDisp'] = '<tr><td style="color: #0d638f;">Approachability</td><td>' . 
 			$affabilityScore . '</td><td><em>' . $affabilityKeys .'</em></td></tr>'; 
 		}
 		else {
-			$_SESSION['affableDisp'] = ""; 
+			$_SESSION['affabilityDisp'] = ""; 
 		}
 		
 		//INTELLIGENCE
