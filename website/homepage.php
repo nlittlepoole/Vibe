@@ -194,12 +194,12 @@
 		
 		<!-- Plugins & Scripts -->
 		
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
+		<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>-->
 		<script>window.jQuery || document.write('<script src="/js/jquery.min.js" type="text/javascript"><\/script>')</script>
 		<script src="/js/bootstrap.min.js" type="text/javascript"></script>
 		<script src="/js/jquery.parallax-1.1.3.js" type="text/javascript"></script>
 		<script src="/js/jquery.flexslider-min.js" type="text/javascript"></script>
-		<script src="/js/jquery.isotope.min.js" type="text/javascript"></script>
+		<!-- <script src="/js/jquery.isotope.min.js" type="text/javascript"></script>-->
 		<!--<script src="/js/jquery.magnific-popup.min.js" type="text/javascript"></script>-->
 		<script src="/js/main.js" type="text/javascript"></script>
 		
