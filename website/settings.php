@@ -449,7 +449,7 @@ function validateForm()
 						<?php echo $_SESSION['dashboard']['Communities'] ?>
 					</ul>
 				</li>
-				<li id="frontend-link" class="tooltips" data-placement="right" data-original-title="View all Achievements">
+				<li id="frontend-link">
 					<a href="achievements.php">
 					<i class="fa fa-trophy"></i>
 					<span class="title">

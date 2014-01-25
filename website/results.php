@@ -145,7 +145,7 @@ function validateForm()
 						<?php echo $_SESSION['dashboard']['Communities'] ?>
 					</ul>
 				</li>
-				<li id="frontend-link" class="tooltips" data-placement="right" data-original-title="Frontend&nbsp;Theme For&nbsp;Metronic&nbsp;Admin">
+				<li id="frontend-link">
 					<a href="achievements.php">
 					<i class="fa fa-trophy"></i>
 					<span class="title">

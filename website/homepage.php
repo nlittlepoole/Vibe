@@ -54,12 +54,12 @@
 			    		<p style="margin-bottom: 0.1em"><button id="rounded_corners" class="btn btn-large btn-primary" style="background-color: #000033" onclick="location.href='<?php echo $loginUrl ?>'">Log in with Facebook 
 			    			<i class="icon-circle-arrow-right" style="color: white" ></i>
 		    			</button></p>
-		    				<a style="font-size: 14px; font-weight: normal; font-family: sans-serif; color: white; text-transform: lowercase; text-decoration: underline" href="#about" id="aboutlink">Learn more</a>
+		    				<a style="font-size: 16px; font-weight: normal; font-family: sans-serif; color: white; text-transform: lowercase; text-decoration: underline" href="#about" id="aboutlink">Learn more</a>
 	    			</span>
 			    </div>
 			  </div>
 			</div>
-			<div style="font-family: sans-serif; font-size: 14px; color: white; bottom: 3%; position: absolute; width: 100%; text-align: center">We promise we won't post anything to Facebook!</div>
+			<div style="font-family: sans-serif; font-size: 18px; color: white; bottom: 3%; position: absolute; width: 100%; text-align: center">We promise we won't post anything to Facebook!</div>
 		</div></section>
 
 		<!-- About Section -->
@@ -193,27 +193,17 @@
 		<div id="preloader"></div>
 		
 		<!-- Plugins & Scripts -->
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
+		
+		<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>-->
 		<script>window.jQuery || document.write('<script src="/js/jquery.min.js" type="text/javascript"><\/script>')</script>
 		<script src="/js/bootstrap.min.js" type="text/javascript"></script>
 		<script src="/js/jquery.parallax-1.1.3.js" type="text/javascript"></script>
 		<script src="/js/jquery.flexslider-min.js" type="text/javascript"></script>
-		<script src="/js/jquery.isotope.min.js" type="text/javascript"></script>
-		<script src="/js/jquery.magnific-popup.min.js" type="text/javascript"></script>
+		<!-- <script src="/js/jquery.isotope.min.js" type="text/javascript"></script>-->
+		<!--<script src="/js/jquery.magnific-popup.min.js" type="text/javascript"></script>-->
 		<script src="/js/main.js" type="text/javascript"></script>
-
-		<script type="text/javascript">
-			//Twitter feed
-		  $('#tweets').tweet({
-		  	modpath: 'twitter/index.php',
-		    username: 'twitter', // Enter Twitter Username Here
-		    count: 1,
-		    template: [
-					'{text}{time}'
-				].join( '' ), 
-		    loading_text: "loading tweets..."
-		  });
-	  </script>
-<?php echo isset($_SESSION['redirect']) ? "<script type='text/javascript'>alert('Log in to use Vibe Communities and Profiles!');</script>" :"" ?>
+		
+		
+<!--<?php echo isset($_SESSION['redirect']) ? "<script type='text/javascript'>alert('Log in to use Vibe Communities and Profiles!');</script>" :"" ?>-->
 	</body>
 </html>

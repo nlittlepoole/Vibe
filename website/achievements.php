@@ -125,7 +125,7 @@
 						<?php echo $_SESSION['dashboard']['Communities'] ?>
 					</ul>
 				</li>
-				<li id="frontend-link" class="start active" data-placement="right" data-original-title="View all Achievements">
+				<li id="frontend-link" class="start active">
 					<a href="achievements.php">
 					<i class="fa fa-trophy"></i>
 					<span class="title">

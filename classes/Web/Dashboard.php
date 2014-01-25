@@ -1,6 +1,6 @@
 <?php 
 require_once( CLASS_PATH . "/Web/User.php");
-require( CLASS_PATH . "/Web/Achievements.php");
+require_once( CLASS_PATH . "/Web/Achievements.php");
 require_once( CLASS_PATH . "/Web/String.php");
 
 // WORKING ON THE ACHIEVEMENTS BOX IN DASHBOARD
@@ -81,7 +81,22 @@ function achievementsBox() {
 		if($data[$traitSearch] == 10) {
 			// the user has that achievement so add that to the array
 			// first element => name of achievement, second element => time ago that person got achievement
-			$_SESSION['msgBox'][$achievedDate] = $_SESSION['achievementNames'][$i];
+			$tempName = $_SESSION['achievementNames'][$i];
+			
+			if($tempName == "HelpingHand") {
+				$tempName = "Helping Hand"; 
+			}
+			else if($tempName == "MotherTeresa"){
+				$tempName = "Mother Teresa";
+			}
+			else if($tempName == "KingOfTheHill") {
+				$tempName = "King of the Hill"; 
+			}
+			else if($tempName == "CommanderOfWords") {
+				$tempName = "Commander of Words"; 
+			}
+			
+			$_SESSION['msgBox'][$achievedDate] = $tempName;
 		}
 		
 		$conn = null; 
@@ -126,6 +141,7 @@ function achievementsBox() {
 		
 		$conn = null; 
 		
+		/*
 		if($nameOfAchievement == "HelpingHand") {
 			$nameOfAchievement = "Helping Hand"; 
 		}
@@ -138,7 +154,7 @@ function achievementsBox() {
 		else if($nameOfAchievement == "CommanderOfWords") {
 			$nameOfAchievement = "Commander of Words"; 
 		}
-		
+		*/
 		$achievementDisp = '<li>
 			<div class="col1">
 				<div class="cont">
