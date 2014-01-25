@@ -57,7 +57,8 @@ function question($facebook,$uid,$token ){
         $question= str_replace("themselves", "himself", $question);
         $question= str_replace("attractive", "good looking", $question); 
         $question= str_replace("them", "him", $question);  
-		$question= str_replace("ther", "their", $question); 
+		$question= str_replace("thelr", "their", $question); 
+		$question= str_replace("suit", "dress", $question); 
     }
     $pic=getPictures($recipient);
     $_SESSION['affiliations']=getAffiliations($facebook,$recipient,$token);
