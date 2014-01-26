@@ -751,6 +751,9 @@ jQuery(document).ready(function() {
       $(window).load(function() {
         $('#joyRideTipContent').joyride({
           autoStart : true,
+          postRideCallback : function() {
+      		window.location.replace("../index.php?action=question"); 
+      		},
           //postStepCallback : function (index, tip) {
           //if (index == 2) {
             //$(this).joyride('set_li', false, 1);
