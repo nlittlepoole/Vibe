@@ -3,6 +3,70 @@
 $path = $_SERVER['DOCUMENT_ROOT'];
 require_once($path . "/config.php");
 
+function totalpointachievementTrackers() {
+	$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+    $sql = "SELECT TellEm_progress,TopAnswerer_progress,TruthGiver_progress,questionsAnswered FROM user WHERE UID=" . $_SESSION['userID'];
+    $st = $conn->prepare($sql);
+    $st->execute();
+    $data = $st->fetch();
+				  
+	
+	$questionsAnswered = $data['questionsAnswered'] + 1; 
+	
+	$sql = "UPDATE user SET questionsAnswered=" . $questionsAnswered . " WHERE UID=" . $_SESSION['userID'];
+	$st = $conn->prepare($sql);
+    $st->execute();
+	
+	$conn = null; 
+	
+	if($data['TellEm_progress'] == 10) {
+		// there is nothing else to do
+		return; 
+	}
+	else {
+		if($questionsAnswered == 100) {
+			// got the Tell Em achievement!
+			$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+		    $sql = "UPDATE user SET TellEm_progress=10 WHERE UID=" . $_SESSION['userID'];
+	        $st = $conn->prepare($sql);
+            $st->execute();
+	
+	        $conn = null;  
+			
+		    return; 
+			
+		}
+		else {
+			// update the Tell Em progress correspondingly 
+			if($questionsAnswered % 10 == 0) {
+				$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+				$newTellEmProgress = $data['TellEm_progress'] + 1; 
+		    	$sql = "UPDATE user SET TellEm_progress=" . $newTellEmProgress . " WHERE UID=" . $_SESSION['userID'];
+	        	$st = $conn->prepare($sql);
+            	$st->execute();
+				
+				$conn = null; 
+			}
+			
+			if($questionsAnswered == 50) {
+				// got the Top Answerer Achievement!
+				$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+		    	$sql = "UPDATE user SET TellEm_progress=10 WHERE UID=" . $_SESSION['userID'];
+	        	$st = $conn->prepare($sql);
+            	$st->execute();
+	
+	        	$conn = null;
+				
+				return; 
+			}
+			else {
+				// update the Top Answerer progress correspondingly
+			}
+			
+		}
+	}
+}
+
 // HELPING HAND
 function helpinghandTracker() {
 	
@@ -11,8 +75,6 @@ function helpinghandTracker() {
     $st = $conn->prepare($sql);
     $st->execute();
     $data = $st->fetch();
-	
-	$st->execute();
 				  
 	$conn = null; 
 	
