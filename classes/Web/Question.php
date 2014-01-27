@@ -360,7 +360,7 @@ function submit2($facebook,$uid,$token ){
 		}
 		else if($prevScore1 == 0 && $prevScore2 != 0) {
 			// prevScore1 should be at least as high as prevScore2
-			$slider1 = $prevScore1;
+			$slider1 = $prevScore2;
 			
 			// ONE TRANSACTION
 			
@@ -429,24 +429,24 @@ function submit2($facebook,$uid,$token ){
 			    
 				$vibe2->setAnswer($slider2, $comment); 
 			    $vibe2->recordToTable();
-				}
-				else {
-					// do the increment one of total for the one that won!
-					
-					$slider1 = $prevScore1; 
-					
-					$name1 = isset($_SESSION['Name1']) ? $_SESSION['Name1'] : "Unknown";
-				    $affiliations1 = isset($_SESSION['affiliations1']) ? $_SESSION['affiliations1'] : "";
-				    
-				    $keywords = "null"; 
-				    
-				    $vibe = new Vibe($uid, $recipient1,$attribute,$keywords,$affiliations1,$gender1,$name1);
-					
-				    if(!$positive){$slider1 = 10 - $slider1;}
-					
-				    $vibe->setAnswer($slider1, $comment); 
-				    $vibe->recordToTable();
-				}
+			}
+			else {
+				// do the increment one of total for the one that won!
+				
+				$slider1 = $prevScore1; 
+				
+				$name1 = isset($_SESSION['Name1']) ? $_SESSION['Name1'] : "Unknown";
+			    $affiliations1 = isset($_SESSION['affiliations1']) ? $_SESSION['affiliations1'] : "";
+			    
+			    $keywords = "null"; 
+			    
+			    $vibe = new Vibe($uid, $recipient1,$attribute,$keywords,$affiliations1,$gender1,$name1);
+				
+			    if(!$positive){$slider1 = 10 - $slider1;}
+				
+			    $vibe->setAnswer($slider1, $comment); 
+			    $vibe->recordToTable();
+			}
 		}
     }
 	else {
@@ -454,23 +454,119 @@ function submit2($facebook,$uid,$token ){
 		
 		if($prevScore1 == 0 && $prevScore2 == 0) {
 			// no data yet for either 
+			
+			$slider1 = 4; 
+			$slider2 = 6; 
+			
+			$name1 = isset($_SESSION['Name1']) ? $_SESSION['Name1'] : "Unknown";
+		    $affiliations1 = isset($_SESSION['affiliations1']) ? $_SESSION['affiliations1'] : "";
+			
+			$name2 = isset($_SESSION['Name2']) ? $_SESSION['Name2'] : "Unknown";
+		    $affiliations2 = isset($_SESSION['affiliations2']) ? $_SESSION['affiliations2'] : "";
+		    
+		    $keywords = "null"; 
+		    
+		    $vibe = new Vibe($uid, $recipient1,$attribute,$keywords,$affiliations1,$gender1,$name1);
+		    $vibe2 = new Vibe($uid, $recipient2,$attribute,$keywords,$affiliations2,$gender2,$name2);
+			
+		    if(!$positive){$slider1 = 10 - $slider1;}
+			if(!$positive){$slider2 = 10 - $slider2;}
+			
+		    $vibe->setAnswer($slider1, $comment); 
+		    $vibe->recordToTable();
+		    
+			$vibe2->setAnswer($slider2, $comment); 
+		    $vibe2->recordToTable();
 		}
 		else if($prevScore1 != 0 && $prevScore2 == 0) {
-			// prevScore1 should be at least as high as prevScore2
+			// slider2 should be at least as high as prevScore1
+			
+			$slider2 = $prevScore1;
+			
+			// ONE TRANSACTION
+			
+			$name2 = isset($_SESSION['Name2']) ? $_SESSION['Name2'] : "Unknown";
+		    $affiliations2 = isset($_SESSION['affiliations2']) ? $_SESSION['affiliations2'] : "";
+		    
+		    $keywords = "null"; 
+		    
+		    $vibe = new Vibe($uid, $recipient2,$attribute,$keywords,$affiliations2,$gender2,$name2);
+			
+		    if(!$positive){$slider2 = 10 - $slider2;}
+			
+		    $vibe->setAnswer($slider2, $comment); 
+		    $vibe->recordToTable();
 		}
 		else if($prevScore1 == 0 && $prevScore2 != 0) {
 			// pointless because we do not know what prevScore1 is worth yet
+			
+			// DO NOTHING
 		}
 		else {
 			// we have values for both so we can do some determinism based on values
 			if($prevScore1 > $prevScore2) {
 				// we did NOT get the output we expected -- good!
+				
+				$slider1 = ($prevScore1 + $prevScore2) / 2; 
+				$slider2 = $prevScore1; 
+				
+				$name1 = isset($_SESSION['Name1']) ? $_SESSION['Name1'] : "Unknown";
+			    $affiliations1 = isset($_SESSION['affiliations1']) ? $_SESSION['affiliations1'] : "";
+				
+				$name2 = isset($_SESSION['Name2']) ? $_SESSION['Name2'] : "Unknown";
+			    $affiliations2 = isset($_SESSION['affiliations2']) ? $_SESSION['affiliations2'] : "";
+			    
+			    $keywords = "null"; 
+			    
+			    $vibe = new Vibe($uid, $recipient1,$attribute,$keywords,$affiliations1,$gender1,$name1);
+			    $vibe2 = new Vibe($uid, $recipient2,$attribute,$keywords,$affiliations2,$gender2,$name2);
+				
+			    if(!$positive){$slider1 = 10 - $slider1;}
+				if(!$positive){$slider2 = 10 - $slider2;}
+				
+			    $vibe->setAnswer($slider1, $comment); 
+			    $vibe->recordToTable();
+			    
+				$vibe2->setAnswer($slider2, $comment); 
+			    $vibe2->recordToTable();
 			}
 			else if($prevScore1 < $prevScore2){
 				// we got the output we expected
+				
+				if(($prevScore2 - $prevScore1 <= 2) && (10 - $prevScore2 < 2)) {
+				
+					$name2 = isset($_SESSION['Name2']) ? $_SESSION['Name2'] : "Unknown";
+				    $affiliations2 = isset($_SESSION['affiliations2']) ? $_SESSION['affiliations2'] : "";
+				    
+				    $keywords = "null"; 
+				    
+				    $vibe = new Vibe($uid, $recipient2,$attribute,$keywords,$affiliations2,$gender2,$name2);
+					
+				    if(!$positive){$slider2 = 10 - $slider2;}
+					
+				    $vibe->setAnswer($slider2, $comment); 
+				    $vibe->recordToTable();
+				}
+				else {
+					// DO NOTHING
+				}
 			}
 			else {
 				// do the increment one of total for the one that won!
+				
+				$slider2 = $prevScore2; 
+				
+				$name2 = isset($_SESSION['Name2']) ? $_SESSION['Name2'] : "Unknown";
+			    $affiliations2 = isset($_SESSION['affiliations2']) ? $_SESSION['affiliations2'] : "";
+			    
+			    $keywords = "null"; 
+			    
+			    $vibe = new Vibe($uid, $recipient2,$attribute,$keywords,$affiliations2,$gender2,$name2);
+				
+			    if(!$positive){$slider2 = 10 - $slider2;}
+				
+			    $vibe->setAnswer($slider2, $comment); 
+			    $vibe->recordToTable();
 			}
 		}
 	}
