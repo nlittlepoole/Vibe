@@ -270,7 +270,7 @@
 								<h4 class="block"><?php echo $question ?></h4>
 							</div>
 							<!--<form role="form" class="form-horizontal form-bordered" action="/index.php?action=submit3" method="post" name="questionsform">-->
-							<form role="form" class="form-horizontal form-bordered" action="searchresults.php" method="post" name="questionsform">
+							<form role="form" class="form-horizontal form-bordered" action="/index.php?action=submit3" method="post" name="questionsform">
 								<div style="width: 41.6666%; float: left; margin-top: 20px; margin-bottom: 20px; height: 250px">
 									<div style="overflow: hidden; margin: 0 auto; display: block; width: 250px; height: 100%">
 										<img class="askedQuestion" src=<?php echo $pic1 ?> />

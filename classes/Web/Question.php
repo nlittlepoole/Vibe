@@ -69,6 +69,7 @@ function question($facebook,$uid,$token ){
 }
 
 // COMPARISON QUESTION
+
 function question2($facebook,$uid,$token ){
     
     //Useful variables are initialized here at the beginning of the code
@@ -100,11 +101,15 @@ function question2($facebook,$uid,$token ){
 			$random2 = rand(0,sizeof($result) - 1); 
 			while($random1 == $random2) {
 				$random1 = rand(0,sizeof($result) - 1); 
-				$random2 = rand(0,sizeof($result) - 1); 
 			}
 			
             $recipient1 = $result[$random1] ['uid']; //$random is used as the index of the top friends array and the user id is returned 
             $recipient2 = $result[$random2] ['uid'];
+			
+			while($recipient1 == $recipient2) {
+				$random1 = rand(0,sizeof($result) - 1); 
+				$recipient1 = $result[$random1] ['uid']; 
+			}
             
             $grab1 = 'https://graph.facebook.com/' . $recipient1; //$grab is set to the graph url of the friend selected
             $grab2 = 'https://graph.facebook.com/' . $recipient2;
@@ -183,6 +188,7 @@ function getQuestion2($input){
             'keywords' =>$keywords,
     ));
 }
+ 
 
 //getQuestion(int) returns an question using the $input as the upward bound of questions that can be pulled
 function getQuestion($input){
@@ -308,8 +314,8 @@ function submit2($facebook,$uid,$token ){
 	
 	// look up their pre-existing Vibe scores for the trait
 	$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
-	$sql = "SELECT $attribute FROM user WHERE id=$recipient1"; 
-	$sql2 = "SELECT $attribute FROM user WHERE id=$recipient2";
+	$sql ="SELECT $attribute FROM user WHERE UID=$recipient1 ";
+	$sql2 = "SELECT $attribute FROM user WHERE UID=$recipient2";
 	$st = $conn->prepare($sql);
 	$st->execute();
 	$st2 = $conn->prepare($sql2);
@@ -319,20 +325,20 @@ function submit2($facebook,$uid,$token ){
 	
 	$conn = null;
 	
-	$prevScore1 = $data[$attribute]; 
-	$prevScore2 = $data2[$attribute];
+	$prevScore1 = $data[0]; 
+	$prevScore2 = $data2[0];
     
     // $slider = $_POST["slideVal"];
     $slider1 = 0; 
 	$slider2 = 0; 
     
     $personPressed = $_POST["name1"];
-	$personPressed2 = $_POST["name2"];
+	//$personPressed2 = $_POST["name2"];
 	
     if($personPressed != "" && $personPressed != null) {
     	// first person was pressed
 		
-		if($prevScore1 == 0 && $prevScore2 == 0) {
+		if(($prevScore1 == 0 && $prevScore2 == 0) || ($prevScore1 == null && $prevScore2 == null)) {
 			// no data yet for either 
 			
 			$slider1 = 6; 
@@ -358,7 +364,7 @@ function submit2($facebook,$uid,$token ){
 			$vibe2->setAnswer($slider2, $comment); 
 		    $vibe2->recordToTable();
 		}
-		else if($prevScore1 == 0 && $prevScore2 != 0) {
+		else if($prevScore1 == 0 && $prevScore2 != 0 || ($prevScore1 == null && $prevScore2 != null) || ($prevScore1 == 0 && $prevScore2 != null) || ($prevScore1 == 0 && $prevScore2 != null)) {
 			// prevScore1 should be at least as high as prevScore2
 			$slider1 = $prevScore2;
 			
@@ -376,7 +382,7 @@ function submit2($facebook,$uid,$token ){
 		    $vibe->setAnswer($slider1, $comment); 
 		    $vibe->recordToTable();
 		}
-		else if($prevScore1 != 0 && $prevScore2 == 0) {
+		else if($prevScore1 != 0 && $prevScore2 == 0 || ($prevScore1 != null && $prevScore2 == null) || ($prevScore1 != 0 && $prevScore2 == null) || ($prevScore1 != 0 && $prevScore2 == null)) {
 			// pointless since we do not know what prevScore2 is worth yet
 			
 			// DO NOTHING
@@ -452,7 +458,7 @@ function submit2($facebook,$uid,$token ){
 	else {
 		// second person was pressed
 		
-		if($prevScore1 == 0 && $prevScore2 == 0) {
+		if(($prevScore1 == 0 && $prevScore2 == 0) || ($prevScore1 == null && $prevScore2 == null)) {
 			// no data yet for either 
 			
 			$slider1 = 4; 
@@ -478,7 +484,7 @@ function submit2($facebook,$uid,$token ){
 			$vibe2->setAnswer($slider2, $comment); 
 		    $vibe2->recordToTable();
 		}
-		else if($prevScore1 != 0 && $prevScore2 == 0) {
+		else if($prevScore1 == 0 && $prevScore2 != 0 || ($prevScore1 == null && $prevScore2 != null) || ($prevScore1 == 0 && $prevScore2 != null) || ($prevScore1 == 0 && $prevScore2 != null)) {
 			// slider2 should be at least as high as prevScore1
 			
 			$slider2 = $prevScore1;
@@ -497,7 +503,7 @@ function submit2($facebook,$uid,$token ){
 		    $vibe->setAnswer($slider2, $comment); 
 		    $vibe->recordToTable();
 		}
-		else if($prevScore1 == 0 && $prevScore2 != 0) {
+		else if($prevScore1 != 0 && $prevScore2 == 0 || ($prevScore1 != null && $prevScore2 == null) || ($prevScore1 != 0 && $prevScore2 == null) || ($prevScore1 != 0 && $prevScore2 == null)) {
 			// pointless because we do not know what prevScore1 is worth yet
 			
 			// DO NOTHING
@@ -570,24 +576,6 @@ function submit2($facebook,$uid,$token ){
 			}
 		}
 	}
-    
     // NOTE: In this case, there is no '$comment'
-    
-    $name = isset($_SESSION['Name']) ? $_SESSION['Name']:"Unknown";
-    $affiliations = isset($_SESSION['affiliations']) ? $_SESSION['affiliations'] : "";
-    $keywords = "null"; 
-    
-    $vibe= new Vibe($uid, $recipient1,$attribute,$keywords,$affiliations,$gender,$name);
-    
-    if(!$positive){
-      $slider=10-$slider;
-    }
-	
-    if(!$null){
-      $slider="null";
-    }
-	
-    $vibe->setAnswer($slider,$comment);
-    $vibe->recordToTable();
 }
 ?>

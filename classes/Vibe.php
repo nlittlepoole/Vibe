@@ -73,8 +73,17 @@ class Vibe
     $this->answer=$input_answer;
     $this->comment=$input_comment;
   }
-  public function setAnswer( $input_answer) {
+  
+  public function setAnswer2( $input_answer) {
     $this->answer=$input_answer;
+  }
+  
+  public function recordToTable2(){
+    $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
+    echo $sql = "INSERT INTO transaction (asked,recipient,attribute,answer,keywords,Affiliations,Gender,Name) VALUES('$this->user_id_1', '$this->user_id_2','$this->attribute' ,$this->answer, '$this->keywords','$this->affiliations','$this->gender','$this->name')";
+    $st = $conn->prepare( $sql );
+    $st->execute();
+    $conn = null;
   }
  
   public function recordToTable(){
