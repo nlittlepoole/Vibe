@@ -73,6 +73,9 @@ class Vibe
     $this->answer=$input_answer;
     $this->comment=$input_comment;
   }
+  public function setAnswer( $input_answer) {
+    $this->answer=$input_answer;
+  }
  
   public function recordToTable(){
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
