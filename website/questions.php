@@ -170,7 +170,7 @@
 					<a href="javascript:;">
 					<i class="fa fa-heart"></i>
 					<span class="title">
-						My Communities
+						My Leaderboards
 					</span>
 					<span class="arrow ">
 					</span>
