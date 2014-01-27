@@ -24,10 +24,13 @@ function totalpointachievementTrackers() {
 		return; 
 	}
 	else {
-		if($questionsAnswered == 100) {
+		if($questionsAnswered >= 100) {
 			// got the Tell Em achievement!
 			$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-		    $sql = "UPDATE user SET TellEm_progress=10 WHERE UID=" . $_SESSION['userID'];
+			
+			$newDate = date('Y-m-d'); 
+			
+		    $sql = "UPDATE user SET TellEm_progress=10,lastdateTellEm=" . $newDate . " WHERE UID=" . $_SESSION['userID'];
 	        $st = $conn->prepare($sql);
             $st->execute();
 	
@@ -37,6 +40,8 @@ function totalpointachievementTrackers() {
 			
 		}
 		else {
+			// you did not get the Tell Em Achievement
+			
 			// update the Tell Em progress correspondingly 
 			if($questionsAnswered % 10 == 0) {
 				$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
@@ -48,10 +53,13 @@ function totalpointachievementTrackers() {
 				$conn = null; 
 			}
 			
-			if($questionsAnswered == 50) {
+			if($questionsAnswered >= 50) {
 				// got the Top Answerer Achievement!
 				$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-		    	$sql = "UPDATE user SET TellEm_progress=10 WHERE UID=" . $_SESSION['userID'];
+				
+				$newDate = date('Y-m-d'); 
+				
+		    	$sql = "UPDATE user SET TopAnswerer_progress=10,lastdateTopAnswerer=" . $newDate . " WHERE UID=" . $_SESSION['userID'];
 	        	$st = $conn->prepare($sql);
             	$st->execute();
 	
@@ -60,7 +68,52 @@ function totalpointachievementTrackers() {
 				return; 
 			}
 			else {
+				// you did not get the Top Answerer achievement
+				
 				// update the Top Answerer progress correspondingly
+				if($questionsAnswered % 5 == 0) {
+					$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+					$newTopAnswererProgress = $data['TopAnswerer_progress'] + 1; 
+			    	$sql = "UPDATE user SET TopAnswerer_progress=" . $newTopAnswererProgress . " WHERE UID=" . $_SESSION['userID'];
+		        	$st = $conn->prepare($sql);
+	            	$st->execute();
+					
+					$conn = null; 
+				}
+				
+				if($questionsAnswered >= 20) {
+					// you got the Truth Giver achievement!
+					
+					$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+					
+					$newDate = date('Y-m-d'); 
+					
+				    $sql = "UPDATE user SET TruthGiver_progress=10,lastdateTruthGiver=" . $newDate . " WHERE UID=" . $_SESSION['userID'];
+			        $st = $conn->prepare($sql);
+		            $st->execute();
+			
+			        $conn = null;  
+					
+				    return; 
+				}
+				else {
+					// you did not get the Truth giver achievement
+					
+					// update the Truth Giver progress accordingly
+					if($questionsAnswered % 2 == 0) {
+						$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+						$newTruthGiverProgress = $data['TruthGiver_progress'] + 1; 
+				    	$sql = "UPDATE user SET TruthGiver_progress=" . $newTruthGiverProgress . " WHERE UID=" . $_SESSION['userID'];
+			        	$st = $conn->prepare($sql);
+		            	$st->execute();
+						
+						$conn = null; 
+						return; 
+					}
+					else {
+						return; 
+					}
+				}			
 			}
 			
 		}

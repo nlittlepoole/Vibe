@@ -51,10 +51,10 @@ function achievementsBox() {
 	
 	$_SESSION['msgBox'] = array(); 
 	
-	$_SESSION['achievementNames'] = array("HelpingHand", "Pal", "Advocate", "Comrade", "MotherTeresa", "Diva", 
-	"KingOfTheHill", "Ideator", "Visionairy", "Blogger", "CommanderOfWords", "Viber");
+	$_SESSION['achievementNames'] = array("HelpingHand", "Pal", "Advocate", "Comrade", "MotherTeresa", "TruthGiver", "TopAnswerer", "TellEm",
+	"Diva", "KingOfTheHill", "Ideator", "Visionairy", "Blogger", "CommanderOfWords", "Viber");
 	
-	for($i = 0; $i < 12; $i++) {
+	for($i = 0; $i < 15; $i++) {
 		$ID = $_SESSION['userID']; 
 		
 		$traitSearch = $_SESSION['achievementNames'][$i] . "_progress"; 
@@ -94,6 +94,15 @@ function achievementsBox() {
 			}
 			else if($tempName == "CommanderOfWords") {
 				$tempName = "Commander of Words"; 
+			}
+			else if($tempName == "TruthGiver"){
+				$tempName = "Truth Giver";
+			}
+			else if($tempName == "TopAnswerer") {
+				$tempName = "Top Answerer"; 
+			}
+			else if($tempName == "TellEm") {
+				$tempName = "Tell it like it is"; 
 			}
 			
 			$_SESSION['msgBox'][$achievedDate] = $tempName;

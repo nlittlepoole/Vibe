@@ -130,6 +130,7 @@ function submit($facebook,$uid,$token ){
 	advocateTracker(); 
 	comradeTracker();
 	motherteresaTracker();
+	totalpointachievementTrackers(); 
 	
     require( CLASS_PATH . "/Vibe.php" );
 	
