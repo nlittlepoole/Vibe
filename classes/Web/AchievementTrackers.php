@@ -28,9 +28,9 @@ function totalpointachievementTrackers() {
 			// got the Tell Em achievement!
 			$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
 			
-			$newDate = date('Y-m-d'); 
+			$currentDateNow = date('Y-m-d'); 
 			
-		    $sql = "UPDATE user SET TellEm_progress=10,lastdateTellEm=" . $newDate . " WHERE UID=" . $_SESSION['userID'];
+		    $sql = "UPDATE user SET TellEm_progress=10,lastdateTellEm='$currentDateNow' WHERE UID=" . $_SESSION['userID'];
 	        $st = $conn->prepare($sql);
             $st->execute();
 	
@@ -57,9 +57,9 @@ function totalpointachievementTrackers() {
 				// got the Top Answerer Achievement!
 				$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
 				
-				$newDate = date('Y-m-d'); 
+				$currentDateNow = date('Y-m-d'); 
 				
-		    	$sql = "UPDATE user SET TopAnswerer_progress=10,lastdateTopAnswerer=" . $newDate . " WHERE UID=" . $_SESSION['userID'];
+		    	$sql = "UPDATE user SET TopAnswerer_progress=10,lastdateTopAnswerer='$currentDateNow' WHERE UID=" . $_SESSION['userID'];
 	        	$st = $conn->prepare($sql);
             	$st->execute();
 	
@@ -86,9 +86,9 @@ function totalpointachievementTrackers() {
 					
 					$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
 					
-					$newDate = date('Y-m-d'); 
+					$currentDateNow = date('Y-m-d'); 
 					
-				    $sql = "UPDATE user SET TruthGiver_progress=10,lastdateTruthGiver=" . $newDate . " WHERE UID=" . $_SESSION['userID'];
+				    $sql = "UPDATE user SET TruthGiver_progress=10,lastdateTruthGiver='$currentDateNow' WHERE UID=" . $_SESSION['userID'];
 			        $st = $conn->prepare($sql);
 		            $st->execute();
 			
