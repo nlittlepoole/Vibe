@@ -286,6 +286,116 @@ function submit($facebook,$uid,$token ){
     $vibe->recordToTable();
 }
 
+// LDAPARSER
+
+function zeroAnalysis($recipient1, $recipient2, $attribute) {
+	
+	// if there is space, add B to the threeblock
+	// NAMEs of the threeblocks will be threeBlock1Attractiveness
+	
+	$nameThreeBlock1 = "threeBlock1" . $attribute; 
+	$nameThreeBlock2 = "threeBlock2" . $attribute; 
+	$nameThreeBlock3 = "threeBlock3" . $attribute; 
+	
+	$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
+	$sql ="SELECT $nameThreeBlock1,$nameThreeBlock2,$nameThreeBlock3 FROM user WHERE UID=$recipient1 ";
+	$st = $conn->prepare($sql);
+	$st->execute();
+	$data = $st->fetch(); 
+	
+	$amount = 0; 
+	// ADD TO THE THREEBLOCK IF NOT FULL YET
+	for($i = 0; $i < count($data); $i++) {
+		if($data[$i]) {
+			//a UID exists in the threeblock
+			$amount++; 
+		}
+	}
+	
+	// NOW WE LOOK AT TOTAL NUMBER OF THINGS STORED
+	if($amount == 0) {
+		//nothing yet in the threeblock, add the other person's UID to the beginning!
+		$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
+		$sql = "UPDATE user SET $nameThreeBlock1='$recipient2' WHERE UID='$recipient1';";
+		$st = $conn->prepare($sql);
+		$st->execute();
+		
+		$conn = null; 
+		
+	}
+	else if($amount == 1) {
+		//only one thing in the threeblock
+		$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
+		$sql = "UPDATE user SET $nameThreeBlock2='$recipient2' WHERE UID='$recipient1';";
+		$st = $conn->prepare($sql);
+		$st->execute();
+		
+		$conn = null; 
+	}
+	else if($amount == 2) {
+		//two things in the threeblock but still room
+		$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
+		$sql = "UPDATE user SET $nameThreeBlock3='$recipient2' WHERE UID='$recipient1';";
+		$st = $conn->prepare($sql);
+		$st->execute();
+		
+		$conn = null; 
+	}
+	else {
+		//threeblock is full --> begin AVERAGE COMPARISON PHASE here
+		
+		//AVERAGE COMPARISON
+		
+		//REMEMBER TO ADD B AT THE END
+		
+	}
+	$conn = null;
+}
+
+function averageComparison($attribute, $recipient2, $uid1, $uid2, $uid3) {
+	//go into each on of the UIDs
+	
+	$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
+	$sql ="SELECT $attribute FROM user WHERE UID=$uid1";	
+	$sql2 ="SELECT $attribute FROM user WHERE UID=$uid2";
+	$sql3 ="SELECT $attribute FROM user WHERE UID=$uid3";
+	
+	$st = $conn->prepare($sql);
+	$st->execute();
+	$data = $st->fetch(); 
+	
+	$value1; $value2; $value3; $totalValues = 0; 
+	
+	if($data[0] != 0) {
+		//there is a recording!
+		$totalValues++; 
+		$value1 = $data[0]; 
+	}
+	
+	$st2 = $conn->prepare($sql2);
+	$st2->execute();
+	$data2 = $st2->fetch(); 
+	
+	if($data2[0] != 0) {
+		//there is a recording!
+		$totalValues++; 
+		$value2 = $data2[0]; 
+	}
+	
+	$st3 = $conn->prepare($sql3);
+	$st3->execute();
+	$data3 = $st3->fetch(); 
+	
+	if($data3[0] != 0) {
+		//there is a recording!
+		$totalValues++; 
+		$value3 = $data3[0]; 
+	}
+		
+	//now you have the right value for totalValues so you can compute the weighted average	
+		
+	$conn = null;
+}
 
 function submit2($facebook,$uid,$token ){
 	//This is the function that gets called when the user submits a question.
@@ -334,6 +444,10 @@ function submit2($facebook,$uid,$token ){
     
     $personPressed = $_POST["name1"];
 	//$personPressed2 = $_POST["name2"];
+	
+	// NOW WE HAVE ALL OF THE CODE WE NEED FOR SETUP
+	
+	// HERE BEGINS THE OVERALL STRUCTURE OF PARSING WHAT TO DO
 	
     if($personPressed != "" && $personPressed != null) {
     	// first person was pressed
