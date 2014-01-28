@@ -40,18 +40,21 @@ CREATE TABLE IF NOT EXISTS `achievements` (
 --
 
 INSERT INTO `achievements` (`ID`, `name`, `category`, `description`, `color`) VALUES
-(1, 'Helping Hand', 'Answers', 'Five answers for one consecutive day', 'Red'),
-(2, 'Pal', 'Answers', 'Five answers for two consecutive days', 'Blue'),
-(3, 'Advocate', 'Answers', 'Five answers for three consecutive days', 'Copper'),
-(4, 'Comrade', 'Answers', 'Five answers for five consecutive days', 'Silver'),
-(5, 'Mother Teresa', 'Answers', 'Five answers for ten consecutive days', 'Gold'),
-(6, 'Diva', 'Percentile', 'Ranked top 10 in a community', 'Silver'),
-(7, 'King of the Hill', 'Percentile', 'Ranked 1 in a community', 'Gold'),
-(8, 'Ideator', 'Fourm', 'Come up with a possible question with 10 community supports', 'Silver'),
-(9, 'Visionairy', 'Forum', 'Come up with a possible question with 100 community supports', 'Gold'),
-(10, 'Blogger', 'Blog', 'Write one approved blog post', 'Silver'),
-(11, 'Commander of Words', 'Blog', 'Write three approved blog posts', 'Gold'),
-(12, 'Viber', 'Overall', 'Four approved blog posts, ten invitations, and five answers for ten consecutive days', 'Black');
+(1, 'Helping Hand', 'Answers', '5 answers for 1 consecutive day', 'red'),
+(2, 'Pal', 'Answers', '5 answers for 2 consecutive days', 'blue'),
+(3, 'Advocate', 'Answers', '5 answers for 3 consecutive days', 'darkgreen'),
+(4, 'Comrade', 'Answers', '5 answers for 5 consecutive days', 'silver'),
+(5, 'Mother Teresa', 'Answers', '5 answers for 10 consecutive days', 'gold'),
+(6, 'Truth Giver', 'Answers', '20 total answers', 'red'),
+(7, 'Top Answerer', 'Answers', '50 total answers', 'blue'),
+(8, 'Tell it like it is', 'Answers', '100 total answers', 'darkgreen'),
+(9, 'Diva', 'Percentile', 'Ranked top 10 in a community', 'silver'),
+(10, 'King of the Hill', 'Percentile', 'Ranked 1 in a community', 'gold'),
+(11, 'Ideator', 'Forum', 'Come up with a possible question with 10 community supports', 'silver'),
+(12, 'Visionairy', 'Forum', 'Come up with a possible question with 100 community supports', 'gold'),
+(13, 'Blogger', 'Blog', 'Write 1 approved blog post', 'silver'),
+(14, 'Commander of Words', 'Blog', 'Write 3 approved blog posts', 'gold'),
+(15, 'Viber', 'Overall', '4 approved blog posts and 5 answers for 10 consecutive days', 'black');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

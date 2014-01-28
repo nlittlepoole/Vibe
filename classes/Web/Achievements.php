@@ -12,6 +12,7 @@ function initAchievementsCreate() {
 	//Pulling out achievements and storing them in SESSION
     $_SESSION['achievementsProgress'] = array($data['HelpingHand_progress'], $data['Pal_progress'], 
     $data['Advocate_progress'], $data['Comrade_progress'], $data['MotherTeresa_progress'], 
+    $data['TruthGiver_progress'], $data['TopAnswerer_progress'], $data['TellEm_progress'],
     $data['Diva_progress'], $data['KingOfTheHill_progress'], $data['Ideator_progress'], 
 	$data['Visionairy_progress'], $data['Blogger_progress'], $data['CommanderOfWords_progress'], 
 	$data['Viber_progress']);
@@ -63,7 +64,7 @@ function achievements() {
 	
 	$_SESSION['achievementsToAchieve'] = 0; 
 	
-	for($i=1; $i<13; $i++) {
+	for($i=1; $i<16; $i++) {
 		$sql = "SELECT * FROM achievements WHERE ID=$i"; 
 	    $st = $conn->prepare( $sql );
 	    $st->execute();
@@ -113,7 +114,7 @@ function achievements() {
 									</div>';
 	}
 
-	$_SESSION['achievementsDone'] = 12 - $_SESSION['achievementsToAchieve']; 
+	$_SESSION['achievementsDone'] = 15 - $_SESSION['achievementsToAchieve']; 
 	
 	$_SESSION['achievementsToAchieveNum'] = '<span class="badge badge-success">' . $_SESSION['achievementsDone'] . '</span>';
 	if($_SESSION['achievementsDone'] == 0) {

@@ -50,7 +50,7 @@ function question($facebook,$uid,$token ){
         $question= str_replace("their", "her", $question);
         $question= str_replace("themselves", "herself", $question); 
         $question= str_replace("them", "her", $question);  
-		$question= str_replace("ther", "their", $question); 
+		$question= str_replace("thelr", "their", $question); 
     }
     else{
         $question= str_replace("their", "his", $question); 
@@ -130,6 +130,7 @@ function submit($facebook,$uid,$token ){
 	advocateTracker(); 
 	comradeTracker();
 	motherteresaTracker();
+	totalpointachievementTrackers(); 
 	
     require( CLASS_PATH . "/Vibe.php" );
     //notify($facebook,$uid,$token);

@@ -51,7 +51,7 @@
 			  <div class="carousel-inner">
 			    <div class="item active">
 			    	<span><span style="color: white">Vibe</span><br /><span style="font-size: 32px" class="stylized">the anonymous peer feedback network</span>
-			    		<p style="margin-bottom: 0.1em"><button id="rounded_corners" class="btn btn-large btn-primary" style="background-color: #000033" onclick="location.href='<?php echo $loginUrl ?>'">Log in with Facebook 
+			    		<p style="margin-bottom: 0.1em"><button id="rounded_corners" class="btn btn-large btn-primary" style="background-color: #3B5998" onclick="location.href='<?php echo $loginUrl ?>'">Log in with Facebook 
 			    			<i class="icon-circle-arrow-right" style="color: white" ></i>
 		    			</button></p>
 		    				<a style="font-size: 16px; font-weight: normal; font-family: sans-serif; color: white; text-transform: lowercase; text-decoration: underline" href="#about" id="aboutlink">Learn more</a>
@@ -142,7 +142,15 @@
 		-->
 
 		<!-- Contact Section -->
-		<section id="contact" style="background: url(../img/greenwall1.jpg) no-repeat center center fixed" class="page">
+		<section id="contact" style="background: #258dc8; /* Old browsers */
+background: -moz-linear-gradient(left,  #258dc8 35%, #258dc8 44%, #1a2389 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right top, color-stop(35%,#258dc8), color-stop(44%,#258dc8), color-stop(100%,#1a2389)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(left,  #258dc8 35%,#258dc8 44%,#1a2389 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(left,  #258dc8 35%,#258dc8 44%,#1a2389 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(left,  #258dc8 35%,#258dc8 44%,#1a2389 100%); /* IE10+ */
+background: linear-gradient(to right,  #258dc8 35%,#258dc8 44%,#1a2389 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#258dc8', endColorstr='#1a2389',GradientType=1 ); /* IE6-9 */
+" class="page">
 			<div class="container">
 				<h1 class="page-title">Contact</h1>
 				<h2 class="page-subtitle">get in touch!</h2>
