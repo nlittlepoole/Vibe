@@ -211,7 +211,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#258dc8', end
 		<!--<script src="/js/jquery.magnific-popup.min.js" type="text/javascript"></script>-->
 		<script src="/js/main.js" type="text/javascript"></script>
 		
-		
+		<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-47556210-1', 'go-vibe.com');
+  ga('send', 'pageview');
+
+</script>
 <!--<?php echo isset($_SESSION['redirect']) ? "<script type='text/javascript'>alert('Log in to use Vibe Communities and Profiles!');</script>" :"" ?>-->
 	</body>
 </html>
