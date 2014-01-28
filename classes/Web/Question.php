@@ -288,7 +288,7 @@ function submit($facebook,$uid,$token ){
 
 // LDAPARSER
 
-function zeroAnalysis($recipient1, $recipient2, $attribute) {
+function zeroAnalysis($facebook, $uid, $token, $recipient1, $recipient2, $attribute, $winnerPos) {
 	
 	// if there is space, add B to the threeblock
 	// NAMEs of the threeblocks will be threeBlock1Attractiveness
@@ -321,7 +321,7 @@ function zeroAnalysis($recipient1, $recipient2, $attribute) {
 		$st->execute();
 		
 		$conn = null; 
-		
+
 	}
 	else if($amount == 1) {
 		//only one thing in the threeblock
@@ -331,6 +331,7 @@ function zeroAnalysis($recipient1, $recipient2, $attribute) {
 		$st->execute();
 		
 		$conn = null; 
+		
 	}
 	else if($amount == 2) {
 		//two things in the threeblock but still room
@@ -340,19 +341,24 @@ function zeroAnalysis($recipient1, $recipient2, $attribute) {
 		$st->execute();
 		
 		$conn = null; 
+		
 	}
 	else {
 		//threeblock is full --> begin AVERAGE COMPARISON PHASE here
 		
-		//AVERAGE COMPARISON
+		$firstUID = $data[0];
+		$secondUID = $data[1]; 
+		$thirdUID = $data[2];  
 		
+		//AVERAGE COMPARISON
+		averageComparison($facebook, $uid, $token, $attribute, $recipient1, $recipient2, $firstUID, $secondUID, $thirdUID, $winnerPos); 
 		//REMEMBER TO ADD B AT THE END
 		
 	}
 	$conn = null;
 }
 
-function averageComparison($attribute, $recipient2, $uid1, $uid2, $uid3) {
+function averageComparison($facebook, $uid, $token, $attribute, $recipient1, $recipient2, $uid1, $uid2, $uid3, $winnerPos) {
 	//go into each on of the UIDs
 	
 	$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
@@ -364,7 +370,7 @@ function averageComparison($attribute, $recipient2, $uid1, $uid2, $uid3) {
 	$st->execute();
 	$data = $st->fetch(); 
 	
-	$value1; $value2; $value3; $totalValues = 0; 
+	$value1 = 0; $value2 = 0; $value3 = 0; $totalValues = 0; 
 	
 	if($data[0] != 0) {
 		//there is a recording!
@@ -391,10 +397,252 @@ function averageComparison($attribute, $recipient2, $uid1, $uid2, $uid3) {
 		$totalValues++; 
 		$value3 = $data3[0]; 
 	}
+	
+	// value1, 2, and 3 now have their corresponding values
+	// but you still need the corresponding threeblocks
+	$nameThreeBlock1 = "threeBlock1" . $attribute; 
+	$nameThreeBlock2 = "threeBlock2" . $attribute; 
+	$nameThreeBlock3 = "threeBlock3" . $attribute; 
+	
+	$sql ="SELECT $nameThreeBlock1,$nameThreeBlock2,$nameThreeBlock3 FROM user WHERE UID=$uid1";	
+	$sql2 ="SELECT $nameThreeBlock1,$nameThreeBlock2,$nameThreeBlock3 FROM user WHERE UID=$uid2";
+	$sql3 ="SELECT $nameThreeBlock1,$nameThreeBlock2,$nameThreeBlock3 FROM user WHERE UID=$uid3";
+	
+	$countA = 0; $countB = 0; $countC = 0; 
+	
+	$st = $conn->prepare($sql);
+	$st->execute();
+	$data = $st->fetch();
+	
+	// the corresponding UIDs you have to go into
+	$uidA1 = $data[0]; 
+	$uidA2 = $data[1]; 
+	$uidA3 = $data[2]; 
+	
+	$scoreA1 = 0; $scoreA2 = 0; $scoreA3 = 0; 
+	if($uidA1 != null && $uidA1 != 0) {
+		$sql ="SELECT $attribute FROM user WHERE UID=$uidA1";
+		$st = $conn->prepare($sql);
+		$st->execute();
+		$data = $st->fetch();
 		
+		$scoreA1 = $data[0]; 
+		$countA++; 
+	}
+	else {
+		// $uidA1 is not valid, that means that the other threeblocks will be empty, so you can skip to the end
+		
+		// SKIP TO END (JUMP)
+	}
+	
+	if($uidA2 != null && $uidA2 != 0) {
+		$sql ="SELECT $attribute FROM user WHERE UID=$uidA2";
+		$st = $conn->prepare($sql);
+		$st->execute();
+		$data = $st->fetch();
+		
+		$scoreA2 = $data[0]; 
+		$countA++; 
+	}
+	else {
+		// $uidA2 is not valid, that means that the other threeblock will be empty, so you can skip to the end
+		
+		// SKIP TO END (JUMP)
+	}
+	
+	if($uidA3 != null && $uidA3 != 0) {
+		$sql ="SELECT $attribute FROM user WHERE UID=$uidA3";
+		$st = $conn->prepare($sql);
+		$st->execute();
+		$data = $st->fetch();
+		
+		$scoreA3 = $data[0]; 
+		$countA++; 
+	}
+	
+	// NOW WE HAVE THE CORRESPONDING VALUES FOR THE SCORES OF THE FIRST THREEBLOCK, THAT WE CAN NOW USE TO CALCULATE THE MEAN
+	
+	$st2 = $conn->prepare($sql2);
+	$st2->execute();
+	$data2 = $st2->fetch();
+	
+	$uidB1 = $data2[0]; 
+	$uidB2 = $data2[1]; 
+	$uidB3 = $data2[2]; 
+	
+	$scoreB1 = 0; $scoreB2 = 0; $scoreB3 = 0; 
+	if($uidB1 != null && $uidB1 != 0) {
+		$sql ="SELECT $attribute FROM user WHERE UID=$uidB1";
+		$st = $conn->prepare($sql);
+		$st->execute();
+		$data = $st->fetch();
+		
+		$scoreB1 = $data[0]; 
+		$countB++; 
+	}
+	else {
+		// $uidB1 is not valid, that means that the other threeblocks will be empty, so you can skip to the end
+		
+		// SKIP TO END (JUMP)
+	}
+	
+	if($uidB2 != null && $uidB2 != 0) {
+		$sql ="SELECT $attribute FROM user WHERE UID=$uidB2";
+		$st = $conn->prepare($sql);
+		$st->execute();
+		$data = $st->fetch();
+		
+		$scoreB2 = $data[0]; 
+		$countB++; 
+	}
+	else {
+		// $uidB2 is not valid, that means that the other threeblock will be empty, so you can skip to the end
+		
+		// SKIP TO END (JUMP)
+	}
+	
+	if($uidB3 != null && $uidB3 != 0) {
+		$sql ="SELECT $attribute FROM user WHERE UID=$uidB3";
+		$st = $conn->prepare($sql);
+		$st->execute();
+		$data = $st->fetch();
+		
+		$scoreB3 = $data[0]; 
+		$countB++; 
+	}
+	
+	$st3 = $conn->prepare($sql3);
+	$st3->execute();
+	$data3 = $st3->fetch();
+	
+	$uidC1 = $data3[0]; 
+	$uidC2 = $data3[1]; 
+	$uidC3 = $data3[2]; 
+	
+	$scoreC1 = 0; $scoreC2 = 0; $scoreC3 = 0; 
+	if($uidC1 != null && $uidC1 != 0) {
+		$sql ="SELECT $attribute FROM user WHERE UID=$uidC1";
+		$st = $conn->prepare($sql);
+		$st->execute();
+		$data = $st->fetch();
+		
+		$scoreC1 = $data[0]; 
+		$countC++; 
+	}
+	else {
+		// $uidC1 is not valid, that means that the other threeblocks will be empty, so you can skip to the end
+		
+		// SKIP TO END (JUMP)
+	}
+	
+	if($uidC2 != null && $uidC2 != 0) {
+		$sql ="SELECT $attribute FROM user WHERE UID=$uidC2";
+		$st = $conn->prepare($sql);
+		$st->execute();
+		$data = $st->fetch();
+		
+		$scoreC2 = $data[0]; 
+		$countC++; 
+	}
+	else {
+		// $uidC2 is not valid, that means that the other threeblock will be empty, so you can skip to the end
+		
+		// SKIP TO END (JUMP)
+	}
+	
+	if($uidC3 != null && $uidC3 != 0) {
+		$sql ="SELECT $attribute FROM user WHERE UID=$uidC3";
+		$st = $conn->prepare($sql);
+		$st->execute();
+		$data = $st->fetch();
+		
+		$scoreC3 = $data[0]; 
+		$countC++; 
+	}
+	
 	//now you have the right value for totalValues so you can compute the weighted average	
+	
+	// NOW WE HAVE BOTH THE NETTED SCORES AND THE SCORES FROM THE THREEBLOCK!
+	$subBlockA = ($scoreA1 + $scoreA2 + $scoreA3) / $countA; 
+	$subBlockB = ($scoreB1 + $scoreB2 + $scoreB3) / $countB; 
+	$subBlockC = ($scoreC1 + $scoreC2 + $scoreC3) / $countC; 
+	
+	$subBlockTotal = ($subBlockA + $subBlockB + $subBlockC) / 3; 
+	
+	$valueTotal = ($value1 + $value2 + $value3) / $totalValues; 
+	
+	$lowerBound = 0; 
+	
+	// NOTE: B IS ALSO ADDED CORRESPONDINGLY BELOW
+	
+	if($valueTotal == 0) {
+		// put all emphasis on subBlock
+		if($subBlockTotal == 0) {
+			// lower bound does not change
+			$sql = "UPDATE user SET $nameThreeBlock1='$recipient2' WHERE UID='$recipient1';";
+			$st = $conn->prepare($sql);
+			$st->execute();
+		}
+		else {
+			$lowerBound = $subBlockTotal; 
+			specialSubmit($facebook, $uid, $token, $recipient1, $lowerBound, $attribute, $winnerPos); 
+			$sql = "UPDATE user SET $nameThreeBlock1='$recipient2',$nameThreeBlock2='0',$nameThreeBlock3='0' WHERE UID='$recipient1';";
+			$st = $conn->prepare($sql);
+			$st->execute();
+		}
+	}
+	else {
+		if($subBlockTotal == 0) {
+			$lowerBound = $valueTotal; 
+			specialSubmit($facebook, $uid, $token, $recipient1, $lowerBound, $attribute, $winnerPos); 
+			$sql = "UPDATE user SET $nameThreeBlock1='$recipient2',$nameThreeBlock2='0',$nameThreeBlock3='0' WHERE UID='$recipient1';";
+			$st = $conn->prepare($sql);
+			$st->execute();
+		}
+		else {
+			$lowerBound = ((68 * $valueTotal) + (32 * $subBlockTotal)) / 100; 
+			specialSubmit($facebook, $uid, $token, $recipient1, $lowerBound, $attribute, $winnerPos); 
+			$sql = "UPDATE user SET $nameThreeBlock1='$recipient2',$nameThreeBlock2='0',$nameThreeBlock3='0' WHERE UID='$recipient1';";
+			$st = $conn->prepare($sql);
+			$st->execute();
+		}
+	}
+	
+	// now lower bound should have the right value
+	
 		
 	$conn = null;
+}
+
+function specialSubmit($facebook, $uid, $token, $recipient1, $lowerBound, $attribute, $winnerPos) {
+	// LIKE A NORMAL TRANSACTION BUT IT IS NOT FROM ANYONE (WELL -- TECHNICALLY THE PERSON THAT JUST ANSWERED THE QUESTION)
+	
+	$slider1 = $lowerBound; 
+	$comment = ""; 
+	$keywords = "null"; 
+	
+	if($winnerPos == 0) {
+		$name1 = isset($_SESSION['Name1']) ? $_SESSION['Name1'] : "Unknown";
+    	$affiliations1 = isset($_SESSION['affiliations1']) ? $_SESSION['affiliations1'] : "";
+		
+		$gender1 = isset($_SESSION['Gender1']) ? $_SESSION['Gender1']: "male";
+    
+    	$vibe = new Vibe($uid, $recipient1,$attribute,$keywords,$affiliations1,$gender1,$name1);
+		
+		$vibe->setAnswer($slider1, $comment); 
+    	$vibe->recordToTable();
+	}
+	else {
+		$name2 = isset($_SESSION['Name2']) ? $_SESSION['Name2'] : "Unknown";
+    	$affiliations2 = isset($_SESSION['affiliations2']) ? $_SESSION['affiliations2'] : "";
+		
+		$gender2 = isset($_SESSION['Gender2']) ? $_SESSION['Gender2']: "male";
+    
+    	$vibe = new Vibe($uid, $recipient2,$attribute,$keywords,$affiliations2,$gender2,$name2);
+		
+		$vibe->setAnswer($slider2, $comment); 
+    	$vibe->recordToTable();
+	}
 }
 
 function submit2($facebook,$uid,$token ){
@@ -417,7 +665,7 @@ function submit2($facebook,$uid,$token ){
     $attribute = isset($_SESSION['attribute']) ? $_SESSION['attribute'] : "";
     $positive = isset($_SESSION['positive']) ? $_SESSION['positive'] + "" : "";
 	
-    $gender1 = isset($_SESSION['Gender2']) ? $_SESSION['Gender1']: "male";
+    $gender1 = isset($_SESSION['Gender1']) ? $_SESSION['Gender1']: "male";
 	$gender2 = isset($_SESSION['Gender2']) ? $_SESSION['Gender2']: "male";
 	
     $null = true;
@@ -455,28 +703,7 @@ function submit2($facebook,$uid,$token ){
 		if(($prevScore1 == 0 && $prevScore2 == 0) || ($prevScore1 == null && $prevScore2 == null)) {
 			// no data yet for either 
 			
-			$slider1 = 6; 
-			$slider2 = 4; 
-			
-			$name1 = isset($_SESSION['Name1']) ? $_SESSION['Name1'] : "Unknown";
-		    $affiliations1 = isset($_SESSION['affiliations1']) ? $_SESSION['affiliations1'] : "";
-			
-			$name2 = isset($_SESSION['Name2']) ? $_SESSION['Name2'] : "Unknown";
-		    $affiliations2 = isset($_SESSION['affiliations2']) ? $_SESSION['affiliations2'] : "";
-		    
-		    $keywords = "null"; 
-		    
-		    $vibe = new Vibe($uid, $recipient1,$attribute,$keywords,$affiliations1,$gender1,$name1);
-		    $vibe2 = new Vibe($uid, $recipient2,$attribute,$keywords,$affiliations2,$gender2,$name2);
-			
-		    if(!$positive){$slider1 = 10 - $slider1;}
-			if(!$positive){$slider2 = 10 - $slider2;}
-			
-		    $vibe->setAnswer($slider1, $comment); 
-		    $vibe->recordToTable();
-		    
-			$vibe2->setAnswer($slider2, $comment); 
-		    $vibe2->recordToTable();
+			zeroAnalysis($facebook, $uid, $token, $recipient1, $recipient2, $attribute, 0); 
 		}
 		else if($prevScore1 == 0 && $prevScore2 != 0 || ($prevScore1 == null && $prevScore2 != null) || ($prevScore1 == 0 && $prevScore2 != null) || ($prevScore1 == 0 && $prevScore2 != null)) {
 			// prevScore1 should be at least as high as prevScore2
@@ -575,28 +802,8 @@ function submit2($facebook,$uid,$token ){
 		if(($prevScore1 == 0 && $prevScore2 == 0) || ($prevScore1 == null && $prevScore2 == null)) {
 			// no data yet for either 
 			
-			$slider1 = 4; 
-			$slider2 = 6; 
+			zeroAnalysis($facebook, $uid, $token, $recipient2, $recipient1, $attribute, 1); 
 			
-			$name1 = isset($_SESSION['Name1']) ? $_SESSION['Name1'] : "Unknown";
-		    $affiliations1 = isset($_SESSION['affiliations1']) ? $_SESSION['affiliations1'] : "";
-			
-			$name2 = isset($_SESSION['Name2']) ? $_SESSION['Name2'] : "Unknown";
-		    $affiliations2 = isset($_SESSION['affiliations2']) ? $_SESSION['affiliations2'] : "";
-		    
-		    $keywords = "null"; 
-		    
-		    $vibe = new Vibe($uid, $recipient1,$attribute,$keywords,$affiliations1,$gender1,$name1);
-		    $vibe2 = new Vibe($uid, $recipient2,$attribute,$keywords,$affiliations2,$gender2,$name2);
-			
-		    if(!$positive){$slider1 = 10 - $slider1;}
-			if(!$positive){$slider2 = 10 - $slider2;}
-			
-		    $vibe->setAnswer($slider1, $comment); 
-		    $vibe->recordToTable();
-		    
-			$vibe2->setAnswer($slider2, $comment); 
-		    $vibe2->recordToTable();
 		}
 		else if($prevScore1 == 0 && $prevScore2 != 0 || ($prevScore1 == null && $prevScore2 != null) || ($prevScore1 == 0 && $prevScore2 != null) || ($prevScore1 == 0 && $prevScore2 != null)) {
 			// slider2 should be at least as high as prevScore1
