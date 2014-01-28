@@ -132,6 +132,7 @@ function submit($facebook,$uid,$token ){
 	motherteresaTracker();
 	
     require( CLASS_PATH . "/Vibe.php" );
+    //notify($facebook,$uid,$token);
 	
     $recipient=$_SESSION['recipient'];
     $attribute=isset( $_SESSION['attribute'] ) ? $_SESSION['attribute'] : "";

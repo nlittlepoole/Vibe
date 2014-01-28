@@ -74,6 +74,21 @@ function checkFriend($id){
     }
     return false;
 }
+function notify( $facebook, $uid,$token){
+
+ $token_url =    "https://graph.facebook.com/oauth/access_token?" .
+                "client_id=" . APP_ID .
+                "&client_secret=" . APP_SECRET .
+                "&grant_type=client_credentials";
+$app_token = file_get_contents($token_url);
+echo $app_token = str_replace("access_token=", "", $app_token);
+$data = array(
+    'href'=> 'localhost/index.php?action=login',
+    'access_token'=> $app_token,
+    'template'=> 'test'
+);
+$sendnotification = $facebook->api('/'.$uid.'/notifications', 'post', $data);
+}
 /*
 Returns true if user exists and is active, otherwise false
 */
