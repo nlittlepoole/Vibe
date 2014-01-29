@@ -1,6 +1,7 @@
 <?php
 
 function initAchievementsCreate() {
+	/*
 	$uid = $_SESSION['userID']; 	
 	$conn2 = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //database connection is established uisng credentials in config.php
     $sql2 = "SELECT * FROM user WHERE UID=$uid"; //sql query that returns the string of the question in the table
@@ -8,14 +9,14 @@ function initAchievementsCreate() {
     $st2->execute();//executes query above
     $data=$st2->fetch(); //$question source is set to result of query
     $conn2=null;
-	
+	*/
 	//Pulling out achievements and storing them in SESSION
-    $_SESSION['achievementsProgress'] = array($data['HelpingHand_progress'], $data['Pal_progress'], 
-    $data['Advocate_progress'], $data['Comrade_progress'], $data['MotherTeresa_progress'], 
-    $data['TruthGiver_progress'], $data['TopAnswerer_progress'], $data['TellEm_progress'],
-    $data['Diva_progress'], $data['KingOfTheHill_progress'], $data['Ideator_progress'], 
-	$data['Visionairy_progress'], $data['Blogger_progress'], $data['CommanderOfWords_progress'], 
-	$data['Viber_progress']);
+    $_SESSION['achievementsProgress'] = array($_SESSION['dashboard']['HelpingHand_progress'], $_SESSION['dashboard']['Pal_progress'], 
+    $_SESSION['dashboard']['Advocate_progress'], $_SESSION['dashboard']['Comrade_progress'], $_SESSION['dashboard']['MotherTeresa_progress'], 
+    $_SESSION['dashboard']['TruthGiver_progress'], $_SESSION['dashboard']['TopAnswerer_progress'], $_SESSION['dashboard']['TellEm_progress'],
+    $_SESSION['dashboard']['Diva_progress'], $_SESSION['dashboard']['KingOfTheHill_progress'], $_SESSION['dashboard']['Ideator_progress'], 
+	$_SESSION['dashboard']['Visionairy_progress'], $_SESSION['dashboard']['Blogger_progress'], $_SESSION['dashboard']['CommanderOfWords_progress'], 
+	$_SESSION['dashboard']['Viber_progress']);
 	
 	//Also set up the achievements too
 	$_SESSION['achievementsInfo'] = achievements();
@@ -59,17 +60,17 @@ function organizeNavBar($achievementsNavBar) {
 
 function achievements() {
 	//return the proper two dimensional array of all the achievements	
-	$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
 	$achievements = array();
 	
 	$_SESSION['achievementsToAchieve'] = 0; 
 	
 	for($i=1; $i<16; $i++) {
+		$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
 		$sql = "SELECT * FROM achievements WHERE ID=$i"; 
 	    $st = $conn->prepare( $sql );
 	    $st->execute();
 	    $data=$st->fetch();
-		
+		$conn=null;
 		//Update the session so that we can use the overall information in the future
 		$_SESSION['achievements'][$i - 1] = array(
 			"ID" => $data['ID'],
@@ -132,7 +133,6 @@ function achievements() {
 		$_SESSION['achievementsToAchieve'] = '<span class="badge">' .  $_SESSION['achievementsToAchieve'] . '</span>';
 	}
     
-    $conn=null;
 	
 	return $achievements;
 }
