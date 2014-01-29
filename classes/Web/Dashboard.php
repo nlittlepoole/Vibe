@@ -263,9 +263,9 @@ if(refresh($uid) ||$force){
     $sql = "UPDATE user SET newAnswers=0 WHERE UID='$uid';";
     $st = $conn->prepare( $sql );// prevents user browser from seeing queries. Useful for security
     $st->execute();
+    $conn=null;
     $_SESSION['refresh']=new DateTime(date("Y-m-d H:i:s", time()));
     $_SESSION['dashboard']=$data;
-    $conn=null;
   }
   else{
     return $_SESSION['dashboard'];

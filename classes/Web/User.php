@@ -160,6 +160,7 @@ function addUser( $facebook,$uid,$token ) {
     $conn=null; //connection to the database is closed. Must do this to prevent memory leaks and performance slowdowns
   }
   function getPictures($recipient){
+    /*
     global $facebook;
     $fql="SELECT src_big FROM photo WHERE aid IN (SELECT aid FROM album WHERE owner = $recipient AND type = 'profile') LIMIT 4; ";
     $param=array(//facebook api uses arrays to store components of query's and then runs them out of $facebook->api(array of parameters)
@@ -176,6 +177,8 @@ function addUser( $facebook,$uid,$token ) {
       array_push($photos, "http://graph.facebook.com/" . $recipient . "/picture?width=300&height=300");
     }
     return $photos[0];
+    */
+    return "http://graph.facebook.com/" . $recipient . "/picture?width=300&height=300";
 }
 function array_delete($array, $element) {
     return array_diff($array, [$element]);

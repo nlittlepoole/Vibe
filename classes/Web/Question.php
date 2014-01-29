@@ -47,18 +47,18 @@ function question($facebook,$uid,$token ){
     //$recipient=712337857;
     $question= str_replace("name", $name, $question); 
     if($_SESSION['Gender']=="female"){
-        $question= str_replace("their", "her", $question);
-        $question= str_replace("themselves", "herself", $question); 
-        $question= str_replace("them", "her", $question);  
-		$question= str_replace("thelr", "their", $question); 
+        $question= str_replace(" their ", " her ", $question);
+        $question= str_replace(" themselves ", " herself ", $question); 
+        $question= str_replace(" them ", " her ", $question);  
+		$question= str_replace(" thelr ", " their ", $question); 
     }
     else{
-        $question= str_replace("their", "his", $question); 
-        $question= str_replace("themselves", "himself", $question);
-        $question= str_replace("attractive", "good looking", $question); 
-        $question= str_replace("them", "him", $question);  
-		$question= str_replace("thelr", "their", $question); 
-		$question= str_replace("suit", "dress", $question); 
+        $question= str_replace(" their ", " his ", $question); 
+        $question= str_replace(" themselves ", " himself ", $question);
+        $question= str_replace(" attractive ", " good looking ", $question); 
+        $question= str_replace(" them ", " him ", $question);  
+		$question= str_replace(" thelr ", " their ", $question); 
+		$question= str_replace(" suit ", " dress ", $question); 
     }
     $pic=getPictures($recipient);
     $_SESSION['affiliations']=getAffiliations($facebook,$recipient,$token);
