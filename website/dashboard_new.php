@@ -35,17 +35,19 @@
 <link href="assets/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
 <!-- END GLOBAL MANDATORY STYLES -->
 <!-- BEGIN PAGE LEVEL PLUGIN STYLES -->
+<!--
 <link href="assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" type="text/css"/>
 <link href="assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css"/>
 <link href="assets/plugins/fullcalendar/fullcalendar/fullcalendar.css" rel="stylesheet" type="text/css"/>
 <link href="assets/plugins/jqvmap/jqvmap/jqvmap.css" rel="stylesheet" type="text/css"/>
 <link href="assets/plugins/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css"/>
+-->
 <!-- END PAGE LEVEL PLUGIN STYLES -->
 <!-- BEGIN THEME STYLES -->
 <link href="assets/css/style-metronic.css" rel="stylesheet" type="text/css"/>
 <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
 <link href="assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
-<link href="assets/css/plugins.css" rel="stylesheet" type="text/css"/>
+<!--<link href="assets/css/plugins.css" rel="stylesheet" type="text/css"/>-->
 <link href="assets/css/pages/tasks.css" rel="stylesheet" type="text/css"/>
 <link href="assets/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
 <link href="assets/css/custom.css" rel="stylesheet" type="text/css"/>
@@ -699,6 +701,7 @@
 <script src="assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
+<!--
 <script src="assets/plugins/jqvmap/jqvmap/jquery.vmap.js" type="text/javascript"></script>
 <script src="assets/plugins/jqvmap/jqvmap/maps/jquery.vmap.russia.js" type="text/javascript"></script>
 <script src="assets/plugins/jqvmap/jqvmap/maps/jquery.vmap.world.js" type="text/javascript"></script>
@@ -710,13 +713,15 @@
 <script src="assets/plugins/flot/jquery.flot.resize.js" type="text/javascript"></script>
 <script src="assets/plugins/jquery.pulsate.min.js" type="text/javascript"></script>
 <script src="assets/plugins/bootstrap-daterangepicker/moment.min.js" type="text/javascript"></script>
-<script src="assets/plugins/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>
+<script src="assets/plugins/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>-->
 <!-- Commented out below so the pop-up notifications don't happen! (Noah)-->
 <!-- <script src="assets/plugins/gritter/js/jquery.gritter.js" type="text/javascript"></script> -->
 <!-- IMPORTANT! fullcalendar depends on jquery-ui-1.10.3.custom.min.js for drag & drop support -->
+<!--
 <script src="assets/plugins/fullcalendar/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
 <script src="assets/plugins/jquery-easy-pie-chart/jquery.easy-pie-chart.js" type="text/javascript"></script>
 <script src="assets/plugins/jquery.sparkline.min.js" type="text/javascript"></script>
+-->
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="assets/scripts/app.js" type="text/javascript"></script>
@@ -727,13 +732,13 @@
 jQuery(document).ready(function() {    
    App.init(); // initlayout and core plugins
    Index.init();
-   Index.initJQVMAP(); // init index page's custom scripts
-   Index.initCalendar(); // init index page's custom scripts
-   Index.initCharts(); // init index page's custom scripts
-   Index.initChat();
+   //Index.initJQVMAP(); // init index page's custom scripts
+   //Index.initCalendar(); // init index page's custom scripts
+   //Index.initCharts(); // init index page's custom scripts
+   //Index.initChat();
    Index.initMiniCharts();
-   Index.initDashboardDaterange();
-   Index.initIntro();
+   //Index.initDashboardDaterange();
+   //Index.initIntro();
    Tasks.initDashboardWidget();
 });
 </script>
@@ -763,16 +768,6 @@ jQuery(document).ready(function() {
         expose: true
         });
       });
-</script>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-47556210-1', 'go-vibe.com');
-  ga('send', 'pageview');
-
 </script>
 <!-- END JAVASCRIPTS -->
 </body>
