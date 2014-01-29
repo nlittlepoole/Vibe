@@ -27,9 +27,16 @@ switch ( $action ) {
     header('Location: /index.php?action=dashboard&force=1'); // index is reloaded but with question prameter. Now that environment is set up index.php is reloaded with the intent of answring questiosn
 break;
   case 'question'://occurs after a login or another question, this case handles generating a new question and friend
-    require( CLASS_PATH . "/Web/Question.php"); 
-    question($facebook,$uid,$token); // calls the question function that pulls a user and question and places the data in the Session cache
-    header('Location: /website/questions.php'); //sends browser to questions page with Session Data containing questions input above
+    require( CLASS_PATH . "/Web/Question.php");
+    $random = rand(0,1); 
+	if($random != 0) {
+		question($facebook,$uid,$token); 
+		header('Location: /website/questions.php');
+	}
+	else {
+		question2($facebook,$uid,$token); 
+		header('Location: /website/questions2.php');
+	}
     break;
   case 'location':
   require( CLASS_PATH . "/Web/Community.php");
@@ -55,13 +62,20 @@ break;
     submit($facebook,$uid,$token );
     header('Location: /index.php?action=question');
     break;
-	
+ 
   case 'submit2':
 	//The settings page has been populated with information  
 	require( CLASS_PATH . "/Web/Settings.php");
   	$_SESSION['redirect']=' /index.php?action=profile&profile=' . $_SESSION['userID'];
 	header('Location:/index.php?action=dashboard&force=1');
 	  
+  break;
+  
+  case 'submit3'://a user submits a question
+    require( CLASS_PATH . "/Web/Question.php");
+    submit2($facebook,$uid,$token );
+    header('Location: /index.php?action=question');
+    
   break;	
   case 'search':
     require( CLASS_PATH . "/Web/Search.php");
