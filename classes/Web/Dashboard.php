@@ -58,17 +58,16 @@ function achievementsBox() {
 		$ID = $_SESSION['userID']; 
 		
 		$traitSearch = $_SESSION['achievementNames'][$i] . "_progress"; 
-		
+		$dateQuery = "lastdate" . $_SESSION['achievementNames'][$i]; 
 		// GRAB CURRENT PROGRESS
+		/*
 		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
 		$sql = "SELECT $traitSearch FROM user WHERE UID=$ID";
-		
 		$st = $conn->prepare($sql);
 	    $st->execute();
 	    $data = $st->fetch(); 
-		
 		// GRAB ACHIEVED DATE TO USE IF RELEVANT
-		$dateQuery = "lastdate" . $_SESSION['achievementNames'][$i]; 
+		
 		
 		$sql2 = "SELECT $dateQuery FROM user WHERE UID=$ID";
 		
@@ -77,8 +76,9 @@ function achievementsBox() {
 	    $data2 = $st2->fetch(); 
 		
 		$achievedDate = $data2[$dateQuery]; 
-		
-		if($data[$traitSearch] == 10) {
+		*/
+		$achievedDate=$_SESSION['dashboard'][$dateQuery];
+		if($_SESSION['dashboard'][$traitSearch] == 10) {
 			// the user has that achievement so add that to the array
 			// first element => name of achievement, second element => time ago that person got achievement
 			$tempName = $_SESSION['achievementNames'][$i];

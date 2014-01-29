@@ -37,20 +37,20 @@ break;
     break;
   case 'dashboard'://occurs after a login or another question, this case handles generating a new question and friend
     require( CLASS_PATH . "/Web/Dashboard.php");
-     $start_timestamp = time();
-    achievementsBox(); 
+    $start_timestamp = time(); 
     $force=$_GET['force'];
     dashboard($facebook,$uid,$token,$force);
+    achievementsBox();
     $end_timestamp = time();
     $duration = $end_timestamp - $start_timestamp;
     echo "Execution took ".$duration." milliseconds.";
     if($_SESSION['redirect']){
         $redirect=$_SESSION['redirect'];
         $_SESSION['redirect']=null;
-        header('Location:'.$redirect);
+        //header('Location:'.$redirect);
     }
     else{
-      header('Location: /website/dashboard.php');
+      //header('Location: /website/dashboard.php');
     }                            // Force php-output-cache to flush to browser.
 
   break;
