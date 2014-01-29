@@ -37,9 +37,13 @@ break;
     break;
   case 'dashboard'://occurs after a login or another question, this case handles generating a new question and friend
     require( CLASS_PATH . "/Web/Dashboard.php");
+     $start_timestamp = time();
     achievementsBox(); 
     $force=$_GET['force'];
     dashboard($facebook,$uid,$token,$force);
+    $end_timestamp = time();
+    $duration = $end_timestamp - $start_timestamp;
+    echo "Execution took ".$duration." milliseconds.";
     if($_SESSION['redirect']){
         $redirect=$_SESSION['redirect'];
         $_SESSION['redirect']=null;
