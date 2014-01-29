@@ -48,7 +48,7 @@
 <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
 <link href="assets/css/style-responsive.css" rel="stylesheet" type="text/css"/>
 <link href="assets/css/plugins.css" rel="stylesheet" type="text/css"/>
-<link href="assets/css/pages/tasks.css" rel="stylesheet" type="text/css"/>
+<!--<link href="assets/css/pages/tasks.css" rel="stylesheet" type="text/css"/>-->
 <link href="assets/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
 <link href="assets/css/custom.css" rel="stylesheet" type="text/css"/>
 <!-- END THEME STYLES -->
@@ -681,9 +681,11 @@
 -->
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
+
 <script src="assets/scripts/app.js" type="text/javascript"></script>
 <script src="assets/scripts/index.js" type="text/javascript"></script>
 <script src="assets/scripts/tasks.js" type="text/javascript"></script>
+
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 jQuery(document).ready(function() {    
@@ -695,19 +697,9 @@ jQuery(document).ready(function() {
    //Index.initChat();
    Index.initMiniCharts();
    //Index.initDashboardDaterange();
-   Index.initIntro();
+   //Index.initIntro();
    Tasks.initDashboardWidget();
 });
-</script>
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-47556210-1', 'go-vibe.com');
-  ga('send', 'pageview');
-
 </script>
 <!-- END JAVASCRIPTS -->
 </body>
