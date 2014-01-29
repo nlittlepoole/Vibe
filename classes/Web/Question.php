@@ -102,7 +102,6 @@ function question2($facebook,$uid,$token ){
 			while($random1 == $random2) {
 				$random1 = rand(0,sizeof($result) - 1); 
 			}
-			
             $recipient1 = $result[$random1] ['uid']; //$random is used as the index of the top friends array and the user id is returned 
             $recipient2 = $result[$random2] ['uid'];
 			
@@ -159,7 +158,6 @@ function question2($facebook,$uid,$token ){
 function getQuestion2($input){
     $attribute = rand(1,$input); //4andom is set to a number between 1 and $input
     $random = rand(1,10);
-
     $question = "Question" . $random;
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD ); //database connection is established uisng credentials in config.php
     $sql = "SELECT $question, Attribute FROM comparison WHERE id=$attribute"; //sql query that returns the string of the question in the table
@@ -314,13 +312,30 @@ function zeroAnalysis($facebook, $uid, $token, $recipient1, $recipient2, $attrib
 	
 	// NOW WE LOOK AT TOTAL NUMBER OF THINGS STORED
 	if($amount == 0) {
-		//nothing yet in the threeblock, add the other person's UID to the beginning!
-		$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
-		$sql = "UPDATE user SET $nameThreeBlock1='$recipient2' WHERE UID='$recipient1';";
-		$st = $conn->prepare($sql);
-		$st->execute();
-		
-		$conn = null; 
+		// ERROR CHECK TO SEE IF PERSON IS IN THERE
+		if(checkUID($recipient1)) {
+			//nothing yet in the threeblock, add the other person's UID to the beginning!
+			$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
+			$sql = "UPDATE user SET $nameThreeBlock1='$recipient2' WHERE UID='$recipient1';";
+			$st = $conn->prepare($sql);
+			$st->execute();
+			
+			$conn = null; 
+		}
+		else {
+			// create the user first
+			$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
+			
+			$sql = "INSERT INTO user (UID) VALUES('$recipient1')"; 
+        	$st = $conn->prepare( $sql );
+        	$st->execute(); //query is executed
+        	
+        	$sql = "UPDATE user SET $nameThreeBlock1='$recipient2' WHERE UID='$recipient1';";
+			$st = $conn->prepare($sql);
+			$st->execute();
+        	
+        	$conn = null; 
+		}
 
 	}
 	else if($amount == 1) {
@@ -700,7 +715,7 @@ function submit2($facebook,$uid,$token ){
     if($personPressed != "" && $personPressed != null) {
     	// first person was pressed
 		
-		if(($prevScore1 == 0 && $prevScore2 == 0) || ($prevScore1 == null && $prevScore2 == null)) {
+		if(($prevScore1 == 0 && $prevScore2 == 0) || ($prevScore1 == null && $prevScore2 == null) && ($prevScore1 == null && $prevScore2 == 0) && ($prevScore1 == 0 && $prevScore2 == null)) {
 			// no data yet for either 
 			
 			zeroAnalysis($facebook, $uid, $token, $recipient1, $recipient2, $attribute, 0); 
