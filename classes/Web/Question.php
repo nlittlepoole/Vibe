@@ -88,7 +88,7 @@ function question2($facebook,$uid,$token ){
 	$_SESSION['Name2'];
     
     //Placed in a while loop to make sure that php doesn't proceed without a valid user
-    while((!$recipient1 || $recipient1 == $uid) && (!$recipient2 || $recipient2 == $uid)){
+    while((!$recipient1 || $recipient1 == $uid) || (!$recipient2 || $recipient2 == $uid)){
     	
         if(true){
         	// THIS CODE IS FOR TOP FRIENDS	
