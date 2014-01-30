@@ -16,14 +16,14 @@ profile=str(all[0][0]);
 answers=str(all[0][1]);
 cur.execute("SELECT Count(*) FROM user WHERE Active=1")
 active = str(cur.fetchall()[0][0])
-cur.execute("SELECT COUNT(*) FROM USER WHERE DATE_SUB(CURDATE(),INTERVAL 30 MINUTE) <=STR_TO_DATE(LastLogin, '%Y-%m-%d %H:%i:%s')")
+cur.execute("SELECT COUNT(*) FROM user WHERE DATE_SUB(CURDATE(),INTERVAL 30 MINUTE) <=STR_TO_DATE(LastLogin, '%Y-%m-%d %H:%i:%s')")
 online=str(cur.fetchall()[0][0])
 cur.execute("SELECT Count(*) FROM directory")
 communities=str(cur.fetchall()[0][0])
 cur.execute("SELECT Name,Users,UID FROM directory  ORDER BY Users DESC Limit 10")
 lists=cur.fetchall()
 largest=""
-now=time.strftime("%Y-%m-%d" )
+now=time.strftime("%Y-%m-%d %H:%M" )
 print now
 for community in lists:
     largest=largest+community[0]+"##"+community[2]+"##"+str(community[1])+"##"
