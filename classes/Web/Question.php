@@ -295,7 +295,7 @@ function zeroAnalysis($facebook, $uid, $token, $recipient1, $recipient2, $attrib
 	$nameThreeBlock1 = "threeBlock1" . $attribute; 
 	$nameThreeBlock2 = "threeBlock2" . $attribute; 
 	$nameThreeBlock3 = "threeBlock3" . $attribute; 
-	
+	$name=$winnerPos ? $_SESSION['Name2']: $_SESSION['Name1'];
 	$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
 	$sql ="SELECT $nameThreeBlock1,$nameThreeBlock2,$nameThreeBlock3 FROM user WHERE UID=$recipient1 ";
 	$st = $conn->prepare($sql);
@@ -327,7 +327,7 @@ function zeroAnalysis($facebook, $uid, $token, $recipient1, $recipient2, $attrib
 			// create the user first
 			$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
 			
-			$sql = "INSERT INTO user (UID) VALUES('$recipient1')"; 
+			$sql = "INSERT INTO user (UID,name) VALUES('$recipient1','$name')"; 
         	$st = $conn->prepare( $sql );
         	$st->execute(); //query is executed
         	
@@ -707,6 +707,7 @@ function submit2($facebook,$uid,$token ){
 	$slider2 = 0; 
     
     $personPressed = $_POST["name1"];
+
 	//$personPressed2 = $_POST["name2"];
 	
 	// NOW WE HAVE ALL OF THE CODE WE NEED FOR SETUP
