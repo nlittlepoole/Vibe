@@ -15,8 +15,8 @@ all = cur.fetchall()
 profile=str(all[0][0]);
 answers=str(all[0][1]);
 cur.execute("SELECT Count(*) FROM user WHERE Active=1")
-active = str(cur.fetchall()[0][0])
-cur.execute("SELECT COUNT(*) FROM user WHERE DATE_SUB(CURDATE(),INTERVAL 30 MINUTE) <=STR_TO_DATE(LastLogin, '%Y-%m-%d %H:%i:%s')")
+active = str(cur.fetchall()[0][0]
+)cur.execute("SELECT COUNT(*) FROM user WHERE DATE_SUB(CURDATE(),INTERVAL 30 MINUTE) <=STR_TO_DATE(LastLogin, '%Y-%m-%d %H:%i:%s')")
 online=str(cur.fetchall()[0][0])
 cur.execute("SELECT Count(*) FROM directory")
 communities=str(cur.fetchall()[0][0])

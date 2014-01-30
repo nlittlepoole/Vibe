@@ -133,23 +133,25 @@ function addUser( $facebook,$uid,$token ) {
     $conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
     $_SESSION['redirect']= checkActive($uid)?""  :"/website/dashboard_new.php";
     if(!$check){ //if the user isn't in Vibosphere, they are added with a true active status 
-        $data= $facebook->api('/me/?fields=gender,name');//facebook graph api link is created to find gender
+        $data= $facebook->api('/me/?fields=gender,name,email');//facebook graph api link is created to find gender
         $gender=$data['gender']; //$gender is set to user gender
         $name=$data['name'];
+        $email=$data['email'];
         $friends= sizeof($_SESSION['friends']['data']);
         $affiliations=getAffiliations($facebook,$uid,$token); //$affiliations is set to result of affiliations function defined below
-        $sql = "INSERT INTO user  (Name,UID,Active,Gender,Communities,Friends,LastLogin) VALUES('$name','$uid','1','$gender','$affiliations',$friends,'$now')"; //user is added to Vibosphere database
+        $sql = "INSERT INTO user  (Name,UID,Active,Gender,Communities,Friends,LastLogin,Email) VALUES('$name','$uid','1','$gender','$affiliations',$friends,'$now','$email')"; //user is added to Vibosphere database
         $st = $conn->prepare( $sql );
         $st->execute(); //query is executed
     }
     else { //the user is in the database but not active, theyare simply set to active
       if(checkUID($uid)){
-        $data= $facebook->api('/me/?fields=gender,name');//facebook graph api is used to create gender query
+        $data= $facebook->api('/me/?fields=gender,name,email');//facebook graph api is used to create gender query
         $gender=$data['gender']; //gender is set
+        $email=$data['email'];
         $name=$data['name'];
         $friends= sizeof($_SESSION['friends']['data']);
         $affiliations=getAffiliations($facebook,$uid,$token); //affiliations is set to the result of the affilations function defined below
-             $sql = "UPDATE user SET Active='1',Gender='$gender', Communities='$affiliations',  Name='$name', Friends=$friends, LastLogin='$now' WHERE UID='$uid';"; //query is set to update the user to active and add their gender and communities
+             $sql = "UPDATE user SET Active='1',Gender='$gender', Communities='$affiliations',  Name='$name', Friends=$friends, LastLogin='$now',Email='$email' WHERE UID='$uid';"; //query is set to update the user to active and add their gender and communities
              $st = $conn->prepare( $sql ); //protection line used to hide queries from browsers
              $st->execute(); //command above is executed
         }
