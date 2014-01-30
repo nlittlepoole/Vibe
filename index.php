@@ -29,7 +29,7 @@ break;
   case 'question'://occurs after a login or another question, this case handles generating a new question and friend
     require( CLASS_PATH . "/Web/Question.php");
     $random = rand(0,1); 
-	if($random != 0) {
+	if($random) {
 		question($facebook,$uid,$token); 
 		header('Location: /website/questions.php');
 	}
