@@ -80,7 +80,7 @@
 					<div class="row-fluid">
 						<div class="span4">
 							<h3 class="icon-thumbs-up">Feedback</h3>
-							<p>Get anonymous feedback from your peers!</p>
+							<p>Get anonymous feedback from your friends!</p>
 						</div>
 						<div class="span4">
 							<h3 class="icon-heart">Profiles</h3>
