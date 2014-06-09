@@ -16,7 +16,7 @@ function post($url,$post_data,$token){
              
             //create cURL connection
             $curl_connection = 
-              curl_init('http://niger.go-vibe.com/api/user.php');
+              curl_init($url);
              
             //set options
             curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);

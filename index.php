@@ -1,5 +1,5 @@
 <?php
-//ob_start();
+
 session_start(); //initializes the PHP session and allows php to access cookie/url fragment data
 ini_set('max_execution_time', 300);
 //Start up code for any instance of Vibe runtime
@@ -27,7 +27,7 @@ switch ( $action ) {
     //addUser($facebook,$uid,$token); //adds user ID to mysql USER table, method does nothing if ID already exists and activates the ID if information exists but this is the first time the user has logged in
     //topFriends($facebook,$uid,$token); // pulls users top friends using the top friends function
     $data= $facebook->api('/me/?fields=gender,name,email');//facebook graph api link is created to find gender
-    $url = 'http://niger.go-vibe.com/api/user.php';
+    $url = 'http://niger.go-vibe.com/api/user.php?action=addUser';
     $post_data = array('uid' => $uid, 'name' => $data['name']);
     // use key 'http' even if you send the request to https://...
     //create array of data to be posted
