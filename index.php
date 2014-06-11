@@ -28,12 +28,12 @@ switch ( $action ) {
     //topFriends($facebook,$uid,$token); // pulls users top friends using the top friends function
     $data= $facebook->api('/me/?fields=gender,name,email');//facebook graph api link is created to find gender
     $url = 'http://niger.go-vibe.com/api/user.php?action=addUser';
-    $post_data = array('uid' => $uid, 'name' => $data['name']);
+    $post_data = array('uid' => $uid, 'name' => $data['name'], 'token'=>$token);
     // use key 'http' even if you send the request to https://...
     //create array of data to be posted
     //traverse array and prepare data for posting (key1=value1)
-    post($url,$post_data,$token);
-    //header('Location: /view/success.php'); // index is reloaded but with question prameter. Now that environment is set up index.php is reloaded with the intent of answring questiosn
+    post($url,$post_data);
+    header('Location: /view/feed.php'); // index is reloaded but with question prameter. Now that environment is set up index.php is reloaded with the intent of answring questiosn
   break;
   default: //this is the default setting, it simply take sthe user to the homepage. It also creates the facebook login url 
     //when a user logs in through facebook, the are simply going to a special link created by the facebook api. The api uses our AP ID and password to generate the link

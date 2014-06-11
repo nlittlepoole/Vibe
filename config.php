@@ -2,7 +2,6 @@
 <?php
 ini_set( "display_errors", true );
 $adress=getenv('IP');
-define( "ROOT", $_SERVER['DOCUMENT_ROOT']);
 date_default_timezone_set( "America/New_York" );  // http://www.php.net/manual/en/timezones.php
 define( "DB_DSN", "mysql:host=79afe5225f7fd454174526fe4108092758d4e751.rackspaceclouddb.com;dbname=VibeSocial" );
 define( "DB_USERNAME", "nlittlepoole" );
