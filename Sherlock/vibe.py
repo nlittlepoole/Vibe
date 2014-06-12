@@ -95,4 +95,4 @@ def getVibes(status):
                 vibes.append(vibe)
     return vibes
 if __name__ == '__main__':
-    print getVibes(sys.argv[1])
+    print getVibes("girlfriend")
