@@ -11,9 +11,9 @@ define( "ADMIN_USERNAME", "teamvibe" );
 define( "ADMIN_PASSWORD", "Carman4ever" );
 define( "APP_ID", "246588708881137" );
 define( "APP_SECRET", "8934166537a59f745ccd26e29f4ef781" );
-$token=(string)file_get_contents("https://graph.facebook.com/oauth/access_token?%20client_id=246588708881137&client_secret=8934166537a59f745ccd26e29f4ef781&grant_type=client_credentials", true);
-$token=str_replace('access_token=','',$token);
-define( "APP_TOKEN", $token );
+$app_token=(string)file_get_contents("https://graph.facebook.com/oauth/access_token?%20client_id=246588708881137&client_secret=8934166537a59f745ccd26e29f4ef781&grant_type=client_credentials", true);
+$app_token=str_replace('access_token=','',$app_token);
+define( "APP_TOKEN", $app_token );
 
 function handleException( $exception ) {
   echo "Sorry, a problem occurred. Please try later.";
