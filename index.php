@@ -43,6 +43,6 @@ switch ( $action ) {
                 );
     $loginUrl = $facebook->getLoginUrl($params); //the facebook getLoginUrl() is an api method that uses the permissions and redirct url to create a unique login url
     $_SESSION['loginUrl'] = $loginUrl; //the log in url is saved in the Session data so that the homepage can use it
-    header('Location: /website/homepage.php'); //the browser is redirected to the homepage. 
+    header('Location: /view/home.php'); //the browser is redirected to the homepage. 
 }
 ?>

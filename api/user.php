@@ -1,16 +1,19 @@
 <?php
-ini_set('display_errors',1); 
-error_reporting(E_ALL);
+//ini_set('display_errors',1); 
+//error_reporting(E_ALL);
 $root=$_SERVER['DOCUMENT_ROOT'];
 require_once( $root ."/config.php" );
 require_once('request.php');
-
- //initializes the PHP session and allows php to access cookie/url fragment data 
-$action = isset( $_GET['action'] ) && validToken($_POST['uid'],$_POST['token']) ? $_GET['action'] : "";
+$uid=  $_REQUEST['uid'] ;
+$token=$_REQUEST['token'];
+$action = isset( $_REQUEST['action'] ) && validToken($uid,$token) ? $_REQUEST['action'] : "";
 //Switch case determines what to do next based on the input arguments from the action URL fragment("?=action" in the URL)
 switch ( $action ) {
 	case 'addUser':
 		addUser();
+	break;
+	case 'getFriends':
+		getFriends();
 	break;
 }
 
@@ -31,7 +34,7 @@ function addUser(){
 function getFriends(){
 	$uid=$_GET['uid'];
 	$token=$_GET['token'];
-	$api="https//graph.facebook.com/v1.0/".$uid;
+	$api="https://graph.facebook.com/v1.0/".$uid;
 	$api=$api.'/friends?access_token='.$token;
 	$friends=json_decode(file_get_contents($api));
 	echo json_encode($friends);
