@@ -16,18 +16,18 @@ $_SESSION['token'];
 <form name="status" action="http://niger.go-vibe.com/api/vibe.php?action=postVibe" method="post">
 	<select name="recipient">
 <?php 
-ini_set('display_errors',1); 
-error_reporting(E_ALL);
-$request="http://niger.go-vibe.com/api/user.php?action=getFriends&uid=".$_SESSION['userID'];
-$request=$request."&token=".$_SESSION['token'];
-$friends=json_decode(file_get_contents($request),true);
-$friends=$friends['data'];
-usort($friends,function($a,$b){
-	return strcmp($a['name'],$b['name']);
-});
-foreach ($friends as $person){
-	echo'<option value="'.$person['id'].'">'.$person['name'].'</option>';
-}
+	ini_set('display_errors',1); 
+	error_reporting(E_ALL);
+	$request = "http://niger.go-vibe.com/api/user.php?action=getFriends&uid=". $_SESSION['userID'];
+	$request = $request."&token=".$_SESSION['token'];
+	$friends = json_decode(file_get_contents($request),true);
+	$friends = $friends['data'];
+	usort( $friends , function( $a ,$b ){
+		return strcmp($a['name'],$b['name']);
+	});
+	foreach ($friends as $person){
+		echo'<option value="'.$person['id'].'">'.$person['name'].'</option>';
+	}
 ?>
 </select><br>
 	<input type="hidden" name="recipient"  value=<?php echo '"'.$_SESSION['userID'].'"' ?>>
