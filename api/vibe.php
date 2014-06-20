@@ -5,8 +5,8 @@ session_start();
 $root=$_SERVER['DOCUMENT_ROOT'];
 require_once( $root ."/config.php" );
 require_once('request.php');
-$uid=  $_POST['uid'] ;
-$token=$_POST['token'];
+$uid=  $_REQUEST['uid'] ;
+$token=$_REQUEST['token'];
 $action = isset( $_GET['action'] ) && validToken($uid,$token) ? $_GET['action'] : ""; //sets $action to "Action" url fragment string if action isn't null
 
 //Switch case determines what to do next based on the input arguments from the action URL fragment("?=action" in the URL)
@@ -14,6 +14,18 @@ switch ( $action ) {
 	case 'postVibe':
 		postVibe(getVibe());
 	break;
+	case 'getCloud':
+		getCloud();
+	break;
+}
+
+function getCloud(){
+		$uid=isset( $_GET['uid'] ) ? $_GET['uid'] : "";
+		$command='sudo python cloud.py "'.$uid.'" 2>&1';
+		$temp = exec($command ,$output);
+		print_r($output);
+		echo "http://niger.go-vibe.com/view/cloud/".$uid.".png";
+
 }
 function getVibe(){
 	$output=[];
