@@ -23,14 +23,13 @@ $_SESSION['token'];
 	$friends = json_decode(file_get_contents($request),true);
 	$friends = $friends['data'];
 	usort( $friends , function( $a ,$b ){
-		return strcmp($a['name'],$b['name']);
+		return strcmp($a['Name'],$b['Name']);
 	});
 	foreach ($friends as $person){
-		echo'<option value="'.$person['id'].'">'.$person['name'].'</option>';
+		echo'<option value="'.$person['UID'].'">'.$person['Name'].'</option>';
 	}
 ?>
 </select><br>
-	<input type="hidden" name="recipient"  value=<?php echo '"'.$_SESSION['userID'].'"' ?>>
     <input type="text" name="status" size="240"  placeholder="Input a Status" style="height:80px;font-size:24pt;" align="middle">
     <input type="hidden" name="uid" value=<?php echo '"'.$_SESSION['userID'].'"' ?>>
     <input type="hidden" name="token" value=<?php echo '"'.$_SESSION['token'].'"' ?> >

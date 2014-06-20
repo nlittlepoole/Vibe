@@ -22,8 +22,9 @@ function addUser($uid,$token){
 	$name=$_POST['name'];
 	//$uid-mysql_real_escape_string($uid)
 	$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
+	$name=$conn->quote($name);
 	$sql="INSERT INTO Users (`UID`, `Name`, `Notes`)
-	    VALUES ('$uid','$name','Test')
+	    VALUES ('$uid',$name,'Test')
 	        ON DUPLICATE KEY UPDATE `Notes` = 'Test2';";
 	$response_array['status'] = "200 Request Queued";  
 	$st = $conn->prepare( $sql );
@@ -39,16 +40,17 @@ function addFriends($uid,$token){
 	$friends=$friends['data'];
 
 	//Set up sql insert queries
+	$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
 	$users_sql="INSERT INTO Users (`UID`, `Name`, `Notes`) VALUES";
 	$friends_sql="INSERT INTO Friends (`UID`,`Friend`) VALUES ";
 	$me='("'. $uid .'",';
 	foreach( $friends as $friend){
 		$friends_sql=$friends_sql. $me.'"'.$friend['id'] .'"),';
-		$users_sql=$users_sql.'("'.$friend['id'].'","'. $friend['name'].'","Not Active"),';
+		$users_sql=$users_sql.'("'.$friend['id'].'",'. $conn->quote($friend['name']).',"Not Active"),';
 	}
 	$friends_sql=rtrim($friends_sql,',');
 	$users_sql=rtrim($users_sql,',')."ON DUPLICATE KEY UPDATE `Notes` = 'Friended';";
-	$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
+	
 	$st = $conn->prepare( $users_sql );
 	$st->execute();
 	$st = $conn->prepare( $friends_sql );
@@ -62,7 +64,7 @@ function getFriends($uid,$token){
 	$st = $conn->prepare($sql);
 	$st->execute();
 	$data = $st->fetchAll(); 
-	$data=array("Status"=>"200 Success","Data"=>$data);
+	$data=array("status"=>"200 Success","data"=>$data);
 	echo json_encode($data);
 }
 ?>

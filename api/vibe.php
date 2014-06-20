@@ -15,12 +15,11 @@ switch ( $action ) {
 		postVibe(getVibe());
 	break;
 	case 'getCloud':
-		getCloud();
+		getCloud($uid);
 	break;
 }
 
 function getCloud(){
-		$uid=isset( $_GET['uid'] ) ? $_GET['uid'] : "";
 		$command='sudo python cloud.py "'.$uid.'" 2>&1';
 		$temp = exec($command ,$output);
 		print_r($output);
@@ -36,24 +35,24 @@ function getVibe(){
 	return $output;
 }
 function postVibe($vibes){
+	//Grab Request Parameters
 	$status = isset( $_POST['status'] ) ? $_POST['status'] : "";
 	$pid=hash("sha256",$status);
-	$uid=isset( $_POST['uid'] ) ? $_POST['uid'] : "";
-	$recipient = isset( $_POST['recipient'] ) ? $_POST['recipient'] : "";
+	$author=isset( $_POST['uid'] ) ? $_POST['uid'] : "";
+	$recipient=isset( $_POST['recipient'] ) ? $_POST['recipient'] : "";
+	//Connect to VibeSocial DBMS
 	$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
-	$sql="INSERT INTO Posts (`PID`, `UID`, `Content`,`Score`)
-		    VALUES ('$pid','$uid','$status',1);";
+	$status=$conn->quote($status); //Clean up user statuses to prevent SQL injections
+	$sql="INSERT INTO Posts (`PID`,`Content`,`Score`,`Author`,`Tagged`)
+		    VALUES ('$pid',$status,1,'$author','$recipient');";
 	$st = $conn->prepare( $sql );
 	$st->execute();
 	foreach($vibes as $vibe){
 		$sql="INSERT INTO Vibes (`Vibe`, `UID`, `Score`)
-		    VALUES ('$vibe','$uid',1)
+		    VALUES ('$vibe','$recipient',1)
 		        ON DUPLICATE KEY UPDATE `Score` = `Score`+1;";
-		$response_array['status'] = "200 Request Queued";  
 		$st = $conn->prepare( $sql );
 		$st->execute();
-
 	}
-	$conn=null;
 }
 ?>
