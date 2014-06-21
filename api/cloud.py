@@ -1,6 +1,5 @@
 import wordcloud,sys, urllib2
 
-
 uid=sys.argv[1]
 
 # Read the whole text.
