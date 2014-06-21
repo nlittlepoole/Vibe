@@ -15,10 +15,25 @@ switch ( $action ) {
 	case 'getFriends':
 		getFriends($uid,$token);
 	break;
+	case 'getFeed':
+		getFeed($uid);
+	break;
 
+}
+function getFeed($uid){
+	$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+
+	$sql = " SELECT T1.PID, T1.Tagged,T2.Name,T1.Content,T1.Score,T1.Timestamp FROM( SELECT * FROM Posts WHERE `Tagged` IN ( SELECT `Friend` FROM Friends WHERE `UID`='$uid') )T1 Join (SELECT * FROM Users)T2 ON T1.Tagged=T2.UID ORDER BY T1.Timestamp DESC;";
+	$st = $conn->prepare($sql);
+	$st->execute();
+	$data = $st->fetchAll(PDO::FETCH_ASSOC); 
+
+	$data=array("status"=>"200 Success","data"=>$data);
+	echo json_encode($data);
 }
 
 function addUser($uid,$token){
+	echo json_encode($response_array);
 	$name=$_POST['name'];
 	//$uid-mysql_real_escape_string($uid)
 	$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
@@ -31,7 +46,6 @@ function addUser($uid,$token){
 	$st->execute();
 	$conn=null;
 	addFriends($uid,$token);
-	echo json_encode($response_array);
 }
 function addFriends($uid,$token){
 	$api="https://graph.facebook.com/v1.0/".$uid;
@@ -42,7 +56,7 @@ function addFriends($uid,$token){
 	//Set up sql insert queries
 	$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
 	$users_sql="INSERT INTO Users (`UID`, `Name`, `Notes`) VALUES";
-	$friends_sql="INSERT INTO Friends (`UID`,`Friend`) VALUES ";
+	$friends_sql="INSERT INTO Friends (`UID`,`Friend`) VALUES('$uid','$uid'),";
 	$me='("'. $uid .'",';
 	foreach( $friends as $friend){
 		$friends_sql=$friends_sql. $me.'"'.$friend['id'] .'"),';

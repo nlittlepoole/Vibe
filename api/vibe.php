@@ -15,16 +15,16 @@ switch ( $action ) {
 		postVibe(getVibe());
 	break;
 	case 'getCloud':
-		getCloud($uid);
+		getCloud();
 	break;
 }
 
 function getCloud(){
-		$command='sudo python cloud.py "'.$uid.'" 2>&1';
+		$user=$_GET['user'];
+		$command='sudo python cloud.py "'.$user.'" 2>&1';
 		$temp = exec($command ,$output);
-		print_r($output);
-		echo "http://niger.go-vibe.com/view/cloud/".$uid.".png";
-
+		//print_r($output);
+		echo json_encode(array("url"=>"http://niger.go-vibe.com/view/cloud/".$user.".png"));
 }
 function getVibe(){
 	$output=[];

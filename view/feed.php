@@ -16,8 +16,6 @@ $_SESSION['token'];
 <form name="status" action="http://niger.go-vibe.com/api/vibe.php?action=postVibe" method="post">
 	<select name="recipient">
 <?php 
-	ini_set('display_errors',1); 
-	error_reporting(E_ALL);
 	$request = "http://niger.go-vibe.com/api/user.php?action=getFriends&uid=". $_SESSION['userID'];
 	$request = $request."&token=".$_SESSION['token'];
 	$friends = json_decode(file_get_contents($request),true);
@@ -26,7 +24,9 @@ $_SESSION['token'];
 		return strcmp($a['Name'],$b['Name']);
 	});
 	foreach ($friends as $person){
-		echo'<option value="'.$person['UID'].'">'.$person['Name'].'</option>';
+		if($person['UID']!=$_SESSION['userID']){
+			echo'<option value="'.$person['UID'].'">'.$person['Name'].'</option>';
+		}
 	}
 ?>
 </select><br>
@@ -36,5 +36,17 @@ $_SESSION['token'];
 
     <input type="submit" value="Submit">
 </form>
+<br>
+<h2><U> Newsfeed:</U></h2>
+<br>
+<?php 
+	$request = "http://niger.go-vibe.com/api/user.php?action=getFeed&uid=". $_SESSION['userID'];
+	$request = $request."&token=".$_SESSION['token'];
+	$posts = json_decode(file_get_contents($request),true);
+	$posts = $posts['data'];
+	foreach ($posts as $post){
+			echo '<a href="http://niger.go-vibe.com/view/profile.php?user='.$post['Tagged'].'&name='.$post['Name'].'">' .$post['Name'] . "</a> : " . $post['Content'] . "<br>";
+	}
+?>
 </body>
 </html>
