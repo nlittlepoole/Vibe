@@ -6,6 +6,15 @@ function validToken($uid,$token){
     $response = json_decode(file_get_contents($url), true);
     return $response['data']['is_valid'] && $response['data']['user_id']==$uid;
 }
+function pushResponse($response_array){
+    ob_start(); 
+    echo json_encode($response_array);
+    header('Connection: close');
+    header('Content-Length: '.ob_get_length());
+    ob_end_flush();
+    ob_flush();
+    flush();
+}
 function post($url,$post_data){
     	foreach ( $post_data as $key => $value) {
             $post_items[] = $key . '=' . $value;

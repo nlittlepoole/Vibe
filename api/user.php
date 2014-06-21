@@ -27,21 +27,19 @@ function getFeed($uid){
 	$st = $conn->prepare($sql);
 	$st->execute();
 	$data = $st->fetchAll(PDO::FETCH_ASSOC); 
-
 	$data=array("status"=>"200 Success","data"=>$data);
-	echo json_encode($data);
+	pushResponse($data);
 }
-
 function addUser($uid,$token){
-	echo json_encode($response_array);
+	$response_array['status'] = "200 Request Queued";
+	pushResponse($response_array);
 	$name=$_POST['name'];
 	//$uid-mysql_real_escape_string($uid)
 	$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
 	$name=$conn->quote($name);
 	$sql="INSERT INTO Users (`UID`, `Name`, `Notes`)
 	    VALUES ('$uid',$name,'Test')
-	        ON DUPLICATE KEY UPDATE `Notes` = 'Test2';";
-	$response_array['status'] = "200 Request Queued";  
+	        ON DUPLICATE KEY UPDATE `Notes` = 'Test2';"; 
 	$st = $conn->prepare( $sql );
 	$st->execute();
 	$conn=null;
@@ -56,7 +54,8 @@ function addFriends($uid,$token){
 	//Set up sql insert queries
 	$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
 	$users_sql="INSERT INTO Users (`UID`, `Name`, `Notes`) VALUES";
-	$friends_sql="INSERT INTO Friends (`UID`,`Friend`) VALUES('$uid','$uid'),";
+	$me_sql="INSERT INTO Friends (`UID`,`Friend`) VALUES('$uid','$uid');";
+	$friends_sql="INSERT INTO Friends (`UID`,`Friend`) VALUES";
 	$me='("'. $uid .'",';
 	foreach( $friends as $friend){
 		$friends_sql=$friends_sql. $me.'"'.$friend['id'] .'"),';
@@ -64,8 +63,10 @@ function addFriends($uid,$token){
 	}
 	$friends_sql=rtrim($friends_sql,',');
 	$users_sql=rtrim($users_sql,',')."ON DUPLICATE KEY UPDATE `Notes` = 'Friended';";
-	
+	//Insert new friends into user and friend tables. Also create a connection between user and himself
 	$st = $conn->prepare( $users_sql );
+	$st->execute();
+	$st = $conn->prepare( $me_sql );
 	$st->execute();
 	$st = $conn->prepare( $friends_sql );
 	$st->execute();
@@ -79,6 +80,6 @@ function getFriends($uid,$token){
 	$st->execute();
 	$data = $st->fetchAll(); 
 	$data=array("status"=>"200 Success","data"=>$data);
-	echo json_encode($data);
+	pushResponse($data);
 }
 ?>
