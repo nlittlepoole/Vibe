@@ -29,8 +29,22 @@ switch ( $action ) {
 	case 'getFeed':
 		getFeed($uid);
 	break;
+	case 'blockUser':
+		blockUser($uid);
+	break;
 
 }
+// enables a block on the friendship between users
+function blockUser($uid){
+	$response_array['status'] = "200 Request Queued";
+	pushResponse($response_array);
+	$user = $_POST['user'];
+	$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+	$sql = "UPDATE Friends SET Blocked=1 WHERE `UID` = '$user' AND `Friend` = '$uid' ;";
+	$st = $conn->prepare($sql);
+	$st->execute();
+}
+
 // json encodes the newsfeed of the given UID
 function getFeed($uid){
 	$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
