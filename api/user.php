@@ -106,8 +106,15 @@ function addFriend($uid, $token){
 }
 // json encodes list of the given user's friends from the Friend graph
 function getFriends($uid,$token){
+	$blocked = isset( $_GET['blocked'] ) ? $_GET['blocked'] : "";
+	if($blocked=='no'){
+		$sql = "SELECT `UID`,`Name` FROM Users WHERE `UID` IN (SELECT `Friend` FROM Friends WHERE `UID`='$uid' AND `Blocked`=0)";
+	}
+	else{
+		$sql = "SELECT `UID`,`Name` FROM Users WHERE `UID` IN (SELECT `Friend` FROM Friends WHERE `UID`='$uid')";
+	
+	}
 	$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-	$sql = 'SELECT `UID`,`Name` FROM Users WHERE `UID` IN (SELECT `Friend` FROM Friends WHERE `UID`="'.$uid.'")';
 	$st = $conn->prepare($sql);
 	$st->execute();
 	$data = $st->fetchAll(); 
