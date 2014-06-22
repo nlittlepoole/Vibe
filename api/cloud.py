@@ -5,7 +5,6 @@ db = MySQLdb.connect(host="79afe5225f7fd454174526fe4108092758d4e751.rackspaceclo
                      user="nlittlepoole", # your username
                      passwd="Carman4ever!", # your password
                      db="VibeSocial") # name of the data base
-
 uid=sys.argv[1]
 cur = db.cursor()
 cur.execute("SELECT Vibe,Score FROM Vibes WHERE UID="+uid)
