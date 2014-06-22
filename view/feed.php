@@ -25,7 +25,6 @@ require_once("header.php");
     <input type="text" name="status" size="240"  placeholder="Input a Status" style="height:80px;font-size:24pt;" align="middle">
     <input type="hidden" name="uid" value=<?php echo '"'.$_SESSION['userID'].'"' ?>>
     <input type="hidden" name="token" value=<?php echo '"'.$_SESSION['token'].'"' ?> >
-    <input type="hidden" name="email" value="test" >
     <input type="submit" value="Submit">
 </form>
 <br>

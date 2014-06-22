@@ -61,7 +61,7 @@ function postVibe($uid, $token, $vibes){
 	$status = isset( $_POST['status'] ) ? $_POST['status'] : "";
 	$pid = hash("sha256", $status);
 	$email= isset( $_POST['email'] ) ? $_POST['email'] : "";
-	$email="nsteb1993@gmail.com";
+	//$email="nsteb1993@gmail.com";
 	$hash_id=hash("sha256", $email);
 	$author = isset( $_POST['uid'] ) ? $_POST['uid'] : "";
 	$recipient = isset( $_POST['recipient'] ) ? $_POST['recipient'] : "";
