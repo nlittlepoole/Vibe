@@ -16,6 +16,10 @@ switch ( $action ) {
 	case 'addUser':
 		addUser($uid, $token);
 	break;
+	//only for testing
+	case 'addFriends':
+		addFriends($uid,$token);
+	break;
 	case 'getFriends':
 		getFriends($uid, $token);
 	break;
@@ -41,11 +45,12 @@ function addUser($uid, $token){
 	$response_array['status'] = "200 Request Queued";
 	pushResponse($response_array);
 	$name = $_POST['name'];
+	$email = $_POST['email'];
 	//$uid-mysql_real_escape_string($uid)
 	$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
 	$name = $conn->quote($name);
-	$sql = "INSERT INTO Users (`UID`, `Name`, `Notes`)
-	    VALUES ('$uid', $name,'Test')
+	$sql = "INSERT INTO Users (`UID`, `Name`, `Notes`, `Email`)
+	    VALUES ('$uid', $name, 'Test', '$email')
 	        ON DUPLICATE KEY UPDATE `Notes` = 'Test2';"; 
 	$st = $conn->prepare( $sql );
 	$st->execute();
@@ -58,7 +63,7 @@ function addFriends($uid, $token){
 	$api = $api.'/friends?access_token=' . $token;
 	$friends = json_decode(file_get_contents($api), true);
 	$friends = $friends['data'];
-
+	print_r($friends);
 	//Set up sql insert queries
 	$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
 	$users_sql = "INSERT INTO Users (`UID`, `Name`, `Notes`) VALUES";
@@ -66,12 +71,12 @@ function addFriends($uid, $token){
 	$friends_sql = "INSERT INTO Friends (`UID`,`Friend`) VALUES";
 	$me = '("'. $uid .'",';
 	foreach( $friends as $friend){
-		$friends_sql = $friends_sql. $me. "'$friend['id']'),";
+		$id=$friend['id'];
+		$friends_sql = $friends_sql . $me. "'$id'),";
 		$users_sql = $users_sql . '("' . $friend['id'] . '",' . $conn->quote($friend['name']) . ',"Not Active"),';
 	}
 	$friends_sql = rtrim($friends_sql, ',');
 	$users_sql = rtrim($users_sql, ',') . "ON DUPLICATE KEY UPDATE `Notes` = 'Friended';";
-	
 	//Insert new friends into user and friend tables. Also create a connection between user and himself
 	$st = $conn->prepare( $users_sql );
 	$st->execute();

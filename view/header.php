@@ -6,6 +6,7 @@ if(!isset($_SESSION['userID'])){
 }
 //store friends in session to speed up feed reloads
 if(!isset($_SESSION['friend_list'])){
+//if(true){
 	$request = "http://niger.go-vibe.com/api/user.php?action=getFriends&uid=". $_SESSION['userID'];
 	$request = $request."&token=".$_SESSION['token'];
 	$friends = json_decode(file_get_contents($request),true);
