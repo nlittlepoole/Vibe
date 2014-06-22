@@ -88,7 +88,7 @@ function postVibe($uid, $token, $vibes){
 	$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
 	$status=$conn->quote($status); //Clean up user statuses to prevent SQL injections
 
-	$sql = "INSERT INTO Posts (`PID`,`Content`,`Score`,`Author`,`Tagged`) VALUES ('$pid',$status,1,'$author','$recipient');";
+	$sql = "INSERT INTO Posts (`PID`,`Content`,`Author`,`Tagged`) VALUES ('$pid',$status,'$author','$recipient');";
 	$st = $conn->prepare( $sql );
 	$st->execute();
 	foreach($vibes as $vibe){

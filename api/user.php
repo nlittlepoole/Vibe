@@ -49,7 +49,7 @@ function blockUser($uid){
 function getFeed($uid){
 	$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
 
-	$sql = " SELECT T1.PID, T1.Tagged, T2.Name, T1.Content, T1.Score, T1.Timestamp FROM ( SELECT * FROM Posts WHERE `Tagged` IN ( SELECT `Friend` FROM Friends WHERE `UID`='$uid') )T1 Join (SELECT * FROM Users) T2 ON T1.Tagged=T2.UID ORDER BY T1.Timestamp DESC;";
+	$sql = " SELECT T1.PID, T1.Tagged, T2.Name, T1.Content, T1.Agree,T1.Disagree, T1.Timestamp FROM ( SELECT * FROM Posts WHERE `Tagged` IN ( SELECT `Friend` FROM Friends WHERE `UID`='$uid') )T1 Join (SELECT * FROM Users) T2 ON T1.Tagged=T2.UID ORDER BY T1.Timestamp DESC;";
 	$st = $conn->prepare($sql);
 	$st->execute();
 	$data = $st->fetchAll(PDO::FETCH_ASSOC); 
