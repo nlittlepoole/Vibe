@@ -13,7 +13,9 @@ $action = isset( $_GET['action'] ) && validToken($uid,$token) ? $_GET['action'] 
 //Switch case determines what to do next based on the input arguments from the action URL fragment("?=action" in the URL)
 switch ( $action ) {
 	case 'postVibe':
-	postVibe( getVibe() );
+	$response_array['status'] = "200 Request Queued";
+	pushResponse($response_array);
+	postVibe($uid, $token, getVibe() );
 	break;
 	case 'getCloud':
 	getCloud();
@@ -34,20 +36,45 @@ function getCloud(){
 function getVibe(){
 	$output = [];
 	$status = isset( $_POST['status'] ) ? $_POST['status'] : ""; //sets $action to "Action" url fragment string if action isn't null
-	$status = addcslashes($status);
+	$status = addslashes($status);
 	$command = "cat password.txt | sudo python vibe.py '$status' 2>&1";
 	$temp = exec($command ,$output);
 	print_r($output);
 	return $output;
 }
 
+// adds temporary users that are going to be matched later
+function addTempUser($uid,$name,$email){
+	$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
+	$name = $conn->quote($name);
+	$sql = "INSERT INTO Users (`UID`, `Name`, `Notes`, `Email`)
+	    VALUES ('$uid', $name, 'Test', '$email')
+	        ON DUPLICATE KEY UPDATE `Notes` = 'Temp';"; 
+	$st = $conn->prepare( $sql );
+	$st->execute();
+	$conn = null;
+
+}
 // posts vibe status to database along with vibes for the status
-function postVibe($vibes){
+function postVibe($uid, $token, $vibes){
 	//Grab Request Parameters
 	$status = isset( $_POST['status'] ) ? $_POST['status'] : "";
 	$pid = hash("sha256", $status);
+	$email= isset( $_POST['email'] ) ? $_POST['email'] : "";
+	$email="nl2418@columbia.edu";
+	$hash_id=hash("sha256", $email);
 	$author = isset( $_POST['uid'] ) ? $_POST['uid'] : "";
 	$recipient = isset( $_POST['recipient'] ) ? $_POST['recipient'] : "";
+
+	// setup temp user if user doesn't exist
+	if($recipient == "" || $email != ""){
+		$recipient = $hash_id;
+		addTempUser($recipient,"Temp User",$email);
+		$url = 'http://niger.go-vibe.com/api/notification.php?action=sendEmail';
+    	$post_data = array('uid' => $uid, 'token' => $token, 'email' => $email, 'status' => $status, 'user' => $recipient);
+    	post($url, $post_data);
+	}
+
 
 	//Connect to VibeSocial DBMS
 	$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
