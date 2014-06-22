@@ -22,24 +22,17 @@ $action = isset( $_GET['action'] ) && $uid ? $_GET['action'] : ""; //sets $actio
 //Switch case determines what to do next based on the input arguments from the action URL fragment("?=action" in the URL)
 switch ( $action ) {
   case 'login': //login occurs after user hits login button on homepage.php, mostly just sets up environment to play vibe 
-   // require( CLASS_PATH . "/Web/User.php");
     $_SESSION['logoutUrl'] = $facebook->getLogoutUrl(array( 'next' => 'http://go-vibe.com') ); //logout url is created and stored to the session data.
-    //$_SESSION['friends'] = array_delete($facebook->api('/me/friends'),$uid); //user's friend list is a json that is decoded from the graph url and returned as a 2d array 
-    //addUser($facebook,$uid,$token); //adds user ID to mysql USER table, method does nothing if ID already exists and activates the ID if information exists but this is the first time the user has logged in
-    //topFriends($facebook,$uid,$token); // pulls users top friends using the top friends function
-    $data= $facebook->api('/me/?fields=gender,name,email');//facebook graph api link is created to find gender
+    $data= $facebook->api('/me/?fields=gender,name,email');
     $url = 'http://niger.go-vibe.com/api/user.php?action=addUser';
-    $post_data = array('uid' => $uid, 'name' => $data['name'], 'token'=>$token);
-    // use key 'http' even if you send the request to https://...
-    //create array of data to be posted
-    //traverse array and prepare data for posting (key1=value1)
-    post($url,$post_data);
-    header('Location: /view/feed.php'); // index is reloaded but with question prameter. Now that environment is set up index.php is reloaded with the intent of answring questiosn
+    $post_data = array('uid' => $uid, 'name' => $data['name'], 'token' => $token, 'email' => $data['email'] );
+    post($url, $post_data);
+    header('Location: /view/feed.php'); 
   break;
   default: //this is the default setting, it simply take sthe user to the homepage. It also creates the facebook login url 
     //when a user logs in through facebook, the are simply going to a special link created by the facebook api. The api uses our AP ID and password to generate the link
     $params = array(
-                  'scope' => "email,manage_notifications,friends_photos, user_photos,user_education_history,read_friendlists,read_stream,user_work_history,user_photo_video_tags, friends_photo_video_tags,friends_education_history,friends_work_history,user_birthday,friends_birthday,user_location,friends_location,friends_hometown,user_hometown", //these are the permissions Vibe needs from facebook
+                  'scope' => "email,manage_notifications, user_photos,user_education_history,read_friendlists,read_stream,user_work_history,user_birthday,user_location,user_hometown", //these are the permissions Vibe needs from facebook
                   'redirect_uri' => 'http://niger.go-vibe.com/index.php?action=login' //this is the link that facebook will redirect the browser to after succesful login
                 );
     $loginUrl = $facebook->getLoginUrl($params); //the facebook getLoginUrl() is an api method that uses the permissions and redirct url to create a unique login url

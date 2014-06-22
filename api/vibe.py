@@ -41,10 +41,10 @@ def processStatus(status):
     #Replace #word with word
     status = re.sub(r'#([^\s]+)', r'\1', status)
     #Take out punctuation
-    status=status.replace('.','')
-    status=status.replace(',','')
-    status=status.replace('!','')
-    status=status.replace('?','')
+    status = status.replace('.','')
+    status = status.replace(',','')
+    status = status.replace('!','')
+    status = status.replace('?','')
     #trim
     status = status.strip('\'"')
     return status
@@ -57,44 +57,44 @@ def vibeList():
     return list
 #end
 def englishList():
-    list=[]
+    list = []
     with open('wordlist.txt') as f:
         list = [line.rstrip() for line in f]
     f.close()
     return list
 #end
-def vibeDistance(word,a):
-    if(a in word):
+def vibeDistance(word, a):
+    if (a in word):
         return abs(len(stemmed)-len(word))
     else:
         return -1
 def getVibe(word):
-    stemmed=stem(word)
-    words=vibeList()
-    results=difflib.get_close_matches(stemmed, words,n=5,cutoff=.82)
-    results=sorted([a for a in results if vibeDistance(a,stemmed)>=0],key=lambda x:vibeDistance(x,stemmed))
-    if len(results)>0:
+    stemmed = stem(word)
+    words = vibeList()
+    results = difflib.get_close_matches(stemmed, words, n=5 , cutoff=.82)
+    results = sorted( [a for a in results if vibeDistance(a, stemmed) >= 0] ,key = lambda x : vibeDistance(x, stemmed))
+    if len(results) > 0 :
         return results[0]
     else:
         return ''
 def getVibes(status):
-    status=processStatus(status)
-    stop=getStopWordList("stop.txt")
-    list=englishList()
-    map=vibeList()
-    words=status.split(' ')
-    vibes=[]
+    status = processStatus(status)
+    stop = getStopWordList("stop.txt")
+    list = englishList()
+    map = vibeList()
+    words = status.split(' ')
+    vibes = []
     for word in words:
-        word=replaceTwoOrMore(word)
+        word = replaceTwoOrMore(word)
         if word in list and word not in stop:
             if word in map:
-                vibe=word
+                vibe = word
             else:
-                vibe=getVibe(word)
-            if vibe!='':
+                vibe = getVibe(word)
+            if vibe != '':
                 vibes.append(vibe)
     return vibes
 if __name__ == '__main__':
-    vibes= getVibes(sys.argv[1])
+    vibes= getVibes( sys.argv[1] )
     for vibe in vibes:
         print vibe
