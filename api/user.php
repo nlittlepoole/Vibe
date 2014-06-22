@@ -20,6 +20,9 @@ switch ( $action ) {
 	case 'addFriends':
 		addFriends($uid,$token);
 	break;
+	case 'addFriend':
+		addFriend($uid,$token);
+	break;
 	case 'getFriends':
 		getFriends($uid, $token);
 	break;
@@ -83,6 +86,20 @@ function addFriends($uid, $token){
 	$st = $conn->prepare( $me_sql );
 	$st->execute();
 	$st = $conn->prepare( $friends_sql );
+	$st->execute();
+	$conn = null;
+
+}
+// adds a friend to friends graph
+function addFriend($uid, $token){
+	$response_array['status'] = "200 Request Queued";
+	pushResponse($response_array);
+	$user = $_POST['user'];
+	//Set up sql insert queries
+	$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
+	$sql = "INSERT INTO Friends (`UID`,`Friend`) VALUES('$uid','$user');";
+	//Insert new friends into user and friend tables. Also create a connection between user and himself
+	$st = $conn->prepare( $sql );
 	$st->execute();
 	$conn = null;
 

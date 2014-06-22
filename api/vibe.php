@@ -61,17 +61,25 @@ function postVibe($uid, $token, $vibes){
 	$status = isset( $_POST['status'] ) ? $_POST['status'] : "";
 	$pid = hash("sha256", $status);
 	$email= isset( $_POST['email'] ) ? $_POST['email'] : "";
-	$email="nl2418@columbia.edu";
+	$email="nsteb1993@gmail.com";
 	$hash_id=hash("sha256", $email);
 	$author = isset( $_POST['uid'] ) ? $_POST['uid'] : "";
 	$recipient = isset( $_POST['recipient'] ) ? $_POST['recipient'] : "";
 
 	// setup temp user if user doesn't exist
 	if($recipient == "" || $email != ""){
+		// add temporary UID
 		$recipient = $hash_id;
-		addTempUser($recipient,"Temp User",$email);
+		addTempUser($recipient, "Temp User", $email);
+
+		// send Email
 		$url = 'http://niger.go-vibe.com/api/notification.php?action=sendEmail';
     	$post_data = array('uid' => $uid, 'token' => $token, 'email' => $email, 'status' => $status, 'user' => $recipient);
+    	post($url, $post_data);
+
+    	// Add temporary friend to friend graph
+    	$url = 'http://niger.go-vibe.com/api/user.php?action=addFriend';
+    	$post_data = array('uid' => $uid, 'token' => $token, 'user' => $recipient);
     	post($url, $post_data);
 	}
 
