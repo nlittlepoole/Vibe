@@ -1,5 +1,6 @@
 <?php
 
+ob_start();
 session_start(); //initializes the PHP session and allows php to access cookie/url fragment data
 ini_set('max_execution_time', 300);
 //Start up code for any instance of Vibe runtime
