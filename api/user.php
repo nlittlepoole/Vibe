@@ -72,6 +72,13 @@ function addUser($uid, $token){
 	$st = $conn->prepare( $sql );
 	$st->execute();
 	$conn = null;
+
+	//makes request to add user's community data
+	$url = 'http://niger.go-vibe.com/api/location.php?action=addUser';
+    $post_data = array('uid' => $uid, 'token' => $token);
+    post($url, $post_data);
+
+    //switches over to dealing with friends
 	addFriends($uid, $token);
 }
 // adds friends to friends graph
@@ -80,7 +87,6 @@ function addFriends($uid, $token){
 	$api = $api.'/friends?access_token=' . $token;
 	$friends = json_decode(file_get_contents($api), true);
 	$friends = $friends['data'];
-	print_r($friends);
 	//Set up sql insert queries
 	$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
 	$users_sql = "INSERT INTO Users (`UID`, `Name`, `Notes`) VALUES";
@@ -94,7 +100,7 @@ function addFriends($uid, $token){
 	}
 	$friends_sql = rtrim($friends_sql, ',');
 	$users_sql = rtrim($users_sql, ',') . "ON DUPLICATE KEY UPDATE `Notes` = 'Friended';";
-	//Insert new friends into user and friend tables. Also create a connection between user and himself
+	// Insert new friends into user and friend tables. Also create a connection between user and himself
 	$st = $conn->prepare( $users_sql );
 	$st->execute();
 	$st = $conn->prepare( $me_sql );
@@ -102,6 +108,11 @@ function addFriends($uid, $token){
 	$st = $conn->prepare( $friends_sql );
 	$st->execute();
 	$conn = null;
+
+	// makes request to add user's friends' community data
+	$url = 'http://niger.go-vibe.com/api/location.php?action=addFriends';
+    $post_data = array('uid' => $uid, 'token' => $token);
+    post($url, $post_data);
 
 }
 // adds a friend to friends graph

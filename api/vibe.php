@@ -15,13 +15,45 @@ switch ( $action ) {
 	case 'postVibe':
 	$response_array['status'] = "200 Request Queued";
 	pushResponse($response_array);
-	postVibe($uid, $token, getVibe() );
+	postVibe($uid, $token, getVibe( isset( $_POST['status'] ) ? $_POST['status'] : "" ) );
 	break;
 	case 'getCloud':
 	getCloud();
 	break;
+	case 'vote':
+	vote();
+	break;
 }
+// increases agree or disagree score for a vibe post
+function vote(){
+	$pid = $_POST['pid'];
+	$vote = $_POST['vote'];
 
+	$sql = "SELECT Recipient, Content FROM Posts WHERE `PID`='$pid';"; 
+	$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
+	$st = $conn->prepare( $sql );
+	$st->execute();
+	$data=$st->fetchAll();
+
+	$user = $data['Recipient'];
+	$status = $data['Content']
+	$vibes = getVibe($status);
+	foreach($vibes as $vibe){
+		$sql = "INSERT INTO Vibes (`Vibe`, `UID`, `Score`)
+		VALUES ('$vibe','$recipient',1)
+		ON DUPLICATE KEY UPDATE `Score` = `Score`+ 1;";
+		$st = $conn->prepare( $sql );
+		$st->execute();
+	}
+
+	if($vote == "agree"){
+		
+	}
+
+	$conn = null;
+	// 0cbb855b74d6fc313f1da0247429f1c11d33521cce31cc1e6246bbab6c17b464
+
+}
 // returns json encoded url to the given user's vibe cloud
 function getCloud(){
 	$user = $_GET['user'];
@@ -33,9 +65,8 @@ function getCloud(){
 }
 
 // generates list of vibes from an input status
-function getVibe(){
+function getVibe($status ){
 	$output = [];
-	$status = isset( $_POST['status'] ) ? $_POST['status'] : ""; //sets $action to "Action" url fragment string if action isn't null
 	$status = addslashes($status);
 	$command = "cat password.txt | sudo python vibe.py '$status' 2>&1";
 	$temp = exec($command ,$output);
