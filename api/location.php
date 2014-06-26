@@ -18,6 +18,11 @@ switch ( $action ) {
 		pushResponse($response_array);
 		addUser( $uid,$token);
 	break;
+	case 'addFriends':
+		$response_array['status'] = "200 Request Queued";
+		pushResponse($response_array);
+		addFriends( $uid,$token);
+	break;
 
 
 }
@@ -44,7 +49,6 @@ function addUser($uid,$token){
 	}
 	if( isset( $sources['education'] ) ){
 		foreach($sources['education'] as $school){
-			echo (int)$school['year']['name'];
 			if(!isset($school['year']) or (int)$school['year']['name'] > 2014 ){
 				$place=array("name" => $school['school']['name'], "LID" => $school['school']['id'], "Relationship" => "School");
 				array_push($places, $place);
@@ -67,5 +71,53 @@ function addUser($uid,$token){
 	}
 	$conn=null;
 }
+function addFriends($uid,$token){
+	//Get Friend Data
+	$api = "https://graph.facebook.com/v1.0/" . $uid;
+	$api = $api.'/friends/?fields=work,education,location,hometown&access_token=' . $token;
+	$friends = json_decode(file_get_contents($api), true);
+	$friends = $friends['data'];
 
+	//Same Process for each friend as add_user. This will ignore users it can pull for so v2 compatible
+	foreach($friends as $friend){
+		$places = array();
+		$user=$friend['id'];
+		if( isset( $friend['work'][0] ) ){
+			$place = array("name" => $friend['work'][0]['employer']['name'], "LID" => $friend['work'][0]['employer']['id'], "Relationship" => "Work");
+			array_push($places, $place);
+		}
+		if( isset( $friend['location']) ){
+			$place = array("name" => $friend['location']['name'], "LID" => $friend['location']['id'], "Relationship" => "Lives");
+			array_push($places, $place);
+		}
+		if( isset( $friend['hometown'] ) ){
+			$place = array("name" => $friend['hometown']['name'], "LID" => $friend['hometown']['id'], "Relationship" => "Hometown");
+			array_push($places, $place);
+		}
+		if( isset( $friend['education'] ) ){
+			foreach($friend['education'] as $school){
+				if(!isset($school['year']) or (int)$school['year']['name'] > 2014 ){
+					$place=array("name" => $school['school']['name'], "LID" => $school['school']['id'], "Relationship" => "School");
+					array_push($places, $place);
+				}
+			}
+		}
+
+		//run sql queries for inserts
+		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+		foreach($places as $place){
+			$LID = $place['LID'];
+			$name = addslashes($place['name']);
+			$relationship = $place['Relationship'];
+			$sql = "INSERT INTO Locations (`LID`,`Name`) Values ('$LID','$name')";
+			$st = $conn->prepare($sql);
+			$st->execute();
+			$sql = "INSERT INTO Located (`LID`,`UID`,`Relationship`) Values ('$LID','$user','$relationship')";
+			$st = $conn->prepare($sql);
+			$st->execute();
+		}
+		$conn=null;
+	}
+
+}
 ?>
