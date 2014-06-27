@@ -36,7 +36,7 @@ function vote(){
 	$data=$st->fetchAll();
 
 	$user = $data['Recipient'];
-	$status = $data['Content']
+	$status = $data['Content'];
 	$vibes = getVibe($status);
 	foreach($vibes as $vibe){
 		$sql = "INSERT INTO Vibes (`Vibe`, `UID`, `Score`)
