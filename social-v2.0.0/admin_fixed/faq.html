@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="ie lt-ie9 lt-ie8 lt-ie7 paceCounter paceSocial footer-sticky"> <![endif]-->
+<!--[if IE 7]>    <html class="ie lt-ie9 lt-ie8 paceCounter paceSocial footer-sticky"> <![endif]-->
+<!--[if IE 8]>    <html class="ie lt-ie9 paceCounter paceSocial footer-sticky"> <![endif]-->
+<!--[if gt IE 8]> <html class="ie paceCounter paceSocial footer-sticky"> <![endif]-->
+<!--[if !IE]><!--><html class="paceCounter paceSocial footer-sticky"><!-- <![endif]-->
+<head>
+	<title>Social Admin Template (v2.0.0-rc8)</title>
+	
+	<!-- Meta -->
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	
+	<!-- 
+	**********************************************************
+	In development, use the LESS files and the less.js compiler
+	instead of the minified CSS loaded by default.
+	**********************************************************
+	<link rel="stylesheet/less" href="../assets/less/admin/module.admin.stylesheet-complete.layout_fixed.true.less" />
+	-->
+
+		<!--[if lt IE 9]><link rel="stylesheet" href="../assets/components/library/bootstrap/css/bootstrap.min.css" /><![endif]-->
+	
+		<link rel="stylesheet" href="../assets/css/admin/module.admin.stylesheet-complete.layout_fixed.true.min.css" />
+	
+	
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+	<script src="../assets/plugins/core_ajaxify_loadscript/script.min.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
+
+<script>var App = {};</script>
+
+<script data-id="App.Scripts">
+App.Scripts = {
+
+	/* CORE scripts always load first; */
+	core: [
+		'../assets/library/jquery/jquery.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/library/modernizr/modernizr.js?v=v2.0.0-rc8&sv=v0.0.1.2'
+	],
+
+	/* PLUGINS_DEPENDENCY always load after CORE but before PLUGINS; */
+	plugins_dependency: [
+		'../assets/library/bootstrap/js/bootstrap.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/library/jquery/jquery-migrate.min.js?v=v2.0.0-rc8&sv=v0.0.1.2'
+	],
+
+	/* PLUGINS always load after CORE and PLUGINS_DEPENDENCY, but before the BUNDLE / initialization scripts; */
+	plugins: [
+		'../assets/plugins/core_nicescroll/jquery.nicescroll.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/core_breakpoints/breakpoints.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/core_ajaxify_davis/davis.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/core_ajaxify_lazyjaxdavis/jquery.lazyjaxdavis.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/core_preload/pace.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/menu_sidr/jquery.sidr.js?v=v2.0.0-rc8', 
+		'../assets/plugins/core_less-js/less.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/charts_flot/excanvas.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/core_browser/ie/ie.prototype.polyfill.js?v=v2.0.0-rc8&sv=v0.0.1.2'
+	],
+
+	/* The initialization scripts always load last and are automatically and dynamically loaded when AJAX navigation is enabled; */
+	bundle: [
+		'../assets/components/core_ajaxify/ajaxify.init.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/components/core_preload/preload.pace.init.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/components/core/core.init.js?v=v2.0.0-rc8'
+	]
+
+};
+</script>
+
+<script>
+$script(App.Scripts.core, 'core');
+
+$script.ready(['core'], function(){
+	$script(App.Scripts.plugins_dependency, 'plugins_dependency');
+});
+$script.ready(['core', 'plugins_dependency'], function(){
+	$script(App.Scripts.plugins, 'plugins');
+});
+$script.ready(['core', 'plugins_dependency', 'plugins'], function(){
+	$script(App.Scripts.bundle, 'bundle');
+});
+</script>
+	<script>if (/*@cc_on!@*/false && document.documentMode === 10) { document.documentElement.className+=' ie ie10'; }</script>
+	
+</head>
+<body class=" scripts-async menu-right-hidden">
+	
+	<!-- Main Container Fluid -->
+	<div class="container-fluid ">
+
+		
+		<!-- Content START -->
+		<div id="content">
+			
+	
+<nav class="navbar navbar-default top-nav navbar-fixed-top" role="navigation">
+
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle btn btn-default" data-toggle="collapse" data-target="#navbar-fixed-layout-collapse">
+		<i class="fa fa-indent"></i>
+      </button>
+      <a class="navbar-brand" href="#"><img src="../assets//images/logo/logo.jpg" alt=""></a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="navbar-fixed-layout-collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Layout <b class="caret"></b></a>
+	          <ul class="dropdown-menu">
+	             <li >
+					<a class="no-ajaxify" href="?module=admin&page=faq&url_rewrite=&build=&layout_fixed=false&v=v2.0.0-rc8" >Fluid Layout
+					</a>
+				</li>
+	            <li class="active">
+					<a class="no-ajaxify" href="?module=admin&page=faq&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8">Fixed Layout
+					</a>
+				</li>
+	          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+           		<li class="dropdown-header">Timeline</li>
+           		<li><a href="index.html?lang=en"><span>Timeline #1</span></a></li>
+				<li><a href="timeline_2.html?lang=en"><span>Timeline #2</span></a></li>
+				<li><a href="timeline_3.html?lang=en"><span>Timeline #3</span></a></li>
+          		<li class="divider"></li>
+           		<li class="dropdown-header">Media</li>
+				<li><a href="media_1.html?lang=en"><span>Photos #1</span></a></li>
+				<li><a href="media_2.html?lang=en"><span>Photos #2</span></a></li>
+				<li><a href="media_3.html?lang=en"><span>Photos #3</span></a></li>
+				<li class="divider"></li>
+           		<li class="dropdown-header">Contacts</li>
+           		<li><a href="contacts_1.html?lang=en"><span>Friends #1</span></a></li>
+				<li><a href="contacts_2.html?lang=en"><span>Friends #2</span></a></li>
+				<li><a href="contacts_3.html?lang=en"><span>Friends #3</span></a></li>
+				<li class="divider"></li>
+           		<li class="dropdown-header">About</li>
+           		<li><a href="about_1.html?lang=en"><span>About #1</span></a></li>
+				<li><a href="about_2.html?lang=en"><span>About #2</span></a></li>
+				<li><a href="about_3.html?lang=en"><span>About #3</span></a></li>
+				<li class="divider"></li>
+				<li><a href="messages.html?lang=en"><span>Messages</span></a></li>
+				<li class="divider"></li>
+           		<li class="dropdown-header">Music</li>
+           		<li><a href="playlist.html?lang=en"><span>playlist</span></a></li>
+				<li><a href="albums.html?lang=en"><span>Albums</span></a></li>
+				<li><a href="song.html?lang=en"><span>Song</span></a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nav Color <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li>
+            	<a href="?module=admin&page=faq&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&navbar_type=navbar-default" >
+            	White Navbar</a>
+
+            </li>
+            <li>
+            	<a href="?module=admin&page=faq&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&navbar_type=navbar-inverse" >
+            	Dark Navbar</a></li>
+            <li>
+            	<a href="?module=admin&page=faq&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&navbar_type=navbar-primary" >
+            		Primary Color Navbar</a></li>
+            <li class="divider"></li>
+			<li class="innerAll half" style="line-height:20px;">
+				<div class="strong">Skin Colors</div>
+								<a href="?module=admin&page=faq&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=style-default" style="background-color: #25ad9f; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">style-default</span></a>
+								<a href="?module=admin&page=faq&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=green-army" style="background-color: #9FB478; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">green-army</span></a>
+								<a href="?module=admin&page=faq&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=alizarin-crimson" style="background-color: #F06F6F; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">alizarin-crimson</span></a>
+								<a href="?module=admin&page=faq&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=blue-gray" style="background-color: #5577b4; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">blue-gray</span></a>
+								<a href="?module=admin&page=faq&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=brown" style="background-color: #d39174; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">brown</span></a>
+								<a href="?module=admin&page=faq&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=purple-gray" style="background-color: #AF86B9; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">purple-gray</span></a>
+								<a href="?module=admin&page=faq&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=purple-wine" style="background-color: #CC6788; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">purple-wine</span></a>
+								<a href="?module=admin&page=faq&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=black-and-white" style="background-color: #979797; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">black-and-white</span></a>
+								<a href="?module=admin&page=faq&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=amazon" style="background-color: #8BC4B9; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">amazon</span></a>
+								<a href="?module=admin&page=faq&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=amber" style="background-color: #b0b069; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">amber</span></a>
+								<a href="?module=admin&page=faq&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=android-green" style="background-color: #A9C784; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">android-green</span></a>
+								<a href="?module=admin&page=faq&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=antique-brass" style="background-color: #B3998A; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">antique-brass</span></a>
+								<a href="?module=admin&page=faq&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=antique-bronze" style="background-color: #8D8D6E; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">antique-bronze</span></a>
+								<a href="?module=admin&page=faq&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=artichoke" style="background-color: #B0B69D; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">artichoke</span></a>
+								<a href="?module=admin&page=faq&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=atomic-tangerine" style="background-color: #F19B69; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">atomic-tangerine</span></a>
+								<a href="?module=admin&page=faq&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=bazaar" style="background-color: #98777B; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">bazaar</span></a>
+								<a href="?module=admin&page=faq&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=bistre-brown" style="background-color: #C3A961; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">bistre-brown</span></a>
+								<a href="?module=admin&page=faq&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=green" style="background-color: #77ac40; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">green</span></a>
+								<a href="?module=admin&page=faq&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=bittersweet" style="background-color: #d6725e; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">bittersweet</span></a>
+								<a href="?module=admin&page=faq&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=blueberry" style="background-color: #7789D1; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">blueberry</span></a>
+								<a href="?module=admin&page=faq&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=bud-green" style="background-color: #6fa362; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">bud-green</span></a>
+								<a href="?module=admin&page=faq&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=coral" style="background-color: #7eccc2; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">coral</span></a>
+								<a href="?module=admin&page=faq&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=burnt-sienna" style="background-color: #E4968A; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">burnt-sienna</span></a>
+							</li>
+
+          </ul>
+        </li>
+      </ul>
+      <form class="navbar-form navbar-left hidden-sm" role="search">
+        <div class="form-group inline-block">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-inverse"><i class="fa fa-search fa-fw"></i></button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="innerLR"><button type="button" class="btn btn-success navbar-btn"><i class="fa fa-pencil"></i> Sign in</button></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <span class="pull-left innerR"><img src="../assets/images/people/35/16.jpg" alt="user" class="img-circle"></span>
+          	Bill <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+			<!-- <div class="layout-app">  -->
+			 <div class="container"><div class="innerLR">
+
+	<h3>Frequently Asked Questions</h3>
+	<div class="separator-h"></div>
+
+	<!-- Widget -->
+<div class="widget widget-tabs widget-tabs-double-2">
+
+	<!-- Widget heading -->
+	<div class="widget-head">
+		<ul>
+			<li class="active"><a class="glyphicons list" href="#tabAll" data-toggle="tab"><i></i><span>All topics</span></a></li>
+			<li><a class="glyphicons user" href="#tabAccount" data-toggle="tab"><i></i><span>Account</span></a></li>
+			<li><a class="glyphicons credit_card" href="#tabPayments" data-toggle="tab"><i></i><span>Payments</span></a></li>
+			<li><a class="glyphicons cogwheel" href="#tabSupport" data-toggle="tab"><i></i><span>Technical Support</span></a></li>
+			<li><a class="glyphicons snowflake" href="#tabFeatures" data-toggle="tab"><i></i><span>Features</span></a></li>
+		</ul>
+	</div>
+	<!-- // Widget heading END -->
+	
+	<div class="widget-body">
+		<div class="tab-content">
+		
+			<!-- Tab content -->
+			<div id="tabAll" class="tab-pane active">
+				<div class="panel-group accordion accordion-2" id="accordion">
+					
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4 class="panel-title"><a class="accordion-toggle glyphicons font" data-toggle="collapse" data-parent="#accordion" href="#collapse-1"><i></i>What is Lorem Ipsum?</a></h4>
+					    </div>
+					    <div id="collapse-1" class="panel-collapse collapse in">
+					      	<div class="panel-body">
+					        	<i class="fa fa-5x pull-left text-primary fa-question-circle"></i> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+					      	</div>
+					    </div>
+				  	</div>
+				  	<div class="panel panel-default">
+					    <div class="panel-heading">
+					      	<h4 class="panel-title"><a class="accordion-toggle glyphicons circle_question_mark" data-toggle="collapse" data-parent="#accordion" href="#collapse-2"><i></i>Why do we use it?</a></h4>
+					    </div>
+					    <div id="collapse-2" class="panel-collapse collapse">
+					    	<div class="panel-body">
+					        	It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+					      	</div>
+					    </div>
+				  	</div>
+				  	<div class="panel panel-default">
+					    <div class="panel-heading">
+					      	<h4 class="panel-title"><a class="accordion-toggle glyphicons flag" data-toggle="collapse" data-parent="#accordion" href="#collapse-3"><i></i>Where does it come from?</a></h4>
+					    </div>
+					    <div id="collapse-3" class="panel-collapse collapse">
+					    	<div class="panel-body">
+					        	<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
+								<p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
+					      	</div>
+					    </div>
+				  	</div>
+				  	<div class="panel panel-default">
+					    <div class="panel-heading">
+					      	<h4 class="panel-title"><a class="accordion-toggle glyphicons download_alt" data-toggle="collapse" data-parent="#accordion" href="#collapse-4"><i></i>Where can I get some?</a></h4>
+					    </div>
+					    <div id="collapse-4" class="panel-collapse collapse">
+					    	<div class="panel-body">
+					        	There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
+					      	</div>
+					    </div>
+				  	</div>
+				</div>
+			</div>
+			<!-- // Tab content END -->
+			
+			<!-- Tab content -->
+			<div id="tabAccount" class="tab-pane">
+			
+				<!-- Accordion -->
+				<div class="panel-group accordion accordion-2" id="tabAccountAccordion">
+					
+					<!-- Accordion Group -->
+					<div class="panel panel-default">
+					
+						<!-- Heading -->
+						<div class="panel-heading">
+							<h4 class="panel-title"><a class="accordion-toggle glyphicons right_arrow" data-toggle="collapse" data-parent="#tabAccountAccordion" href="#collapse-1-1"><i></i>Lorem ipsum dolor sit amet?</a></h4>
+					    </div>
+					    <!-- // Heading END -->
+					    
+					    <!-- Body -->
+					    <div id="collapse-1-1" class="panel-collapse collapse in">
+					      	<div class="panel-body">
+					        	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tristique rutrum libero, vel bibendum nunc consectetur sed. Sed nibh metus, sodales non porttitor non, euismod ut magna. Etiam viverra pharetra facilisis. Aenean augue risus, molestie eu semper at, ornare at velit. Maecenas erat dui, placerat sed facilisis at, laoreet at ligula. Maecenas eu rutrum lacus. Curabitur at turpis ligula. Phasellus pharetra tellus in augue viverra id vehicula eros pretium. Donec consectetur mattis lorem, eget dictum lectus tristique vel. Ut vehicula consequat mi at fringilla.
+					      	</div>
+					    </div>
+					    <!-- // Body END -->
+					    
+				  	</div>
+				  	<!-- // Accordion Group END -->
+				  	
+				  	<!-- Accordion Group -->
+				  	<div class="panel panel-default">
+				  	
+				  		<!-- Heading -->
+					    <div class="panel-heading">
+					      	<h4 class="panel-title"><a class="accordion-toggle glyphicons right_arrow" data-toggle="collapse" data-parent="#tabAccountAccordion" href="#collapse-2-1"><i></i>Quisque porttitor elit ac mauris?</a></h4>
+					    </div>
+					    <!-- // Heading END -->
+					    
+					    <!-- Body -->
+					    <div id="collapse-2-1" class="panel-collapse collapse">
+					    	<div class="panel-body">
+					        	Quisque porttitor elit ac mauris aliquam sollicitudin. Nam imperdiet ligula et dolor pulvinar consequat. Sed in turpis id erat vehicula gravida. Nunc sed mauris ante. Pellentesque at convallis dolor. Nulla pharetra risus ut neque consequat in dapibus est feugiat. Fusce dapibus adipiscing lectus, a fringilla odio dictum et. Quisque eu tortor lacus. In elementum posuere dapibus. Duis ut neque nisi, vel vulputate dolor. Donec sem est, ultricies nec auctor vel, iaculis lobortis metus.
+					      	</div>
+					    </div>
+					    <!-- // Body END -->
+					    
+				  	</div>
+				  	<!-- // Accordion Group END -->
+				  	
+				  	<!-- Accordion Group -->
+				  	<div class="panel panel-default">
+				  	
+				  		<!-- Heading -->
+					    <div class="panel-heading">
+					      	<h4 class="panel-title"><a class="accordion-toggle glyphicons right_arrow" data-toggle="collapse" data-parent="#tabAccountAccordion" href="#collapse-3-1"><i></i>Vivamus eros tortor consequat sed?</a></h4>
+					    </div>
+					    <!-- // Heading -->
+					    
+					    <!-- Body -->
+					    <div id="collapse-3-1" class="panel-collapse collapse">
+					    	<div class="panel-body">
+					        	Vivamus eros tortor, consequat sed posuere non, tempus non ligula. Integer pharetra sem eu dolor rhoncus euismod. Vestibulum fermentum sollicitudin augue eu porta. In quis magna elit, in congue urna. Vivamus vitae blandit nisi. Aliquam lacinia magna eget lorem auctor vel facilisis ante rhoncus. Nulla ut sapien sit amet justo molestie tincidunt ut mollis lacus. Sed at felis lorem. Nam tincidunt vehicula ipsum, in aliquet turpis tempor et. Donec lacinia, nulla et tincidunt fringilla, turpis nulla sodales quam, sed viverra magna eros quis ipsum. Pellentesque vulputate gravida sodales. Fusce pulvinar vestibulum malesuada. Suspendisse eget lectus sit amet lacus tincidunt fringilla. Donec posuere neque risus, non viverra justo.
+					      	</div>
+					    </div>
+					    <!-- // Body END -->
+					    
+				  	</div>
+				  	<!-- // Accordion Group END -->
+				  	
+				  	<!-- Accordion Group -->
+				  	<div class="panel panel-default">
+				  	
+				  		<!-- Heading -->
+					    <div class="panel-heading">
+					      	<h4 class="panel-title"><a class="accordion-toggle glyphicons right_arrow" data-toggle="collapse" data-parent="#tabAccountAccordion" href="#collapse-4-1"><i></i>Etiam suscipit leo tincidunt mi volutpat?</a></h4>
+					    </div>
+					    <!-- // Heading END -->
+					    
+					    <!-- Body -->
+					    <div id="collapse-4-1" class="panel-collapse collapse">
+					    	<div class="panel-body">
+					        	Etiam suscipit leo tincidunt mi volutpat commodo. Morbi tempor interdum dictum. In hac habitasse platea dictumst. Morbi quis turpis sed felis mattis tempus vel vitae nibh. In feugiat consectetur felis et sodales. Aliquam gravida elit nec augue mattis ut mollis nibh eleifend. Aliquam vulputate pulvinar libero et pellentesque. Vivamus hendrerit varius metus quis congue. Ut scelerisque tincidunt aliquam.
+					      	</div>
+					    </div>
+					    <!-- // Body END -->
+					    
+				  	</div>
+				  	<!-- // Accordion Group END -->
+				  	
+				</div>
+			</div>
+			<!-- // Tab content END -->
+			
+			<!-- Tab content -->
+			<div id="tabPayments" class="tab-pane widget-body-regular">
+				<h5>Payments tab content</h5>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ante est, tempor ut posuere nec, venenatis sed arcu. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis in purus ut mauris sodales sollicitudin. Mauris cursus imperdiet dignissim. Phasellus risus felis, rutrum in laoreet vel, posuere vel dolor. Sed venenatis vehicula tempus. Nam at rutrum enim. Sed massa quam, mattis in viverra ut, ullamcorper et massa. Phasellus sapien diam, faucibus ac tempor a, condimentum quis est. Donec nec velit ante, vel mattis metus. Ut nec libero diam, id auctor sapien. Suspendisse eget lorem ante, in fringilla dui. In hac habitasse platea dictumst.</p>
+			</div>
+			<!-- // Tab content END -->
+			
+			<!-- Tab content -->
+			<div id="tabSupport" class="tab-pane widget-body-regular">
+				<h5>Support tab content</h5>
+				<p>Integer porttitor, enim eu egestas ullamcorper, odio mauris semper quam, in facilisis dui ligula eget ligula. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas dolor leo, consectetur nec tristique pretium, ornare quis purus. Nullam pulvinar, enim eu molestie venenatis, turpis nisl vehicula eros, et ultricies risus urna sed diam. Suspendisse potenti. Nullam tincidunt tellus nisi. Aenean felis eros, congue vitae hendrerit id, mattis quis mi.</p>
+			</div>
+			<!-- // Tab content END -->
+			
+			<!-- Tab content -->
+			<div id="tabFeatures" class="tab-pane widget-body-regular">
+				<h5>Features tab content</h5>
+				<p>Nunc aliquet lacus laoreet odio consectetur tempus. In id nisl diam, congue vehicula sapien. Nulla facilisi. Donec sagittis cursus sollicitudin. Aenean leo tellus, eleifend quis facilisis vel, tempus ac elit. Nam eget turpis nec erat vestibulum fringilla. Donec et felis ipsum. Fusce feugiat ultricies lacus a ultrices. Nunc ultrices, orci ut convallis pulvinar, diam nunc tincidunt augue, sit amet lacinia ante mi a augue. Sed feugiat, neque eget porttitor varius, tellus nisi sollicitudin libero, nec aliquam ante dui gravida ipsum. Fusce cursus rhoncus lectus, quis malesuada sapien facilisis eu. Aenean vitae massa sed urna condimentum porttitor ac at risus.</p>
+			</div>
+			<!-- // Tab content END -->
+			
+		</div>
+	</div>
+</div>
+<!-- // Widget END -->
+
+
+
+	<h3>Contact</h3>
+	<div class="separator-h"></div>
+
+	<div class="row">
+		<div class="col-md-7">
+			<form class="margin-none">
+				<div class="row">
+					<div class="col-md-6">
+						<input type="text" class="form-control" name="name" placeholder="YOUR NAME">
+					</div>
+					<div class="col-md-6"> 
+						<input type="text" class="form-control" name="phone" placeholder="PHONE">
+					</div>
+				</div>
+				<div class="innerT">
+					<textarea name="message" class="form-control" rows="5" placeholder="YOUR MESSAGE"></textarea>
+					<div class="right innerT">
+						<button class="btn btn-primary">Send message</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="col-md-5">
+			<div class="well">
+	<address class="margin-none">
+		<h2>John Doe</h2>
+		<strong>Business manager</strong> at 
+		<strong><a href="#">Business</a></strong><br> 
+		<abbr title="Work email">e-mail:</abbr> <a href="mailto:#">john.doe@mybiz.com</a><br /> 
+		<abbr title="Work Phone">phone:</abbr> (012) 345-678-901<br/>
+		<abbr title="Work Fax">fax:</abbr> (012) 678-132-901
+		<div class="separator bottom"></div>
+		<p class="margin-none"><strong>You can also find us:</strong><br/>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean tristique rutrum libero, vel bibendum nunc consectetur sed.</p>
+	</address>
+</div>
+
+		</div>
+	</div>
+
+</div>	
+		
+				</div> 
+				
+		</div>
+		<!-- // Content END -->
+		
+		<div class="clearfix"></div>
+		<!-- // Sidebar menu & content wrapper END -->
+		
+				<!-- Footer -->
+		<div id="footer" class="hidden-print">
+			
+			<!--  Copyright Line -->
+			<div class="copy">&copy; 2012 - 2014 - <a href="http://www.mosaicpro.biz">MosaicPro</a> - All Rights Reserved. <a href="http://themeforest.net/?ref=mosaicpro" target="_blank">Purchase Social Admin Template</a> - Current version: v2.0.0-rc8 / <a target="_blank" href="../assets/../../CHANGELOG.txt?v=v2.0.0-rc8">changelog</a></div>
+			<!--  End Copyright Line -->
+	
+		</div>
+		<!-- // Footer END -->
+		
+				
+	</div>
+	<!-- // Main Container Fluid END -->
+	
+
+	<!-- Global -->
+	<script data-id="App.Config">
+		var basePath = '',
+		commonPath = '../assets/',
+		rootPath = '../',
+		DEV = false,
+		componentsPath = '../assets/components/';
+	
+	var primaryColor = '#25ad9f',
+		dangerColor = '#b55151',
+		successColor = '#609450',
+		infoColor = '#4a8bc2',
+		warningColor = '#ab7a4b',
+		inverseColor = '#45484d';
+	
+	var themerPrimaryColor = primaryColor;
+
+		App.Config = {
+		ajaxify_menu_selectors: ['#menu'],
+		ajaxify_layout_app: false	};
+		</script>
+	
+		
+</body>
+</html>

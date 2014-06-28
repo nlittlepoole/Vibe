@@ -1,0 +1,3512 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="ie lt-ie9 lt-ie8 lt-ie7 paceCounter paceSocial footer-sticky"> <![endif]-->
+<!--[if IE 7]>    <html class="ie lt-ie9 lt-ie8 paceCounter paceSocial footer-sticky"> <![endif]-->
+<!--[if IE 8]>    <html class="ie lt-ie9 paceCounter paceSocial footer-sticky"> <![endif]-->
+<!--[if gt IE 8]> <html class="ie paceCounter paceSocial footer-sticky"> <![endif]-->
+<!--[if !IE]><!--><html class="paceCounter paceSocial footer-sticky"><!-- <![endif]-->
+<head>
+	<title>Social Admin Template (v2.0.0-rc8)</title>
+	
+	<!-- Meta -->
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	
+	<!-- 
+	**********************************************************
+	In development, use the LESS files and the less.js compiler
+	instead of the minified CSS loaded by default.
+	**********************************************************
+	<link rel="stylesheet/less" href="../assets/less/admin/module.admin.stylesheet-complete.layout_fixed.true.less" />
+	-->
+
+		<!--[if lt IE 9]><link rel="stylesheet" href="../assets/components/library/bootstrap/css/bootstrap.min.css" /><![endif]-->
+	
+		<link rel="stylesheet" href="../assets/css/admin/module.admin.stylesheet-complete.layout_fixed.true.min.css" />
+	
+	
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+	<script src="../assets/plugins/core_ajaxify_loadscript/script.min.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
+
+<script>var App = {};</script>
+
+<script data-id="App.Scripts">
+App.Scripts = {
+
+	/* CORE scripts always load first; */
+	core: [
+		'../assets/library/jquery/jquery.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/library/modernizr/modernizr.js?v=v2.0.0-rc8&sv=v0.0.1.2'
+	],
+
+	/* PLUGINS_DEPENDENCY always load after CORE but before PLUGINS; */
+	plugins_dependency: [
+		'../assets/library/bootstrap/js/bootstrap.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/library/jquery-ui/js/jquery-ui.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/library/jquery/jquery-migrate.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/tables_datatables/js/jquery.dataTables.min.js?v=v2.0.0-rc8&sv=v0.0.1.2'
+	],
+
+	/* PLUGINS always load after CORE and PLUGINS_DEPENDENCY, but before the BUNDLE / initialization scripts; */
+	plugins: [
+		'../assets/plugins/core_nicescroll/jquery.nicescroll.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/core_breakpoints/breakpoints.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/core_ajaxify_davis/davis.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/core_ajaxify_lazyjaxdavis/jquery.lazyjaxdavis.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/core_preload/pace.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/menu_sidr/jquery.sidr.js?v=v2.0.0-rc8', 
+		'../assets/plugins/tables_datatables/extras/TableTools/media/js/TableTools.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/tables_datatables/extras/ColVis/media/js/ColVis.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/components/tables_datatables/js/DT_bootstrap.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/forms_elements_bootstrap-select/js/bootstrap-select.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/tables_datatables/extras/FixedHeader/FixedHeader.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/tables_datatables/extras/ColReorder/media/js/ColReorder.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/core_less-js/less.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/charts_flot/excanvas.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/core_browser/ie/ie.prototype.polyfill.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/core_jquery-ui-touch-punch/jquery.ui.touch-punch.min.js?v=v2.0.0-rc8&sv=v0.0.1.2'
+	],
+
+	/* The initialization scripts always load last and are automatically and dynamically loaded when AJAX navigation is enabled; */
+	bundle: [
+		'../assets/components/core_ajaxify/ajaxify.init.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/components/core_preload/preload.pace.init.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/components/tables_datatables/js/datatables.init.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/components/forms_elements_fuelux-checkbox/fuelux-checkbox.init.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/components/forms_elements_bootstrap-select/bootstrap-select.init.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/components/tables/tables-classic.init.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/components/core/core.init.js?v=v2.0.0-rc8'
+	]
+
+};
+</script>
+
+<script>
+$script(App.Scripts.core, 'core');
+
+$script.ready(['core'], function(){
+	$script(App.Scripts.plugins_dependency, 'plugins_dependency');
+});
+$script.ready(['core', 'plugins_dependency'], function(){
+	$script(App.Scripts.plugins, 'plugins');
+});
+$script.ready(['core', 'plugins_dependency', 'plugins'], function(){
+	$script(App.Scripts.bundle, 'bundle');
+});
+</script>
+	<script>if (/*@cc_on!@*/false && document.documentMode === 10) { document.documentElement.className+=' ie ie10'; }</script>
+	
+</head>
+<body class=" scripts-async menu-right-hidden">
+	
+	<!-- Main Container Fluid -->
+	<div class="container-fluid ">
+
+		
+		<!-- Content START -->
+		<div id="content">
+			
+	
+<nav class="navbar navbar-default top-nav navbar-fixed-top" role="navigation">
+
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle btn btn-default" data-toggle="collapse" data-target="#navbar-fixed-layout-collapse">
+		<i class="fa fa-indent"></i>
+      </button>
+      <a class="navbar-brand" href="#"><img src="../assets//images/logo/logo.jpg" alt=""></a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="navbar-fixed-layout-collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Layout <b class="caret"></b></a>
+	          <ul class="dropdown-menu">
+	             <li >
+					<a class="no-ajaxify" href="?module=admin&page=tables&url_rewrite=&build=&layout_fixed=false&v=v2.0.0-rc8" >Fluid Layout
+					</a>
+				</li>
+	            <li class="active">
+					<a class="no-ajaxify" href="?module=admin&page=tables&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8">Fixed Layout
+					</a>
+				</li>
+	          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+           		<li class="dropdown-header">Timeline</li>
+           		<li><a href="index.html?lang=en"><span>Timeline #1</span></a></li>
+				<li><a href="timeline_2.html?lang=en"><span>Timeline #2</span></a></li>
+				<li><a href="timeline_3.html?lang=en"><span>Timeline #3</span></a></li>
+          		<li class="divider"></li>
+           		<li class="dropdown-header">Media</li>
+				<li><a href="media_1.html?lang=en"><span>Photos #1</span></a></li>
+				<li><a href="media_2.html?lang=en"><span>Photos #2</span></a></li>
+				<li><a href="media_3.html?lang=en"><span>Photos #3</span></a></li>
+				<li class="divider"></li>
+           		<li class="dropdown-header">Contacts</li>
+           		<li><a href="contacts_1.html?lang=en"><span>Friends #1</span></a></li>
+				<li><a href="contacts_2.html?lang=en"><span>Friends #2</span></a></li>
+				<li><a href="contacts_3.html?lang=en"><span>Friends #3</span></a></li>
+				<li class="divider"></li>
+           		<li class="dropdown-header">About</li>
+           		<li><a href="about_1.html?lang=en"><span>About #1</span></a></li>
+				<li><a href="about_2.html?lang=en"><span>About #2</span></a></li>
+				<li><a href="about_3.html?lang=en"><span>About #3</span></a></li>
+				<li class="divider"></li>
+				<li><a href="messages.html?lang=en"><span>Messages</span></a></li>
+				<li class="divider"></li>
+           		<li class="dropdown-header">Music</li>
+           		<li><a href="playlist.html?lang=en"><span>playlist</span></a></li>
+				<li><a href="albums.html?lang=en"><span>Albums</span></a></li>
+				<li><a href="song.html?lang=en"><span>Song</span></a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nav Color <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li>
+            	<a href="?module=admin&page=tables&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&navbar_type=navbar-default" >
+            	White Navbar</a>
+
+            </li>
+            <li>
+            	<a href="?module=admin&page=tables&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&navbar_type=navbar-inverse" >
+            	Dark Navbar</a></li>
+            <li>
+            	<a href="?module=admin&page=tables&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&navbar_type=navbar-primary" >
+            		Primary Color Navbar</a></li>
+            <li class="divider"></li>
+			<li class="innerAll half" style="line-height:20px;">
+				<div class="strong">Skin Colors</div>
+								<a href="?module=admin&page=tables&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=style-default" style="background-color: #25ad9f; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">style-default</span></a>
+								<a href="?module=admin&page=tables&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=green-army" style="background-color: #9FB478; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">green-army</span></a>
+								<a href="?module=admin&page=tables&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=alizarin-crimson" style="background-color: #F06F6F; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">alizarin-crimson</span></a>
+								<a href="?module=admin&page=tables&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=blue-gray" style="background-color: #5577b4; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">blue-gray</span></a>
+								<a href="?module=admin&page=tables&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=brown" style="background-color: #d39174; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">brown</span></a>
+								<a href="?module=admin&page=tables&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=purple-gray" style="background-color: #AF86B9; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">purple-gray</span></a>
+								<a href="?module=admin&page=tables&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=purple-wine" style="background-color: #CC6788; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">purple-wine</span></a>
+								<a href="?module=admin&page=tables&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=black-and-white" style="background-color: #979797; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">black-and-white</span></a>
+								<a href="?module=admin&page=tables&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=amazon" style="background-color: #8BC4B9; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">amazon</span></a>
+								<a href="?module=admin&page=tables&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=amber" style="background-color: #b0b069; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">amber</span></a>
+								<a href="?module=admin&page=tables&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=android-green" style="background-color: #A9C784; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">android-green</span></a>
+								<a href="?module=admin&page=tables&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=antique-brass" style="background-color: #B3998A; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">antique-brass</span></a>
+								<a href="?module=admin&page=tables&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=antique-bronze" style="background-color: #8D8D6E; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">antique-bronze</span></a>
+								<a href="?module=admin&page=tables&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=artichoke" style="background-color: #B0B69D; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">artichoke</span></a>
+								<a href="?module=admin&page=tables&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=atomic-tangerine" style="background-color: #F19B69; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">atomic-tangerine</span></a>
+								<a href="?module=admin&page=tables&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=bazaar" style="background-color: #98777B; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">bazaar</span></a>
+								<a href="?module=admin&page=tables&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=bistre-brown" style="background-color: #C3A961; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">bistre-brown</span></a>
+								<a href="?module=admin&page=tables&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=green" style="background-color: #77ac40; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">green</span></a>
+								<a href="?module=admin&page=tables&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=bittersweet" style="background-color: #d6725e; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">bittersweet</span></a>
+								<a href="?module=admin&page=tables&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=blueberry" style="background-color: #7789D1; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">blueberry</span></a>
+								<a href="?module=admin&page=tables&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=bud-green" style="background-color: #6fa362; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">bud-green</span></a>
+								<a href="?module=admin&page=tables&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=coral" style="background-color: #7eccc2; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">coral</span></a>
+								<a href="?module=admin&page=tables&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=burnt-sienna" style="background-color: #E4968A; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">burnt-sienna</span></a>
+							</li>
+
+          </ul>
+        </li>
+      </ul>
+      <form class="navbar-form navbar-left hidden-sm" role="search">
+        <div class="form-group inline-block">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-inverse"><i class="fa fa-search fa-fw"></i></button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="innerLR"><button type="button" class="btn btn-success navbar-btn"><i class="fa fa-pencil"></i> Sign in</button></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <span class="pull-left innerR"><img src="../assets/images/people/35/16.jpg" alt="user" class="img-circle"></span>
+          	Bill <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+			<!-- <div class="layout-app">  -->
+			 <div class="container"><h1>Tables</h1>
+<div class="innerLR">
+
+	<!-- Widget -->
+	<div class="widget widget-body-white widget-heading-simple">
+		<div class="widget-body">
+			<!-- Table -->
+<table class="dynamicTable tableTools table table-striped checkboxs">
+
+	<!-- Table heading -->
+	<thead>
+		<tr>
+			<th class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</th>
+			<th>Rendering eng.</th>
+			<th>Browser</th>
+			<th>Platform(s)</th>
+			<th>Eng. vers.</th>
+			<th>CSS grade</th>
+		</tr>
+	</thead>
+	<!-- // Table heading END -->
+	
+	<!-- Table body -->
+	<tbody>
+	
+		<!-- Table row -->
+		<tr class="gradeX">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox" checked="checked">
+	                </label>
+	            </div>
+			</td>
+			<td>Trident</td>
+			<td>Internet Explorer 4.0</td>
+			<td>Win 95+</td>
+			<td class="center">4</td>
+			<td class="center">X</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeC">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox" checked="checked">
+	                </label>
+	            </div>
+			</td>
+			<td>Trident</td>
+			<td>Internet Explorer 5.0</td>
+			<td>Win 95+</td>
+			<td class="center">5</td>
+			<td class="center">C</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox" checked="checked">
+	                </label>
+	            </div>
+			</td>
+			<td>Trident</td>
+			<td>Internet Explorer 5.5</td>
+			<td>Win 95+</td>
+			<td class="center">5.5</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Trident</td>
+			<td>Internet Explorer 6</td>
+			<td>Win 98+</td>
+			<td class="center">6</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Trident</td>
+			<td>Internet Explorer 7</td>
+			<td>Win XP SP2+</td>
+			<td class="center">7</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Trident</td>
+			<td>AOL browser (AOL desktop)</td>
+			<td>Win XP</td>
+			<td class="center">6</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Gecko</td>
+			<td>Firefox 1.0</td>
+			<td>Win 98+ / OSX.2+</td>
+			<td class="center">1.7</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Gecko</td>
+			<td>Firefox 1.5</td>
+			<td>Win 98+ / OSX.2+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Gecko</td>
+			<td>Firefox 2.0</td>
+			<td>Win 98+ / OSX.2+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Gecko</td>
+			<td>Firefox 3.0</td>
+			<td>Win 2k+ / OSX.3+</td>
+			<td class="center">1.9</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Gecko</td>
+			<td>Camino 1.0</td>
+			<td>OSX.2+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Gecko</td>
+			<td>Camino 1.5</td>
+			<td>OSX.3+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Gecko</td>
+			<td>Netscape 7.2</td>
+			<td>Win 95+ / Mac OS 8.6-9.2</td>
+			<td class="center">1.7</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Gecko</td>
+			<td>Netscape Browser 8</td>
+			<td>Win 98SE+</td>
+			<td class="center">1.7</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Gecko</td>
+			<td>Netscape Navigator 9</td>
+			<td>Win 98+ / OSX.2+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Gecko</td>
+			<td>Mozilla 1.0</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Gecko</td>
+			<td>Mozilla 1.1</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1.1</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Gecko</td>
+			<td>Mozilla 1.2</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1.2</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Gecko</td>
+			<td>Mozilla 1.3</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1.3</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Gecko</td>
+			<td>Mozilla 1.4</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1.4</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Gecko</td>
+			<td>Mozilla 1.5</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1.5</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Gecko</td>
+			<td>Mozilla 1.6</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1.6</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Gecko</td>
+			<td>Mozilla 1.7</td>
+			<td>Win 98+ / OSX.1+</td>
+			<td class="center">1.7</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Gecko</td>
+			<td>Mozilla 1.8</td>
+			<td>Win 98+ / OSX.1+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Gecko</td>
+			<td>Seamonkey 1.1</td>
+			<td>Win 98+ / OSX.2+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Gecko</td>
+			<td>Epiphany 2.20</td>
+			<td>Gnome</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Webkit</td>
+			<td>Safari 1.2</td>
+			<td>OSX.3</td>
+			<td class="center">125.5</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Webkit</td>
+			<td>Safari 1.3</td>
+			<td>OSX.3</td>
+			<td class="center">312.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Webkit</td>
+			<td>Safari 2.0</td>
+			<td>OSX.4+</td>
+			<td class="center">419.3</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Webkit</td>
+			<td>Safari 3.0</td>
+			<td>OSX.4+</td>
+			<td class="center">522.1</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Webkit</td>
+			<td>OmniWeb 5.5</td>
+			<td>OSX.4+</td>
+			<td class="center">420</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Webkit</td>
+			<td>iPod Touch / iPhone</td>
+			<td>iPod</td>
+			<td class="center">420.1</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Webkit</td>
+			<td>S60</td>
+			<td>S60</td>
+			<td class="center">413</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Presto</td>
+			<td>Opera 7.0</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Presto</td>
+			<td>Opera 7.5</td>
+			<td>Win 95+ / OSX.2+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Presto</td>
+			<td>Opera 8.0</td>
+			<td>Win 95+ / OSX.2+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Presto</td>
+			<td>Opera 8.5</td>
+			<td>Win 95+ / OSX.2+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Presto</td>
+			<td>Opera 9.0</td>
+			<td>Win 95+ / OSX.3+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Presto</td>
+			<td>Opera 9.2</td>
+			<td>Win 88+ / OSX.3+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Presto</td>
+			<td>Opera 9.5</td>
+			<td>Win 88+ / OSX.3+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Presto</td>
+			<td>Opera for Wii</td>
+			<td>Wii</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Presto</td>
+			<td>Nokia N800</td>
+			<td>N800</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Presto</td>
+			<td>Nintendo DS browser</td>
+			<td>Nintendo DS</td>
+			<td class="center">8.5</td>
+			<td class="center">C/A<sup>1</sup></td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeC">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>KHTML</td>
+			<td>Konqureror 3.1</td>
+			<td>KDE 3.1</td>
+			<td class="center">3.1</td>
+			<td class="center">C</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>KHTML</td>
+			<td>Konqureror 3.3</td>
+			<td>KDE 3.3</td>
+			<td class="center">3.3</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>KHTML</td>
+			<td>Konqureror 3.5</td>
+			<td>KDE 3.5</td>
+			<td class="center">3.5</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeX">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Tasman</td>
+			<td>Internet Explorer 4.5</td>
+			<td>Mac OS 8-9</td>
+			<td class="center">-</td>
+			<td class="center">X</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeC">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Tasman</td>
+			<td>Internet Explorer 5.1</td>
+			<td>Mac OS 7.6-9</td>
+			<td class="center">1</td>
+			<td class="center">C</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeC">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Tasman</td>
+			<td>Internet Explorer 5.2</td>
+			<td>Mac OS 8-X</td>
+			<td class="center">1</td>
+			<td class="center">C</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Misc</td>
+			<td>NetFront 3.1</td>
+			<td>Embedded devices</td>
+			<td class="center">-</td>
+			<td class="center">C</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Misc</td>
+			<td>NetFront 3.4</td>
+			<td>Embedded devices</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeX">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Misc</td>
+			<td>Dillo 0.8</td>
+			<td>Embedded devices</td>
+			<td class="center">-</td>
+			<td class="center">X</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeX">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Misc</td>
+			<td>Links</td>
+			<td>Text only</td>
+			<td class="center">-</td>
+			<td class="center">X</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeX">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Misc</td>
+			<td>Lynx</td>
+			<td>Text only</td>
+			<td class="center">-</td>
+			<td class="center">X</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeC">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Misc</td>
+			<td>IE Mobile</td>
+			<td>Windows Mobile 6</td>
+			<td class="center">-</td>
+			<td class="center">C</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeC">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Misc</td>
+			<td>PSP browser</td>
+			<td>PSP</td>
+			<td class="center">-</td>
+			<td class="center">C</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeU">
+			<td class="text-center">
+				<div class="checkbox checkbox-single margin-none">
+	                <label class="checkbox-custom">
+	                    <i class="fa fa-fw fa-square-o"></i>
+	                    <input type="checkbox">
+	                </label>
+	            </div>
+			</td>
+			<td>Other browsers</td>
+			<td>All others</td>
+			<td>-</td>
+			<td class="center">-</td>
+			<td class="center">U</td>
+		</tr>
+		<!-- // Table row END -->
+		
+	</tbody>
+	<!-- // Table body END -->
+	
+</table>
+<!-- // Table END -->
+
+
+
+
+
+
+		</div>
+	</div>
+	<!-- // Widget END -->
+
+	<h3 class="innerTB">Show / hide columns</h3>
+
+	<!-- Widget -->
+	<div class="widget widget-body-white widget-heading-simple">
+		<div class="widget-body">
+			<!-- Table -->
+<table class="dynamicTable colVis table">
+
+	<!-- Table heading -->
+	<thead class="bg-gray">
+		<tr>
+			<th>Rendering eng.</th>
+			<th>Browser</th>
+			<th>Platform(s)</th>
+			<th>Eng. vers.</th>
+			<th>CSS grade</th>
+		</tr>
+	</thead>
+	<!-- // Table heading END -->
+	
+	<!-- Table body -->
+	<tbody>
+	
+		<!-- Table row -->
+		<tr class="gradeX">
+			<td>Trident</td>
+			<td>Internet Explorer 4.0</td>
+			<td>Win 95+</td>
+			<td class="center">4</td>
+			<td class="center">X</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeC">
+			<td>Trident</td>
+			<td>Internet Explorer 5.0</td>
+			<td>Win 95+</td>
+			<td class="center">5</td>
+			<td class="center">C</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Trident</td>
+			<td>Internet Explorer 5.5</td>
+			<td>Win 95+</td>
+			<td class="center">5.5</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Trident</td>
+			<td>Internet Explorer 6</td>
+			<td>Win 98+</td>
+			<td class="center">6</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Trident</td>
+			<td>Internet Explorer 7</td>
+			<td>Win XP SP2+</td>
+			<td class="center">7</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Trident</td>
+			<td>AOL browser (AOL desktop)</td>
+			<td>Win XP</td>
+			<td class="center">6</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Firefox 1.0</td>
+			<td>Win 98+ / OSX.2+</td>
+			<td class="center">1.7</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Firefox 1.5</td>
+			<td>Win 98+ / OSX.2+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Firefox 2.0</td>
+			<td>Win 98+ / OSX.2+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Firefox 3.0</td>
+			<td>Win 2k+ / OSX.3+</td>
+			<td class="center">1.9</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Camino 1.0</td>
+			<td>OSX.2+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Camino 1.5</td>
+			<td>OSX.3+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Netscape 7.2</td>
+			<td>Win 95+ / Mac OS 8.6-9.2</td>
+			<td class="center">1.7</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Netscape Browser 8</td>
+			<td>Win 98SE+</td>
+			<td class="center">1.7</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Netscape Navigator 9</td>
+			<td>Win 98+ / OSX.2+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.0</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.1</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1.1</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.2</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1.2</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.3</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1.3</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.4</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1.4</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.5</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1.5</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.6</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1.6</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.7</td>
+			<td>Win 98+ / OSX.1+</td>
+			<td class="center">1.7</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.8</td>
+			<td>Win 98+ / OSX.1+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Seamonkey 1.1</td>
+			<td>Win 98+ / OSX.2+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Epiphany 2.20</td>
+			<td>Gnome</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Webkit</td>
+			<td>Safari 1.2</td>
+			<td>OSX.3</td>
+			<td class="center">125.5</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Webkit</td>
+			<td>Safari 1.3</td>
+			<td>OSX.3</td>
+			<td class="center">312.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Webkit</td>
+			<td>Safari 2.0</td>
+			<td>OSX.4+</td>
+			<td class="center">419.3</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Webkit</td>
+			<td>Safari 3.0</td>
+			<td>OSX.4+</td>
+			<td class="center">522.1</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Webkit</td>
+			<td>OmniWeb 5.5</td>
+			<td>OSX.4+</td>
+			<td class="center">420</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Webkit</td>
+			<td>iPod Touch / iPhone</td>
+			<td>iPod</td>
+			<td class="center">420.1</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Webkit</td>
+			<td>S60</td>
+			<td>S60</td>
+			<td class="center">413</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera 7.0</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera 7.5</td>
+			<td>Win 95+ / OSX.2+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera 8.0</td>
+			<td>Win 95+ / OSX.2+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera 8.5</td>
+			<td>Win 95+ / OSX.2+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera 9.0</td>
+			<td>Win 95+ / OSX.3+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera 9.2</td>
+			<td>Win 88+ / OSX.3+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera 9.5</td>
+			<td>Win 88+ / OSX.3+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera for Wii</td>
+			<td>Wii</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Nokia N800</td>
+			<td>N800</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Nintendo DS browser</td>
+			<td>Nintendo DS</td>
+			<td class="center">8.5</td>
+			<td class="center">C/A<sup>1</sup></td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeC">
+			<td>KHTML</td>
+			<td>Konqureror 3.1</td>
+			<td>KDE 3.1</td>
+			<td class="center">3.1</td>
+			<td class="center">C</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>KHTML</td>
+			<td>Konqureror 3.3</td>
+			<td>KDE 3.3</td>
+			<td class="center">3.3</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>KHTML</td>
+			<td>Konqureror 3.5</td>
+			<td>KDE 3.5</td>
+			<td class="center">3.5</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeX">
+			<td>Tasman</td>
+			<td>Internet Explorer 4.5</td>
+			<td>Mac OS 8-9</td>
+			<td class="center">-</td>
+			<td class="center">X</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeC">
+			<td>Tasman</td>
+			<td>Internet Explorer 5.1</td>
+			<td>Mac OS 7.6-9</td>
+			<td class="center">1</td>
+			<td class="center">C</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeC">
+			<td>Tasman</td>
+			<td>Internet Explorer 5.2</td>
+			<td>Mac OS 8-X</td>
+			<td class="center">1</td>
+			<td class="center">C</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Misc</td>
+			<td>NetFront 3.1</td>
+			<td>Embedded devices</td>
+			<td class="center">-</td>
+			<td class="center">C</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Misc</td>
+			<td>NetFront 3.4</td>
+			<td>Embedded devices</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeX">
+			<td>Misc</td>
+			<td>Dillo 0.8</td>
+			<td>Embedded devices</td>
+			<td class="center">-</td>
+			<td class="center">X</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeX">
+			<td>Misc</td>
+			<td>Links</td>
+			<td>Text only</td>
+			<td class="center">-</td>
+			<td class="center">X</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeX">
+			<td>Misc</td>
+			<td>Lynx</td>
+			<td>Text only</td>
+			<td class="center">-</td>
+			<td class="center">X</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeC">
+			<td>Misc</td>
+			<td>IE Mobile</td>
+			<td>Windows Mobile 6</td>
+			<td class="center">-</td>
+			<td class="center">C</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeC">
+			<td>Misc</td>
+			<td>PSP browser</td>
+			<td>PSP</td>
+			<td class="center">-</td>
+			<td class="center">C</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeU">
+			<td>Other browsers</td>
+			<td>All others</td>
+			<td>-</td>
+			<td class="center">-</td>
+			<td class="center">U</td>
+		</tr>
+		<!-- // Table row END -->
+		
+	</tbody>
+	<!-- // Table body END -->
+	
+</table>
+<!-- // Table END -->
+
+
+		</div>
+	</div>
+	<!-- // Widget END -->
+
+	<h3 class="innerTB">Vertical Scrolling</h3>
+
+	<!-- Widget -->
+	<div class="widget">
+		<div class="widget-body">
+			<!-- Table -->
+<table class="dynamicTable scrollVertical table table-primary">
+
+	<!-- Table heading -->
+	<thead>
+		<tr>
+			<th>Rendering eng.</th>
+			<th>Browser</th>
+			<th>Platform(s)</th>
+			<th>Eng. vers.</th>
+			<th>CSS grade</th>
+		</tr>
+	</thead>
+	<!-- // Table heading END -->
+	
+	<!-- Table body -->
+	<tbody>
+	
+		<!-- Table row -->
+		<tr class="gradeX">
+			<td>Trident</td>
+			<td>Internet Explorer 4.0</td>
+			<td>Win 95+</td>
+			<td class="center">4</td>
+			<td class="center">X</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeC">
+			<td>Trident</td>
+			<td>Internet Explorer 5.0</td>
+			<td>Win 95+</td>
+			<td class="center">5</td>
+			<td class="center">C</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Trident</td>
+			<td>Internet Explorer 5.5</td>
+			<td>Win 95+</td>
+			<td class="center">5.5</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Trident</td>
+			<td>Internet Explorer 6</td>
+			<td>Win 98+</td>
+			<td class="center">6</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Trident</td>
+			<td>Internet Explorer 7</td>
+			<td>Win XP SP2+</td>
+			<td class="center">7</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Trident</td>
+			<td>AOL browser (AOL desktop)</td>
+			<td>Win XP</td>
+			<td class="center">6</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Firefox 1.0</td>
+			<td>Win 98+ / OSX.2+</td>
+			<td class="center">1.7</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Firefox 1.5</td>
+			<td>Win 98+ / OSX.2+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Firefox 2.0</td>
+			<td>Win 98+ / OSX.2+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Firefox 3.0</td>
+			<td>Win 2k+ / OSX.3+</td>
+			<td class="center">1.9</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Camino 1.0</td>
+			<td>OSX.2+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Camino 1.5</td>
+			<td>OSX.3+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Netscape 7.2</td>
+			<td>Win 95+ / Mac OS 8.6-9.2</td>
+			<td class="center">1.7</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Netscape Browser 8</td>
+			<td>Win 98SE+</td>
+			<td class="center">1.7</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Netscape Navigator 9</td>
+			<td>Win 98+ / OSX.2+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.0</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.1</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1.1</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.2</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1.2</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.3</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1.3</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.4</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1.4</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.5</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1.5</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.6</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1.6</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.7</td>
+			<td>Win 98+ / OSX.1+</td>
+			<td class="center">1.7</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.8</td>
+			<td>Win 98+ / OSX.1+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Seamonkey 1.1</td>
+			<td>Win 98+ / OSX.2+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Epiphany 2.20</td>
+			<td>Gnome</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Webkit</td>
+			<td>Safari 1.2</td>
+			<td>OSX.3</td>
+			<td class="center">125.5</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Webkit</td>
+			<td>Safari 1.3</td>
+			<td>OSX.3</td>
+			<td class="center">312.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Webkit</td>
+			<td>Safari 2.0</td>
+			<td>OSX.4+</td>
+			<td class="center">419.3</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Webkit</td>
+			<td>Safari 3.0</td>
+			<td>OSX.4+</td>
+			<td class="center">522.1</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Webkit</td>
+			<td>OmniWeb 5.5</td>
+			<td>OSX.4+</td>
+			<td class="center">420</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Webkit</td>
+			<td>iPod Touch / iPhone</td>
+			<td>iPod</td>
+			<td class="center">420.1</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Webkit</td>
+			<td>S60</td>
+			<td>S60</td>
+			<td class="center">413</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera 7.0</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera 7.5</td>
+			<td>Win 95+ / OSX.2+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera 8.0</td>
+			<td>Win 95+ / OSX.2+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera 8.5</td>
+			<td>Win 95+ / OSX.2+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera 9.0</td>
+			<td>Win 95+ / OSX.3+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera 9.2</td>
+			<td>Win 88+ / OSX.3+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera 9.5</td>
+			<td>Win 88+ / OSX.3+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera for Wii</td>
+			<td>Wii</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Nokia N800</td>
+			<td>N800</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Nintendo DS browser</td>
+			<td>Nintendo DS</td>
+			<td class="center">8.5</td>
+			<td class="center">C/A<sup>1</sup></td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeC">
+			<td>KHTML</td>
+			<td>Konqureror 3.1</td>
+			<td>KDE 3.1</td>
+			<td class="center">3.1</td>
+			<td class="center">C</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>KHTML</td>
+			<td>Konqureror 3.3</td>
+			<td>KDE 3.3</td>
+			<td class="center">3.3</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>KHTML</td>
+			<td>Konqureror 3.5</td>
+			<td>KDE 3.5</td>
+			<td class="center">3.5</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeX">
+			<td>Tasman</td>
+			<td>Internet Explorer 4.5</td>
+			<td>Mac OS 8-9</td>
+			<td class="center">-</td>
+			<td class="center">X</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeC">
+			<td>Tasman</td>
+			<td>Internet Explorer 5.1</td>
+			<td>Mac OS 7.6-9</td>
+			<td class="center">1</td>
+			<td class="center">C</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeC">
+			<td>Tasman</td>
+			<td>Internet Explorer 5.2</td>
+			<td>Mac OS 8-X</td>
+			<td class="center">1</td>
+			<td class="center">C</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Misc</td>
+			<td>NetFront 3.1</td>
+			<td>Embedded devices</td>
+			<td class="center">-</td>
+			<td class="center">C</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Misc</td>
+			<td>NetFront 3.4</td>
+			<td>Embedded devices</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeX">
+			<td>Misc</td>
+			<td>Dillo 0.8</td>
+			<td>Embedded devices</td>
+			<td class="center">-</td>
+			<td class="center">X</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeX">
+			<td>Misc</td>
+			<td>Links</td>
+			<td>Text only</td>
+			<td class="center">-</td>
+			<td class="center">X</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeX">
+			<td>Misc</td>
+			<td>Lynx</td>
+			<td>Text only</td>
+			<td class="center">-</td>
+			<td class="center">X</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeC">
+			<td>Misc</td>
+			<td>IE Mobile</td>
+			<td>Windows Mobile 6</td>
+			<td class="center">-</td>
+			<td class="center">C</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeC">
+			<td>Misc</td>
+			<td>PSP browser</td>
+			<td>PSP</td>
+			<td class="center">-</td>
+			<td class="center">C</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeU">
+			<td>Other browsers</td>
+			<td>All others</td>
+			<td>-</td>
+			<td class="center">-</td>
+			<td class="center">U</td>
+		</tr>
+		<!-- // Table row END -->
+		
+	</tbody>
+	<!-- // Table body END -->
+	
+</table>
+<!-- // Table END -->
+
+
+
+
+
+
+		</div>
+	</div>
+	<!-- // Widget END -->
+
+	<h3 class="innerTB">Loading large data set with AJAX (5,000 results)</h3>
+
+	<!-- Widget -->
+	<div class="widget">
+		<div class="widget-body">
+			<!-- Table -->
+<table class="dynamicTable ajax table table-primary">
+
+	<!-- Table heading -->
+	<thead>
+		<tr>
+			<th>Rendering eng.</th>
+			<th>Browser</th>
+			<th>Platform(s)</th>
+			<th>Eng. vers.</th>
+			<th>CSS grade</th>
+		</tr>
+	</thead>
+	<!-- // Table heading END -->
+	
+	<!-- Table body -->
+	<tbody></tbody>
+	<!-- // Table body END -->
+	
+</table>
+<!-- // Table END -->
+
+
+
+		</div>
+	</div>
+	<!-- // Widget END -->
+
+	<h3 class="innerTB">Fixed Header and Column Reorder (Drag &amp; Drop)</h3>
+
+	<!-- Widget -->
+	<div class="widget">
+		<div class="widget-body overflow-x">
+			<!-- Table -->
+<table class="dynamicTable fixedHeaderColReorder table">
+
+	<!-- Table heading -->
+	<thead class="bg-gray">
+		<tr>
+			<th>Rendering eng.</th>
+			<th>Browser</th>
+			<th>Platform(s)</th>
+			<th>Eng. vers.</th>
+			<th>CSS grade</th>
+		</tr>
+	</thead>
+	<!-- // Table heading END -->
+	
+	<!-- Table body -->
+	<tbody>
+	
+		<!-- Table row -->
+		<tr class="gradeX">
+			<td>Trident</td>
+			<td>Internet Explorer 4.0</td>
+			<td>Win 95+</td>
+			<td class="center">4</td>
+			<td class="center">X</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeC">
+			<td>Trident</td>
+			<td>Internet Explorer 5.0</td>
+			<td>Win 95+</td>
+			<td class="center">5</td>
+			<td class="center">C</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Trident</td>
+			<td>Internet Explorer 5.5</td>
+			<td>Win 95+</td>
+			<td class="center">5.5</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Trident</td>
+			<td>Internet Explorer 6</td>
+			<td>Win 98+</td>
+			<td class="center">6</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Trident</td>
+			<td>Internet Explorer 7</td>
+			<td>Win XP SP2+</td>
+			<td class="center">7</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Trident</td>
+			<td>AOL browser (AOL desktop)</td>
+			<td>Win XP</td>
+			<td class="center">6</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Firefox 1.0</td>
+			<td>Win 98+ / OSX.2+</td>
+			<td class="center">1.7</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Firefox 1.5</td>
+			<td>Win 98+ / OSX.2+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Firefox 2.0</td>
+			<td>Win 98+ / OSX.2+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Firefox 3.0</td>
+			<td>Win 2k+ / OSX.3+</td>
+			<td class="center">1.9</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Camino 1.0</td>
+			<td>OSX.2+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Camino 1.5</td>
+			<td>OSX.3+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Netscape 7.2</td>
+			<td>Win 95+ / Mac OS 8.6-9.2</td>
+			<td class="center">1.7</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Netscape Browser 8</td>
+			<td>Win 98SE+</td>
+			<td class="center">1.7</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Netscape Navigator 9</td>
+			<td>Win 98+ / OSX.2+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.0</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.1</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1.1</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.2</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1.2</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.3</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1.3</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.4</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1.4</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.5</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1.5</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.6</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">1.6</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.7</td>
+			<td>Win 98+ / OSX.1+</td>
+			<td class="center">1.7</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Mozilla 1.8</td>
+			<td>Win 98+ / OSX.1+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Seamonkey 1.1</td>
+			<td>Win 98+ / OSX.2+</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Gecko</td>
+			<td>Epiphany 2.20</td>
+			<td>Gnome</td>
+			<td class="center">1.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Webkit</td>
+			<td>Safari 1.2</td>
+			<td>OSX.3</td>
+			<td class="center">125.5</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Webkit</td>
+			<td>Safari 1.3</td>
+			<td>OSX.3</td>
+			<td class="center">312.8</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Webkit</td>
+			<td>Safari 2.0</td>
+			<td>OSX.4+</td>
+			<td class="center">419.3</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Webkit</td>
+			<td>Safari 3.0</td>
+			<td>OSX.4+</td>
+			<td class="center">522.1</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Webkit</td>
+			<td>OmniWeb 5.5</td>
+			<td>OSX.4+</td>
+			<td class="center">420</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Webkit</td>
+			<td>iPod Touch / iPhone</td>
+			<td>iPod</td>
+			<td class="center">420.1</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Webkit</td>
+			<td>S60</td>
+			<td>S60</td>
+			<td class="center">413</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera 7.0</td>
+			<td>Win 95+ / OSX.1+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera 7.5</td>
+			<td>Win 95+ / OSX.2+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera 8.0</td>
+			<td>Win 95+ / OSX.2+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera 8.5</td>
+			<td>Win 95+ / OSX.2+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera 9.0</td>
+			<td>Win 95+ / OSX.3+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera 9.2</td>
+			<td>Win 88+ / OSX.3+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera 9.5</td>
+			<td>Win 88+ / OSX.3+</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Opera for Wii</td>
+			<td>Wii</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Nokia N800</td>
+			<td>N800</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Presto</td>
+			<td>Nintendo DS browser</td>
+			<td>Nintendo DS</td>
+			<td class="center">8.5</td>
+			<td class="center">C/A<sup>1</sup></td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeC">
+			<td>KHTML</td>
+			<td>Konqureror 3.1</td>
+			<td>KDE 3.1</td>
+			<td class="center">3.1</td>
+			<td class="center">C</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>KHTML</td>
+			<td>Konqureror 3.3</td>
+			<td>KDE 3.3</td>
+			<td class="center">3.3</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>KHTML</td>
+			<td>Konqureror 3.5</td>
+			<td>KDE 3.5</td>
+			<td class="center">3.5</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeX">
+			<td>Tasman</td>
+			<td>Internet Explorer 4.5</td>
+			<td>Mac OS 8-9</td>
+			<td class="center">-</td>
+			<td class="center">X</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeC">
+			<td>Tasman</td>
+			<td>Internet Explorer 5.1</td>
+			<td>Mac OS 7.6-9</td>
+			<td class="center">1</td>
+			<td class="center">C</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeC">
+			<td>Tasman</td>
+			<td>Internet Explorer 5.2</td>
+			<td>Mac OS 8-X</td>
+			<td class="center">1</td>
+			<td class="center">C</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Misc</td>
+			<td>NetFront 3.1</td>
+			<td>Embedded devices</td>
+			<td class="center">-</td>
+			<td class="center">C</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeA">
+			<td>Misc</td>
+			<td>NetFront 3.4</td>
+			<td>Embedded devices</td>
+			<td class="center">-</td>
+			<td class="center">A</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeX">
+			<td>Misc</td>
+			<td>Dillo 0.8</td>
+			<td>Embedded devices</td>
+			<td class="center">-</td>
+			<td class="center">X</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeX">
+			<td>Misc</td>
+			<td>Links</td>
+			<td>Text only</td>
+			<td class="center">-</td>
+			<td class="center">X</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeX">
+			<td>Misc</td>
+			<td>Lynx</td>
+			<td>Text only</td>
+			<td class="center">-</td>
+			<td class="center">X</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeC">
+			<td>Misc</td>
+			<td>IE Mobile</td>
+			<td>Windows Mobile 6</td>
+			<td class="center">-</td>
+			<td class="center">C</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeC">
+			<td>Misc</td>
+			<td>PSP browser</td>
+			<td>PSP</td>
+			<td class="center">-</td>
+			<td class="center">C</td>
+		</tr>
+		<!-- // Table row END -->
+		
+		<!-- Table row -->
+		<tr class="gradeU">
+			<td>Other browsers</td>
+			<td>All others</td>
+			<td>-</td>
+			<td class="center">-</td>
+			<td class="center">U</td>
+		</tr>
+		<!-- // Table row END -->
+		
+	</tbody>
+	<!-- // Table body END -->
+	
+</table>
+<!-- // Table END -->
+
+
+
+
+
+
+
+		</div>
+	</div>
+	<!-- // Widget END -->
+	
+	<h3 class="innerTB">Classic Tables</h3>
+
+<!-- Widget -->
+<div class="widget">
+	
+	<!-- Widget heading -->
+	<div class="widget-head">
+		<h4 class="heading">Minimal Table</h4>
+	</div>
+	<!-- // Widget heading END -->
+	
+	<div class="widget-body innerAll inner-2x">
+	
+		<!-- Table -->
+		<table class="table">
+		
+			<!-- Table heading -->
+			<thead>
+				<tr>
+					<th class="center">No.</th>
+					<th>Column Heading</th>
+				</tr>
+			</thead>
+			<!-- // Table heading END -->
+			
+			<!-- Table body -->
+			<tbody>
+				
+				<!-- Table row -->
+				<tr>
+					<td class="center">1</td>
+					<td>Lorem ipsum dolor</td>
+				</tr>
+				<!-- // Table row END -->
+				
+				<!-- Table row -->
+				<tr>
+					<td class="center">2</td>
+					<td>Lorem ipsum dolor</td>
+				</tr>
+				<!-- // Table row END -->
+				
+				<!-- Table row -->
+				<tr>
+					<td class="center">3</td>
+					<td>Lorem ipsum dolor</td>
+				</tr>
+				<!-- // Table row END -->
+				
+			</tbody>
+			<!-- // Table body END -->
+			
+		</table>
+		<!-- // Table END -->
+		
+	</div>
+</div>
+<!-- // Widget END -->
+
+<!-- Widget -->
+<div class="widget">
+	
+	<!-- Widget heading -->
+	<div class="widget-head">
+		<h4 class="heading">Bordered Table</h4>
+	</div>
+	<!-- // Widget heading END -->
+	
+	<div class="widget-body innerAll inner-2x">
+	
+		<!-- Table -->
+		<table class="table table-bordered table-white">
+			
+			<!-- Table heading -->
+			<thead>
+				<tr>
+					<th class="center">No.</th>
+					<th>Column Heading</th>
+				</tr>
+			</thead>
+			<!-- // Table heading END -->
+			
+			<!-- Table body -->
+			<tbody>
+			
+				<!-- Table row -->
+				<tr>
+					<td class="center">1</td>
+					<td>Lorem ipsum dolor</td>
+				</tr>
+				<!-- // Table row END -->
+				
+				<!-- Table row -->
+				<tr>
+					<td class="center">2</td>
+					<td>Lorem ipsum dolor</td>
+				</tr>
+				<!-- // Table row END -->
+				
+				<!-- Table row -->
+				<tr>
+					<td class="center">3</td>
+					<td>Lorem ipsum dolor</td>
+				</tr>
+				<!-- // Table row END -->
+				
+			</tbody>
+			<!-- // Table body END -->
+			
+		</table>
+		<!-- // Table END -->
+		
+	</div>
+</div>
+<!-- // Widget END -->
+
+<!-- Widget -->
+<div class="widget">
+	
+	<!-- Widget heading -->
+	<div class="widget-head">
+		<h4 class="heading">Striped Table</h4>
+	</div>
+	<!-- // Widget heading END -->
+	
+	<div class="widget-body innerAll inner-2x">
+	
+		<!-- Table -->
+		<table class="table table-bordered table-striped table-white">
+			
+			<!-- Table heading -->
+			<thead>
+				<tr>
+					<th class="center">No.</th>
+					<th>Column Heading</th>
+				</tr>
+			</thead>
+			<!-- // Table heading END -->
+			
+			<!-- Table body -->
+			<tbody>
+				
+				<!-- Table row -->
+				<tr>
+					<td class="center">1</td>
+					<td>Lorem ipsum dolor</td>
+				</tr>
+				<!-- // Table row END -->
+				
+				<!-- Table row -->
+				<tr>
+					<td class="center">2</td>
+					<td>Lorem ipsum dolor</td>
+				</tr>
+				<!-- // Table row END -->
+				
+				<!-- Table row -->
+				<tr>
+					<td class="center">3</td>
+					<td>Lorem ipsum dolor</td>
+				</tr>
+				<!-- // Table row END -->
+				
+			</tbody>
+			<!-- // Table body END -->
+			
+		</table>
+		<!-- // Table END -->
+		
+	</div>
+</div>
+<!-- // Widget END -->
+
+<!-- Widget -->
+<div class="widget">
+	
+	<!-- Widget heading -->
+	<div class="widget-head">
+		<h4 class="heading">Primary Table</h4>
+	</div>
+	<!-- // Widget heading END -->
+	
+	<div class="widget-body innerAll inner-2x">
+	
+		<!-- Table -->
+		<table class="table table-bordered table-primary">
+			
+			<!-- Table heading -->
+			<thead>
+				<tr>
+					<th class="center">No.</th>
+					<th>Column Heading</th>
+				</tr>
+			</thead>
+			<!-- // Table heading END -->
+			
+			<!-- Table body -->
+			<tbody>
+				
+				<!-- Table row -->
+				<tr>
+					<td class="center">1</td>
+					<td>Lorem ipsum dolor</td>
+				</tr>
+				<!-- // Table row END -->
+				
+				<!-- Table row -->
+				<tr>
+					<td class="center">2</td>
+					<td>Lorem ipsum dolor</td>
+				</tr>
+				<!-- // Table row END -->
+				
+				<!-- Table row -->
+				<tr>
+					<td class="center">3</td>
+					<td>Lorem ipsum dolor</td>
+				</tr>
+				<!-- // Table row END -->
+				
+			</tbody>
+			<!-- // Table body END -->
+			
+		</table>
+		<!-- // Table END -->
+		
+	</div>
+</div>
+<!-- // Widget END -->
+
+<!-- Widget -->
+<div class="widget">
+	
+	<!-- Widget heading -->
+	<div class="widget-head">
+		<h4 class="heading">Condensed Table</h4>
+	</div>
+	<!-- // Widget heading END -->
+	
+	<div class="widget-body innerAll inner-2x">
+	
+		<!-- Table -->
+		<table class="table table-bordered table-condensed">
+			
+			<!-- Table heading -->
+			<thead>
+				<tr>
+					<th class="center">No.</th>
+					<th>Column Heading</th>
+				</tr>
+			</thead>
+			<!-- // Table heading END -->
+			
+			<!-- Table body -->
+			<tbody>
+			
+				<!-- Table row -->
+				<tr>
+					<td class="center">1</td>
+					<td>Lorem ipsum dolor</td>
+				</tr>
+				<!-- // Table row END -->
+				
+				<!-- Table row -->
+				<tr>
+					<td class="center">2</td>
+					<td>Lorem ipsum dolor</td>
+				</tr>
+				<!-- // Table row END -->
+				
+				<!-- Table row -->
+				<tr>
+					<td class="center">3</td>
+					<td>Lorem ipsum dolor</td>
+				</tr>
+				<!-- // Table row END -->
+				
+			</tbody>
+			<!-- // Table body END -->
+			
+		</table>
+		<!-- // Table END -->
+		
+	</div>
+</div>
+<!-- // Widget END -->
+
+
+	
+</div>
+
+	
+		
+				</div> 
+				
+		</div>
+		<!-- // Content END -->
+		
+		<div class="clearfix"></div>
+		<!-- // Sidebar menu & content wrapper END -->
+		
+				<!-- Footer -->
+		<div id="footer" class="hidden-print">
+			
+			<!--  Copyright Line -->
+			<div class="copy">&copy; 2012 - 2014 - <a href="http://www.mosaicpro.biz">MosaicPro</a> - All Rights Reserved. <a href="http://themeforest.net/?ref=mosaicpro" target="_blank">Purchase Social Admin Template</a> - Current version: v2.0.0-rc8 / <a target="_blank" href="../assets/../../CHANGELOG.txt?v=v2.0.0-rc8">changelog</a></div>
+			<!--  End Copyright Line -->
+	
+		</div>
+		<!-- // Footer END -->
+		
+				
+	</div>
+	<!-- // Main Container Fluid END -->
+	
+
+	<!-- Global -->
+	<script data-id="App.Config">
+		var basePath = '',
+		commonPath = '../assets/',
+		rootPath = '../',
+		DEV = false,
+		componentsPath = '../assets/components/';
+	
+	var primaryColor = '#25ad9f',
+		dangerColor = '#b55151',
+		successColor = '#609450',
+		infoColor = '#4a8bc2',
+		warningColor = '#ab7a4b',
+		inverseColor = '#45484d';
+	
+	var themerPrimaryColor = primaryColor;
+
+		App.Config = {
+		ajaxify_menu_selectors: ['#menu'],
+		ajaxify_layout_app: false	};
+		</script>
+	
+		
+</body>
+</html>
