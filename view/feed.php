@@ -37,6 +37,9 @@ require_once("header.php");
 	$posts = $posts['friend'];
 	foreach ($posts as $post){
 			echo '<a href="http://niger.go-vibe.com/view/profile.php?user='.$post['Tagged'].'&name='.$post['Name'].'">' .$post['Name'] . "</a> : " . $post['Content'] . "<br>";
+			foreach($post['Comments'] as $comment){
+				echo '<li>' . $comment['Content'].'</li>';
+			}
 	}
 ?>
 </body>

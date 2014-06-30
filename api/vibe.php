@@ -17,6 +17,11 @@ switch ( $action ) {
 	pushResponse($response_array);
 	postVibe($uid, $token, getVibe( isset( $_POST['status'] ) ? $_POST['status'] : "" ) );
 	break;
+	case 'postComment':
+		$response_array['status'] = "200 Request Queued";
+		pushResponse($response_array);
+		postComment($uid, $token);
+	break;
 	case 'getCloud':
 	getCloud();
 	break;
@@ -129,5 +134,23 @@ function postVibe($uid, $token, $vibes){
 		$st = $conn->prepare( $sql );
 		$st->execute();
 	}
+}
+function postComment($uid, $token){
+	//Grab Request Parameters
+	$status = isset( $_POST['status'] ) ? $_POST['status'] : "";
+	$pid = isset( $_POST['PID'] ) ? $_POST['PID'] : "";
+	$email= isset( $_POST['email'] ) ? $_POST['email'] : "";
+	//$email="nsteb1993@gmail.com";
+	$hash_id=hash("sha256", $email);
+	$author = isset( $_POST['uid'] ) ? $_POST['uid'] : "";
+	$recipient = isset( $_POST['recipient'] ) ? $_POST['recipient'] : "";
+	//Connect to VibeSocial DBMS
+	$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
+	$status=$conn->quote($status); //Clean up user statuses to prevent SQL injections
+
+	$sql = "INSERT INTO Posts (`PID`,`Content`,`Author`,`Tagged`) VALUES ('$pid',$status,'$author','$recipient');";
+	$st = $conn->prepare( $sql );
+	$st->execute();
+	$conn=null;
 }
 ?>
