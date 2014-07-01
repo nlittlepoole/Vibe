@@ -20,7 +20,6 @@
 	});
 
 	$_SESSION['friend_list'] = $friends;
-	
 
 	/* NEWSFEED FRIEND POST PARSING */
 	/* ---------------------------- */
@@ -355,7 +354,7 @@
 		<div class="clearfix"></div>
 		<!-- // Sidebar menu & content wrapper END -->
 		
-				<!-- Footer -->
+		<!-- Footer -->
 		<div id="footer" class="hidden-print">
 			
 			<!--  Copyright Line -->
@@ -364,7 +363,6 @@
 	
 		</div>
 		<!-- // Footer END -->
-		
 				
 	</div>
 	<!-- // Main Container Fluid END -->

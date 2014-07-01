@@ -1,5 +1,14 @@
 <?php
 	session_start();
+
+	// grabbing user ID & name info
+	$user = isset( $_GET['user'] ) ? $_GET['user'] : "";
+	$name = isset( $_GET['name'] ) ? $_GET['name'] : "";
+
+    $_SESSION['temp_name'] = $name; 
+
+	// picture URL request
+	$pic = "https://graph.facebook.com/$user/picture?type=large"
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +18,7 @@
 <!--[if gt IE 8]> <html class="ie paceCounter paceSocial footer-sticky"> <![endif]-->
 <!--[if !IE]><!--><html class="paceCounter paceSocial footer-sticky"><!-- <![endif]-->
 <head>
-	<title>Noah Stebbins</title>
+	<title><?php echo $_SESSION['temp_name']; ?></title>
 	
 	<!-- Meta -->
 	<meta charset="utf-8">
@@ -130,14 +139,15 @@ $script.ready(['core', 'plugins_dependency', 'plugins'], function(){
 	<div class="widget cover image">	
 		<div class="widget-body padding-none margin-none">
 			<div class="photo">
-				<img src="../assets/images/small_prof_pic.jpg" class="img-circle" style="width: 100px"/> 
+				<!-- NOTE: on failure (i.e. FB 2.0 non-user), it should load up a default gray person symbol -->
+				<img src=<?php echo '"' .$pic.'"' ?> class="img-circle" style="width: 100px"/> 
 			</div>
 			<div class="innerAll border-right pull-left">
-				<h3 class="margin-none"><?php echo $_SESSION['full_name']; ?></h3>
+				<h3 class="margin-none"><?php echo $_SESSION['temp_name']; ?></h3>
 				<span>Works at Anchorage Capital, L.L.C.</span>
 			</div>
 			<div class="innerAll pull-left">
-				<p class="lead margin-none "> <i class="fa fa-quote-left text-muted fa-fw"></i> Hello! I am a short optional caption.</p> 
+				<p class="lead margin-none "> <i class="fa fa-quote-left text-muted fa-fw"></i> Hello! This is an optional caption.</p> 
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -180,90 +190,6 @@ $script.ready(['core', 'plugins_dependency', 'plugins'], function(){
 
 					</div>
 				</div>
-				
-				<input type="text" class="form-control" placeholder="Comment here...">
-
-			</div>
-
-			<div class="widget">
-			<!-- Info -->
-				<div class="bg-primary">
-					<div class="media">
-						<div class="media-body innerTB" style="padding-left:20px;">
-							<a href="" class="text-white strong">Someone</a>
-							<span>upped your <a href="" class="text-white strong">Chillness</a> on 15th January, 2014 <i class="icon-time-clock"></i></span>
-
-						</div>
-
-					</div>
-				</div>
-
-				<!-- Content -->
-				<div class="innerAll">
-					<p class="lead">Yo, Carman lyfe tho. You were a good host!</p>
-				</div>
-				<!-- Comment -->
-				<div class="bg-gray innerAll border-top border-bottom text-small ">
-					<span>View all <a href="" class="text-primary">2 Comments</a></span>
-				</div>
-
-				<!-- First Comment -->
-				<div class="media border-bottom margin-none bg-gray">
-					<a href="" class="pull-left innerAll half">
-						<img src="../assets//images/people/100/2.jpg" width="60" class="media-object">
-					</a>
-					<div class="media-body innerTB">
-						<a href="#" class="pull-right innerT innerR text-muted">
-							<i class="icon-reply-all-fill fa fa-2x "></i>
-						</a>
-						<a href="" class="strong text-inverse">Adrian Demian</a> 	<small class="text-muted ">wrote on Jan 15th, 2014</small> <a href="" class="text-small">like</a>
-						<div>I can see this as being true!</div>
-
-					</div>
-				</div>
-
-				<!-- Second Comment -->
-				<div class="media margin-none bg-gray">
-					<a href="" class="pull-left innerAll half">
-						<img src="../assets//images/people/100/11.jpg" width="60" class="media-object">
-					</a>
-					<div class="media-body innerTB">
-						<a href="#" class="pull-right innerT innerR">
-							<i class="icon-reply-all-fill fa fa-2x text-muted "></i>
-						</a>
-						<a href="" class="strong text-inverse">Jenny Adams</a> 	<small class="text-muted ">wrote on Jan 15th, 2014</small> <a href="" class="text-small">like</a>
-						<div>Yep! So much Keystone haha</div>
-					</div>
-				</div>
-				
-				<input type="text" class="form-control" placeholder="Comment here...">
-
-			</div>
-
-			<div class="widget">
-
-				<!-- Info -->
-				<div class="bg-primary">
-					<div class="media">
-						<div class="media-body innerTB" style="padding-left:20px;">
-							<a href="" class="text-white strong">Someone</a>
-							<span>upped your <a href="" class="text-white strong">Chillness</a> on 15th January, 2014 <i class="icon-time-clock"></i></span>
-
-						</div>
-
-					</div>
-				</div>
-
-				<!-- Content -->
-				<div class="innerAll">
-					<p class="lead">Bro, do you even lift? I never see you in the gym!</p>
-				</div>
-				<!-- Comment -->
-				<div class="bg-gray innerAll border-top border-bottom text-small ">
-					<span>No comments yet!</span>
-				</div>
-
-				
 				
 				<input type="text" class="form-control" placeholder="Comment here...">
 

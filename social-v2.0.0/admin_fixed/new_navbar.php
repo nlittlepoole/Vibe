@@ -1,3 +1,9 @@
+<?php
+    session_start(); 
+
+    $_SESSION['my_profile_link'] = "http://localhost/social-v2.0.0/admin_fixed/new_profile.php?user=" . $_SESSION['userID'] . "&name=" . $_SESSION['full_name'] . "";
+?>
+
 <nav class="navbar navbar-default top-nav navbar-fixed-top" role="navigation">
 
   <div class="container">
@@ -23,11 +29,11 @@
         <button type="submit" class="btn btn-inverse"><i class="fa fa-search fa-fw"></i></button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li class="innerLR"><button type="button" class="btn btn-success navbar-btn"><i class="fa fa-pencil"></i> Sign in</button></li>
+        <li class="innerLR"><button type="button" class="btn btn-info navbar-btn"><i class="fa fa-globe"></i></button></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <a href=<?php echo $_SESSION['my_profile_link']; ?>>
           <span class="pull-left innerR"><img src="../assets/images/people/35/16.jpg" alt="user" class="img-circle"></span>
-          	Niger
+              <?php echo $_SESSION['first_name']; ?>
           </a>
         </li>
       </ul>
