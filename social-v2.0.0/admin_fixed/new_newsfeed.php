@@ -1,5 +1,32 @@
 <?php
+	
+	// SESSION START
 	session_start();
+
+
+	/* HEADER FRIEND LIST PARSING */
+	/* -------------------------- */
+
+	// (NOTE: for now, it throws the PHP everytime on loadup)
+	$request = "http://localhost/api/user.php?action=getFriends&blocked=no&uid=". $_SESSION['userID'];
+	$request .= "&token=" . $_SESSION['token'];
+
+	$friends = json_decode(file_get_contents($request),true);
+
+	$friends = $friends['data'];
+
+	usort($friends, function($a, $b) {
+		return strcmp($a['Name'], $b['Name']);
+	});
+
+	$_SESSION['friend_list'] = $friends;
+	
+
+	/* NEWSFEED FRIEND POST PARSING */
+	/* ---------------------------- */
+
+	$_SESSION['newsfeed_elems_request'] = "http://localhost/api/user.php?action=getFeed&uid=" . $_SESSION['userID'];
+	$_SESSION['newsfeed_elems_request'] .= "&token=" . $_SESSION['token'];
 ?>
 
 <!DOCTYPE html>
@@ -10,24 +37,19 @@
 <!--[if !IE]><!--><html class="paceCounter paceSocial footer-sticky"><!-- <![endif]-->
 <head>
 	
-	<title>Social Admin Template (v2.0.0-rc8)</title>
+	<title>Vibe</title>
 	
 	<!-- Meta -->
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 	
-	<!-- 
-	**********************************************************
-	In development, use the LESS files and the less.js compiler
-	instead of the minified CSS loaded by default.
-	**********************************************************
-	<link rel="stylesheet/less" href="../assets/less/admin/module.admin.stylesheet-complete.layout_fixed.true.less" />
-	-->
+	<!-- In development, use the LESS files and the less.js compiler instead of the minified CSS loaded by default. -->
+	<!-- <link rel="stylesheet/less" href="../assets/less/admin/module.admin.stylesheet-complete.layout_fixed.true.less" /> -->
 
-		<!--[if lt IE 9]><link rel="stylesheet" href="../assets/components/library/bootstrap/css/bootstrap.min.css" /><![endif]-->
-	
-		<link rel="stylesheet" href="../assets/css/admin/module.admin.stylesheet-complete.layout_fixed.true.min.css" />
+	<!--[if lt IE 9]><link rel="stylesheet" href="../assets/components/library/bootstrap/css/bootstrap.min.css" /><![endif]-->
+
+	<link rel="stylesheet" href="../assets/css/admin/module.admin.stylesheet-complete.layout_fixed.true.min.css" />
 	
 	
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -37,6 +59,19 @@
     <![endif]-->
 
 	<script src="../assets/plugins/core_ajaxify_loadscript/script.min.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
+
+	<!-- NOAH'S DEPENDENCIES -->
+
+	<!-- jQuery -->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+	<!-- jQuery UI -->
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+	<!-- FONT AWESOME -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- END NOAH'S DEPENDENCIES -->
 
 	<script>var App = {};</script>
 
@@ -96,6 +131,39 @@
 	});
 	</script>
 	<script>if (/*@cc_on!@*/false && document.documentMode === 10) { document.documentElement.className+=' ie ie10'; }</script>
+
+	<!-- AUTOCOMPLETE CODE -->
+	<script type="text/javascript">
+		$(function() {
+			
+			// friends' list
+			var my_friends = <?php echo json_encode($_SESSION['friend_list']); ?>;
+
+			var names_to_ID = []; 
+			var friends_names = []; 
+
+			// parsing list into SESSION dictionary
+			for(var i = 0; i < my_friends.length; i++) {
+				names_to_ID[my_friends[i]['Name']] = my_friends[i]['UID'];
+				friends_names[i] = my_friends[i]['Name'];
+
+			}
+
+		    $("#inputFriend").autocomplete({
+		      source: friends_names
+		    });
+		});
+	</script>
+
+	<style type="text/css">
+	  .ui-autocomplete {
+	    max-height: 400px;
+	    overflow-y: auto;
+
+	    /* prevent horizontal scrollbar */
+	    overflow-x: hidden;
+	  }
+	</style>
 	
 </head>
 <body class=" scripts-async menu-right-hidden">
@@ -104,408 +172,180 @@
 	<div class="container-fluid ">
 
 		
-		<!-- Content START -->
-		<div id="content">
-			
+<!-- Content START -->
+<div id="content">
 	
-<nav class="navbar navbar-default top-nav navbar-fixed-top" role="navigation">
-
-  <div class="container">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle btn btn-default" data-toggle="collapse" data-target="#navbar-fixed-layout-collapse">
-		<i class="fa fa-indent"></i>
-      </button>
-      <a class="navbar-brand" href="#"><img src="../assets//images/logo/logo.jpg" alt=""></a>
-    </div>
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="navbar-fixed-layout-collapse">
-      <ul class="nav navbar-nav">
-        <li class="dropdown">
-	          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Layout <b class="caret"></b></a>
-	          <ul class="dropdown-menu">
-	             <li >
-					<a class="no-ajaxify" href="?module=admin&page=timeline_3&url_rewrite=&build=&layout_fixed=false&v=v2.0.0-rc8" >Fluid Layout
-					</a>
-				</li>
-	            <li class="active">
-					<a class="no-ajaxify" href="?module=admin&page=timeline_3&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8">Fixed Layout
-					</a>
-				</li>
-	          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-           		<li class="dropdown-header">Timeline</li>
-           		<li><a href="index.html?lang=en"><span>Timeline #1</span></a></li>
-				<li><a href="timeline_2.html?lang=en"><span>Timeline #2</span></a></li>
-				<li class="active"><a href="timeline_3.html?lang=en"><span>Timeline #3</span></a></li>
-          		<li class="divider"></li>
-           		<li class="dropdown-header">Media</li>
-				<li><a href="media_1.html?lang=en"><span>Photos #1</span></a></li>
-				<li><a href="media_2.html?lang=en"><span>Photos #2</span></a></li>
-				<li><a href="media_3.html?lang=en"><span>Photos #3</span></a></li>
-				<li class="divider"></li>
-           		<li class="dropdown-header">Contacts</li>
-           		<li><a href="contacts_1.html?lang=en"><span>Friends #1</span></a></li>
-				<li><a href="contacts_2.html?lang=en"><span>Friends #2</span></a></li>
-				<li><a href="contacts_3.html?lang=en"><span>Friends #3</span></a></li>
-				<li class="divider"></li>
-           		<li class="dropdown-header">About</li>
-           		<li><a href="about_1.html?lang=en"><span>About #1</span></a></li>
-				<li><a href="about_2.html?lang=en"><span>About #2</span></a></li>
-				<li><a href="about_3.html?lang=en"><span>About #3</span></a></li>
-				<li class="divider"></li>
-				<li><a href="messages.html?lang=en"><span>Messages</span></a></li>
-				<li class="divider"></li>
-           		<li class="dropdown-header">Music</li>
-           		<li><a href="playlist.html?lang=en"><span>playlist</span></a></li>
-				<li><a href="albums.html?lang=en"><span>Albums</span></a></li>
-				<li><a href="song.html?lang=en"><span>Song</span></a></li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nav Color <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li>
-            	<a href="?module=admin&page=timeline_3&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&navbar_type=navbar-default" >
-            	White Navbar</a>
-
-            </li>
-            <li>
-            	<a href="?module=admin&page=timeline_3&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&navbar_type=navbar-inverse" >
-            	Dark Navbar</a></li>
-            <li>
-            	<a href="?module=admin&page=timeline_3&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&navbar_type=navbar-primary" >
-            		Primary Color Navbar</a></li>
-            <li class="divider"></li>
-			<li class="innerAll half" style="line-height:20px;">
-				<div class="strong">Skin Colors</div>
-								<a href="?module=admin&page=timeline_3&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=style-default" style="background-color: #25ad9f; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">style-default</span></a>
-								<a href="?module=admin&page=timeline_3&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=green-army" style="background-color: #9FB478; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">green-army</span></a>
-								<a href="?module=admin&page=timeline_3&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=alizarin-crimson" style="background-color: #F06F6F; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">alizarin-crimson</span></a>
-								<a href="?module=admin&page=timeline_3&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=blue-gray" style="background-color: #5577b4; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">blue-gray</span></a>
-								<a href="?module=admin&page=timeline_3&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=brown" style="background-color: #d39174; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">brown</span></a>
-								<a href="?module=admin&page=timeline_3&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=purple-gray" style="background-color: #AF86B9; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">purple-gray</span></a>
-								<a href="?module=admin&page=timeline_3&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=purple-wine" style="background-color: #CC6788; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">purple-wine</span></a>
-								<a href="?module=admin&page=timeline_3&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=black-and-white" style="background-color: #979797; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">black-and-white</span></a>
-								<a href="?module=admin&page=timeline_3&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=amazon" style="background-color: #8BC4B9; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">amazon</span></a>
-								<a href="?module=admin&page=timeline_3&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=amber" style="background-color: #b0b069; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">amber</span></a>
-								<a href="?module=admin&page=timeline_3&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=android-green" style="background-color: #A9C784; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">android-green</span></a>
-								<a href="?module=admin&page=timeline_3&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=antique-brass" style="background-color: #B3998A; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">antique-brass</span></a>
-								<a href="?module=admin&page=timeline_3&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=antique-bronze" style="background-color: #8D8D6E; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">antique-bronze</span></a>
-								<a href="?module=admin&page=timeline_3&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=artichoke" style="background-color: #B0B69D; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">artichoke</span></a>
-								<a href="?module=admin&page=timeline_3&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=atomic-tangerine" style="background-color: #F19B69; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">atomic-tangerine</span></a>
-								<a href="?module=admin&page=timeline_3&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=bazaar" style="background-color: #98777B; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">bazaar</span></a>
-								<a href="?module=admin&page=timeline_3&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=bistre-brown" style="background-color: #C3A961; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">bistre-brown</span></a>
-								<a href="?module=admin&page=timeline_3&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=green" style="background-color: #77ac40; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">green</span></a>
-								<a href="?module=admin&page=timeline_3&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=bittersweet" style="background-color: #d6725e; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">bittersweet</span></a>
-								<a href="?module=admin&page=timeline_3&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=blueberry" style="background-color: #7789D1; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">blueberry</span></a>
-								<a href="?module=admin&page=timeline_3&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=bud-green" style="background-color: #6fa362; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">bud-green</span></a>
-								<a href="?module=admin&page=timeline_3&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=coral" style="background-color: #7eccc2; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">coral</span></a>
-								<a href="?module=admin&page=timeline_3&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=burnt-sienna" style="background-color: #E4968A; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">burnt-sienna</span></a>
-							</li>
-
-          </ul>
-        </li>
-      </ul>
-      <form class="navbar-form navbar-left hidden-sm" role="search">
-        <div class="form-group inline-block">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-inverse"><i class="fa fa-search fa-fw"></i></button>
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li class="innerLR"><button type="button" class="btn btn-success navbar-btn"><i class="fa fa-pencil"></i> Sign in</button></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          <span class="pull-left innerR"><img src="../assets/images/people/35/16.jpg" alt="user" class="img-circle"></span>
-          	Bill <b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+	<!-- NAVBAR LOAD -->	
+	<script> 
+	    $(function(){
+	      $('#new_navbar').load('new_navbar.php'); 
+	    });
+	</script> 
+	<div id="new_navbar"></div>
 
 
-			<!-- <div class="layout-app">  -->
-			 <div class="container"><div class="innerAll">
+<div class="container"><div class="innerAll">
 	<div class="row">
 		<div class="col-lg-9 col-md-8">
 			
 			<div class="timeline-cover">
-	<div class="widget border-bottom">
 
-		<div class="widget-body border-bottom">
-			<div class="media">
-				<div class="pull-left innerAll">
-					<img src="../assets/images/people/100/22.jpg" alt="" class="img-circle">
-				</div>
-				<div class="media-body">
-					<h4><a href="">Noah Stebbins</a> <a href="" class="text-muted"><i class="fa fa-envelope"></i></a></h4>
-					<div class="clearfix"></div>
-					<p>NOTE: this is where the optional short caption can go</p>
-					<a href="" class="btn btn-info btn-sm">
-						<i class="icon-turn-right"></i> Follow 
-					</a>
-				</div>
-			</div>
-		</div>
-
-		<div class="">
-			<ul class="navigation">
-				<li class="active"><a class="" href="timeline_3.html?lang=en"><i class="fa fa-fw icon-road-sign"></i><span> Timeline</span></a></li>
-				<li><a href="media_3.html?lang=en"><i class="fa fa-fw icon-flip-camera"></i><span> Photos</span></a></li>
-				<li><a href="contacts_3.html?lang=en"><i class="fa fa-fw icon-group"></i><span> Friends</span></a></li>
-				<li><a href="messages.html?lang=en"><i class="fa fa-fw fa-envelope"></i><span> Messages</span></a></li>
-				<li class="pull-right"><a href="about_3.html?lang=en"><i class="fa fa-fw fa-user"></i><span> About</span></a></li>
-			</ul>
-			<div class="clearfix"></div>
-		</div>
-
-<!-- 		<nav class="navbar widget-head padding-none margin-none" role="navigation">
-	      
-	        <div class="navbar-header">
-	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-3">
-	            <span>Choose menu </span>
-	            <i class="fa fa-bars "></i>
-	           
-	          </button>
-	        </div>
-	        <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-3" style="height: 1px;">
-				<div class="padding-none">
-					<ul class="display-block">
-						<li class="active"><a class="" href="timeline_3.html?lang=en"><i class="fa fa-fw icon-road-sign"></i> <span>Timeline</span></a></li>
-						<li><a href="media_3.html?lang=en"><i class="fa fa-fw icon-flip-camera"></i> <span>Photos</span></a></li>
-						<li><a href="contacts_3.html?lang=en"><i class="fa fa-fw icon-group"></i> <span>Friends</span></a></li>
-						<li><a href="messages.html?lang=en"><i class="fa fa-fw fa-envelope"></i> <span>Messages</span></a></li>
-						<li class="pull-right"><a href="about_3.html?lang=en"><i class="fa fa-fw fa-user"></i> <span>About</span></a></li>
-					</ul>
-				</div>
-	        </div>
-	      
-	    </nav>
- -->
-
-		
-	
-		
-
-	</div>
-	
-
-</div>
-
-
-			
-			<div class="media">
-	<a href="" class="btn btn-default pull-left">Today</a>
-	<div class="media-body">
-		  <div class="input-group">
-		      <input type="text" class="form-control" placeholder="Share your mood...">
-		      <span class="input-group-btn">
-		        <button class="btn btn-primary" type="button">Search</button>
-		      </span>
-		    </div><!-- /input-group -->
-	</div>
-</div>
-
-<ul class="timeline-activity list-unstyled">
-
-	<li class="active">
-		<div class="block block-inline">
-			<span class="marker"></span>
-			<div class="caret"></div>
-			<div class="box-generic">
-				<div class="timeline-top-info border-bottom">
-					<i class="fa fa-user"></i> <a href="" class="text-inverse">mosaicpro</a> replied to <a href="" class="text-info">Having A Great Day!</a> from <a href="#"><img src="../assets/images/people/80/8.jpg" alt="photo" width="20"></a> <a href="">Andrew M.</a>
-					<div class="timeline-bottom">
-						<i class="fa fa-clock-o"></i> 2 days ago 
-					 
-					</div>
-				</div>
-				<div class="media innerAll  bg-gray margin-none">
-			        <a class="pull-left" href="#"><img src="../assets/images/people/80/8.jpg" alt="photo" class="media-object" width="35"></a>
-			        <div class="media-body">
-			          	<a href="" class="strong text-inverse">Andrew</a> Good Job. Congrats and hope to see more admin templates like this in the future.
-		     			<div class="timeline-bottom">
-							<i class="fa fa-clock-o"></i> 2 days ago  
-						</div>
-			        </div>
-			    </div>
-		     	<div class="media innerAll margin-none bg-gray border-top border-bottom">
-			       	<a class="pull-left" href="#"><img src="../assets/images/people/80/2.jpg" alt="photo" width="35" class="media-object"></a>
-			        <div class="media-body">
-			        	<a href="" class="strong text-inverse">mosaicpro</a> Thanks, I  apreciate it!
-			     		<div class="timeline-bottom">
-							<i class="fa fa-clock-o"></i> 5 days ago   
-						</div>
-			        </div>
-		      	</div>
-				<div class="innerAll">
-					<input class="form-control" placeholder="Comment here..."/>
-				</div>
-			</div>
-			
-		</div>
-	</li>
-	<li>
-		<span class="marker"></span>
-		<div class="block block-inline">
-			<div class="caret"></div>
-			<div class="box-generic">
-				<div class="timeline-top-info">
-					<i class="fa fa-user"></i> 
-					<a href="" class="text-inverse">mosaicpro</a> visited 
-					<a href="" class="text-info"><i class="fa fa-location-arrow"></i> Dracula's Castle</a>
-				</div>
-				<div class="media margin-none">
-					<div class="row innerLR innerB">
-						<div class="col-sm-4 col-lg-3">
-							<div class="innerT">
-								<div class="icon-block text-center ">
-									<span class="glyphicons tower"><i></i></span>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-8 col-lg-9">
-							<div class="innerT">
-								<h5 class="strong"><a href="">Bran Castle</a></h5>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus, aspernatur ut fuga eum cumque delectus voluptate impedit quaerat sapiente officiis fugit voluptates sit neque quibusdam beatae est modi repudiandae unde.</p>
-								<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <i class="fa fa-star-o"></i> 3.5
-							</div>
-						</div>
-					</div>
-				</div>		
-			</div>
-			<div class="timeline-bottom innerT half">
-				<i class="fa fa-clock-o"></i> 2 days ago  <span class="innerL"><i class="fa fa-calendar fa-fw"></i> 25 Oct 2013</span>
-			</div>
-		</div>
-	</li>
-	<li>
-		<span class="marker"></span>
-		<div class="block block-inline">
-			<div class="caret"></div>
-			<div class="box-generic">
-				<div class="timeline-top-info">
-					<i class="fa fa-user"></i> <a href="" class="text-inverse">mosaicpro</a> wrote a <a href="" class="text-info">comment</a> to <a href="#"><img src="../assets/images/people/80/2.jpg" width="20" /></a> <a href="">Jane S.</a>
-					<div class="timeline-bottom">
-						<i class="fa fa-clock-o"></i> 6 days ago  
-					</div>
-				</div>
-				<div class="bg-gray innerAll border-top">Good Job. Congrats and hope to see you soon.</div>
-			</div>
-		
-		</div>
-	</li>
-	<li>
-		<span class="marker"></span>
-		<div class="block">
-			<div class="caret"></div>
-				<div class="inline-block box-generic">
-					<div class="timeline-top-info bg-gray border-bottom">
-						<i class="fa fa-user"></i> <a href="" class="text-inverse">mosaicpro</a> is following <a href="#"><img  src="../assets/images/people/80/1.jpg" width="20"/></a> <a href="">Jane S.</a>
-					</div>			
-					<div class="media innerAll margin-none">
-				        <a class="pull-left" href="#">
-				          <img src="../assets/images/people/80/1.jpg" alt="photo" class="media-object" width="35">
-				        </a>
-				        <div class="media-body">
-				          <a href="" class="strong text-inverse">Jane Smith</a>
-				          <a href="" class="clearfix text-info">www.domain.com</a>
-				     	<div class="media-icons">
-								<a href=""><i class="fa fa-clock-o"></i></a>
-								<a href=""><i class="fa fa-calendar"></i></a>
-								<a href=""><i class="fa fa-user"></i></a>
-								<a href=""><i class="fa fa-star"></i></a>
-							</div>
-				        </div>
-			      </div>
-				</div>
-
-				<div class="inline-block box-generic">
-					<div class="timeline-top-info bg-gray border-bottom">
-						<i class="fa fa-user"></i> <a href="" class="text-inverse">mosaicpro</a> is following <a href="#"><img  src="../assets/images/people/80/1.jpg" width="20"/></a> <a href="">Jane S.</a>
-					</div>	
+				<!-- WIDGET -->
+				<div class="widget widget-heading-simple widget-body-white">
 					
-					<div class="media innerAll margin-none ">
-				        <a class="pull-left" href="#">
-				          <img src="../assets/images/people/80/1.jpg" alt="photo" class="media-object" width="35">
-				        </a>
-				        <div class="media-body">
-				        	<a href="" class="strong text-inverse">Jane Smith</a>
-				        	<a href="" class="clearfix text-info">www.domain.com</a>
-				     	<div class="media-icons">
-								<a href=""><i class="fa fa-clock-o"></i></a>
-								<a href=""><i class="fa fa-calendar"></i></a>
-								<a href=""><i class="fa fa-user"></i></a>
-								<a href=""><i class="fa fa-star"></i></a>
+					<div class="widget-body">
+						<div class="innerLR">
+							<div class="col-sm-12" style="padding: 0px; margin-bottom: 15px;">
+								
+								<div class="bg-gray innerAll border-top border-bottom">
+									<h4 style="text-align: center; color: #428bca; margin-top: 5px; margin-bottom: 5px;" class="heading"><?php echo $_SESSION['first_name']; ?>, what's on your mind?</h4>
+								</div>
+
 							</div>
-				        </div>
-			      </div>
-			</div>
-		</div>
-	</li>
-	<li>
-		<div class="marker"></div>
-		<div class="block block-inline">
-			<div class="caret"></div>
-			<div class="box-generic">
-				<div class="timeline-top-info">
-					<i class="fa fa-user"></i> <a href="">mosaicpro</a> has uploaded 10 photos in <a href="" class="text-primary"><i class="text-primary fa fa-location-arrow"></i> Album Name #2</a>
-				</div>
-				<div class="innerLR innerB">
-					  	
-					<a href="#" class="thumbnail pull-left border-none"><img src="../assets/images/people/80/1.jpg" alt="photo" width="35"/></a>	
-					  	
-					<a href="#" class="thumbnail pull-left border-none"><img src="../assets/images/people/80/2.jpg" alt="photo" width="35"/></a>	
-					  	
-					<a href="#" class="thumbnail pull-left border-none"><img src="../assets/images/people/80/3.jpg" alt="photo" width="35"/></a>	
-					  	
-					<a href="#" class="thumbnail pull-left border-none"><img src="../assets/images/people/80/4.jpg" alt="photo" width="35"/></a>	
-					  	
-					<a href="#" class="thumbnail pull-left border-none"><img src="../assets/images/people/80/5.jpg" alt="photo" width="35"/></a>	
-					  	
-					<a href="#" class="thumbnail pull-left border-none"><img src="../assets/images/people/80/6.jpg" alt="photo" width="35"/></a>	
-					  	
-					<a href="#" class="thumbnail pull-left border-none"><img src="../assets/images/people/80/7.jpg" alt="photo" width="35"/></a>	
-					  	
-					<a href="#" class="thumbnail pull-left border-none"><img src="../assets/images/people/80/8.jpg" alt="photo" width="35"/></a>	
-					  	
-					<a href="#" class="thumbnail pull-left border-none"><img src="../assets/images/people/80/9.jpg" alt="photo" width="35"/></a>	
-					  	
-					<a href="#" class="thumbnail pull-left border-none"><img src="../assets/images/people/80/10.jpg" alt="photo" width="35"/></a>	
-										<div class="clearfix"></div>
-				</div>
-			</div>
-			<div class="separator bottom"></div>
-		</div>
-	</li>
-</ul>
+							<form class="form-horizontal" role="form">
+							    <div class="form-group">
+							        
+							        <label for="inputFriend" class="col-sm-2 control-label">Friend</label>
+							        
+							        <div class="col-sm-9">
+							            <input type="text" class="form-control" id="inputFriend" placeholder="Who's this about? Type in a Facebook friend!">
+							        </div>
 
+							    </div>
+							    <div class="form-group">
+							        
+							        <label for="inputVibe" class="col-sm-2 control-label">Vibe</label>
+							        
+							        <div class="col-sm-9">
+							            <input type="text" class="form-control" id="inputVibe" placeholder="What do you want to say?">
+							        </div>
 
+							    </div>
+							    <div class="form-group">
+
+							        <div class="col-sm-offset-2 col-sm-10">
+							            <button type="submit" class="btn btn-primary" style="width: 20%">Submit&nbsp;&nbsp;<i class="fa fa-arrow-circle-right"></i> </button>
+							        </div>
+
+							    </div>
+							</form>
+						</div>
+					</div>
+				
+				</div>
+				<!-- // Widget END -->
+
+			<!-- END OF NORMAL TIMELINE -->	
+			</div>
 			
-</div>
+			<div class="media">
+				
+				<a href="" class="btn btn-default pull-left">Today</a>
+				<div class="media-body">
+					  <div class="input-group">
+					      <input type="text" class="form-control" placeholder="Share your mood...">
+					      <span class="input-group-btn">
+					        <button class="btn btn-primary" type="button">Search</button>
+					      </span>
+					    </div><!-- /input-group -->
+				</div>
+			</div>
+
+			<ul class="timeline-activity list-unstyled" id="newsfeed_container">
+				
+				<li>
+					<span class="marker"></span>
+					<div class="block">
+						<div class="caret"></div>
+							
+							<div class="inline-block box-generic" style="width: 100%; border: 1px solid #ececec;">
+
+								<!-- SOCIAL MEDIA POST FOR TESTING PURPOSES -->
+
+								<div class="widget">
+
+								<!-- Info -->
+									<div class="bg-primary">
+										<div class="media">
+											<div class="media-body innerTB" style="padding-left:20px;">
+												<a href="" class="text-white strong">Someone</a>
+												<span>upped your <a href="" class="text-white strong">Chillness</a> on 15th January, 2014 <i class="icon-time-clock"></i></span>
+
+											</div>
+
+										</div>
+									</div>
+
+									<!-- Content -->
+									<div class="innerAll">
+										<p class="lead">Yo, Carman lyfe tho. You were a good host!</p>
+									</div>
+									<!-- Comment -->
+									<div class="bg-gray innerAll border-top border-bottom text-small ">
+										<span>View all <a href="" class="text-primary">2 Comments</a></span>
+									</div>
+
+									<!-- First Comment -->
+									<div class="media border-bottom margin-none bg-gray">
+										<a href="" class="pull-left innerAll half">
+											<img src="../assets//images/people/100/2.jpg" width="60" class="media-object">
+										</a>
+										<div class="media-body innerTB">
+											<a href="#" class="pull-right innerT innerR text-muted">
+												<i class="icon-reply-all-fill fa fa-2x "></i>
+											</a>
+											<a href="" class="strong text-inverse">Adrian Demian</a> 	<small class="text-muted ">wrote on Jan 15th, 2014</small> <a href="" class="text-small">like</a>
+											<div>I can see this as being true!</div>
+
+										</div>
+									</div>
+
+									<!-- Second Comment -->
+									<div class="media margin-none bg-gray">
+										<a href="" class="pull-left innerAll half">
+											<img src="../assets//images/people/100/11.jpg" width="60" class="media-object">
+										</a>
+										<div class="media-body innerTB">
+											<a href="#" class="pull-right innerT innerR">
+												<i class="icon-reply-all-fill fa fa-2x text-muted "></i>
+											</a>
+											<a href="" class="strong text-inverse">Jenny Adams</a> 	<small class="text-muted ">wrote on Jan 15th, 2014</small> <a href="" class="text-small">like</a>
+											<div>Yep! So much Keystone haha</div>
+										</div>
+									</div>
+									
+									<input type="text" class="form-control" style="border: none;" placeholder="Comment here...">
+
+								</div>
+						</div>
+					</div>
+				</li>
+
+				<div id="last_elems"></div>
+
+				<!-- NEWSFEED LOADING INFRASTRUCTURE -->
+				
+				<script> 
+				    $(function(){
+				      $('#last_elems').load('newsfeed_element.php'); 
+				    });
+				</script> 
+
+
+				<!-- END OF NEWSFEED LOADING INFRASTRUCTURE -->
+
+			</ul>				
+		</div>
+
+<!-- SIDEBAR WIDGET -->
 <div class="col-md-4 col-lg-3">
 
-	<script src="../assets/library/jquery/jquery.min.js"></script>
 	<script> 
 	    $(function(){
 	      $('#new_sidebar').load('new_sidebar.php'); 
 	    });
 	</script> 
 	<div id="new_sidebar"></div>
-	
 		
 </div> 
 				
@@ -552,33 +392,5 @@
 		ajaxify_layout_app: false	};
 		</script>
 	
-	<?php 
-
-		$pathway = "http://localhost/api/user.php?action=getUser&uid=" . $_SESSION['userID'];
-		$pathway = $pathway . "&token=" . $_SESSION['token'];
-
-	?>
-
-	<script type="text/javascript">
-
-		var mypathway = "<?php echo $pathway; ?>";
-
-		$.get(mypathway, function(data) {
-		  alert("DATA" + data );
-		});
-
-	</script>
-
-	<?php	
-		echo "Hello!";
-
-		$request = "http://localhost/api/user.php?action=getUser&uid=". $_SESSION['userID'];
-		$request = $request."&token=".$_SESSION['token'];
-		$posts = json_decode(file_get_contents($request), true);
-		$posts = $posts['data'];
-
-		echo "POSTS: " . $posts;
-		print_r($posts); 
-	?>
 </body>
 </html>

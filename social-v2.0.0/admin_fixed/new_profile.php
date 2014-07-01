@@ -133,7 +133,7 @@ $script.ready(['core', 'plugins_dependency', 'plugins'], function(){
 				<img src="../assets/images/small_prof_pic.jpg" class="img-circle" style="width: 100px"/> 
 			</div>
 			<div class="innerAll border-right pull-left">
-				<h3 class="margin-none">Noah Stebbins</h3>
+				<h3 class="margin-none"><?php echo $_SESSION['full_name']; ?></h3>
 				<span>Works at Anchorage Capital, L.L.C.</span>
 			</div>
 			<div class="innerAll pull-left">

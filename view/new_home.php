@@ -29,8 +29,8 @@
           <a href="index.html"><img src="https://s3.amazonaws.com/HookFeed/HookFeed_Logo_Light.png" width="150"></a>
         </div>
         <nav>
-          <a href="pricing/index.html">About</a>
-          <a href="https://secure.hookfeed.com/login">Login</a>
+          <a href="#benefits_banner">About</a>
+          <a href=<?php echo '"'. $_SESSION['loginUrl'] . '"' ?>>Login</a>
         </nav>
       </div><!-- END .sixteen.columns -->
     </div><!-- END #header_bar.container -->
