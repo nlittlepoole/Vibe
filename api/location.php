@@ -23,9 +23,74 @@ switch ( $action ) {
 		pushResponse($response_array);
 		addFriends( $uid,$token);
 	break;
+	case 'getFeed' :
+		getFeed();
+	break;
+	case 'getLocations':
+		getLocations($uid,$token);
+	break;
 
 
 }
+// returns json of a user's communities
+function getLocations($uid, $token){
+	$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+	$sql = "SELECT LID,Name FROM Locations WHERE `LID` IN (SELECT LID FROM Located WHERE UID  = '$uid') ";
+	$st = $conn->prepare($sql);
+	$st->execute();
+	$data = $st->fetchAll(PDO::FETCH_ASSOC); 
+	$data = array("status" => "200 Success", "data" => $data);
+	$conn=null;
+	pushResponse($data);
+}
+
+// json encodes the newsfeed of the given UID
+function getFeed(){
+	$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+	$lid=$_GET['LID'];
+	$sql = "SELECT T1.PID, T1.Tagged, T2.Name, T1.Content, T1.Agree, T1.Disagree, T1.Timestamp FROM (SELECT A.PID, Tagged, Content, Agree, Disagree, A.Timestamp FROM (SELECT * FROM Posts WHERE `Tagged` IN (SELECT `UID` FROM Located WHERE `LID` = '$lid'))A JOIN (SELECT DISTINCT PID FROM Posts WHERE `Tagged` IN (SELECT `UID` FROM Located WHERE `LID` = '$lid') LIMIT 10)B ON A.Pid = B.PID)T1 JOIN (SELECT * FROM Users) T2 ON T1.Tagged = T2.UID;";
+	$st = $conn->prepare($sql);
+	$st->execute();
+	$data = $st->fetchAll(PDO::FETCH_ASSOC); 
+	$data=groupByKey($data);
+	$data = array("status" => "200 Success", "data" => $data);
+	$conn=null;
+	pushResponse($data);
+}
+function groupByKey($array) {
+    $return = array();
+    //Group 
+    foreach($array as $post) {
+        if(isset($return[$post['PID'] ] )){
+        	array_push($return[ $post['PID'] ], $post);
+        }
+        else{
+        	$return[ $post['PID'] ]=array($post);
+        }
+
+    }
+    // Create Comment Tree
+    $result=array();
+    foreach($return as $thread){
+    	usort($thread, "cmp");
+    	$post = array_pop($thread);
+    	$post['Comments'] = $thread;
+    	array_push($result, $post);
+
+    }
+    return $result;
+}
+function cmp($a, $b)
+{
+	$a = strtotime($a['Timestamp']);
+	$b = strtotime($b['Timestamp']);
+    if ($a == $b) {
+        return 0;
+    }
+    return ($a < $b) ? 1 : -1;
+}
+
+
 // takes a facebook user and adds all their communities to our Location index and establishes the relationships
 function addUser($uid,$token){
 	//retrieve info from facebook

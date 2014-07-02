@@ -49,19 +49,12 @@ function blockUser($uid){
 function getFeed($uid){
 	$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
 
-	$sql = "Select T1.PID, T1.Tagged, T2.Name, T1.Content, T1.Agree, T1.Disagree, T1.Timestamp From (SELECT A.PID,Tagged,Content,Agree,Disagree,Timestamp FROM (Select * From Posts Where `Tagged` In (Select `Friend` From Friends Where `UID` = '$uid'))A Join (Select DISTINCT PID From Posts Where `Tagged` In (Select `Friend` From Friends Where `UID` = '712337857') LIMIT 10)B On A.Pid = B.PID)T1 Join (Select * From Users) T2 On T1.Tagged = T2.UID Order By T1.timestamp Desc;";
+	$sql = "Select T1.PID, T1.Tagged, T2.Name, T1.Content, T1.Agree, T1.Disagree, T1.Timestamp From (SELECT A.PID,Tagged,Content,Agree,Disagree,Timestamp FROM (Select * From Posts Where `Tagged` In (Select `Friend` From Friends Where `UID` = '$uid'))A Join (Select DISTINCT PID From Posts Where `Tagged` In (Select `Friend` From Friends Where `UID` = '$uid') LIMIT 10)B On A.Pid = B.PID)T1 Join (Select * From Users) T2 On T1.Tagged = T2.UID Order By T1.timestamp Desc;";
 	$st = $conn->prepare($sql);
 	$st->execute();
 	$data = $st->fetchAll(PDO::FETCH_ASSOC); 
 	$data=groupByKey($data);
-	$data = array("status" => "200 Success", "friend" => $data);
-	if(isset($_GET['community'])){
-		$sql = "SELECT PID,B.Name,Tagged,Content,Agree,Disagree,A.Timestamp,A.Name as Community,LID FROM (SELECT * FROM (SELECT T1.UID,T2.LID,T2.Name FROM (SELECT UID,LID FROM Located WHERE LID IN ( SELECT LID FROM Located where UID='$uid' )) T1 JOIN (SELECT * FROM Locations) T2 on T1.LID=T2.LID)L JOIN (SELECT * FROM Posts)R ON L.UID=R.Tagged)A JOIN (SELECT Name,UID FROM Users) B ON A.Tagged=B.UID ORDER BY A.Timestamp DESC LIMIT 200;";
-		$st = $conn->prepare($sql);
-		$st->execute();
-		$community = $st->fetchAll(PDO::FETCH_ASSOC);
-		$data['community']=$community; 
-	}
+	$data = array("status" => "200 Success", "data" => $data);
 	$conn=null;
 	pushResponse($data);
 }
