@@ -13,9 +13,65 @@ $action = isset( $_GET['action'] ) && validToken($uid,$token) ? $_GET['action'] 
 //Switch case determines what to do next based on the input arguments from the action URL fragment("?=action" in the URL)
 switch ( $action ) {
 	case 'sendEmail':
-	sendEmail();
+		sendEmail();
+	break;
+	case 'addNotification':
+		addnNotification($uid, $token);
+	break;
+	case 'getNotifications':
+		getNotifications($uid);
+	break;
+	case 'clearNotification':
+		clearNotification();
 	break;
 }
+
+// adds a notification to the database
+function addNotification($uid, $token){
+	// response code
+	$response_array['status'] = "200 Request Queued";
+	pushResponse($response_array);
+
+	// get parameters
+	$class = $_POST['class'];
+	$message = $_POST['message'];
+	$data = $_POST['data'];
+
+	// generates NID, the assumption is that all three of these shouldn't ever be the same
+	$nid = hash("sha256", $uid . $message . $data);
+
+	// runs SQL
+	$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+	$sql = "INSERT INTO Notifications (`NID`,`UID`,`Message`,`Class`,`Data`) VALUES ('$nid','$uid','$message','$class','$data') ";
+	$st = $conn->prepare($sql);
+	$st->execute();
+	$conn = null;
+}
+// clears the specified Notification from the database
+function clearNotification(){
+	$response_array['status'] = "200 Request Queued";
+	pushResponse($response_array);
+	$nid = $_POST['NID'];
+	$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+	$sql = "DELETE * FROM Notifications WHERE NID='$nid'; ";
+	$st = $conn->prepare($sql);
+	$st->execute();
+	$conn = null;
+}
+
+// returns json object of notifications
+function getNotifications($uid){
+	$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+
+	$sql = "SELECT * FROM Notifications WHERE UID='$uid'; ";
+	$st = $conn->prepare($sql);
+	$st->execute();
+	$data = $st->fetchAll(PDO::FETCH_ASSOC); 
+	$data = array("status" => "200 Success", "data" => $data);
+	$conn = null;
+	pushResponse($data);
+}
+
 
 // returns json encoded url to the given user's vibe cloud
 function sendEmail(){
