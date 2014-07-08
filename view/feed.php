@@ -34,7 +34,7 @@ require_once("header.php");
 	$request = "http://niger.go-vibe.com/api/user.php?action=getFeed&uid=". $_SESSION['userID'];
 	$request = $request."&token=".$_SESSION['token'];
 	$posts = json_decode(file_get_contents($request),true);
-	$posts = $posts['friend'];
+	$posts = $posts['data'];
 	foreach ($posts as $post){
 			echo '<a href="http://niger.go-vibe.com/view/profile.php?user='.$post['Tagged'].'&name='.$post['Name'].'">' .$post['Name'] . "</a> : " . $post['Content'] . "<br>";
 			foreach($post['Comments'] as $comment){
