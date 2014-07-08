@@ -34,11 +34,11 @@ function vote(){
 	$pid = $_POST['pid'];
 	$vote = $_POST['vote'];
 
-	$sql = "SELECT Recipient, Content FROM Posts WHERE `PID`='$pid';"; 
+	$sql = "SELECT Recipient, Content,Timestamp FROM Posts WHERE `PID`='$pid' ORDER BY Timestamp Asc Limit 1;"; 
 	$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
 	$st = $conn->prepare( $sql );
 	$st->execute();
-	$data=$st->fetchAll();
+	$data=$st->fetch();
 
 	$user = $data['Recipient'];
 	$status = $data['Content'];
