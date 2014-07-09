@@ -2,7 +2,7 @@
 session_start();
 $user = isset( $_GET['user'] ) ? $_GET['user'] : "";
 $name = isset( $_GET['name'] ) ? $_GET['name'] : "";
-$request = "http://niger.go-vibe.com/api/vibe.php?action=getCloud&uid=". $_SESSION['userID'];
+$request = "http://api.go-vibe.com/api/vibe.php?action=getCloud&uid=". $_SESSION['userID'];
 $request = $request."&token=".$_SESSION['token'];
 $request = $request."&user=".$user;
 $cloud = json_decode(file_get_contents($request),true);

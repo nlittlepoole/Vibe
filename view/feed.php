@@ -12,7 +12,7 @@ require_once("header.php");
 </head>
 <body>
 <h1>Post a Vibe:</h1>
-<form name="status" action="http://niger.go-vibe.com/api/vibe.php?action=postVibe" method="post">
+<form name="status" action="http://api.go-vibe.com/api/vibe.php?action=postVibe" method="post">
 	<select name="recipient">
 <?php 
 	foreach ($_SESSION['friend_list'] as $person){
@@ -31,12 +31,12 @@ require_once("header.php");
 <h2><U> Newsfeed:</U></h2>
 <br>
 <?php 
-	$request = "http://niger.go-vibe.com/api/user.php?action=getFeed&uid=". $_SESSION['userID'];
+	$request = "http://api.go-vibe.com/api/user.php?action=getFeed&uid=". $_SESSION['userID'];
 	$request = $request."&token=".$_SESSION['token'];
 	$posts = json_decode(file_get_contents($request),true);
 	$posts = $posts['data'];
 	foreach ($posts as $post){
-			echo '<a href="http://niger.go-vibe.com/view/profile.php?user='.$post['Tagged'].'&name='.$post['Name'].'">' .$post['Name'] . "</a> : " . $post['Content'] . "<br>";
+			echo '<a href="http://api.go-vibe.com/view/profile.php?user='.$post['Tagged'].'&name='.$post['Name'].'">' .$post['Name'] . "</a> : " . $post['Content'] . "<br>";
 			foreach($post['Comments'] as $comment){
 				echo '<li>' . $comment['Content'].'</li>';
 			}

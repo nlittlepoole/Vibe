@@ -9,9 +9,9 @@ define( "DB_PASSWORD", "Carman4ever!" );
 define( "CLASS_PATH", "classes" );
 define( "ADMIN_USERNAME", "teamvibe" );
 define( "ADMIN_PASSWORD", "Carman4ever" );
-define( "APP_ID", "246588708881137" );
-define( "APP_SECRET", "8934166537a59f745ccd26e29f4ef781" );
-$app_token=(string)file_get_contents("https://graph.facebook.com/oauth/access_token?%20client_id=246588708881137&client_secret=8934166537a59f745ccd26e29f4ef781&grant_type=client_credentials", true);
+define( "APP_ID", "162254093981266" );
+define( "APP_SECRET", "7387b4372a38f8db30ae8834dd193c5b" );
+$app_token=(string)file_get_contents("https://graph.facebook.com/oauth/access_token?%20client_id=162254093981266&client_secret=7387b4372a38f8db30ae8834dd193c5b&grant_type=client_credentials", true);
 $app_token=str_replace('access_token=','',$app_token);
 define( "APP_TOKEN", $app_token );
 

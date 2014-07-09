@@ -25,7 +25,7 @@ switch ( $action ) {
     $_SESSION['logoutUrl'] = $facebook->getLogoutUrl(array( 'next' => 'http://go-vibe.com') ); //logout url is created and stored to the session data.
     $data= $facebook->api('/me/?fields=gender,name,email');
 
-    $url = 'http://niger.go-vibe.com/api/user.php?action=addUser';
+    $url = 'http://api.go-vibe.com/api/user.php?action=addUser';
     $post_data = array('uid' => $uid, 'name' => $data['name'], 'token' => $token, 'email' => $data['email'] );
     post($url, $post_data);
     header('Location: /view/feed.php'); 
@@ -34,7 +34,7 @@ switch ( $action ) {
     //when a user logs in through facebook, the are simply going to a special link created by the facebook api. The api uses our AP ID and password to generate the link
     $params = array(
                   'scope' => "email,manage_notifications, user_photos,user_education_history,read_friendlists,read_stream,user_work_history,user_birthday,user_location,user_hometown,user_friends", //these are the permissions Vibe needs from facebook
-                  'redirect_uri' => 'http://niger.go-vibe.com/index.php?action=login' //this is the link that facebook will redirect the browser to after succesful login
+                  'redirect_uri' => 'http://api.go-vibe.com/index.php?action=login' //this is the link that facebook will redirect the browser to after succesful login
                 );
     $loginUrl = $facebook->getLoginUrl($params); //the facebook getLoginUrl() is an api method that uses the permissions and redirct url to create a unique login url
     $_SESSION['loginUrl'] = $loginUrl; //the log in url is saved in the Session data so that the homepage can use it
