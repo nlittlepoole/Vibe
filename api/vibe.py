@@ -3,6 +3,7 @@ import sys
 import re
 from stemming.porter2 import stem
 import difflib
+
 stemmed=''
 #start replaceTwoOrMore
 def replaceTwoOrMore(s):
