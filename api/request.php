@@ -1,58 +1,63 @@
 <?php
-// get config elements
-$root = $_SERVER['DOCUMENT_ROOT'];
-require_once($root . "/config.php");
 
-// Authenticate User access token and UID. Returns true if user is valid, false otherwise
-function validToken($uid, $token){
-    $url = "https://graph.facebook.com/debug_token?input_token=$token&access_token=" . APP_TOKEN;
-    $response = json_decode(file_get_contents($url), true);
-    //return $response['data']['is_valid'] && $response['data']['user_id'] == $uid;
-    return true;
-}
-function pushResponse($response_array){
-    ob_start(); 
-    echo json_encode($response_array);
-    header('Connection: close');
-    header('Content-Length: '. ob_get_length());
-    ob_end_flush();
-    ob_flush();
-    flush();
-}
-function post($url, $post_data){
- foreach ( $post_data as $key => $value) {
-    $post_items[] = $key . '=' . $value;
-}
+    // config settings 
+    $root = $_SERVER['DOCUMENT_ROOT'];
+    require_once($root . "/config.php");
 
-            //create the final string to be posted using implode()
-$post_string = implode ('&', $post_items);
+    // authenticate user access token & UID
+    function validToken($uid, $token) {
 
-            //create cURL connection
-$curl_connection = 
-curl_init($url);
+        $url = "https://graph.facebook.com/debug_token?input_token=$token&access_token=" . APP_TOKEN;
+        $response = json_decode(file_get_contents($url), true);
+        
+        return true;
+    }
 
-            //set options
-curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
-curl_setopt($curl_connection, CURLOPT_USERAGENT, 
-  "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)");
-curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
-curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, 1);
+    // pushing JSON encoded response
+    function pushResponse($response_array){
+        
+        ob_start(); 
+        echo json_encode($response_array);
+        
+        header('Connection: close');
+        header('Content-Length: '. ob_get_length());
+        
+        ob_end_flush();
+        ob_flush();
+        flush();
+    }
 
-            //set data to be posted
-curl_setopt($curl_connection, CURLOPT_POSTFIELDS, $post_string);
+    function post($url, $post_data) {
+        foreach($post_data as $key => $value) {
+            $post_items[] = $key . '=' . $value;
+        }
 
-            //perform our request
-$result = curl_exec($curl_connection);
+        $post_string = implode ('&', $post_items);
 
-            //show information regarding the request
-print_r(curl_getinfo($curl_connection));
-echo curl_errno($curl_connection) . '-' . 
-curl_error($curl_connection);
+        // create cURL connection
+        $curl_connection = curl_init($url);
 
-            //close the connection
-curl_close($curl_connection);
+        // set options
+        curl_setopt($curl_connection, CURLOPT_CONNECTTIMEOUT, 30);
+        curl_setopt($curl_connection, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)");
+        curl_setopt($curl_connection, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl_connection, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl_connection, CURLOPT_FOLLOWLOCATION, 1);
 
-var_dump($result);
-}
+        // set data to be posted
+        curl_setopt($curl_connection, CURLOPT_POSTFIELDS, $post_string);
+
+        // perform our request
+        $result = curl_exec($curl_connection);
+
+        //show information regarding the request
+        print_r(curl_getinfo($curl_connection));
+        echo curl_errno($curl_connection) . '-' . curl_error($curl_connection);
+
+        //close the connection
+        curl_close($curl_connection);
+
+        var_dump($result);  
+    }
+    
 ?>

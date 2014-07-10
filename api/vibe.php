@@ -86,6 +86,7 @@
 
 	// generate vibes for given status
 	function getVibe($status) {
+		
 		$output = [];
 		$status = addslashes($status);
 
@@ -96,78 +97,88 @@
 		return $output;
 	}
 
-	// adds temporary users that are going to be matched later
-	function addTempUser($uid,$name,$email){
-		$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
+	// add temp user that'll be matched to FB(?) later
+	function addTempUser($uid, $name, $email) {
+
+		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
 		$name = $conn->quote($name);
+
 		$sql = "INSERT INTO Users (`UID`, `Name`, `Notes`, `Email`)
 		    VALUES ('$uid', $name, 'Test', '$email')
 		        ON DUPLICATE KEY UPDATE `Notes` = 'Temp';"; 
-		$st = $conn->prepare( $sql );
+		
+		$st = $conn->prepare($sql);
 		$st->execute();
 		$conn = null;
-
 	}
-	// posts vibe status to database along with vibes for the status
-	function postVibe($uid, $token, $vibes){
-		//Grab Request Parameters
-		$status = isset( $_POST['status'] ) ? $_POST['status'] : "";
-		$pid = hash("sha256", $status);
-		$email= isset( $_POST['email'] ) ? $_POST['email'] : "";
-		//$email="nsteb1993@gmail.com";
-		$hash_id=hash("sha256", $email);
-		$author = isset( $_POST['uid'] ) ? $_POST['uid'] : "";
-		$recipient = isset( $_POST['recipient'] ) ? $_POST['recipient'] : "";
 
-		// setup temp user if user doesn't exist
-		if($recipient == "" || $email != ""){
-			// add temporary UID
+	// post tweet & associated vibes to DB
+	function postVibe($uid, $token, $vibes){
+
+		$status = isset($_POST['status']) ? $_POST['status'] : "";
+		$pid = hash("sha256", $status);
+		$email = isset($_POST['email']) ? $_POST['email'] : "";
+
+		$hash_id = hash("sha256", $email);
+		$author = isset($_POST['uid']) ? $_POST['uid'] : "";
+		$recipient = isset($_POST['recipient']) ? $_POST['recipient'] : "";
+
+		// setup temp user if user does not exist
+		if ($recipient == "" || $email != "") {
+			
+			// add temp UID (why?)
 			$recipient = $hash_id;
 			addTempUser($recipient, "Temp User", $email);
 
-			// send Email
+			// send email
 			$url = 'http://niger.go-vibe.com/api/notification.php?action=sendEmail';
 	    	$post_data = array('uid' => $uid, 'token' => $token, 'email' => $email, 'status' => $status, 'user' => $recipient);
 	    	post($url, $post_data);
 
-	    	// Add temporary friend to friend graph
+	    	// Add temp friend to friend graph
 	    	$url = 'http://niger.go-vibe.com/api/user.php?action=addFriend';
 	    	$post_data = array('uid' => $uid, 'token' => $token, 'user' => $recipient);
 	    	post($url, $post_data);
 		}
 
-
-		//Connect to VibeSocial DBMS
 		$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
 		$status=$conn->quote($status); //Clean up user statuses to prevent SQL injections
 
-		$sql = "INSERT INTO Posts (`PID`,`Content`,`Author`,`Tagged`) VALUES ('$pid',$status,'$author','$recipient');";
-		$st = $conn->prepare( $sql );
+		$sql = "INSERT INTO Posts (`PID`, `Content`, `Author`, `Tagged`) VALUES ('$pid', $status, '$author', '$recipient');";
+		$st = $conn->prepare($sql);
 		$st->execute();
-		foreach($vibes as $vibe){
+
+		foreach($vibes as $vibe) {
 			$sql = "INSERT INTO Vibes (`Vibe`, `UID`, `Score`)
-			VALUES ('$vibe','$recipient',1)
-			ON DUPLICATE KEY UPDATE `Score` = `Score`+ 1;";
+				VALUES ('$vibe','$recipient',1)
+					ON DUPLICATE KEY UPDATE `Score` = `Score`+ 1;";
+			
 			$st = $conn->prepare( $sql );
 			$st->execute();
 		}
 	}
-	function postComment($uid, $token){
-		//Grab Request Parameters
-		$status = isset( $_POST['status'] ) ? $_POST['status'] : "";
-		$pid = isset( $_POST['PID'] ) ? $_POST['PID'] : "";
-		$email= isset( $_POST['email'] ) ? $_POST['email'] : "";
-		//$email="nsteb1993@gmail.com";
-		$hash_id=hash("sha256", $email);
-		$author = isset( $_POST['uid'] ) ? $_POST['uid'] : "";
-		$recipient = isset( $_POST['recipient'] ) ? $_POST['recipient'] : "";
-		//Connect to VibeSocial DBMS
-		$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
-		$status=$conn->quote($status); //Clean up user statuses to prevent SQL injections
 
+	function postComment($uid, $token){
+
+		// add POST components
+		$status = isset($_POST['status']) ? $_POST['status'] : "";
+		$pid = isset($_POST['PID']) ? $_POST['PID'] : "";
+		$email = isset($_POST['email']) ? $_POST['email'] : "";
+
+		$hash_id = hash("sha256", $email);
+		$author = isset($_POST['uid']) ? $_POST['uid'] : "";
+
+		$recipient = isset($_POST['recipient']) ? $_POST['recipient'] : "";
+
+		$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
+		$status = $conn->quote($status); //Clean up user statuses to prevent SQL injections
+
+		// add post to DB
 		$sql = "INSERT INTO Posts (`PID`,`Content`,`Author`,`Tagged`) VALUES ('$pid',$status,'$author','$recipient');";
-		$st = $conn->prepare( $sql );
+		$st = $conn->prepare($sql);
+		
 		$st->execute();
-		$conn=null;
+		
+		$conn = null;
 	}
 ?>
