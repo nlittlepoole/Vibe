@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="ie lt-ie9 lt-ie8 lt-ie7 paceCounter paceSocial footer-sticky"> <![endif]-->
+<!--[if IE 7]>    <html class="ie lt-ie9 lt-ie8 paceCounter paceSocial footer-sticky"> <![endif]-->
+<!--[if IE 8]>    <html class="ie lt-ie9 paceCounter paceSocial footer-sticky"> <![endif]-->
+<!--[if gt IE 8]> <html class="ie paceCounter paceSocial footer-sticky"> <![endif]-->
+<!--[if !IE]><!--><html class="paceCounter paceSocial footer-sticky"><!-- <![endif]-->
+<head>
+	<title>Social Admin Template (v2.0.0-rc8)</title>
+	
+	<!-- Meta -->
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	
+	<!-- 
+	**********************************************************
+	In development, use the LESS files and the less.js compiler
+	instead of the minified CSS loaded by default.
+	**********************************************************
+	<link rel="stylesheet/less" href="../assets/less/admin/module.admin.stylesheet-complete.layout_fixed.true.less" />
+	-->
+
+		<!--[if lt IE 9]><link rel="stylesheet" href="../assets/components/library/bootstrap/css/bootstrap.min.css" /><![endif]-->
+	
+		<link rel="stylesheet" href="../assets/css/admin/module.admin.stylesheet-complete.layout_fixed.true.min.css" />
+	
+	
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+	<script src="../assets/plugins/core_ajaxify_loadscript/script.min.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
+
+<script>var App = {};</script>
+
+<script data-id="App.Scripts">
+App.Scripts = {
+
+	/* CORE scripts always load first; */
+	core: [
+		'../assets/library/jquery/jquery.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/library/modernizr/modernizr.js?v=v2.0.0-rc8&sv=v0.0.1.2'
+	],
+
+	/* PLUGINS_DEPENDENCY always load after CORE but before PLUGINS; */
+	plugins_dependency: [
+		'../assets/library/bootstrap/js/bootstrap.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/library/jquery/jquery-migrate.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/charts_flot/jquery.flot.js?v=v2.0.0-rc8&sv=v0.0.1.2'
+	],
+
+	/* PLUGINS always load after CORE and PLUGINS_DEPENDENCY, but before the BUNDLE / initialization scripts; */
+	plugins: [
+		'../assets/plugins/core_nicescroll/jquery.nicescroll.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/core_breakpoints/breakpoints.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/core_ajaxify_davis/davis.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/core_ajaxify_lazyjaxdavis/jquery.lazyjaxdavis.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/core_preload/pace.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/menu_sidr/jquery.sidr.js?v=v2.0.0-rc8', 
+		'../assets/plugins/charts_easy_pie/js/jquery.easy-pie-chart.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/components/charts_flot/flotcharts.common.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/charts_flot/plugins/jquery.flot.orderBars.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/charts_flot/jquery.flot.resize.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/core_less-js/less.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/charts_flot/excanvas.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/plugins/core_browser/ie/ie.prototype.polyfill.js?v=v2.0.0-rc8&sv=v0.0.1.2'
+	],
+
+	/* The initialization scripts always load last and are automatically and dynamically loaded when AJAX navigation is enabled; */
+	bundle: [
+		'../assets/components/core_ajaxify/ajaxify.init.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/components/core_preload/preload.pace.init.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/components/charts_easy_pie/easy-pie.init.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/components/core_medical/medical.init.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/components/core/core.init.js?v=v2.0.0-rc8'
+	]
+
+};
+</script>
+
+<script>
+$script(App.Scripts.core, 'core');
+
+$script.ready(['core'], function(){
+	$script(App.Scripts.plugins_dependency, 'plugins_dependency');
+});
+$script.ready(['core', 'plugins_dependency'], function(){
+	$script(App.Scripts.plugins, 'plugins');
+});
+$script.ready(['core', 'plugins_dependency', 'plugins'], function(){
+	$script(App.Scripts.bundle, 'bundle');
+});
+</script>
+	<script>if (/*@cc_on!@*/false && document.documentMode === 10) { document.documentElement.className+=' ie ie10'; }</script>
+	
+</head>
+<body class=" scripts-async menu-right-hidden">
+	
+	<!-- Main Container Fluid -->
+	<div class="container-fluid ">
+
+		
+		<!-- Content START -->
+		<div id="content">
+			
+	
+<nav class="navbar navbar-default top-nav navbar-fixed-top" role="navigation">
+
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle btn btn-default" data-toggle="collapse" data-target="#navbar-fixed-layout-collapse">
+		<i class="fa fa-indent"></i>
+      </button>
+      <a class="navbar-brand" href="#"><img src="../assets//images/logo/logo.jpg" alt=""></a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="navbar-fixed-layout-collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Layout <b class="caret"></b></a>
+	          <ul class="dropdown-menu">
+	             <li >
+					<a class="no-ajaxify" href="?module=admin&page=medical_overview&url_rewrite=&build=&layout_fixed=false&v=v2.0.0-rc8" >Fluid Layout
+					</a>
+				</li>
+	            <li class="active">
+					<a class="no-ajaxify" href="?module=admin&page=medical_overview&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8">Fixed Layout
+					</a>
+				</li>
+	          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+           		<li class="dropdown-header">Timeline</li>
+           		<li><a href="index.html?lang=en"><span>Timeline #1</span></a></li>
+				<li><a href="timeline_2.html?lang=en"><span>Timeline #2</span></a></li>
+				<li><a href="timeline_3.html?lang=en"><span>Timeline #3</span></a></li>
+          		<li class="divider"></li>
+           		<li class="dropdown-header">Media</li>
+				<li><a href="media_1.html?lang=en"><span>Photos #1</span></a></li>
+				<li><a href="media_2.html?lang=en"><span>Photos #2</span></a></li>
+				<li><a href="media_3.html?lang=en"><span>Photos #3</span></a></li>
+				<li class="divider"></li>
+           		<li class="dropdown-header">Contacts</li>
+           		<li><a href="contacts_1.html?lang=en"><span>Friends #1</span></a></li>
+				<li><a href="contacts_2.html?lang=en"><span>Friends #2</span></a></li>
+				<li><a href="contacts_3.html?lang=en"><span>Friends #3</span></a></li>
+				<li class="divider"></li>
+           		<li class="dropdown-header">About</li>
+           		<li><a href="about_1.html?lang=en"><span>About #1</span></a></li>
+				<li><a href="about_2.html?lang=en"><span>About #2</span></a></li>
+				<li><a href="about_3.html?lang=en"><span>About #3</span></a></li>
+				<li class="divider"></li>
+				<li><a href="messages.html?lang=en"><span>Messages</span></a></li>
+				<li class="divider"></li>
+           		<li class="dropdown-header">Music</li>
+           		<li><a href="playlist.html?lang=en"><span>playlist</span></a></li>
+				<li><a href="albums.html?lang=en"><span>Albums</span></a></li>
+				<li><a href="song.html?lang=en"><span>Song</span></a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nav Color <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li>
+            	<a href="?module=admin&page=medical_overview&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&navbar_type=navbar-default" >
+            	White Navbar</a>
+
+            </li>
+            <li>
+            	<a href="?module=admin&page=medical_overview&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&navbar_type=navbar-inverse" >
+            	Dark Navbar</a></li>
+            <li>
+            	<a href="?module=admin&page=medical_overview&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&navbar_type=navbar-primary" >
+            		Primary Color Navbar</a></li>
+            <li class="divider"></li>
+			<li class="innerAll half" style="line-height:20px;">
+				<div class="strong">Skin Colors</div>
+								<a href="?module=admin&page=medical_overview&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=style-default" style="background-color: #25ad9f; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">style-default</span></a>
+								<a href="?module=admin&page=medical_overview&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=green-army" style="background-color: #9FB478; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">green-army</span></a>
+								<a href="?module=admin&page=medical_overview&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=alizarin-crimson" style="background-color: #F06F6F; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">alizarin-crimson</span></a>
+								<a href="?module=admin&page=medical_overview&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=blue-gray" style="background-color: #5577b4; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">blue-gray</span></a>
+								<a href="?module=admin&page=medical_overview&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=brown" style="background-color: #d39174; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">brown</span></a>
+								<a href="?module=admin&page=medical_overview&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=purple-gray" style="background-color: #AF86B9; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">purple-gray</span></a>
+								<a href="?module=admin&page=medical_overview&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=purple-wine" style="background-color: #CC6788; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">purple-wine</span></a>
+								<a href="?module=admin&page=medical_overview&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=black-and-white" style="background-color: #979797; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">black-and-white</span></a>
+								<a href="?module=admin&page=medical_overview&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=amazon" style="background-color: #8BC4B9; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">amazon</span></a>
+								<a href="?module=admin&page=medical_overview&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=amber" style="background-color: #b0b069; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">amber</span></a>
+								<a href="?module=admin&page=medical_overview&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=android-green" style="background-color: #A9C784; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">android-green</span></a>
+								<a href="?module=admin&page=medical_overview&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=antique-brass" style="background-color: #B3998A; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">antique-brass</span></a>
+								<a href="?module=admin&page=medical_overview&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=antique-bronze" style="background-color: #8D8D6E; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">antique-bronze</span></a>
+								<a href="?module=admin&page=medical_overview&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=artichoke" style="background-color: #B0B69D; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">artichoke</span></a>
+								<a href="?module=admin&page=medical_overview&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=atomic-tangerine" style="background-color: #F19B69; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">atomic-tangerine</span></a>
+								<a href="?module=admin&page=medical_overview&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=bazaar" style="background-color: #98777B; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">bazaar</span></a>
+								<a href="?module=admin&page=medical_overview&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=bistre-brown" style="background-color: #C3A961; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">bistre-brown</span></a>
+								<a href="?module=admin&page=medical_overview&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=green" style="background-color: #77ac40; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">green</span></a>
+								<a href="?module=admin&page=medical_overview&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=bittersweet" style="background-color: #d6725e; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">bittersweet</span></a>
+								<a href="?module=admin&page=medical_overview&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=blueberry" style="background-color: #7789D1; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">blueberry</span></a>
+								<a href="?module=admin&page=medical_overview&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=bud-green" style="background-color: #6fa362; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">bud-green</span></a>
+								<a href="?module=admin&page=medical_overview&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=coral" style="background-color: #7eccc2; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">coral</span></a>
+								<a href="?module=admin&page=medical_overview&url_rewrite=&build=&layout_fixed=true&v=v2.0.0-rc8&skin=burnt-sienna" style="background-color: #E4968A; display:inline-block; width:30px; height:30px; margin:1px;" class="no-ajaxify innerAll half "><span class="hide">burnt-sienna</span></a>
+							</li>
+
+          </ul>
+        </li>
+      </ul>
+      <form class="navbar-form navbar-left hidden-sm" role="search">
+        <div class="form-group inline-block">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-inverse"><i class="fa fa-search fa-fw"></i></button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="innerLR"><button type="button" class="btn btn-success navbar-btn"><i class="fa fa-pencil"></i> Sign in</button></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <span class="pull-left innerR"><img src="../assets/images/people/35/16.jpg" alt="user" class="img-circle"></span>
+          	Bill <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+
+			<!-- <div class="layout-app">  -->
+			 <div class="container"><div class="innerLR">
+	
+	<h2>Overview</h2>
+
+	<!-- row- -->
+	<div class="row">
+		<!-- col -->
+		<div class="col-lg-4 col-md-6">
+			<div class="widget ">
+				<div class="widget-head height-auto">
+					<div class=" innerLR half ">
+						<span class="pull-right"><strong class="text-primary">25 days</strong> left</span>
+						<span class="label label-primary">Next cycle</span> 01/12/13
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- BALLANCE START -->
+<div class="widget ">
+    <div class="widget-head"><h4 class="heading strong pull-left">Ballance</h4> <iclass="fa fa-euro text-primary pull-right innerT half"></i></div>
+    <div class="widget-body">
+        <div class="media">
+            <div class="pull-left">
+                <div class="innerAll">
+                    <div data-percent="20" data-size="70" class="easy-pie primary" data-scale-color="false" data-track-color="#ffffff"><span class="value text-primary">20%</span></div>
+                </div>
+            </div>
+            <div class="media-body">
+                <div class="text-large text-regular">&euro;4,387.00</div>
+                <p class="lead"><span class="text-primary">Current balance</span> this billing cycle</p></div>
+        </div>
+    </div>
+</div>
+<!-- // END BALLANCE -->
+
+
+
+            <!-- STATISTIC START -->
+<div class="widget">
+    <div class="widget-head"><h5 class="heading strong pull-left"> Statistic</h5><i class="fa fa-bar-chart-o text-primary pull-right innerT half"></i></div>
+    <div class="widget-body">
+        <div class="innerAll text-center">
+            <div data-percent="22" data-size="150" class="easy-pie inline-block easy-pie-gender inverse" data-scale-color="false" data-track-color="#ffffff" data-line-width="5">
+                <div class="value text-center innerAll"><p class="lead text-large">22%</p></div>
+            </div>
+            <div class="separator bottom"></div>
+            <p class="lead"><span class="text-large text-regular">8,320</span> of <span class="text-primary">your customers</span>
+            </p>
+            <p class="margin-none">living in <span class="strong">Caracal</span>, aged <span class="strong">50+</span>
+            </p>
+            <p class="margin-none">suffer from a <span class="strong text-primary">Heart Disease</span></p></div>
+    </div>
+</div>
+<!-- // END STATISTIC -->
+
+
+
+
+		</div>
+		<!-- // END col -->
+
+		<!-- col -->
+		<div class="col-lg-4 col-md-6">
+
+            <!-- GENDER START -->
+<div class="widget widget-body-white">
+    <div class="widget-head"><h4 class="heading pull-left">By Gender</h4>
+        <i class="fa fa-group text-primary pull-right innerT half"></i>
+    </div>
+    <div class="widget-body">
+        <div class="innerAll text-center">
+            <div data-percent="50" data-size="200" class="easy-pie inline-block easy-pie-gender" data-scale-color="false" data-track-color="#D67FB0" data-bar-color="#4193d0" data-line-width="8" data-animate="false">
+                <div class="value text-center innerAll"><p class="lead">Your customers</p>
+                    <p class="sublead">Male: <strong class="male">50%</strong></p>
+                    <p class="sublead">Female: <strong class="female">50%</strong></p></div>
+            </div>
+            <div class="separator"></div>
+            <div id="chart_gender"></div>
+        </div>
+    </div>
+</div>
+<!-- // END GENDER -->
+
+
+
+
+
+
+
+
+            <!-- COMPARISON START -->
+<div class="widget widget-body-gray">
+    <div class="widget-head"><h4 class="heading pull-left">Comparison</h4>
+        <i class="fa fa-bar-chart-o text-primary pull-right innerT half"></i>
+    </div>
+    <div class="widget-body padding-none">
+        <div class="innerAll text-center"><p class="lead"><span class="text-large text-regular">1,210</span> of <span class="text-primary">your customers</span></p>
+            <div class="progress white progress-mini ">
+                <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
+            </div>
+            <p class="margin-none">living in <span class="strong">Bucharest</span>, aged <span class="strong">45+</span> </p>
+
+            <p class="margin-none">suffer from a <span class="strong text-danger">deadly disease</span></p>
+        </div>
+    </div>
+</div>
+<!-- // END COMPARISON -->
+
+
+		</div>
+		<!-- // END col -->
+
+		<!-- col -->
+		<div class="col-lg-4 col-md-12">
+
+            <!-- MALE START -->
+<div class="widget widget-body-white">
+    <div class="widget-head">
+        <h4 class="heading pull-left">Male</h4>
+        <i class="fa fa-bar-chart-o text-primary pull-right innerT half"></i>
+    </div>
+    <div class="widget-body">
+        <i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i><i class="fa fa-male fa-fw text-male-light"></i>        <div class="innerAll text-center">
+            <p class="lead"><span class="text-large text-regular">1,400,120</span> (45%)</p>
+            <p class="margin-none">of your male customers, living <span class="strong">nationwide</span>, aged <span class="strong">25-65</span>, who used to smoke,</p>
+            <p class="margin-none">suffer from <span class="strong text-male">lung cancer</span></p>
+        </div>
+    </div>
+</div>
+<!-- // END MALE -->
+
+
+            <!-- FEMALE START -->
+<div class="widget widget-body-white">
+    <div class="widget-head">
+        <h4 class="heading pull-left">Female</h4>
+        <i class="fa fa-bar-chart-o text-primary pull-right innerT half"></i>
+    </div>
+    <div class="widget-body">
+        <i class="fa fa-female fa-fw text-female"></i><i class="fa fa-female fa-fw text-female"></i><i class="fa fa-female fa-fw text-female"></i><i class="fa fa-female fa-fw text-female"></i><i class="fa fa-female fa-fw text-female"></i><i class="fa fa-female fa-fw text-female"></i><i class="fa fa-female fa-fw text-female"></i><i class="fa fa-female fa-fw text-female"></i><i class="fa fa-female fa-fw text-female"></i><i class="fa fa-female fa-fw text-female"></i><i class="fa fa-female fa-fw text-female"></i><i class="fa fa-female fa-fw text-female"></i><i class="fa fa-female fa-fw text-female"></i><i class="fa fa-female fa-fw text-female"></i><i class="fa fa-female fa-fw text-female"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i><i class="fa fa-female fa-fw text-female-light"></i>        <div class="innerAll text-center">
+            <p class="lead"><span class="text-large text-regular">10,240</span> (15%)</p>
+            <p class="margin-none">of your female customers, living <span class="strong">nationwide</span>, aged <span class="strong">25-35</span>, who used to smoke,</p>
+            <p class="margin-none">suffer from <span class="strong text-female">Hypertension</span></p>
+        </div>
+    </div>
+</div>
+<!-- // END FEMALE -->
+
+
+
+
+
+
+
+		</div> 
+		<!-- // END col -->
+	</div>
+	<!-- // END row -->
+</div>
+
+
+
+
+
+
+
+
+
+
+	
+		
+				</div> 
+				
+		</div>
+		<!-- // Content END -->
+		
+		<div class="clearfix"></div>
+		<!-- // Sidebar menu & content wrapper END -->
+		
+				<!-- Footer -->
+		<div id="footer" class="hidden-print">
+			
+			<!--  Copyright Line -->
+			<div class="copy">&copy; 2012 - 2014 - <a href="http://www.mosaicpro.biz">MosaicPro</a> - All Rights Reserved. <a href="http://themeforest.net/?ref=mosaicpro" target="_blank">Purchase Social Admin Template</a> - Current version: v2.0.0-rc8 / <a target="_blank" href="../assets/../../CHANGELOG.txt?v=v2.0.0-rc8">changelog</a></div>
+			<!--  End Copyright Line -->
+	
+		</div>
+		<!-- // Footer END -->
+		
+				
+	</div>
+	<!-- // Main Container Fluid END -->
+	
+
+	<!-- Global -->
+	<script data-id="App.Config">
+		var basePath = '',
+		commonPath = '../assets/',
+		rootPath = '../',
+		DEV = false,
+		componentsPath = '../assets/components/';
+	
+	var primaryColor = '#25ad9f',
+		dangerColor = '#b55151',
+		successColor = '#609450',
+		infoColor = '#4a8bc2',
+		warningColor = '#ab7a4b',
+		inverseColor = '#45484d';
+	
+	var themerPrimaryColor = primaryColor;
+
+		App.Config = {
+		ajaxify_menu_selectors: ['#menu'],
+		ajaxify_layout_app: false	};
+		</script>
+	
+		
+</body>
+</html>
