@@ -10,14 +10,16 @@
 
 		// GRABBING THE JSON
 		$.getJSON(newsfeed_url, function(data) {
-		    
+
 			// TESTING AGAINST ERRORS
+			// alert("DATA:" + typeof(data['data']));
+
 		    if (!data.error) {
 
 		        // PARSING RESULTS
-		        for(var i = 0; i < data['friend'].length; i++) {
+		        for(var i = 0; i < data['data'].length; i++) {
 		        	
-		        	var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + data['friend'][i]['Tagged'] + "&name=" + data['friend'][i]['Name'] + "";
+		        	var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + data['data'][i]['Tagged'] + "&name=" + data['data'][i]['Name'] + "";
 
 		        	var html_newsfeed_content = " \
 						<li class='active'> \
@@ -36,7 +38,7 @@
 												<div class='media'> \
 													<div class='media-body innerTB' style='padding-left:20px;'> \
 														<a href='#' class='text-white strong'>Someone</a> \
-														<span>upped <a href='" + temp_link + "' class='text-white strong'>" + data['friend'][i]['Name'] + "'s Chillness</a> \
+														<span>upped <a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['Name'] + "'s Chillness</a> \
 														on 15th January, 2014 <i class='icon-time-clock'></i></span> \
 					   								\
 													</div> \
@@ -46,7 +48,7 @@
 												\
 											<!-- Content --> \
 											<div class='innerAll'> \
-												<p class='lead'>" + data['friend'][i]['Content'] + "</p> \
+												<p class='lead'>" + data['data'][i]['Content'] + "</p> \
 											</div> \
 											<!-- Comment --> \
 											<div class='bg-gray innerAll border-top border-bottom text-small'> \

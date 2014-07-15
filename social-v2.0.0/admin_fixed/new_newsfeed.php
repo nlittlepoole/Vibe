@@ -1,11 +1,10 @@
 <?php
 	
-	// SESSION START
 	session_start();
 
 
-	/* HEADER FRIEND LIST PARSING */
-	/* -------------------------- */
+	// HEADER FRIEND LIST PARSING 
+	// -------------------------- 
 
 	// (NOTE: for now, it throws the PHP everytime on loadup)
 	$request = "http://api.go-vibe.com/api/user.php?action=getFriends&blocked=no&uid=". $_SESSION['userID'];
@@ -21,8 +20,8 @@
 
 	$_SESSION['friend_list'] = $friends;
 
-	/* NEWSFEED FRIEND POST PARSING */
-	/* ---------------------------- */
+	// NEWSFEED FRIEND POST PARSING
+	// ---------------------------- 
 
 	$_SESSION['newsfeed_elems_request'] = "http://api.go-vibe.com/api/user.php?action=getFeed&uid=" . $_SESSION['userID'];
 	$_SESSION['newsfeed_elems_request'] .= "&token=" . $_SESSION['token'];
