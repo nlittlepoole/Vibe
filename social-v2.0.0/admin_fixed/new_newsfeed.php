@@ -200,13 +200,16 @@
 								</div>
 
 							</div>
-							<form class="form-horizontal" role="form">
+							<form class="form-horizontal" role="form" name="status" action="http://api.go-vibe.com/api/vibe.php?action=postVibe" method="post">
 							    <div class="form-group">
 							        
+							    	<input type="hidden" name="uid" value=<?php echo '"' . $_SESSION['userID'] . '"' ?>>
+    								<input type="hidden" name="token" value=<?php echo '"' . $_SESSION['token'] . '"' ?>>
+
 							        <label for="inputFriend" class="col-sm-2 control-label">Friend</label>
 							        
 							        <div class="col-sm-9">
-							            <input type="text" class="form-control" id="inputFriend" placeholder="Who's this about? Type in a Facebook friend!">
+							            <input type="text" class="form-control" id="inputFriend" name="" placeholder="Who's this about? Type in a Facebook friend!">
 							        </div>
 
 							    </div>
