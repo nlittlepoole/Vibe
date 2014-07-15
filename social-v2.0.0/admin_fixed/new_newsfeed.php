@@ -200,32 +200,34 @@
 								</div>
 
 							</div>
-							<form class="form-horizontal" role="form" name="status" action="http://api.go-vibe.com/api/vibe.php?action=postVibe" method="post">
+							<form name="status" class="form-horizontal" method="post" action="http://api.go-vibe.com/api/vibe.php?action=postVibe">
 							    <div class="form-group">
-							        
-							    	<input type="hidden" name="uid" value=<?php echo '"' . $_SESSION['userID'] . '"' ?>>
-    								<input type="hidden" name="token" value=<?php echo '"' . $_SESSION['token'] . '"' ?>>
-
 							        <label for="inputFriend" class="col-sm-2 control-label">Friend</label>
 							        
 							        <div class="col-sm-9">
-							            <input type="text" class="form-control" id="inputFriend" name="" placeholder="Who's this about? Type in a Facebook friend!">
+							            <input type="text" class="form-control" id="inputFriend2" name="recipient" placeholder="Who's this about? Type in a Facebook friend!">
 							        </div>
 
 							    </div>
+							    <div class="form-group">
+							    	<input type="hidden" name="uid" value=<?php echo '"' . $_SESSION['userID'] . '"' ?>>
+    								<input type="hidden" name="token" value=<?php echo '"' . $_SESSION['token'] . '"' ?>>
+    							</div>
 							    <div class="form-group">
 							        
 							        <label for="inputVibe" class="col-sm-2 control-label">Vibe</label>
 							        
 							        <div class="col-sm-9">
-							            <input type="text" class="form-control" id="inputVibe" placeholder="What do you want to say?">
+							            <input type="text" class="form-control" name="status" id="inputVibe" placeholder="What do you want to say?">
 							        </div>
 
 							    </div>
 							    <div class="form-group">
 
 							        <div class="col-sm-offset-2 col-sm-10">
-							            <button type="submit" class="btn btn-primary" style="width: 20%">Submit&nbsp;&nbsp;<i class="fa fa-arrow-circle-right"></i> </button>
+							        	<!--
+							            <input type="submit" class="btn btn-primary" style="width: 20%" />&nbsp;&nbsp;<i class="fa fa-arrow-circle-right"></i>-->
+							        	<input type="submit" value="Submit" />
 							        </div>
 
 							    </div>
@@ -392,5 +394,13 @@
 		ajaxify_layout_app: false	};
 		</script>
 	
+
+	<br /><br /><br />
+	<form name="status" action="http://api.go-vibe.com/api/vibe.php?action=postVibe" method="post">
+		<input type="text" name="status" size="240"  placeholder="Input a Status" style="height:80px;font-size:24pt;" align="middle">
+	    <input type="hidden" name="uid" value=<?php echo '"'.$_SESSION['userID'].'"' ?>>
+	    <input type="hidden" name="token" value=<?php echo '"'.$_SESSION['token'].'"' ?> >
+	    <input type="submit" value="Submit">
+	</form>
 </body>
 </html>

@@ -15,7 +15,7 @@
 	$action = isset($_REQUEST['action']) && validToken($uid, $token) ? $_REQUEST['action'] : "";
 
 	// parsing based on action fragment
-	switch ( $action ) {
+	switch ($action) {
 		case 'addUser':
 			addUser($uid, $token);
 		break;
@@ -51,7 +51,6 @@
 		$st = $conn->prepare($sql);
 		$st->execute();
 	}
-
 
 	function getFeed($uid){
 

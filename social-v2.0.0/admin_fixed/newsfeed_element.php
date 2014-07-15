@@ -23,6 +23,9 @@
 
 		        	var all_comments = ""; 
 
+		        	for(var j = 0; data['data'][i]['Comments'].length; j++) {
+		        		all_comments += "<p>This is a comment!</p>";
+		        	}
 
 		        	var html_newsfeed_content = 
 		        		["<li class='active'>", 
@@ -51,6 +54,8 @@
 												"<span>Be the first to leave a comment!</span>",
 											"</div>",
 											"<!-- Rendered Comments -->",
+											all_comments, 
+											"<!-- User input comments -->",
 											"<input type='text' class='form-control' style='border: none;' placeholder='Comment here...'>",
 										"</div>",
 									"</div>",
