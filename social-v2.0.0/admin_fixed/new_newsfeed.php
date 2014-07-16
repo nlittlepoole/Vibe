@@ -150,6 +150,31 @@
 		    $("#inputFriend").autocomplete({
 		      source: friends_names
 		    });
+
+		    // mapping a user's friend name to UID
+
+		    $(function() {
+				$("#statusform").submit(function(event) {
+
+		  			event.preventDefault();
+		  			
+		  			var inputted_name = $('#statusform input[name="recipient"]').val();
+		  			var desired_uid = names_to_ID[inputted_name]
+
+					$('#statusform input[name="recipient"]').val(desired_uid);
+		  			$("#statusform").submit();
+				});
+			});
+
+			$("#status_submit").on("mouseenter", function() {
+			  	$(this).css("background-color", "#275379");
+			  	$(this).css("border-color", "#275379");
+			});
+
+			$("#status_submit").on("mouseleave", function() {
+			  	$(this).css("background-color", "#428bca");
+			  	$(this).css("border-color", "#428bca");
+			});
 		});
 	</script>
 
@@ -200,7 +225,7 @@
 								</div>
 
 							</div>
-							<form name="status" class="form-horizontal" method="post" action="http://api.go-vibe.com/api/vibe.php?action=postVibe">
+							<form name="status" id="statusform" class="form-horizontal" method="post" action="http://api.go-vibe.com/api/vibe.php?action=postVibe">
 							    <div class="form-group">
 							        <label for="inputFriend" class="col-sm-2 control-label">Friend</label>
 							        
@@ -225,9 +250,8 @@
 							    <div class="form-group">
 
 							        <div class="col-sm-offset-2 col-sm-10">
-							        	<!--
-							            <input type="submit" class="btn btn-primary" style="width: 20%" />&nbsp;&nbsp;<i class="fa fa-arrow-circle-right"></i>-->
-							        	<input type="submit" value="Submit" />
+							            <button type="submit" value="Submit" id="status_submit" class="btn btn-primary" style="width: 20%">Share&nbsp;&nbsp;<i class="fa fa-arrow-circle-right"></i></button>
+							        	<!-- <input type="submit" value="Submit" /> -->
 							        </div>
 
 							    </div>
