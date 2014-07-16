@@ -92,8 +92,8 @@
 		plugins: [
 			'../assets/plugins/core_nicescroll/jquery.nicescroll.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
 			'../assets/plugins/core_breakpoints/breakpoints.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
-			'../assets/plugins/core_ajaxify_davis/davis.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
-			'../assets/plugins/core_ajaxify_lazyjaxdavis/jquery.lazyjaxdavis.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+			//'../assets/plugins/core_ajaxify_davis/davis.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+			//'../assets/plugins/core_ajaxify_lazyjaxdavis/jquery.lazyjaxdavis.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
 			'../assets/plugins/core_preload/pace.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
 			'../assets/plugins/menu_sidr/jquery.sidr.js?v=v2.0.0-rc8', 
 			'../assets/plugins/media_blueimp/js/blueimp-gallery.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
@@ -205,7 +205,7 @@
 							        <label for="inputFriend" class="col-sm-2 control-label">Friend</label>
 							        
 							        <div class="col-sm-9">
-							            <input type="text" class="form-control" id="inputFriend2" name="recipient" placeholder="Who's this about? Type in a Facebook friend!">
+							            <input type="text" class="form-control" id="inputFriend" name="recipient" placeholder="Who's this about? Type in a Facebook friend!">
 							        </div>
 
 							    </div>
@@ -394,13 +394,5 @@
 		ajaxify_layout_app: false	};
 		</script>
 	
-
-	<br /><br /><br />
-	<form name="status" action="http://api.go-vibe.com/api/vibe.php?action=postVibe" method="post">
-		<input type="text" name="status" size="240"  placeholder="Input a Status" style="height:80px;font-size:24pt;" align="middle">
-	    <input type="hidden" name="uid" value=<?php echo '"'.$_SESSION['userID'].'"' ?>>
-	    <input type="hidden" name="token" value=<?php echo '"'.$_SESSION['token'].'"' ?> >
-	    <input type="submit" value="Submit">
-	</form>
 </body>
 </html>
