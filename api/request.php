@@ -26,7 +26,7 @@
         
         ob_end_flush();
         ob_flush();
-        flush();
+        // flush();
     }
 
     function post($url, $post_data) {

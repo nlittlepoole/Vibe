@@ -56,7 +56,7 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 
-	<script src="../assets/plugins/core_ajaxify_loadscript/script.min.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
+	<script src="../assets/plugins/core_ajaxify_loadscript/script.min.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script> 
 
 	<!-- NOAH'S DEPENDENCIES -->
 
@@ -106,7 +106,7 @@
 
 		/* The initialization scripts always load last and are automatically and dynamically loaded when AJAX navigation is enabled; */
 		bundle: [
-			'../assets/components/core_ajaxify/ajaxify.init.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+			// '../assets/components/core_ajaxify/ajaxify.init.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
 			'../assets/components/core_preload/preload.pace.init.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
 			'../assets/components/widget_twitter/twitter.init.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
 			'../assets/components/core/core.init.js?v=v2.0.0-rc8'
@@ -147,9 +147,11 @@
 
 			}
 
-		    $("#inputFriend").autocomplete({
-		      source: friends_names
-		    });
+			if(friends_names.length != 0) {
+			    $("#inputFriend").autocomplete({
+			      source: friends_names
+			    });
+			}
 
 		    // mapping a user's friend name to UID
 
@@ -163,6 +165,7 @@
 
 					$('#statusform input[name="recipient"]').val(desired_uid);
 		  			$("#statusform").submit();
+
 				});
 			});
 
@@ -232,6 +235,7 @@
 							        <div class="col-sm-9">
 							            <input type="text" class="form-control" id="inputFriend" name="recipient_to_convert" placeholder="Who's this about? Type in a Facebook friend!">
 							        	<input type="hidden" value="" name="recipient" />
+							        	<input type="hidden" value="newsfeed" name="post_source" />
 							        </div>
 
 							    </div>
@@ -355,7 +359,7 @@
 				
 				<script> 
 				    $(function(){
-				      $('#last_elems').load('newsfeed_element.php'); 
+				      	$('#last_elems').load('newsfeed_element.php'); 
 				    });
 				</script> 
 

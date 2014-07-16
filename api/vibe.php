@@ -1,6 +1,7 @@
 <?php
 
 	// config settings setup
+	ob_start(); 
 	ini_set('display_errors',1); 
 	error_reporting(E_ALL);
 	session_start();
@@ -156,6 +157,8 @@
 			$st = $conn->prepare( $sql );
 			$st->execute();
 		}
+
+		header('Location: http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_newsfeed.php');
 	}
 
 	function postComment($uid, $token){
