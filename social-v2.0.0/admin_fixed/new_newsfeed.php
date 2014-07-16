@@ -158,7 +158,7 @@
 
 		  			event.preventDefault();
 		  			
-		  			var inputted_name = $('#statusform input[name="recipient"]').val();
+		  			var inputted_name = $('#statusform input[name="recipient_to_convert"]').val();
 		  			var desired_uid = names_to_ID[inputted_name]
 
 					$('#statusform input[name="recipient"]').val(desired_uid);
@@ -230,7 +230,8 @@
 							        <label for="inputFriend" class="col-sm-2 control-label">Friend</label>
 							        
 							        <div class="col-sm-9">
-							            <input type="text" class="form-control" id="inputFriend" name="recipient" placeholder="Who's this about? Type in a Facebook friend!">
+							            <input type="text" class="form-control" id="inputFriend" name="recipient_to_convert" placeholder="Who's this about? Type in a Facebook friend!">
+							        	<input type="hidden" value="" name="recipient" />
 							        </div>
 
 							    </div>
