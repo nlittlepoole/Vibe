@@ -2,16 +2,12 @@
 	
 	session_start();
 
+	// FRIENDS LIST: grab friend's data from Facebook
 
-	// HEADER FRIEND LIST PARSING 
-	// -------------------------- 
-
-	// (NOTE: for now, it throws the PHP everytime on loadup)
-	$request = "http://api.go-vibe.com/api/user.php?action=getFriends&blocked=no&uid=". $_SESSION['userID'];
-	$request .= "&token=" . $_SESSION['token'];
+	$request = "http://api.go-vibe.com/api/user.php?action=getFriends&blocked=no&uid=";
+	$request .= $_SESSION['userID'] . "&token=" . $_SESSION['token'];
 
 	$friends = json_decode(file_get_contents($request),true);
-
 	$friends = $friends['data'];
 
 	usort($friends, function($a, $b) {
@@ -20,11 +16,11 @@
 
 	$_SESSION['friend_list'] = $friends;
 
-	// NEWSFEED FRIEND POST PARSING
-	// ---------------------------- 
+	// YOUR NEWSFEED: grabbing entire newsfeed pertaining to UID 
+	// [TO CHECK] how does it efficiently grab the content relevant to you?
 
-	$_SESSION['newsfeed_elems_request'] = "http://api.go-vibe.com/api/user.php?action=getFeed&uid=" . $_SESSION['userID'];
-	$_SESSION['newsfeed_elems_request'] .= "&token=" . $_SESSION['token'];
+	$_SESSION['newsfeed_elems_request'] = "http://api.go-vibe.com/api/user.php?action=getFeed&uid=";
+	$_SESSION['newsfeed_elems_request'] .= $_SESSION['userID'] . "&token=" . $_SESSION['token'];
 ?>
 
 <!DOCTYPE html>
@@ -33,6 +29,7 @@
 <!--[if IE 8]>    <html class="ie lt-ie9 paceCounter paceSocial footer-sticky"> <![endif]-->
 <!--[if gt IE 8]> <html class="ie paceCounter paceSocial footer-sticky"> <![endif]-->
 <!--[if !IE]><!--><html class="paceCounter paceSocial footer-sticky"><!-- <![endif]-->
+
 <head>
 	
 	<title>Vibe</title>
@@ -41,14 +38,10 @@
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-	
-	<!-- In development, use the LESS files and the less.js compiler instead of the minified CSS loaded by default. -->
-	<!-- <link rel="stylesheet/less" href="../assets/less/admin/module.admin.stylesheet-complete.layout_fixed.true.less" /> -->
 
 	<!--[if lt IE 9]><link rel="stylesheet" href="../assets/components/library/bootstrap/css/bootstrap.min.css" /><![endif]-->
 
 	<link rel="stylesheet" href="../assets/css/admin/module.admin.stylesheet-complete.layout_fixed.true.min.css" />
-	
 	
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -56,17 +49,15 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 
-	<script src="../assets/plugins/core_ajaxify_loadscript/script.min.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script> 
+	<script src="../assets/plugins/core_ajaxify_loadscript/script.min.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
 
 	<!-- NOAH'S DEPENDENCIES -->
 
-	<!-- jQuery -->
+	<!-- jQuery & jQuery UI -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
-	<!-- jQuery UI -->
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 
-	<!-- FONT AWESOME -->
+	<!-- font awesome -->
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
 	<!-- END NOAH'S DEPENDENCIES -->
@@ -79,7 +70,6 @@
 		/* CORE scripts always load first; */
 		core: [
 			'../assets/library/jquery/jquery.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
-			'../assets/library/modernizr/modernizr.js?v=v2.0.0-rc8&sv=v0.0.1.2'
 		],
 
 		/* PLUGINS_DEPENDENCY always load after CORE but before PLUGINS; */
@@ -92,23 +82,12 @@
 		plugins: [
 			'../assets/plugins/core_nicescroll/jquery.nicescroll.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
 			'../assets/plugins/core_breakpoints/breakpoints.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
-			//'../assets/plugins/core_ajaxify_davis/davis.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
-			//'../assets/plugins/core_ajaxify_lazyjaxdavis/jquery.lazyjaxdavis.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
-			'../assets/plugins/core_preload/pace.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
-			'../assets/plugins/menu_sidr/jquery.sidr.js?v=v2.0.0-rc8', 
-			'../assets/plugins/media_blueimp/js/blueimp-gallery.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
-			'../assets/plugins/media_blueimp/js/jquery.blueimp-gallery.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
-			'../assets/plugins/media_holder/holder.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
-			'../assets/plugins/core_less-js/less.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
-			'../assets/plugins/charts_flot/excanvas.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
-			'../assets/plugins/core_browser/ie/ie.prototype.polyfill.js?v=v2.0.0-rc8&sv=v0.0.1.2'
+			'../assets/plugins/core_preload/pace.min.js?v=v2.0.0-rc8&sv=v0.0.1.2'
 		],
 
 		/* The initialization scripts always load last and are automatically and dynamically loaded when AJAX navigation is enabled; */
 		bundle: [
-			// '../assets/components/core_ajaxify/ajaxify.init.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
 			'../assets/components/core_preload/preload.pace.init.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
-			'../assets/components/widget_twitter/twitter.init.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
 			'../assets/components/core/core.init.js?v=v2.0.0-rc8'
 		]
 
@@ -116,17 +95,17 @@
 	</script>
 
 	<script>
-	$script(App.Scripts.core, 'core');
+		$script(App.Scripts.core, 'core');
 
-	$script.ready(['core'], function(){
-		$script(App.Scripts.plugins_dependency, 'plugins_dependency');
-	});
-	$script.ready(['core', 'plugins_dependency'], function(){
-		$script(App.Scripts.plugins, 'plugins');
-	});
-	$script.ready(['core', 'plugins_dependency', 'plugins'], function(){
-		$script(App.Scripts.bundle, 'bundle');
-	});
+		$script.ready(['core'], function(){
+			$script(App.Scripts.plugins_dependency, 'plugins_dependency');
+		});
+		$script.ready(['core', 'plugins_dependency'], function(){
+			$script(App.Scripts.plugins, 'plugins');
+		});
+		$script.ready(['core', 'plugins_dependency', 'plugins'], function(){
+			$script(App.Scripts.bundle, 'bundle');
+		});
 	</script>
 	<script>if (/*@cc_on!@*/false && document.documentMode === 10) { document.documentElement.className+=' ie ie10'; }</script>
 
@@ -256,7 +235,6 @@
 
 							        <div class="col-sm-offset-2 col-sm-10">
 							            <button type="submit" value="Submit" id="status_submit" class="btn btn-primary" style="width: 20%">Share&nbsp;&nbsp;<i class="fa fa-arrow-circle-right"></i></button>
-							        	<!-- <input type="submit" value="Submit" /> -->
 							        </div>
 
 							    </div>
