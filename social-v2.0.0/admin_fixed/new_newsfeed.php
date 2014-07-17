@@ -153,13 +153,32 @@
 	  					$('input[id="inputFriend"]').val("");
 	  					$('input[id="inputVibe"]').val("");
 
-	  					// [TO IMPLEMENT] clear the old elements and update HTML with new elements from SQL call
-	  					// $('#last_elems').clear();
+	  					// [TO IMPLEMENT] clear the old elements and update HTML with new elements from SQL call)
+	  					$(".vibe_newsfeed_posts").remove();
+	  					$('#last_elems').load('newsfeed_element.php'); 
 	  					// $('#last_elems').load('newsfeed_element.php'); 
+	  					// alert('about to trigger the newsfeed element upload');
+	  					/*
+	  					$.get("newsfeed_element.php", function(data) {
+	  						alert(data);
+						     $("#last_elems").replaceWith(data);
+						});
+						*/
 					    
 	  			});
 
 			});
+
+
+			
+			function update() {
+				// carry out some action every so often 
+				$(".vibe_newsfeed_posts").remove();
+				$('#last_elems').load('newsfeed_element.php'); 
+			}
+			
+
+			// setInterval(update, 10000);	 	// send the GET request every 10 seconds
 
 
 			// custom design change - (dark blue on hover instead of turquoise)

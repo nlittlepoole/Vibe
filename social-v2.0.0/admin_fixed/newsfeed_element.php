@@ -12,13 +12,20 @@
 		$.getJSON(newsfeed_url, function(data) {
 
 			// testing against errors
-			// alert("DATA: " + data['data']);
+			// alert("REAL DATA: " + data['data']);
 
 		    if (!data.error) {
 
 		        // PARSING RESULTS
 		        for(var i = 0; i < data['data'].length; i++) {
 		        	
+		        	var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + data['data'][i]['Tagged'] + "&name=" + data['data'][i]['Name'] + "";
+
+		        	// grab the first element and store it in session data
+		        	if(i == 0) {
+		        		most_recent_pid = data['data'][i]['PID']
+		        	}
+
 		        	var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + data['data'][i]['Tagged'] + "&name=" + data['data'][i]['Name'] + "";
 
 		        	var all_comments = ""; 
