@@ -29,7 +29,7 @@
 		        	*/
 
 		        	var html_newsfeed_content = 
-		        		["<li class='active'>", 
+		        		["<li class='active vibe_newsfeed_posts'>", 
 							"<span class='marker'></span>",
 							"<div class='block'>",
 								"<div class='caret'></div>",

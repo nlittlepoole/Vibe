@@ -160,10 +160,12 @@
 
 			});
 
-			/*
+			
 			$(".vibe_newsfeed_posts").on("remove", function() {
+				alert("remove triggered.");
 			    $('#last_elems').load('newsfeed_element.php');
-			})*/
+			})
+
 
 			// custom design change - (dark blue on hover instead of turquoise)
 
