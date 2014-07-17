@@ -12,6 +12,7 @@
 		$.getJSON(newsfeed_url, function(data) {
 
 			// TESTING AGAINST ERRORS
+			// alert("DATA: " + data['data']);
 
 		    if (!data.error) {
 

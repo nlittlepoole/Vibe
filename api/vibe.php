@@ -158,7 +158,7 @@
 			$st->execute();
 		}
 
-		header('Location: http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_newsfeed.php');
+		// header('Location: http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_newsfeed.php');
 	}
 
 	function postComment($uid, $token){

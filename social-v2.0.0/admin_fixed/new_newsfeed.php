@@ -149,22 +149,22 @@
 	  			$.post("http://api.go-vibe.com/api/vibe.php?action=postVibe", $("#statusform").serialize())
 
 	  				.done(function(data) {
+	  					// $(".vibe_newsfeed_posts").remove();
 	  					$('input[id="inputFriend"]').val("");
 	  					$('input[id="inputVibe"]').val("");
 
 	  					// $('#last_elems').clear();
-	  					$(".vibe_newsfeed_posts").remove();
-	  				});	
+	  					// $('#last_elems').load('newsfeed_element.php'); 
+					    
+	  			});
+
+	  			// alert('calling the load function!');
+	  			// $('#last_elems').load('newsfeed_element.php'); 	
+	  			//$('#last_elems').html("<p>HELLO WORLD!!!!</p>");
 				
 
 
 			});
-
-			
-			$(".vibe_newsfeed_posts").on("remove", function() {
-				alert("remove triggered.");
-			    $('#last_elems').load('newsfeed_element.php');
-			})
 
 
 			// custom design change - (dark blue on hover instead of turquoise)
