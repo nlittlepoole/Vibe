@@ -5,13 +5,13 @@
 <script type="text/javascript">
 	$(function(){
 		
-		// REQUEST
+		// REQUEST to get newsfeed elements
 		var newsfeed_url = "<?php echo $_SESSION['newsfeed_elems_request']; ?>";
 
-		// GRABBING THE JSON
+		// GRABBING THE JSON of newsfeed elements
 		$.getJSON(newsfeed_url, function(data) {
 
-			// TESTING AGAINST ERRORS
+			// testing against errors
 			// alert("DATA: " + data['data']);
 
 		    if (!data.error) {
@@ -23,6 +23,7 @@
 
 		        	var all_comments = ""; 
 
+		        	// do comments parsing of DB, once basic form is done...
 		        	/*
 		        	for(var j = 0; data['data'][i]['Comments'].length; j++) {
 		        		all_comments += "<p>This is a comment!</p>";

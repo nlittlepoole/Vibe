@@ -153,21 +153,17 @@
 	  					$('input[id="inputFriend"]').val("");
 	  					$('input[id="inputVibe"]').val("");
 
+	  					// [TO IMPLEMENT] clear the old elements and update HTML with new elements from SQL call
 	  					// $('#last_elems').clear();
 	  					// $('#last_elems').load('newsfeed_element.php'); 
 					    
 	  			});
 
-	  			// alert('calling the load function!');
-	  			// $('#last_elems').load('newsfeed_element.php'); 	
-	  			//$('#last_elems').html("<p>HELLO WORLD!!!!</p>");
-				
-
-
 			});
 
 
 			// custom design change - (dark blue on hover instead of turquoise)
+			// [TO IMPLEMENT] more properties and custom styling on the page
 
 			$("#status_submit").on("mouseenter", function() {
 			  	$(this).css("background-color", "#275379");
@@ -283,74 +279,6 @@
 			</div>
 
 			<ul class="timeline-activity list-unstyled" id="newsfeed_container">
-				
-				<li>
-					<span class="marker"></span>
-					<div class="block">
-						<div class="caret"></div>
-							
-							<div class="inline-block box-generic" style="width: 100%; border: 1px solid #ececec;">
-
-								<!-- SOCIAL MEDIA POST FOR TESTING PURPOSES -->
-
-								<div class="widget">
-
-								<!-- Info -->
-									<div class="bg-primary">
-										<div class="media">
-											<div class="media-body innerTB" style="padding-left:20px;">
-												<a href="" class="text-white strong">Someone</a>
-												<span>upped your <a href="" class="text-white strong">Chillness</a> on 15th January, 2014 <i class="icon-time-clock"></i></span>
-
-											</div>
-
-										</div>
-									</div>
-
-									<!-- Content -->
-									<div class="innerAll">
-										<p class="lead">Yo, Carman lyfe tho. You were a good host!</p>
-									</div>
-									<!-- Comment -->
-									<div class="bg-gray innerAll border-top border-bottom text-small ">
-										<span>View all <a href="" class="text-primary">2 Comments</a></span>
-									</div>
-
-									<!-- First Comment -->
-									<div class="media border-bottom margin-none bg-gray">
-										<a href="" class="pull-left innerAll half">
-											<img src="../assets//images/people/100/2.jpg" width="60" class="media-object">
-										</a>
-										<div class="media-body innerTB">
-											<a href="#" class="pull-right innerT innerR text-muted">
-												<i class="icon-reply-all-fill fa fa-2x "></i>
-											</a>
-											<a href="" class="strong text-inverse">Adrian Demian</a> 	<small class="text-muted ">wrote on Jan 15th, 2014</small> <a href="" class="text-small">like</a>
-											<div>I can see this as being true!</div>
-
-										</div>
-									</div>
-
-									<!-- Second Comment -->
-									<div class="media margin-none bg-gray">
-										<a href="" class="pull-left innerAll half">
-											<img src="../assets//images/people/100/11.jpg" width="60" class="media-object">
-										</a>
-										<div class="media-body innerTB">
-											<a href="#" class="pull-right innerT innerR">
-												<i class="icon-reply-all-fill fa fa-2x text-muted "></i>
-											</a>
-											<a href="" class="strong text-inverse">Jenny Adams</a> 	<small class="text-muted ">wrote on Jan 15th, 2014</small> <a href="" class="text-small">like</a>
-											<div>Yep! So much Keystone haha</div>
-										</div>
-									</div>
-									
-									<input type="text" class="form-control" style="border: none;" placeholder="Comment here...">
-
-								</div>
-						</div>
-					</div>
-				</li>
 
 				<div id="last_elems"></div>
 
@@ -368,17 +296,17 @@
 			</ul>				
 		</div>
 
-<!-- SIDEBAR WIDGET -->
-<div class="col-md-4 col-lg-3">
+			<!-- SIDEBAR WIDGET -->
+			<div class="col-md-4 col-lg-3">
 
-	<script> 
-	    $(function(){
-	      $('#new_sidebar').load('new_sidebar.php'); 
-	    });
-	</script> 
-	<div id="new_sidebar"></div>
-		
-</div> 
+				<script> 
+				    $(function(){
+				      $('#new_sidebar').load('new_sidebar.php'); 
+				    });
+				</script> 
+				<div id="new_sidebar"></div>
+					
+			</div> 
 				
 		</div>
 		<!-- // Content END -->
