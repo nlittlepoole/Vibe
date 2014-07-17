@@ -12,7 +12,6 @@
 		$.getJSON(newsfeed_url, function(data) {
 
 			// TESTING AGAINST ERRORS
-			// alert("DATA:" + (data['data']));
 
 		    if (!data.error) {
 
@@ -23,9 +22,11 @@
 
 		        	var all_comments = ""; 
 
+		        	/*
 		        	for(var j = 0; data['data'][i]['Comments'].length; j++) {
 		        		all_comments += "<p>This is a comment!</p>";
 		        	}
+		        	*/
 
 		        	var html_newsfeed_content = 
 		        		["<li class='active'>", 

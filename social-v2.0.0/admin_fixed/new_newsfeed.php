@@ -24,6 +24,7 @@
 ?>
 
 <!DOCTYPE html>
+
 <!--[if lt IE 7]> <html class="ie lt-ie9 lt-ie8 lt-ie7 paceCounter paceSocial footer-sticky"> <![endif]-->
 <!--[if IE 7]>    <html class="ie lt-ie9 lt-ie8 paceCounter paceSocial footer-sticky"> <![endif]-->
 <!--[if IE 8]>    <html class="ie lt-ie9 paceCounter paceSocial footer-sticky"> <![endif]-->
@@ -87,7 +88,7 @@
 
 		/* The initialization scripts always load last and are automatically and dynamically loaded when AJAX navigation is enabled; */
 		bundle: [
-			'../assets/components/core_preload/preload.pace.init.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+			'../assets/components/core_preload/preload.pace.init.js?v=v2.0.0-rc8&sv=v0.0.1.2',
 			'../assets/components/core/core.init.js?v=v2.0.0-rc8'
 		]
 
@@ -109,8 +110,9 @@
 	</script>
 	<script>if (/*@cc_on!@*/false && document.documentMode === 10) { document.documentElement.className+=' ie ie10'; }</script>
 
-	<!-- AUTOCOMPLETE CODE -->
+	<!-- autocomplete code && form submission -->
 	<script type="text/javascript">
+		
 		$(function() {
 			
 			// friends' list
@@ -123,30 +125,47 @@
 			for(var i = 0; i < my_friends.length; i++) {
 				names_to_ID[my_friends[i]['Name']] = my_friends[i]['UID'];
 				friends_names[i] = my_friends[i]['Name'];
-
 			}
 
 			if(friends_names.length != 0) {
 			    $("#inputFriend").autocomplete({
-			      source: friends_names
+				     source: friends_names
 			    });
 			}
 
 		    // mapping a user's friend name to UID
 
-		    $(function() {
-				$("#statusform").submit(function(event) {
+			$("#statusform").submit(function(event) {
 
-		  			event.preventDefault();
-		  			
-		  			var inputted_name = $('#statusform input[name="recipient_to_convert"]').val();
-		  			var desired_uid = names_to_ID[inputted_name]
+	  			event.preventDefault();
+	  			
+	  			var inputted_name = $('#statusform input[name="recipient_to_convert"]').val();
+	  			var desired_uid = names_to_ID[inputted_name]
 
-					$('#statusform input[name="recipient"]').val(desired_uid);
-		  			$("#statusform").submit();
+				$('#statusform input[name="recipient"]').val(desired_uid);
+	  			// $("#statusform").submit();
 
-				});
+	  			
+	  			$.post("http://api.go-vibe.com/api/vibe.php?action=postVibe", $("#statusform").serialize())
+
+	  				.done(function(data) {
+	  					$('input[id="inputFriend"]').val("");
+	  					$('input[id="inputVibe"]').val("");
+
+	  					// $('#last_elems').clear();
+	  					$(".vibe_newsfeed_posts").remove();
+	  				});	
+				
+
+
 			});
+
+			/*
+			$(".vibe_newsfeed_posts").on("remove", function() {
+			    $('#last_elems').load('newsfeed_element.php');
+			})*/
+
+			// custom design change - (dark blue on hover instead of turquoise)
 
 			$("#status_submit").on("mouseenter", function() {
 			  	$(this).css("background-color", "#275379");
@@ -157,16 +176,16 @@
 			  	$(this).css("background-color", "#428bca");
 			  	$(this).css("border-color", "#428bca");
 			});
+
 		});
 	</script>
 
 	<style type="text/css">
+	  /* autocomplete box */
 	  .ui-autocomplete {
-	    max-height: 400px;
-	    overflow-y: auto;
-
-	    /* prevent horizontal scrollbar */
-	    overflow-x: hidden;
+		   max-height: 400px;
+		   overflow-y: auto;
+		   overflow-x: hidden;		/* prevent horizontal scrollbar */
 	  }
 	</style>
 	
