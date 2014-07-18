@@ -123,6 +123,7 @@
 		$hash_id = hash("sha256", $email);
 		$author = isset($_POST['uid']) ? $_POST['uid'] : "";
 		$recipient = isset($_POST['recipient']) ? $_POST['recipient'] : "";
+		$recipients = explode(" ",$recipient);
 
 		// setup temp user if user does not exist
 		if ($recipient == "" || $email != "") {
@@ -149,6 +150,13 @@
 		$st = $conn->prepare($sql);
 		$st->execute();
 
+		foreach($recipients as $tagged){
+			$sql = "INSERT INTO Tagged (`UID`, `PID`)
+				VALUES ('$tagged','$pid');";
+			
+			$st = $conn->prepare( $sql );
+			$st->execute();
+		}
 		foreach($vibes as $vibe) {
 			$sql = "INSERT INTO Vibes (`Vibe`, `UID`, `Score`)
 				VALUES ('$vibe','$recipient',1)
@@ -157,7 +165,7 @@
 			$st = $conn->prepare( $sql );
 			$st->execute();
 		}
-
+		$conn = null;
 		// header('Location: http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_newsfeed.php');
 	}
 
