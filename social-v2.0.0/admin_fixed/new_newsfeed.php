@@ -112,6 +112,9 @@
 
 	<!-- autocomplete code && form submission -->
 	<script type="text/javascript">
+
+		// initializing the last stored element to none
+		localStorage.setItem("latest_pid", "null value");
 		
 		$(function() {
 			
@@ -154,16 +157,9 @@
 	  					$('input[id="inputVibe"]').val("");
 
 	  					// [TO IMPLEMENT] clear the old elements and update HTML with new elements from SQL call)
-	  					$(".vibe_newsfeed_posts").remove();
+	  					// $(".vibe_newsfeed_posts").remove();
 	  					$('#last_elems').load('newsfeed_element.php'); 
-	  					// $('#last_elems').load('newsfeed_element.php'); 
 	  					// alert('about to trigger the newsfeed element upload');
-	  					/*
-	  					$.get("newsfeed_element.php", function(data) {
-	  						alert(data);
-						     $("#last_elems").replaceWith(data);
-						});
-						*/
 					    
 	  			});
 
@@ -173,7 +169,7 @@
 			
 			function update() {
 				// carry out some action every so often 
-				$(".vibe_newsfeed_posts").remove();
+				// $(".vibe_newsfeed_posts").remove();
 				$('#last_elems').load('newsfeed_element.php'); 
 			}
 			
