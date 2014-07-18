@@ -16,7 +16,7 @@ HOST = "smtp.secureserver.net"
 FROM= "info@go-vibe.com"
 TO= email
 SUBJECT = "You've got Vibes!"
-BODY = "Hey, Someone has posted about you on vibe \n They said: "+status + "\n go to http://niger.go-vibe.com/index.php?ref="+uid +" to see more"
+BODY = "Hey, Someone has posted about you on vibe \n They said: "+status + "\n go to http://api.go-vibe.com/index.php?ref="+uid +" to see more"
 body = string.join((
     "From: %s" % FROM,
     "To: %s" % TO,
