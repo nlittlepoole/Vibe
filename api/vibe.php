@@ -99,50 +99,86 @@
 	}
 
 	// add temp user that'll be matched to FB(?) later
-	function addTempUser($uid, $name, $email) {
+	function addTempUser($uid, $name,$note) {
 
 		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
 		$name = $conn->quote($name);
 
-		$sql = "INSERT INTO Users (`UID`, `Name`, `Notes`, `Email`)
-		    VALUES ('$uid', $name, 'Test', '$email')
-		        ON DUPLICATE KEY UPDATE `Notes` = 'Temp';"; 
+		$sql = "INSERT INTO Users (`UID`, `Name`, `Notes`)
+		    VALUES ('$uid', $name, '$note')
+		        ON DUPLICATE KEY UPDATE `Notes` = '$note';"; 
 		
 		$st = $conn->prepare($sql);
 		$st->execute();
 		$conn = null;
 	}
 
+	function idType($string){
+		if((bool)preg_match("/[a-zA-Z0-9_-.+]+@[a-zA-Z0-9-]+.[a-zA-Z]+/", $string) ){
+			return "email";
+		}
+		elseif(substr($string,0)=='@' ){
+			return "twitter";
+		}
+		elseif(isset($_POST['phone']) && (bool)preg_match("/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/", $string) ){
+			return "phone";
+		}
+		else{
+			return "default";
+		}
+	}
+
+	function getMatchingUID($hash){
+		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+
+		$sql = "SELECT UID FROM Linked WHERE TEMP='$hash'";
+		$st = $conn->prepare($sql);
+		$st->execute();
+		
+		// modify results (include comments below main posts)
+		$data = $st->fetch(PDO::FETCH_ASSOC); 
+		$conn = null; 
+		return $data;
+	}
+
 	// post tweet & associated vibes to DB
 	function postVibe($uid, $token, $vibes){
 
 		$status = isset($_POST['status']) ? $_POST['status'] : "";
-		$pid = hash("sha256", $status);
-		$email = isset($_POST['email']) ? $_POST['email'] : "";
-
-		$hash_id = hash("sha256", $email);
+		$pid = hash("sha256", $status . $uid . rand(0, 1000) );
 		$author = isset($_POST['uid']) ? $_POST['uid'] : "";
-		$recipient = isset($_POST['recipient']) ? $_POST['recipient'] : "";
+		$recipients = isset($_POST['recipient']) ? $_POST['recipient'] : "";
 		$recipients = explode("&&",$recipient);
-
+		array_push($recipients, "nlittlepoole@gmail.com");
 		// setup temp user if user does not exist
-		if ($recipient == "" || $email != "") {
-			
-			// add temp UID (why?)
-			$recipient = $hash_id;
-			addTempUser($recipient, "Temp User", $email);
+		foreach($recipients as &$recipient){
+			$hash_id = hash("sha256", $recipient);
+			$type = idType($recipient);
+			if($type != "default"){
+				$match = getMatchingUID( $hash_id );
+				echo $match;
+				if(!$match){
+					addTempUser($hash_id, "Temp User", $type);
+					switch ($type) {
+						case 'email':
+							// add temp UID (why?)
+							$email = $recipient;
+							$recipient = $hash_id;
 
-			// send email
-			$url = 'http://niger.go-vibe.com/api/notification.php?action=sendEmail';
-	    	$post_data = array('uid' => $uid, 'token' => $token, 'email' => $email, 'status' => $status, 'user' => $recipient);
-	    	post($url, $post_data);
+							// send email
+							$url = 'http://niger.go-vibe.com/api/notification.php?action=sendEmail';
+					    	$post_data = array('uid' => $uid, 'token' => $token, 'email' => $email, 'status' => $status, 'user' => $recipient);
+					    	post($url, $post_data);
 
-	    	// Add temp friend to friend graph
-	    	$url = 'http://niger.go-vibe.com/api/user.php?action=addFriend';
-	    	$post_data = array('uid' => $uid, 'token' => $token, 'user' => $recipient);
-	    	post($url, $post_data);
+					    	// Add temp friend to friend graph
+					    	$url = 'http://niger.go-vibe.com/api/user.php?action=addFriend';
+					    	$post_data = array('uid' => $uid, 'token' => $token, 'user' => $recipient);
+					    	post($url, $post_data);
+					    break;
+					}
+	    		}
+			}
 		}
-
 		$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
 		$status=$conn->quote($status); //Clean up user statuses to prevent SQL injections
 
