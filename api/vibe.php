@@ -156,8 +156,6 @@
 			$type = idType($recipient);
 			if($type != "default"){
 				$match = getMatchingUID( $hash_id )[0];
-				print_r($matched);
-				echo $match;
 				if(!$match){
 					addTempUser($hash_id, "Temp User", $type);
 					switch ($type) {
