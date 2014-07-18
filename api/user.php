@@ -33,7 +33,7 @@
 			getFeed($uid);
 		break;
 		case 'getStream':
-			getFeed($uid);
+			getStream($uid);
 		break;
 		case 'blockUser':
 			blockUser($uid);
