@@ -136,7 +136,7 @@
 		$st->execute();
 		
 		// modify results (include comments below main posts)
-		$data = $st->fetch(PDO::NUM); 
+		$data = $st->fetch(PDO::FETCH_NUM); 
 		$conn = null; 
 		return $data;
 	}
