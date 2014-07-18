@@ -59,7 +59,7 @@
 		// retrieve overall feed information associated with friends
 		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
 
-		$sql = "SELECT PID,Content,Agree,Disagree,Timestamp FROM Posts WHERE PID IN SELECT PID FROM Tagged WHERE UID='$uid'";
+		$sql = "SELECT PID,Content,Agree,Disagree,Timestamp FROM Posts WHERE PID IN (SELECT PID FROM Tagged WHERE UID='$uid')";
 		$st = $conn->prepare($sql);
 		$st->execute();
 		
