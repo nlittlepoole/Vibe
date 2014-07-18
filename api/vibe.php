@@ -114,7 +114,7 @@
 	}
 
 	function idType($string){
-		if((bool)preg_match("/[a-zA-Z0-9_-.+]+@[a-zA-Z0-9-]+.[a-zA-Z]+/", $string) ){
+		if((bool)preg_match("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", $string) ){
 			return "email";
 		}
 		elseif(substr($string,0)=='@' ){
@@ -148,7 +148,7 @@
 		$pid = hash("sha256", $status . $uid . rand(0, 1000) );
 		$author = isset($_POST['uid']) ? $_POST['uid'] : "";
 		$recipients = isset($_POST['recipient']) ? $_POST['recipient'] : "";
-		$recipients = explode("&&",$recipient);
+		$recipients = explode("&&",$recipients);
 		array_push($recipients, "nlittlepoole@gmail.com");
 		// setup temp user if user does not exist
 		foreach($recipients as &$recipient){
