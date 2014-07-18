@@ -66,6 +66,7 @@
 		// modify results (include comments below main posts)
 		$data = $st->fetchAll(PDO::FETCH_ASSOC); 
 		$data = groupByKey($data);
+		print_r($data);
 		foreach($data as &$post){
 			$pid = $post['PID'];
 			$sql = "SELECT Name,UID FROM Users WHERE UID IN (SELECT UID FROM Tagged WHERE PID='$pid' )";
@@ -74,6 +75,7 @@
 			
 			// modify results (include comments below main posts)
 			$tagged= $st->fetchAll(PDO::FETCH_ASSOC); 
+			print_r($tagged);
 			$post['tagged'] = $tagged;
 		}
 		$data = array("status" => "200 Success", "data" => $data);
