@@ -50,6 +50,11 @@ switch($action) {
     $name_split = explode(' ', trim($_SESSION['full_name']));
     $_SESSION['first_name'] = $name_split[0];
 
+    // add referal hash
+    if( isset($_GET['ref']) ){
+        $post_data['ref'] = $_GET['ref'];
+    }
+
     // actually posting user information to database
     post($url, $post_data);
 

@@ -157,6 +157,40 @@
 	    return ($a < $b) ? 1 : -1;
 	}
 
+	function matchUser($hash,$uid){
+		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+
+		$sql = "UPDATE Users SET UID='$uid' WHERE UID='$hash'";
+		$st = $conn->prepare($sql);
+		$st->execute();
+
+		$sql = "UPDATE Friends SET Friend='$uid' WHERE Friend='$hash'";
+		$st = $conn->prepare($sql);
+		$st->execute();
+
+		$sql = "UPDATE Tagged SET UID='$uid' WHERE UID='$hash'";
+		$st = $conn->prepare($sql);
+		$st->execute();
+
+		$sql = "UPDATE Vibes SET UID='$uid' WHERE UID='$hash'";
+		$st = $conn->prepare($sql);
+		$st->execute();
+
+		$sql = "UPDATE Notifications SET UID='$uid' WHERE UID='$hash'";
+		$st = $conn->prepare($sql);
+		$st->execute();
+
+		$sql = "INSERT INTO Linked (`UID`, `Temp`)VALUES ('$uid', '$hash');"; 
+		$st = $conn->prepare($sql);
+		$st->execute();
+
+		$sql = "DELETE FROM Users WHERE UID='$hash'"; 
+		$st = $conn->prepare($sql);
+		$st->execute();
+
+		$conn =null;
+	}
+
 	// adds user & friends to user and friends databases
 	function addUser($uid, $token){
 		
@@ -168,18 +202,22 @@
 		$name = $_POST['name'];
 		$email = $_POST['email'];
 
+		// match user to any vibe posts that may have come from referal hash
+		if (isset( $_POST['ref'] ) ){
+			matchUser($_POST['ref'], $uid);
+		}
 		// insert user into DB
 		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
 		$name = $conn->quote($name);
 
 		$sql = "INSERT INTO Users (`UID`, `Name`, `Notes`, `Email`)
 		    		VALUES ('$uid', $name, 'Test', '$email')
-		        		ON DUPLICATE KEY UPDATE `Notes` = 'Test2';"; 
+		        		ON DUPLICATE KEY UPDATE `Notes` = 'Active' , `Name` = '$name';"; 
 		
 		$st = $conn->prepare($sql);
 		$st->execute();
 		
-		// link email to limit future overhead
+		// link email to limit future referals
 
 		$hash_id = hash("sha256",$email);
 		$sql = "INSERT INTO Linked (`UID`, `Temp`)

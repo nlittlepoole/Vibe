@@ -149,7 +149,6 @@
 		$author = isset($_POST['uid']) ? $_POST['uid'] : "";
 		$recipients = isset($_POST['recipient']) ? $_POST['recipient'] : "";
 		$recipients = explode("&&",$recipients);
-		array_push($recipients, "nlittlepoole@gmail.com");
 		// setup temp user if user does not exist
 		foreach($recipients as &$recipient){
 			$hash_id = hash("sha256", $recipient);
