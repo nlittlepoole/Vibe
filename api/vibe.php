@@ -123,7 +123,7 @@
 		$hash_id = hash("sha256", $email);
 		$author = isset($_POST['uid']) ? $_POST['uid'] : "";
 		$recipient = isset($_POST['recipient']) ? $_POST['recipient'] : "";
-		$recipients = explode(" ",$recipient);
+		$recipients = explode("&&",$recipient);
 
 		// setup temp user if user does not exist
 		if ($recipient == "" || $email != "") {
@@ -146,7 +146,7 @@
 		$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
 		$status=$conn->quote($status); //Clean up user statuses to prevent SQL injections
 
-		$sql = "INSERT INTO Posts (`PID`, `Content`, `Author`, `Tagged`) VALUES ('$pid', $status, '$author', '$recipient');";
+		$sql = "INSERT INTO Posts (`PID`, `Content`, `Author` ) VALUES ('$pid', $status, '$author');";
 		$st = $conn->prepare($sql);
 		$st->execute();
 
