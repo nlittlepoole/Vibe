@@ -66,7 +66,7 @@
 		// modify results (include comments below main posts)
 		$data = $st->fetchAll(PDO::FETCH_ASSOC); 
 		$data = groupByKey($data);
-		for($data as &$post){
+		foreach($data as &$post){
 			$pid = $post['PID'];
 			$sql = "SELECT Name,UID FROM Users WHERE UID IN (SELECT UID FROM Tagged WHERE PID='$pid' )";
 			$st = $conn->prepare($sql);
