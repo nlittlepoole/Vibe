@@ -28,6 +28,10 @@ $action = isset($_GET['action']) && $uid ? $_GET['action'] : "";
 
 $_SESSION['full_name'] = "";
 
+if( isset($_GET['ref']) ){
+        $_SESSION['ref'] = $_GET['ref'];
+    }
+
 //Switch case determines what to do next based on the input arguments from the action URL fragment("?=action" in the URL)
 switch($action) {
 
@@ -51,8 +55,8 @@ switch($action) {
     $_SESSION['first_name'] = $name_split[0];
 
     // add referal hash
-    if( isset($_GET['ref']) ){
-        $post_data['ref'] = $_GET['ref'];
+    if( isset($_SESSION['ref']) ){
+        $post_data['ref'] = $_SESSION['ref'];
     }
 
     // actually posting user information to database
