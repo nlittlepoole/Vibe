@@ -32,6 +32,9 @@
 		case 'getFeed':
 			getFeed($uid);
 		break;
+		case 'getStream':
+			getFeed($uid);
+		break;
 		case 'blockUser':
 			blockUser($uid);
 		break;
@@ -50,6 +53,25 @@
 		
 		$st = $conn->prepare($sql);
 		$st->execute();
+	}
+	function getStream($uid){
+
+		// retrieve overall feed information associated with friends
+		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+
+		$sql = "SELECT T1.PID, T1.Tagged, T2.Name, T1.Content, T1.Agree, T1.Disagree, T1.Timestamp From ( (SELECT * FROM Posts WHERE Tagged='$uid')T1 Join (Select * From Users WHERE UID='$uid') T2 On T1.Tagged = T2.UID )"
+		$st = $conn->prepare($sql);
+		$st->execute();
+		
+		// modify results (include comments below main posts)
+		$data = $st->fetchAll(PDO::FETCH_ASSOC); 
+		
+		$data = groupByKey($data);
+		$data = array("status" => "200 Success", "data" => $data);
+		$conn = null;
+
+		// push results
+		pushResponse($data);
 	}
 
 	function getFeed($uid){
