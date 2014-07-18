@@ -136,7 +136,7 @@
 		$st->execute();
 		
 		// modify results (include comments below main posts)
-		$data = $st->fetch(PDO::FETCH_ASSOC); 
+		$data = $st->fetch(PDO::NUM); 
 		$conn = null; 
 		return $data;
 	}
@@ -156,6 +156,7 @@
 			$type = idType($recipient);
 			if($type != "default"){
 				$match = getMatchingUID( $hash_id )[0];
+				print_r($matched);
 				echo $match;
 				if(!$match){
 					addTempUser($hash_id, "Temp User", $type);
