@@ -178,10 +178,19 @@
 		
 		$st = $conn->prepare($sql);
 		$st->execute();
-		$conn = null;
+		
+		// link email to limit future overhead
 
+		$hash_id = hash("sha256",$email);
+		$sql = "INSERT INTO Linked (`UID`, `Temp`)
+		    		VALUES ('$uid', '$hash_id');"; 
+		
+		$st = $conn->prepare($sql);
+		$st->execute();
+
+		$conn = null;
 		// makes request to add user data
-		$url = 'http://niger.go-vibe.com/api/location.php?action=addUser';
+		$url = 'http://api.go-vibe.com/api/location.php?action=addUser';
 	    $post_data = array('uid' => $uid, 'token' => $token);
 	    post($url, $post_data);
 
@@ -226,7 +235,7 @@
 		$conn = null;
 
 		// request to add community data
-		$url = 'http://niger.go-vibe.com/api/location.php?action=addFriends';
+		$url = 'http://api.go-vibe.com/api/location.php?action=addFriends';
 	    $post_data = array('uid' => $uid, 'token' => $token);
 	    post($url, $post_data);
 
