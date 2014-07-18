@@ -59,13 +59,23 @@
 		// retrieve overall feed information associated with friends
 		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
 
-		$sql = "SELECT * FROM POSTS WHERE PID IN SELECT * FROM Tagged WHERE UID='$uid'";
+		$sql = "SELECT PID,Name,Content,Agree,Disagree,Timestamp FROM POSTS WHERE PID IN SELECT * FROM Tagged WHERE UID='$uid'";
 		$st = $conn->prepare($sql);
 		$st->execute();
 		
 		// modify results (include comments below main posts)
 		$data = $st->fetchAll(PDO::FETCH_ASSOC); 
 		$data = groupByKey($data);
+		for($data as &$post){
+			$pid = $post['PID'];
+			$sql = "SELECT Name,UID FROM Users WHERE UID IN (SELECT UID FROM Tagged WHERE PID='$pid' )";
+			$st = $conn->prepare($sql);
+			$st->execute();
+			
+			// modify results (include comments below main posts)
+			$tagged= $st->fetchAll(PDO::FETCH_ASSOC); 
+			$post['tagged'] = $tagged;
+		}
 		$data = array("status" => "200 Success", "data" => $data);
 		$conn = null;
 
