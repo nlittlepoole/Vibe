@@ -114,7 +114,7 @@
 	}
 
 	function idType($string){
-		if((bool)preg_match("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", $string) ){
+		if(filter_var($string, FILTER_VALIDATE_EMAIL)){
 			return "email";
 		}
 		elseif(substr($string,0)=='@' ){
