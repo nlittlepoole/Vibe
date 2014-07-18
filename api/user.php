@@ -90,7 +90,7 @@
 		// retrieve overall feed information associated with friends
 		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
 
-		$sql = "Select T1.PID, T1.Tagged, T2.Name, T1.Content, T1.Agree, T1.Disagree, T1.Timestamp From (SELECT A.PID,Tagged,Content,Agree,Disagree,Timestamp FROM (Select * From Posts Where `Tagged` In (Select `Friend` From Friends Where `UID` = '$uid'))A Join (Select DISTINCT PID From Posts Where `Tagged` In (Select `Friend` From Friends Where `UID` = '$uid') LIMIT 150)B On A.Pid = B.PID)T1 Join (Select * From Users) T2 On T1.Tagged = T2.UID Order By T1.timestamp Desc;";
+		$sql = "SELECT A.PID,Content,Agree,Disagree,Timestamp FROM((SELECT * FROM Posts)A JOIN (SELECT PID FROM (SELECT PID,UID,Timestamp FROM Tagged ORDER BY Timestamp DESC)T1 JOIN (SELECT Friend FROM Friends WHERE UID='$uid')T2 ON T1.UID=T2.Friend LIMIT 10)B ON A.PID=B.PID)";
 		$st = $conn->prepare($sql);
 		$st->execute();
 		
@@ -98,6 +98,17 @@
 		$data = $st->fetchAll(PDO::FETCH_ASSOC); 
 		
 		$data = groupByKey($data);
+		foreach($data as &$post){
+			$pid = $post['PID'];
+			$sql = "SELECT Name,UID FROM Users WHERE UID IN (SELECT UID FROM Tagged WHERE PID='$pid' )";
+			$st = $conn->prepare($sql);
+			$st->execute();
+			
+			// modify results (include comments below main posts)
+			$tagged= $st->fetchAll(PDO::FETCH_ASSOC); 
+			print_r($tagged);
+			$post['tagged'] = $tagged;
+		}
 		$data = array("status" => "200 Success", "data" => $data);
 		$conn = null;
 
