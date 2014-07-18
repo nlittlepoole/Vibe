@@ -155,7 +155,7 @@
 			$hash_id = hash("sha256", $recipient);
 			$type = idType($recipient);
 			if($type != "default"){
-				$match = getMatchingUID( $hash_id );
+				$match = getMatchingUID( $hash_id )[0];
 				echo $match;
 				if(!$match){
 					addTempUser($hash_id, "Temp User", $type);
@@ -166,16 +166,19 @@
 							$recipient = $hash_id;
 
 							// send email
-							$url = 'http://niger.go-vibe.com/api/notification.php?action=sendEmail';
+							$url = 'http://api.go-vibe.com/api/notification.php?action=sendEmail';
 					    	$post_data = array('uid' => $uid, 'token' => $token, 'email' => $email, 'status' => $status, 'user' => $recipient);
 					    	post($url, $post_data);
 
 					    	// Add temp friend to friend graph
-					    	$url = 'http://niger.go-vibe.com/api/user.php?action=addFriend';
+					    	$url = 'http://api.go-vibe.com/api/user.php?action=addFriend';
 					    	$post_data = array('uid' => $uid, 'token' => $token, 'user' => $recipient);
 					    	post($url, $post_data);
 					    break;
 					}
+	    		}
+	    		else{
+	    			$recipient = $match;
 	    		}
 			}
 		}
