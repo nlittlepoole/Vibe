@@ -13,7 +13,7 @@ status=sys.argv[3]
 #print 'Content-Type: text/plain'
 #print
 HOST = "smtp.secureserver.net"
-FROM= "info@go-vibe.com"
+FROM= "notify@go-vibe.com"
 TO= email
 SUBJECT = "You've got Vibes!"
 BODY = "Hey, Someone has posted about you on vibe \n They said: "+status + "\n go to http://api.go-vibe.com/index.php?ref="+uid +" to see more"
