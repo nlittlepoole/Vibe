@@ -184,6 +184,7 @@
 		$st = $conn->prepare($sql);
 		$st->execute();
 
+		// this will cascade delete anything that is left over from previous update statements
 		$sql = "DELETE FROM Users WHERE UID='$hash'"; 
 		$st = $conn->prepare($sql);
 		$st->execute();
