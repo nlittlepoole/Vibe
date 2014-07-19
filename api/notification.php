@@ -20,6 +20,9 @@
 		case 'sendEmail':
 			sendEmail();
 		break;
+		case 'sendTweet':
+			sendTweet();
+		break;
 		case 'addNotification':
 			addNotification($uid, $token);
 		break;
@@ -91,7 +94,7 @@
 	}
 
 
-	// returns JSON encoded URL to the user's Vibe cloud
+	// sends email to user
 	function sendEmail() {
 		
 		$user = $_POST['user'];
@@ -104,7 +107,20 @@
 		$command = "sudo python sendEmail.py $email $user '$status'  2>&1";
 		$temp = exec($command, $output);
 		
-		echo json_encode(array("url"=>"http://niger.go-vibe.com/view/cloud/" . $user . ".png"));
+	}
+
+	// sends tweet to user
+	function sendTweet() {
+		$user = $_POST['user'];
+		$url = "http://api.go-vibe.com/index.php?ref=$user";
+		$status = isset( $_POST['status'] ) ? $_POST['status'] : "";
+		$twitter = isset( $_POST['twitter'] ) ? $_POST['twitter'] : "";
+		$status = addslashes($status);
+
+		// runs cloud.py which generates Vibe cloud PNG at the returned URL
+		$command = "sudo python sendTweet.py '$twitter' '$url' '$status'  2>&1";
+		$temp = exec($command, $output);
+		
 	}
 
 ?>

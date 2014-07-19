@@ -114,12 +114,13 @@
 	}
 
 	function idType($string){
-		if(filter_var($string, FILTER_VALIDATE_EMAIL)){
-			return "email";
-		}
-		elseif(substr($string,0)=='@' ){
+		if(substr($string,0,1)=='@' ){
 			return "twitter";
 		}
+		elseif(filter_var($string, FILTER_VALIDATE_EMAIL)){
+			return "email";
+		}
+
 		elseif(isset($_POST['phone']) && (bool)preg_match("/\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/", $string) ){
 			return "phone";
 		}
@@ -159,7 +160,6 @@
 					addTempUser($hash_id, "Temp User", $type);
 					switch ($type) {
 						case 'email':
-							// add temp UID (why?)
 							$email = $recipient;
 							$recipient = $hash_id;
 
@@ -168,12 +168,22 @@
 					    	$post_data = array('uid' => $uid, 'token' => $token, 'email' => $email, 'status' => $status, 'user' => $recipient);
 					    	post($url, $post_data);
 
-					    	// Add temp friend to friend graph
-					    	$url = 'http://api.go-vibe.com/api/user.php?action=addFriend';
-					    	$post_data = array('uid' => $uid, 'token' => $token, 'user' => $recipient);
+					    break;
+					    case 'twitter':
+							$twitter = $recipient;
+							$recipient = $hash_id;
+							// send tweet
+							$url = 'http://api.go-vibe.com/api/notification.php?action=sendTweet';
+					    	$post_data = array('uid' => $uid, 'token' => $token, 'twitter' => $twitter, 'status' => $status, 'user' => $recipient);
 					    	post($url, $post_data);
+
+
 					    break;
 					}
+					// Add temp friend to friend graph
+			    	$url = 'http://api.go-vibe.com/api/user.php?action=addFriend';
+			    	$post_data = array('uid' => $uid, 'token' => $token, 'user' => $recipient);
+			    	post($url, $post_data);
 	    		}
 	    		else{
 	    			$recipient = $match;
