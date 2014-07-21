@@ -88,7 +88,7 @@
 		// retrieve overall feed information associated with friends
 		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
 
-		$sql = "SELECT A.PID,Content,Agree,Disagree,Timestamp FROM((SELECT * FROM Posts)A JOIN (SELECT PID FROM (SELECT PID,UID,Timestamp FROM Tagged ORDER BY Timestamp DESC)T1 JOIN (SELECT Friend FROM Friends WHERE UID='$uid')T2 ON T1.UID=T2.Friend LIMIT 10)B ON A.PID=B.PID)";
+		$sql = "SELECT A.PID,Content,Agree,Disagree,Timestamp FROM((SELECT * FROM Posts)A JOIN (SELECT DISTINCT PID FROM (SELECT PID,UID,Timestamp FROM Tagged ORDER BY Timestamp DESC)T1 JOIN (SELECT Friend FROM Friends WHERE UID='$uid')T2 ON T1.UID=T2.Friend LIMIT 10)B ON A.PID=B.PID )ORDER BY Timestamp DESC";
 		$st = $conn->prepare($sql);
 		$st->execute();
 		
