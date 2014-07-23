@@ -1,5 +1,8 @@
 <?php
 	session_start();
+
+	$_SESSION['newsfeed_elems_request'] = "http://api.go-vibe.com/api/user.php?action=getFeed&uid=";
+	$_SESSION['newsfeed_elems_request'] .= $_SESSION['userID'] . "&token=" . $_SESSION['token'];
 ?>
 
 <script type="text/javascript">

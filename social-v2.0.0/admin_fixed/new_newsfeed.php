@@ -1,5 +1,6 @@
 <?php
 	
+	// keep track of session data
 	session_start();
 
 	// FRIENDS LIST: grab friend's data from Facebook
@@ -18,9 +19,6 @@
 
 	// YOUR NEWSFEED: grabbing entire newsfeed pertaining to UID 
 	// [TO CHECK] how does it efficiently grab the content relevant to you?
-
-	$_SESSION['newsfeed_elems_request'] = "http://api.go-vibe.com/api/user.php?action=getFeed&uid=";
-	$_SESSION['newsfeed_elems_request'] .= $_SESSION['userID'] . "&token=" . $_SESSION['token'];
 ?>
 
 <!DOCTYPE html>
@@ -35,9 +33,8 @@
 	
 	<title>Newsfeed</title>
 
+	<!-- overall settings -->
 	<?php require_once("webpage_settings.php"); ?>
-
-	<!-- NOAH'S DEPENDENCIES -->
 
 	<!-- jQuery & jQuery UI -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -45,8 +42,6 @@
 
 	<!-- font awesome -->
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-
-	<!-- END NOAH'S DEPENDENCIES -->
 
 	<!-- autocomplete code && form submission -->
 	<script type="text/javascript">
@@ -56,26 +51,29 @@
 		
 		$(function() {
 			
-			// friends' list
+			// friends' list (as JSON data)
 			var my_friends = <?php echo json_encode($_SESSION['friend_list']); ?>;
 
 			var names_to_ID = []; 
 			var friends_names = []; 
 
-			// parsing list into SESSION dictionary
 			for(var i = 0; i < my_friends.length; i++) {
+				
+				// storing mapping of name to UID
 				names_to_ID[my_friends[i]['Name']] = my_friends[i]['UID'];
+				
+				// simply storing names
 				friends_names[i] = my_friends[i]['Name'];
 			}
 
+			// autocomplete with list of friends' names
 			if(friends_names.length != 0) {
 			    $("#inputFriend").autocomplete({
 				     source: friends_names
 			    });
 			}
 
-		    // mapping a user's friend name to UID
-
+			// submission custom modifications
 			$("#statusform").submit(function(event) {
 
 	  			event.preventDefault();
@@ -83,24 +81,20 @@
 	  			var inputted_name = $('#statusform input[name="recipient_to_convert"]').val();
 	  			var desired_uid = names_to_ID[inputted_name]
 
+	  			// filling in hidden element with desired UID
 				$('#statusform input[name="recipient"]').val(desired_uid);
-	  			// $("#statusform").submit();
-
 	  			
 	  			$.post("http://api.go-vibe.com/api/vibe.php?action=postVibe", $("#statusform").serialize())
 
 	  				.done(function(data) {
-	  					// $(".vibe_newsfeed_posts").remove();
+
+	  					// clear form elements
 	  					$('input[id="inputFriend"]').val("");
 	  					$('input[id="inputVibe"]').val("");
 
-	  					// [TO IMPLEMENT] clear the old elements and update HTML with new elements from SQL call)
-	  					// $(".vibe_newsfeed_posts").remove();
+	  					// trigger load of elements again (will have updated submission)
 	  					$('#last_elems').load('newsfeed_element.php'); 
-	  					// alert('about to trigger the newsfeed element upload');
-					    
 	  			});
-
 			});
 
 
@@ -108,7 +102,6 @@
 			function update() {
 				$('#last_elems').load('newsfeed_element.php'); 
 			}
-			
 
 			setInterval(update, 60000);	 	// send the GET request every 60 seconds
 
@@ -129,156 +122,155 @@
 	</script>
 
 	<style type="text/css">
-	  /* autocomplete box */
+	  
 	  .ui-autocomplete {
 		   max-height: 400px;
 		   overflow-y: auto;
 		   overflow-x: hidden;		/* prevent horizontal scrollbar */
 	  }
+
 	</style>
-	
 </head>
+
 <body class=" scripts-async menu-right-hidden">
 	
 	<!-- Main Container Fluid -->
 	<div class="container-fluid ">
 
 		
-<!-- Content START -->
-<div id="content">
-	
-	<!-- NAVBAR LOAD -->	
-	<script> 
-	    $(function(){
-	      $('#new_navbar').load('new_navbar.php'); 
-	    });
-	</script> 
-	<div id="new_navbar"></div>
-
-
-<div class="container"><div class="innerAll">
-	<div class="row">
-		<div class="col-lg-9 col-md-8">
+		<!-- Content START -->
+		<div id="content">
 			
-			<div class="timeline-cover">
+			<!-- NAVBAR LOAD -->	
+			<script> 
+			    $(function(){
+			      $('#new_navbar').load('new_navbar.php'); 
+			    });
+			</script> 
+			<div id="new_navbar"></div>
 
-				<!-- WIDGET -->
-				<div class="widget widget-heading-simple widget-body-white">
+
+		<div class="container"><div class="innerAll">
+			<div class="row">
+				<div class="col-lg-9 col-md-8">
 					
-					<div class="widget-body">
-						<div class="innerLR">
-							<div class="col-sm-12" style="padding: 0px; margin-bottom: 15px;">
-								
-								<div class="bg-gray innerAll border-top border-bottom">
-									<h4 style="text-align: center; color: #428bca; margin-top: 5px; margin-bottom: 5px;" class="heading"><?php echo $_SESSION['first_name']; ?>, what's on your mind?</h4>
+					<div class="timeline-cover">
+
+						<!-- WIDGET -->
+						<div class="widget widget-heading-simple widget-body-white">
+							
+							<div class="widget-body">
+								<div class="innerLR">
+									<div class="col-sm-12" style="padding: 0px; margin-bottom: 15px;">
+										
+										<div class="bg-gray innerAll border-top border-bottom">
+											<h4 style="text-align: center; color: #428bca; margin-top: 5px; margin-bottom: 5px;" class="heading"><?php echo $_SESSION['first_name']; ?>, what's on your mind?</h4>
+										</div>
+
+									</div>
+									<form name="status" id="statusform" class="form-horizontal" method="post" action="http://api.go-vibe.com/api/vibe.php?action=postVibe">
+									    <div class="form-group">
+									        <label for="inputFriend" class="col-sm-2 control-label">Friend</label>
+									        
+									        <div class="col-sm-9">
+									            <input type="text" class="form-control" id="inputFriend" name="recipient_to_convert" placeholder="Who's this about? Type in a Facebook friend!">
+									        	<input type="hidden" value="" name="recipient" />
+									        	<input type="hidden" value="newsfeed" name="post_source" />
+									        </div>
+
+									    </div>
+									    <div class="form-group">
+									    	<input type="hidden" name="uid" value=<?php echo '"' . $_SESSION['userID'] . '"' ?>>
+		    								<input type="hidden" name="token" value=<?php echo '"' . $_SESSION['token'] . '"' ?>>
+		    							</div>
+									    <div class="form-group">
+									        
+									        <label for="inputVibe" class="col-sm-2 control-label">Vibe</label>
+									        
+									        <div class="col-sm-9">
+									            <input type="text" class="form-control" name="status" id="inputVibe" placeholder="What do you want to say?">
+									        </div>
+
+									    </div>
+									    <div class="form-group">
+
+									        <div class="col-sm-offset-2 col-sm-10">
+									            <button type="submit" value="Submit" id="status_submit" class="btn btn-primary" style="width: 20%">Share&nbsp;&nbsp;<i class="fa fa-arrow-circle-right"></i></button>
+									        </div>
+
+									    </div>
+									</form>
 								</div>
-
 							</div>
-							<form name="status" id="statusform" class="form-horizontal" method="post" action="http://api.go-vibe.com/api/vibe.php?action=postVibe">
-							    <div class="form-group">
-							        <label for="inputFriend" class="col-sm-2 control-label">Friend</label>
-							        
-							        <div class="col-sm-9">
-							            <input type="text" class="form-control" id="inputFriend" name="recipient_to_convert" placeholder="Who's this about? Type in a Facebook friend!">
-							        	<input type="hidden" value="" name="recipient" />
-							        	<input type="hidden" value="newsfeed" name="post_source" />
-							        </div>
+						
+						</div>
+						<!-- // Widget END -->
 
-							    </div>
-							    <div class="form-group">
-							    	<input type="hidden" name="uid" value=<?php echo '"' . $_SESSION['userID'] . '"' ?>>
-    								<input type="hidden" name="token" value=<?php echo '"' . $_SESSION['token'] . '"' ?>>
-    							</div>
-							    <div class="form-group">
-							        
-							        <label for="inputVibe" class="col-sm-2 control-label">Vibe</label>
-							        
-							        <div class="col-sm-9">
-							            <input type="text" class="form-control" name="status" id="inputVibe" placeholder="What do you want to say?">
-							        </div>
-
-							    </div>
-							    <div class="form-group">
-
-							        <div class="col-sm-offset-2 col-sm-10">
-							            <button type="submit" value="Submit" id="status_submit" class="btn btn-primary" style="width: 20%">Share&nbsp;&nbsp;<i class="fa fa-arrow-circle-right"></i></button>
-							        </div>
-
-							    </div>
-							</form>
+					<!-- END OF NORMAL TIMELINE -->	
+					</div>
+					
+					<div class="media">
+						
+						<a href="" class="btn btn-default pull-left">Today</a>
+						<div class="media-body">
+							  <div class="input-group">
+							      <input type="text" class="form-control" placeholder="Share your mood...">
+							      <span class="input-group-btn">
+							        <button class="btn btn-primary" type="button">Search</button>
+							      </span>
+							    </div><!-- /input-group -->
 						</div>
 					</div>
-				
-				</div>
-				<!-- // Widget END -->
 
-			<!-- END OF NORMAL TIMELINE -->	
+					<ul class="timeline-activity list-unstyled" id="newsfeed_container">
+
+						<div id="last_elems"></div>
+
+						<!-- NEWSFEED LOADING INFRASTRUCTURE -->
+						
+						<script> 
+						    $(function(){
+						      	$('#last_elems').load('newsfeed_element.php'); 
+						    });
+						</script> 
+
+
+						<!-- END OF NEWSFEED LOADING INFRASTRUCTURE -->
+
+					</ul>				
+				</div>
+
+					<!-- SIDEBAR WIDGET -->
+					<div class="col-md-4 col-lg-3">
+
+						<script> 
+						    $(function(){
+						      $('#new_sidebar').load('new_sidebar.php'); 
+						    });
+						</script> 
+						<div id="new_sidebar"></div>
+							
+					</div> 
+						
 			</div>
+			<!-- // Content END -->
 			
-			<div class="media">
+			<div class="clearfix"></div>
+			<!-- // Sidebar menu & content wrapper END -->
+			
+			<!-- Footer -->
+			<div id="footer" class="hidden-print">
 				
-				<a href="" class="btn btn-default pull-left">Today</a>
-				<div class="media-body">
-					  <div class="input-group">
-					      <input type="text" class="form-control" placeholder="Share your mood...">
-					      <span class="input-group-btn">
-					        <button class="btn btn-primary" type="button">Search</button>
-					      </span>
-					    </div><!-- /input-group -->
-				</div>
+				<!-- potential footer goes here -->
+		
 			</div>
-
-			<ul class="timeline-activity list-unstyled" id="newsfeed_container">
-
-				<div id="last_elems"></div>
-
-				<!-- NEWSFEED LOADING INFRASTRUCTURE -->
-				
-				<script> 
-				    $(function(){
-				      	$('#last_elems').load('newsfeed_element.php'); 
-				    });
-				</script> 
-
-
-				<!-- END OF NEWSFEED LOADING INFRASTRUCTURE -->
-
-			</ul>				
-		</div>
-
-			<!-- SIDEBAR WIDGET -->
-			<div class="col-md-4 col-lg-3">
-
-				<script> 
-				    $(function(){
-				      $('#new_sidebar').load('new_sidebar.php'); 
-				    });
-				</script> 
-				<div id="new_sidebar"></div>
+			<!-- // Footer END -->
 					
-			</div> 
-				
-		</div>
-		<!-- // Content END -->
-		
-		<div class="clearfix"></div>
-		<!-- // Sidebar menu & content wrapper END -->
-		
-		<!-- Footer -->
-		<div id="footer" class="hidden-print">
-			
-			<!--  Copyright Line -->
-			<div class="copy">&copy; 2012 - 2014 - <a href="http://www.mosaicpro.biz">MosaicPro</a> - All Rights Reserved. <a href="http://themeforest.net/?ref=mosaicpro" target="_blank">Purchase Social Admin Template</a> - Current version: v2.0.0-rc8 / <a target="_blank" href="../assets/../../CHANGELOG.txt?v=v2.0.0-rc8">changelog</a></div>
-			<!--  End Copyright Line -->
-	
-		</div>
-		<!-- // Footer END -->
-				
-	</div>
-	<!-- // Main Container Fluid END -->
+		</div></div>
+		<!-- // Main Container Fluid END -->
 	
 
-	<!-- Global -->
+	<!-- global -->
 	<script data-id="App.Config">
 		var basePath = '',
 		commonPath = '../assets/',
@@ -286,7 +278,7 @@
 		DEV = false,
 		componentsPath = '../assets/components/';
 	
-	var primaryColor = '#25ad9f',
+	var primaryColor = '#275379',
 		dangerColor = '#b55151',
 		successColor = '#609450',
 		infoColor = '#4a8bc2',
