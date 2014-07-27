@@ -55,10 +55,8 @@
 		$st->execute();
 	}
 	function getStream($uid){
-
 		// retrieve overall feed information associated with friends
 		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-
 		$sql = "SELECT PID,Content,Agree,Disagree,Timestamp FROM Posts WHERE PID IN (SELECT PID FROM Tagged WHERE UID='$uid')";
 		$st = $conn->prepare($sql);
 		$st->execute();
@@ -87,8 +85,8 @@
 
 		// retrieve overall feed information associated with friends
 		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-
-		$sql = "SELECT A.PID,Content,Agree,Disagree,Timestamp FROM((SELECT * FROM Posts)A JOIN (SELECT DISTINCT PID FROM (SELECT PID,UID,Timestamp FROM Tagged ORDER BY Timestamp DESC)T1 JOIN (SELECT Friend FROM Friends WHERE UID='$uid')T2 ON T1.UID=T2.Friend LIMIT 10)B ON A.PID=B.PID )ORDER BY Timestamp DESC";
+		$offset = isset($_GET['offset']) ? $_GET['offset']:'0';
+		$sql = "SELECT A.PID,Content,Agree,Disagree,Timestamp FROM((SELECT * FROM Posts)A JOIN (SELECT DISTINCT PID FROM (SELECT PID,UID,Timestamp FROM Tagged ORDER BY Timestamp DESC)T1 JOIN (SELECT Friend FROM Friends WHERE UID='$uid')T2 ON T1.UID=T2.Friend LIMIT 10 OFFSET $offset)B ON A.PID=B.PID )ORDER BY Timestamp DESC";
 		$st = $conn->prepare($sql);
 		$st->execute();
 		
