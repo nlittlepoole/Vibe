@@ -56,11 +56,10 @@
 
 	// JSON encode the newsfeed of given UID
 	function getFeed() {
-
+		$offset = isset($_GET['offset']) ? $_GET['offset']:'0';
 		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
 		$lid = $_GET['LID'];
-		
-		$sql = "SELECT T1.PID, T1.Tagged, T2.Name, T1.Content, T1.Agree, T1.Disagree, T1.Timestamp FROM (SELECT A.PID, Tagged, Content, Agree, Disagree, A.Timestamp FROM (SELECT * FROM Posts WHERE `Tagged` IN (SELECT `UID` FROM Located WHERE `LID` = '$lid'))A JOIN (SELECT DISTINCT PID FROM Posts WHERE `Tagged` IN (SELECT `UID` FROM Located WHERE `LID` = '$lid') LIMIT 10)B ON A.Pid = B.PID)T1 JOIN (SELECT * FROM Users) T2 ON T1.Tagged = T2.UID;";
+		$sql = "SELECT A.PID,Content,Agree,Disagree,Timestamp FROM((SELECT * FROM Posts)A JOIN (SELECT DISTINCT PID FROM (SELECT PID,UID,Timestamp FROM Tagged ORDER BY Timestamp DESC)T1 JOIN (SELECT `UID` FROM Located WHERE `LID` = '$lid')T2 ON T1.UID=T2.UID LIMIT 10 OFFSET $offset)B ON A.PID=B.PID )ORDER BY Timestamp DESC";
 		$st = $conn->prepare($sql);
 		$st->execute();
 		
