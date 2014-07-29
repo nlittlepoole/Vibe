@@ -43,7 +43,7 @@
 	}
 
 	// search
-	function getVibe($uid) {
+	function search($uid) {
 	$keyword = $_GET['keyword'];
 	$output = [];
 
