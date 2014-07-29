@@ -31,6 +31,12 @@
 			pushResponse($response_array);
 			postComment($uid, $token);
 		break;
+		case 'deleteVibe':
+			// response OK.
+			$response_array['status'] = "200 Request Queued";
+			pushResponse($response_array);
+			deleteVibe();
+		break;
 		case 'getCloud':
 			getCloud();
 		break;
@@ -62,7 +68,7 @@
 		foreach($vibes as $vibe){
 			$sql = "INSERT INTO Vibes (`Vibe`, `UID`, `Score`)
 				VALUES ('$vibe','$tagged',1)
-					ON DUPLICATE KEY UPDATE `Score` = `Score`+ 1;";
+					ON DUPLICATE KEY UPDATE `Score` = `Score`+ $vote;";
 			$st = $conn->prepare( $sql );
 			$st->execute();
 		}
@@ -70,6 +76,42 @@
 			$st = $conn->prepare( $sql );
 			$st->execute();
 		$conn = null;
+	}
+
+	// Delete a Vibe Post or comment
+	function deleteVibe() {
+		
+		$pid = $_POST['pid'];
+		$timestamp = $_POST['timestamp'];
+		// grab necessary data about post
+		$sql = "SELECT A.PID, UID as Tagged, Author, Content,Type FROM (SELECT * FROM Posts WHERE TIMESTAMP = '$timestamp' AND PID = '$pid')A JOIN Tagged on A.PID = Tagged.PID"; 
+		$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
+		
+		$st = $conn->prepare($sql);
+		$st->execute();
+		$data = $st->fetch();
+		$type = $data['Type'];
+		$vibes = getVibe($status);
+
+		foreach($vibes as $vibe){
+			$sql = "INSERT INTO Vibes (`Vibe`, `UID`, `Score`)
+				VALUES ('$vibe','$tagged',1)
+					ON DUPLICATE KEY UPDATE `Score` = `Score`-1";
+			$st = $conn->prepare( $sql );
+			$st->execute();
+		}
+		if($type =="Master"){
+			$sql = "DELETE FROM Posts WHERE PID = '$pid'";	
+			$st = $conn->prepare( $sql );
+			$st->execute();
+			$conn = null;
+		}
+		else{
+			$sql = "DELETE FROM Posts WHERE PID = '$pid' and Timestamp = '$timestamp'";	
+			$st = $conn->prepare( $sql );
+			$st->execute();
+			$conn = null;
+		}
 	}
 
 	// return JSON encoded url to the user's Vibe cloud
@@ -192,7 +234,7 @@
 		$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
 		$status=$conn->quote($status); //Clean up user statuses to prevent SQL injections
 
-		$sql = "INSERT INTO Posts (`PID`, `Content`, `Author` ) VALUES ('$pid', $status, '$author');";
+		$sql = "INSERT INTO Posts (`PID`, `Content`, `Author` ,`Type`) VALUES ('$pid', $status, '$author','Master');";
 		$st = $conn->prepare($sql);
 		$st->execute();
 
@@ -231,7 +273,7 @@
 		$status = $conn->quote($status); //Clean up user statuses to prevent SQL injections
 
 		// add post to DB
-		$sql = "INSERT INTO Posts (`PID`,`Content`,`Author`,`Tagged`) VALUES ('$pid',$status,'$author','$recipient');";
+		$sql = "INSERT INTO Posts (`PID`,`Content`,`Author`,`Type`) VALUES ('$pid',$status,'$author','Child');";
 		$st = $conn->prepare($sql);
 		
 		$st->execute();
