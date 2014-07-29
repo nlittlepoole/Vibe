@@ -58,7 +58,7 @@
 	function getFeed() {
 		$offset = isset($_GET['offset']) ? $_GET['offset']:'0';
 		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-		$lid = $_GET['LID'];
+		$lid = $_GET['lid'];
 		$sql = "SELECT A.PID,Content,Timestamp FROM((SELECT * FROM Posts)A JOIN (SELECT DISTINCT PID FROM (SELECT PID,UID,Timestamp FROM Tagged ORDER BY Timestamp DESC)T1 JOIN (SELECT `UID` FROM Located WHERE `LID` = '$lid')T2 ON T1.UID=T2.UID LIMIT 10 OFFSET $offset)B ON A.PID=B.PID )ORDER BY Timestamp DESC";
 		$st = $conn->prepare($sql);
 		$st->execute();
