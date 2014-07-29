@@ -66,7 +66,7 @@
 			$st = $conn->prepare( $sql );
 			$st->execute();
 		}
-			$sql = "INSERT INTO Liked (UID, PID, Timestamp,Vote) VALUES('$uid','$pid','$timestamp',$vote) ON DUPLICATE KEY UPDATE `Vote` = $vote;";	
+			$sql = "INSERT INTO Liked (UID, PID, Timestamp,Vote) VALUES('$uid','$pid','$timestamp',$vote) ON DUPLICATE KEY UPDATE `Vote` = $vote , Timestamp = '$timestamp';";	
 			$st = $conn->prepare( $sql );
 			$st->execute();
 		$conn = null;
