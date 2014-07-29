@@ -37,7 +37,27 @@
 		break;
 		case 'blockUser':
 			blockUser($uid);
+		case 'search':
+			search($uid);
 		break;
+	}
+
+	// search
+	function getVibe($uid) {
+	$keyword = $_GET['keyword'];
+	$output = [];
+
+	$command = "python search.py '$keyword' '$uid'";
+	$temp = exec($command ,$output);
+	
+	$data = [];
+	foreach($output as $row){
+		$temp = explode("||", $row);
+		$result = array('Name' => $temp[0], 'UID' => $temp[1]);
+		array_push($data, $result );
+	}
+	$data = array("status" => "200 Success", "data" => $data);
+	pushResponse($data);
 	}
 
 	// enable a blocked status on a friendship
