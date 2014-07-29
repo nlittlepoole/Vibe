@@ -55,9 +55,11 @@
 		$st->execute();
 	}
 	function getStream($uid){
-		// retrieve overall feed information associated with friends
+		$user = $_GET['user'];
+
+		// retrieve overall feed information associated specific user
 		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-		$sql = "SELECT PID,Content,Timestamp FROM Posts WHERE PID IN (SELECT PID FROM Tagged WHERE UID='$uid')";
+		$sql = "SELECT PID,Content,Timestamp FROM Posts WHERE PID IN (SELECT PID FROM Tagged WHERE UID='$user')";
 		$st = $conn->prepare($sql);
 		$st->execute();
 		
