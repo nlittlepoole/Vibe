@@ -35,6 +35,8 @@
 			getCloud();
 		break;
 		case 'vote':
+			$response_array['status'] = "200 Request Queued";
+			pushResponse($response_array);
 			vote($uid);
 		break;
 	}
@@ -52,7 +54,6 @@
 		$st = $conn->prepare($sql);
 		$st->execute();
 		$data = $st->fetch();
-		print_r($data);
 		$tagged = $data['Tagged'];
 		$status = $data['Content'];
 
@@ -65,8 +66,7 @@
 			$st = $conn->prepare( $sql );
 			$st->execute();
 		}
-		$sql = "INSERT INTO Liked (UID, PID, Timestamp,Vote) VALUES('$uid','$pid','$timestamp',$vote) ON DUPLICATE KEY UPDATE `Vote` = $vote;";
-		echo $sql;	
+			$sql = "INSERT INTO Liked (UID, PID, Timestamp,Vote) VALUES('$uid','$pid','$timestamp',$vote) ON DUPLICATE KEY UPDATE `Vote` = $vote;";	
 			$st = $conn->prepare( $sql );
 			$st->execute();
 		$conn = null;
