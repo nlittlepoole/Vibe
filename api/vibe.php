@@ -69,7 +69,6 @@
 		echo $sql;	
 			$st = $conn->prepare( $sql );
 			$st->execute();
-		}
 		$conn = null;
 	}
 
