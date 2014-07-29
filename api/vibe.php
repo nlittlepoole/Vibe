@@ -35,41 +35,41 @@
 			getCloud();
 		break;
 		case 'vote':
-			vote();
+			vote($uid);
 		break;
 	}
 
 	// increases agree or disagree for vibe post
-	function vote() {
+	function vote($uid) {
 		
 		$pid = $_POST['pid'];
-		$vote = $_POST['vote'];
-
+		$vote = $_POST['vote'] =='agree' ? 1: -1;
+		$timestamp = $_POST['timestamp'];
 		// grab necessary data about post
-		$sql = "SELECT Recipient, Content, Timestamp FROM Posts WHERE `PID`='$pid' ORDER BY Timestamp Asc Limit 1;"; 
+		$sql = "SELECT A.PID, UID as Tagged, Author, Content FROM (SELECT * FROM Posts WHERE TIMESTAMP = '$timestamp' AND PID = '$pid')A JOIN Tagged on A.PID = Tagged.PID"; 
 		$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
 		
 		$st = $conn->prepare($sql);
 		$st->execute();
 		$data = $st->fetch();
-
-		$user = $data['Recipient'];
+		print_r($data);
+		$tagged = $data['Tagged'];
 		$status = $data['Content'];
 
 		$vibes = getVibe($status);
 		
 		foreach($vibes as $vibe){
 			$sql = "INSERT INTO Vibes (`Vibe`, `UID`, `Score`)
-				VALUES ('$vibe','$recipient',1)
+				VALUES ('$vibe','$tagged',1)
 					ON DUPLICATE KEY UPDATE `Score` = `Score`+ 1;";
 			$st = $conn->prepare( $sql );
 			$st->execute();
 		}
-
-		if($vote == "agree") {
-			// ...
+		$sql = "INSERT INTO Liked (UID, PID, Timestamp,Vote) VALUES('$uid','$pid','$timestamp',$vote) ON DUPLICATE KEY UPDATE `Vote` = $vote;";
+		echo $sql;	
+			$st = $conn->prepare( $sql );
+			$st->execute();
 		}
-
 		$conn = null;
 	}
 
