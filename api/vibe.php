@@ -261,7 +261,7 @@
 
 		// add POST components
 		$status = isset($_POST['status']) ? $_POST['status'] : "";
-		$pid = isset($_POST['PID']) ? $_POST['PID'] : "";
+		$pid = isset($_POST['pid']) ? $_POST['pid'] : "";
 		$email = isset($_POST['email']) ? $_POST['email'] : "";
 
 		$hash_id = hash("sha256", $email);
