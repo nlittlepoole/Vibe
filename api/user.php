@@ -86,7 +86,7 @@
 			$votes= $st->fetch(); 
 			$post['Agree'] = $votes['Agree'];
 			$post['Disagree'] = $votes['Disagree'];
-			$post['Total_Votes'] = $votes['Total'];
+			$post['Score'] = $votes['Total'];
 		}
 		$data = array("status" => "200 Success", "data" => $data);
 		$conn = null;
@@ -128,7 +128,7 @@
 			$votes= $st->fetch(); 
 			$post['Agree'] = $votes['Agree'];
 			$post['Disagree'] = $votes['Disagree'];
-			$post['Total_Votes'] = $votes['Total'];
+			$post['Score'] = $votes['Total'];
 		}
 		$data = array("status" => "200 Success", "data" => $data);
 		$conn = null;
