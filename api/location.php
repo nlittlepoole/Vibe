@@ -124,7 +124,7 @@
 	    	
 	    	array_push($result, $post);
 	    }
-	    
+
 	    return $result;
 	}
 
@@ -194,7 +194,7 @@
 			$st->execute();
 		}
 
-		$conn=null;
+		$conn = null;
 	}
 
 	function addFriends($uid, $token) {
