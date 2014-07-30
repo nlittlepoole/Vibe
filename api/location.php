@@ -18,14 +18,12 @@
 	// trigger method from action URL fragment
 	switch ($action) {
 		case 'addUser':
-			// response OK.
 			$response_array['status'] = "200 Request Queued";
 			pushResponse($response_array);
 
 			addUser($uid, $token);
 		break;
 		case 'addFriends':
-			// response OK.
 			$response_array['status'] = "200 Request Queued";
 			pushResponse($response_array);
 
@@ -58,9 +56,12 @@
 
 	// JSON encode the newsfeed of given UID
 	function getFeed() {
+
+		// offset used for infinite scroll
 		$offset = isset($_GET['offset']) ? $_GET['offset']:'0';
-		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
 		$lid = $_GET['lid'];
+
+		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
 		$sql = "SELECT A.PID,Content,Timestamp FROM((SELECT * FROM Posts)A JOIN (SELECT DISTINCT PID FROM (SELECT PID,UID,Timestamp FROM Tagged ORDER BY Timestamp DESC)T1 JOIN (SELECT `UID` FROM Located WHERE `LID` = '$lid')T2 ON T1.UID=T2.UID LIMIT 10 OFFSET $offset)B ON A.PID=B.PID )ORDER BY Timestamp DESC";
 		$st = $conn->prepare($sql);
 		$st->execute();
@@ -68,6 +69,7 @@
 		$data = $st->fetchAll(PDO::FETCH_ASSOC); 
 		$data = groupByKey($data);
 
+		// modifying post info returned, by enclosing score info and all people tagged
 		foreach($data as &$post){
 			$pid = $post['PID'];
 			$timestamp = $post['Timestamp'];
@@ -80,15 +82,16 @@
 			$tagged= $st->fetchAll(PDO::FETCH_ASSOC); 
 			$post['tagged'] = $tagged;
 
-			$sql = "SELECT SUM(Vote) as Total, Sum( Case When Vote< 0 Then 1 Else 0 End ) As Disagree , Sum( Case When Vote > 0 Then 1 Else 0 End ) As Agree FROM Liked GROUP BY PID,Timestamp HAVING Timestamp = '$timestamp' AND pid = '$pid';";
+			$sql = "SELECT SUM(Vote) as Total, Sum(Case When Vote < 0 Then 1 Else 0 End) As Disagree, Sum(Case When Vote > 0 Then 1 Else 0 End) As Agree FROM Liked GROUP BY PID,Timestamp HAVING Timestamp = '$timestamp' AND pid = '$pid';";
 			$st = $conn->prepare($sql);
 			$st->execute();
 			
 			// modify results (include comments below main posts)
-			$votes= $st->fetch(); 
-			$post['Agree'] = $votes['Agree'];
-			$post['Disagree'] = $votes['Disagree'];
-			$post['Score'] = $votes['Total'];
+			$votes = $st->fetch(); 
+
+			$post['Agree'] 		= $votes['Agree'];
+			$post['Disagree']	= $votes['Disagree'];
+			$post['Score'] 		= $votes['Total'];
 		}
 
 		$data = array("status" => "200 Success", "data" => $data);
@@ -112,8 +115,8 @@
 	    
 	    // put comments under original post
 	    $result = array();
-	    foreach($return as $thread) {
-	    	
+	    
+	    foreach($return as $thread) {	
 	    	usort($thread, "cmp");
 	    	
 	    	$post = array_pop($thread);
@@ -121,6 +124,7 @@
 	    	
 	    	array_push($result, $post);
 	    }
+	    
 	    return $result;
 	}
 
@@ -128,6 +132,7 @@
 	{
 		$a = strtotime($a['Timestamp']);
 		$b = strtotime($b['Timestamp']);
+	    
 	    if($a == $b) {
 	    	return 0;
 	    }

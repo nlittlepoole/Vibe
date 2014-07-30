@@ -1,6 +1,6 @@
 <?php
 
-	// PHP settings
+	// overall settings
 	ini_set('display_errors',1); 
 	error_reporting(E_ALL);
 	session_start();
@@ -105,22 +105,22 @@
 		
 		// runs cloud.py which generates Vibe cloud PNG at the returned URL
 		$command = "sudo python sendEmail.py $email $user '$status'  2>&1";
-		$temp = exec($command, $output);
-		
+		$temp = exec($command, $output)	
 	}
 
 	// sends tweet to user
 	function sendTweet() {
+		
 		$user = $_POST['user'];
 		$url = "http://api.go-vibe.com/index.php?ref=$user";
+		
 		$status = isset( $_POST['status'] ) ? $_POST['status'] : "";
 		$twitter = isset( $_POST['twitter'] ) ? $_POST['twitter'] : "";
 		$status = addslashes($status);
 
 		// runs cloud.py which generates Vibe cloud PNG at the returned URL
 		$command = "sudo python sendTweet.py '$twitter' '$url' '$status'  2>&1";
-		$temp = exec($command, $output);
-		
+		$temp = exec($command, $output);	
 	}
 
 ?>
