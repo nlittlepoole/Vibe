@@ -49,7 +49,11 @@
 
 	$command = "python search.py '$keyword' '$uid'";
 	$temp = exec($command ,$output);
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> FETCH_HEAD
 	$data = [];
 	foreach($output as $row){
 		$temp = explode("||", $row);
