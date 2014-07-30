@@ -4,7 +4,7 @@
     $root = $_SERVER['DOCUMENT_ROOT'];
     require_once($root . "/config.php");
 
-    // authenticate user access token & UID
+    // authenticate user access token & UID (means that api requests will only work for someone with valid UID)
     function validToken($uid, $token) {
 
         /*
@@ -15,7 +15,7 @@
         return true;
     }
 
-    // pushing JSON encoded response
+    // pushing JSON encoded response (NOTE: currently inefficient, leading to long waits)
     function pushResponse($response_array){
         
         ob_start(); 
@@ -29,6 +29,7 @@
         // flush();
     }
 
+    // current post framework to send asynchronous POST requests between different files
     function post($url, $post_data) {
         foreach($post_data as $key => $value) {
             $post_items[] = $key . '=' . $value;
