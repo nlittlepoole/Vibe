@@ -10,8 +10,8 @@
 	require_once('request.php');
 
 	// REQUEST components
-	$uid = $_REQUEST['uid'];
-	$token = $_REQUEST['token'];
+	$uid 	= $_REQUEST['uid'];
+	$token 	= $_REQUEST['token'];
 
 	$action = isset($_REQUEST['action']) && validToken($uid, $token) ? $_REQUEST['action'] : "";
 
@@ -21,12 +21,14 @@
 			// response OK.
 			$response_array['status'] = "200 Request Queued";
 			pushResponse($response_array);
+
 			addUser($uid, $token);
 		break;
 		case 'addFriends':
 			// response OK.
 			$response_array['status'] = "200 Request Queued";
 			pushResponse($response_array);
+
 			addFriends($uid, $token);
 		break;
 		case 'getFeed':
@@ -56,17 +58,39 @@
 
 	// JSON encode the newsfeed of given UID
 	function getFeed() {
-
+		$offset = isset($_GET['offset']) ? $_GET['offset']:'0';
 		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-		$lid = $_GET['LID'];
-		
-		$sql = "SELECT T1.PID, T1.Tagged, T2.Name, T1.Content, T1.Agree, T1.Disagree, T1.Timestamp FROM (SELECT A.PID, Tagged, Content, Agree, Disagree, A.Timestamp FROM (SELECT * FROM Posts WHERE `Tagged` IN (SELECT `UID` FROM Located WHERE `LID` = '$lid'))A JOIN (SELECT DISTINCT PID FROM Posts WHERE `Tagged` IN (SELECT `UID` FROM Located WHERE `LID` = '$lid') LIMIT 10)B ON A.Pid = B.PID)T1 JOIN (SELECT * FROM Users) T2 ON T1.Tagged = T2.UID;";
+		$lid = $_GET['lid'];
+		$sql = "SELECT A.PID,Content,Timestamp FROM((SELECT * FROM Posts)A JOIN (SELECT DISTINCT PID FROM (SELECT PID,UID,Timestamp FROM Tagged ORDER BY Timestamp DESC)T1 JOIN (SELECT `UID` FROM Located WHERE `LID` = '$lid')T2 ON T1.UID=T2.UID LIMIT 10 OFFSET $offset)B ON A.PID=B.PID )ORDER BY Timestamp DESC";
 		$st = $conn->prepare($sql);
 		$st->execute();
 		
 		$data = $st->fetchAll(PDO::FETCH_ASSOC); 
 		$data = groupByKey($data);
-		
+
+		foreach($data as &$post){
+			$pid = $post['PID'];
+			$timestamp = $post['Timestamp'];
+			
+			$sql = "SELECT Name,UID FROM Users WHERE UID IN (SELECT UID FROM Tagged WHERE PID='$pid' )";
+			$st = $conn->prepare($sql);
+			$st->execute();
+			
+			// modify results (include comments below main posts)
+			$tagged= $st->fetchAll(PDO::FETCH_ASSOC); 
+			$post['tagged'] = $tagged;
+
+			$sql = "SELECT SUM(Vote) as Total, Sum( Case When Vote< 0 Then 1 Else 0 End ) As Disagree , Sum( Case When Vote > 0 Then 1 Else 0 End ) As Agree FROM Liked GROUP BY PID,Timestamp HAVING Timestamp = '$timestamp' AND pid = '$pid';";
+			$st = $conn->prepare($sql);
+			$st->execute();
+			
+			// modify results (include comments below main posts)
+			$votes= $st->fetch(); 
+			$post['Agree'] = $votes['Agree'];
+			$post['Disagree'] = $votes['Disagree'];
+			$post['Score'] = $votes['Total'];
+		}
+
 		$data = array("status" => "200 Success", "data" => $data);
 		$conn = null;
 		

@@ -17,12 +17,11 @@
 
 	$_SESSION['friend_list'] = $friends;
 
-	// YOUR NEWSFEED: grabbing entire newsfeed pertaining to UID 
-	// [TO CHECK] how does it efficiently grab the content relevant to you?
 ?>
 
 <!DOCTYPE html>
 
+<!-- overall page settings -->
 <!--[if lt IE 7]> <html class="ie lt-ie9 lt-ie8 lt-ie7 paceCounter paceSocial footer-sticky"> <![endif]-->
 <!--[if IE 7]>    <html class="ie lt-ie9 lt-ie8 paceCounter paceSocial footer-sticky"> <![endif]-->
 <!--[if IE 8]>    <html class="ie lt-ie9 paceCounter paceSocial footer-sticky"> <![endif]-->
@@ -135,11 +134,11 @@
 
 <body class=" scripts-async menu-right-hidden">
 	
-	<!-- Main Container Fluid -->
+	<!-- main container -->
 	<div class="container-fluid ">
 
 		
-		<!-- Content Start -->
+		<!-- being overall content -->
 		<div id="content">
 			
 			<!-- loading NAVBAR... -->	
@@ -286,29 +285,34 @@
 	</div>
 	
 
-	<!-- global -->
+	<!-- global settings (scripts) -->
 	<script data-id="App.Config">
+		
+		// theme path variables
 		var basePath = '',
 		commonPath = '../assets/',
 		rootPath = '../',
 		DEV = false,
 		componentsPath = '../assets/components/';
 	
-	var primaryColor = '#275379',
+		// theme color variables
+		var primaryColor = '#275379',
 		dangerColor = '#b55151',
 		successColor = '#609450',
 		infoColor = '#4a8bc2',
 		warningColor = '#ab7a4b',
 		inverseColor = '#45484d';
 	
-	var themerPrimaryColor = primaryColor;
+		// primary color
+		var themerPrimaryColor = primaryColor;
 
 		App.Config = {
-		ajaxify_menu_selectors: ['#menu'],
-		ajaxify_layout_app: false	};
+			ajaxify_menu_selectors: ['#menu'],
+			ajaxify_layout_app: false	};
+
 	</script>
 
-	<!-- preloading -->
+	<!-- instant click (JS third party library) -->
 	<script src="../../customjs/instantclick.min.js" data-no-instant></script>
 	<script data-no-instant>InstantClick.init();</script>
 	

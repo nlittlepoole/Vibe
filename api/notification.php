@@ -65,7 +65,7 @@
 		$response_array['status'] = "200 Request Queued";
 		pushResponse($response_array);
 		
-		$nid = $_POST['NID'];
+		$nid = $_POST['nid'];
 		
 		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
 		$sql = "DELETE * FROM Notifications WHERE NID='$nid'; ";

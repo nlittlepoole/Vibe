@@ -37,7 +37,27 @@
 		break;
 		case 'blockUser':
 			blockUser($uid);
+		case 'search':
+			search($uid);
 		break;
+	}
+
+	// search
+	function search($uid) {
+	$keyword = $_GET['keyword'];
+	$output = [];
+
+	$command = "python search.py '$keyword' '$uid'";
+	$temp = exec($command ,$output);
+
+	$data = [];
+	foreach($output as $row){
+		$temp = explode("||", $row);
+		$result = array('Name' => $temp[0], 'UID' => $temp[1]);
+		array_push($data, $result );
+	}
+	$data = array("status" => "200 Success", "data" => $data);
+	pushResponse($data);
 	}
 
 	// enable a blocked status on a friendship
@@ -55,11 +75,11 @@
 		$st->execute();
 	}
 	function getStream($uid){
+		$user = $_GET['user'];
 
-		// retrieve overall feed information associated with friends
+		// retrieve overall feed information associated specific user
 		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-
-		$sql = "SELECT PID,Content,Agree,Disagree,Timestamp FROM Posts WHERE PID IN (SELECT PID FROM Tagged WHERE UID='$uid')";
+		$sql = "SELECT PID,Content,Timestamp FROM Posts WHERE PID IN (SELECT PID FROM Tagged WHERE UID='$user')";
 		$st = $conn->prepare($sql);
 		$st->execute();
 		
@@ -68,6 +88,7 @@
 		$data = groupByKey($data);
 		foreach($data as &$post){
 			$pid = $post['PID'];
+			$timestamp = $post['Timestamp'];
 			$sql = "SELECT Name,UID FROM Users WHERE UID IN (SELECT UID FROM Tagged WHERE PID='$pid' )";
 			$st = $conn->prepare($sql);
 			$st->execute();
@@ -75,6 +96,17 @@
 			// modify results (include comments below main posts)
 			$tagged= $st->fetchAll(PDO::FETCH_ASSOC); 
 			$post['tagged'] = $tagged;
+
+
+			$sql = "SELECT SUM(Vote) as Total, Sum( Case When Vote< 0 Then 1 Else 0 End ) As Disagree , Sum( Case When Vote > 0 Then 1 Else 0 End ) As Agree FROM Liked GROUP BY PID,Timestamp HAVING Timestamp = '$timestamp' AND pid = '$pid';";
+			$st = $conn->prepare($sql);
+			$st->execute();
+			
+			// modify results (include comments below main posts)
+			$votes= $st->fetch(); 
+			$post['Agree'] = $votes['Agree'];
+			$post['Disagree'] = $votes['Disagree'];
+			$post['Score'] = $votes['Total'];
 		}
 		$data = array("status" => "200 Success", "data" => $data);
 		$conn = null;
@@ -87,8 +119,8 @@
 
 		// retrieve overall feed information associated with friends
 		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-
-		$sql = "SELECT A.PID,Content,Agree,Disagree,Timestamp FROM((SELECT * FROM Posts)A JOIN (SELECT DISTINCT PID FROM (SELECT PID,UID,Timestamp FROM Tagged ORDER BY Timestamp DESC)T1 JOIN (SELECT Friend FROM Friends WHERE UID='$uid')T2 ON T1.UID=T2.Friend LIMIT 10)B ON A.PID=B.PID )ORDER BY Timestamp DESC";
+		$offset = isset($_GET['offset']) ? $_GET['offset']:'0';
+		$sql = "SELECT A.PID,Content,Timestamp FROM((SELECT * FROM Posts)A JOIN (SELECT DISTINCT PID FROM (SELECT PID,UID,Timestamp FROM Tagged ORDER BY Timestamp DESC)T1 JOIN (SELECT Friend FROM Friends WHERE UID='$uid')T2 ON T1.UID=T2.Friend LIMIT 10 OFFSET $offset)B ON A.PID=B.PID )ORDER BY Timestamp DESC";
 		$st = $conn->prepare($sql);
 		$st->execute();
 		
@@ -98,6 +130,8 @@
 		$data = groupByKey($data);
 		foreach($data as &$post){
 			$pid = $post['PID'];
+			$timestamp = $post['Timestamp'];
+
 			$sql = "SELECT Name,UID FROM Users WHERE UID IN (SELECT UID FROM Tagged WHERE PID='$pid' )";
 			$st = $conn->prepare($sql);
 			$st->execute();
@@ -105,6 +139,16 @@
 			// modify results (include comments below main posts)
 			$tagged= $st->fetchAll(PDO::FETCH_ASSOC); 
 			$post['tagged'] = $tagged;
+
+			$sql = "SELECT SUM(Vote) as Total, Sum( Case When Vote< 0 Then 1 Else 0 End ) As Disagree , Sum( Case When Vote > 0 Then 1 Else 0 End ) As Agree FROM Liked GROUP BY PID,Timestamp HAVING Timestamp = '$timestamp' AND pid = '$pid';";
+			$st = $conn->prepare($sql);
+			$st->execute();
+			
+			// modify results (include comments below main posts)
+			$votes= $st->fetch(); 
+			$post['Agree'] = $votes['Agree'];
+			$post['Disagree'] = $votes['Disagree'];
+			$post['Score'] = $votes['Total'];
 		}
 		$data = array("status" => "200 Success", "data" => $data);
 		$conn = null;

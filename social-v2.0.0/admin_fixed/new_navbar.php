@@ -18,7 +18,7 @@
     <div class="collapse navbar-collapse" id="navbar-fixed-layout-collapse">
       <ul class="nav navbar-nav">
         <li >
-	          <a href="new_newsfeed.php" class="dropdown-toggle" data-toggle="dropdown">Newsfeed</a>
+	          <a href="new_newsfeed.php">Newsfeed</a>
 	     
         </li>
       </ul>
