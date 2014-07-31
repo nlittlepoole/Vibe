@@ -3,6 +3,14 @@
 
     $_SESSION['my_profile_link'] = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" . $_SESSION['userID'] . "&name=" . $_SESSION['full_name'] . "";
 ?>
+  <script>
+  // submission custom modifications
+      $("#statusform").submit(function(event) {
+
+          event.preventDefault();
+          alert('you have triggered submit!')
+      });
+  </script>
 
 <nav class="navbar navbar-default top-nav navbar-fixed-top" role="navigation">
 
@@ -22,7 +30,9 @@
 	     
         </li>
       </ul>
-      <form class="navbar-form navbar-left hidden-sm" role="search">
+
+      <!-- search form -->
+      <form class="navbar-form navbar-left hidden-sm" role="search" name="searchform" id="statusform" method="post" action="#">
         <div class="form-group inline-block">
           <input type="text" class="form-control" placeholder="Search">
         </div>
