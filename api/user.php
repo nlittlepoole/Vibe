@@ -10,8 +10,8 @@
 	require_once('request.php');
 
 	// URL fragments
-	$uid = $_REQUEST['uid'];
-	$token = $_REQUEST['token'];
+	$uid 	= $_REQUEST['uid'];
+	$token 	= $_REQUEST['token'];
 	$action = isset($_REQUEST['action']) && validToken($uid, $token) ? $_REQUEST['action'] : "";
 
 	// parsing based on action fragment
@@ -42,22 +42,22 @@
 		break;
 	}
 
-	// search
+	// implemented search functionality API (grabs all relevant names)
 	function search($uid) {
-	$keyword = $_GET['keyword'];
-	$output = [];
+		$keyword = $_GET['keyword'];
+		$output = [];
 
-	$command = "python search.py '$keyword' '$uid'";
-	$temp = exec($command ,$output);
+		$command = "python search.py '$keyword' '$uid'";
+		$temp = exec($command ,$output);
 
-	$data = [];
-	foreach($output as $row){
-		$temp = explode("||", $row);
-		$result = array('Name' => $temp[0], 'UID' => $temp[1]);
-		array_push($data, $result );
-	}
-	$data = array("status" => "200 Success", "data" => $data);
-	pushResponse($data);
+		$data = [];
+		foreach($output as $row){
+			$temp = explode("||", $row);
+			$result = array('Name' => $temp[0], 'UID' => $temp[1]);
+			array_push($data, $result );
+		}
+		$data = array("status" => "200 Success", "data" => $data);
+		pushResponse($data);
 	}
 
 	// enable a blocked status on a friendship

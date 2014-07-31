@@ -11,8 +11,8 @@
 	require_once('request.php');
 
 	// REQUEST fragments
-	$uid =  $_REQUEST['uid'];
-	$token = $_REQUEST['token'];
+	$uid 	=  $_REQUEST['uid'];
+	$token 	= $_REQUEST['token'];
 	$action = isset($_GET['action']) && validToken($uid,$token) ? $_GET['action'] : ""; 
 
 	// determine method call using action URL fragment
