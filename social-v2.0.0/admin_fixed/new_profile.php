@@ -76,8 +76,10 @@
 						</div>
 					</div>
 
+					<!-- structure of profile post -->
+					
 					<!-- DENOTES A SPECIFIC POST GROUP (NOT JUST ONE POST) -->
-					<div class="widget">
+					<div class="widget profile-post-group">
 						<!-- Info -->
 						<div class="bg-primary">
 							<div class="media">
@@ -93,7 +95,7 @@
 						<div class="innerAll">
 							<p class="lead">Dude, you got to lay off the Subway.</p>
 						</div>
-						<!-- Comment -->
+						<!-- Comment Header -->
 						<div class="bg-gray innerAll border-top border-bottom text-small ">
 							<span>View all <a href="" class="text-primary">1 Comment</a></span>
 						</div>
