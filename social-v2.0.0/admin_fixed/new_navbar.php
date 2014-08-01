@@ -18,6 +18,12 @@
                   $("#search-submit").click();
               }
           });
+
+          var temp_friends = JSON.parse(localStorage["friends_names"]);
+
+          $("#search-bar").autocomplete({
+             source: temp_friends
+          });
       });
   </script>
 
@@ -40,13 +46,15 @@
         </li>
       </ul>
 
-      <!-- search form -->
+      <!-- SEARCH WIDGET -->
       <form class="navbar-form navbar-left hidden-sm" role="search" name="searchform" id="status-form" method="post" action="#">
         <div class="form-group inline-block">
           <input type="text" class="form-control" placeholder="Search" id="search-bar">
         </div>
-        <button type="submit" class="btn btn-inverse" id="search-submit"><i class="fa fa-search fa-fw" style="display: none;"></i></button>
+        <button type="submit" class="btn btn-inverse" id="search-submit" style="display: none;"><i class="fa fa-search fa-fw"></i></button>
       </form>
+
+
       <ul class="nav navbar-nav navbar-right">
         <li class="innerLR"><button type="button" class="btn btn-info navbar-btn"><i class="fa fa-globe"></i></button></li>
         <li class="dropdown">

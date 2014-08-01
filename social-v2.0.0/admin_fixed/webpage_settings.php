@@ -7,7 +7,7 @@
 
 <link rel="stylesheet" href="../assets/css/admin/module.admin.stylesheet-complete.layout_fixed.true.min.css" />
 
-<script type="text/javascript" src="external_js_scripts.js"></script>
+<!-- <script type="text/javascript" src="external_js_scripts.js"></script> -->
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>

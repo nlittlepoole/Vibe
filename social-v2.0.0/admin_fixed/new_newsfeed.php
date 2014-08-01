@@ -72,6 +72,9 @@
 			    });
 			}
 
+			localStorage.setItem("names_to_ID", JSON.stringify(names_to_ID));
+			localStorage.setItem("friends_names", JSON.stringify(friends_names));
+
 			// submission custom modifications
 			$("#statusform").submit(function(event) {
 

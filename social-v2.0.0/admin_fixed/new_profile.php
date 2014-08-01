@@ -62,7 +62,7 @@
 							<div class="widget-body padding-none margin-none">
 								<div class="photo">
 									<!-- NOTE: on failure (i.e. FB 2.0 non-user), it should load up a default gray person symbol -->
-									<img src=<?php echo '"' .$pic.'"' ?> class="img-circle" style="width: 100px"/> 
+									<img src=<?php echo '"' . $pic .'"' ?> class="img-circle" style="width: 100px"/> 
 								</div>
 								<div class="innerAll border-right pull-left">
 									<h3 class="margin-none"><?php echo $_SESSION['temp_name']; ?></h3>
