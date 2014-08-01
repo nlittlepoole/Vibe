@@ -64,7 +64,7 @@
     <div class="collapse navbar-collapse" id="navbar-fixed-layout-collapse">
       <ul class="nav navbar-nav">
         <li>
-	          <a href="new_newsfeed.php">Newsfeed</a>
+	          <a href="http://api.go-vibe.com/index.php?action=newsfeed">Newsfeed</a>
 	     
         </li>
       </ul>

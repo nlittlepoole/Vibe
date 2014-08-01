@@ -67,6 +67,12 @@ switch($action) {
 
   break;
 
+  case 'newsfeed':
+    // take user to the new newsfeed
+    header('Location: /social-v2.0.0/admin_fixed/new_newsfeed.php');
+
+  break;
+
   default: 
     // default option (triggered upon initially going to 'api.go-vibe.com')
 
