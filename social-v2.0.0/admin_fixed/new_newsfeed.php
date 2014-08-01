@@ -53,13 +53,13 @@
 			// friends' list (as JSON data)
 			var my_friends = <?php echo json_encode($_SESSION['friend_list']); ?>;
 
-			var names_to_ID = []; 
-			var friends_names = []; 
+			var names_to_ID = {}; 
+			var friends_names = new Array(); 
 
 			for(var i = 0; i < my_friends.length; i++) {
 				
 				// storing mapping of name to UID
-				names_to_ID[my_friends[i]['Name']] = my_friends[i]['UID'];
+				names_to_ID[String(my_friends[i]['Name'])] = String(my_friends[i]['UID']);
 				
 				// simply storing names
 				friends_names[i] = my_friends[i]['Name'];
@@ -72,8 +72,8 @@
 			    });
 			}
 
-			localStorage.setItem("names_to_ID", JSON.stringify(names_to_ID));
 			localStorage.setItem("friends_names", JSON.stringify(friends_names));
+			localStorage.setItem("names_to_ID", JSON.stringify(names_to_ID));
 
 			// submission custom modifications
 			$("#statusform").submit(function(event) {

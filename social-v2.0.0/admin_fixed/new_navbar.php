@@ -1,29 +1,52 @@
 <?php
     session_start(); 
-
-    $_SESSION['my_profile_link'] = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" . $_SESSION['userID'] . "&name=" . $_SESSION['full_name'] . "";
 ?>
   <script>
 
+      var temp_friends = JSON.parse(localStorage["friends_names"]);
+      var temp_names_to_ID = JSON.parse(localStorage["names_to_ID"]);
+
+      // alert(localStorage["names_to_ID"]);
+      $(function() {
+        $("#search-bar").autocomplete({
+           source: temp_friends
+        });
+      });
+
       $(function() {
           // submission custom modifications
+          
           $("#status-form").submit(function(event) {
               event.preventDefault();
-              alert('you have triggered submit!')
+
+              // console.log('triggered submission.');
+
+              // grab person's full name and UID
+              // var person_name = $('#status-form input[name="search-bar"]').val();
+              // console.log('you have triggered submit with UID of: ' + temp_names_to_ID[person_name]);
           });
+          
 
           // triggering submission upon ENTER
           $("#search-bar").keyup(function(event){
               if(event.keyCode == 13){
+                  console.log('triggered click.');
                   $("#search-submit").click();
+
+                  load_profile(); 
               }
           });
 
-          var temp_friends = JSON.parse(localStorage["friends_names"]);
+          function load_profile() {
+              var person_name = $('#status-form input[name="search-bar"]').val();
 
-          $("#search-bar").autocomplete({
-             source: temp_friends
-          });
+              temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" 
+              temp_link += temp_names_to_ID[person_name] + "&name=" + person_name + "";
+
+              console.log('you have triggered load submit with UID of: ' + temp_names_to_ID[person_name]);
+
+              window.location.href = temp_link;
+          }
       });
   </script>
 
@@ -49,7 +72,7 @@
       <!-- SEARCH WIDGET -->
       <form class="navbar-form navbar-left hidden-sm" role="search" name="searchform" id="status-form" method="post" action="#">
         <div class="form-group inline-block">
-          <input type="text" class="form-control" placeholder="Search" id="search-bar">
+          <input type="text" class="form-control" placeholder="Search" id="search-bar" name="search-bar">
         </div>
         <button type="submit" class="btn btn-inverse" id="search-submit" style="display: none;"><i class="fa fa-search fa-fw"></i></button>
       </form>
