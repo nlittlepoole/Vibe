@@ -45,7 +45,17 @@
 			// GRABBING THE JSON of newsfeed elements
 
 			$.getJSON(user_networks_url, function(data) {
-				console.log("DATA: " + data['data']);
+				//onsole.log("DATA: " + data['data'][0]['Name']);
+				num_networks = data['data'].length;
+
+				for(var i = 0; i < num_networks; i++) {
+					console.log(data['data'][i]['Name']);
+				}
+				/*
+				for (location_name in data['data']) {
+    				console.log(location_name['Name']);
+    			}
+    			*/
 			});
 
 		});
@@ -91,7 +101,7 @@
 									</div>
 									<div class="innerAll border-right pull-left">
 										<h3 class="margin-none"><?php echo $_SESSION['temp_name']; ?></h3>
-										<span>Works at Anchorage Capital, L.L.C.</span>
+										<span id="network_info">Works at Anchorage Capital, L.L.C.</span>
 									</div>
 									<div class="innerAll pull-left">
 										<p class="lead margin-none "> <i class="fa fa-quote-left text-muted fa-fw"></i> Hello! This is an optional caption.</p> 
