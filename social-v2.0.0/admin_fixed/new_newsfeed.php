@@ -66,11 +66,13 @@
 			}
 
 			// autocomplete with list of friends' names
+			/*
 			if(friends_names.length != 0) {
 			    $("#inputFriend").autocomplete({
 				     source: friends_names
 			    });
 			}
+			*/
 
 			localStorage.setItem("friends_names", JSON.stringify(friends_names));
 			localStorage.setItem("names_to_ID", JSON.stringify(names_to_ID));
@@ -123,6 +125,26 @@
 
 	</script>
 
+	<!-- Ajax load scripts go at the top... -->
+	<script type="text/javascript"> 
+
+		$(window).bind("load", function() {
+   			console.log('loading up the page...');
+
+	    	// loading navbar...
+	    	$('#new_navbar').load('new_navbar.php'); 
+	    	console.log('navbar is loaded...');
+
+	    	// loading sidebar...
+	    	$('#new_sidebar').load('new_sidebar.php'); 
+	    	console.log('sidebar is loaded...'); 
+
+	    	// loading newsfeed elements...
+	      	$('#last_elems').load('newsfeed_element.php'); 
+	      	console.log('newsfeed element is loaded...');
+		});
+	</script> 
+
 	<style type="text/css">
 	  
 	  .ui-autocomplete {
@@ -144,12 +166,7 @@
 		<!-- being overall content -->
 		<div id="content">
 			
-			<!-- loading NAVBAR... -->	
-			<script> 
-			    $(function(){
-			      $('#new_navbar').load('new_navbar.php'); 
-			    });
-			</script> 
+			<!-- loading NAVBAR here -->	
 
 			<div id="new_navbar"></div>
 
@@ -241,13 +258,7 @@
 						<!-- actual TIMELINE -->
 						<ul class="timeline-activity list-unstyled" id="newsfeed_container">
 
-							<!-- loading NEWSFEED ELEMENTS... -->
-							
-							<script> 
-							    $(function(){
-							      	$('#last_elems').load('newsfeed_element.php'); 
-							    });
-							</script> 
+							<!-- loading NEWSFEED ELEMENTS here -->
 
 							<div id="last_elems"></div>
 
@@ -255,14 +266,8 @@
 
 					</div>
 
-					<!-- loading SIDEBAR... -->
+					<!-- loading SIDEBAR here -->
 					<div class="col-md-4 col-lg-3">
-
-						<script> 
-						    $(function(){
-						      $('#new_sidebar').load('new_sidebar.php'); 
-						    });
-						</script> 
 
 						<div id="new_sidebar"></div>
 							
