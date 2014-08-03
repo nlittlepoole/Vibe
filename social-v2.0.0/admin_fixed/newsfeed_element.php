@@ -22,26 +22,32 @@
 		        	// grabbing all of the names/UIDs of recipients
 		        	// PID of respective post (and overall structure is) data['data'][i]['PID'])
 
-					// creating a temp link for each post (link to profile of that person...)
-					// NOTE: the one directly below is extremely old...
-		        	var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + data['data'][i]['Tagged'] + "&name=" + data['data'][i]['Name'] + "";
-		        	var temp_link2 = "";
+					// creating a temp string for each post (link to profile of all people tagged...)
 
-					recipient_size = data['data'][i]['tagged'].length;
+					var recipient_size = data['data'][i]['tagged'].length;
 					var post_tagged_formatted_names = ""; 
 
 					if(recipient_size == 1) {
+						
+						var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + data['data'][i]['tagged'][0]['UID'] + "&name=" + data['data'][i]['tagged'][0]['Name'] + "";
+						
 						post_tagged_formatted_names = "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['tagged'][0]['Name'] + "</a>"; 
 					}
 					else if(recipient_size == 2) {
+						
+						var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + data['data'][i]['tagged'][0]['UID'] + "&name=" + data['data'][i]['tagged'][0]['Name'] + "";
+						var temp_link2 = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + data['data'][i]['tagged'][1]['UID'] + "&name=" + data['data'][i]['tagged'][1]['Name'] + "";
+						
 						post_tagged_formatted_names = "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['tagged'][0]['Name'] + "</a>" + " and " + "<a href='" + temp_link2 + "' class='text-white strong'>" + data['data'][i]['tagged'][1]['Name'] + "</a>"; 
 					}
 					else {
 						for(var z = 0; z < recipient_size; z++) {
+
+							var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + data['data'][i]['tagged'][z]['UID'] + "&name=" + data['data'][i]['tagged'][z]['Name'] + "";
 							
 							if(z == recipient_size - 1) {
 								// last element (special case)
-								post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['tagged'][z]['Name'] + "</a>";
+								post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['tagged'][z]['Name'] + "</a>&nbsp;";
 							}
 							else if(z == recipient_size - 2) {
 								// second to last element (special case)
@@ -52,10 +58,10 @@
 								post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['tagged'][z]['Name'] + "</a>" + ", "; 
 							}
 
-			        		console.log('name for the member in PID is: ' + data['data'][i]['tagged'][z]['Name']);
-			        		console.log('pid for the member in PID is: ' + data['data'][i]['tagged'][z]['UID']);
 			        	}
 					}
+
+					console.log(post_tagged_formatted_names);
 
 		        	// looking @ first element returned (i.e. most recent post)
 		        	if(i == 0) {
@@ -80,9 +86,6 @@
 			        			// loop through to where we finally get to pointer match (new content is finally all accounted for)
 			        			while(String(curr_pid) !== String(localStorage.getItem("latest_pid"))) {
 
-			        				// generate temp link for that post (link to person's profile)
-			        				var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + data['data'][j]['Tagged'] + "&name=" + data['data'][j]['Name'] + "";
-
 			        				html_newsfeed_content += 
 						        		["<li class='active vibe_newsfeed_posts'>", 
 											"<span class='marker'></span>",
@@ -96,7 +99,7 @@
 																"<div class='media'>",
 																	"<div class='media-body innerTB' style='padding-left:20px;'>",
 																		"<a href='#' class='text-white strong'>Someone</a>",
-																		"<span>upped <a href='" + temp_link + "' class='text-white strong'>" + data['data'][j]['Name'] + "'s Chillness</a>",
+																		"<span>upped the Chillness of " + post_tagged_formatted_names,
 																		"on 15th January, 2014 <i class='icon-time-clock'></i></span>",
 																	"</div>",
 																"</div>",
@@ -165,7 +168,7 @@
 												"<div class='media'>",
 													"<div class='media-body innerTB' style='padding-left:20px;'>",
 														"<a href='#' class='text-white strong'>Someone</a>",
-														"<span>upped <a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['Name'] + "'s Chillness</a>",
+														"<span>upped the Chillness of " + post_tagged_formatted_names,
 														"on 15th January, 2014 <i class='icon-time-clock'></i></span>",
 													"</div>",
 												"</div>",
