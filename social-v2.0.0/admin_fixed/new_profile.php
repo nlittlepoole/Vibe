@@ -10,6 +10,7 @@
 	// picture URL request
 	$pic = "https://graph.facebook.com/" . $_SESSION['prof_UID'] . "/picture?type=large";
 
+	// FB Graph API request to grab user's communities
 	$_SESSION['user_networks_request'] = "http://api.go-vibe.com/api/location.php?action=getLocations&uid=";
 	$_SESSION['user_networks_request'] .= $_SESSION['prof_UID'] . "&token=" . $_SESSION['token'];
 ?>
@@ -43,17 +44,19 @@
 			// GRABBING THE JSON of newsfeed elements
 
 			$.getJSON(user_networks_url, function(data) {
-				//onsole.log("DATA: " + data['data'][0]['Name']);
-				num_networks = data['data'].length;
+
+				var network_string 	= ""; 
+				var num_networks 	= data['data'].length;
 
 				for(var i = 0; i < num_networks; i++) {
-					console.log(data['data'][i]['Name']);
+		
+					// limit output of communities
+					if(i < 1) {
+						network_string += data['data'][i]['Name'] + '<br />'; 
+					}
 				}
-				/*
-				for (location_name in data['data']) {
-    				console.log(location_name['Name']);
-    			}
-    			*/
+
+				$('#network_info').html(network_string);
 			});
 
 		});
@@ -99,10 +102,12 @@
 									</div>
 									<div class="innerAll border-right pull-left">
 										<h3 class="margin-none"><?php echo $_SESSION['prof_name'] ?></h3>
-										<span id="network_info">Works at Anchorage Capital, L.L.C.</span>
+										<span id="network_info"></span>
 									</div>
 									<div class="innerAll pull-left">
-										<p class="lead margin-none "> <i class="fa fa-quote-left text-muted fa-fw"></i> Hello! This is an optional caption.</p> 
+										<p class="lead margin-none ">
+											<i class="fa fa-quote-left text-muted fa-fw"></i> Hello! This is an optional caption.
+										</p>
 									</div>
 								</div>
 								<div class="clearfix"></div>
