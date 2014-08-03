@@ -43,6 +43,7 @@
 	<script type="text/javascript" src="http://api.go-vibe.com/selectize/selectize.js"></script>
 	<!-- <script type="text/javascript" src="http://api.go-vibe.com/selectize/examples/js/index.js"></script> -->
 	<link rel="stylesheet" type="text/css" href="http://api.go-vibe.com/selectize/examples/css/stylesheet.css" />
+	<link rel="stylesheet" type="text/css" href="http://api.go-vibe.com/selectize/selectize.default.css" />
 
 	<!-- autocomplete code && form submission -->
 	<script type="text/javascript">
