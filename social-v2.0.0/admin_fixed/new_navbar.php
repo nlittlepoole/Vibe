@@ -11,13 +11,14 @@
       var temp_names_to_ID = JSON.parse(localStorage["names_to_ID"]);
 
       // alert(localStorage["names_to_ID"]);
-      /*
+      
       $(function() {
         $("#search-bar").autocomplete({
            source: temp_friends
         });
       });
-      */
+      
+      console.log('search bar finished loading');
 
       $(function() {
           // submission custom modifications

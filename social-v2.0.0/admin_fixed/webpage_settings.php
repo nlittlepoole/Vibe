@@ -24,7 +24,7 @@ App.Scripts = {
 
 	/* CORE scripts always load first; */
 	core: [
-		'../assets/library/jquery/jquery.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../assets/library/jquery/temp.js' // manually put in a placeholder so it doesn't load jQuery twice!
 	],
 
 	/* PLUGINS_DEPENDENCY always load after CORE but before PLUGINS; */

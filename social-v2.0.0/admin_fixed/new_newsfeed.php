@@ -32,9 +32,6 @@
 	
 	<title>Newsfeed</title>
 
-	<!-- overall settings -->
-	<?php require_once("webpage_settings.php"); ?>
-
 	<!-- jQuery & jQuery UI -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
@@ -66,13 +63,12 @@
 			}
 
 			// autocomplete with list of friends' names
-			/*
+			
 			if(friends_names.length != 0) {
 			    $("#inputFriend").autocomplete({
 				     source: friends_names
 			    });
-			}
-			*/
+			}	
 
 			localStorage.setItem("friends_names", JSON.stringify(friends_names));
 			localStorage.setItem("names_to_ID", JSON.stringify(names_to_ID));
@@ -101,7 +97,6 @@
 	  			});
 			});
 
-
 			// periodic action
 			function update() {
 				$('#last_elems').load('newsfeed_element.php'); 
@@ -128,7 +123,7 @@
 	<!-- Ajax load scripts go at the top... -->
 	<script type="text/javascript"> 
 
-		$(window).bind("load", function() {
+		$(function() {
    			console.log('loading up the page...');
 
 	    	// loading navbar...
@@ -144,6 +139,9 @@
 	      	console.log('newsfeed element is loaded...');
 		});
 	</script> 
+
+	<!-- overall settings -->
+	<?php require_once("webpage_settings.php"); ?>
 
 	<style type="text/css">
 	  
