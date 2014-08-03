@@ -39,6 +39,9 @@
 	<!-- font awesome -->
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
+	<!-- Selectize plugins (jQuery and its CSS) -->
+	<!-- <script type="text/javascript" src=""></script>-->
+
 	<!-- autocomplete code && form submission -->
 	<script type="text/javascript">
 
@@ -63,12 +66,32 @@
 			}
 
 			// autocomplete with list of friends' names
-			
+			/*
 			if(friends_names.length != 0) {
 			    $("#inputFriend").autocomplete({
 				     source: friends_names
 			    });
 			}	
+			*/
+
+			var items = friends_names.map(function(x) { return { item: x }; });
+
+			$('#inputFriend').selectize({
+			    delimiter: ',',
+			    persist: false,
+			    maxItems: 4,
+			    options: items,
+			    labelField: "item",
+			    valueField: "item",
+			    sortField: 'item',
+			    searchField: 'item',
+			    create: function(input) {
+			        return {
+			            value: input,
+			            text: input
+			        }
+			    }
+			});
 
 			localStorage.setItem("friends_names", JSON.stringify(friends_names));
 			localStorage.setItem("names_to_ID", JSON.stringify(names_to_ID));
