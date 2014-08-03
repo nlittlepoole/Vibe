@@ -36,7 +36,8 @@
 			<a href="#" class="pull-right innerT innerR text-muted">
 				<i class="icon-reply-all-fill fa fa-2x "></i>
 			</a>
-			<a href="" class="strong text-inverse">Adrian Demian</a> 	<small class="text-muted ">wrote on Jan 15th, 2014</small> <a href="" class="text-small">like</a>
+			<a href="" class="strong text-inverse">Adrian Demian</a> <small class="text-muted ">wrote on Jan 15th, 2014</small> <a href="" class="text-small">like</a>
+			
 			<div>That $5 is worth it though.</div>
 
 		</div>

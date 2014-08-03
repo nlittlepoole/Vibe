@@ -8,48 +8,44 @@
 <script type="text/javascript">
 	$(function(){
 		
-		// REQUEST to get newsfeed elements
+		// JSON request for newsfeed elements
 		var newsfeed_url = "<?php echo $_SESSION['newsfeed_elems_request']; ?>";
 
-		// GRABBING THE JSON of newsfeed elements
+		// grabbing JSON...
 		$.getJSON(newsfeed_url, function(data) {
-
-			// testing against errors
-			// alert("REAL DATA: " + data['data']);
 
 		    if (!data.error) {
 
-		        // PARSING RESULTS
+		        // looping through all posts
 		        for(var i = 0; i < data['data'].length; i++) {
 		        	
+		        	// creating a temp link for each post (link to profile of that person...)
 		        	var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + data['data'][i]['Tagged'] + "&name=" + data['data'][i]['Name'] + "";
 
-		        	// grab the first element and store it in session data
+		        	// looking @ first element returned (i.e. most recent post)
 		        	if(i == 0) {
 
 		        		var most_recent_pid = String(data['data'][0]['PID']); 
 
-		        		// alert('most recent pid is ' + most_recent_pid + ' and local storaged value is now ' + String(localStorage.getItem("latest_pid")));
-
 		        		if (String(localStorage.getItem("latest_pid")) != "null value") {
-		        			// alert("you made it to the if by accident"); 
+		        			// in this case, the data has already been loaded @ least once before in session
 
 		        			if(localStorage.getItem("latest_pid") == most_recent_pid) {
-		        				// alert('not doing any append update!');
+		        				// no changes since we still have latest pointer to same post so do nothing with JSON returned
 		        				return; 
 		        			}
 		        			else {
-		        				// alert('we have triggered a difference!');
+		        				// latest pointer to JSON data and locally stored pointer are not the same (i.e. we have new content!)
 		        			
-			        			// NOTE: the returned content is different than the rendered content!
-			        			var curr_pid = most_recent_pid
-			        			var j = 0; 
+			        			var curr_pid 	= most_recent_pid
+			        			var j 			= 0; 
 
 			        			var html_newsfeed_content = ""; 
 
-			        			// alert("current pid: " + curr_pid + ", local storage item: " + localStorage.getItem("latest_pid"));
+			        			// loop through to where we finally get to pointer match (new content is finally all accounted for)
 			        			while(String(curr_pid) !== String(localStorage.getItem("latest_pid"))) {
-			        				// alert("current pid: " + curr_pid + ", local storage item: " + localStorage.getItem("latest_pid"));
+
+			        				// generate temp link for that post (link to person's profile)
 			        				var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + data['data'][j]['Tagged'] + "&name=" + data['data'][j]['Name'] + "";
 
 			        				html_newsfeed_content += 
@@ -89,32 +85,32 @@
 										].join('\n');
 
 									j += 1;
-									curr_pid = data['data'][j]['PID']; 
+									curr_pid = data['data'][j]['PID']; 	// updating curr PID as looping through
 			        			}
 
-			        			// debugger; 
+			        			// prepending all of this HTML (of new posts that haven't been rendered before)...
 			        			$('#newsfeed_container').prepend(html_newsfeed_content);
-			        			// debugger; 
 
+			        			// update the locally stored value of latest PID
 			        			most_recent_pid = data['data'][0]['PID'];
 		        				localStorage.setItem("latest_pid", most_recent_pid);
-		        				// alert('leaving after difference triggering!');
+
 		        				return; 
 		        			}
 		        		}
 		        		else {
-		        			// first time going through
+		        			// first time going through, so just set the locally stored value
+		        			// now body of loop will continue to be called (didn't return)
+
 		        			most_recent_pid = data['data'][0]['PID'];
 		        			localStorage.setItem("latest_pid", most_recent_pid);
-		        			// alert('IMPORTANT: localstorage item set to ' + most_recent_pid); 
 		        		} 
 		        	}
-
-		        	var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + data['data'][i]['Tagged'] + "&name=" + data['data'][i]['Name'] + "";
 
 		        	var all_comments = ""; 
 
 		        	// do comments parsing of DB, once basic form is done...
+		        	// also need to set up multi-tagging rendering (with name generation)...
 		        	/*
 		        	for(var j = 0; data['data'][i]['Comments'].length; j++) {
 		        		all_comments += "<p>This is a comment!</p>";
@@ -157,13 +153,13 @@
 						"</li>",
 						].join('\n');
 
+					// append this content to overally content (adding older and older posts to the tail)
 					$('#newsfeed_container').append(html_newsfeed_content);
 		        }
 		    } 
 		    else {
-
-		    	// WARNING! ERROR TRIGGERED.
-		        console.log("WARNING: ERROR TRIGGERED LOADING DATA..."); 
+		    	// there was an error with grabbing JSON
+		    	console.log('[STATUS] error grabbing JSON for newsfeed elements');
 		    }
 		});
 	});
