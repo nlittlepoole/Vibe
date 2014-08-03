@@ -40,8 +40,8 @@
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
 	<!-- Selectize plugins (jQuery and its CSS) -->
-	<script type="text/javascript" src="http://api.go-vibe.com/selectize/src/selectize.js"></script>
-	<script type="text/javascript" src="http://api.go-vibe.com/selectize/examples/js/index.js"></script>
+	<script type="text/javascript" src="http://api.go-vibe.com/selectize/selectize.js"></script>
+	<!-- <script type="text/javascript" src="http://api.go-vibe.com/selectize/examples/js/index.js"></script> -->
 	<link rel="stylesheet" type="text/css" href="http://api.go-vibe.com/selectize/examples/css/stylesheet.css" />
 
 	<!-- autocomplete code && form submission -->
