@@ -22,13 +22,9 @@
           // submission custom modifications
           
           $("#status-form").submit(function(event) {
+              
+              // simply override normal send
               event.preventDefault();
-
-              // console.log('triggered submission.');
-
-              // grab person's full name and UID
-              // var person_name = $('#status-form input[name="search-bar"]').val();
-              // console.log('you have triggered submit with UID of: ' + temp_names_to_ID[person_name]);
           });
           
 
@@ -48,7 +44,7 @@
               temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" 
               temp_link += temp_names_to_ID[person_name] + "&name=" + person_name + "";
 
-              console.log('you have triggered load submit with UID of: ' + temp_names_to_ID[person_name]);
+              // console.log('you have triggered load submit with UID of: ' + temp_names_to_ID[person_name]);
 
               window.location.href = temp_link;
           }

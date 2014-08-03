@@ -16,6 +16,7 @@
 ?>
 
 <!DOCTYPE html>
+
 <!--[if lt IE 7]> <html class="ie lt-ie9 lt-ie8 lt-ie7 paceCounter paceSocial footer-sticky"> <![endif]-->
 <!--[if IE 7]>    <html class="ie lt-ie9 lt-ie8 paceCounter paceSocial footer-sticky"> <![endif]-->
 <!--[if IE 8]>    <html class="ie lt-ie9 paceCounter paceSocial footer-sticky"> <![endif]-->
@@ -87,7 +88,6 @@
 			<!-- loading NAVBAR here... -->	
 			<div id="new_navbar"></div>
 
-
 			<!-- <div class="layout-app">  -->
 			<div class="container"><div class="innerAll">
 				<div class="row">
@@ -96,7 +96,6 @@
 						<div class="timeline-cover">	
 							<div class="cover image ">
 								<div style="height: 50px"></div>
-								<!-- <div class="top"><img src="../assets//images/photodune-2755655-party-time-s.jpg" class="img-responsive" />				</div>-->
 								<ul class="list-unstyled">
 									<li class="active"><a href="index.html?lang=en"><i class="fa fa-fw fa-clock-o"></i> <span>Timeline</span></a></li>
 								</ul>
@@ -123,14 +122,13 @@
 
 						<!-- structure of profile post -->
 						
-						<!-- DENOTES A SPECIFIC POST GROUP (NOT JUST ONE POST) -->
+						<!-- denotes one post and all of its comments (for now) -->
 						<div id="posts_location"></div>
 
 					</div>
 
 					<!-- STARTING WIDGETS ON THE SIDE -->
 					<div class="col-md-4 col-lg-3">
-
 
 						<!-- load SIDEBAR here... -->	
 						<div id="new_sidebar"></div>
@@ -139,8 +137,6 @@
 					<!-- // Content END -->
 					
 					<div class="clearfix"></div>
-					<!-- // Sidebar menu & content wrapper END -->
-				
 						
 				</div>
 				<!-- // Main Container Fluid END -->

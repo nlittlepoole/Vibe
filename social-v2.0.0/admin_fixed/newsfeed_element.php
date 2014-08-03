@@ -27,16 +27,12 @@
 		        	// grab the first element and store it in session data
 		        	if(i == 0) {
 
-		        		// debugger; 
-
 		        		var most_recent_pid = String(data['data'][0]['PID']); 
 
 		        		// alert('most recent pid is ' + most_recent_pid + ' and local storaged value is now ' + String(localStorage.getItem("latest_pid")));
-		        		// debugger; 
 
 		        		if (String(localStorage.getItem("latest_pid")) != "null value") {
 		        			// alert("you made it to the if by accident"); 
-		        			// debugger; 
 
 		        			if(localStorage.getItem("latest_pid") == most_recent_pid) {
 		        				// alert('not doing any append update!');
@@ -51,7 +47,6 @@
 
 			        			var html_newsfeed_content = ""; 
 
-			        			// debugger; 
 			        			// alert("current pid: " + curr_pid + ", local storage item: " + localStorage.getItem("latest_pid"));
 			        			while(String(curr_pid) !== String(localStorage.getItem("latest_pid"))) {
 			        				// alert("current pid: " + curr_pid + ", local storage item: " + localStorage.getItem("latest_pid"));
@@ -108,8 +103,6 @@
 		        			}
 		        		}
 		        		else {
-		        			// alert("you made it to the else!");
-		        			// debugger; 
 		        			// first time going through
 		        			most_recent_pid = data['data'][0]['PID'];
 		        			localStorage.setItem("latest_pid", most_recent_pid);
