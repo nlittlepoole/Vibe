@@ -27,10 +27,20 @@
   <section id="header_bar_banner">
     <div id="header_bar" class="container">
       <div class="sixteen columns">
-        <div id="logo">
-          <a href="#"><img src="vibe72dpi-rgb.gif" width="72"/></a>
-          <a href="index.html"><img src="https://s3.amazonaws.com/HookFeed/HookFeed_Logo_Light.png" width="150"></a>
+        <style type="text/css">
+          #logo {
+            height: 50px;
+            padding-top: 7px;
+          }
+        </style>
+
+        <div id="logo" style="width: 26px;">
+          <a href="#"><img src="vibe72dpi-rgb.gif" style="margin-bottom: 7px; width: 36px;"/></a>
+          <!--<a href="index.html"><img src="https://s3.amazonaws.com/HookFeed/HookFeed_Logo_Light.png" width="150"></a>-->
         </div>
+        <nav style="float: left;">
+          <a href="#" style="font-size: 20px;">Vibe</a>
+        </nav>
         <nav>
           <a href="#benefits_banner">About</a>
           <a href=<?php echo '"'. $_SESSION['loginUrl'] . '"' ?>>Login</a>
