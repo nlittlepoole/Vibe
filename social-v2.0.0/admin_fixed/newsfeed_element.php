@@ -18,9 +18,44 @@
 
 		        // looping through all posts
 		        for(var i = 0; i < data['data'].length; i++) {
-		        	
-		        	// creating a temp link for each post (link to profile of that person...)
+
+		        	// grabbing all of the names/UIDs of recipients
+		        	// PID of respective post (and overall structure is) data['data'][i]['PID'])
+
+					// creating a temp link for each post (link to profile of that person...)
+					// NOTE: the one directly below is extremely old...
 		        	var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + data['data'][i]['Tagged'] + "&name=" + data['data'][i]['Name'] + "";
+		        	var temp_link2 = "";
+
+					recipient_size = data['data'][i]['tagged'].length;
+					var post_tagged_formatted_names = ""; 
+
+					if(recipient_size == 1) {
+						post_tagged_formatted_names = "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['tagged'][0]['Name'] + "</a>"; 
+					}
+					else if(recipient_size == 2) {
+						post_tagged_formatted_names = "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['tagged'][0]['Name'] + "</a>" + " and " + "<a href='" + temp_link2 + "' class='text-white strong'>" + data['data'][i]['tagged'][1]['Name'] + "</a>"; 
+					}
+					else {
+						for(var z = 0; z < recipient_size; z++) {
+							
+							if(z == recipient_size - 1) {
+								// last element (special case)
+								post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['tagged'][z]['Name'] + "</a>";
+							}
+							else if(z == recipient_size - 2) {
+								// second to last element (special case)
+								post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['tagged'][z]['Name'] + "</a>" + ", and";
+							}
+							else {
+								// typical case
+								post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['tagged'][z]['Name'] + "</a>" + ", "; 
+							}
+
+			        		console.log('name for the member in PID is: ' + data['data'][i]['tagged'][z]['Name']);
+			        		console.log('pid for the member in PID is: ' + data['data'][i]['tagged'][z]['UID']);
+			        	}
+					}
 
 		        	// looking @ first element returned (i.e. most recent post)
 		        	if(i == 0) {
