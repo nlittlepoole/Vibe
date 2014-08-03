@@ -11,12 +11,8 @@
 		// REQUEST to get newsfeed elements
 		var newsfeed_url = "<?php echo $_SESSION['newsfeed_elems_request']; ?>";
 
-		console.log('[STATUS] ... entering getJSON')
-
 		// GRABBING THE JSON of newsfeed elements
 		$.getJSON(newsfeed_url, function(data) {
-
-			console.log('[STATUS] ... entered getJSON!!')
 
 			// testing against errors
 			// alert("REAL DATA: " + data['data']);

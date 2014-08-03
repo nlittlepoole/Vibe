@@ -21,6 +21,7 @@ $token = $facebook->getAccessToken();
 $_SESSION['token'] = $token;
 echo $token;
 
+// fb info parsing
 $uid = $facebook->getUser(); 
 $_SESSION['userID'] = $uid; 
 
@@ -28,9 +29,9 @@ $action = isset($_GET['action']) && $uid ? $_GET['action'] : "";
 
 $_SESSION['full_name'] = "";
 
-if( isset($_GET['ref']) ){
-        $_SESSION['ref'] = $_GET['ref'];
-    }
+if(isset($_GET['ref'])) {
+    $_SESSION['ref'] = $_GET['ref'];
+}
 
 //Switch case determines what to do next based on the input arguments from the action URL fragment("?=action" in the URL)
 switch($action) {
@@ -53,6 +54,7 @@ switch($action) {
     // first name -- SESSION data
     $name_split = explode(' ', trim($_SESSION['full_name']));
     $_SESSION['first_name'] = $name_split[0];
+    $_SESSION['my_profile_load_name'] = $name_split[0] . "%20" . $name_split[1];
 
     // add referal hash
     if( isset($_SESSION['ref']) ){

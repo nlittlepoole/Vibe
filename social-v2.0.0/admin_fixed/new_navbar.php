@@ -2,7 +2,7 @@
     session_start(); 
 
     $_SESSION['my_profile_link'] = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=";
-    $_SESSION['my_profile_link'] .= $_SESSION['userID'] . "&name=" . $_SESSION['full_name'] . "";
+    $_SESSION['my_profile_link'] .= $_SESSION['userID'] . "&name=" . $_SESSION['my_profile_load_name'] . "";
 
 ?>
   <script>
@@ -17,8 +17,6 @@
            source: temp_friends
         });
       });
-      
-      console.log('search bar finished loading');
 
       $(function() {
           // submission custom modifications

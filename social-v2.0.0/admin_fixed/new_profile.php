@@ -4,16 +4,14 @@
 	session_start();
 
 	// grabbing person's UID & name info
-	$user = isset($_GET['user']) ? $_GET['user'] : "";
-	$name = isset($_GET['name']) ? $_GET['name'] : "";
-
-    $_SESSION['temp_name'] = $name; 
+	$_SESSION['prof_UID'] 	= isset($_GET['user']) ? $_GET['user'] : "";
+	$_SESSION['prof_name'] 	= isset($_GET['name']) ? $_GET['name'] : "";
 
 	// picture URL request
-	$pic = "https://graph.facebook.com/$user/picture?type=large";
+	$pic = "https://graph.facebook.com/" . $_SESSION['prof_UID'] . "/picture?type=large";
 
 	$_SESSION['user_networks_request'] = "http://api.go-vibe.com/api/location.php?action=getLocations&uid=";
-	$_SESSION['user_networks_request'] .= $user . "&token=" . $_SESSION['token'];
+	$_SESSION['user_networks_request'] .= $_SESSION['prof_UID'] . "&token=" . $_SESSION['token'];
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +21,7 @@
 <!--[if gt IE 8]> <html class="ie paceCounter paceSocial footer-sticky"> <![endif]-->
 <!--[if !IE]><!--><html class="paceCounter paceSocial footer-sticky"><!-- <![endif]-->
 <head>
-	<title><?php echo $_SESSION['temp_name']; ?></title>
+	<title><?php echo $_SESSION['prof_name']; ?></title>
 	
 	<!-- overall settings -->
 	<?php require_once("webpage_settings.php"); ?>
@@ -100,7 +98,7 @@
 										<img src=<?php echo '"' . $pic .'"' ?> class="img-circle" style="width: 100px"/> 
 									</div>
 									<div class="innerAll border-right pull-left">
-										<h3 class="margin-none"><?php echo $_SESSION['temp_name']; ?></h3>
+										<h3 class="margin-none"><?php echo $_SESSION['prof_name'] ?></h3>
 										<span id="network_info">Works at Anchorage Capital, L.L.C.</span>
 									</div>
 									<div class="innerAll pull-left">
