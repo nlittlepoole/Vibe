@@ -80,7 +80,7 @@
 			var items = friends_names.map(function(x) { return { item: x }; });
 
 			$('#inputFriend').selectize({
-			    delimiter: ',',
+			    delimiter: '&&',
 			    persist: false,
 			    maxItems: 4,
 			    options: items,
@@ -104,11 +104,26 @@
 
 	  			event.preventDefault();
 	  			
-	  			var inputted_name = $('#statusform input[name="recipient_to_convert"]').val();
-	  			var desired_uid = names_to_ID[inputted_name]
+	  			var inputted_names = $('#statusform input[name="recipient_to_convert"]').val();
 
-	  			// filling in hidden element with desired UID
-				$('#statusform input[name="recipient"]').val(desired_uid);
+				var my_names = inputted_names.split("&&");
+
+				var uid_string = ""; 
+
+				for(var i = 0; i < my_names.length; i++) {
+					var desired_uid = names_to_ID[my_names[i]];
+					uid_string += desired_uid; 
+					if(i < my_names.length - 1) {
+						uid_string += "&&"; 
+					}
+				}
+
+	  			// filling in hidden element with desired UID string
+				$('#statusform input[name="recipient"]').val(uid_string);
+				var inputted_uids = $('#statusform input[name="recipient"]').val();
+
+				console.log('inputted names: ' + inputted_names); 
+				console.log('inputted UIDs: ' + inputted_uids);
 	  			
 	  			$.post("http://api.go-vibe.com/api/vibe.php?action=postVibe", $("#statusform").serialize())
 
