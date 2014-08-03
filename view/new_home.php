@@ -28,6 +28,7 @@
     <div id="header_bar" class="container">
       <div class="sixteen columns">
         <div id="logo">
+          <a href="#"><img src="vibe72dpi-rgb.gif" width="72"/></a>
           <a href="index.html"><img src="https://s3.amazonaws.com/HookFeed/HookFeed_Logo_Light.png" width="150"></a>
         </div>
         <nav>
