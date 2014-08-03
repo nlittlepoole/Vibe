@@ -1,6 +1,8 @@
 <?php
-	// for now, this is just the structure of the profile element
-	// but dynamic rendering will occur in the near future
+	// for now, just profile element, but dynamic rendering in future
+
+	// continue session
+	session_start();
 ?>
 
 <!-- DENOTES A SPECIFIC POST GROUP (NOT JUST ONE POST) -->
