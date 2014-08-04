@@ -34,6 +34,9 @@
 
 	<script type="text/javascript">
 
+		// initializing the last stored element to none
+		localStorage.setItem("latest_pid", "null value");
+
 		$(function() {
 
 			// JSON of person's communities

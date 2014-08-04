@@ -30,6 +30,9 @@
 		        // looping through all posts
 		        for(var i = 0; i < data['data'].length; i++) {
 
+		        	// below content test for profile debugging!
+		        	console.log("Content of post is: " + data['data'][i]['Content']);
+
 		        	// grabbing all of the names/UIDs of recipients
 		        	// PID of respective post (and overall structure is) data['data'][i]['PID'])
 
@@ -92,7 +95,7 @@
 			        			var curr_pid 	= most_recent_pid
 			        			var j 			= 0; 
 
-			        			var html_newsfeed_content = ""; 
+			        			var html_profile_content = ""; 
 
 			        			// loop through to where we finally get to pointer match (new content is finally all accounted for)
 			        			while(String(curr_pid) !== String(localStorage.getItem("latest_pid"))) {
@@ -168,44 +171,46 @@
 		        	}
 		        	*/
 
-		        	var html_newsfeed_content = 
-		        		["<li class='active vibe_newsfeed_posts'>", 
-							"<span class='marker'></span>",
-							"<div class='block'>",
-								"<div class='caret'></div>",
-									"<div class='inline-block box-generic' style='width: 100%; border: 1px solid #ececec;''>",
-										"<!-- SOCIAL MEDIA POST FOR TESTING PURPOSES -->",
-										"<div class='widget'>",
-											"<!-- Info -->",
-											"<div class='bg-primary'>",
-												"<div class='media'>",
-													"<div class='media-body innerTB' style='padding-left:20px;'>",
-														"<a href='#' class='text-white strong'>Someone</a>",
-														"<span>upped the Chillness of " + post_tagged_formatted_names,
-														"on 15th January, 2014 <i class='icon-time-clock'></i></span>",
-													"</div>",
-												"</div>",
-											"</div>",
-											"<!-- Content -->",
-											"<div class='innerAll'>",
-												"<p class='lead'>" + data['data'][i]['Content'] + "</p>",
-											"</div>",
-											"<!-- Comment -->",
-											"<div class='bg-gray innerAll border-top border-bottom text-small'>",
-												"<span>Be the first to leave a comment!</span>",
-											"</div>",
-											"<!-- Rendered Comments -->",
-											all_comments, 
-											"<!-- User input comments -->",
-											"<input type='text' class='form-control' style='border: none;' placeholder='Comment here...'>",
-										"</div>",
-									"</div>",
-							"</div>",
-						"</li>",
+		        	var html_profile_content = 
+						['<!-- DENOTES A SPECIFIC POST GROUP (NOT JUST ONE POST) -->',
+						'<div class="widget profile-post-group">',
+							'<!-- Info -->',
+							'<div class="bg-primary">',
+								'<div class="media">',
+									'<div class="media-body innerTB" style="padding-left:20px;">',
+										'<a href="" class="text-white strong">Someone</a>',
+										'<span>upped the Chillness of ' + post_tagged_formatted_names,
+										'on 15th January, 2014 <i class="icon-time-clock"></i></span>',
+									'</div>',
+								'</div>',
+							'</div>',
+							'<!-- Content -->',
+							'<div class="innerAll">',
+								'<p class="lead">' + data['data'][i]['Content'] + '</p>',
+							'</div>',
+							'<!-- Comment Header -->',
+							'<div class="bg-gray innerAll border-top border-bottom text-small ">',
+								'<span>View all <a href="" class="text-primary">1 Comment</a></span>',
+							'</div>',
+							'<!-- First Comment -->',
+							'<div class="media border-bottom margin-none bg-gray">',
+								'<a href="" class="pull-left innerAll half">',
+									'<img src="../assets//images/people/100/2.jpg" width="60" class="media-object">',
+								'</a>',
+								'<div class="media-body innerTB">',
+									'<a href="#" class="pull-right innerT innerR text-muted">',
+										'<i class="icon-reply-all-fill fa fa-2x "></i>',
+									'</a>',
+									'<a href="" class="strong text-inverse">Adrian Demian</a> <small class="text-muted ">wrote on Jan 15th, 2014</small> <a href="" class="text-small">like</a>',
+									'<div>That $5 is worth it though.</div>',
+								'</div>',
+							'</div>',
+							'<input type="text" class="form-control" placeholder="Comment here...">',
+						'</div>'
 						].join('\n');
 
 					// append this content to overally content (adding older and older posts to the tail)
-					$('#posts_location').append(html_newsfeed_content);
+					$('#posts_location').append(html_profile_content);
 		        }
 		    } 
 		    else {
@@ -214,45 +219,5 @@
 		    }
 		}); 
 	});
-
-</script>
-
-<script>
-var html_newsfeed_content = 
-	["<li class='active vibe_newsfeed_posts'>", 
-		"<span class='marker'></span>",
-		"<div class='block'>",
-			"<div class='caret'></div>",
-				"<div class='inline-block box-generic' style='width: 100%; border: 1px solid #ececec;''>",
-					"<!-- SOCIAL MEDIA POST FOR TESTING PURPOSES -->",
-					"<div class='widget'>",
-						"<!-- Info -->",
-						"<div class='bg-primary'>",
-							"<div class='media'>",
-								"<div class='media-body innerTB' style='padding-left:20px;'>",
-									"<a href='#' class='text-white strong'>Someone</a>",
-									"<span>upped the Chillness of " + post_tagged_formatted_names,
-									"on 15th January, 2014 <i class='icon-time-clock'></i></span>",
-								"</div>",
-							"</div>",
-						"</div>",
-						"<!-- Content -->",
-						"<div class='innerAll'>",
-							"<p class='lead'>" + data['data'][i]['Content'] + "</p>",
-						"</div>",
-						"<!-- Comment -->",
-						"<div class='bg-gray innerAll border-top border-bottom text-small'>",
-							"<span>Be the first to leave a comment!</span>",
-						"</div>",
-						"<!-- Rendered Comments -->",
-						all_comments, 
-						"<!-- User input comments -->",
-						"<input type='text' class='form-control' style='border: none;' placeholder='Comment here...'>",
-					"</div>",
-				"</div>",
-		"</div>",
-	"</li>",
-	].join('\n');
-
 
 </script>
