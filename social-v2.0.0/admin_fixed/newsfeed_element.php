@@ -6,7 +6,7 @@
 ?>
 
 <script type="text/javascript">
-	$(function(){
+	$(function() {
 		
 		// JSON request for newsfeed elements
 		var newsfeed_url = "<?php echo $_SESSION['newsfeed_elems_request']; ?>";

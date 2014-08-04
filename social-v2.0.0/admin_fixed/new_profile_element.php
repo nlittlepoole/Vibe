@@ -3,7 +3,36 @@
 
 	// continue session
 	session_start();
+
+	$_SESSION['profile_elems_request'] = "http://api.go-vibe.com/api/user.php?action=getStream";
+	$_SESSION['profile_elems_request'] .= "&uid=" . $_SESSION['userID']  . "&token=" . $_SESSION['token'];
+	$_SESSION['profile_elems_request'] .= "&user=" . $_SESSION['prof_UID']; 
 ?>
+
+<script type="text/javascript">
+
+	$(function() {
+
+		// JSON request for profile elements
+		var profile_url = "<?php echo $_SESSION['profile_elems_request']; ?>";
+
+		console.log('profile url of elements: ' + profile_url); 
+		console.log('[STATUS] did get to the JavaScript...'); 
+
+		// grabbing JSON...
+		$.getJSON(profile_url, function(data) {
+
+		    if (!data.error) {
+		    	console.log("The number of posts about this person is: " + data['data'].length); 
+		    }
+		    else {
+		    	// there was an error with grabbing JSON
+		    	console.log('[STATUS] error grabbing JSON for profile elements');
+		    }
+		}); 
+	});
+
+</script>
 
 <!-- DENOTES A SPECIFIC POST GROUP (NOT JUST ONE POST) -->
 <div class="widget profile-post-group">
