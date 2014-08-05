@@ -157,33 +157,35 @@
                 $(this).css("background-color", "#428bca");
                 $(this).css("border-color", "#428bca");
             });
-        });
 
-        /* comment submissions */
-        $(function() {
-
-            console.log('jQuery code wrote is able to be used.');
-          
-          // custom modifications
-          $(".comment_form").submit(function(event) {
+            // comment submissions - custom modifications
+            $(".comment_form").submit(function(event) {
               
               // debugging
               console.log('you sent something!'); 
 
               // simply override normal send
               event.preventDefault();
-          });
-          
+            });
 
-          // triggering submission upon ENTER
-          $(".comment_input").keyup(function(event){
-              if(event.keyCode == 13){
+            $(".comment_submit").click(function() {
+              console.log("the submit button was pressed");
+            });
 
-                  console.log('triggered click...');
-                  debugger; 
-                  $(".comment_submit").click();
-              }
-          });
+            $( ".comment_input" ).css( "border", "3px solid red" );
+
+            // triggering submission upon ENTER
+            /*
+            $(".comment_input").keyup(function(event){
+                console.log('character entered...')
+
+                if(event.keyCode == 13){
+
+                    console.log('triggered click...');
+                    $(".comment_submit").click();
+                }
+            });
+            */
         });
 
     </script>

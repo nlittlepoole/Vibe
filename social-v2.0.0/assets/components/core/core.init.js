@@ -1,4 +1,4 @@
-/* Remove Envato Frame */
+oder/* Remove Envato Frame */
 if (window.location != window.parent.location)
 	top.location.href = document.location.href;
 
@@ -127,7 +127,7 @@ if (window.location != window.parent.location)
 
 	window.enableContentNiceScroll = function(hide)
 	{
-		if ($('html').is('.ie') || Modernizr.touch)
+		if ($('html').is('.ie'))
 			return;
 
 		if (typeof $.fn.niceScroll == 'undefined')
