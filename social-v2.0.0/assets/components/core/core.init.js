@@ -125,6 +125,7 @@ if (window.location != window.parent.location)
 		$(this).closest('li').removeClass('active');
 	});
 
+	
 	window.enableContentNiceScroll = function(hide)
 	{
 		if ($('html').is('.ie'))

@@ -158,6 +158,10 @@
                 $(this).css("border-color", "#428bca");
             });
 
+        });
+        $(window).load(function() {
+            //dom not only ready, but everything is loaded
+
             // comment submissions - custom modifications
             $(".comment_form").submit(function(event) {
               
@@ -171,8 +175,6 @@
             $(".comment_submit").click(function() {
               console.log("the submit button was pressed");
             });
-
-            $( ".comment_input" ).css( "border", "3px solid red" );
 
             // triggering submission upon ENTER
             /*
