@@ -1,21 +1,21 @@
 <?php
-	
-	// keep track of session data
-	session_start();
+    
+    // keep track of session data
+    session_start();
 
-	// FRIENDS LIST: grab friend's data from Facebook
+    // FRIENDS LIST: grab friend's data from Facebook
 
-	$request = "http://api.go-vibe.com/api/user.php?action=getFriends&blocked=no&uid=";
-	$request .= $_SESSION['userID'] . "&token=" . $_SESSION['token'];
+    $request = "http://api.go-vibe.com/api/user.php?action=getFriends&blocked=no&uid=";
+    $request .= $_SESSION['userID'] . "&token=" . $_SESSION['token'];
 
-	$friends = json_decode(file_get_contents($request),true);
-	$friends = $friends['data'];
+    $friends = json_decode(file_get_contents($request),true);
+    $friends = $friends['data'];
 
-	usort($friends, function($a, $b) {
-		return strcmp($a['Name'], $b['Name']);
-	});
+    usort($friends, function($a, $b) {
+        return strcmp($a['Name'], $b['Name']);
+    });
 
-	$_SESSION['friend_list'] = $friends;
+    $_SESSION['friend_list'] = $friends;
 
 ?>
 
@@ -29,339 +29,373 @@
 <!--[if !IE]><!--><html class="paceCounter paceSocial footer-sticky"><!-- <![endif]-->
 
 <head>
-	
-	<title>Newsfeed</title>
+    
+    <title>Newsfeed</title>
 
-	<!-- jQuery & jQuery UI -->
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <!-- jQuery & jQuery UI -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 
-	<!-- font awesome -->
-	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- font awesome -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
-	<!-- Selectize plugins (jQuery and its CSS) -->
-	<script type="text/javascript" src="http://api.go-vibe.com/selectize/selectize.js"></script>
-	<!-- <script type="text/javascript" src="http://api.go-vibe.com/selectize/examples/js/index.js"></script> -->
-	<link rel="stylesheet" type="text/css" href="http://api.go-vibe.com/selectize/examples/css/stylesheet.css" />
-	<link rel="stylesheet" type="text/css" href="http://api.go-vibe.com/selectize/selectize.default.css" />
+    <!-- Selectize plugins (jQuery and its CSS) -->
+    <script type="text/javascript" src="http://api.go-vibe.com/selectize/selectize.js"></script>
+    <!-- <script type="text/javascript" src="http://api.go-vibe.com/selectize/examples/js/index.js"></script> -->
+    <link rel="stylesheet" type="text/css" href="http://api.go-vibe.com/selectize/examples/css/stylesheet.css" />
+    <link rel="stylesheet" type="text/css" href="http://api.go-vibe.com/selectize/selectize.default.css" />
 
-	<!-- autocomplete code && form submission -->
-	<script type="text/javascript">
+    <!-- autocomplete code && form submission -->
+    <script type="text/javascript">
 
-		// initializing the last stored element to none
-		localStorage.setItem("latest_pid", "null value");
-		
-		$(function() {
-			
-			// friends' list (as JSON data)
-			var my_friends = <?php echo json_encode($_SESSION['friend_list']); ?>;
+        // initializing the last stored element to none
+        localStorage.setItem("latest_pid", "null value");
+        
+        $(function() {
+            
+            // friends' list (as JSON data)
+            var my_friends = <?php echo json_encode($_SESSION['friend_list']); ?>;
 
-			var names_to_ID = {}; 
-			var friends_names = new Array(); 
+            var names_to_ID = {}; 
+            var friends_names = new Array(); 
 
-			for(var i = 0; i < my_friends.length; i++) {
-				
-				// storing mapping of name to UID
-				names_to_ID[String(my_friends[i]['Name'])] = String(my_friends[i]['UID']);
-				
-				// simply storing names
-				friends_names[i] = my_friends[i]['Name'];
-			}
+            for(var i = 0; i < my_friends.length; i++) {
+                
+                // storing mapping of name to UID
+                names_to_ID[String(my_friends[i]['Name'])] = String(my_friends[i]['UID']);
+                
+                // simply storing names
+                friends_names[i] = my_friends[i]['Name'];
+            }
 
-			// autocomplete with list of friends' names
-			/*
-			if(friends_names.length != 0) {
-			    $("#inputFriend").autocomplete({
-				     source: friends_names
-			    });
-			}	
-			*/
+            // autocomplete with list of friends' names
+            /*
+            if(friends_names.length != 0) {
+                $("#inputFriend").autocomplete({
+                     source: friends_names
+                });
+            }   
+            */
 
-			var items = friends_names.map(function(x) { return { item: x }; });
+            var items = friends_names.map(function(x) { return { item: x }; });
 
-			$('#inputFriend').selectize({
-			    delimiter: '&&',
-			    persist: false,
-			    maxItems: 4,
-			    options: items,
-			    labelField: "item",
-			    valueField: "item",
-			    sortField: 'item',
-			    searchField: 'item',
-			    create: function(input) {
-			        return {
-			            value: input,
-			            text: input
-			        }
-			    }
-			});
+            $('#inputFriend').selectize({
+                delimiter: '&&',
+                persist: false,
+                maxItems: 4,
+                options: items,
+                labelField: "item",
+                valueField: "item",
+                sortField: 'item',
+                searchField: 'item',
+                create: function(input) {
+                    return {
+                        value: input,
+                        text: input
+                    }
+                }
+            });
 
-			localStorage.setItem("friends_names", JSON.stringify(friends_names));
-			localStorage.setItem("names_to_ID", JSON.stringify(names_to_ID));
+            localStorage.setItem("friends_names", JSON.stringify(friends_names));
+            localStorage.setItem("names_to_ID", JSON.stringify(names_to_ID));
 
-			// submission custom modifications
-			$("#statusform").submit(function(event) {
+            // submission custom modifications
+            $("#statusform").submit(function(event) {
 
-	  			event.preventDefault();
-	  			
-	  			var inputted_names = $('#statusform input[name="recipient_to_convert"]').val();
+                event.preventDefault();
+                
+                var inputted_names = $('#statusform input[name="recipient_to_convert"]').val();
 
-				var my_names = inputted_names.split("&&");
+                var my_names = inputted_names.split("&&");
 
-				var uid_string = ""; 
+                var uid_string = ""; 
 
-				for(var i = 0; i < my_names.length; i++) {
-					var desired_uid = names_to_ID[my_names[i]];
-					uid_string += desired_uid; 
-					if(i < my_names.length - 1) {
-						uid_string += "&&"; 
-					}
-				}
+                for(var i = 0; i < my_names.length; i++) {
+                    var desired_uid = names_to_ID[my_names[i]];
+                    uid_string += desired_uid; 
+                    if(i < my_names.length - 1) {
+                        uid_string += "&&"; 
+                    }
+                }
 
-	  			// filling in hidden element with desired UID string
-				$('#statusform input[name="recipient"]').val(uid_string);
-				var inputted_uids = $('#statusform input[name="recipient"]').val();
+                // filling in hidden element with desired UID string
+                $('#statusform input[name="recipient"]').val(uid_string);
+                var inputted_uids = $('#statusform input[name="recipient"]').val();
 
-				console.log('inputted names: ' + inputted_names); 
-				console.log('inputted UIDs: ' + inputted_uids);
-	  			
-	  			$.post("http://api.go-vibe.com/api/vibe.php?action=postVibe", $("#statusform").serialize())
+                console.log('inputted names: ' + inputted_names); 
+                console.log('inputted UIDs: ' + inputted_uids);
+                
+                $.post("http://api.go-vibe.com/api/vibe.php?action=postVibe", $("#statusform").serialize())
 
-	  				.done(function(data) {
+                    .done(function(data) {
 
-	  					// clear form elements
-	  					$('input[id="inputFriend"]').val("");
-	  					$('input[id="inputVibe"]').val("");
+                        // clear form elements
+                        $('input[id="inputFriend"]').val("");
+                        $('input[id="inputVibe"]').val("");
 
-	  					// trigger load of elements again (will have updated submission)
-	  					$('#last_elems').load('newsfeed_element.php'); 
-	  			});
-			});
+                        // trigger load of elements again (will have updated submission)
+                        $('#last_elems').load('newsfeed_element.php'); 
+                });
+            });
 
-			// periodic action
-			function update() {
-				$('#last_elems').load('newsfeed_element.php'); 
-			}
+            // periodic action
+            function update() {
+                $('#last_elems').load('newsfeed_element.php'); 
+            }
 
-			setInterval(update, 60000);	 	// send the GET request every 60 seconds
+            setInterval(update, 60000);     // send the GET request every 60 seconds
 
 
-			// custom design change - (dark blue on hover instead of turquoise)
+            // custom design change - (dark blue on hover instead of turquoise)
 
-			$("#status_submit").on("mouseenter", function() {
-			  	$(this).css("background-color", "#275379");
-			  	$(this).css("border-color", "#275379");
-			});
+            $("#status_submit").on("mouseenter", function() {
+                $(this).css("background-color", "#275379");
+                $(this).css("border-color", "#275379");
+            });
 
-			$("#status_submit").on("mouseleave", function() {
-			  	$(this).css("background-color", "#428bca");
-			  	$(this).css("border-color", "#428bca");
-			});
-		});
+            $("#status_submit").on("mouseleave", function() {
+                $(this).css("background-color", "#428bca");
+                $(this).css("border-color", "#428bca");
+            });
+        });
 
-	</script>
+        /* comment submissions */
+        $(function() {
+          
+          // custom modifications
+          
+          $(".comment-form").submit(function(event) {
+              
+              // simply override normal send
+              event.preventDefault();
+          });
+          
 
-	<!-- Ajax load scripts go at the top... -->
-	<script type="text/javascript"> 
+          // triggering submission upon ENTER
+          $("#search-bar").keyup(function(event){
+              if(event.keyCode == 13){
+                  console.log('triggered click.');
+                  $("#search-submit").click();
 
-		$(function() {
-   			console.log('loading up the page...');
+                  load_profile(); 
+              }
+          });
 
-	    	// loading navbar...
-	    	$('#new_navbar').load('new_navbar.php'); 
-	    	console.log('navbar is loaded...');
+          function load_profile() {
+              var person_name = $('#status-form input[name="search-bar"]').val();
 
-	    	// loading sidebar...
-	    	$('#new_sidebar').load('new_sidebar.php'); 
-	    	console.log('sidebar is loaded...'); 
+              temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" 
+              temp_link += temp_names_to_ID[person_name] + "&name=" + person_name + "";
 
-	    	// loading newsfeed elements...
-	      	$('#last_elems').load('newsfeed_element.php'); 
-	      	console.log('newsfeed element is loaded...');
-		});
-	</script> 
+              // console.log('you have triggered load submit with UID of: ' + temp_names_to_ID[person_name]);
 
-	<!-- overall settings -->
-	<?php require_once("webpage_settings.php"); ?>
+              window.location.href = temp_link;
+          }
+        });
 
-	<style type="text/css">
-	  
-	  .ui-autocomplete {
-		   max-height: 400px;
-		   overflow-y: auto;
-		   overflow-x: hidden;		/* prevent horizontal scrollbar */
-	  }
+    </script>
 
-	</style>
+    <!-- Ajax load scripts go at the top... -->
+    <script type="text/javascript"> 
+
+        $(function() {
+            console.log('loading up the page...');
+
+            // loading navbar...
+            $('#new_navbar').load('new_navbar.php'); 
+            console.log('navbar is loaded...');
+
+            // loading sidebar...
+            $('#new_sidebar').load('new_sidebar.php'); 
+            console.log('sidebar is loaded...'); 
+
+            // loading newsfeed elements...
+            $('#last_elems').load('newsfeed_element.php'); 
+            console.log('newsfeed element is loaded...');
+        });
+    </script> 
+
+    <!-- overall settings -->
+    <?php require_once("webpage_settings.php"); ?>
+
+    <style type="text/css">
+      
+      .ui-autocomplete {
+           max-height: 400px;
+           overflow-y: auto;
+           overflow-x: hidden;      /* prevent horizontal scrollbar */
+      }
+
+    </style>
 
 </head>
 
 <body class=" scripts-async menu-right-hidden">
-	
-	<!-- main container -->
-	<div class="container-fluid ">
+    
+    <!-- main container -->
+    <div class="container-fluid ">
 
-		
-		<!-- being overall content -->
-		<div id="content">
-			
-			<!-- loading NAVBAR here -->	
+        
+        <!-- being overall content -->
+        <div id="content">
+            
+            <!-- loading NAVBAR here -->    
 
-			<div id="new_navbar"></div>
+            <div id="new_navbar"></div>
 
-			<div class="container"><div class="innerAll">
-				<div class="row">
-					<div class="col-lg-9 col-md-8">
-						
-						<div class="timeline-cover">
+            <div class="container"><div class="innerAll">
+                <div class="row">
+                    <div class="col-lg-9 col-md-8">
+                        
+                        <div class="timeline-cover">
 
-							<!-- VIBE SUBMIT FORM -->
-							<div class="widget widget-heading-simple widget-body-white">
-								
-								<div class="widget-body">
-									<div class="innerLR">
-										<div class="col-sm-12" style="padding: 0px; margin-bottom: 15px;">
-											
-											<!-- header or greeting -->
-											<div class="bg-gray innerAll border-top border-bottom">
-												<h4 style="text-align: center; color: #428bca; margin-top: 5px; margin-bottom: 5px;" class="heading"><?php echo $_SESSION['first_name']; ?>, what's on your mind?</h4>
-											</div>
+                            <!-- VIBE SUBMIT FORM -->
+                            <div class="widget widget-heading-simple widget-body-white">
+                                
+                                <div class="widget-body">
+                                    <div class="innerLR">
+                                        <div class="col-sm-12" style="padding: 0px; margin-bottom: 15px;">
+                                            
+                                            <!-- header or greeting -->
+                                            <div class="bg-gray innerAll border-top border-bottom">
+                                                <h4 style="text-align: center; color: #428bca; margin-top: 5px; margin-bottom: 5px;" class="heading"><?php echo $_SESSION['first_name']; ?>, what's on your mind?</h4>
+                                            </div>
 
-										</div>
-										<form name="status" id="statusform" class="form-horizontal" method="post" action="http://api.go-vibe.com/api/vibe.php?action=postVibe">
-										    
-											<!-- friend selection -->
-										    <div class="form-group">
-										        <label for="inputFriend" class="col-sm-2 control-label">Friend</label>
-										        
-										        <div class="col-sm-9">
-										            <input type="text" class="form-control" id="inputFriend" name="recipient_to_convert" placeholder="Who's this about? Type in a Facebook friend!">
-										        	<input type="hidden" value="" name="recipient" />
-										        	<input type="hidden" value="newsfeed" name="post_source" />
-										        </div>
+                                        </div>
+                                        <form name="status" id="statusform" class="form-horizontal" method="post" action="http://api.go-vibe.com/api/vibe.php?action=postVibe">
+                                            
+                                            <!-- friend selection -->
+                                            <div class="form-group">
+                                                <label for="inputFriend" class="col-sm-2 control-label">Friend</label>
+                                                
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" id="inputFriend" name="recipient_to_convert" placeholder="Who's this about? Type in a Facebook friend!">
+                                                    <input type="hidden" value="" name="recipient" />
+                                                    <input type="hidden" value="newsfeed" name="post_source" />
+                                                </div>
 
-										    </div>
+                                            </div>
 
-										    <!-- hidden fields -->
-										    <div class="form-group">
-										    	<input type="hidden" name="uid" value=<?php echo '"' . $_SESSION['userID'] . '"' ?>>
-			    								<input type="hidden" name="token" value=<?php echo '"' . $_SESSION['token'] . '"' ?>>
-			    							</div>
+                                            <!-- hidden fields -->
+                                            <div class="form-group">
+                                                <input type="hidden" name="uid" value=<?php echo '"' . $_SESSION['userID'] . '"' ?>>
+                                                <input type="hidden" name="token" value=<?php echo '"' . $_SESSION['token'] . '"' ?>>
+                                            </div>
 
-			    							<!-- Vibe content field -->
-										    <div class="form-group">
-										        
-										        <label for="inputVibe" class="col-sm-2 control-label">Vibe</label>
-										        
-										        <div class="col-sm-9">
-										            <input type="text" class="form-control" name="status" id="inputVibe" placeholder="What do you want to say?">
-										        </div>
+                                            <!-- Vibe content field -->
+                                            <div class="form-group">
+                                                
+                                                <label for="inputVibe" class="col-sm-2 control-label">Vibe</label>
+                                                
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" name="status" id="inputVibe" placeholder="What do you want to say?">
+                                                </div>
 
-										    </div>
+                                            </div>
 
-										    <!-- submit field -->
-										    <div class="form-group">
+                                            <!-- submit field -->
+                                            <div class="form-group">
 
-										        <div class="col-sm-offset-2 col-sm-10">
-										            <button type="submit" value="Submit" id="status_submit" class="btn btn-primary" style="width: 20%">Share&nbsp;&nbsp;<i class="fa fa-arrow-circle-right"></i></button>
-										        </div>
+                                                <div class="col-sm-offset-2 col-sm-10">
+                                                    <button type="submit" value="Submit" id="status_submit" class="btn btn-primary" style="width: 20%">Share&nbsp;&nbsp;<i class="fa fa-arrow-circle-right"></i></button>
+                                                </div>
 
-										    </div>
+                                            </div>
 
-										</form>
-									</div>
-								</div>
-							
-							</div>
-							<!-- // Widget END -->
+                                        </form>
+                                    </div>
+                                </div>
+                            
+                            </div>
+                            <!-- // Widget END -->
 
-						<!-- end of TIMELINE COVER -->	
-						</div>
-						
-						<!-- HEADER Widget of NEWSFEED ELEMENTS -->
-						<div class="media">
-							
-							<a href="" class="btn btn-default pull-left">Today</a>
-							<div class="media-body">
-								  <div class="input-group">
-								      <input type="text" class="form-control" placeholder="Share your mood...">
+                        <!-- end of TIMELINE COVER -->  
+                        </div>
+                        
+                        <!-- HEADER Widget of NEWSFEED ELEMENTS -->
+                        <div class="media">
+                            
+                            <a href="" class="btn btn-default pull-left">Today</a>
+                            <div class="media-body">
+                                  <div class="input-group">
+                                      <input type="text" class="form-control" placeholder="Share your mood...">
 
-								      <span class="input-group-btn">
-								          <button class="btn btn-primary" type="button">Search</button>
-								      </span>
+                                      <span class="input-group-btn">
+                                          <button class="btn btn-primary" type="button">Search</button>
+                                      </span>
 
-								  </div><!-- /input-group -->
-							</div>
-						</div>
+                                  </div><!-- /input-group -->
+                            </div>
+                        </div>
 
-						<!-- actual TIMELINE -->
-						<ul class="timeline-activity list-unstyled" id="newsfeed_container">
+                        <!-- actual TIMELINE -->
+                        <ul class="timeline-activity list-unstyled" id="newsfeed_container">
 
-							<!-- loading NEWSFEED ELEMENTS here -->
+                            <!-- loading NEWSFEED ELEMENTS here -->
 
-							<div id="last_elems"></div>
+                            <div id="last_elems"></div>
 
-						</ul>
+                        </ul>
 
-					</div>
+                    </div>
 
-					<!-- loading SIDEBAR here -->
-					<div class="col-md-4 col-lg-3">
+                    <!-- loading SIDEBAR here -->
+                    <div class="col-md-4 col-lg-3">
 
-						<div id="new_sidebar"></div>
-							
-					</div> 
-							
-				</div>
-				<!-- // Content END -->
-				
-				<div class="clearfix"></div>
-				<!-- // Sidebar menu & content wrapper END -->
-				
-				<!-- Footer -->
-				<div id="footer" class="hidden-print">
-					
-					<!-- potential footer goes here -->
-			
-				</div>
-				<!-- // Footer END -->
-						
-			</div></div>
-			<!-- // Main Container Fluid END -->
-		</div>
-	</div>
-	
+                        <div id="new_sidebar"></div>
+                            
+                    </div> 
+                            
+                </div>
+                <!-- // Content END -->
+                
+                <div class="clearfix"></div>
+                <!-- // Sidebar menu & content wrapper END -->
+                
+                <!-- Footer -->
+                <div id="footer" class="hidden-print">
+                    
+                    <!-- potential footer goes here -->
+            
+                </div>
+                <!-- // Footer END -->
+                        
+            </div></div>
+            <!-- // Main Container Fluid END -->
+        </div>
+    </div>
+    
 
-	<!-- global settings (scripts) -->
-	<script data-id="App.Config">
-		
-		// theme path variables
-		var basePath = '',
-		commonPath = '../assets/',
-		rootPath = '../',
-		DEV = false,
-		componentsPath = '../assets/components/';
-	
-		// theme color variables
-		var primaryColor = '#275379',
-		dangerColor = '#b55151',
-		successColor = '#609450',
-		infoColor = '#4a8bc2',
-		warningColor = '#ab7a4b',
-		inverseColor = '#45484d';
-	
-		// primary color
-		var themerPrimaryColor = primaryColor;
+    <!-- global settings (scripts) -->
+    <script data-id="App.Config">
+        
+        // theme path variables
+        var basePath = '',
+        commonPath = '../assets/',
+        rootPath = '../',
+        DEV = false,
+        componentsPath = '../assets/components/';
+    
+        // theme color variables
+        var primaryColor = '#275379',
+        dangerColor = '#b55151',
+        successColor = '#609450',
+        infoColor = '#4a8bc2',
+        warningColor = '#ab7a4b',
+        inverseColor = '#45484d';
+    
+        // primary color
+        var themerPrimaryColor = primaryColor;
 
-		App.Config = {
-			ajaxify_menu_selectors: ['#menu'],
-			ajaxify_layout_app: false	};
+        App.Config = {
+            ajaxify_menu_selectors: ['#menu'],
+            ajaxify_layout_app: false   };
 
-	</script>
+    </script>
 
-	<!-- instant click (JS third party library) -->
-	<script src="../../customjs/instantclick.min.js" data-no-instant></script>
-	<script data-no-instant>InstantClick.init();</script>
-	
+    <!-- instant click (JS third party library) -->
+    <script src="../../customjs/instantclick.min.js" data-no-instant></script>
+    <script data-no-instant>InstantClick.init();</script>
+    
 </body>
 </html>
