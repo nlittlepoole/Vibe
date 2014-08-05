@@ -61,7 +61,8 @@
 			        	}
 					}
 
-					console.log(post_tagged_formatted_names);
+					// the below console printer shows the new name
+					// console.log(post_tagged_formatted_names);
 
 		        	// looking @ first element returned (i.e. most recent post)
 		        	if(i == 0) {
@@ -116,7 +117,7 @@
 															all_comments, 
 															"<!-- User input comments -->",
 															'<form class="hidden-sm comment_form" method="post" action="#">',
-																"<input type='text' class='form-control' style='border: none;' placeholder='Comment here...'>",
+																"<input type='text' class='form-control comment_input' style='border: none;' placeholder='Comment here...'>",
 																'<button type="submit" class="btn btn-inverse comment_submit" style="display: none;"><i class="fa fa-search fa-fw"></i></button>',
 															'</form>',
 														"</div>",
@@ -188,7 +189,7 @@
 											all_comments, 
 											"<!-- User input comments -->",
 											'<form class="hidden-sm comment_form" method="post" action="#">',
-												"<input type='text' class='form-control' style='border: none;' placeholder='Comment here...'>",
+												"<input type='text' class='form-control comment_input' style='border: none;' placeholder='Comment here...'>",
 												'<button type="submit" class="btn btn-inverse comment_submit" style="display: none;"><i class="fa fa-search fa-fw"></i></button>',
 											'</form>',
 										"</div>",

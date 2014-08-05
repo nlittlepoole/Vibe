@@ -161,36 +161,29 @@
 
         /* comment submissions */
         $(function() {
+
+            console.log('jQuery code wrote is able to be used.');
           
           // custom modifications
-          
-          $(".comment-form").submit(function(event) {
+          $(".comment_form").submit(function(event) {
               
+              // debugging
+              console.log('you sent something!'); 
+
               // simply override normal send
               event.preventDefault();
           });
           
 
           // triggering submission upon ENTER
-          $("#search-bar").keyup(function(event){
+          $(".comment_input").keyup(function(event){
               if(event.keyCode == 13){
-                  console.log('triggered click.');
-                  $("#search-submit").click();
 
-                  load_profile(); 
+                  console.log('triggered click...');
+                  debugger; 
+                  $(".comment_submit").click();
               }
           });
-
-          function load_profile() {
-              var person_name = $('#status-form input[name="search-bar"]').val();
-
-              temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" 
-              temp_link += temp_names_to_ID[person_name] + "&name=" + person_name + "";
-
-              // console.log('you have triggered load submit with UID of: ' + temp_names_to_ID[person_name]);
-
-              window.location.href = temp_link;
-          }
         });
 
     </script>
