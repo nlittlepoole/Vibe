@@ -168,6 +168,8 @@
               // debugging
               console.log('you sent something!'); 
 
+              // to pass: status, PID, email (optional), author (your UID), token
+
               // simply override normal send
               event.preventDefault();
             });
@@ -177,17 +179,17 @@
             });
 
             // triggering submission upon ENTER
-            /*
+            
             $(".comment_input").keyup(function(event){
                 console.log('character entered...')
 
                 if(event.keyCode == 13){
 
-                    console.log('triggered click...');
+                    console.log('triggered click by hitting ENTER...');
                     $(".comment_submit").click();
                 }
             });
-            */
+            
         });
 
     </script>
