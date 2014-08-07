@@ -20,7 +20,7 @@
                 for(var i = 0; i < data['data'].length; i++) {
 
                     // grabbing all of the names/UIDs of recipients
-                    // PID of respective post (and overall structure is) data['data'][i]['PID'])
+                    var tempPID = data['data'][i]['PID']; 
 
                     // creating a temp string for each post (link to profile of all people tagged...)
 
@@ -117,9 +117,10 @@
                                                             all_comments, 
                                                             "<!-- User input comments -->",
                                                             '<form class="comment_form" name="comment_form" method="post" action="#">',
-                                                            "<input type='text' class='form-control comment_input' name='comment_input' style='border: none;' placeholder='Comment here...'>",
+                                                            "<input type='text' class='form-control comment_input' name='status' style='border: none;' placeholder='Comment here...'>",
                                                             "<input type='hidden' class='hiddenID' name='uid' value='" + localStorage['uid'] + "'/>",
                                                             "<input type='hidden' class='hiddentoken' name='token' value='" + localStorage['token'] + "'/>",
+                                                            "<input type='hidden' class='hiddenPID' name='pid' value='" + tempPID + "'/>",
                                                             '<button type="submit" class="comment_submit" name="comment_submit" style="display: none; "></button>',
                                                         '</form>',
                                                         "</div>",
@@ -191,9 +192,10 @@
                                             all_comments, 
                                             "<!-- User input comments -->",
                                             '<form class="comment_form" name="comment_form" method="post" action="#">',
-                                                "<input type='text' class='form-control comment_input' name='comment_input' style='border: none;' placeholder='Comment here...'>",
+                                                "<input type='text' class='form-control comment_input' name='status' style='border: none;' placeholder='Comment here...'>",
                                                 "<input type='hidden' class='hiddenID' name='uid' value='" + localStorage['uid'] + "'/>",
                                                 "<input type='hidden' class='hiddentoken' name='token' value='" + localStorage['token'] + "'/>",
+                                                "<input type='hidden' class='hiddenPID' name='pid' value='" + tempPID + "'/>",
                                                 '<button type="submit" class="comment_submit" name="comment_submit" style="display: none; "></button>',
                                             '</form>',
                                         "</div>",

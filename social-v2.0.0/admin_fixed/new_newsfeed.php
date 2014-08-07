@@ -184,9 +184,28 @@
               var my_token = $(this).children('.hiddentoken').val();
               console.log('token: ' + my_token); 
 
+              var myPID = $(this).children('.hiddenPID').val();
+              console.log('PID: ' + myPID); 
+
               // simply override normal send
               event.preventDefault();
-            });
+
+              $.post("http://api.go-vibe.com/api/vibe.php?action=postComment", $(this).serialize())
+
+                    .done(function(data) {
+
+                        // clear form elements
+                        $('.comment_input').val("");
+
+                        // reset local storage to trigger full reload (for debugging)
+                        localStorage.setItem("latest_pid", "null value");
+
+                        // trigger load of elements again (will have updated submission)
+                        $('#last_elems').load('newsfeed_element.php'); 
+
+                        console.log('successfully posted tho!'); 
+              });
+            }); 
 
         });
 
