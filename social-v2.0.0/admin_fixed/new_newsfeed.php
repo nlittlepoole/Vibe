@@ -52,6 +52,12 @@
         localStorage.setItem("latest_pid", "null value");
         
         $(function() {
+
+            var my_uid      = '<?php echo $_SESSION["userID"]; ?>'; 
+            var my_token    = '<?php echo $_SESSION["token"]; ?>'; 
+
+            localStorage.setItem("uid", my_uid);
+            localStorage.setItem("token", my_token);
             
             // friends' list (as JSON data)
             var my_friends = <?php echo json_encode($_SESSION['friend_list']); ?>;
@@ -166,28 +172,22 @@
             $(".comment_form").submit(function(event) {
               
               // debugging
-              console.log('you sent something!'); 
+              console.log('submission triggered...'); 
+
+              // grab value of comment and display it
+              var my_comment = $(this).children('.comment_input').val();
+              console.log('comment: ' + my_comment); 
+
+              var my_uid = $(this).children('.hiddenID').val();
+              console.log('uid: ' + my_uid); 
+
+              var my_token = $(this).children('.hiddentoken').val();
+              console.log('token: ' + my_token); 
 
               // simply override normal send
               event.preventDefault();
             });
 
-            $(".comment_submit").click(function() {
-              console.log("the submit button was pressed");
-            });
-
-            // triggering submission upon ENTER
-            /*
-            $(".comment_input").keyup(function(event){
-                console.log('character entered...')
-
-                if(event.keyCode == 13){
-
-                    console.log('triggered click...');
-                    $(".comment_submit").click();
-                }
-            });
-            */
         });
 
     </script>
@@ -196,8 +196,9 @@
     <script type="text/javascript"> 
 
         $(function() {
-            console.log('loading up the page...');
 
+            console.log('loading up the page...');
+            
             // loading navbar...
             $('#new_navbar').load('new_navbar.php'); 
             console.log('navbar is loaded...');
@@ -209,6 +210,7 @@
             // loading newsfeed elements...
             $('#last_elems').load('newsfeed_element.php'); 
             console.log('newsfeed element is loaded...');
+
         });
     </script> 
 
