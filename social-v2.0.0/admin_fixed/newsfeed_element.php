@@ -22,6 +22,32 @@
                     // grabbing all of the names/UIDs of recipients
                     var tempPID = data['data'][i]['PID']; 
 
+                    // first print console info to the console
+                    var num_comments = data['data'][i]['Comments'].length;
+
+                    var comment_data = ""; 
+
+                    for(var j = 0; j < num_comments; j++) {
+                        // console.log("data of comment: " + data['data'][i]['Comments'][j]['Content']); 
+
+                        comment_data += 
+                            ['<!-- First Comment -->', 
+                             '<div class="media border-bottom margin-none bg-gray">',
+                                '<a href="" class="pull-left innerAll half">',
+                                    '<img src="../assets//images/people/100/2.jpg" width="60" class="media-object">',
+                                '</a>',
+                                '<div class="media-body innerTB">',
+                                    '<a href="#" class="pull-right innerT innerR text-muted">',
+                                        '<i class="icon-reply-all-fill fa fa-2x "></i>',
+                                    '</a>',
+                                    '<a href="" class="strong text-inverse">Adrian Demian</a>    <small class="text-muted ">wrote on Jan 15th, 2014</small> <a href="" class="text-small">mark it</a>',
+                                    '<div>- Happy B-Day!</div>',
+                                '</div>',
+                            '</div>',
+                            ].join('\n');
+
+                    }
+
                     // creating a temp string for each post (link to profile of all people tagged...)
 
                     var recipient_size = data['data'][i]['tagged'].length;
@@ -114,7 +140,7 @@
                                                                 "<span>Be the first to leave a comment!</span>",
                                                             "</div>",
                                                             "<!-- Rendered Comments -->",
-                                                            all_comments, 
+                                                            comment_data, 
                                                             "<!-- User input comments -->",
                                                             '<form class="comment_form" name="comment_form" method="post" action="#">',
                                                             "<input type='text' class='form-control comment_input' name='status' style='border: none;' placeholder='Comment here...'>",
@@ -189,7 +215,7 @@
                                                 "<span>Be the first to leave a comment!</span>",
                                             "</div>",
                                             "<!-- Rendered Comments -->",
-                                            all_comments, 
+                                            comment_data, 
                                             "<!-- User input comments -->",
                                             '<form class="comment_form" name="comment_form" method="post" action="#">',
                                                 "<input type='text' class='form-control comment_input' name='status' style='border: none;' placeholder='Comment here...'>",
