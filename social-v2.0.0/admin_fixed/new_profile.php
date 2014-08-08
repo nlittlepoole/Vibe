@@ -35,7 +35,7 @@
 	<script type="text/javascript">
 
 		// initializing the last stored element to none
-		localStorage.setItem("latest_pid", "null value");
+		localStorage.setItem("latest_pid_profile", "null value");
 
 		$(function() {
 

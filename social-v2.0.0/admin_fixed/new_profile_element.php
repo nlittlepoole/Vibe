@@ -17,7 +17,6 @@
 		var profile_url = "<?php echo $_SESSION['profile_elems_request']; ?>";
 
 		console.log('profile url of elements: ' + profile_url); 
-		console.log('[STATUS] did get to the JavaScript...'); 
 
 		// grabbing JSON...
 		$.getJSON(profile_url, function(data) {
@@ -82,10 +81,10 @@
 
 		        		var most_recent_pid = String(data['data'][0]['PID']); 
 
-		        		if (String(localStorage.getItem("latest_pid")) != "null value") {
+		        		if (String(localStorage.getItem("latest_pid_profile")) != "null value") {
 		        			// in this case, the data has already been loaded @ least once before in session
 
-		        			if(localStorage.getItem("latest_pid") == most_recent_pid) {
+		        			if(localStorage.getItem("latest_pid_profile") == most_recent_pid) {
 		        				// no changes since we still have latest pointer to same post so do nothing with JSON returned
 		        				return; 
 		        			}
@@ -98,7 +97,7 @@
 			        			var html_profile_content = ""; 
 
 			        			// loop through to where we finally get to pointer match (new content is finally all accounted for)
-			        			while(String(curr_pid) !== String(localStorage.getItem("latest_pid"))) {
+			        			while(String(curr_pid) != String(localStorage.getItem("latest_pid_profile"))) {
 
 									var html_profile_content = 
 										['<!-- DENOTES A SPECIFIC POST GROUP (NOT JUST ONE POST) -->',
@@ -147,7 +146,7 @@
 
 			        			// update the locally stored value of latest PID
 			        			most_recent_pid = data['data'][0]['PID'];
-		        				localStorage.setItem("latest_pid", most_recent_pid);
+		        				localStorage.setItem("latest_pid_profile", most_recent_pid);
 
 		        				return; 
 		        			}
@@ -157,7 +156,7 @@
 		        			// now body of loop will continue to be called (didn't return)
 
 		        			most_recent_pid = data['data'][0]['PID'];
-		        			localStorage.setItem("latest_pid", most_recent_pid);
+		        			localStorage.setItem("latest_pid_profile", most_recent_pid);
 		        		} 
 		        	}
 
