@@ -31,9 +31,10 @@
                         // console.log("data of comment: " + data['data'][i]['Comments'][j]['Content']); 
 
                         current_comment = data['data'][i]['Comments'][j]['Content']; 
-                        current_timestamp = data['data'][i]['Comments'][j]['Timestamp'];
+                        current_timestamp = data['data'][i]['Comments'][j]['formatted_time'];
 
                         current_author = data['data'][i]['Comments'][j]['Author'];
+                        current_author_name = data['data'][i]['Comments'][j]['post_author'];
 
                         comment_data += 
                             ['<!-- First Comment -->', 
@@ -45,7 +46,7 @@
                                     '<a href="#" class="pull-right innerT innerR text-muted">',
                                         '<i class="icon-reply-all-fill fa fa-2x"></i>',
                                     '</a>',
-                                    '<a href="" class="strong text-inverse">' + current_author + '</a>    <small class="text-muted ">wrote on ' + current_timestamp + '</small> <a href="" class="text-small">mark it</a>',
+                                    '<a href="" class="strong text-inverse">' + current_author_name + '</a>    <small class="text-muted ">wrote on ' + current_timestamp + '</small> <a href="" class="text-small">like</a>',
                                     '<div>' + current_comment + '</div>',
                                 '</div>',
                             '</div>',

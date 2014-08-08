@@ -133,10 +133,6 @@
 			$pid = $post['PID'];
 			$timestamp = $post['Timestamp'];
 
-			$format = 'Y-m-d H:i:s';
-			$post_date = DateTime::createFromFormat($format, $timestamp);
-			$post['formatted_time'] = date_format($post_date, 'g:ia \o\n l jS F Y');
-
 			$sql = "SELECT Name,UID FROM Users WHERE UID IN (SELECT UID FROM Tagged WHERE PID='$pid' )";
 			$st = $conn->prepare($sql);
 			$st->execute();
@@ -167,7 +163,31 @@
 		// group elements under same PID (original post & comments)
 	    $return = array();
 
-	    foreach($array as $post) {
+	    $conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+
+	    foreach($array as &$post) {
+
+	    	// [TO BE OPTIMIZED] -- get the person's name who posted the post (each post has an author UID)
+	    	$post_author = $post['Author'];
+
+			$sql = "SELECT Name FROM Users WHERE UID='$post_author'";
+			$st = $conn->prepare($sql);
+			$st->execute();
+		
+			$data = $st->fetch(); 
+
+			$post['post_author'] = $data["Name"];
+
+			// $post['post_author'] = $post['Author'];
+
+	    	// formatted time
+	    	$timestamp = $post['Timestamp'];
+
+			$format = 'Y-m-d H:i:s';
+			$post_date = DateTime::createFromFormat($format, $timestamp);
+			$post['formatted_time'] = date_format($post_date, 'g:ia \o\n F jS Y');
+
+			// modify results (include comments below main posts)
 	        
 	        if(isset($return[$post['PID']])) {
 	        	array_push($return[$post['PID']], $post);
@@ -177,6 +197,8 @@
 	        	$return[$post['PID']] = array($post);
 	        }
 	    }
+
+	    $conn = null; 
 	    
 	    // put comments under main post
 	    $result = array();
