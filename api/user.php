@@ -129,8 +129,13 @@
 		
 		$data = groupByKey($data);
 		foreach($data as &$post){
+
 			$pid = $post['PID'];
 			$timestamp = $post['Timestamp'];
+
+			$format = 'Y-m-d H:i:s';
+			$post_date = DateTime::createFromFormat($format, $timestamp);
+			$post['formatted_time'] = date_format($post_date, 'g:ia \o\n l jS F Y');
 
 			$sql = "SELECT Name,UID FROM Users WHERE UID IN (SELECT UID FROM Tagged WHERE PID='$pid' )";
 			$st = $conn->prepare($sql);
