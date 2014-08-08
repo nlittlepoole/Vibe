@@ -27,8 +27,13 @@
 
                     var comment_data = ""; 
 
-                    for(var j = 0; j < num_comments; j++) {
+                    for(var j = num_comments - 1; j >= 0; j--) {
                         // console.log("data of comment: " + data['data'][i]['Comments'][j]['Content']); 
+
+                        current_comment = data['data'][i]['Comments'][j]['Content']; 
+                        current_timestamp = data['data'][i]['Comments'][j]['Timestamp'];
+
+                        current_author = data['data'][i]['Comments'][j]['Author'];
 
                         comment_data += 
                             ['<!-- First Comment -->', 
@@ -38,10 +43,10 @@
                                 '</a>',
                                 '<div class="media-body innerTB">',
                                     '<a href="#" class="pull-right innerT innerR text-muted">',
-                                        '<i class="icon-reply-all-fill fa fa-2x "></i>',
+                                        '<i class="icon-reply-all-fill fa fa-2x"></i>',
                                     '</a>',
-                                    '<a href="" class="strong text-inverse">Adrian Demian</a>    <small class="text-muted ">wrote on Jan 15th, 2014</small> <a href="" class="text-small">mark it</a>',
-                                    '<div>- Happy B-Day!</div>',
+                                    '<a href="" class="strong text-inverse">' + current_author + '</a>    <small class="text-muted ">wrote on ' + current_timestamp + '</small> <a href="" class="text-small">mark it</a>',
+                                    '<div>' + current_comment + '</div>',
                                 '</div>',
                             '</div>',
                             ].join('\n');
