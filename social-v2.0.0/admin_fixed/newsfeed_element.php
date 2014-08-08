@@ -14,6 +14,8 @@
         // grabbing JSON...
         $.getJSON(newsfeed_url, function(data) {
 
+            console.log('you triggered a load...');
+
             if (!data.error) {
 
                 // looping through all posts
@@ -22,7 +24,7 @@
                     // grabbing all of the names/UIDs of recipients
                     var tempPID = data['data'][i]['PID']; 
 
-                    // first print console info to the console
+                    // number of comments
                     var num_comments = data['data'][i]['Comments'].length;
 
                     var comment_data = ""; 
@@ -176,23 +178,15 @@
                             }
                         }
                         else {
+
                             // first time going through, so just set the locally stored value
                             // now body of loop will continue to be called (didn't return)
 
                             most_recent_pid = data['data'][0]['PID'];
                             localStorage.setItem("latest_pid", most_recent_pid);
+
                         } 
                     }
-
-                    var all_comments = ""; 
-
-                    // do comments parsing of DB, once basic form is done...
-                    // also need to set up multi-tagging rendering (with name generation)...
-                    /*
-                    for(var j = 0; data['data'][i]['Comments'].length; j++) {
-                        all_comments += "<p>This is a comment!</p>";
-                    }
-                    */
 
                     var html_newsfeed_content = 
                         ["<li class='active vibe_newsfeed_posts'>", 
@@ -238,6 +232,8 @@
 
                     // append this content to overally content (adding older and older posts to the tail)
                     $('#newsfeed_container').append(html_newsfeed_content);
+
+                    console.log('added an element'); 
                 }
             } 
             else {

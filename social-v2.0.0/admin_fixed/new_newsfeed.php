@@ -176,29 +176,25 @@
 
               // grab value of comment and display it
               var my_comment = $(this).children('.comment_input').val();
-              console.log('comment: ' + my_comment); 
-
               var my_uid = $(this).children('.hiddenID').val();
-              console.log('uid: ' + my_uid); 
-
               var my_token = $(this).children('.hiddentoken').val();
-              console.log('token: ' + my_token); 
-
               var myPID = $(this).children('.hiddenPID').val();
-              console.log('PID: ' + myPID); 
 
               // simply override normal send
               event.preventDefault();
+
+              // reset local storage to trigger full reload (for debugging)
+              localStorage.setItem("latest_pid", "null value");
 
               $.post("http://api.go-vibe.com/api/vibe.php?action=postComment", $(this).serialize())
 
                     .done(function(data) {
 
+                        // clear all old elements
+                        $('.vibe_newsfeed_posts').remove();
+
                         // clear form elements
                         $('.comment_input').val("");
-
-                        // reset local storage to trigger full reload (for debugging)
-                        localStorage.setItem("latest_pid", "null value");
 
                         // trigger load of elements again (will have updated submission)
                         $('#last_elems').load('newsfeed_element.php'); 
@@ -412,8 +408,8 @@
     </script>
 
     <!-- instant click (JS third party library) -->
-    <script src="../../customjs/instantclick.min.js" data-no-instant></script>
-    <script data-no-instant>InstantClick.init();</script>
+    <!-- <script src="../../customjs/instantclick.min.js" data-no-instant></script> -->
+    <!-- <script data-no-instant>InstantClick.init();</script> -->
     
 </body>
 </html>
