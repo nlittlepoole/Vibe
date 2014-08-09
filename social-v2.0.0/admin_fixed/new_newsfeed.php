@@ -186,21 +186,32 @@
               // reset local storage to trigger full reload (for debugging)
               localStorage.setItem("latest_pid", "null value");
 
-              $.post("http://api.go-vibe.com/api/vibe.php?action=postComment", $(this).serialize())
+              // post request (modified)
 
-                    .done(function(data) {
-
-                        // clear all old elements
-                        $('.vibe_newsfeed_posts').remove();
-
-                        // clear form elements
-                        $('.comment_input').val("");
-
-                        // trigger load of elements again (will have updated submission)
-                        $('#last_elems').load('newsfeed_element.php'); 
-
-                        console.log('successfully posted tho!'); 
+              $.ajax({
+                  type: 'POST',
+                  url: "http://api.go-vibe.com/api/vibe.php?action=postComment",
+                  data: { status: my_comment, uid: my_uid, token: my_token, pid: myPID},
+                  success: function(data) {
+                      console.log('mission accomplished.'); 
+                      $('.comment_form').each(function() {
+                          this.reset();
+                      });
+                  },
+                  async: true
               });
+
+              console.log('ajax called successfully'); 
+
+              // clear all old elements
+              // $('.vibe_newsfeed_posts').remove();
+
+              // clear form elements
+              // $('.comment_input').clear();
+
+              // trigger load of elements again (will have updated submission)
+              // $('#last_elems').load('newsfeed_element.php'); 
+
             }); 
 
         });
