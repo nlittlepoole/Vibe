@@ -108,7 +108,8 @@
 			        	}
 					}
 
-					console.log(post_tagged_formatted_names);
+					// the below console printer shows the new name
+                    // console.log(post_tagged_formatted_names);
 
 		        	// looking @ first element returned (i.e. most recent post)
 		        	if(i == 0) {
@@ -154,19 +155,8 @@
 											'<div class="bg-gray innerAll border-top border-bottom text-small ">',
 												'<span>View all <a href="" class="text-primary">1 Comment</a></span>',
 											'</div>',
-											'<!-- First Comment -->',
-											'<div class="media border-bottom margin-none bg-gray">',
-												'<a href="" class="pull-left innerAll half">',
-													'<img src="../assets//images/people/100/2.jpg" width="60" class="media-object">',
-												'</a>',
-												'<div class="media-body innerTB">',
-													'<a href="#" class="pull-right innerT innerR text-muted">',
-														'<i class="icon-reply-all-fill fa fa-2x "></i>',
-													'</a>',
-													'<a href="" class="strong text-inverse">Adrian Demian</a> <small class="text-muted ">wrote on Jan 15th, 2014</small> <a href="" class="text-small">like</a>',
-													'<div>That $5 is worth it though.</div>',
-												'</div>',
-											'</div>',
+											"<!-- Rendered Comments -->",
+											comment_data,
 											'<input type="text" class="form-control" placeholder="Comment here...">',
 										'</div>'
 										].join('\n');
@@ -226,18 +216,8 @@
 								'<span>View all <a href="" class="text-primary">1 Comment</a></span>',
 							'</div>',
 							'<!-- First Comment -->',
-							'<div class="media border-bottom margin-none bg-gray">',
-								'<a href="" class="pull-left innerAll half">',
-									'<img src="../assets//images/people/100/2.jpg" width="60" class="media-object">',
-								'</a>',
-								'<div class="media-body innerTB">',
-									'<a href="#" class="pull-right innerT innerR text-muted">',
-										'<i class="icon-reply-all-fill fa fa-2x "></i>',
-									'</a>',
-									'<a href="" class="strong text-inverse">Adrian Demian</a> <small class="text-muted ">wrote on Jan 15th, 2014</small> <a href="" class="text-small">like</a>',
-									'<div>That $5 is worth it though.</div>',
-								'</div>',
-							'</div>',
+							"<!-- Rendered Comments -->",
+							comment_data,
 							'<input type="text" class="form-control" placeholder="Comment here...">',
 						'</div>'
 						].join('\n');
