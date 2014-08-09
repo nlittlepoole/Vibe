@@ -21,19 +21,53 @@
 		// grabbing JSON...
 		$.getJSON(profile_url, function(data) {
 
-			// simple working statement
-		    console.log("The number of posts about this person is: " + data['data'].length);
+			// simple working statement - for debugging if necessary
+		    // console.log("The number of posts about this person is: " + data['data'].length);
 
 		    if (!data.error) {
 
 		        // looping through all posts
 		        for(var i = 0; i < data['data'].length; i++) {
 
-		        	// below content test for profile debugging!
-		        	console.log("Content of post is: " + data['data'][i]['Content']);
+		        	// below content test for profile debugging - if necessary
+		        	// console.log("Content of post is: " + data['data'][i]['Content']);
 
 		        	// grabbing all of the names/UIDs of recipients
-		        	// PID of respective post (and overall structure is) data['data'][i]['PID'])
+                    var tempPID = data['data'][i]['PID']; 
+
+                    // number of comments
+                    var num_comments = data['data'][i]['Comments'].length;
+
+                    var comment_data = ""; 
+
+                    for(var j = num_comments - 1; j >= 0; j--) {
+                        
+                    	// debugging comment
+                        console.log("data of comment: " + data['data'][i]['Comments'][j]['Content']); 
+
+                        current_comment = data['data'][i]['Comments'][j]['Content']; 
+                        current_timestamp = data['data'][i]['Comments'][j]['formatted_time'];
+
+                        current_author = data['data'][i]['Comments'][j]['Author'];
+                        current_author_name = data['data'][i]['Comments'][j]['post_author'];
+
+                        comment_data += 
+                            ['<!-- First Comment -->', 
+                             '<div class="media border-bottom margin-none bg-gray">',
+                                '<a href="" class="pull-left innerAll half">',
+                                    '<img src="../assets//images/people/100/2.jpg" width="60" class="media-object">',
+                                '</a>',
+                                '<div class="media-body innerTB">',
+                                    '<a href="#" class="pull-right innerT innerR text-muted">',
+                                        '<i class="icon-reply-all-fill fa fa-2x"></i>',
+                                    '</a>',
+                                    '<a href="" class="strong text-inverse">' + current_author_name + '</a>    <small class="text-muted ">wrote on ' + current_timestamp + '</small> <a href="" class="text-small">like</a>',
+                                    '<div>' + current_comment + '</div>',
+                                '</div>',
+                            '</div>',
+                            ].join('\n');
+
+                    }
 
 					// creating a temp string for each post (link to profile of all people tagged...)
 

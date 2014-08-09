@@ -8,7 +8,7 @@
 	$_SESSION['prof_name'] 	= isset($_GET['name']) ? $_GET['name'] : "";
 
 	// picture URL request
-	$pic = "https://graph.facebook.com/" . $_SESSION['prof_UID'] . "/picture?type=large";
+	$pic = "https://graph.facebook.com/" . $_SESSION['prof_UID'] . "/picture?width=200&height=200";
 
 	// FB Graph API request to grab user's communities
 	$_SESSION['user_networks_request'] = "http://api.go-vibe.com/api/location.php?action=getLocations&uid=";
