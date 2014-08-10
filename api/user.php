@@ -141,7 +141,7 @@
 			$tagged= $st->fetchAll(PDO::FETCH_ASSOC); 
 			$post['tagged'] = $tagged;
 
-			$sql = "SELECT SUM(Vote) as Total, Sum( Case When Vote< 0 Then 1 Else 0 End ) As Disagree , Sum( Case When Vote > 0 Then 1 Else 0 End ) As Agree FROM Liked GROUP BY PID,Timestamp HAVING Timestamp = '$timestamp' AND pid = '$pid';";
+			$sql = "SELECT SUM(Vote) as Total, Sum( Case When Vote < 0 Then 1 Else 0 End) As Disagree , Sum(Case When Vote > 0 Then 1 Else 0 End) As Agree FROM Liked GROUP BY PID,Timestamp HAVING Timestamp = '$timestamp' AND pid = '$pid';";
 			$st = $conn->prepare($sql);
 			$st->execute();
 			

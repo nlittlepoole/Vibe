@@ -24,6 +24,29 @@
                     // grabbing all of the names/UIDs of recipients
                     var tempPID = data['data'][i]['PID']; 
 
+                    /* LIKES */
+
+                    // grab total number of likes
+                    
+                    var total_agree = 0;
+
+                    if(data['data'][i]['Score'] !== null) {
+                        total_agree = data['data'][i]['Score']
+                    }
+
+                    console.log('the total number of likes is: ' + total_agree); 
+
+                    var like_submission_form = [
+                        '<form class="like_form" name="like_form" method="post" action="#" style="display: none;">',
+                            "<input type='hidden' class='hiddenID' name='uid' value='" + localStorage['uid'] + "'/>",
+                            "<input type='hidden' class='hiddentoken' name='token' value='" + localStorage['token'] + "'/>",
+                            "<input type='hidden' class='hiddenPID' name='pid' value='" + tempPID + "'/>",
+                            '<button type="submit" class="comment_submit" name="comment_submit" style="display: none; "></button>',
+                        '</form>'
+                        ].join('\n');
+
+                    /* COMMENTS */
+
                     // number of comments
                     var num_comments = data['data'][i]['Comments'].length;
 
@@ -179,12 +202,12 @@
                                                             comment_data, 
                                                             "<!-- User input comments -->",
                                                             '<form class="comment_form" name="comment_form" method="post" action="#">',
-                                                            "<input type='text' class='form-control comment_input' name='status' style='border: none;' placeholder='Comment here...'>",
-                                                            "<input type='hidden' class='hiddenID' name='uid' value='" + localStorage['uid'] + "'/>",
-                                                            "<input type='hidden' class='hiddentoken' name='token' value='" + localStorage['token'] + "'/>",
-                                                            "<input type='hidden' class='hiddenPID' name='pid' value='" + tempPID + "'/>",
-                                                            '<button type="submit" class="comment_submit" name="comment_submit" style="display: none; "></button>',
-                                                        '</form>',
+                                                                "<input type='text' class='form-control comment_input' name='status' style='border: none;' placeholder='Comment here...'>",
+                                                                "<input type='hidden' class='hiddenID' name='uid' value='" + localStorage['uid'] + "'/>",
+                                                                "<input type='hidden' class='hiddentoken' name='token' value='" + localStorage['token'] + "'/>",
+                                                                "<input type='hidden' class='hiddenPID' name='pid' value='" + tempPID + "'/>",
+                                                                '<button type="submit" class="comment_submit" name="comment_submit" style="display: none; "></button>',
+                                                            '</form>',
                                                         "</div>",
                                                     "</div>",
                                             "</div>",

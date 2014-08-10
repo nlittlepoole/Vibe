@@ -168,6 +168,17 @@
         $(window).load(function() {
             //dom not only ready, but everything is loaded
 
+            /* like form submission for easier writing of jQuery here...
+            var like_submission_form = [
+                '<form class="like_form" name="like_form" method="post" action="#" style="display: none;">',
+                    "<input type='hidden' class='hiddenID' name='uid' value='" + localStorage['uid'] + "'/>",
+                    "<input type='hidden' class='hiddentoken' name='token' value='" + localStorage['token'] + "'/>",
+                    "<input type='hidden' class='hiddenPID' name='pid' value='" + tempPID + "'/>",
+                    '<button type="submit" class="comment_submit" name="comment_submit" style="display: none; "></button>',
+                '</form>'
+                ].join('\n');
+            */
+
             // comment submissions - custom modifications
             $(".comment_form").submit(function(event) {
               
