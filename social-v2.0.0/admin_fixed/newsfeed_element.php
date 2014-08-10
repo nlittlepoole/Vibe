@@ -41,7 +41,7 @@
                             "<input type='hidden' class='hiddenID' name='uid' value='" + localStorage['uid'] + "'/>",
                             "<input type='hidden' class='hiddentoken' name='token' value='" + localStorage['token'] + "'/>",
                             "<input type='hidden' class='hiddenPID' name='pid' value='" + tempPID + "'/>",
-                            '<button type="submit" class="comment_submit" name="comment_submit" style="display: none; "></button>',
+                            '<button type="submit" class="like_submit" name="like_submit" style="display: none; "></button>',
                         '</form>'
                         ].join('\n');
 
@@ -56,7 +56,7 @@
                     if(num_comments > 4) {
                         show_more_comments = [
                             "<div class='bg-gray innerAll border-top border-bottom text-small'>",
-                                "<span><a href='#' class='like_link'>view all " + num_comments + " comments</a></span>",
+                                "<span><a href='#'>view all " + num_comments + " comments</a></span>",
                             "</div>"
                             ].join('\n');
                     }
@@ -64,7 +64,7 @@
                     var comment_data = ""; 
 
                     for(var j = num_comments - 1; j >= 0; j--) {
-                        console.log("data of comment: " + data['data'][i]['Comments'][j]['Content']); 
+                        // console.log("data of comment: " + data['data'][i]['Comments'][j]['Content']); 
 
                         current_comment = data['data'][i]['Comments'][j]['Content']; 
                         current_timestamp = data['data'][i]['Comments'][j]['formatted_time'];
@@ -194,7 +194,11 @@
                                                             "</div>",
                                                             "<!-- Comment -->",
                                                             "<div class='bg-gray innerAll border-top border-bottom text-small'>",
-                                                                "<span><a href='#' class='like_link'>like · comment</a></span>",
+                                                                "<span>",
+                                                                    "<a href='#' class='like_link'>like · comment</a>",
+                                                                    "<!-- Like Submission Form -->", 
+                                                                    like_submission_form,
+                                                                "</span>",
                                                             "</div>",
                                                             "<!-- Show more comments? -->", 
                                                             show_more_comments,
@@ -263,7 +267,11 @@
                                             "</div>",
                                             "<!-- Comment -->",
                                             "<div class='bg-gray innerAll border-top border-bottom text-small'>",
-                                                "<span><a href='#' class='like_link'>like · comment</a></span>",
+                                                "<span>",
+                                                    "<a href='#' class='like_link'>like · comment</a>",
+                                                    "<!-- Like Submission Form -->", 
+                                                    like_submission_form,
+                                                "</span>",
                                             "</div>",
                                             "<!-- Show more comments? -->", 
                                             show_more_comments,
@@ -286,7 +294,7 @@
                     // append this content to overally content (adding older and older posts to the tail)
                     $('#newsfeed_container').append(html_newsfeed_content);
 
-                    console.log('added an element'); 
+                    // console.log('added an element'); 
                 }
             } 
             else {

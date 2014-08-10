@@ -165,19 +165,48 @@
             });
 
         });
+
         $(window).load(function() {
             //dom not only ready, but everything is loaded
 
-            /* like form submission for easier writing of jQuery here...
-            var like_submission_form = [
-                '<form class="like_form" name="like_form" method="post" action="#" style="display: none;">',
-                    "<input type='hidden' class='hiddenID' name='uid' value='" + localStorage['uid'] + "'/>",
-                    "<input type='hidden' class='hiddentoken' name='token' value='" + localStorage['token'] + "'/>",
-                    "<input type='hidden' class='hiddenPID' name='pid' value='" + tempPID + "'/>",
-                    '<button type="submit" class="comment_submit" name="comment_submit" style="display: none; "></button>',
-                '</form>'
-                ].join('\n');
-            */
+            $(".like_form").submit(function(event) {
+              
+              // debugging
+              console.log('like submission triggered...'); 
+
+              // grab value of comment and display it
+              var my_vote = "agree";
+              var my_uid = $(this).children('.hiddenID').val();
+              var my_token = $(this).children('.hiddentoken').val();
+              var myPID = $(this).children('.hiddenPID').val();
+
+              var my_timestamp = new Date($.now());
+
+              console.log('timestamp of submission is: ' + my_timestamp);
+
+              // simply override normal send
+              event.preventDefault();
+
+              localStorage.setItem("latest_pid", "null value"); // trigger full reload
+
+              // post request (modified)
+
+              /*
+              $.ajax({
+                  type: 'POST',
+                  url: "http://api.go-vibe.com/api/vibe.php?action=vote",
+                  data: { uid: my_uid, token: my_token, pid: myPID, vote: my_vote, timestamp : my_timestamp},
+                  success: function(data) {
+                      console.log('like mission accomplished.'); 
+                      $('.like_form').each(function() {
+                          this.reset();
+                      });
+                  },
+                  async: true
+              });
+              */
+
+            }); 
 
             // comment submissions - custom modifications
             $(".comment_form").submit(function(event) {
@@ -204,7 +233,7 @@
                   url: "http://api.go-vibe.com/api/vibe.php?action=postComment",
                   data: { status: my_comment, uid: my_uid, token: my_token, pid: myPID},
                   success: function(data) {
-                      console.log('mission accomplished.'); 
+                      console.log('comment mission accomplished.'); 
                       $('.comment_form').each(function() {
                           this.reset();
                       });
@@ -225,23 +254,28 @@
 
             }); 
 
-        });
-
-        $(function() {
             // trigger action upon 'like'
-            $(document.body).on('click', '.like_link' ,function() {
+            $('.like_link').click(function() {
+                
                 console.log('you clicked the like button');
 
+                var is_unlike = $(this).hasClass("unlike_me").toString();
+
+                if(is_unlike == "true") {
+                    // altering content dynamically
+                    $(this).text('like · comment'); 
+                }
+                else {
+                    // altering content dynamically
+                    $(this).text('unlike · comment'); 
+                }
+
+                // submit POST request associated with voting...
+                // $(this).nextAll("form").submit(); 
+                // console.log('number of siblings of type form: ' + $(this).siblings("form").length)
+
                 // switch classes
-                $(this).toggleClass('like_link unlike_link');
-
-                // altering content dynamically
-                $(this).text('unlike · comment'); 
-            });
-
-            // trigger action upon 'unlike'
-            $(document.body).on('click', '.unlike_link' ,function() {
-                console.log('you clicked the unlike button');
+                $(this).toggleClass('unlike_me');
             });
 
         });
