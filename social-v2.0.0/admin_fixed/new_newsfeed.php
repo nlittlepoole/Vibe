@@ -180,7 +180,7 @@
               var my_token = $(this).children('.hiddentoken').val();
               var myPID = $(this).children('.hiddenPID').val();
 
-              var my_timestamp = new Date($.now());
+              var my_timestamp = $(this).children('.timestamp').val();
 
               console.log('timestamp of submission is: ' + my_timestamp);
 
@@ -191,7 +191,6 @@
 
               // post request (modified)
 
-              /*
               $.ajax({
                   type: 'POST',
                   url: "http://api.go-vibe.com/api/vibe.php?action=vote",
@@ -204,7 +203,6 @@
                   },
                   async: true
               });
-              */
 
             }); 
 
@@ -256,8 +254,8 @@
 
             // trigger action upon 'like'
             $('.like_link').click(function() {
-                
-                console.log('you clicked the like button');
+
+                console.log("OVERALL CLICK.");
 
                 var is_unlike = $(this).hasClass("unlike_me").toString();
 
@@ -266,13 +264,13 @@
                     $(this).text('like · comment'); 
                 }
                 else {
+                    // submit POST request associated with voting...
+                    $(this).nextAll("form").submit(); 
+                    console.log('number of siblings of type form: ' + $(this).siblings("form").length)
+
                     // altering content dynamically
                     $(this).text('unlike · comment'); 
                 }
-
-                // submit POST request associated with voting...
-                // $(this).nextAll("form").submit(); 
-                // console.log('number of siblings of type form: ' + $(this).siblings("form").length)
 
                 // switch classes
                 $(this).toggleClass('unlike_me');

@@ -21,8 +21,9 @@
                 // looping through all posts
                 for(var i = 0; i < data['data'].length; i++) {
 
-                    // grabbing all of the names/UIDs of recipients
-                    var tempPID = data['data'][i]['PID']; 
+                    //  grab overall info about post
+                    var tempPID             = data['data'][i]['PID']; 
+                    var overall_timestamp   = data['data'][i]['Timestamp']; 
 
                     /* LIKES */
 
@@ -36,11 +37,31 @@
 
                     console.log('the total number of likes is: ' + total_agree); 
 
+                    var show_like_info = "";
+
+                    if(total_agree > 0) {
+                        if(total_agree == 1) {
+                            show_like_info = [
+                                "<div class='bg-gray innerAll border-top border-bottom text-small'>",
+                                    "<span><a href='#'>1 person likes this</a></span>",
+                                "</div>"
+                                ].join('\n');
+                        }
+                        else {
+                            show_like_info = [
+                                "<div class='bg-gray innerAll border-top border-bottom text-small'>",
+                                    "<span><a href='#'>" + total_agree + " people like this</a></span>",
+                                "</div>"
+                                ].join('\n');
+                        }
+                    }
+
                     var like_submission_form = [
                         '<form class="like_form" name="like_form" method="post" action="#" style="display: none;">',
                             "<input type='hidden' class='hiddenID' name='uid' value='" + localStorage['uid'] + "'/>",
                             "<input type='hidden' class='hiddentoken' name='token' value='" + localStorage['token'] + "'/>",
                             "<input type='hidden' class='hiddenPID' name='pid' value='" + tempPID + "'/>",
+                            "<input type='hidden' class='timestamp' name='timestamp' value='" + overall_timestamp + "'/>",
                             '<button type="submit" class="like_submit" name="like_submit" style="display: none; "></button>',
                         '</form>'
                         ].join('\n');
@@ -200,6 +221,8 @@
                                                                     like_submission_form,
                                                                 "</span>",
                                                             "</div>",
+                                                            "<!-- Show overall like info -->",
+                                                            show_like_info,
                                                             "<!-- Show more comments? -->", 
                                                             show_more_comments,
                                                             "<!-- Rendered Comments -->",
@@ -273,6 +296,8 @@
                                                     like_submission_form,
                                                 "</span>",
                                             "</div>",
+                                            "<!-- Show overall like info -->",
+                                            show_like_info,
                                             "<!-- Show more comments? -->", 
                                             show_more_comments,
                                             "<!-- Rendered Comments -->",
