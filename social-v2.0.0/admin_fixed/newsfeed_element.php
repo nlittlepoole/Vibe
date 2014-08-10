@@ -35,20 +35,26 @@
                         current_comment = data['data'][i]['Comments'][j]['Content']; 
                         current_timestamp = data['data'][i]['Comments'][j]['formatted_time'];
 
+                        // UID and name of author
                         current_author = data['data'][i]['Comments'][j]['Author'];
                         current_author_name = data['data'][i]['Comments'][j]['post_author'];
 
+                        var temp_link   = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + current_author + "&name=" + current_author_name + "";
+                        
+                        // note: the below is not a graph API request, so it should be pretty fast...
+                        var pic_href    = "https://graph.facebook.com/" + current_author + "/picture?width=60&height=60";
+
                         comment_data += 
-                            ['<!-- First Comment -->', 
+                            ['<!-- Comment -->', 
                              '<div class="media border-bottom margin-none bg-gray">',
                                 '<a href="" class="pull-left innerAll half">',
-                                    '<img src="../assets//images/people/100/2.jpg" width="60" class="media-object">',
+                                    '<img src="' + pic_href + '" width="60" class="media-object">',
                                 '</a>',
                                 '<div class="media-body innerTB">',
                                     '<a href="#" class="pull-right innerT innerR text-muted">',
                                         '<i class="icon-reply-all-fill fa fa-2x"></i>',
                                     '</a>',
-                                    '<a href="" class="strong text-inverse">' + current_author_name + '</a>    <small class="text-muted ">wrote on ' + current_timestamp + '</small> <a href="" class="text-small">like</a>',
+                                    '<a href="' + temp_link + '" class="strong text-inverse">' + current_author_name + '</a>    <small class="text-muted ">wrote on ' + current_timestamp + '</small> <a href="" class="text-small">like</a>',
                                     '<div>' + current_comment + '</div>',
                                 '</div>',
                             '</div>',
