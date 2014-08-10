@@ -114,11 +114,14 @@
                 var inputted_vibe = $('#statusform input[name="status"]').val();
 
                 var my_names = inputted_names.split("&&");
+                var my_ids_list = [];
 
                 var uid_string = ""; 
 
                 for(var i = 0; i < my_names.length; i++) {
                     var desired_uid = names_to_ID[my_names[i]];
+                    my_ids_list.push(desired_uid);
+
                     uid_string += desired_uid; 
                     if(i < my_names.length - 1) {
                         uid_string += "&&"; 
@@ -156,6 +159,43 @@
                             }); 
                         */
 
+                        var recipient_size = my_names.length;
+                        var post_tagged_formatted_names = ""; 
+
+                        if(recipient_size == 1) {
+                            
+                            var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + my_ids_list[0] + "&name=" + my_names[0] + "";
+                            
+                            post_tagged_formatted_names = "<a href='" + temp_link + "' class='text-white strong'>" + my_names[0] + "</a>"; 
+                        }
+                        else if(recipient_size == 2) {
+                            
+                            var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + my_ids_list[0] + "&name=" + my_names[0] + "";
+                            var temp_link2 = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + my_ids_list[1] + "&name=" + my_ids_list[1] + "";
+                            
+                            post_tagged_formatted_names = "<a href='" + temp_link + "' class='text-white strong'>" + my_names[0] + "</a>" + " and " + "<a href='" + temp_link2 + "' class='text-white strong'>" + my_names[1] + "</a>"; 
+                        }
+                        else {
+                            for(var z = 0; z < recipient_size; z++) {
+
+                                var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + my_ids_list[z] + "&name=" + my_names[z] + "";
+                                
+                                if(z == recipient_size - 1) {
+                                    // last element (special case)
+                                    post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + my_names[z] + "</a>&nbsp;";
+                                }
+                                else if(z == recipient_size - 2) {
+                                    // second to last element (special case)
+                                    post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + my_names[z] + "</a>" + ", and ";
+                                }
+                                else {
+                                    // typical case
+                                    post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + my_names[z] + "</a>" + ", "; 
+                                }
+
+                            }
+                        }
+
                         var html_newsfeed_content = 
                         ["<li class='active vibe_newsfeed_posts'>", 
                             "<span class='marker'></span>",
@@ -169,7 +209,7 @@
                                                 "<div class='media'>",
                                                     "<div class='media-body innerTB' style='padding-left:20px;'>",
                                                         "<a href='#' class='text-white strong'>Someone</a>",
-                                                        "<span>upped the Chillness of insert_name_here",
+                                                        "<span>upped the Chillness of " + post_tagged_formatted_names + " ",
                                                         "<br />on&nbsp;insert_time_here&nbsp;<i class='icon-time-clock'></i></span>",
                                                     "</div>",
                                                 "</div>",

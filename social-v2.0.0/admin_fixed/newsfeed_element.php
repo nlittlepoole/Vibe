@@ -155,7 +155,7 @@
                             }
                             else if(z == recipient_size - 2) {
                                 // second to last element (special case)
-                                post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['tagged'][z]['Name'] + "</a>" + ", and";
+                                post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['tagged'][z]['Name'] + "</a>" + ", and ";
                             }
                             else {
                                 // typical case
