@@ -136,6 +136,14 @@
 
                     .done(function(data) {
 
+                        // console.log("data returned: " + data);
+
+                        var start_i = String(data).indexOf('{');
+                        var json_string = data.substring(start_i); 
+
+                        returned_data = JSON.parse(json_string);
+                        // console.log("PID: " + returned_data['PID']);
+
                         // clear form elements
                         $('input[id="inputFriend"]').val("");
                         $('input[id="inputVibe"]').val("");
@@ -184,7 +192,7 @@
                                                 "<input type='text' class='form-control comment_input' name='status' style='border: none;' placeholder='Comment here...'>",
                                                 "<input type='hidden' class='hiddenID' name='uid' value='" + localStorage['uid'] + "'/>",
                                                 "<input type='hidden' class='hiddentoken' name='token' value='" + localStorage['token'] + "'/>",
-                                                "<input type='hidden' class='hiddenPID' name='pid' value='10000'/>",
+                                                "<input type='hidden' class='hiddenPID' name='pid' value='" + returned_data['PID'] + "'/>",
                                                 '<button type="submit" class="comment_submit" name="comment_submit" style="display: none; "></button>',
                                             '</form>',
                                         "</div>",

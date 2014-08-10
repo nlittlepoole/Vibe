@@ -21,8 +21,6 @@
 
 		case 'postVibe':
 			// response OK.
-			$response_array['status'] = "200 Request Queued";
-			pushResponse($response_array);
 			postVibe($uid, $token, getVibe(isset( $_POST['status']) ? $_POST['status'] : "" ));
 		break;
 		case 'postComment':
@@ -188,6 +186,11 @@
 
 		$status = isset($_POST['status']) ? $_POST['status'] : "";
 		$pid = hash("sha256", $status . $uid . rand(0, 1000) );
+
+		$response_array['status'] = "200 Request Queued";
+		$response_array['PID'] = $pid;
+		pushResponse($response_array);
+
 		$author = isset($_POST['uid']) ? $_POST['uid'] : "";
 		$recipients = isset($_POST['recipient']) ? $_POST['recipient'] : "";
 		$recipients = explode("&&",$recipients);
@@ -254,7 +257,6 @@
 			$st->execute();
 		}
 		$conn = null;
-		// header('Location: http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_newsfeed.php');
 	}
 
 	function postComment($uid, $token){
