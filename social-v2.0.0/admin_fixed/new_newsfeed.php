@@ -111,6 +111,7 @@
                 event.preventDefault();
                 
                 var inputted_names = $('#statusform input[name="recipient_to_convert"]').val();
+                var inputted_vibe = $('#statusform input[name="status"]').val();
 
                 var my_names = inputted_names.split("&&");
 
@@ -140,7 +141,60 @@
                         $('input[id="inputVibe"]').val("");
 
                         // trigger load of elements again (will have updated submission)
-                        $('#last_elems').load('newsfeed_element.php'); 
+                        /*
+                            $('#last_elems').load('newsfeed_element.php', function() {
+                              alert( "Load was performed." );
+                              console.log("yes, load was indeed performed");
+                            }); 
+                        */
+
+                        var html_newsfeed_content = 
+                        ["<li class='active vibe_newsfeed_posts'>", 
+                            "<span class='marker'></span>",
+                            "<div class='block'>",
+                                "<div class='caret'></div>",
+                                    "<div class='inline-block box-generic' style='width: 100%; border: 1px solid #ececec;''>",
+                                        "<!-- SOCIAL MEDIA POST FOR TESTING PURPOSES -->",
+                                        "<div class='widget'>",
+                                            "<!-- Info -->",
+                                            "<div class='bg-primary'>",
+                                                "<div class='media'>",
+                                                    "<div class='media-body innerTB' style='padding-left:20px;'>",
+                                                        "<a href='#' class='text-white strong'>Someone</a>",
+                                                        "<span>upped the Chillness of insert_name_here",
+                                                        "<br />on&nbsp;insert_time_here&nbsp;<i class='icon-time-clock'></i></span>",
+                                                    "</div>",
+                                                "</div>",
+                                            "</div>",
+                                            "<!-- Content -->",
+                                            "<div class='innerAll'>",
+                                                "<p class='lead' style='display : inline;'>" + inputted_vibe + "</p>",
+                                            "</div>",
+                                            "<!-- Comment -->",
+                                            "<div class='bg-gray innerAll border-top border-bottom text-small'>",
+                                                "<span>",
+                                                    "<a href='#' class='like_link'>like · comment</a>",
+                                                "</span>",
+                                            "</div>",
+                                            "<!-- Show overall like info -->",
+                                            "<!-- Show more comments? -->", 
+                                            "<!-- Rendered Comments -->",
+                                            "<!-- User input comments -->",
+                                            '<form class="comment_form" name="comment_form" method="post" action="#">',
+                                                "<input type='text' class='form-control comment_input' name='status' style='border: none;' placeholder='Comment here...'>",
+                                                "<input type='hidden' class='hiddenID' name='uid' value='" + localStorage['uid'] + "'/>",
+                                                "<input type='hidden' class='hiddentoken' name='token' value='" + localStorage['token'] + "'/>",
+                                                "<input type='hidden' class='hiddenPID' name='pid' value='10000'/>",
+                                                '<button type="submit" class="comment_submit" name="comment_submit" style="display: none; "></button>',
+                                            '</form>',
+                                        "</div>",
+                                    "</div>",
+                            "</div>",
+                        "</li>",
+                        ].join('\n');
+
+
+                        $("#newsfeed_container").prepend(html_newsfeed_content);
                 });
             });
 
@@ -149,7 +203,7 @@
                 $('#last_elems').load('newsfeed_element.php'); 
             }
 
-            setInterval(update, 60000);     // send the GET request every 60 seconds
+            // setInterval(update, 60000);     // send the GET request every 60 seconds
 
 
             // custom design change - (dark blue on hover instead of turquoise)
