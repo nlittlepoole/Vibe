@@ -216,6 +216,22 @@
 
         });
 
+        $(function() {
+            // trigger action upon 'like'
+            $(document.body).on('click', '.like_link' ,function() {
+                console.log('you clicked the like button');
+
+                // switch classes
+                $(this).toggleClass('like_link unlike_link');
+            });
+
+            // trigger action upon 'unlike'
+            $(document.body).on('click', '.unlike_link' ,function() {
+                console.log('you clicked the unlike button');
+            });
+
+        });
+
     </script>
 
     <!-- Ajax load scripts go at the top... -->
