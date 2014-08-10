@@ -223,6 +223,9 @@
 
                 // switch classes
                 $(this).toggleClass('like_link unlike_link');
+
+                // altering content dynamically
+                $(this).text('unlike · comment'); 
             });
 
             // trigger action upon 'unlike'

@@ -27,10 +27,21 @@
                     // number of comments
                     var num_comments = data['data'][i]['Comments'].length;
 
+                    // 'show all comments' option
+                    var show_more_comments = ""; 
+
+                    if(num_comments > 4) {
+                        show_more_comments = [
+                            "<div class='bg-gray innerAll border-top border-bottom text-small'>",
+                                "<span><a href='#' class='like_link'>view all " + num_comments + " comments</a></span>",
+                            "</div>"
+                            ].join('\n');
+                    }
+
                     var comment_data = ""; 
 
                     for(var j = num_comments - 1; j >= 0; j--) {
-                        // console.log("data of comment: " + data['data'][i]['Comments'][j]['Content']); 
+                        console.log("data of comment: " + data['data'][i]['Comments'][j]['Content']); 
 
                         current_comment = data['data'][i]['Comments'][j]['Content']; 
                         current_timestamp = data['data'][i]['Comments'][j]['formatted_time'];
@@ -44,8 +55,17 @@
                         // note: the below is not a graph API request, so it should be pretty fast...
                         var pic_href    = "https://graph.facebook.com/" + current_author + "/picture?width=60&height=60";
 
+                        var beginning_tag = ""; 
+                        var closing_tag = ""; 
+
+                        if(j > 3) {
+                            beginning_tag   = '<div style="display: none">';
+                            closing_tag     = '</div>';
+                        }
+
                         comment_data += 
                             ['<!-- Comment -->', 
+                             beginning_tag,
                              '<div class="media border-bottom margin-none bg-gray">',
                                 '<a href="" class="pull-left innerAll half">',
                                     '<img src="' + pic_href + '" width="60" class="media-object">',
@@ -58,8 +78,8 @@
                                     '<div>' + current_comment + '</div>',
                                 '</div>',
                             '</div>',
+                            closing_tag
                             ].join('\n');
-
                     }
 
                     // creating a temp string for each post (link to profile of all people tagged...)
@@ -151,8 +171,10 @@
                                                             "</div>",
                                                             "<!-- Comment -->",
                                                             "<div class='bg-gray innerAll border-top border-bottom text-small'>",
-                                                                "<span><a href='#' class='like_link'>like</a></span>",
+                                                                "<span><a href='#' class='like_link'>like · comment</a></span>",
                                                             "</div>",
+                                                            "<!-- Show more comments? -->", 
+                                                            show_more_comments,
                                                             "<!-- Rendered Comments -->",
                                                             comment_data, 
                                                             "<!-- User input comments -->",
@@ -218,8 +240,10 @@
                                             "</div>",
                                             "<!-- Comment -->",
                                             "<div class='bg-gray innerAll border-top border-bottom text-small'>",
-                                                "<span><a href='#' class='like_link'>like</a></span>",
+                                                "<span><a href='#' class='like_link'>like · comment</a></span>",
                                             "</div>",
+                                            "<!-- Show more comments? -->", 
+                                            show_more_comments,
                                             "<!-- Rendered Comments -->",
                                             comment_data, 
                                             "<!-- User input comments -->",
