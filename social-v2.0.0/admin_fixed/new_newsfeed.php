@@ -224,9 +224,6 @@
                                                     "<a href='#' class='like_link'>like · comment</a>",
                                                 "</span>",
                                             "</div>",
-                                            "<!-- Show overall like info -->",
-                                            "<!-- Show more comments? -->", 
-                                            "<!-- Rendered Comments -->",
                                             "<!-- User input comments -->",
                                             '<form class="comment_form" name="comment_form" method="post" action="#">',
                                                 "<input type='text' class='form-control comment_input' name='status' style='border: none;' placeholder='Comment here...'>",
@@ -337,6 +334,36 @@
                       $('.comment_form').each(function() {
                           this.reset();
                       });
+
+                      // append to current status the comment that you submitted
+
+                      // insert comment above form (as a sibling) --> how to insert before something? (look online)
+                      // you also need to find out where Niger does his timestamp insertion...
+
+                      var comment_to_append = ""; 
+
+                      var my_name = "<?php print($_SESSION['full_name']) ?>"; 
+                      var my_uid = "<?php print($_SESSION['userID']) ?>"; 
+                      var my_profile_load_name = "<?php print($_SESSION['my_profile_load_name']) ?>"; 
+
+                      var my_prof_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=";
+                      my_prof_link += my_uid . "&name=" . my_profile_load_name . "";
+
+                      comment_data += 
+                            ['<!-- Comment -->', 
+                             '<div class="media border-bottom margin-none bg-gray">',
+                                '<a href="" class="pull-left innerAll half">',
+                                    '<img src="' + pic_href + '" width="60" class="media-object">',
+                                '</a>',
+                                '<div class="media-body innerTB">',
+                                    '<a href="#" class="pull-right innerT innerR text-muted">',
+                                        '<i class="icon-reply-all-fill fa fa-2x"></i>',
+                                    '</a>',
+                                    '<a href="' + my_prof_link + '" class="strong text-inverse">' + my_name + '</a>    <small class="text-muted ">wrote on insert_time_here</small> <a href="" class="text-small">like</a>',
+                                    '<div>' + my_comment + '</div>',
+                                '</div>',
+                            '</div>',
+                            ].join('\n');
                   },
                   async: true
               });

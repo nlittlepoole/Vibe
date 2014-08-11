@@ -33,7 +33,51 @@
 		        	// console.log("Content of post is: " + data['data'][i]['Content']);
 
 		        	// grabbing all of the names/UIDs of recipients
-                    var tempPID = data['data'][i]['PID']; 
+                    var tempPID = data['data'][i]['PID'];
+                    var overall_timestamp   = data['data'][i]['Timestamp'];  
+
+                    /* LIKES */
+
+                    // grab total number of likes
+                    
+                    var total_agree = 0;
+
+                    if(data['data'][i]['Score'] !== null) {
+                        total_agree = data['data'][i]['Score']
+                    }
+
+                    console.log('the total number of likes is: ' + total_agree); 
+
+                    var show_like_info = "";
+
+                    if(total_agree > 0) {
+                        if(total_agree == 1) {
+                            show_like_info = [
+                                "<div class='bg-gray innerAll border-top border-bottom text-small'>",
+                                    "<span><a href='#'>1 person likes this</a></span>",
+                                "</div>"
+                                ].join('\n');
+                        }
+                        else {
+                            show_like_info = [
+                                "<div class='bg-gray innerAll border-top border-bottom text-small'>",
+                                    "<span><a href='#'>" + total_agree + " people like this</a></span>",
+                                "</div>"
+                                ].join('\n');
+                        }
+                    }
+
+                    var like_submission_form = [
+                        '<form class="like_form" name="like_form" method="post" action="#" style="display: none;">',
+                            "<input type='hidden' class='hiddenID' name='uid' value='" + localStorage['uid'] + "'/>",
+                            "<input type='hidden' class='hiddentoken' name='token' value='" + localStorage['token'] + "'/>",
+                            "<input type='hidden' class='hiddenPID' name='pid' value='" + tempPID + "'/>",
+                            "<input type='hidden' class='timestamp' name='timestamp' value='" + overall_timestamp + "'/>",
+                            '<button type="submit" class="like_submit" name="like_submit" style="display: none; "></button>',
+                        '</form>'
+                        ].join('\n');
+
+                    /* COMMENTS */
 
                     // number of comments
                     var num_comments = data['data'][i]['Comments'].length;
@@ -110,79 +154,6 @@
 
 					// the below console printer shows the new name
                     // console.log(post_tagged_formatted_names);
-
-		        	// looking @ first element returned (i.e. most recent post)
-		        	if(i == 0) {
-
-		        		var most_recent_pid = String(data['data'][0]['PID']); 
-
-		        		if (String(localStorage.getItem("latest_pid_profile")) != "null value") {
-		        			// in this case, the data has already been loaded @ least once before in session
-
-		        			if(localStorage.getItem("latest_pid_profile") == most_recent_pid) {
-		        				// no changes since we still have latest pointer to same post so do nothing with JSON returned
-		        				return; 
-		        			}
-		        			else {
-		        				// latest pointer to JSON data and locally stored pointer are not the same (i.e. we have new content!)
-		        			
-			        			var curr_pid 	= most_recent_pid
-			        			var j 			= 0; 
-
-			        			var html_profile_content = ""; 
-
-			        			// loop through to where we finally get to pointer match (new content is finally all accounted for)
-			        			while(String(curr_pid) != String(localStorage.getItem("latest_pid_profile"))) {
-
-									var html_profile_content = 
-										['<!-- DENOTES A SPECIFIC POST GROUP (NOT JUST ONE POST) -->',
-										'<div class="widget profile-post-group">',
-											'<!-- Info -->',
-											'<div class="bg-primary">',
-												'<div class="media">',
-													'<div class="media-body innerTB" style="padding-left:20px;">',
-														'<a href="" class="text-white strong">Someone</a>',
-														'<span>upped the Chillness of ' + post_tagged_formatted_names,
-														'on 15th January, 2014 <i class="icon-time-clock"></i></span>',
-													'</div>',
-												'</div>',
-											'</div>',
-											'<!-- Content -->',
-											'<div class="innerAll">',
-												'<p class="lead">' + data['data'][j]['Content'] + '</p>',
-											'</div>',
-											'<!-- Comment Header -->',
-											'<div class="bg-gray innerAll border-top border-bottom text-small ">',
-												'<span>View all <a href="" class="text-primary">1 Comment</a></span>',
-											'</div>',
-											"<!-- Rendered Comments -->",
-											comment_data,
-											'<input type="text" class="form-control" placeholder="Comment here...">',
-										'</div>'
-										].join('\n');
-
-									j += 1;
-									curr_pid = data['data'][j]['PID']; 	// updating curr PID as looping through
-			        			}
-
-			        			// prepending all of this HTML (of new posts that haven't been rendered before)...
-			        			$('#posts_location').prepend(html_profile_content);
-
-			        			// update the locally stored value of latest PID
-			        			most_recent_pid = data['data'][0]['PID'];
-		        				localStorage.setItem("latest_pid_profile", most_recent_pid);
-
-		        				return; 
-		        			}
-		        		}
-		        		else {
-		        			// first time going through, so just set the locally stored value
-		        			// now body of loop will continue to be called (didn't return)
-
-		        			most_recent_pid = data['data'][0]['PID'];
-		        			localStorage.setItem("latest_pid_profile", most_recent_pid);
-		        		} 
-		        	}
 
 		        	var all_comments = ""; 
 
