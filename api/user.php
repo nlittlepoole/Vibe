@@ -185,7 +185,9 @@
 
 			$format = 'Y-m-d H:i:s';
 			$post_date = DateTime::createFromFormat($format, $timestamp);
-			$post['formatted_time'] = date_format($post_date, 'g:ia \o\n F jS Y');
+
+			// this formatted time is what needs to be altered as the years, months, and days change
+			$post['formatted_time'] = date_format($post_date, 'F jS');
 
 			// modify results (include comments below main posts)
 	        

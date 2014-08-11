@@ -59,7 +59,7 @@
       <button type="button" class="navbar-toggle btn btn-default" data-toggle="collapse" data-target="#navbar-fixed-layout-collapse">
 		<i class="fa fa-indent"></i>
       </button>
-      <a class="navbar-brand" href="#"><img src="../assets//images/logo/logo.jpg" alt=""></a>
+      <a class="navbar-brand" href="#"><img src="http://api.go-vibe.com/view/vibe72dpi-rgb.gif" style="width: 32px;" alt=""></a>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="navbar-fixed-layout-collapse">
