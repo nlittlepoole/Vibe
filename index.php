@@ -65,7 +65,18 @@ switch($action) {
     post($url, $post_data);
 
     // automatically take user to the new newsfeed
-    header('Location: /social-v2.0.0/admin_fixed/new_newsfeed.php');
+    $iphone     = strpos($_SERVER['HTTP_USER_AGENT'],"iPhone");
+    $android    = strpos($_SERVER['HTTP_USER_AGENT'],"Android");
+    $palmpre    = strpos($_SERVER['HTTP_USER_AGENT'],"webOS");
+    $berry      = strpos($_SERVER['HTTP_USER_AGENT'],"BlackBerry");
+    $ipod       = strpos($_SERVER['HTTP_USER_AGENT'],"iPod");
+
+    if ($iphone || $android || $palmpre || $ipod || $berry == true) { 
+        header('Location: /social-v2.0.0/admin_fixed/mobile_newsfeed.php');  // redirect the user to a different page, designed for mobile
+    }
+    else {
+        header('Location: /social-v2.0.0/admin_fixed/new_newsfeed.php');
+    }
 
   break;
 

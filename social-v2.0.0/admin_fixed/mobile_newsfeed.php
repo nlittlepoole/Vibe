@@ -435,7 +435,7 @@
             console.log('sidebar is loaded...'); 
 
             // loading newsfeed elements...
-            $('#last_elems').load('newsfeed_element.php'); 
+            $('#last_elems').load('mobile_newsfeed_element.php'); 
             console.log('newsfeed element is loaded...');
 
         });
@@ -536,22 +536,6 @@
                             <!-- // Widget END -->
 
                         <!-- end of TIMELINE COVER -->  
-                        </div>
-                        
-                        <!-- HEADER Widget of NEWSFEED ELEMENTS -->
-                        <div class="media">
-                            
-                            <a href="" class="btn btn-default pull-left">Today</a>
-                            <div class="media-body">
-                                  <div class="input-group">
-                                      <input type="text" class="form-control" placeholder="Share your mood...">
-
-                                      <span class="input-group-btn">
-                                          <button class="btn btn-primary" type="button">Search</button>
-                                      </span>
-
-                                  </div><!-- /input-group -->
-                            </div>
                         </div>
 
                         <!-- actual TIMELINE -->

@@ -80,7 +80,7 @@
 	function deleteVibe() {
 		
 		$pid = $_POST['pid'];
-		$timestamp = $_POST['timestamp'];
+		$timestamp = $_POST['`'];
 		// grab necessary data about post
 		$sql = "SELECT A.PID, UID as Tagged, Author, Content,Type FROM (SELECT * FROM Posts WHERE TIMESTAMP = '$timestamp' AND PID = '$pid')A JOIN Tagged on A.PID = Tagged.PID"; 
 		$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
@@ -189,18 +189,23 @@
 
 		$response_array['status'] = "200 Request Queued";
 		$response_array['PID'] = $pid;
+
 		pushResponse($response_array);
 
 		$author = isset($_POST['uid']) ? $_POST['uid'] : "";
+
 		$recipients = isset($_POST['recipient']) ? $_POST['recipient'] : "";
 		$recipients = explode("&&",$recipients);
+
 		// setup temp user if user does not exist
 		foreach($recipients as &$recipient){
 			$hash_id = hash("sha256", $recipient);
 			$type = idType($recipient);
+
 			if($type != "default"){
-				$match = getMatchingUID( $hash_id )[0];
-				if(!$match){
+				$match = getMatchingUID($hash_id)[0];
+				
+				if(!$match) {
 					addTempUser($hash_id, "Temp User", $type);
 					switch ($type) {
 						case 'email':
@@ -211,17 +216,15 @@
 							$url = 'http://api.go-vibe.com/api/notification.php?action=sendEmail';
 					    	$post_data = array('uid' => $uid, 'token' => $token, 'email' => $email, 'status' => $status, 'user' => $recipient);
 					    	post($url, $post_data);
-
 					    break;
 					    case 'twitter':
 							$twitter = $recipient;
 							$recipient = $hash_id;
+
 							// send tweet
 							$url = 'http://api.go-vibe.com/api/notification.php?action=sendTweet';
 					    	$post_data = array('uid' => $uid, 'token' => $token, 'twitter' => $twitter, 'status' => $status, 'user' => $recipient);
 					    	post($url, $post_data);
-
-
 					    break;
 					}
 					// Add temp friend to friend graph
@@ -234,8 +237,9 @@
 	    		}
 			}
 		}
-		$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
-		$status=$conn->quote($status); //Clean up user statuses to prevent SQL injections
+		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+
+		$status = $conn->quote($status); //Clean up user statuses to prevent SQL injections
 
 		$sql = "INSERT INTO Posts (`PID`, `Content`, `Author` ,`Type`) VALUES ('$pid', $status, '$author','Master');";
 		$st = $conn->prepare($sql);
