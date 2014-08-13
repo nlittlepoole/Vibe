@@ -93,7 +93,7 @@
 
 
       <ul class="nav navbar-nav navbar-right">
-        <li class="innerLR"><button type="button" class="btn btn-info navbar-btn"><i class="fa fa-globe"></i></button></li>
+        <li class="innerLR"><img src="small_globe.png" /><i class="fa fa-globe fa-2x" id="notifications-button"></i></li>
         <li class="dropdown">
           <a href=<?php echo $_SESSION['my_profile_link']; ?>>
           <span class="pull-left innerR"><img src="../assets/images/people/35/16.jpg" alt="user" class="img-circle"></span>
