@@ -445,16 +445,6 @@
     <!-- overall settings -->
     <?php require_once("webpage_settings.php"); ?>
 
-    <style type="text/css">
-      
-      .ui-autocomplete {
-           max-height: 400px;
-           overflow-y: auto;
-           overflow-x: hidden;      /* prevent horizontal scrollbar */
-      }
-
-    </style>
-
 </head>
 
 <body class=" scripts-async menu-right-hidden">

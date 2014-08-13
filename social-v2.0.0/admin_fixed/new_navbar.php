@@ -51,6 +51,19 @@
       });
   </script>
 
+  <style type="text/css">
+      .ui-autocomplete {
+           max-height: 400px;
+           overflow-y: auto;
+           overflow-x: hidden;      prevent horizontal scrollbar 
+      }
+
+      .ui-corner-all {
+           font-size: 13px;
+           font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      }
+  </style>
+
 <nav class="navbar navbar-default top-nav navbar-fixed-top" role="navigation">
 
   <div class="container">
@@ -73,7 +86,7 @@
       <!-- SEARCH WIDGET -->
       <form class="navbar-form navbar-left hidden-sm" role="search" name="searchform" id="status-form" method="post" action="#">
         <div class="form-group inline-block">
-          <input type="text" class="form-control" placeholder="Search" id="search-bar" name="search-bar">
+          <input type="text" class="form-control" placeholder="Search for people" id="search-bar" name="search-bar">
         </div>
         <button type="submit" class="btn btn-inverse" id="search-submit" style="display: none;"><i class="fa fa-search fa-fw"></i></button>
       </form>

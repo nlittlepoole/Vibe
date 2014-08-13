@@ -129,20 +129,20 @@
                     // creating a temp string for each post (link to profile of all people tagged...)
 
                     var recipient_size = data['data'][i]['tagged'].length;
-                    var post_tagged_formatted_names = ""; 
+                    var post_tagged_formatted_names = "<span style='font-size:115%'>"; 
 
                     if(recipient_size == 1) {
                         
                         var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + data['data'][i]['tagged'][0]['UID'] + "&name=" + data['data'][i]['tagged'][0]['Name'] + "";
                         
-                        post_tagged_formatted_names = "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['tagged'][0]['Name'] + "</a>"; 
+                        post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['tagged'][0]['Name'] + "</a>"; 
                     }
                     else if(recipient_size == 2) {
                         
                         var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + data['data'][i]['tagged'][0]['UID'] + "&name=" + data['data'][i]['tagged'][0]['Name'] + "";
                         var temp_link2 = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + data['data'][i]['tagged'][1]['UID'] + "&name=" + data['data'][i]['tagged'][1]['Name'] + "";
                         
-                        post_tagged_formatted_names = "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['tagged'][0]['Name'] + "</a>" + " and " + "<a href='" + temp_link2 + "' class='text-white strong'>" + data['data'][i]['tagged'][1]['Name'] + "</a>"; 
+                        post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['tagged'][0]['Name'] + "</a>" + " and " + "<a href='" + temp_link2 + "' class='text-white strong'>" + data['data'][i]['tagged'][1]['Name'] + "</a>"; 
                     }
                     else {
                         for(var z = 0; z < recipient_size; z++) {
@@ -165,6 +165,8 @@
                         }
                     }
 
+                    post_tagged_formatted_names += "</span>";
+
                     // the below console printer shows the new name
                     // console.log(post_tagged_formatted_names);
 
@@ -180,9 +182,8 @@
                                             "<div class='bg-primary'>",
                                                 "<div class='media'>",
                                                     "<div class='media-body innerTB' style='padding-left:20px;'>",
-                                                        "<a href='#' class='text-white strong'>Someone</a>",
-                                                        "<span>upped the Chillness of " + post_tagged_formatted_names,
-                                                        "<br />on&nbsp;" + data['data'][i]['formatted_time'] + "&nbsp;<i class='icon-time-clock'></i></span>",
+                                                        "<span><i class='fa fa-arrow-up'></i> chillness of " + post_tagged_formatted_names,
+                                                        " on " + data['data'][i]['formatted_time'] + "&nbsp;</span>",
                                                     "</div>",
                                                 "</div>",
                                             "</div>",
