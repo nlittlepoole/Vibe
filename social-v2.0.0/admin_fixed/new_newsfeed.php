@@ -271,7 +271,7 @@
             $(".like_form").submit(function(event) {
               
               // simply override normal send
-              // event.preventDefault();
+              event.preventDefault();
 
               // debugging
               console.log('like submission triggered...'); 

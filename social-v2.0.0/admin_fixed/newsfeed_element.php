@@ -127,7 +127,7 @@
                                     '<a href="#" class="pull-right innerT innerR text-muted">',
                                         '<i class="icon-reply-all-fill fa fa-2x"></i>',
                                     '</a>',
-                                    '<a href="' + temp_link + '" class="strong text-inverse">' + current_author_name + '</a>    <small class="text-muted ">wrote on ' + current_timestamp + '</small> <a href="" class="text-small">like</a>',
+                                    '<a href="' + temp_link + '" class="strong text-inverse">' + current_author_name + '</a>    <small class="text-muted ">wrote on ' + current_timestamp + '</small>',
                                     '<div>' + current_comment + '</div>',
                                 '</div>',
                             '</div>',
@@ -182,7 +182,7 @@
                     var html_newsfeed_content = 
                         ["<li class='active vibe_newsfeed_posts'>", 
                             "<span class='marker'></span>",
-                            "<div class='block'>",
+                            "<div class='block' style='padding-right: 0px;'>",
                                 "<div class='caret'></div>",
                                     "<div class='inline-block box-generic' style='width: 100%; border: 1px solid #ececec;''>",
                                         "<!-- SOCIAL MEDIA POST FOR TESTING PURPOSES -->",

@@ -4,6 +4,8 @@
     $_SESSION['my_profile_link'] = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=";
     $_SESSION['my_profile_link'] .= $_SESSION['userID'] . "&name=" . $_SESSION['my_profile_load_name'] . "";
 
+    $_SESSION['my_profile_pic'] = "https://graph.facebook.com/" . $_SESSION['userID'] . "/picture?width=70&height=70";
+
 ?>
   <script>
 
@@ -55,7 +57,7 @@
       .ui-autocomplete {
            max-height: 400px;
            overflow-y: auto;
-           overflow-x: hidden;      prevent horizontal scrollbar 
+           overflow-x: hidden;
       }
 
       .ui-corner-all {
@@ -93,10 +95,10 @@
 
 
       <ul class="nav navbar-nav navbar-right">
-        <li class="innerLR"><img src="small_globe.png" /><i class="fa fa-globe fa-2x" id="notifications-button"></i></li>
+        <li class="innerLR"><a href='javascript:;'><img src="http://api.go-vibe.com/social-v2.0.0/admin_fixed/nav_globe.png" style="width: 36px;" /></a></li>
         <li class="dropdown">
           <a href=<?php echo $_SESSION['my_profile_link']; ?>>
-          <span class="pull-left innerR"><img src="../assets/images/people/35/16.jpg" alt="user" class="img-circle"></span>
+          <span class="pull-left innerR"><img src=<?php echo $_SESSION['my_profile_pic']; ?> alt="user" class="img-circle" style="width: 36px;"></span>
               <?php echo $_SESSION['first_name']; ?>
           </a>
         </li>
