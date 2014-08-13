@@ -42,7 +42,7 @@
     <!-- Selectize plugins (jQuery and its CSS) -->
     <script type="text/javascript" src="http://api.go-vibe.com/selectize/selectize.js"></script>
     <!-- <script type="text/javascript" src="http://api.go-vibe.com/selectize/examples/js/index.js"></script> -->
-    <link rel="stylesheet" type="text/css" href="http://api.go-vibe.com/selectize/examples/css/stylesheet.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="http://api.go-vibe.com/selectize/examples/css/stylesheet.css" /> -->
     <link rel="stylesheet" type="text/css" href="http://api.go-vibe.com/selectize/selectize.default.css" />
 
     <!-- autocomplete code && form submission -->
@@ -486,6 +486,12 @@
                                                 <label for="inputFriend" class="col-sm-2 control-label">Friend</label>
                                                 
                                                 <div class="col-sm-9">
+                                                  <style type="text/css">
+                                                    .selectize-control {
+                                                      padding: 0px;
+                                                      border-style: none;
+                                                    }
+                                                  </style>
                                                     <input type="text" class="form-control" id="inputFriend" name="recipient_to_convert" placeholder="Who's this about? Type in a Facebook friend!">
                                                     <input type="hidden" value="" name="recipient" />
                                                     <input type="hidden" value="newsfeed" name="post_source" />
