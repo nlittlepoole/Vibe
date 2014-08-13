@@ -37,25 +37,6 @@
 
                     console.log('the total number of likes is: ' + total_agree); 
 
-                    var show_like_info = "";
-
-                    if(total_agree > 0) {
-                        if(total_agree == 1) {
-                            show_like_info = [
-                                "<div class='bg-gray innerAll border-top border-bottom text-small'>",
-                                    "<span><a href='javascript:;'>1 person likes this</a></span>",
-                                "</div>"
-                                ].join('\n');
-                        }
-                        else {
-                            show_like_info = [
-                                "<div class='bg-gray innerAll border-top border-bottom text-small'>",
-                                    "<span><a href='javascript:;'>" + total_agree + " people like this</a></span>",
-                                "</div>"
-                                ].join('\n');
-                        }
-                    }
-
                     var like_submission_form = [
                         '<form class="like_form" name="like_form" method="post" action="#" style="display: none;">',
                             "<input type='hidden' class='hiddenID' name='uid' value='" + localStorage['uid'] + "'/>",
@@ -65,6 +46,34 @@
                             '<button type="submit" class="like_submit" name="like_submit" style="display: none; "></button>',
                         '</form>'
                         ].join('\n');
+
+                    var show_like_info = "";
+
+                    if(total_agree >= 0) {
+                        if(total_agree == 0) {
+                            show_like_info = [
+                                "<div class='bg-gray innerAll border-top border-bottom text-small'>",
+                                    "<span>",
+                                        "<a href='javascript:;' class='like_link'>Like</a> · ",
+                                        "<!-- Like Submission Form -->", 
+                                        like_submission_form,
+                                    "</span>",
+                                "</div>"
+                                ].join('\n');
+                        }
+                        else {
+                            show_like_info = [
+                                "<div class='bg-gray innerAll border-top border-bottom text-small'>",
+                                    "<span>",
+                                        "<a href='javascript:;' class='like_link'>Like</a> · ",
+                                        "<!-- Like Submission Form -->", 
+                                        like_submission_form,
+                                    "</span>",
+                                    "<span><a href='javascript:;'>" + total_agree + " <i class='fa fa-thumbs-o-up'></i></a></span>",
+                                "</div>"
+                                ].join('\n');
+                        }
+                    }
 
                     /* COMMENTS */
 
@@ -190,14 +199,6 @@
                                             "<!-- Content -->",
                                             "<div class='innerAll'>",
                                                 "<p class='lead' style='display : inline;'>" + data['data'][i]['Content'] + "</p>",
-                                            "</div>",
-                                            "<!-- Comment -->",
-                                            "<div class='bg-gray innerAll border-top border-bottom text-small'>",
-                                                "<span>",
-                                                    "<a href='javascript:;' class='like_link'>like</a> · <a href='#' class='comment_link'>comment</a>",
-                                                    "<!-- Like Submission Form -->", 
-                                                    like_submission_form,
-                                                "</span>",
                                             "</div>",
                                             "<!-- Show overall like info -->",
                                             show_like_info,
