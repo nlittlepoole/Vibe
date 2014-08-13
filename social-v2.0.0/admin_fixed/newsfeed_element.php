@@ -43,14 +43,14 @@
                         if(total_agree == 1) {
                             show_like_info = [
                                 "<div class='bg-gray innerAll border-top border-bottom text-small'>",
-                                    "<span><a href='#'>1 person likes this</a></span>",
+                                    "<span><a href='javascript:;'>1 person likes this</a></span>",
                                 "</div>"
                                 ].join('\n');
                         }
                         else {
                             show_like_info = [
                                 "<div class='bg-gray innerAll border-top border-bottom text-small'>",
-                                    "<span><a href='#'>" + total_agree + " people like this</a></span>",
+                                    "<span><a href='javascript:;'>" + total_agree + " people like this</a></span>",
                                 "</div>"
                                 ].join('\n');
                         }
@@ -77,7 +77,7 @@
                     if(num_comments > 4) {
                         show_more_comments = [
                             "<div class='bg-gray innerAll border-top border-bottom text-small'>",
-                                "<span><a href='#'>view all " + num_comments + " comments</a></span>",
+                                "<span><a href='javascript:;'>view all " + num_comments + " comments</a></span>",
                             "</div>"
                             ].join('\n');
                     }
@@ -193,7 +193,7 @@
                                             "<!-- Comment -->",
                                             "<div class='bg-gray innerAll border-top border-bottom text-small'>",
                                                 "<span>",
-                                                    "<a href='#' class='like_link'>like · comment</a>",
+                                                    "<a href='javascript:;' class='like_link'>like</a> · <a href='#' class='comment_link'>comment</a>",
                                                     "<!-- Like Submission Form -->", 
                                                     like_submission_form,
                                                 "</span>",

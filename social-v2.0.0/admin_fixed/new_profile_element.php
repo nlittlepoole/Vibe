@@ -43,7 +43,7 @@
                     var total_agree = 0;
 
                     if(data['data'][i]['Score'] !== null) {
-                        total_agree = data['data'][i]['Score']
+                        total_agree = data['data'][i]['Score'];
                     }
 
                     console.log('the total number of likes is: ' + total_agree); 

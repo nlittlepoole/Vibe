@@ -245,6 +245,8 @@
 		$st = $conn->prepare($sql);
 		$st->execute();
 
+		// technically now the timestamp has been created so pull it
+
 		foreach($recipients as $tagged){
 			$sql = "INSERT INTO Tagged (`UID`, `PID`)
 				VALUES ('$tagged','$pid');";

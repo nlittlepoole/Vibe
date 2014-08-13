@@ -270,6 +270,9 @@
 
             $(".like_form").submit(function(event) {
               
+              // simply override normal send
+              // event.preventDefault();
+
               // debugging
               console.log('like submission triggered...'); 
 
@@ -282,9 +285,6 @@
               var my_timestamp = $(this).children('.timestamp').val();
 
               console.log('timestamp of submission is: ' + my_timestamp);
-
-              // simply override normal send
-              event.preventDefault();
 
               localStorage.setItem("latest_pid", "null value"); // trigger full reload
 
@@ -400,15 +400,16 @@
 
                 if(is_unlike == "true") {
                     // altering content dynamically
-                    $(this).text('like · comment'); 
+                    $(this).text('like'); 
                 }
                 else {
                     // submit POST request associated with voting...
+
                     $(this).nextAll("form").submit(); 
-                    console.log('number of siblings of type form: ' + $(this).siblings("form").length)
+                    // console.log('number of siblings of type form: ' + $(this).siblings("form").length)
 
                     // altering content dynamically
-                    $(this).text('unlike · comment'); 
+                    $(this).text('unlike'); 
                 }
 
                 // switch classes
