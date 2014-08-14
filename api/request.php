@@ -26,7 +26,7 @@
         
         ob_end_flush();
         ob_flush();
-        // flush();
+         flush();
     }
 
     // current post framework to send asynchronous POST requests between different files
