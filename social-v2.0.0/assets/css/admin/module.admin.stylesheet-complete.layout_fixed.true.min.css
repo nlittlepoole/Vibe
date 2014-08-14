@@ -5687,8 +5687,8 @@ div.DTCR_pointer {
     color: #428bca;
 }
 .btn-group.open .btn-primary.dropdown-toggle, .btn-primary.disabled, .btn-primary[disabled], .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
-    background: #209488;
-    border-color: #209488;
+    background: #275379;
+    border-color: #275379;
 }
 .btn-primary.btn-stroke:hover, .btn-primary.btn-stroke:focus, .btn-primary.btn-stroke:active, .btn-primary.btn-stroke.active {
     background: #428bca;

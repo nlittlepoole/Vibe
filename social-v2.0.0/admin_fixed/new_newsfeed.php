@@ -160,20 +160,20 @@
                         */
 
                         var recipient_size = my_names.length;
-                        var post_tagged_formatted_names = ""; 
+                        var post_tagged_formatted_names = "<span style='font-size:115%'>"; 
 
                         if(recipient_size == 1) {
                             
                             var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + my_ids_list[0] + "&name=" + my_names[0] + "";
                             
-                            post_tagged_formatted_names = "<a href='" + temp_link + "' class='text-white strong'>" + my_names[0] + "</a>"; 
+                            post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + my_names[0] + "</a>"; 
                         }
                         else if(recipient_size == 2) {
                             
                             var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + my_ids_list[0] + "&name=" + my_names[0] + "";
                             var temp_link2 = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + my_ids_list[1] + "&name=" + my_ids_list[1] + "";
                             
-                            post_tagged_formatted_names = "<a href='" + temp_link + "' class='text-white strong'>" + my_names[0] + "</a>" + " and " + "<a href='" + temp_link2 + "' class='text-white strong'>" + my_names[1] + "</a>"; 
+                            post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + my_names[0] + "</a>" + " and " + "<a href='" + temp_link2 + "' class='text-white strong'>" + my_names[1] + "</a>"; 
                         }
                         else {
                             for(var z = 0; z < recipient_size; z++) {
@@ -196,6 +196,8 @@
                             }
                         }
 
+                        post_tagged_formatted_names += "</span>";
+
                         var html_newsfeed_content = 
                         ["<li class='active vibe_newsfeed_posts'>", 
                             "<span class='marker'></span>",
@@ -208,9 +210,7 @@
                                             "<div class='bg-primary'>",
                                                 "<div class='media'>",
                                                     "<div class='media-body innerTB' style='padding-left:20px;'>",
-                                                        "<a href='#' class='text-white strong'>Someone</a>",
-                                                        "<span>upped the Chillness of " + post_tagged_formatted_names + " ",
-                                                        "<br />on&nbsp;insert_time_here&nbsp;<i class='icon-time-clock'></i></span>",
+                                                        "<span><i class='fa fa-arrow-up'></i> chillness of " + post_tagged_formatted_names + "</span>",
                                                     "</div>",
                                                 "</div>",
                                             "</div>",
@@ -221,7 +221,7 @@
                                             "<!-- Comment -->",
                                             "<div class='bg-gray innerAll border-top border-bottom text-small'>",
                                                 "<span>",
-                                                    "<a href='#' class='like_link'>like · comment</a>",
+                                                    "<a href='#' class='like_link'>Like</a>",
                                                 "</span>",
                                             "</div>",
                                             "<!-- User input comments -->",
@@ -401,6 +401,8 @@
                 if(is_unlike == "true") {
                     // altering content dynamically
                     $(this).text('like'); 
+
+                    // undo like (send a disagree? - ask Niger)
                 }
                 else {
                     // submit POST request associated with voting...
@@ -408,8 +410,10 @@
                     $(this).nextAll("form").submit(); 
                     // console.log('number of siblings of type form: ' + $(this).siblings("form").length)
 
-                    // altering content dynamically
-                    $(this).text('unlike'); 
+                    // altering content dynamically - change to unlike and add dynamic increment on total # of likes there
+                    var parse_like_text = $(this).text(); 
+
+                    $(this).text('Unlike'); 
                 }
 
                 // switch classes

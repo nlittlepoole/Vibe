@@ -69,7 +69,7 @@
                                         "<!-- Like Submission Form -->", 
                                         like_submission_form,
                                     "</span>",
-                                    "<span><a href='javascript:;'>" + total_agree + " <i class='fa fa-thumbs-o-up'></i></a></span>",
+                                    "<span><a href='javascript:;'>" + "<span class='like_count'>" + total_agree + "</span>" + " <i class='fa fa-thumbs-o-up'></i></a></span>",
                                 "</div>"
                                 ].join('\n');
                         }
