@@ -54,7 +54,7 @@
                             show_like_info = [
                                 "<div class='bg-gray innerAll border-top border-bottom text-small'>",
                                     "<span>",
-                                        "<a href='javascript:;' class='like_link'>Like</a> · ",
+                                        "<a href='javascript:;' class='like_link'>Like</a>",
                                         "<!-- Like Submission Form -->", 
                                         like_submission_form,
                                     "</span>",

@@ -290,7 +290,23 @@
 
                     console.log('text returned: ' + parse_like_text);
 
+                    var to_add = "";
+
+                    if (/^\s+$/.test(parse_like_text)) {
+                        // only whitespace
+                        to_add = "<span><a href='javascript:;'>" + "<span class='like_count'>1</span>" + " <i class='fa fa-thumbs-o-up'></i></a></span>";
+                    }
+                    else {
+                        like_num = parseFloat(parse_like_text)
+                        like_num += 1
+
+                        to_add = "<span><a href='javascript:;'>" + "<span class='like_count'>" + like_num + "</span>" + " <i class='fa fa-thumbs-o-up'></i></a></span>";
+                        $(this).parent().next().remove();
+
+                    }
+
                     $(this).text('Unlike'); 
+                    $(to_add).insertAfter($(this).parent());
                 }
 
                 // switch classes
