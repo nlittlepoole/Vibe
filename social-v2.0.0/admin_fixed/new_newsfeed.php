@@ -268,6 +268,35 @@
         $(window).load(function() {
             //dom not only ready, but everything is loaded
 
+            $('.widget').on('click', '.like_link', function() {
+                console.log("OVERALL CLICK.");
+
+                var is_unlike = $(this).hasClass("unlike_me").toString();
+
+                if(is_unlike == "true") {
+                    // altering content dynamically
+                    $(this).text('like'); 
+
+                    // undo like (send a disagree? - ask Niger)
+                }
+                else {
+                    // submit POST request associated with voting...
+
+                    $(this).nextAll("form").submit(); 
+                    // console.log('number of siblings of type form: ' + $(this).siblings("form").length)
+
+                    // altering content dynamically - change to unlike and add dynamic increment on total # of likes there
+                    var parse_like_text = $(this).parent().next().text(); 
+
+                    console.log('text returned: ' + parse_like_text);
+
+                    $(this).text('Unlike'); 
+                }
+
+                // switch classes
+                $(this).toggleClass('unlike_me');
+            });
+
             $(".like_form").submit(function(event) {
               
               // simply override normal send
@@ -390,35 +419,6 @@
               // $('#last_elems').load('newsfeed_element.php'); 
 
             }); 
-
-            // trigger action upon 'like'
-            $('.like_link').click(function() {
-
-                console.log("OVERALL CLICK.");
-
-                var is_unlike = $(this).hasClass("unlike_me").toString();
-
-                if(is_unlike == "true") {
-                    // altering content dynamically
-                    $(this).text('like'); 
-
-                    // undo like (send a disagree? - ask Niger)
-                }
-                else {
-                    // submit POST request associated with voting...
-
-                    $(this).nextAll("form").submit(); 
-                    // console.log('number of siblings of type form: ' + $(this).siblings("form").length)
-
-                    // altering content dynamically - change to unlike and add dynamic increment on total # of likes there
-                    var parse_like_text = $(this).text(); 
-
-                    $(this).text('Unlike'); 
-                }
-
-                // switch classes
-                $(this).toggleClass('unlike_me');
-            });
 
         });
 
