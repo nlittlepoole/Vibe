@@ -40,8 +40,26 @@
 		case 'search':
 			search($uid);
 		break;
+		case 'getVotes':
+			getVotes($uid);
+		break;
 	}
 
+	function getVotes($uid){
+		// retrieve all likes associated specific user
+		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+		$sql = "SELECT PID,Vote FROM Liked WHERE UID = '$uid'";
+		$st = $conn->prepare($sql);
+		$st->execute();
+		
+		// modify results (include comments below main posts)
+		$data = $st->fetchAll(PDO::FETCH_ASSOC);
+		$data = array("status" => "200 Success", "data" => $data);
+		$conn = null;
+
+		// push results
+		pushResponse($data); 
+	}
 	// implemented search functionality API (grabs all relevant names)
 	function search($uid) {
 		$keyword = $_GET['keyword'];
