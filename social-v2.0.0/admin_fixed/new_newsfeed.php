@@ -2,7 +2,7 @@
     
     session_start();
 
-    // FRIENDS LIST: grab friend's data from Facebook
+    // FRIEND LIST for Ajax & autocomplete
     
     $request = "http://api.go-vibe.com/api/user.php?action=getFriends&blocked=no&uid=";
     $request .= $_SESSION['userID'] . "&token=" . $_SESSION['token'];
@@ -32,7 +32,7 @@
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 
-        <!-- font awesome -->
+        <!-- Font Awesome -->
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
         <!-- Selectize -->
@@ -41,17 +41,11 @@
 
         <!-- autocomplete code && form submission -->
         <script type="text/javascript">
-
-            // initializing the last stored element to none
-            localStorage.setItem("latest_pid", "null value");
             
             $(function() {
 
-                var my_uid      = '<?php echo $_SESSION["userID"]; ?>'; 
-                var my_token    = '<?php echo $_SESSION["token"]; ?>'; 
-
-                localStorage.setItem("uid", my_uid);
-                localStorage.setItem("token", my_token);
+                localStorage.setItem("uid", '<?php echo $_SESSION["userID"]; ?>');
+                localStorage.setItem("token", '<?php echo $_SESSION["token"]; ?>');
                 
                 // friends' list (as JSON data)
                 var my_friends = <?php echo json_encode($_SESSION['friend_list']); ?>;
@@ -61,21 +55,11 @@
 
                 for(var i = 0; i < my_friends.length; i++) {
                     
-                    // storing mapping of name to UID
-                    names_to_ID[String(my_friends[i]['Name'])] = String(my_friends[i]['UID']);
-                    
-                    // simply storing names
-                    friends_names[i] = my_friends[i]['Name'];
+                    names_to_ID[String(my_friends[i]['Name'])] = String(my_friends[i]['UID']);      // name to UID
+                    friends_names[i] = my_friends[i]['Name'];                                       // just name
                 }
 
-                // autocomplete with list of friends' names
-                /*
-                if(friends_names.length != 0) {
-                    $("#inputFriend").autocomplete({
-                         source: friends_names
-                    });
-                }   
-                */
+                /* SELECTIZE */
 
                 var items = friends_names.map(function(x) { return { item: x }; });
 
@@ -99,7 +83,8 @@
                 localStorage.setItem("friends_names", JSON.stringify(friends_names));
                 localStorage.setItem("names_to_ID", JSON.stringify(names_to_ID));
 
-                // submission custom modifications
+                /* SUBMITTING A STATUS */
+
                 $("#statusform").submit(function(event) {
 
                     event.preventDefault();
@@ -107,16 +92,20 @@
                     var inputted_names = $('#statusform input[name="recipient_to_convert"]').val();
                     var inputted_vibe = $('#statusform input[name="status"]').val();
 
-                    var my_names = inputted_names.split("&&");
-                    var my_ids_list = [];
+                    // names and IDs for post
+                    var my_names    = inputted_names.split("&&");
+                    var my_ids      = [];
 
                     var uid_string = ""; 
 
                     for(var i = 0; i < my_names.length; i++) {
-                        var desired_uid = names_to_ID[my_names[i]];
-                        my_ids_list.push(desired_uid);
-
-                        uid_string += desired_uid; 
+                        
+                        var curr_UID = names_to_ID[my_names[i]];
+                        
+                        // updating both the UID list and the UID serialized string
+                        my_ids.push(curr_UID);
+                        uid_string += curr_UID; 
+                        
                         if(i < my_names.length - 1) {
                             uid_string += "&&"; 
                         }
@@ -145,34 +134,26 @@
                             $('input[id="inputFriend"]').val("");
                             $('input[id="inputVibe"]').val("");
 
-                            // trigger load of elements again (will have updated submission)
-                            /*
-                                $('#last_elems').load('newsfeed_element.php', function() {
-                                  alert( "Load was performed." );
-                                  console.log("yes, load was indeed performed");
-                                }); 
-                            */
-
                             var recipient_size = my_names.length;
                             var post_tagged_formatted_names = "<span style='font-size:115%'>"; 
 
                             if(recipient_size == 1) {
                                 
-                                var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + my_ids_list[0] + "&name=" + my_names[0] + "";
+                                var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + my_ids[0] + "&name=" + my_names[0] + "";
                                 
                                 post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + my_names[0] + "</a>"; 
                             }
                             else if(recipient_size == 2) {
                                 
-                                var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + my_ids_list[0] + "&name=" + my_names[0] + "";
-                                var temp_link2 = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + my_ids_list[1] + "&name=" + my_ids_list[1] + "";
+                                var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + my_ids[0] + "&name=" + my_names[0] + "";
+                                var temp_link2 = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + my_ids[1] + "&name=" + my_ids[1] + "";
                                 
                                 post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + my_names[0] + "</a>" + " and " + "<a href='" + temp_link2 + "' class='text-white strong'>" + my_names[1] + "</a>"; 
                             }
                             else {
                                 for(var z = 0; z < recipient_size; z++) {
 
-                                    var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + my_ids_list[z] + "&name=" + my_names[z] + "";
+                                    var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + my_ids[z] + "&name=" + my_names[z] + "";
                                     
                                     if(z == recipient_size - 1) {
                                         // last element (special case)
@@ -237,30 +218,10 @@
                     });
                 });
 
-                // periodic action
-                function update() {
-                    $('#last_elems').load('newsfeed_element.php'); 
-                }
-
-                // setInterval(update, 60000);     // send the GET request every 60 seconds
-
-
-                // custom design change - (dark blue on hover instead of turquoise)
-
-                $("#status_submit").on("mouseenter", function() {
-                    $(this).css("background-color", "#275379");
-                    $(this).css("border-color", "#275379");
-                });
-
-                $("#status_submit").on("mouseleave", function() {
-                    $(this).css("background-color", "#428bca");
-                    $(this).css("border-color", "#428bca");
-                });
-
             });
 
             $(window).load(function() {
-                //dom not only ready, but everything is loaded
+                // dom not only ready, but everything is loaded
 
                 $('.widget').on('click', '.like_link', function() {
                     console.log("OVERALL CLICK.");
@@ -303,8 +264,7 @@
                         $(to_add).insertAfter($(this).parent());
                     }
 
-                    // switch classes
-                    $(this).toggleClass('unlike_me');
+                    $(this).toggleClass('unlike_me');   // switch classes
                 });
 
                 $(".like_form").submit(function(event) {
@@ -324,8 +284,6 @@
                   var my_timestamp = $(this).children('.timestamp').val();
 
                   console.log('timestamp of submission is: ' + my_timestamp);
-
-                  localStorage.setItem("latest_pid", "null value"); // trigger full reload
 
                   // post request (modified)
 
@@ -360,9 +318,6 @@
 
                   // simply override normal send
                   event.preventDefault();
-
-                  // reset local storage to trigger full reload (for debugging)
-                  localStorage.setItem("latest_pid", "null value");
 
                   // post request (modified)
 
@@ -460,11 +415,10 @@
         <?php require_once("webpage_settings.php"); ?>
     </head>
 
-    <body class=" scripts-async menu-right-hidden">
+    <body class="scripts-async menu-right-hidden">
         
         <!-- main container -->
-        <div class="container-fluid ">
-
+        <div class="container-fluid">
             
             <!-- being overall content -->
             <div id="content">
@@ -606,22 +560,21 @@
         <script data-id="App.Config">
             
             // theme path variables
-            var basePath = '',
-            commonPath = '../assets/',
-            rootPath = '../',
-            DEV = false,
-            componentsPath = '../assets/components/';
+            var basePath    = '',
+            commonPath      = '../assets/',
+            rootPath        = '../',
+            DEV             = false,
+            componentsPath  = '../assets/components/';
         
             // theme color variables
-            var primaryColor = '#275379',
-            dangerColor = '#b55151',
-            successColor = '#609450',
-            infoColor = '#4a8bc2',
-            warningColor = '#ab7a4b',
-            inverseColor = '#45484d';
+            var primaryColor    = '#275379',
+            dangerColor         = '#b55151',
+            successColor        = '#609450',
+            infoColor           = '#4a8bc2',
+            warningColor        = '#ab7a4b',
+            inverseColor        = '#45484d';
         
-            // primary color
-            var themerPrimaryColor = primaryColor;
+            var themerPrimaryColor = primaryColor;  // primary color
 
             App.Config = {
                 ajaxify_menu_selectors: ['#menu'],
@@ -629,8 +582,21 @@
 
         </script>
 
-        <!-- instant click (JS third party library) -->
-        <!-- <script src="../../customjs/instantclick.min.js" data-no-instant></script> -->
-        <!-- <script data-no-instant>InstantClick.init();</script> -->
+        <!-- minor design tweaks -->
+        <script type="text/javascript">
+            $(function() {
+                // custom design change - (dark blue on hover instead of turquoise)
+
+                $("#status_submit").on("mouseenter", function() {
+                    $(this).css("background-color", "#275379");
+                    $(this).css("border-color", "#275379");
+                });
+
+                $("#status_submit").on("mouseleave", function() {
+                    $(this).css("background-color", "#428bca");
+                    $(this).css("border-color", "#428bca");
+                });
+            });
+        </script>
     </body>
 </html>
