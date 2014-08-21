@@ -1,56 +1,50 @@
 <?php
     session_start();
 
+    // JSON newsfeed request
     $_SESSION['newsfeed_elems_request'] = "http://api.go-vibe.com/api/user.php?action=getFeed&uid=";
     $_SESSION['newsfeed_elems_request'] .= $_SESSION['userID'] . "&token=" . $_SESSION['token'];
 ?>
 
 <script type="text/javascript">
+    
     $(function() {
         
-        // JSON request for newsfeed elements
         var newsfeed_url = "<?php echo $_SESSION['newsfeed_elems_request']; ?>";
 
-        // grabbing JSON...
         $.getJSON(newsfeed_url, function(data) {
-
-            console.log('you triggered a load...');
 
             if (!data.error) {
 
-                // looping through all posts
+                // loop through posts
                 for(var i = 0; i < data['data'].length; i++) {
 
                     //  grab overall info about post
-                    var tempPID             = data['data'][i]['PID']; 
-                    var overall_timestamp   = data['data'][i]['Timestamp']; 
+                    var post_PID            = data['data'][i]['PID']; 
+                    var post_timestamp      = data['data'][i]['Timestamp']; 
 
                     /* LIKES */
-
-                    // grab total number of likes
                     
-                    var total_agree = 0;
+                    var total_likes = 0;
 
                     if(data['data'][i]['Score'] !== null) {
-                        total_agree = data['data'][i]['Score']
+                        total_likes = data['data'][i]['Score']
                     }
-
-                    console.log('the total number of likes is: ' + total_agree); 
 
                     var like_submission_form = [
                         '<form class="like_form" name="like_form" method="post" action="#" style="display: none;">',
                             "<input type='hidden' class='hiddenID' name='uid' value='" + localStorage['uid'] + "'/>",
                             "<input type='hidden' class='hiddentoken' name='token' value='" + localStorage['token'] + "'/>",
-                            "<input type='hidden' class='hiddenPID' name='pid' value='" + tempPID + "'/>",
-                            "<input type='hidden' class='timestamp' name='timestamp' value='" + overall_timestamp + "'/>",
+                            "<input type='hidden' class='hiddenPID' name='pid' value='" + post_PID + "'/>",
+                            "<input type='hidden' class='timestamp' name='timestamp' value='" + post_timestamp + "'/>",
                             '<button type="submit" class="like_submit" name="like_submit" style="display: none; "></button>',
                         '</form>'
                         ].join('\n');
 
                     var show_like_info = "";
 
-                    if(total_agree >= 0) {
-                        if(total_agree == 0) {
+                    if(total_likes >= 0) {
+                        if(total_likes == 0) {
                             show_like_info = [
                                 "<div class='bg-gray innerAll border-top border-bottom text-small'>",
                                     "<span>",
@@ -69,7 +63,7 @@
                                         "<!-- Like Submission Form -->", 
                                         like_submission_form,
                                     "</span>",
-                                    "<span><a href='javascript:;'>" + "<span class='like_count'>" + total_agree + "</span>" + " <i class='fa fa-thumbs-o-up'></i></a></span>",
+                                    "<span><a href='javascript:;'>" + "<span class='like_count'>" + total_likes + "</span>" + " <i class='fa fa-thumbs-o-up'></i></a></span>",
                                 "</div>"
                                 ].join('\n');
                         }
@@ -211,7 +205,7 @@
                                                 "<input type='text' class='form-control comment_input' name='status' style='border: none;' placeholder='Comment here...'>",
                                                 "<input type='hidden' class='hiddenID' name='uid' value='" + localStorage['uid'] + "'/>",
                                                 "<input type='hidden' class='hiddentoken' name='token' value='" + localStorage['token'] + "'/>",
-                                                "<input type='hidden' class='hiddenPID' name='pid' value='" + tempPID + "'/>",
+                                                "<input type='hidden' class='hiddenPID' name='pid' value='" + post_PID + "'/>",
                                                 '<button type="submit" class="comment_submit" name="comment_submit" style="display: none; "></button>',
                                             '</form>',
                                         "</div>",
@@ -227,8 +221,7 @@
                 }
             } 
             else {
-                // there was an error with grabbing JSON
-                console.log('[STATUS] error grabbing JSON for newsfeed elements');
+                console.log('[ERROR] rendering newsfeed elements');     // error with JSON
             }
         });
     });
