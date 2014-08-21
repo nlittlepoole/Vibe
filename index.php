@@ -72,17 +72,17 @@ switch($action) {
     $ipod       = strpos($_SERVER['HTTP_USER_AGENT'],"iPod");
 
     if ($iphone || $android || $palmpre || $ipod || $berry == true) { 
-        header('Location: /social-v2.0.0/admin_fixed/mobile_newsfeed.php');  // redirect the user to a different page, designed for mobile
+        header('Location: /frontend_mobile/newsfeed.php');  // redirect the user to a different page, designed for mobile
     }
     else {
-        header('Location: /social-v2.0.0/admin_fixed/new_newsfeed.php');
+        header('Location: /frontend/newsfeed.php');
     }
 
   break;
 
   case 'newsfeed':
     // take user to the new newsfeed
-    header('Location: /social-v2.0.0/admin_fixed/new_newsfeed.php');
+    header('Location: /frontend/newsfeed.php');
 
   break;
 
@@ -99,7 +99,7 @@ switch($action) {
     $_SESSION['loginUrl'] = $loginUrl; 
 
     // redirected to new home page 
-    header('Location: http://api.go-vibe.com/view/new_home.php');
+    header('Location: http://api.go-vibe.com/landing/new_home.php');
 
 }
 ?>

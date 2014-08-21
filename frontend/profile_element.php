@@ -99,7 +99,7 @@
                             ['<!-- First Comment -->', 
                              '<div class="media border-bottom margin-none bg-gray">',
                                 '<a href="" class="pull-left innerAll half">',
-                                    '<img src="../assets//images/people/100/2.jpg" width="60" class="media-object">',
+                                    '<img src="../frontend_assets//images/people/100/2.jpg" width="60" class="media-object">',
                                 '</a>',
                                 '<div class="media-body innerTB">',
                                     '<a href="#" class="pull-right innerT innerR text-muted">',
@@ -120,21 +120,21 @@
 
 					if(recipient_size == 1) {
 						
-						var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + data['data'][i]['tagged'][0]['UID'] + "&name=" + data['data'][i]['tagged'][0]['Name'] + "";
+						var temp_link = "http://api.go-vibe.com/frontend/profile.php?user=" + data['data'][i]['tagged'][0]['UID'] + "&name=" + data['data'][i]['tagged'][0]['Name'] + "";
 						
 						post_tagged_formatted_names = "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['tagged'][0]['Name'] + "</a>"; 
 					}
 					else if(recipient_size == 2) {
 						
-						var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + data['data'][i]['tagged'][0]['UID'] + "&name=" + data['data'][i]['tagged'][0]['Name'] + "";
-						var temp_link2 = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + data['data'][i]['tagged'][1]['UID'] + "&name=" + data['data'][i]['tagged'][1]['Name'] + "";
+						var temp_link = "http://api.go-vibe.com/frontend/profile.php?user=" + data['data'][i]['tagged'][0]['UID'] + "&name=" + data['data'][i]['tagged'][0]['Name'] + "";
+						var temp_link2 = "http://api.go-vibe.com/frontend/profile.php?user=" + data['data'][i]['tagged'][1]['UID'] + "&name=" + data['data'][i]['tagged'][1]['Name'] + "";
 						
 						post_tagged_formatted_names = "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['tagged'][0]['Name'] + "</a>" + " and " + "<a href='" + temp_link2 + "' class='text-white strong'>" + data['data'][i]['tagged'][1]['Name'] + "</a>"; 
 					}
 					else {
 						for(var z = 0; z < recipient_size; z++) {
 
-							var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + data['data'][i]['tagged'][z]['UID'] + "&name=" + data['data'][i]['tagged'][z]['Name'] + "";
+							var temp_link = "http://api.go-vibe.com/frontend/profile.php?user=" + data['data'][i]['tagged'][z]['UID'] + "&name=" + data['data'][i]['tagged'][z]['Name'] + "";
 							
 							if(z == recipient_size - 1) {
 								// last element (special case)

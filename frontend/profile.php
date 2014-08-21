@@ -66,13 +66,13 @@
 		
 		$(function() {
 			// loading the navbar
-			$('#new_navbar').load('new_navbar.php'); 
+			$('#navbar').load('navbar.php'); 
 
 			// loading sidebar
-			$('#new_sidebar').load('new_sidebar.php'); 
+			$('#sidebar').load('sidebar.php'); 
 
 			// loading profile element
-			$('#posts_location').load('new_profile_element.php'); 
+			$('#posts_location').load('profile_element.php'); 
 		});
 	</script>
 
@@ -89,7 +89,7 @@
 		<div id="content">
 			
 			<!-- loading NAVBAR here... -->	
-			<div id="new_navbar"></div>
+			<div id="navbar"></div>
 
 			<!-- <div class="layout-app">  -->
 			<div class="container"><div class="innerAll">
@@ -134,7 +134,7 @@
 					<div class="col-md-4 col-lg-3">
 
 						<!-- load SIDEBAR here... -->	
-						<div id="new_sidebar"></div>
+						<div id="sidebar"></div>
 							
 					</div>
 					<!-- // Content END -->
@@ -149,10 +149,10 @@
 			<!-- Global -->
 			<script data-id="App.Config">
 				var basePath = '',
-				commonPath = '../assets/',
+				commonPath = '../frontend_assets/',
 				rootPath = '../',
 				DEV = false,
-				componentsPath = '../assets/components/';
+				componentsPath = '../frontend_assets/components/';
 			
 				var primaryColor = '#25ad9f',
 				dangerColor = '#b55151',

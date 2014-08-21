@@ -1,7 +1,7 @@
 <?php
     session_start(); 
 
-    $_SESSION['my_profile_link'] = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=";
+    $_SESSION['my_profile_link'] = "http://api.go-vibe.com/frontend/profile.php?user=";
     $_SESSION['my_profile_link'] .= $_SESSION['userID'] . "&name=" . $_SESSION['my_profile_load_name'] . "";
 
     $_SESSION['my_profile_pic'] = "https://graph.facebook.com/" . $_SESSION['userID'] . "/picture?width=70&height=70";
@@ -43,7 +43,7 @@
           function load_profile() {
               var person_name = $('#status-form input[name="search-bar"]').val();
 
-              temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" 
+              temp_link = "http://api.go-vibe.com/frontend/profile.php?user=" 
               temp_link += temp_names_to_ID[person_name] + "&name=" + person_name + "";
 
               // console.log('you have triggered load submit with UID of: ' + temp_names_to_ID[person_name]);
@@ -74,7 +74,7 @@
       <button type="button" class="navbar-toggle btn btn-default" data-toggle="collapse" data-target="#navbar-fixed-layout-collapse">
 		<i class="fa fa-indent"></i>
       </button>
-      <a class="navbar-brand" href="#"><img src="http://api.go-vibe.com/view/vibe72dpi-rgb.gif" style="width: 32px;" alt=""></a>
+      <a class="navbar-brand" href="#"><img src="http://api.go-vibe.com/landing/vibe72dpi-rgb.gif" style="width: 32px;" alt=""></a>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="navbar-fixed-layout-collapse">
@@ -95,7 +95,7 @@
 
 
       <ul class="nav navbar-nav navbar-right">
-        <li class="innerLR"><a href='javascript:;'><img src="http://api.go-vibe.com/social-v2.0.0/admin_fixed/nav_globe.png" style="width: 36px;" /></a></li>
+        <li class="innerLR"><a href='javascript:;'><img src="http://api.go-vibe.com/frontend/nav_globe.png" style="width: 36px;" /></a></li>
         <li class="dropdown">
           <a href=<?php echo $_SESSION['my_profile_link']; ?>>
           <span class="pull-left innerR"><img src=<?php echo $_SESSION['my_profile_pic']; ?> alt="user" class="img-circle" style="width: 36px;"></span>

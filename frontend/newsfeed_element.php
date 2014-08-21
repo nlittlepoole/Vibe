@@ -92,7 +92,7 @@
                         comment_author_UID  = data['data'][i]['Comments'][j]['Author'];
                         comment_author_name = data['data'][i]['Comments'][j]['post_author'];
 
-                        var temp_link   = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + comment_author_UID + "&name=" + comment_author_name + "";
+                        var temp_link   = "http://api.go-vibe.com/frontend/profile.php?user=" + comment_author_UID + "&name=" + comment_author_name + "";
                         var pic_href    = "https://graph.facebook.com/" + comment_author_UID + "/picture?width=60&height=60";
 
                         var beginning_tag = ""; 
@@ -129,14 +129,14 @@
 
                     if(recipient_size == 1) {
                         
-                        var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + data['data'][i]['tagged'][0]['UID'] + "&name=" + data['data'][i]['tagged'][0]['Name'] + "";
+                        var temp_link = "http://api.go-vibe.com/frontend/profile.php?user=" + data['data'][i]['tagged'][0]['UID'] + "&name=" + data['data'][i]['tagged'][0]['Name'] + "";
                         
                         post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['tagged'][0]['Name'] + "</a>"; 
                     }
                     else if(recipient_size == 2) {
                         
-                        var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + data['data'][i]['tagged'][0]['UID'] + "&name=" + data['data'][i]['tagged'][0]['Name'] + "";
-                        var temp_link2 = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + data['data'][i]['tagged'][1]['UID'] + "&name=" + data['data'][i]['tagged'][1]['Name'] + "";
+                        var temp_link = "http://api.go-vibe.com/frontend/profile.php?user=" + data['data'][i]['tagged'][0]['UID'] + "&name=" + data['data'][i]['tagged'][0]['Name'] + "";
+                        var temp_link2 = "http://api.go-vibe.com/frontend/profile.php?user=" + data['data'][i]['tagged'][1]['UID'] + "&name=" + data['data'][i]['tagged'][1]['Name'] + "";
                         
                         post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['tagged'][0]['Name'] + "</a>" + " and " + "<a href='" + temp_link2 + "' class='text-white strong'>" + data['data'][i]['tagged'][1]['Name'] + "</a>"; 
                     }
@@ -144,7 +144,7 @@
 
                         for(var z = 0; z < recipient_size; z++) {
 
-                            var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + data['data'][i]['tagged'][z]['UID'] + "&name=" + data['data'][i]['tagged'][z]['Name'] + "";
+                            var temp_link = "http://api.go-vibe.com/frontend/profile.php?user=" + data['data'][i]['tagged'][z]['UID'] + "&name=" + data['data'][i]['tagged'][z]['Name'] + "";
                             
                             if(z == recipient_size - 1) {       // last element
                                 post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['tagged'][z]['Name'] + "</a>&nbsp;";

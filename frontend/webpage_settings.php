@@ -3,9 +3,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 
-<!--[if lt IE 9]><link rel="stylesheet" href="../assets/components/library/bootstrap/css/bootstrap.min.css" /><![endif]-->
+<!--[if lt IE 9]><link rel="stylesheet" href="../frontend_assets/components/library/bootstrap/css/bootstrap.min.css" /><![endif]-->
 
-<link rel="stylesheet" href="../assets/css/admin/module.admin.stylesheet-complete.layout_fixed.true.min.css" />
+<link rel="stylesheet" href="../frontend_assets/css/admin/module.admin.stylesheet-complete.layout_fixed.true.min.css" />
 
 <!-- <script type="text/javascript" src="external_js_scripts.js"></script> -->
 
@@ -15,7 +15,7 @@
   <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <![endif]-->
 
-<script src="../assets/plugins/core_ajaxify_loadscript/script.min.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
+<script src="../frontend_assets/plugins/core_ajaxify_loadscript/script.min.js?v=v2.0.0-rc8&sv=v0.0.1.2"></script>
 
 <script>var App = {};</script>
 
@@ -24,26 +24,26 @@ App.Scripts = {
 
 	/* CORE scripts always load first; */
 	core: [
-		'../assets/library/jquery/temp.js' // manually put in a placeholder so it doesn't load jQuery twice!
+		'../frontend_assets/library/jquery/temp.js' // manually put in a placeholder so it doesn't load jQuery twice!
 	],
 
 	/* PLUGINS_DEPENDENCY always load after CORE but before PLUGINS; */
 	plugins_dependency: [
-		'../assets/library/bootstrap/js/bootstrap.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
-		'../assets/library/jquery/jquery-migrate.min.js?v=v2.0.0-rc8&sv=v0.0.1.2'
+		'../frontend_assets/library/bootstrap/js/bootstrap.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../frontend_assets/library/jquery/jquery-migrate.min.js?v=v2.0.0-rc8&sv=v0.0.1.2'
 	],
 
 	/* PLUGINS always load after CORE and PLUGINS_DEPENDENCY, but before the BUNDLE / initialization scripts; */
 	plugins: [
-		'../assets/plugins/core_nicescroll/jquery.nicescroll.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
-		'../assets/plugins/core_breakpoints/breakpoints.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
-		'../assets/plugins/core_preload/pace.min.js?v=v2.0.0-rc8&sv=v0.0.1.2'
+		'../frontend_assets/plugins/core_nicescroll/jquery.nicescroll.min.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../frontend_assets/plugins/core_breakpoints/breakpoints.js?v=v2.0.0-rc8&sv=v0.0.1.2', 
+		'../frontend_assets/plugins/core_preload/pace.min.js?v=v2.0.0-rc8&sv=v0.0.1.2'
 	],
 
 	/* The initialization scripts always load last and are automatically and dynamically loaded when AJAX navigation is enabled; */
 	bundle: [
-		'../assets/components/core_preload/preload.pace.init.js?v=v2.0.0-rc8&sv=v0.0.1.2',
-		'../assets/components/core/core.init.js?v=v2.0.0-rc8'
+		'../frontend_assets/components/core_preload/preload.pace.init.js?v=v2.0.0-rc8&sv=v0.0.1.2',
+		'../frontend_assets/components/core/core.init.js?v=v2.0.0-rc8'
 	]
 
 };

@@ -132,14 +132,14 @@
 
                             if(recipient_size == 1) {
                                 
-                                var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + my_ids[0] + "&name=" + my_names[0] + "";
+                                var temp_link = "http://api.go-vibe.com/frontend/profile.php?user=" + my_ids[0] + "&name=" + my_names[0] + "";
                                 
                                 post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + my_names[0] + "</a>"; 
                             }
                             else if(recipient_size == 2) {
                                 
-                                var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + my_ids[0] + "&name=" + my_names[0] + "";
-                                var temp_link2 = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + my_ids[1] + "&name=" + my_names[1] + "";
+                                var temp_link = "http://api.go-vibe.com/frontend/profile.php?user=" + my_ids[0] + "&name=" + my_names[0] + "";
+                                var temp_link2 = "http://api.go-vibe.com/frontend/profile.php?user=" + my_ids[1] + "&name=" + my_names[1] + "";
                                 
                                 post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + my_names[0] + "</a>" + " and " + "<a href='" + temp_link2 + "' class='text-white strong'>" + my_names[1] + "</a>"; 
                             }
@@ -147,7 +147,7 @@
 
                                 for(var z = 0; z < recipient_size; z++) {
 
-                                    var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + my_ids[z] + "&name=" + my_names[z] + "";
+                                    var temp_link = "http://api.go-vibe.com/frontend/profile.php?user=" + my_ids[z] + "&name=" + my_names[z] + "";
                                     
                                     if(z == recipient_size - 1) {       // last element
                                         post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + my_names[z] + "</a>&nbsp;";
@@ -311,7 +311,7 @@
                           var my_uid                = "<?php print($_SESSION['userID']) ?>"; 
                           var my_profile_load_name  = "<?php print($_SESSION['my_profile_load_name']) ?>"; 
 
-                          var my_prof_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=";
+                          var my_prof_link = "http://api.go-vibe.com/frontend/profile.php?user=";
                           my_prof_link += my_uid + "&name=" + my_profile_load_name + "";
 
                           var pic_href = "https://graph.facebook.com/" + my_uid + "/picture?width=60&height=60";
@@ -350,11 +350,11 @@
                 console.log('loading up the page...');
                 
                 // loading navbar...
-                $('#new_navbar').load('new_navbar.php'); 
+                $('#navbar').load('navbar.php'); 
                 console.log('navbar is loaded...');
 
                 // loading sidebar...
-                $('#new_sidebar').load('new_sidebar.php'); 
+                $('#sidebar').load('sidebar.php'); 
                 console.log('sidebar is loaded...'); 
 
                 // loading newsfeed elements...
@@ -378,7 +378,7 @@
                 
                 <!-- loading NAVBAR here -->    
 
-                <div id="new_navbar"></div>
+                <div id="navbar"></div>
 
                 <div class="container"><div class="innerAll">
                     <div class="row">
@@ -485,7 +485,7 @@
                         <!-- loading SIDEBAR here -->
                         <div class="col-md-4 col-lg-3">
 
-                            <div id="new_sidebar"></div>
+                            <div id="sidebar"></div>
                                 
                         </div> 
                                 
@@ -514,10 +514,10 @@
             
             // theme path variables
             var basePath    = '',
-            commonPath      = '../assets/',
+            commonPath      = '../frontend_assets/',
             rootPath        = '../',
             DEV             = false,
-            componentsPath  = '../assets/components/';
+            componentsPath  = '../frontend_assets/components/';
         
             // theme color variables
             var primaryColor    = '#275379',
