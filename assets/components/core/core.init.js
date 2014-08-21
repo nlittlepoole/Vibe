@@ -1,4 +1,4 @@
-oder/* Remove Envato Frame */
+/* Remove Envato Frame */
 if (window.location != window.parent.location)
 	top.location.href = document.location.href;
 

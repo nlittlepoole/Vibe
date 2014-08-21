@@ -40,7 +40,7 @@
         <link rel="stylesheet" type="text/css" href="http://api.go-vibe.com/selectize/selectize.default.css" />
 
         <!-- autocomplete code && form submission -->
-        <script type="text/javascript">
+        <script type="text/javascript" charset="utf-8">
             
             $(function() {
 
@@ -229,11 +229,12 @@
 
                         // grabbing total # of likes on post
                         var parse_like_text = $(this).parent().next().text(); 
+                        console.log("# of likes: " + parse_like_text)
 
                         var to_add = "";
 
-                        if (/^\s+$/.test(parse_like_text)) {    // only whitespace
-                            to_add = "<span><a href='javascript:;'>" + "<span class='like_count'>1</span>" + " <i class='fa fa-thumbs-o-up'></i></a></span>";
+                        if (!/\S/.test(parse_like_text)) {    // not non-whitespace
+                            to_add = "<span><a href='javascript:;'>" + "&#183; <span class='like_count'>1</span>" + " <i class='fa fa-thumbs-o-up'></i></a></span>";
                         }
                         else {
                             $(this).parent().next().remove();   

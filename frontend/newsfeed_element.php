@@ -4,11 +4,32 @@
     // JSON newsfeed request
     $_SESSION['newsfeed_elems_request'] = "http://api.go-vibe.com/api/user.php?action=getFeed&uid=";
     $_SESSION['newsfeed_elems_request'] .= $_SESSION['userID'] . "&token=" . $_SESSION['token'];
+
+    // get votes request
+    $_SESSION['my_votes'] = "http://api.go-vibe.com/api/user.php?action=getVotes&uid=";
+    $_SESSION['my_votes'] .= $_SESSION['userID'] . "&token=" . $_SESSION['token'];
 ?>
 
 <script type="text/javascript">
-    
+
     $(function() {
+
+        // USER'S LIKE HISTORY
+
+        var my_votes_url = "<?php echo $_SESSION['my_votes']; ?>";
+
+        $.getJSON(my_votes_url, function(data) {
+
+            if (!data.error) {
+                
+            }
+            else {
+                console.log('[ERROR] rendering newsfeed elements');     // error with JSON
+            }
+
+        });
+
+        // NEWSFEED (to implement: trigger as callback from above JSON request)
         
         var newsfeed_url = "<?php echo $_SESSION['newsfeed_elems_request']; ?>";
 

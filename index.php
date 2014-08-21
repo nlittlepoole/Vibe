@@ -40,7 +40,7 @@ switch($action) {
     // login hits upon 'login' from homepage
 
     // logout URL created
-    $_SESSION['logoutUrl'] = $facebook->getLogoutUrl(array( 'next' => 'http://api.go-vibe.com') ); 
+    $_SESSION['logoutUrl'] = $facebook->getLogoutUrl(array('next' => 'http://api.go-vibe.com')); 
     
     // basic graph API request
     $data = $facebook->api('/me/?fields=gender,name,email');
