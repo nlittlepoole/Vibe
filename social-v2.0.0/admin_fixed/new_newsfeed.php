@@ -127,7 +127,7 @@
 
                             /* RECIPIENTS */
  
-                            var recipient_size = data['data'][i]['tagged'].length;
+                            var recipient_size = my_names.length;
                             var post_tagged_formatted_names = "<span style='font-size:115%'>"; 
 
                             if(recipient_size == 1) {
@@ -172,33 +172,31 @@
                                     "<div class='block' style='padding-right: 0px;'>",
                                         "<div class='caret'></div>",
                                             "<div class='inline-block box-generic' style='width: 100%; border: 1px solid #ececec;''>",
-                                                "<!-- SOCIAL MEDIA POST FOR TESTING PURPOSES -->",
                                                 "<div class='widget'>",
                                                     "<!-- Info -->",
                                                     "<div class='bg-primary'>",
                                                         "<div class='media'>",
                                                             "<div class='media-body innerTB' style='padding-left:20px;'>",
                                                                 "<span><i class='fa fa-arrow-up'></i> chillness of " + post_tagged_formatted_names,
-                                                                " on " + data['data'][i]['formatted_time'] + "&nbsp;</span>",
                                                             "</div>",
                                                         "</div>",
                                                     "</div>",
                                                     "<!-- Content -->",
                                                     "<div class='innerAll'>",
-                                                        "<p class='lead' style='display : inline;'>" + data['data'][i]['Content'] + "</p>",
+                                                        "<p class='lead' style='display : inline;'>" + inputted_vibe + "</p>",
                                                     "</div>",
-                                                    "<!-- Show overall like info -->",
-                                                    show_like_info,
-                                                    "<!-- Show more comments? -->", 
-                                                    show_more_comments,
-                                                    "<!-- Rendered Comments -->",
-                                                    comment_data, 
+                                                    "<!-- Comment -->",
+                                                    "<div class='bg-gray innerAll border-top border-bottom text-small'>",
+                                                        "<span>",
+                                                            "<a href='#' class='like_link'>Like</a>",
+                                                        "</span>",
+                                                    "</div>",
                                                     "<!-- User input comments -->",
                                                     '<form class="comment_form" name="comment_form" method="post" action="#">',
                                                         "<input type='text' class='form-control comment_input' name='status' style='border: none;' placeholder='Comment here...'>",
                                                         "<input type='hidden' class='hiddenID' name='uid' value='" + localStorage['uid'] + "'/>",
                                                         "<input type='hidden' class='hiddentoken' name='token' value='" + localStorage['token'] + "'/>",
-                                                        "<input type='hidden' class='hiddenPID' name='pid' value='" + post_PID + "'/>",
+                                                        "<input type='hidden' class='hiddenPID' name='pid' value='" + returned_data['PID'] + "'/>",
                                                         '<button type="submit" class="comment_submit" name="comment_submit" style="display: none; "></button>',
                                                     '</form>',
                                                 "</div>",
@@ -225,15 +223,12 @@
                         $(this).text('like'); 
                     }
                     else {
-                        // submit POST request associated with voting...
-
+                        
+                        // submit POST request (vote)
                         $(this).nextAll("form").submit(); 
-                        // console.log('number of siblings of type form: ' + $(this).siblings("form").length)
 
-                        // altering content dynamically - change to unlike and add dynamic increment on total # of likes there
+                        // grabbing total # of likes on post
                         var parse_like_text = $(this).parent().next().text(); 
-
-                        console.log('text returned: ' + parse_like_text);
 
                         var to_add = "";
 
@@ -241,12 +236,10 @@
                             to_add = "<span><a href='javascript:;'>" + "<span class='like_count'>1</span>" + " <i class='fa fa-thumbs-o-up'></i></a></span>";
                         }
                         else {
-                            like_num = parseFloat(parse_like_text)
-                            like_num += 1
+                            $(this).parent().next().remove();   
 
+                            like_num = parseFloat(parse_like_text) + 1
                             to_add = "<span><a href='javascript:;'>" + "<span class='like_count'>" + like_num + "</span>" + " <i class='fa fa-thumbs-o-up'></i></a></span>";
-                            $(this).parent().next().remove();
-
                         }
 
                         $(this).text('Unlike'); 
@@ -256,13 +249,12 @@
                     $(this).toggleClass('unlike_me');   // switch classes
                 });
 
+                // submission override of LIKE
+
                 $(".like_form").submit(function(event) {
                   
                   // simply override normal send
                   event.preventDefault();
-
-                  // debugging
-                  console.log('like submission triggered...'); 
 
                   // grab value of comment and display it
                   var my_vote   = "agree";
@@ -274,38 +266,30 @@
 
                   console.log('timestamp of submission is: ' + my_timestamp);
 
-                  // post request (modified)
-
                   $.ajax({
                       type: 'POST',
                       url: "http://api.go-vibe.com/api/vibe.php?action=vote",
                       data: { uid: my_uid, token: my_token, pid: myPID, vote: my_vote, timestamp : my_timestamp},
                       success: function(data) {
-                          console.log('like mission accomplished.'); 
                           $('.like_form').each(function() {
                               this.reset();
                           });
                       },
                       async: true
                   });
-
                 }); 
 
-                // comment submissions - custom modifications
-                $(".comment_form").submit(function(event) {
-                  
-                  // debugging
-                  console.log('submission triggered...'); 
+                /* COMMENTS */
 
-                  // grab value of comment and display it
-                  var my_comment = $(this).children('.comment_input').val();
-                  var my_uid = $(this).children('.hiddenID').val();
-                  var my_token = $(this).children('.hiddentoken').val();
-                  var myPID = $(this).children('.hiddenPID').val();
+                $(".comment_form").submit(function(event) {
+
+                  var my_comment  = $(this).children('.comment_input').val();
+                  var my_uid      = $(this).children('.hiddenID').val();
+                  var my_token    = $(this).children('.hiddentoken').val();
+                  var myPID       = $(this).children('.hiddenPID').val();
 
                   var current_elem = $(this);
 
-                  // simply override normal send
                   event.preventDefault();
 
                   // post request (modified)
@@ -315,21 +299,17 @@
                       url: "http://api.go-vibe.com/api/vibe.php?action=postComment",
                       data: { status: my_comment, uid: my_uid, token: my_token, pid: myPID},
                       success: function(data) {
-                          console.log('comment mission accomplished.'); 
                           $('.comment_form').each(function() {
                               this.reset();
                           });
 
-                          // append to current status the comment that you submitted
-
-                          // insert comment above form (as a sibling) --> how to insert before something? (look online)
-                          // you also need to find out where Niger does his timestamp insertion...
+                          // APPENDING COMMENT
 
                           var comment_to_append = ""; 
 
-                          var my_name = "<?php print($_SESSION['full_name']) ?>"; 
-                          var my_uid = "<?php print($_SESSION['userID']) ?>"; 
-                          var my_profile_load_name = "<?php print($_SESSION['my_profile_load_name']) ?>"; 
+                          var my_name               = "<?php print($_SESSION['full_name']) ?>"; 
+                          var my_uid                = "<?php print($_SESSION['userID']) ?>"; 
+                          var my_profile_load_name  = "<?php print($_SESSION['my_profile_load_name']) ?>"; 
 
                           var my_prof_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=";
                           my_prof_link += my_uid + "&name=" + my_profile_load_name + "";
@@ -352,26 +332,10 @@
                                 '</div>',
                                 ].join('\n');
 
-                          console.log(comment_data);
-
                           $(comment_data).insertBefore(current_elem);
-
-                          console.log("[STATUS] successfully inserted");
                       },
                       async: true
                   });
-
-                  console.log('ajax called successfully'); 
-
-                  // clear all old elements
-                  // $('.vibe_newsfeed_posts').remove();
-
-                  // clear form elements
-                  // $('.comment_input').clear();
-
-                  // trigger load of elements again (will have updated submission)
-                  // $('#last_elems').load('newsfeed_element.php'); 
-
                 }); 
 
             });
