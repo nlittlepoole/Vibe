@@ -71,11 +71,8 @@
 
                     /* COMMENTS */
 
-                    // number of comments
-                    var num_comments = data['data'][i]['Comments'].length;
-
-                    // 'show all comments' option
-                    var show_more_comments = ""; 
+                    var num_comments = data['data'][i]['Comments'].length;  // # of comments
+                    var show_more_comments = "";                            // 'show all comments' option
 
                     if(num_comments > 4) {
                         show_more_comments = [
@@ -88,19 +85,15 @@
                     var comment_data = ""; 
 
                     for(var j = num_comments - 1; j >= 0; j--) {
-                        // console.log("data of comment: " + data['data'][i]['Comments'][j]['Content']); 
 
-                        current_comment = data['data'][i]['Comments'][j]['Content']; 
-                        current_timestamp = data['data'][i]['Comments'][j]['formatted_time'];
+                        // comment info
+                        comment_content     = data['data'][i]['Comments'][j]['Content']; 
+                        comment_timestamp   = data['data'][i]['Comments'][j]['formatted_time'];
+                        comment_author_UID  = data['data'][i]['Comments'][j]['Author'];
+                        comment_author_name = data['data'][i]['Comments'][j]['post_author'];
 
-                        // UID and name of author
-                        current_author = data['data'][i]['Comments'][j]['Author'];
-                        current_author_name = data['data'][i]['Comments'][j]['post_author'];
-
-                        var temp_link   = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + current_author + "&name=" + current_author_name + "";
-                        
-                        // note: the below is not a graph API request, so it should be pretty fast...
-                        var pic_href    = "https://graph.facebook.com/" + current_author + "/picture?width=60&height=60";
+                        var temp_link   = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + comment_author_UID + "&name=" + comment_author_name + "";
+                        var pic_href    = "https://graph.facebook.com/" + comment_author_UID + "/picture?width=60&height=60";
 
                         var beginning_tag = ""; 
                         var closing_tag = ""; 
@@ -111,7 +104,7 @@
                         }
 
                         comment_data += 
-                            ['<!-- Comment -->', 
+                            ['<!-- comment -->', 
                              beginning_tag,
                              '<div class="media border-bottom margin-none bg-gray">',
                                 '<a href="" class="pull-left innerAll half">',
@@ -121,15 +114,15 @@
                                     '<a href="#" class="pull-right innerT innerR text-muted">',
                                         '<i class="icon-reply-all-fill fa fa-2x"></i>',
                                     '</a>',
-                                    '<a href="' + temp_link + '" class="strong text-inverse">' + current_author_name + '</a>    <small class="text-muted ">wrote on ' + current_timestamp + '</small>',
-                                    '<div>' + current_comment + '</div>',
+                                    '<a href="' + temp_link + '" class="strong text-inverse">' + comment_author_name + '</a>    <small class="text-muted ">wrote on ' + comment_timestamp + '</small>',
+                                    '<div>' + comment_content + '</div>',
                                 '</div>',
                             '</div>',
                             closing_tag
                             ].join('\n');
                     }
 
-                    // creating a temp string for each post (link to profile of all people tagged...)
+                    /* RECIPIENTS */
 
                     var recipient_size = data['data'][i]['tagged'].length;
                     var post_tagged_formatted_names = "<span style='font-size:115%'>"; 
@@ -148,20 +141,18 @@
                         post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['tagged'][0]['Name'] + "</a>" + " and " + "<a href='" + temp_link2 + "' class='text-white strong'>" + data['data'][i]['tagged'][1]['Name'] + "</a>"; 
                     }
                     else {
+
                         for(var z = 0; z < recipient_size; z++) {
 
                             var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + data['data'][i]['tagged'][z]['UID'] + "&name=" + data['data'][i]['tagged'][z]['Name'] + "";
                             
-                            if(z == recipient_size - 1) {
-                                // last element (special case)
+                            if(z == recipient_size - 1) {   // last element
                                 post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['tagged'][z]['Name'] + "</a>&nbsp;";
                             }
-                            else if(z == recipient_size - 2) {
-                                // second to last element (special case)
+                            else if(z == recipient_size - 2) {  // second-to-last element
                                 post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['tagged'][z]['Name'] + "</a>" + ", and ";
                             }
                             else {
-                                // typical case
                                 post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['tagged'][z]['Name'] + "</a>" + ", "; 
                             }
 
@@ -170,8 +161,7 @@
 
                     post_tagged_formatted_names += "</span>";
 
-                    // the below console printer shows the new name
-                    // console.log(post_tagged_formatted_names);
+                    /* BODY OF CONTENT */
 
                     var html_newsfeed_content = 
                         ["<li class='active vibe_newsfeed_posts'>", 
@@ -214,10 +204,8 @@
                         "</li>",
                         ].join('\n');
 
-                    // append this content to overally content (adding older and older posts to the tail)
+                    // append content (add to tail)
                     $('#newsfeed_container').append(html_newsfeed_content);
-
-                    // console.log('added an element'); 
                 }
             } 
             else {
