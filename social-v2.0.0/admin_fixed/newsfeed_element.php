@@ -123,7 +123,7 @@
                     }
 
                     /* RECIPIENTS */
-
+ 
                     var recipient_size = data['data'][i]['tagged'].length;
                     var post_tagged_formatted_names = "<span style='font-size:115%'>"; 
 
@@ -146,7 +146,7 @@
 
                             var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + data['data'][i]['tagged'][z]['UID'] + "&name=" + data['data'][i]['tagged'][z]['Name'] + "";
                             
-                            if(z == recipient_size - 1) {   // last element
+                            if(z == recipient_size - 1) {       // last element
                                 post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['tagged'][z]['Name'] + "</a>&nbsp;";
                             }
                             else if(z == recipient_size - 2) {  // second-to-last element

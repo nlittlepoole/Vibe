@@ -111,30 +111,23 @@
                         }
                     }
 
-                    // filling in hidden element with desired UID string
-                    $('#statusform input[name="recipient"]').val(uid_string);
-                    var inputted_uids = $('#statusform input[name="recipient"]').val();
-
-                    console.log('inputted names: ' + inputted_names); 
-                    console.log('inputted UIDs: ' + inputted_uids);
+                    $('#statusform input[name="recipient"]').val(uid_string); // fill in hidden element with UID serialized string
                     
                     $.post("http://api.go-vibe.com/api/vibe.php?action=postVibe", $("#statusform").serialize())
 
                         .done(function(data) {
 
-                            // console.log("data returned: " + data);
-
-                            var start_i = String(data).indexOf('{');
-                            var json_string = data.substring(start_i); 
-
-                            returned_data = JSON.parse(json_string);
-                            // console.log("PID: " + returned_data['PID']);
-
                             // clear form elements
                             $('input[id="inputFriend"]').val("");
                             $('input[id="inputVibe"]').val("");
 
-                            var recipient_size = my_names.length;
+                            // trim front of JSON (i.e. the extraneous header)
+                            var json_string = data.substring(String(data).indexOf('{')); 
+                            returned_data   = JSON.parse(json_string);
+
+                            /* RECIPIENTS */
+ 
+                            var recipient_size = data['data'][i]['tagged'].length;
                             var post_tagged_formatted_names = "<span style='font-size:115%'>"; 
 
                             if(recipient_size == 1) {
@@ -146,25 +139,23 @@
                             else if(recipient_size == 2) {
                                 
                                 var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + my_ids[0] + "&name=" + my_names[0] + "";
-                                var temp_link2 = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + my_ids[1] + "&name=" + my_ids[1] + "";
+                                var temp_link2 = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + my_ids[1] + "&name=" + my_names[1] + "";
                                 
                                 post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + my_names[0] + "</a>" + " and " + "<a href='" + temp_link2 + "' class='text-white strong'>" + my_names[1] + "</a>"; 
                             }
                             else {
+
                                 for(var z = 0; z < recipient_size; z++) {
 
                                     var temp_link = "http://api.go-vibe.com/social-v2.0.0/admin_fixed/new_profile.php?user=" + my_ids[z] + "&name=" + my_names[z] + "";
                                     
-                                    if(z == recipient_size - 1) {
-                                        // last element (special case)
+                                    if(z == recipient_size - 1) {       // last element
                                         post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + my_names[z] + "</a>&nbsp;";
                                     }
-                                    else if(z == recipient_size - 2) {
-                                        // second to last element (special case)
+                                    else if(z == recipient_size - 2) {  // second-to-last element
                                         post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + my_names[z] + "</a>" + ", and ";
                                     }
                                     else {
-                                        // typical case
                                         post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + my_names[z] + "</a>" + ", "; 
                                     }
 
@@ -173,46 +164,48 @@
 
                             post_tagged_formatted_names += "</span>";
 
+                            /* BODY OF CONTENT */
+
                             var html_newsfeed_content = 
-                            ["<li class='active vibe_newsfeed_posts'>", 
-                                "<span class='marker'></span>",
-                                "<div class='block'>",
-                                    "<div class='caret'></div>",
-                                        "<div class='inline-block box-generic' style='width: 100%; border: 1px solid #ececec;''>",
-                                            "<!-- SOCIAL MEDIA POST FOR TESTING PURPOSES -->",
-                                            "<div class='widget'>",
-                                                "<!-- Info -->",
-                                                "<div class='bg-primary'>",
-                                                    "<div class='media'>",
-                                                        "<div class='media-body innerTB' style='padding-left:20px;'>",
-                                                            "<span><i class='fa fa-arrow-up'></i> chillness of " + post_tagged_formatted_names + "</span>",
+                                ["<li class='active vibe_newsfeed_posts'>", 
+                                    "<span class='marker'></span>",
+                                    "<div class='block' style='padding-right: 0px;'>",
+                                        "<div class='caret'></div>",
+                                            "<div class='inline-block box-generic' style='width: 100%; border: 1px solid #ececec;''>",
+                                                "<!-- SOCIAL MEDIA POST FOR TESTING PURPOSES -->",
+                                                "<div class='widget'>",
+                                                    "<!-- Info -->",
+                                                    "<div class='bg-primary'>",
+                                                        "<div class='media'>",
+                                                            "<div class='media-body innerTB' style='padding-left:20px;'>",
+                                                                "<span><i class='fa fa-arrow-up'></i> chillness of " + post_tagged_formatted_names,
+                                                                " on " + data['data'][i]['formatted_time'] + "&nbsp;</span>",
+                                                            "</div>",
                                                         "</div>",
                                                     "</div>",
+                                                    "<!-- Content -->",
+                                                    "<div class='innerAll'>",
+                                                        "<p class='lead' style='display : inline;'>" + data['data'][i]['Content'] + "</p>",
+                                                    "</div>",
+                                                    "<!-- Show overall like info -->",
+                                                    show_like_info,
+                                                    "<!-- Show more comments? -->", 
+                                                    show_more_comments,
+                                                    "<!-- Rendered Comments -->",
+                                                    comment_data, 
+                                                    "<!-- User input comments -->",
+                                                    '<form class="comment_form" name="comment_form" method="post" action="#">',
+                                                        "<input type='text' class='form-control comment_input' name='status' style='border: none;' placeholder='Comment here...'>",
+                                                        "<input type='hidden' class='hiddenID' name='uid' value='" + localStorage['uid'] + "'/>",
+                                                        "<input type='hidden' class='hiddentoken' name='token' value='" + localStorage['token'] + "'/>",
+                                                        "<input type='hidden' class='hiddenPID' name='pid' value='" + post_PID + "'/>",
+                                                        '<button type="submit" class="comment_submit" name="comment_submit" style="display: none; "></button>',
+                                                    '</form>',
                                                 "</div>",
-                                                "<!-- Content -->",
-                                                "<div class='innerAll'>",
-                                                    "<p class='lead' style='display : inline;'>" + inputted_vibe + "</p>",
-                                                "</div>",
-                                                "<!-- Comment -->",
-                                                "<div class='bg-gray innerAll border-top border-bottom text-small'>",
-                                                    "<span>",
-                                                        "<a href='#' class='like_link'>Like</a>",
-                                                    "</span>",
-                                                "</div>",
-                                                "<!-- User input comments -->",
-                                                '<form class="comment_form" name="comment_form" method="post" action="#">',
-                                                    "<input type='text' class='form-control comment_input' name='status' style='border: none;' placeholder='Comment here...'>",
-                                                    "<input type='hidden' class='hiddenID' name='uid' value='" + localStorage['uid'] + "'/>",
-                                                    "<input type='hidden' class='hiddentoken' name='token' value='" + localStorage['token'] + "'/>",
-                                                    "<input type='hidden' class='hiddenPID' name='pid' value='" + returned_data['PID'] + "'/>",
-                                                    '<button type="submit" class="comment_submit" name="comment_submit" style="display: none; "></button>',
-                                                '</form>',
                                             "</div>",
-                                        "</div>",
-                                "</div>",
-                            "</li>",
-                            ].join('\n');
-
+                                    "</div>",
+                                "</li>",
+                                ].join('\n');
 
                             $("#newsfeed_container").prepend(html_newsfeed_content);
                     });
@@ -221,18 +214,15 @@
             });
 
             $(window).load(function() {
-                // dom not only ready, but everything is loaded
+
+                /* LIKES */
 
                 $('.widget').on('click', '.like_link', function() {
-                    console.log("OVERALL CLICK.");
 
                     var is_unlike = $(this).hasClass("unlike_me").toString();
 
                     if(is_unlike == "true") {
-                        // altering content dynamically
                         $(this).text('like'); 
-
-                        // undo like (send a disagree? - ask Niger)
                     }
                     else {
                         // submit POST request associated with voting...
@@ -247,8 +237,7 @@
 
                         var to_add = "";
 
-                        if (/^\s+$/.test(parse_like_text)) {
-                            // only whitespace
+                        if (/^\s+$/.test(parse_like_text)) {    // only whitespace
                             to_add = "<span><a href='javascript:;'>" + "<span class='like_count'>1</span>" + " <i class='fa fa-thumbs-o-up'></i></a></span>";
                         }
                         else {
@@ -276,10 +265,10 @@
                   console.log('like submission triggered...'); 
 
                   // grab value of comment and display it
-                  var my_vote = "agree";
-                  var my_uid = $(this).children('.hiddenID').val();
-                  var my_token = $(this).children('.hiddentoken').val();
-                  var myPID = $(this).children('.hiddenPID').val();
+                  var my_vote   = "agree";
+                  var my_uid    = $(this).children('.hiddenID').val();
+                  var my_token  = $(this).children('.hiddentoken').val();
+                  var myPID     = $(this).children('.hiddenPID').val();
 
                   var my_timestamp = $(this).children('.timestamp').val();
 
