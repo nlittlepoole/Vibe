@@ -21,7 +21,7 @@
 	<h5 class="innerAll margin-none border-bottom bg-gray">Recent News</h5>
 	<div class="widget-body padding-none">
 				<div class="media border-bottom innerAll margin-none">
-			<img src="../frontend_assets/images/people/35/22.jpg" class="pull-left media-object"/>
+			<img src="../assets/images/people/35/22.jpg" class="pull-left media-object"/>
 			<div class="media-body">
 				<a href="" class="pull-right text-muted innerT half">
 					<i class="fa fa-comments"></i> 4
@@ -31,7 +31,7 @@
 			</div>
 		</div>
 				<div class="media border-bottom innerAll margin-none">
-			<img src="../frontend_assets/images/people/35/22.jpg" class="pull-left media-object"/>
+			<img src="../assets/images/people/35/22.jpg" class="pull-left media-object"/>
 			<div class="media-body">
 				<a href="" class="pull-right text-muted innerT half">
 					<i class="fa fa-comments"></i> 4
@@ -41,7 +41,7 @@
 			</div>
 		</div>
 				<div class="media border-bottom innerAll margin-none">
-			<img src="../frontend_assets/images/people/35/22.jpg" class="pull-left media-object"/>
+			<img src="../assets/images/people/35/22.jpg" class="pull-left media-object"/>
 			<div class="media-body">
 				<a href="" class="pull-right text-muted innerT half">
 					<i class="fa fa-comments"></i> 4
@@ -51,7 +51,7 @@
 			</div>
 		</div>
 				<div class="media border-bottom innerAll margin-none">
-			<img src="../frontend_assets/images/people/35/22.jpg" class="pull-left media-object"/>
+			<img src="../assets/images/people/35/22.jpg" class="pull-left media-object"/>
 			<div class="media-body">
 				<a href="" class="pull-right text-muted innerT half">
 					<i class="fa fa-comments"></i> 4
@@ -61,7 +61,7 @@
 			</div>
 		</div>
 				<div class="media border-bottom innerAll margin-none">
-			<img src="../frontend_assets/images/people/35/22.jpg" class="pull-left media-object"/>
+			<img src="../assets/images/people/35/22.jpg" class="pull-left media-object"/>
 			<div class="media-body">
 				<a href="" class="pull-right text-muted innerT half">
 					<i class="fa fa-comments"></i> 4

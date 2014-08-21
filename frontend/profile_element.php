@@ -99,7 +99,7 @@
                             ['<!-- First Comment -->', 
                              '<div class="media border-bottom margin-none bg-gray">',
                                 '<a href="" class="pull-left innerAll half">',
-                                    '<img src="../frontend_assets//images/people/100/2.jpg" width="60" class="media-object">',
+                                    '<img src="../assets//images/people/100/2.jpg" width="60" class="media-object">',
                                 '</a>',
                                 '<div class="media-body innerTB">',
                                     '<a href="#" class="pull-right innerT innerR text-muted">',

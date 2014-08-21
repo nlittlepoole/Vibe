@@ -149,10 +149,10 @@
 			<!-- Global -->
 			<script data-id="App.Config">
 				var basePath = '',
-				commonPath = '../frontend_assets/',
+				commonPath = '../assets/',
 				rootPath = '../',
 				DEV = false,
-				componentsPath = '../frontend_assets/components/';
+				componentsPath = '../assets/components/';
 			
 				var primaryColor = '#25ad9f',
 				dangerColor = '#b55151',

@@ -514,10 +514,10 @@
             
             // theme path variables
             var basePath    = '',
-            commonPath      = '../frontend_assets/',
+            commonPath      = '../assets/',
             rootPath        = '../',
             DEV             = false,
-            componentsPath  = '../frontend_assets/components/';
+            componentsPath  = '../assets/components/';
         
             // theme color variables
             var primaryColor    = '#275379',
