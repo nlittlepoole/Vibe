@@ -317,6 +317,30 @@
 
                           var pic_href = "https://graph.facebook.com/" + my_uid + "/picture?width=60&height=60";
 
+                          var current_date = new Date();
+
+                          var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+                          post_month    = monthNames[current_date.getMonth()];
+                          post_date     = current_date.getDate();
+
+                          var date_append = ""; 
+
+                          if(post_date % 10 === 1) {
+                            date_append = "st";
+                          }
+                          else if(post_date % 10 === 2) {
+                            date_append = "nd";
+                          }
+                          else if(post_date % 10 === 3) {
+                            date_append = "rd";
+                          }
+                          else {
+                            date_append = "th";
+                          }
+
+                          var formatted_datetime = post_month + " " + post_date + date_append;
+
                           comment_data = 
                                 ['<!-- Comment -->', 
                                  '<div class="media border-bottom margin-none bg-gray">',
@@ -327,7 +351,8 @@
                                         '<a href="#" class="pull-right innerT innerR text-muted">',
                                             '<i class="icon-reply-all-fill fa fa-2x"></i>',
                                         '</a>',
-                                        '<a href="' + my_prof_link + '" class="strong text-inverse">' + my_name + '</a>    <small class="text-muted ">wrote on insert_time_here</small> <a href="" class="text-small">like</a>',
+                                        '<a href="' + my_prof_link + '" class="strong text-inverse">' + my_name + '</a>',    
+                                        '<small class="text-muted ">wrote on ' + formatted_datetime + '</small>',
                                         '<div>' + my_comment + '</div>',
                                     '</div>',
                                 '</div>',
