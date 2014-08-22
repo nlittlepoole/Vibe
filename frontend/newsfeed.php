@@ -164,6 +164,8 @@
 
                             post_tagged_formatted_names += "</span>";
 
+                            var formatted_datetime = get_formatted_date();      // date
+
                             /* BODY OF CONTENT */
 
                             var html_newsfeed_content = 
@@ -177,7 +179,8 @@
                                                     "<div class='bg-primary'>",
                                                         "<div class='media'>",
                                                             "<div class='media-body innerTB' style='padding-left:20px;'>",
-                                                                "<span><i class='fa fa-arrow-up'></i> chillness of " + post_tagged_formatted_names,
+                                                                "<span><i class='fa fa-user'></i> " + post_tagged_formatted_names,
+                                                                " on " + formatted_datetime + "&nbsp;</span>",
                                                             "</div>",
                                                         "</div>",
                                                     "</div>",
@@ -317,29 +320,7 @@
 
                           var pic_href = "https://graph.facebook.com/" + my_uid + "/picture?width=60&height=60";
 
-                          var current_date = new Date();
-
-                          var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
-                          post_month    = monthNames[current_date.getMonth()];
-                          post_date     = current_date.getDate();
-
-                          var date_append = ""; 
-
-                          if(post_date % 10 === 1) {
-                            date_append = "st";
-                          }
-                          else if(post_date % 10 === 2) {
-                            date_append = "nd";
-                          }
-                          else if(post_date % 10 === 3) {
-                            date_append = "rd";
-                          }
-                          else {
-                            date_append = "th";
-                          }
-
-                          var formatted_datetime = post_month + " " + post_date + date_append;
+                          var formatted_datetime = get_formatted_date();
 
                           comment_data = 
                                 ['<!-- Comment -->', 
@@ -365,6 +346,32 @@
                 }); 
 
             });
+
+            function get_formatted_date() {
+              var current_date = new Date();
+
+              var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+              post_month    = monthNames[current_date.getMonth()];
+              post_date     = current_date.getDate();
+
+              var date_append = ""; 
+
+              if(post_date % 10 === 1) {
+                date_append = "st";
+              }
+              else if(post_date % 10 === 2) {
+                date_append = "nd";
+              }
+              else if(post_date % 10 === 3) {
+                date_append = "rd";
+              }
+              else {
+                date_append = "th";
+              }
+
+              return post_month + " " + post_date + date_append;
+            }
 
         </script>
 

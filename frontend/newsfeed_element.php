@@ -110,7 +110,7 @@
 
                             if(num_comments > 4) {
                                 show_more_comments = [
-                                    "<div class='bg-gray innerAll border-top border-bottom text-small'>",
+                                    "<div class='bg-gray innerAll border-top border-bottom text-small comment_data_header'>",
                                         "<span><a href='javascript:;'>view all " + num_comments + " comments</a></span>",
                                     "</div>"
                                     ].join('\n');
@@ -209,7 +209,7 @@
                                                     "<div class='bg-primary'>",
                                                         "<div class='media'>",
                                                             "<div class='media-body innerTB' style='padding-left:20px;'>",
-                                                                "<span><i class='fa fa-arrow-up'></i> chillness of " + post_tagged_formatted_names,
+                                                                "<span><i class='fa fa-user'></i> " + post_tagged_formatted_names,
                                                                 " on " + data['data'][i]['formatted_time'] + "&nbsp;</span>",
                                                             "</div>",
                                                         "</div>",
