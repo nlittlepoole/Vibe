@@ -216,6 +216,13 @@
 
             $(window).load(function() {
 
+                /* 'VIEW ALL' comments triggered */
+
+                $('.widget').on('click', '.comment_data_header', function() {
+                    $(this).closest(".widget").children(".comment").css("display", "block");
+                    $(this).remove();
+                });
+
                 /* LIKES */
 
                 $('.widget').on('click', '.like_link', function() {

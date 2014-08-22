@@ -129,11 +129,11 @@
                                 var temp_link   = "http://api.go-vibe.com/frontend/profile.php?user=" + comment_author_UID + "&name=" + comment_author_name + "";
                                 var pic_href    = "https://graph.facebook.com/" + comment_author_UID + "/picture?width=60&height=60";
 
-                                var beginning_tag = ""; 
-                                var closing_tag = ""; 
+                                var beginning_tag = "<div class='comment'>"; 
+                                var closing_tag = "</div>"; 
 
                                 if(j > 3) {
-                                    beginning_tag   = '<div style="display: none">';
+                                    beginning_tag   = '<div class="comment" style="display: none">';
                                     closing_tag     = '</div>';
                                 }
 
