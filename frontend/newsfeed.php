@@ -419,6 +419,7 @@
                 <!-- loading NAVBAR here -->    
 
                 <div id="navbar"></div>
+                <div id="sidebar"></div>
 
                 <div class="container"><div class="innerAll">
                     <div class="row">
@@ -523,11 +524,11 @@
                         </div>
 
                         <!-- loading SIDEBAR here -->
-                        <div class="col-md-4 col-lg-3">
-
-                            <div id="sidebar"></div>
-                                
-                        </div> 
+                        <!--
+                            <div class="col-md-4 col-lg-3">
+                                <div id="sidebar"></div>
+                            </div> 
+                        -->
                                 
                     </div>
                     <!-- // Content END -->

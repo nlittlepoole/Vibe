@@ -60,6 +60,15 @@
             console.log('click triggered');
             
             if(!is_visible) {
+              var offset = $('#custom_globe').offset();
+
+                $('#notifications_toolbar').css({
+                 'position'   : 'absolute',
+                 'left'     : offset.left + 16,
+                 'top'    : '60px',
+                 'z-index'  : '1'
+              });
+
               $('#notifications_toolbar').show();
               is_visible = true;
             }
@@ -113,7 +122,7 @@
 
 
       <ul class="nav navbar-nav navbar-right">
-        <li class="innerLR"><a id="notifications_trigger" href='javascript:;'><img src="http://api.go-vibe.com/frontend/nav_globe.png" style="width: 36px;" /></a></li>
+        <li class="innerLR"><a id="notifications_trigger" href='javascript:;'><img src="http://api.go-vibe.com/frontend/nav_globe.png" id="custom_globe" style="width: 36px;" /></a></li>
         <li class="dropdown">
           <a href=<?php echo $_SESSION['my_profile_link']; ?>>
           <span class="pull-left innerR"><img src=<?php echo $_SESSION['my_profile_pic']; ?> alt="user" class="img-circle" style="width: 36px;"></span>
