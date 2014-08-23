@@ -51,6 +51,24 @@
               window.location.href = temp_link;
           }
       });
+
+      $(window).load(function() {
+
+        var is_visible = false;
+
+        $(document).on('click', '#notifications_trigger', function() {
+            console.log('click triggered');
+            
+            if(!is_visible) {
+              $('#notifications_toolbar').show();
+              is_visible = true;
+            }
+            else {
+              $('#notifications_toolbar').hide();
+              is_visible = false;
+            }
+        });
+      });
   </script>
 
   <style type="text/css">
@@ -74,7 +92,7 @@
       <button type="button" class="navbar-toggle btn btn-default" data-toggle="collapse" data-target="#navbar-fixed-layout-collapse">
 		<i class="fa fa-indent"></i>
       </button>
-      <a class="navbar-brand" href="#"><img src="http://api.go-vibe.com/landing/vibe72dpi-rgb.gif" style="width: 32px;" alt=""></a>
+          <a class="navbar-brand" href="http://api.go-vibe.com/index.php?action=newsfeed"><img src="http://api.go-vibe.com/landing/vibe72dpi-rgb.gif" style="width: 32px;" alt=""></a>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="navbar-fixed-layout-collapse">
@@ -95,7 +113,7 @@
 
 
       <ul class="nav navbar-nav navbar-right">
-        <li class="innerLR"><a href='javascript:;'><img src="http://api.go-vibe.com/frontend/nav_globe.png" style="width: 36px;" /></a></li>
+        <li class="innerLR"><a id="notifications_trigger" href='javascript:;'><img src="http://api.go-vibe.com/frontend/nav_globe.png" style="width: 36px;" /></a></li>
         <li class="dropdown">
           <a href=<?php echo $_SESSION['my_profile_link']; ?>>
           <span class="pull-left innerR"><img src=<?php echo $_SESSION['my_profile_pic']; ?> alt="user" class="img-circle" style="width: 36px;"></span>
