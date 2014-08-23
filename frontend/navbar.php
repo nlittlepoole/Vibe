@@ -66,7 +66,7 @@
                  'position'   : 'absolute',
                  'left'     : offset.left + 16,
                  'top'    : '60px',
-                 'z-index'  : '1'
+                 'z-index'  : '10000'
               });
 
               $('#notifications_toolbar').show();
@@ -95,7 +95,7 @@
 
 <nav class="navbar navbar-default top-nav navbar-fixed-top" role="navigation">
 
-  <div class="container">
+  <div class="container"><div class="col-lg-9 col-md-8">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle btn btn-default" data-toggle="collapse" data-target="#navbar-fixed-layout-collapse">
@@ -131,5 +131,5 @@
         </li>
       </ul>
     </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+  </div><!-- /.container-fluid --></div>
 </nav>

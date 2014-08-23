@@ -25,7 +25,7 @@
 		   'position' 	: 'absolute',
 		   'left' 		: offset.left + 16,
 		   'top' 		: '60px',
-		   'z-index' 	: '1'
+		   'z-index' 	: '10000'
 		});
 	});
 </script>
