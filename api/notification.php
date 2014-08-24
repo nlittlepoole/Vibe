@@ -1,7 +1,6 @@
 <?php
 
 	// config settings setup
-	ob_start(); 
 	ini_set('display_errors',1); 
 	error_reporting(E_ALL);
 	session_start();
@@ -59,6 +58,7 @@
 		$conn = null;
 	}
 
+	
 	// clears the specified notification from DB
 	function clearNotification() {
 
@@ -95,6 +95,7 @@
 	}
 
 
+	/*
 	// sends email to user
 	function sendEmail() {
 		
@@ -108,6 +109,7 @@
 		$command = "sudo python sendEmail.py $email $user '$status'  2>&1";
 		$temp = exec($command, $output)	
 	}
+
 
 	// sends tweet to user
 	function sendTweet() {
@@ -123,5 +125,6 @@
 		$command = "sudo python sendTweet.py '$twitter' '$url' '$status'  2>&1";
 		$temp = exec($command, $output);	
 	}
+	*/
 
 ?>

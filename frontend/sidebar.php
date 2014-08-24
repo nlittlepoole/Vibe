@@ -18,10 +18,15 @@
 <script type="text/javascript">
 	$(window).load(function() {
 
+		// dynamically load notification elements
+		// TO IMPLEMENT: insert notification element loading here (from separate file)
+
+		// render position
 		var offset = $('#custom_globe').offset();
 		var top_offset = $(document).scrollTop() + 38;
 	  	top_offset += "px";
 
+	  	// properties upon content
   		$('#notifications_toolbar').hide();
   		$('#notifications_toolbar').css({
 		   'position' 	: 'absolute',
@@ -31,6 +36,7 @@
 		});
 	});
 
+	// maintains dynamic POS on SCROLL
 	$(window).scroll(function() {
 
 	  var offset = $('#custom_globe').offset();
@@ -45,6 +51,7 @@
 	  });
 	});
 
+	// maintains dynamic POS on RESIZE
 	$(window).resize(function() {
 
 	  var offset = $('#custom_globe').offset();
@@ -65,7 +72,7 @@
 	<div class="widget">
 		<h5 class="innerAll margin-none border-bottom bg-gray">Recent News</h5>
 		<div class="widget-body padding-none">
-					<div class="media border-bottom innerAll margin-none">
+			<div class="media border-bottom innerAll margin-none">
 				<img src="../assets/images/people/35/22.jpg" class="pull-left media-object"/>
 				<div class="media-body">
 					<a href="" class="pull-right text-muted innerT half">
@@ -73,46 +80,6 @@
 					</a>
 					<h5 class="margin-none"><a href="" class="text-inverse">Someone upped your Kindness</a></h5>
 					<small>on February 12th, 2014 </small> 
-				</div>
-			</div>
-					<div class="media border-bottom innerAll margin-none">
-				<img src="../assets/images/people/35/22.jpg" class="pull-left media-object"/>
-				<div class="media-body">
-					<a href="" class="pull-right text-muted innerT half">
-						<i class="fa fa-comments"></i> 4
-					</a>
-					<h5 class="margin-none"><a href="" class="text-inverse">Someone sent you a crush!</a></h5>
-					<small>on February 2nd, 2014 </small> 
-				</div>
-			</div>
-					<div class="media border-bottom innerAll margin-none">
-				<img src="../assets/images/people/35/22.jpg" class="pull-left media-object"/>
-				<div class="media-body">
-					<a href="" class="pull-right text-muted innerT half">
-						<i class="fa fa-comments"></i> 4
-					</a>
-					<h5 class="margin-none"><a href="" class="text-inverse">Someone upped your Honesty</a></h5>
-					<small>on February 2nd, 2014 </small> 
-				</div>
-			</div>
-					<div class="media border-bottom innerAll margin-none">
-				<img src="../assets/images/people/35/22.jpg" class="pull-left media-object"/>
-				<div class="media-body">
-					<a href="" class="pull-right text-muted innerT half">
-						<i class="fa fa-comments"></i> 4
-					</a>
-					<h5 class="margin-none"><a href="" class="text-inverse">2 people liked your comment</a></h5>
-					<small>on February 2nd, 2014 </small> 
-				</div>
-			</div>
-					<div class="media border-bottom innerAll margin-none">
-				<img src="../assets/images/people/35/22.jpg" class="pull-left media-object"/>
-				<div class="media-body">
-					<a href="" class="pull-right text-muted innerT half">
-						<i class="fa fa-comments"></i> 4
-					</a>
-					<h5 class="margin-none"><a href="" class="text-inverse">Someone blocked you!</a></h5>
-					<small>on February 2nd, 2014 </small> 
 				</div>
 			</div>
 		</div>
