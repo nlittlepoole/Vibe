@@ -1,6 +1,7 @@
 <?php
 
-	// overall settings
+	// config settings setup
+	ob_start(); 
 	ini_set('display_errors',1); 
 	error_reporting(E_ALL);
 	session_start();
@@ -10,9 +11,9 @@
 	require_once($root . "/config.php");
 	require_once('request.php');
 
-	// REQUEST fragments
-	$uid 	=  $_REQUEST['uid'];
-	$token 	= $_REQUEST['token'];
+	// grabbing URL fragments
+	$uid =  $_REQUEST['uid'] ;
+	$token = $_REQUEST['token'];
 	$action = isset($_GET['action']) && validToken($uid,$token) ? $_GET['action'] : ""; 
 
 	// determine method call using action URL fragment
@@ -42,7 +43,7 @@
 		pushResponse($response_array);
 
 		// POST components
-		$class = $_POST['class'];
+		$class = $_POST['classif'];
 		$message = $_POST['message'];
 		$data = $_POST['data'];
 

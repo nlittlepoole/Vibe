@@ -62,7 +62,7 @@
             if(!is_visible) {
               var offset = $('#custom_globe').offset();
               
-              var top_offset = $(document).scrollTop() + 44;
+              var top_offset = $(document).scrollTop() + 38;
               top_offset += "px";
 
                 $('#notifications_toolbar').css({

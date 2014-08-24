@@ -1,18 +1,20 @@
 <?php
 
-	// config settings
+	// config settings setup
+	ob_start(); 
 	ini_set('display_errors',1); 
 	error_reporting(E_ALL);
-	
+	session_start();
+
 	// file imports
 	$root = $_SERVER['DOCUMENT_ROOT'];
 	require_once($root . "/config.php");
 	require_once('request.php');
 
-	// URL fragments
-	$uid 	= $_REQUEST['uid'];
-	$token 	= $_REQUEST['token'];
-	$action = isset($_REQUEST['action']) && validToken($uid, $token) ? $_REQUEST['action'] : "";
+	// grabbing URL fragments
+	$uid =  $_REQUEST['uid'] ;
+	$token = $_REQUEST['token'];
+	$action = isset($_GET['action']) && validToken($uid,$token) ? $_GET['action'] : ""; 
 
 	// parsing based on action fragment
 	switch ($action) {

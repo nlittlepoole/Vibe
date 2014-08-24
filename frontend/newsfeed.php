@@ -125,6 +125,28 @@
                             var json_string = data.substring(String(data).indexOf('{')); 
                             returned_data   = JSON.parse(json_string);
 
+                            for(var i = 0; i < my_ids.length; i++) {
+                                
+                                // notify user on Vibe that someone wrote about them
+                                $.ajax(
+                                {
+                                  type: "POST",
+                                  url: "http://api.go-vibe.com/api/notification.php?action=addNotification",
+                                  data: { 
+                                    uid     : my_ids[i], 
+                                    token   : localStorage['token'], 
+                                    classif : "posted about you", 
+                                    message : inputted_vibe, 
+                                    data    : returned_data['PID']
+                                  }
+                                })
+                                  .done(function(msg) {
+                                    console.log('notification has been sent');
+                                  });
+                            }
+
+                            /* -- DYNAMIC CONTENT -- */
+
                             /* RECIPIENTS */
  
                             var recipient_size = my_names.length;

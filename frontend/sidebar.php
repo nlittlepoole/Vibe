@@ -19,7 +19,7 @@
 	$(window).load(function() {
 
 		var offset = $('#custom_globe').offset();
-		var top_offset = $(document).scrollTop() + 44;
+		var top_offset = $(document).scrollTop() + 38;
 	  	top_offset += "px";
 
   		$('#notifications_toolbar').hide();
@@ -34,7 +34,7 @@
 	$(window).scroll(function() {
 
 	  var offset = $('#custom_globe').offset();
-	  var top_offset = $(document).scrollTop() + 44;
+	  var top_offset = $(document).scrollTop() + 38;
 	  top_offset += "px";
 
 	  $('#notifications_toolbar').css({
@@ -48,7 +48,7 @@
 	$(window).resize(function() {
 
 	  var offset = $('#custom_globe').offset();
-	  var top_offset = $(document).scrollTop() + 44;
+	  var top_offset = $(document).scrollTop() + 38;
 	  top_offset += "px";
 
 	  $('#notifications_toolbar').css({
