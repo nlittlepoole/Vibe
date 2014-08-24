@@ -67,7 +67,7 @@
 
                 $('#notifications_toolbar').css({
                  'position' : 'absolute',
-                 'left'     : offset.left + 6,
+                 'left'     : offset.left + 12,
                  'top'      : top_offset,
                  'z-index'  : '10000'
               });
@@ -103,11 +103,18 @@
 
   <script type="text/javascript">
 
-    // quick heuristic so that both 'Newsfeed' and Vibe icon fade together
-    $('.homepage_nav').hover(function() {
-      $('.homepage_nav').css('opacity', '0.6');
-    }, function() {
-      $('.homepage_nav').css('opacity', '1');
+    $(function() {
+      // quick heuristic so that both 'Newsfeed' and Vibe icon fade together
+      $('.homepage_nav').hover(function() {
+        $('.homepage_nav').css('opacity', '0.6');
+      }, function() {
+        $('.homepage_nav').css('opacity', '1');
+      });
+
+      $(document).on('click', '#settings_menu_nav', function() {
+        $(this).css('background-color', 'white');
+      });
+
     });
 
   </script>
@@ -152,18 +159,12 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding-left: 0px; padding-right: 0px">
             <span class="pull-left innerR"></span>
-            <b class="caret"></b>
+            <b class="caret" id="settings_menu_nav"></b>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <li><a href="<?php echo $_SESSION['logoutUrl']; ?>">Sign out</a></li>
           </ul>
         </li>
-
-        <li class="innerLR"><span class="nav_elem"><i class="fa fa-lg fa-sign-out fa-fw" style="color: black; width: 30px"></i></span></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid --></div>

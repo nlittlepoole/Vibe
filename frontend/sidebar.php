@@ -25,7 +25,7 @@
   		$('#notifications_toolbar').hide();
   		$('#notifications_toolbar').css({
 		   'position' 	: 'absolute',
-		   'left' 		: offset.left + 6,
+		   'left' 		: offset.left + 12,
 		   'top' 		: top_offset,
 		   'z-index' 	: '10000'
 		});
@@ -39,7 +39,7 @@
 
 	  $('#notifications_toolbar').css({
 		   'position' 	: 'absolute',
-		   'left' 		: offset.left + 6,
+		   'left' 		: offset.left + 12,
 		   'top' 		: top_offset,
 		   'z-index' 	: '10000'
 	  });
