@@ -94,25 +94,36 @@
            font-size: 13px;
            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       }
+
+      .nav_elem:hover {
+        opacity: 0.6;
+      }
+
   </style>
+
+  <script type="text/javascript">
+
+    // quick heuristic so that both 'Newsfeed' and Vibe icon fade together
+    $('.homepage_nav').hover(function() {
+      $('.homepage_nav').css('opacity', '0.6');
+    }, function() {
+      $('.homepage_nav').css('opacity', '1');
+    });
+
+  </script>
 
 <nav class="navbar navbar-default top-nav navbar-fixed-top" role="navigation">
 
   <div class="container"><div class="col-lg-9 col-md-8">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle btn btn-default" data-toggle="collapse" data-target="#navbar-fixed-layout-collapse">
-		<i class="fa fa-indent"></i>
-      </button>
-          <a class="navbar-brand" href="http://api.go-vibe.com/index.php?action=newsfeed"><img src="http://api.go-vibe.com/landing/vibe72dpi-rgb.gif" style="width: 32px;" alt=""></a>
+      <button type="button" class="navbar-toggle btn btn-default" data-toggle="collapse" data-target="#navbar-fixed-layout-collapse"><i class="fa fa-indent"></i></button>
+      <a class="navbar-brand homepage_nav" href="http://api.go-vibe.com/index.php?action=newsfeed"><img src="http://api.go-vibe.com/landing/vibe72dpi-rgb.gif" style="width: 32px;" alt=""></a>
     </div>
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="navbar-fixed-layout-collapse">
       <ul class="nav navbar-nav">
-        <li>
-	          <a href="http://api.go-vibe.com/index.php?action=newsfeed">Newsfeed</a>
-	     
-        </li>
+        <li><a class="homepage_nav" href="http://api.go-vibe.com/index.php?action=newsfeed">Newsfeed</a></li>
       </ul>
 
       <!-- SEARCH WIDGET -->
@@ -123,15 +134,15 @@
         <button type="submit" class="btn btn-inverse" id="search-submit" style="display: none;"><i class="fa fa-search fa-fw"></i></button>
       </form>
 
-
+      <!-- NOTIFICATIONS AND PROFILE LINKS -->
       <ul class="nav navbar-nav navbar-right">
-        <li class="innerLR"><a id="notifications_trigger" href='javascript:;'><i class="fa fa-bell fa-fw" id="custom_globe" style="color: black;"></i></a></li>
+        <li class="innerLR"><span class="nav_elem"><a id="notifications_trigger" href='javascript:;'><i class="fa fa-bell fa-fw" id="custom_globe" style="color: black; width: 30px"></i></a></span></li>
         <!-- <li class="innerLR"><a id="" href='javascript:;'><img src="http://api.go-vibe.com/frontend/nav_globe.png" id="custom_globe" style="width: 36px;" /></a></li> -->
         <li class="dropdown">
-          <a href=<?php echo $_SESSION['my_profile_link']; ?>>
-          <span class="pull-left innerR"><img src=<?php echo $_SESSION['my_profile_pic']; ?> alt="user" class="img-circle" style="width: 36px;"></span>
-              <?php echo $_SESSION['first_name']; ?>
-          </a>
+          <a href=<?php echo $_SESSION['my_profile_link']; ?>><span class="nav_elem">
+            <span class="pull-left innerR"><img src=<?php echo $_SESSION['my_profile_pic']; ?> alt="user" class="img-circle" style="width: 36px;"></span>
+            <?php echo $_SESSION['first_name']; ?>
+          </span></a>
         </li>
       </ul>
     </div><!-- /.navbar-collapse -->
