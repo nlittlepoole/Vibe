@@ -19,14 +19,45 @@
 	$(window).load(function() {
 
 		var offset = $('#custom_globe').offset();
+		var top_offset = $(document).scrollTop() + 44;
+	  	top_offset += "px";
 
   		$('#notifications_toolbar').hide();
   		$('#notifications_toolbar').css({
 		   'position' 	: 'absolute',
-		   'left' 		: offset.left + 16,
-		   'top' 		: '60px',
+		   'left' 		: offset.left + 6,
+		   'top' 		: top_offset,
 		   'z-index' 	: '10000'
 		});
+	});
+
+	$(window).scroll(function() {
+	  console.log('scroll triggered.');
+
+	  var offset = $('#custom_globe').offset();
+	  var top_offset = $(document).scrollTop() + 44;
+	  top_offset += "px";
+
+	  $('#notifications_toolbar').css({
+		   'position' 	: 'absolute',
+		   'left' 		: offset.left + 6,
+		   'top' 		: top_offset,
+		   'z-index' 	: '10000'
+	  });
+	});
+
+	$(window).resize(function() {
+
+	  var offset = $('#custom_globe').offset();
+	  var top_offset = $(document).scrollTop() + 44;
+	  top_offset += "px";
+
+	  $('#notifications_toolbar').css({
+		   'position' 	: 'absolute',
+		   'left' 		: offset.left + 6,
+		   'top' 		: top_offset,
+		   'z-index' 	: '10000'
+	  });
 	});
 </script>
 
