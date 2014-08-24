@@ -136,14 +136,34 @@
 
       <!-- NOTIFICATIONS AND PROFILE LINKS -->
       <ul class="nav navbar-nav navbar-right">
-        <li class="innerLR"><span class="nav_elem"><a id="notifications_trigger" href='javascript:;'><i class="fa fa-bell fa-fw" id="custom_globe" style="color: black; width: 30px"></i></a></span></li>
-        <!-- <li class="innerLR"><a id="" href='javascript:;'><img src="http://api.go-vibe.com/frontend/nav_globe.png" id="custom_globe" style="width: 36px;" /></a></li> -->
-        <li class="dropdown">
-          <a href=<?php echo $_SESSION['my_profile_link']; ?>><span class="nav_elem">
-            <span class="pull-left innerR"><img src=<?php echo $_SESSION['my_profile_pic']; ?> alt="user" class="img-circle" style="width: 36px;"></span>
-            <?php echo $_SESSION['first_name']; ?>
-          </span></a>
+
+        <!-- notifications -->
+        <li class="innerLR"><span class="nav_elem"><a id="notifications_trigger" href='javascript:;'><i class="fa fa-bell fa-lg fa-fw" id="custom_globe" style="color: black; width: 30px"></i></a></span></li>
+
+        <li class="innerLR">
+          <a href=<?php echo $_SESSION['my_profile_link']; ?> style="padding-right: 5px;">
+            <span class="nav_elem">
+              <img src=<?php echo $_SESSION['my_profile_pic']; ?> alt="user" class="img-circle" style="width: 36px;" />
+              <span style="color: #428bca;">&nbsp;<?php echo $_SESSION['first_name']; ?></span>
+            </span>
+          </a>
         </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding-left: 0px; padding-right: 0px">
+            <span class="pull-left innerR"></span>
+            <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>
+
+        <li class="innerLR"><span class="nav_elem"><i class="fa fa-lg fa-sign-out fa-fw" style="color: black; width: 30px"></i></span></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid --></div>
