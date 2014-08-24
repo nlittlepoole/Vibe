@@ -51,12 +51,22 @@
                                 
                                 // you have upvoted this post
                                 if(my_votes[post_PID] > 0) {
-                                    my_post_like = "<a href='javascript:;' class='like_link unlike_me'>Unlike</a>";
+                                    // my_post_like = "<a href='javascript:;' class='like_link unlike_me'>Unlike</a>";
+                                    my_post_like = "<i class='fa fa-lg fa-thumbs-up' style='color: #428bca'></i>";
+                                    my_post_like += "&nbsp;&nbsp;&nbsp;<i class='fa fa-lg fa-thumbs-down' style='color: gray'></i>";
                                 }
 
                                 // you have downvoted this post
+                                else if(my_votes[post_PID] < 0) {
+                                    my_post_like = "<i class='fa fa-lg fa-thumbs-up' style='color: gray'></i>";
+                                    my_post_like += "&nbsp;&nbsp;&nbsp;<i class='fa fa-lg fa-thumbs-down' style='color: #428bca'></i>";
+                                }
 
                                 // you are currently neutral
+                                else {
+                                    my_post_like = "<i class='fa fa-lg fa-thumbs-up' style='color: gray'></i>";
+                                    my_post_like += "&nbsp;&nbsp;&nbsp;<i class='fa fa-lg fa-thumbs-down' style='color: gray'></i>";
+                                }
                             }
                             
                             var total_likes = 0;
@@ -86,6 +96,9 @@
                                                 "<!-- Like Submission Form -->", 
                                                 like_submission_form,
                                             "</span>",
+                                            "<span style='float: right;'>", 
+                                                "hello!",
+                                            "</span>",
                                         "</div>"
                                         ].join('\n');
                                 }
@@ -97,7 +110,7 @@
                                                 "<!-- Like Submission Form -->", 
                                                 like_submission_form,
                                             "</span>",
-                                            "<span><a href='javascript:;'>" + "<span class='like_count'>" + total_likes + "</span>" + " <i class='fa fa-thumbs-o-up'></i></a></span>",
+                                            "<span style='float: right;'><a href='javascript:;'>" + "<span class='like_count'>" + total_likes + "</span>" + " <i class='fa fa-thumbs-o-up'></i></a></span>",
                                         "</div>"
                                         ].join('\n');
                                 }
@@ -208,7 +221,7 @@
                                                     "<!-- Info -->",
                                                     "<div class='bg-primary'>",
                                                         "<div class='media'>",
-                                                            "<div class='media-body innerTB' style='padding-left:20px;'>",
+                                                            "<div class='media-body innerTB' style='padding-left:10px;'>",
                                                                 "<span><i class='fa fa-user'></i> " + post_tagged_formatted_names,
                                                                 " on " + data['data'][i]['formatted_time'] + "&nbsp;</span>",
                                                             "</div>",

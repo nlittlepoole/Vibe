@@ -32,7 +32,6 @@
 	});
 
 	$(window).scroll(function() {
-	  console.log('scroll triggered.');
 
 	  var offset = $('#custom_globe').offset();
 	  var top_offset = $(document).scrollTop() + 44;
