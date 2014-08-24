@@ -69,10 +69,12 @@
                                 }
                             }
                             
-                            var total_likes = 0;
+                            var total_likes     = 0;
+                            var total_agrees    = data['data'][i]['Agree']; 
+                            var total_disagrees = data['data'][i]['Disagree']; 
 
                             if(data['data'][i]['Score'] !== null) {
-                                total_likes = data['data'][i]['Score']
+                                total_likes = data['data'][i]['Score'];
                             }
 
                             var like_submission_form = [
@@ -85,36 +87,20 @@
                                 '</form>'
                                 ].join('\n');
 
-                            var show_like_info = "";
-
-                            if(total_likes >= 0) {
-                                if(total_likes == 0) {
-                                    show_like_info = [
-                                        "<div class='bg-gray innerAll border-top border-bottom text-small'>",
-                                            "<span>",
-                                                my_post_like,
-                                                "<!-- Like Submission Form -->", 
-                                                like_submission_form,
-                                            "</span>",
-                                            "<span style='float: right;'>", 
-                                                "hello!",
-                                            "</span>",
-                                        "</div>"
-                                        ].join('\n');
-                                }
-                                else {
-                                    show_like_info = [
-                                        "<div class='bg-gray innerAll border-top border-bottom text-small'>",
-                                            "<span>",
-                                                my_post_like + " · ",
-                                                "<!-- Like Submission Form -->", 
-                                                like_submission_form,
-                                            "</span>",
-                                            "<span style='float: right;'><a href='javascript:;'>" + "<span class='like_count'>" + total_likes + "</span>" + " <i class='fa fa-thumbs-o-up'></i></a></span>",
-                                        "</div>"
-                                        ].join('\n');
-                                }
-                            }
+                            var show_like_info = [
+                                "<div class='bg-gray innerAll border-top border-bottom text-small'>",
+                                    "<span>",
+                                        my_post_like,
+                                        "<!-- Like Submission Form -->", 
+                                        like_submission_form,
+                                    "</span>",
+                                    "<span style='float: right;'>",
+                                        "<i class='fa fa-thumbs-up' style='color: #606060  '></i>&nbsp;<span class='like_count'>" + total_agrees + "</span>",
+                                        "&nbsp;&nbsp;",
+                                        "<i class='fa fa-thumbs-down' style='color: #606060  '></i>&nbsp;<span class='dislike_count'>" + total_disagrees + "</span>",
+                                    "</span>",
+                                "</div>"
+                                ].join('\n');
 
                             /* COMMENTS */
 
