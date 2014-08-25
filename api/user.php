@@ -97,7 +97,7 @@
 
 		// retrieve overall feed information associated specific user
 		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-		$sql = "SELECT PID,Content,Author as Author_Name, UID as Author_UID, Timestamp FROM (SELECT PID,Content,Author,Timestamp FROM Posts WHERE PID IN (SELECT PID FROM Tagged WHERE UID='$user')) A JOIN (SELECT Name, UID FROM Users)B ON A.Author= B.UID";
+		$sql = "SELECT PID,Content,Author as Author_Name, UID as Author_UID, Timestamp FROM (SELECT PID,Content,Author,Timestamp FROM Posts WHERE PID IN (SELECT PID FROM Tagged WHERE UID='$user')) A JOIN (SELECT Name, UID FROM Users)B ON A.Author= B.UID ORDER BY Timestamp";
 		$st = $conn->prepare($sql);
 		$st->execute();
 		
@@ -138,7 +138,7 @@
 		// retrieve overall feed information associated with friends
 		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
 		$offset = isset($_GET['offset']) ? $_GET['offset']:'0';
-		$sql = "SELECT PID, Author as Author_UID, Content, Timestamp, Name as Author_Name FROM (SELECT A.PID,A.Author,Content,Timestamp FROM((SELECT * FROM Posts)A JOIN (SELECT DISTINCT PID FROM (SELECT PID,UID,Timestamp FROM Tagged ORDER BY Timestamp DESC)T1 JOIN (SELECT Friend FROM Friends WHERE UID='$uid')T2 ON T1.UID=T2.Friend LIMIT 10 OFFSET $offset)B ON A.PID=B.PID ) ORDER BY Timestamp DESC)X JOIN (SELECT UID, Name FROM Users)Y ON X.Author=Y.UID;";
+		$sql = "SELECT PID, Author as Author_UID, Content, Timestamp, Name as Author_Name FROM (SELECT A.PID,A.Author,Content,Timestamp FROM((SELECT * FROM Posts)A JOIN (SELECT DISTINCT PID FROM (SELECT PID,UID,Timestamp FROM Tagged ORDER BY Timestamp DESC)T1 JOIN (SELECT Friend FROM Friends WHERE UID='$uid')T2 ON T1.UID=T2.Friend LIMIT 10 OFFSET $offset)B ON A.PID=B.PID ))X JOIN (SELECT UID, Name FROM Users)Y ON X.Author=Y.UID ORDER BY Timestamp DESC;";
 		$st = $conn->prepare($sql);
 		$st->execute();
 		
