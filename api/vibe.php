@@ -122,7 +122,6 @@
 		$temp = exec($command, $output);
 		$data = array("url"=>"http://api.go-vibe.com/view/cloud/" . $user . ".png");
 		$response_array = array("status"=> "200 Success" , "data" => $data);
-		
 		echo json_encode($response_array, JSON_UNESCAPED_SLASHES);
 	}
 

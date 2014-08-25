@@ -138,7 +138,7 @@
 		// retrieve overall feed information associated with friends
 		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
 		$offset = isset($_GET['offset']) ? $_GET['offset']:'0';
-		$sql = "SELECT A.PID,A.Author,Content,Timestamp FROM((SELECT * FROM Posts)A JOIN (SELECT DISTINCT PID FROM (SELECT PID,UID,Timestamp FROM Tagged ORDER BY Timestamp DESC)T1 JOIN (SELECT Friend FROM Friends WHERE UID='$uid')T2 ON T1.UID=T2.Friend LIMIT 10 OFFSET $offset)B ON A.PID=B.PID )ORDER BY Timestamp DESC";
+		$sql = "SELECT PID, Author as Author_UID, Content, Timestamp, Name as Author_Name FROM (SELECT A.PID,A.Author,Content,Timestamp FROM((SELECT * FROM Posts)A JOIN (SELECT DISTINCT PID FROM (SELECT PID,UID,Timestamp FROM Tagged ORDER BY Timestamp DESC)T1 JOIN (SELECT Friend FROM Friends WHERE UID='$uid')T2 ON T1.UID=T2.Friend LIMIT 10 OFFSET $offset)B ON A.PID=B.PID ) ORDER BY Timestamp DESC)X JOIN (SELECT UID, Name FROM Users)Y ON X.Author=Y.UID;";
 		$st = $conn->prepare($sql);
 		$st->execute();
 		
@@ -184,20 +184,6 @@
 	    $conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
 
 	    foreach($array as &$post) {
-
-	    	// [TO BE OPTIMIZED] -- get the person's name who posted the post (each post has an author UID)
-	    	$post_author = $post['Author'];
-
-			$sql = "SELECT Name FROM Users WHERE UID='$post_author'";
-			$st = $conn->prepare($sql);
-			$st->execute();
-		
-			$data = $st->fetch(); 
-
-			$post['post_author'] = $data["Name"];
-
-			// $post['post_author'] = $post['Author'];
-
 	    	// formatted time
 	    	$timestamp = $post['Timestamp'];
 
@@ -226,8 +212,9 @@
 	    	
 	    	// compare posts by timestamp and put comments under oldest post (original)
 	    	usort($thread, "cmp");
-
 	    	$post = array_pop($thread);
+	    	unset($post['Author_UID']);
+	    	unset($post['Author_Name']);
 	    	$post['Comments'] = $thread;
 	    	foreach($post['Comments'] as &$comment){
 	    		$comment['Comments'] = array();
