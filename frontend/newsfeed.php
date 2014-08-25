@@ -122,6 +122,7 @@
                             $('input[id="inputVibe"]').val("");
 
                             // trim front of JSON (i.e. the extraneous header)
+                            console.log(String(data));
                             var json_string = data.substring(String(data).indexOf('{')); 
                             returned_data   = JSON.parse(json_string);
 

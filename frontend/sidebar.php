@@ -75,7 +75,7 @@
 <div id="notifications_toolbar">
 	<i class="fa fa-caret-up" style="margin-bottom: 0px; padding-bottom: 0px"></i>
 	<div class="widget">
-		<h5 class="innerAll margin-none border-bottom bg-gray">Recent News</h5>
+		<h5 class="innerAll margin-none border-bottom bg-gray">Notifications</h5>
 		<div class="widget-body padding-none">
 			<div id="notification_elems"></div>
 		</div>

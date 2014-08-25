@@ -17,6 +17,20 @@
         $.getJSON(my_notifications_url, function(data) {
 
             if (!data.error) {
+
+                var notification_length = data['data'].length;
+
+                for(var i = 0; i < notification_length; i++) {
+                    var curr_classif = data['data'][i]['Class'];
+                    var curr_message = data['data'][i]['Message'];
+                    var curr_data = data['data'][i]['Data'];
+                    var curr_timestamp = data['data'][i]['Timestamp'];
+
+                    console.log("POST: " + curr_classif + " " + curr_message + " " + curr_data + " " + curr_timestamp);
+                }
+
+                // sample content (template)
+                /*
                 var html_notification_content = [
                     '<div class="media border-bottom innerAll margin-none">',
                         '<img src="../assets/images/people/35/22.jpg" class="pull-left media-object"/>',
@@ -31,7 +45,7 @@
                     ].join('\n');
 
                 $('#notification_elems').append(html_notification_content);
-                console.log(html_notification_content);
+                */
             }
             else {
                 console.log('[ERROR] rendering notification elements');     // error with JSON
