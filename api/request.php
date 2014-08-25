@@ -32,10 +32,11 @@
                 ignore_user_abort(true);
                 header("Connection: close\r\n");
                 header("Content-Encoding: none\r\n");  
-                ob_start();        
+                ob_start();   
+                ob_clean();     
                 $response = json_encode($response_array);
                 echo $response;  
-                $size = ob_get_length()*2;
+                $size = ob_get_length()+2;
                 header("Content-Length: $size",TRUE);  
                 ob_end_flush();
                 flush();
