@@ -18,9 +18,13 @@
 	// determine method call using action URL fragment
 	switch ($action) {
 		case 'sendEmail':
+			$response_array['status'] = "200 Request Queued";
+			pushResponse($response_array);
 			sendEmail();
 		break;
 		case 'sendTweet':
+			$response_array['status'] = "200 Request Queued";
+			pushResponse($response_array);
 			sendTweet();
 		break;
 		case 'addNotification':
@@ -95,7 +99,7 @@
 	}
 
 
-	/*
+	
 	// sends email to user
 	function sendEmail() {
 		
@@ -105,9 +109,9 @@
 		
 		$status = addslashes($status);
 		
-		// runs cloud.py which generates Vibe cloud PNG at the returned URL
+		// runs sendEmail.py which deals with sending the email
 		$command = "sudo python sendEmail.py $email $user '$status'  2>&1";
-		$temp = exec($command, $output)	
+		$temp = exec($command, $output);
 	}
 
 
@@ -125,6 +129,5 @@
 		$command = "sudo python sendTweet.py '$twitter' '$url' '$status'  2>&1";
 		$temp = exec($command, $output);	
 	}
-	*/
 
 ?>
