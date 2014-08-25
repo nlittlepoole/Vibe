@@ -132,8 +132,6 @@
 
 		$command = "cat password.txt | sudo python vibe.py '$status' 2>&1";
 		$temp = exec($command ,$output);
-		
-		print_r($output);
 		return $output;
 	}
 
