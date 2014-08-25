@@ -213,8 +213,8 @@
 	    	// compare posts by timestamp and put comments under oldest post (original)
 	    	usort($thread, "cmp");
 	    	$post = array_pop($thread);
-	    	$post['Author_UID'])="";
-	    	$post['Author_Name'])="";
+	    	$post['Author_UID']="";
+	    	$post['Author_Name']="";
 	    	$post['Comments'] = $thread;
 	    	foreach($post['Comments'] as &$comment){
 	    		$comment['Comments'] = array();
