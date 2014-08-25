@@ -57,7 +57,6 @@
         var is_visible = false;
 
         $(document).on('click', '#notifications_trigger', function() {
-            console.log('click triggered');
             
             if(!is_visible) {
               var offset = $('#custom_globe').offset();

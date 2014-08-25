@@ -65,6 +65,11 @@
 		   'z-index' 	: '10000'
 	  });
 	});
+
+	$(function() {
+		console.log('notification elements being loaded...');
+		$('#notification_elems').load('sidebar_element.php'); 
+	});
 </script>
 
 <div id="notifications_toolbar">
@@ -72,16 +77,7 @@
 	<div class="widget">
 		<h5 class="innerAll margin-none border-bottom bg-gray">Recent News</h5>
 		<div class="widget-body padding-none">
-			<div class="media border-bottom innerAll margin-none">
-				<img src="../assets/images/people/35/22.jpg" class="pull-left media-object"/>
-				<div class="media-body">
-					<a href="" class="pull-right text-muted innerT half">
-						<i class="fa fa-comments"></i> 4
-					</a>
-					<h5 class="margin-none"><a href="" class="text-inverse">Someone upped your Kindness</a></h5>
-					<small>on February 12th, 2014 </small> 
-				</div>
-			</div>
+			<div id="notification_elems"></div>
 		</div>
 	</div>
 </div>
