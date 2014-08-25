@@ -120,8 +120,10 @@
 		// runs cloud.py generating cloud PNG at returned URL
 		$command = 'sudo python cloud.py "' . $user . '" 2>&1';
 		$temp = exec($command, $output);
+		$data = array("url"=>"http://api.go-vibe.com/view/cloud/" . $user . ".png");
+		$response_array = array("status"=> "200 Success" , "data" => $data);
 		
-		echo json_encode(array("url"=>"http://niger.go-vibe.com/view/cloud/" . $user . ".png"));
+		echo json_encode($response_array, JSON_UNESCAPED_SLASHES);
 	}
 
 	// generate vibes for given status
