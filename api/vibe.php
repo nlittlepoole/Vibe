@@ -26,13 +26,13 @@
 		case 'postComment':
 			// response OK.
 			$response_array['status'] = "200 Request Queued";
-			pushResponse($response_array);
+			pushResponse($response_array,"POST");
 			postComment($uid, $token);
 		break;
 		case 'deleteVibe':
 			// response OK.
 			$response_array['status'] = "200 Request Queued";
-			pushResponse($response_array);
+			pushResponse($response_array,"POST");
 			deleteVibe();
 		break;
 		case 'getCloud':
@@ -40,7 +40,7 @@
 		break;
 		case 'vote':
 			$response_array['status'] = "200 Request Queued";
-			pushResponse($response_array);
+			pushResponse($response_array,"POST");
 			vote($uid);
 		break;
 	}
@@ -189,7 +189,7 @@
 		$response_array['status'] = "200 Request Queued";
 		$response_array['PID'] = $pid;
 
-		pushResponse($response_array);
+		pushResponse($response_array, "POST");
 
 		$author = isset($_POST['uid']) ? $_POST['uid'] : "";
 

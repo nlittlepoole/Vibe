@@ -58,7 +58,7 @@
 		$conn = null;
 
 		// push results
-		pushResponse($data); 
+		pushResponse($data, "GET"); 
 	}
 	// implemented search functionality API (grabs all relevant names)
 	function search($uid) {
@@ -75,7 +75,7 @@
 			array_push($data, $result );
 		}
 		$data = array("status" => "200 Success", "data" => $data);
-		pushResponse($data);
+		pushResponse($data, "GET");
 	}
 
 	// enable a blocked status on a friendship
@@ -83,7 +83,7 @@
 
 		// push response
 		$response_array['status'] = "200 Request Queued";
-		pushResponse($response_array);
+		pushResponse($response_array,"POST");
 		
 		$user = $_POST['user'];
 		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
@@ -113,7 +113,7 @@
 			
 			// modify results (include comments below main posts)
 			$tagged= $st->fetchAll(PDO::FETCH_ASSOC); 
-			$post['tagged'] = $tagged;
+			$post['Tagged'] = $tagged;
 
 
 			$sql = "SELECT SUM(Vote) as Total, Sum( Case When Vote< 0 Then 1 Else 0 End ) As Disagree , Sum( Case When Vote > 0 Then 1 Else 0 End ) As Agree FROM Liked GROUP BY PID,Timestamp HAVING Timestamp = '$timestamp' AND pid = '$pid';";
@@ -130,7 +130,7 @@
 		$conn = null;
 
 		// push results
-		pushResponse($data);
+		pushResponse($data,"GET");
 	}
 
 	function getFeed($uid){
@@ -157,7 +157,7 @@
 			
 			// modify results (include comments below main posts)
 			$tagged= $st->fetchAll(PDO::FETCH_ASSOC); 
-			$post['tagged'] = $tagged;
+			$post['Tagged'] = $tagged;
 
 			$sql = "SELECT SUM(Vote) as Total, Sum( Case When Vote < 0 Then 1 Else 0 End) As Disagree , Sum(Case When Vote > 0 Then 1 Else 0 End) As Agree FROM Liked GROUP BY PID,Timestamp HAVING Timestamp = '$timestamp' AND pid = '$pid';";
 			$st = $conn->prepare($sql);
@@ -173,7 +173,7 @@
 		$conn = null;
 
 		// push results
-		pushResponse($data);
+		pushResponse($data,"GET");
 	}
 
 	function groupByKey($array) {
@@ -308,7 +308,7 @@
 
 		// response OK
 		$response_array['status'] = "200 Request Queued";
-		pushResponse($response_array);
+		pushResponse($response_array, "POST");
 
 		// makes request to add user data
 		$url = 'http://api.go-vibe.com/api/location.php?action=addUser';
@@ -367,7 +367,7 @@
 		
 		// response OK.
 		$response_array['status'] = "200 Request Queued";
-		pushResponse($response_array);
+		pushResponse($response_array, "POST");
 		
 		$user = $_POST['user'];
 
@@ -402,7 +402,7 @@
 		$data = array("status"=>"200 Success", "data"=>$data);
 
 		// push JSON data
-		pushResponse($data);
+		pushResponse($data,"GET");
 	}
 
 ?>

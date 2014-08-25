@@ -16,7 +16,7 @@
     }
 
     // pushing JSON encoded response (NOTE: currently inefficient, leading to long waits)
-    function pushResponse($response_array){
+    function pushResponse($response_array, $type){
         /*
         ob_start(); 
         echo json_encode($response_array);
@@ -27,17 +27,23 @@
         ob_end_flush();
         ob_flush();
          flush(); */
-
-        ignore_user_abort(true);
-        header("Connection: close\r\n");
-        header("Content-Encoding: none\r\n");  
-        ob_start();          
-        echo json_encode($response_array);  
-        $size = ob_get_length() +2;   
-        header("Content-Length: $size",TRUE);  
-        ob_end_flush();
-        ob_flush();
-        flush();   
+        switch ($type) {
+            case 'POST':
+                ignore_user_abort(true);
+                header("Connection: close\r\n");
+                header("Content-Encoding: none\r\n");  
+                ob_start();          
+                echo json_encode($response_array);  
+                $size = ob_get_length();
+                header("Content-Length: $size",TRUE);  
+                ob_end_flush();
+                ob_flush();
+                flush();
+            break;   
+            case 'GET':
+                echo json_encode($response_array);  
+            break;
+        }
     }
 
     // current post framework to send asynchronous POST requests between different files

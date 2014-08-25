@@ -19,13 +19,13 @@
 	switch ($action) {
 		case 'addUser':
 			$response_array['status'] = "200 Request Queued";
-			pushResponse($response_array);
+			pushResponse($response_array,"POST");
 
 			addUser($uid, $token);
 		break;
 		case 'addFriends':
 			$response_array['status'] = "200 Request Queued";
-			pushResponse($response_array);
+			pushResponse($response_array, "POST");
 
 			addFriends($uid, $token);
 		break;
@@ -51,7 +51,7 @@
 		$conn = null;
 		
 		// push JSON data
-		pushResponse($data);
+		pushResponse($data, "GET");
 	}
 
 	// JSON encode the newsfeed of given UID
@@ -97,7 +97,7 @@
 		$data = array("status" => "200 Success", "data" => $data);
 		$conn = null;
 		
-		pushResponse($data);
+		pushResponse($data, "GET");
 	}
 
 	function groupByKey($array) {

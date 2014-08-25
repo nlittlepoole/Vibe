@@ -19,12 +19,12 @@
 	switch ($action) {
 		case 'sendEmail':
 			$response_array['status'] = "200 Request Queued";
-			pushResponse($response_array);
+			pushResponse($response_array, "POST");
 			sendEmail();
 		break;
 		case 'sendTweet':
 			$response_array['status'] = "200 Request Queued";
-			pushResponse($response_array);
+			pushResponse($response_array, "POST");
 			sendTweet();
 		break;
 		case 'addNotification':
@@ -43,7 +43,7 @@
 		
 		// reponse OK.
 		$response_array['status'] = "200 Request Queued";
-		pushResponse($response_array);
+		pushResponse($response_array, "POST");
 
 		// POST components
 		$class = $_POST['classif'];
@@ -68,7 +68,7 @@
 
 		// response OK.
 		$response_array['status'] = "200 Request Queued";
-		pushResponse($response_array);
+		pushResponse($response_array, "POST");
 		
 		$nid = $_POST['nid'];
 		
@@ -95,7 +95,7 @@
 		$conn = null;
 		
 		// push JSON encoded results
-		pushResponse($data);
+		pushResponse($data, "GET");
 	}
 
 
