@@ -97,7 +97,7 @@
 
 		// retrieve overall feed information associated specific user
 		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-		$sql = "SELECT PID,Content,Author,Timestamp FROM Posts WHERE PID IN (SELECT PID FROM Tagged WHERE UID='$user')";
+		$sql = "SELECT PID,Content,Author as Author_Name, UID as Author_UID, Timestamp FROM (SELECT PID,Content,Author,Timestamp FROM Posts WHERE PID IN (SELECT PID FROM Tagged WHERE UID='$user')) A JOIN (SELECT Name, UID FROM Users)B ON A.Author= B.UID";
 		$st = $conn->prepare($sql);
 		$st->execute();
 		
@@ -213,8 +213,8 @@
 	    	// compare posts by timestamp and put comments under oldest post (original)
 	    	usort($thread, "cmp");
 	    	$post = array_pop($thread);
-	    	unset($post['Author_UID']);
-	    	unset($post['Author_Name']);
+	    	$post['Author_UID'])="";
+	    	$post['Author_Name'])="";
 	    	$post['Comments'] = $thread;
 	    	foreach($post['Comments'] as &$comment){
 	    		$comment['Comments'] = array();
