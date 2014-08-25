@@ -245,6 +245,10 @@
 		$st = $conn->prepare($sql);
 		$st->execute();
 
+		$sql = "INSERT INTO Liked (UID, PID, Timestamp) SELECT Author as UID, PID, Timestamp FROM Posts WHERE PID='$pid';";
+		$st = $conn->prepare($sql);
+		$st->execute();
+
 		// technically now the timestamp has been created so pull it
 
 		foreach($recipients as $tagged){

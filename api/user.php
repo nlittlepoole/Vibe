@@ -1,19 +1,18 @@
 <?php
 
-	// config settings setup
+	// config settings
 	ini_set('display_errors',1); 
 	error_reporting(E_ALL);
-	session_start();
-
+	
 	// file imports
 	$root = $_SERVER['DOCUMENT_ROOT'];
 	require_once($root . "/config.php");
 	require_once('request.php');
 
-	// grabbing URL fragments
-	$uid =  $_REQUEST['uid'] ;
-	$token = $_REQUEST['token'];
-	$action = isset($_GET['action']) && validToken($uid,$token) ? $_GET['action'] : ""; 
+	// URL fragments
+	$uid 	= $_REQUEST['uid'];
+	$token 	= $_REQUEST['token'];
+	$action = isset($_REQUEST['action']) && validToken($uid, $token) ? $_REQUEST['action'] : "";
 
 	// parsing based on action fragment
 	switch ($action) {
@@ -230,6 +229,9 @@
 
 	    	$post = array_pop($thread);
 	    	$post['Comments'] = $thread;
+	    	foreach($post['Comments'] as &$comment){
+	    		$comment['Comments'] = array();
+	    	}
 	    	
 	    	array_push($result, $post);
 	    }
