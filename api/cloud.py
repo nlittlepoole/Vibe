@@ -37,4 +37,4 @@ words = wordcloud.process_text(text)
 elements = wordcloud.fit_words(words)
 
 # draw the positioned words to a PNG file
-wordcloud.draw(elements, '/var/www/niger/Vibe/view/cloud/' + uid + '.png')
+wordcloud.draw(elements, '/var/www/api/Vibe/view/cloud/' + uid + '.png')
