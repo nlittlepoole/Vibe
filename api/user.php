@@ -288,10 +288,6 @@
 
 	// adds user & friends to user and friends databases
 	function addUser($uid, $token){
-		
-		// response OK
-		$response_array['status'] = "200 Request Queued";
-		pushResponse($response_array);
 
 		// parsing specific user info
 		$name = $_POST['name'];
@@ -322,6 +318,11 @@
 		$st->execute();
 
 		$conn = null;
+
+		// response OK
+		$response_array['status'] = "200 Request Queued";
+		pushResponse($response_array);
+
 		// makes request to add user data
 		$url = 'http://api.go-vibe.com/api/location.php?action=addUser';
 	    $post_data = array('uid' => $uid, 'token' => $token);
