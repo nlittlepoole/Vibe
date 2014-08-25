@@ -273,13 +273,7 @@
 		// add POST components
 		$status = isset($_POST['status']) ? $_POST['status'] : "";
 		$pid = isset($_POST['pid']) ? $_POST['pid'] : "";
-		$email = isset($_POST['email']) ? $_POST['email'] : "";
-
-		$hash_id = hash("sha256", $email);
-		$author = isset($_POST['uid']) ? $_POST['uid'] : "";
-
-		$recipient = isset($_POST['recipient']) ? $_POST['recipient'] : "";
-
+		$author = $uid;
 		$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
 		$status = $conn->quote($status); //Clean up user statuses to prevent SQL injections
 

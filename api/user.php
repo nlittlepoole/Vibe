@@ -217,7 +217,12 @@
 	    	$post['Author_Name']="";
 	    	$post['Comments'] = $thread;
 	    	foreach($post['Comments'] as &$comment){
+	    		// comments need to have exact same fields as master posts for android json decoding
 	    		$comment['Comments'] = array();
+	    		$comment['Agree'] = 0;
+				$comment['Disagree'] =0;
+				$comment['Score'] = 0;
+				$comment['Tagged'] = array();
 	    	}
 	    	
 	    	array_push($result, $post);
