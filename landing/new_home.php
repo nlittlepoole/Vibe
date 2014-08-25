@@ -69,7 +69,7 @@
     <div class="twelve columns offset-by-two">
       <h2>"Got something good to say about a buddy? We've got the platform for you."</h2>
       <div class="john-collison">
-        <a href="https://twitter.com/collision"><img src="http://api.go-vibe.com/view/small_prof_pic.jpg" width="160" height="160" id="john" class="person scale-with-grid"></a>
+        <a href="https://twitter.com/collision"><img src="http://api.go-vibe.com/landing/small_prof_pic.jpg" width="160" height="160" id="john" class="person scale-with-grid"></a>
         <h3 style="margin-bottom: 5px"><a href="https://twitter.com/collision">Noah Stebbins</a></h3>
         <h4><a href="https://stripe.com">Co-Founder of Vibe</a></h4>
       </div>
