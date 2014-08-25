@@ -33,7 +33,7 @@
         header("Content-Encoding: none\r\n");  
         ob_start();          
         echo json_encode($response_array);  
-        $size = ob_get_length();   
+        $size = ob_get_length() +2;   
         header("Content-Length: $size",TRUE);  
         ob_end_flush();
         ob_flush();
