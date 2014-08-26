@@ -36,8 +36,6 @@
 
                         get_stream = JSON.parse(localStorage["getStream"])
 
-                        console.log("number of posts in getStream: " + get_stream.length);
-
                         // check if this post exists in getStream - since you're looking at original posts, you don't need a timestamp
                         // (each original post can be defined strictly by PID)
 
@@ -45,25 +43,29 @@
 
                             // if the PIDs match, we found our original post in the db so we can add that content to our notifications returned
                             if(get_stream[j]["PID"] == curr_pid) {
-                                console.log("we have a match with getStream and notifications rendered...");
+
+                                var post_content = get_stream[j]["Content"]
+                                var post_content_abbrev = '"' + post_content + '"';
+
+                                if(post_content.length > 20) {
+                                    var post_content_abbrev = '"' + post_content.substring(0, 20) + '..."';
+                                }
+
+                                var html_notification_content = [
+                                '<div class="media border-bottom innerAll margin-none">',
+                                    '<div class="media-body">',
+                                        '<a href="" class="pull-right text-muted innerT half">',
+                                            '<i class="fa fa-comments"></i> 4',
+                                        '</a>',
+                                        '<h5 class="margin-none"><a href="" class="text-inverse">Someone wrote about you!</a></h5>',
+                                        '<small>' + post_content_abbrev + '</small>',
+                                    '</div>',
+                                '</div>',
+                                ].join('\n');
+
+                            $('#notification_elems').append(html_notification_content);
                             }
                         }
-
-                        // '<img src="../assets/images/people/35/22.jpg" class="pull-left media-object"/>',
-
-                        var html_notification_content = [
-                            '<div class="media border-bottom innerAll margin-none">',
-                                '<div class="media-body">',
-                                    '<a href="" class="pull-right text-muted innerT half">',
-                                        '<i class="fa fa-comments"></i> 4',
-                                    '</a>',
-                                    '<h5 class="margin-none"><a href="" class="text-inverse">Someone wrote about you!</a></h5>',
-                                    '<small>on February 12th, 2014 </small>',
-                                '</div>',
-                            '</div>',
-                            ].join('\n');
-
-                        $('#notification_elems').append(html_notification_content);
                     }
                 }
             }

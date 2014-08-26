@@ -15,6 +15,11 @@
 <script type="text/javascript">
 	$(window).load(function() {
 
+		// check if window width is large enough to make notifications bigger
+		if($(window).width() > 1000) {
+		  	$('#notifications_toolbar').find('.widget').css('width', '300px');
+		}
+
 		// dynamically load notification elements
 		// TO IMPLEMENT: insert notification element loading here (from separate file)
 
@@ -61,6 +66,13 @@
 		   'top' 		: top_offset,
 		   'z-index' 	: '10000'
 	  });
+
+	  // if window is large enough, make notifications wider (easier to read)
+	  if($(window).width() < 1000) {
+	  	$('#notifications_toolbar').find('.widget').css('width', '');
+	  }
+
+
 	});
 
 	$(function() {
