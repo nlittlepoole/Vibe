@@ -409,7 +409,7 @@
 
         </script>
 
-        <!-- Ajax load scripts go at the top... -->
+        <!-- loading webelements and using getStream for notifications -->
         <script type="text/javascript"> 
 
             $(function() {
@@ -420,10 +420,12 @@
                 // grabbing JSON...
                 $.getJSON(profile_url, function(data) {
 
-                    // simple working statement - for debugging if necessary
-                    console.log("The number of posts about this person is: " + data['data'].length);
-
                     if (!data.error) {
+                        
+                        // simple working statement - for debugging if necessary
+                        console.log("The number of posts about this person is: " + data['data'].length);
+                        localStorage["getStream"] = JSON.stringify(data['data']);
+
                         // loading navbar...
                         $('#navbar').load('navbar.php'); 
                         console.log('navbar is loaded...');

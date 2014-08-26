@@ -34,6 +34,21 @@
 
                         var curr_pid = curr_data;   // the data is actually the PID of the post
 
+                        get_stream = JSON.parse(localStorage["getStream"])
+
+                        console.log("number of posts in getStream: " + get_stream.length);
+
+                        // check if this post exists in getStream - since you're looking at original posts, you don't need a timestamp
+                        // (each original post can be defined strictly by PID)
+
+                        for(var j = 0; j < get_stream.length; j++) {
+
+                            // if the PIDs match, we found our original post in the db so we can add that content to our notifications returned
+                            if(get_stream[j]["PID"] == curr_pid) {
+                                console.log("we have a match with getStream and notifications rendered...");
+                            }
+                        }
+
                         // '<img src="../assets/images/people/35/22.jpg" class="pull-left media-object"/>',
 
                         var html_notification_content = [
