@@ -16,6 +16,10 @@
 
     $_SESSION['friend_list'] = $friends;
 
+    $_SESSION['profile_elems_request'] = "http://api.go-vibe.com/api/user.php?action=getStream";
+    $_SESSION['profile_elems_request'] .= "&uid=" . $_SESSION['userID']  . "&token=" . $_SESSION['token'];
+    $_SESSION['profile_elems_request'] .= "&user=" . $_SESSION['prof_UID']; 
+
 ?>
 
 <!DOCTYPE html>
@@ -410,19 +414,32 @@
 
             $(function() {
 
-                console.log('loading up the page...');
-                
-                // loading navbar...
-                $('#navbar').load('navbar.php'); 
-                console.log('navbar is loaded...');
+                // JSON request for profile elements
+                var profile_url = "<?php echo $_SESSION['profile_elems_request']; ?>";
 
-                // loading sidebar...
-                $('#sidebar').load('sidebar.php'); 
-                console.log('sidebar is loaded...'); 
+                // grabbing JSON...
+                $.getJSON(profile_url, function(data) {
 
-                // loading newsfeed elements...
-                $('#last_elems').load('newsfeed_element.php'); 
-                console.log('newsfeed element is loaded...');
+                    // simple working statement - for debugging if necessary
+                    console.log("The number of posts about this person is: " + data['data'].length);
+
+                    if (!data.error) {
+                        // loading navbar...
+                        $('#navbar').load('navbar.php'); 
+                        console.log('navbar is loaded...');
+
+                        // loading sidebar...
+                        $('#sidebar').load('sidebar.php'); 
+                        console.log('sidebar is loaded...'); 
+
+                        // loading newsfeed elements...
+                        $('#last_elems').load('newsfeed_element.php'); 
+                        console.log('newsfeed element is loaded...');
+                    }
+                    else {
+
+                    }
+                });
 
             });
         </script> 
