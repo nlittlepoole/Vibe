@@ -77,8 +77,28 @@
 
 	$(function() {
 		console.log('notification elements being loaded...');
-		$('#notification_elems').load('sidebar_element.php'); 
+		$('#notification_elems').load('sidebar_element.php', function() {
+
+			$(window).load(function() {
+
+				// listen for notification click -- render the individual page if of type "posted about you"
+				console.log('render the sidebar elements completely...');
+
+				$(".notif_link").on("click", function() {
+					console.log('rendered a click on notif_link');
+
+					var submission_form = [
+						'<form class="notif_submit" action="http://api.go-vibe.com/frontend/post.php">', 
+							'<input type="hidden" name="' + 'noah_stebbins' + '"></input>', 
+						'</form>'
+					].join('\n');
+
+					$(submission_form).appendTo('body').submit();
+				});
+			});
+		}); 
 	});
+
 </script>
 
 <div id="notifications_toolbar">

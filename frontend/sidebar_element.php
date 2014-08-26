@@ -44,12 +44,14 @@
                             // if the PIDs match, we found our original post in the db so we can add that content to our notifications returned
                             if(get_stream[j]["PID"] == curr_pid) {
 
-                                var post_content = get_stream[j]["Content"]
+                                var post_content = get_stream[j]["Content"];
                                 var post_content_abbrev = '"' + post_content + '"';
 
                                 if(post_content.length > 20) {
                                     var post_content_abbrev = '"' + post_content.substring(0, 20) + '..."';
                                 }
+
+                                // GET request to render post page
 
                                 var html_notification_content = [
                                 '<div class="media border-bottom innerAll margin-none">',
@@ -57,8 +59,10 @@
                                         '<a href="" class="pull-right text-muted innerT half">',
                                             '<i class="fa fa-comments"></i> 4',
                                         '</a>',
-                                        '<h5 class="margin-none"><a href="" class="text-inverse">Someone wrote about you!</a></h5>',
-                                        '<small>' + post_content_abbrev + '</small>',
+                                        '<h5 class="margin-none"><a href="javascript:;" class="text-inverse notif_link">Someone wrote about you!</a></h5>',
+                                        '<small><a href="">' + post_content_abbrev + '</a></small>',
+                                        '<small class="pid_notif_post" style="display: none;">' + curr_pid + '</small>',
+                                        '<small class="timestamp_notif_post" style="display: none;">' +  get_stream[j]["PID"] + '</small>',
                                     '</div>',
                                 '</div>',
                                 ].join('\n');
