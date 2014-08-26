@@ -49,7 +49,7 @@
 	function vote($uid) {
 		
 		$pid = $_POST['pid'];
-		$vote = $_POST['vote'] =='agree' ? 1: -1;
+		$vote = $_POST['vote'] =='agree' ? 1:  $_POST['vote'] =='null' ? 0 : -1;
 		$timestamp = $_POST['timestamp'];
 		// grab necessary data about post
 		$sql = "SELECT A.PID, UID as Tagged, Author, Content FROM (SELECT * FROM Posts WHERE TIMESTAMP = '$timestamp' AND PID = '$pid')A JOIN Tagged on A.PID = Tagged.PID"; 
