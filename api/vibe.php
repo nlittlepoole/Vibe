@@ -191,7 +191,7 @@
 
 		pushResponse($response_array, "POST");
 
-		$author = isset($_POST['uid']) ? $_POST['uid'] : "";
+		$author = $uid;
 
 		$recipients = isset($_POST['recipient']) ? $_POST['recipient'] : "";
 		$recipients = explode("&&",$recipients);
@@ -274,6 +274,7 @@
 		$status = isset($_POST['status']) ? $_POST['status'] : "";
 		$pid = isset($_POST['pid']) ? $_POST['pid'] : "";
 		$author = $uid;
+		
 		$conn = new PDO( DB_DSN, DB_USERNAME, DB_PASSWORD );
 		$status = $conn->quote($status); //Clean up user statuses to prevent SQL injections
 
