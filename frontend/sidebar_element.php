@@ -55,14 +55,14 @@
 
                                 var html_notification_content = [
                                 '<div class="media border-bottom innerAll margin-none">',
-                                    '<div class="media-body">',
+                                    '<div class="media-body notif_body">',
                                         '<a href="" class="pull-right text-muted innerT half">',
                                             '<i class="fa fa-comments"></i> 4',
                                         '</a>',
                                         '<h5 class="margin-none"><a href="javascript:;" class="text-inverse notif_link">Someone wrote about you!</a></h5>',
                                         '<small><a href="">' + post_content_abbrev + '</a></small>',
                                         '<small class="pid_notif_post" style="display: none;">' + curr_pid + '</small>',
-                                        '<small class="timestamp_notif_post" style="display: none;">' +  get_stream[j]["PID"] + '</small>',
+                                        '<small class="timestamp_notif_post" style="display: none;">' +  get_stream[j]["Timestamp"] + '</small>',
                                     '</div>',
                                 '</div>',
                                 ].join('\n');

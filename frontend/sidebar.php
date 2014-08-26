@@ -87,9 +87,13 @@
 				$(".notif_link").on("click", function() {
 					console.log('rendered a click on notif_link');
 
+					var temp_post_pid = $(this).closest("div.notif_body").find('.pid_notif_post').text();
+					var temp_post_timestamp = $(this).closest("div.notif_body").find('.timestamp_notif_post').text();
+
 					var submission_form = [
 						'<form class="notif_submit" action="http://api.go-vibe.com/frontend/post.php">', 
-							'<input type="hidden" name="' + 'noah_stebbins' + '"></input>', 
+							'<input type="hidden" name="currPID" + value="' + temp_post_pid + '"></input>', 
+							'<input type="hidden" name="currTimestamp" + value="' + temp_post_timestamp + '"></input>', 
 						'</form>'
 					].join('\n');
 
