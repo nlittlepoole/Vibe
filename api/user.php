@@ -169,6 +169,7 @@
 			$post['Disagree'] = $votes['Disagree'];
 			$post['Score'] = $votes['Total'];
 		}
+		usort($data, "cmp");
 		$data = array("status" => "200 Success", "data" => $data);
 		$conn = null;
 
