@@ -427,16 +427,12 @@
                         localStorage["getStream"] = JSON.stringify(data['data']);
 
                         // loading navbar...
-                        $('#navbar').load('navbar.php'); 
+                        $('#navbar').load('navbar.php', function() {
+                            $('#sidebar').load('sidebar.php', function() {
+                                $('#last_elems').load('newsfeed_element.php'); 
+                            }); 
+                        }); 
                         console.log('navbar is loaded...');
-
-                        // loading sidebar...
-                        $('#sidebar').load('sidebar.php'); 
-                        console.log('sidebar is loaded...'); 
-
-                        // loading newsfeed elements...
-                        $('#last_elems').load('newsfeed_element.php'); 
-                        console.log('newsfeed element is loaded...');
                     }
                     else {
 

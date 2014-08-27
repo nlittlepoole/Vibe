@@ -52,6 +52,7 @@
                                 }
 
                                 var JSON_content = JSON.stringify(get_stream[j]);
+                                console.log("JSON string: " + JSON_content);
 
                                 // GET request to render post page
 

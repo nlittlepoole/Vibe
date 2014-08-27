@@ -241,7 +241,7 @@
                         }); 
                     }
                     else {
-
+                    	console.log('[STATUS] error retrieving profile elems');
                     }
                 });
 
@@ -286,49 +286,9 @@
                             </div>
 
                             <!-- actual TIMELINE -->
-                            <ul class="timeline-activity list-unstyled" id="newsfeed_container">
+                            <ul class="timeline-activity list-unstyled" id="post_container">
 
                                 <!-- loading NEWSFEED ELEMENTS here -->
-
-                                <li class='active vibe_newsfeed_posts'>
-                                    <span class='marker'></span>
-                                    <div class='block' style='padding-right: 0px;'>
-                                        <div class='caret'></div>
-                                            <div class='inline-block box-generic' style='width: 100%; border: 1px solid #ececec;'>
-                                                <!-- SOCIAL MEDIA POST FOR TESTING PURPOSES -->
-                                                <div class='widget'>
-                                                    <!-- Info -->
-                                                    <div class='bg-primary'>
-                                                        <div class='media'>
-                                                            <div class='media-body innerTB' style='padding-left:10px;'>
-                                                                <span><i class='fa fa-user'></i> Noah Stebbins on August 26th</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Content -->
-                                                    <div class='innerAll'>
-                                                        <p class='lead' style='display : inline;'> Here is some content. </p>
-                                                    </div>
-                                                    <!-- Show overall like info -->
-                                                    <!-- show_like_info, -->
-                                                    <!-- Show more comments? -->
-                                                    <!-- show_more_comments, -->
-                                                    <!-- Rendered Comments -->
-                                                    <!-- comment_data, -->
-                                                    <!-- User input comments -->
-                                                    <!--
-                                                    '<form class="comment_form" name="comment_form" method="post" action="#">',
-                                                        "<input type='text' class='form-control comment_input' name='status' style='border: none;' placeholder='Comment here...'>",
-                                                        "<input type='hidden' class='hiddenID' name='uid' value='" + localStorage['uid'] + "'/>",
-                                                        "<input type='hidden' class='hiddentoken' name='token' value='" + localStorage['token'] + "'/>",
-                                                        "<input type='hidden' class='hiddenPID' name='pid' value='" + post_PID + "'/>",
-                                                        '<button type="submit" class="comment_submit" name="comment_submit" style="display: none; "></button>',
-                                                    '</form>',
-                                                    `-->
-                                                </div>
-                                            </div>
-                                    </div>
-                                </li>
 
                             </ul>
 
@@ -354,7 +314,7 @@
             </div>
         </div>
 
-        <!--
+       
         <script type="text/javascript">
 
         	// render unique content with POST variables and jQuery
@@ -365,21 +325,27 @@
 
 		        var my_votes_url = "<?php echo $_SESSION['my_votes']; ?>";
 
-		        $.getJSON(my_votes_url, function(data) {
+		        $.getJSON(my_votes_url, function(vote_data) {
 
 		            my_votes = {};
 
-		            if (!data.error) {
+		            if (!vote_data.error) {
 		                
 		                // filling up all recorded votes
-		                for(var i = 0; i < data['data'].length; i++) {
-		                    my_votes[data['data'][i]['PID']] = data['data'][i]['Vote']; 
+		                for(var i = 0; i < vote_data['data'].length; i++) {
+		                    my_votes[vote_data['PID']] = vote_data['Vote']; 
 		                }
 
 
+		                var stringified_data = '<?php echo $_POST["currJSON"]; ?>';
+		                var data = JSON.parse(stringified_data);
+
+		                console.log("PID within the JSON is: " + data['PID']);
+
+
                         //  grab overall info about post
-                        var post_PID            = data['data'][i]['PID']; 
-                        var post_timestamp      = data['data'][i]['Timestamp']; 
+                        var post_PID            = data['PID']; 
+                        var post_timestamp      = data['Timestamp']; 
 
                         /* LIKES */
 
@@ -408,11 +374,11 @@
                         }
                         
                         var total_likes     = 0;
-                        var total_agrees    = data['data'][i]['Agree']; 
-                        var total_disagrees = data['data'][i]['Disagree']; 
+                        var total_agrees    = data['Agree']; 
+                        var total_disagrees = data['Disagree']; 
 
-                        if(data['data'][i]['Score'] !== null) {
-                            total_likes = data['data'][i]['Score'];
+                        if(data['Score'] !== null) {
+                            total_likes = data['Score'];
                         }
 
                         var like_submission_form = [
@@ -442,7 +408,7 @@
 
                         /* COMMENTS */
 
-                        var num_comments = data['data'][i]['Comments'].length;  // # of comments
+                        var num_comments = data['Comments'].length;  // # of comments
                         var show_more_comments = "";                            // 'show all comments' option
 
                         if(num_comments > 4) {
@@ -458,10 +424,10 @@
                         for(var j = num_comments - 1; j >= 0; j--) {
 
                             // comment info
-                            comment_content     = data['data'][i]['Comments'][j]['Content']; 
-                            comment_timestamp   = data['data'][i]['Comments'][j]['formatted_time'];
-                            comment_author_UID  = data['data'][i]['Comments'][j]['Author_UID'];
-                            comment_author_name = data['data'][i]['Comments'][j]['Author_Name'];
+                            comment_content     = data['Comments'][j]['Content']; 
+                            comment_timestamp   = data['Comments'][j]['formatted_time'];
+                            comment_author_UID  = data['Comments'][j]['Author_UID'];
+                            comment_author_name = data['Comments'][j]['Author_Name'];
 
                             var temp_link   = "http://api.go-vibe.com/frontend/profile.php?user=" + comment_author_UID + "&name=" + comment_author_name + "";
                             var pic_href    = "https://graph.facebook.com/" + comment_author_UID + "/picture?width=60&height=60";
@@ -495,36 +461,36 @@
 
                         /* RECIPIENTS */
      
-                        var recipient_size = data['data'][i]['Tagged'].length;
+                        var recipient_size = data['Tagged'].length;
                         var post_tagged_formatted_names = "<span style='font-size:115%'>"; 
 
                         if(recipient_size == 1) {
                             
-                            var temp_link = "http://api.go-vibe.com/frontend/profile.php?user=" + data['data'][i]['Tagged'][0]['UID'] + "&name=" + data['data'][i]['Tagged'][0]['Name'] + "";
+                            var temp_link = "http://api.go-vibe.com/frontend/profile.php?user=" + data['Tagged'][0]['UID'] + "&name=" + data['Tagged'][0]['Name'] + "";
                             
-                            post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['Tagged'][0]['Name'] + "</a>"; 
+                            post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['Tagged'][0]['Name'] + "</a>"; 
                         }
                         else if(recipient_size == 2) {
                             
-                            var temp_link = "http://api.go-vibe.com/frontend/profile.php?user=" + data['data'][i]['Tagged'][0]['UID'] + "&name=" + data['data'][i]['Tagged'][0]['Name'] + "";
-                            var temp_link2 = "http://api.go-vibe.com/frontend/profile.php?user=" + data['data'][i]['Tagged'][1]['UID'] + "&name=" + data['data'][i]['Tagged'][1]['Name'] + "";
+                            var temp_link = "http://api.go-vibe.com/frontend/profile.php?user=" + data['Tagged'][0]['UID'] + "&name=" + data['Tagged'][0]['Name'] + "";
+                            var temp_link2 = "http://api.go-vibe.com/frontend/profile.php?user=" + data['Tagged'][1]['UID'] + "&name=" + data['Tagged'][1]['Name'] + "";
                             
-                            post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['Tagged'][0]['Name'] + "</a>" + " and " + "<a href='" + temp_link2 + "' class='text-white strong'>" + data['data'][i]['Tagged'][1]['Name'] + "</a>"; 
+                            post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['Tagged'][0]['Name'] + "</a>" + " and " + "<a href='" + temp_link2 + "' class='text-white strong'>" + data['Tagged'][1]['Name'] + "</a>"; 
                         }
                         else {
 
                             for(var z = 0; z < recipient_size; z++) {
 
-                                var temp_link = "http://api.go-vibe.com/frontend/profile.php?user=" + data['data'][i]['Tagged'][z]['UID'] + "&name=" + data['data'][i]['Tagged'][z]['Name'] + "";
+                                var temp_link = "http://api.go-vibe.com/frontend/profile.php?user=" + data['Tagged'][z]['UID'] + "&name=" + data['Tagged'][z]['Name'] + "";
                                 
                                 if(z == recipient_size - 1) {       // last element
-                                    post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['Tagged'][z]['Name'] + "</a>&nbsp;";
+                                    post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['Tagged'][z]['Name'] + "</a>&nbsp;";
                                 }
                                 else if(z == recipient_size - 2) {  // second-to-last element
-                                    post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['Tagged'][z]['Name'] + "</a>" + ", and ";
+                                    post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['Tagged'][z]['Name'] + "</a>" + ", and ";
                                 }
                                 else {
-                                    post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['Tagged'][z]['Name'] + "</a>" + ", "; 
+                                    post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['Tagged'][z]['Name'] + "</a>" + ", "; 
                                 }
 
                             }
@@ -547,13 +513,13 @@
                                                     "<div class='media'>",
                                                         "<div class='media-body innerTB' style='padding-left:10px;'>",
                                                             "<span><i class='fa fa-user'></i> " + post_tagged_formatted_names,
-                                                            " on " + data['data'][i]['formatted_time'] + "&nbsp;</span>",
+                                                            " on " + data['formatted_time'] + "&nbsp;</span>",
                                                         "</div>",
                                                     "</div>",
                                                 "</div>",
                                                 "<!-- Content -->",
                                                 "<div class='innerAll'>",
-                                                    "<p class='lead' style='display : inline;'>" + data['data'][i]['Content'] + "</p>",
+                                                    "<p class='lead' style='display : inline;'>" + data['Content'] + "</p>",
                                                 "</div>",
                                                 "<!-- Show overall like info -->",
                                                 show_like_info,
@@ -576,18 +542,13 @@
                             ].join('\n');
 
                         // append content (add to tail)
-                        $('#newsfeed_container').append(html_newsfeed_content);
-	                        
-		                    
-		               
+                        $('#post_container').append(html_newsfeed_content);  
 		            }
-		           
-
 		        });
 		    });
 
 		</script>
-        -->
+       
 
         <!-- global settings (scripts) -->
         <script data-id="App.Config">

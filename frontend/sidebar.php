@@ -88,13 +88,17 @@
 
 					var temp_post_pid = $(this).closest("div.notif_body").find('.pid_notif_post').text();
 					var temp_post_timestamp = $(this).closest("div.notif_body").find('.timestamp_notif_post').text();
+					var temp_post_JSON = $(this).closest("div.notif_body").find('.JSON_notif_post').text();
 
 					var submission_form = [
 						'<form class="notif_submit" action="http://api.go-vibe.com/frontend/post.php" method="post">', 
-							'<input type="hidden" name="currPID" + value="' + temp_post_pid + '"></input>', 
-							'<input type="hidden" name="currTimestamp" + value="' + temp_post_timestamp + '"></input>', 
+							'<input type="hidden" name="currPID" value=\'' + temp_post_pid + '\'></input>', 
+							'<input type="hidden" name="currTimestamp" value="' + temp_post_timestamp + '"></input>', 
+							'<input type="hidden" name="currJSON" value=\'' + temp_post_JSON + '\'></input>', 
 						'</form>'
 					].join('\n');
+
+					console.log("form with JSON: " + submission_form);
 
 					$(submission_form).appendTo('body').submit();
 				});
