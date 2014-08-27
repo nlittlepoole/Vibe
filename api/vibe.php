@@ -49,7 +49,8 @@
 	function vote($uid) {
 		
 		$pid = $_POST['pid'];
-		$vote = $_POST['vote'] =='agree' ? 1:  $_POST['vote'] =='null' ? 0 : -1;
+		// do not change these parenthesis, php ternary operators don't handle chains normaly so this is necessary
+		$vote =  $_POST['vote'] =='agree' ? 1 :  ( $_POST['vote'] == "null"? 0 : -1 ) ;
 		$timestamp = $_POST['timestamp'];
 		// grab necessary data about post
 		$sql = "SELECT A.PID, UID as Tagged, Author, Content FROM (SELECT * FROM Posts WHERE TIMESTAMP = '$timestamp' AND PID = '$pid')A JOIN Tagged on A.PID = Tagged.PID"; 
@@ -57,22 +58,24 @@
 		
 		$st = $conn->prepare($sql);
 		$st->execute();
-		$data = $st->fetch();
-		$tagged = $data['Tagged'];
-		$status = $data['Content'];
+		$data = $st->fetchAll();
+		foreach($data as $person){
+			$tagged = $person['Tagged'];
+			$status = $person['Content'];
 
-		$vibes = getVibe($status);
-		
-		foreach($vibes as $vibe){
-			$sql = "INSERT INTO Vibes (`Vibe`, `UID`, `Score`)
-				VALUES ('$vibe','$tagged',1)
-					ON DUPLICATE KEY UPDATE `Score` = `Score`+ $vote;";
-			$st = $conn->prepare( $sql );
-			$st->execute();
+			$vibes = getVibe($status);
+			
+			foreach($vibes as $vibe){
+				$sql = "INSERT INTO Vibes (`Vibe`, `UID`, `Score`)
+					VALUES ('$vibe','$tagged',1)
+						ON DUPLICATE KEY UPDATE `Score` = `Score`+ $vote;";
+				$st = $conn->prepare( $sql );
+				$st->execute();
+			}
 		}
-			$sql = "INSERT INTO Liked (UID, PID, Timestamp,Vote) VALUES('$uid','$pid','$timestamp',$vote) ON DUPLICATE KEY UPDATE `Vote` = $vote , Timestamp = '$timestamp';";	
-			$st = $conn->prepare( $sql );
-			$st->execute();
+		$sql = "INSERT INTO Liked (UID, PID, Timestamp,Vote) VALUES('$uid','$pid','$timestamp',$vote) ON DUPLICATE KEY UPDATE `Vote` = $vote , Timestamp = '$timestamp';";	
+		$st = $conn->prepare( $sql );
+		$st->execute();
 		$conn = null;
 	}
 
