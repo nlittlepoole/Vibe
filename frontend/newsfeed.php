@@ -18,7 +18,7 @@
 
     $_SESSION['profile_elems_request'] = "http://api.go-vibe.com/api/user.php?action=getStream";
     $_SESSION['profile_elems_request'] .= "&uid=" . $_SESSION['userID']  . "&token=" . $_SESSION['token'];
-    $_SESSION['profile_elems_request'] .= "&user=" . $_SESSION['prof_UID']; 
+    $_SESSION['profile_elems_request'] .= "&user=" . $_SESSION['userID']; 
 
 ?>
 

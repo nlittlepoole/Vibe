@@ -18,7 +18,7 @@
 
     $_SESSION['profile_elems_request'] = "http://api.go-vibe.com/api/user.php?action=getStream";
     $_SESSION['profile_elems_request'] .= "&uid=" . $_SESSION['userID']  . "&token=" . $_SESSION['token'];
-    $_SESSION['profile_elems_request'] .= "&user=" . $_SESSION['prof_UID']; 
+    $_SESSION['profile_elems_request'] .= "&user=" . $_SESSION['userID']; 
 
 ?>
 
@@ -30,7 +30,7 @@
 <!--[if !IE]><!--><html class="paceCounter paceSocial footer-sticky"><!-- <![endif]-->
 
     <head>
-        <title>Newsfeed</title>
+        <title>Post</title>
 
         <!-- jQuery & jQuery UI -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -45,201 +45,6 @@
 
         <!-- autocomplete code && form submission -->
         <script type="text/javascript" charset="utf-8">
-            
-            $(function() {
-
-                localStorage.setItem("uid", '<?php echo $_SESSION["userID"]; ?>');
-                localStorage.setItem("token", '<?php echo $_SESSION["token"]; ?>');
-                
-                // friends' list (as JSON data)
-                var my_friends = <?php echo json_encode($_SESSION['friend_list']); ?>;
-
-                var names_to_ID = {}; 
-                var friends_names = new Array(); 
-
-                for(var i = 0; i < my_friends.length; i++) {
-                    
-                    names_to_ID[String(my_friends[i]['Name'])] = String(my_friends[i]['UID']);      // name to UID
-                    friends_names[i] = my_friends[i]['Name'];                                       // just name
-                }
-
-                /* SELECTIZE */
-
-                var items = friends_names.map(function(x) { return { item: x }; });
-
-                $('#inputFriend').selectize({
-                    delimiter: '&&',
-                    persist: false,
-                    maxItems: 4,
-                    options: items,
-                    labelField: "item",
-                    valueField: "item",
-                    sortField: 'item',
-                    searchField: 'item',
-                    create: function(input) {
-                        return {
-                            value: input,
-                            text: input
-                        }
-                    }
-                });
-
-                localStorage.setItem("friends_names", JSON.stringify(friends_names));
-                localStorage.setItem("names_to_ID", JSON.stringify(names_to_ID));
-
-                /* SUBMITTING A STATUS */
-
-                $("#statusform").submit(function(event) {
-
-                    event.preventDefault();
-                    
-                    var inputted_names = $('#statusform input[name="recipient_to_convert"]').val();
-                    var inputted_vibe = $('#statusform input[name="status"]').val();
-
-                    // names and IDs for post
-                    var my_names    = inputted_names.split("&&");
-                    var my_ids      = [];
-
-                    var uid_string = ""; 
-
-                    for(var i = 0; i < my_names.length; i++) {
-                        
-                        var curr_UID = names_to_ID[my_names[i]];
-                        
-                        // updating both the UID list and the UID serialized string
-                        my_ids.push(curr_UID);
-                        uid_string += curr_UID; 
-                        
-                        if(i < my_names.length - 1) {
-                            uid_string += "&&"; 
-                        }
-                    }
-
-                    $('#statusform input[name="recipient"]').val(uid_string); // fill in hidden element with UID serialized string
-                    
-                    $.post("http://api.go-vibe.com/api/vibe.php?action=postVibe", $("#statusform").serialize())
-
-                        .done(function(data) {
-
-                            // clear form elements
-                            $('input[id="inputFriend"]').val("");
-                            $('input[id="inputVibe"]').val("");
-
-                            // trim front of JSON (i.e. the extraneous header)
-                            console.log(String(data));
-                            var json_string = data.substring(String(data).indexOf('{')); 
-                            returned_data   = JSON.parse(json_string);
-
-                            for(var i = 0; i < my_ids.length; i++) {
-                                
-                                // notify user on Vibe that someone wrote about them
-                                $.ajax(
-                                {
-                                  type: "POST",
-                                  url: "http://api.go-vibe.com/api/notification.php?action=addNotification",
-                                  data: { 
-                                    uid     : my_ids[i], 
-                                    token   : localStorage['token'], 
-                                    classif : "posted about you", 
-                                    message : inputted_vibe, 
-                                    data    : returned_data['PID']
-                                  }
-                                })
-                                  .done(function(msg) {
-                                    console.log('notification has been sent');
-                                  });
-                            }
-
-                            /* -- DYNAMIC CONTENT -- */
-
-                            /* RECIPIENTS */
- 
-                            var recipient_size = my_names.length;
-                            var post_tagged_formatted_names = "<span style='font-size:115%'>"; 
-
-                            if(recipient_size == 1) {
-                                
-                                var temp_link = "http://api.go-vibe.com/frontend/profile.php?user=" + my_ids[0] + "&name=" + my_names[0] + "";
-                                
-                                post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + my_names[0] + "</a>"; 
-                            }
-                            else if(recipient_size == 2) {
-                                
-                                var temp_link = "http://api.go-vibe.com/frontend/profile.php?user=" + my_ids[0] + "&name=" + my_names[0] + "";
-                                var temp_link2 = "http://api.go-vibe.com/frontend/profile.php?user=" + my_ids[1] + "&name=" + my_names[1] + "";
-                                
-                                post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + my_names[0] + "</a>" + " and " + "<a href='" + temp_link2 + "' class='text-white strong'>" + my_names[1] + "</a>"; 
-                            }
-                            else {
-
-                                for(var z = 0; z < recipient_size; z++) {
-
-                                    var temp_link = "http://api.go-vibe.com/frontend/profile.php?user=" + my_ids[z] + "&name=" + my_names[z] + "";
-                                    
-                                    if(z == recipient_size - 1) {       // last element
-                                        post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + my_names[z] + "</a>&nbsp;";
-                                    }
-                                    else if(z == recipient_size - 2) {  // second-to-last element
-                                        post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + my_names[z] + "</a>" + ", and ";
-                                    }
-                                    else {
-                                        post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + my_names[z] + "</a>" + ", "; 
-                                    }
-
-                                }
-                            }
-
-                            post_tagged_formatted_names += "</span>";
-
-                            var formatted_datetime = get_formatted_date();      // date
-
-                            /* BODY OF CONTENT */
-
-                            var html_newsfeed_content = 
-                                ["<li class='active vibe_newsfeed_posts'>", 
-                                    "<span class='marker'></span>",
-                                    "<div class='block' style='padding-right: 0px;'>",
-                                        "<div class='caret'></div>",
-                                            "<div class='inline-block box-generic' style='width: 100%; border: 1px solid #ececec;''>",
-                                                "<div class='widget'>",
-                                                    "<!-- Info -->",
-                                                    "<div class='bg-primary'>",
-                                                        "<div class='media'>",
-                                                            "<div class='media-body innerTB' style='padding-left:20px;'>",
-                                                                "<span><i class='fa fa-user'></i> " + post_tagged_formatted_names,
-                                                                " on " + formatted_datetime + "&nbsp;</span>",
-                                                            "</div>",
-                                                        "</div>",
-                                                    "</div>",
-                                                    "<!-- Content -->",
-                                                    "<div class='innerAll'>",
-                                                        "<p class='lead' style='display : inline;'>" + inputted_vibe + "</p>",
-                                                    "</div>",
-                                                    "<!-- Comment -->",
-                                                    "<div class='bg-gray innerAll border-top border-bottom text-small'>",
-                                                        "<span>",
-                                                            "<a href='#' class='like_link'>Like</a>",
-                                                        "</span>",
-                                                    "</div>",
-                                                    "<!-- User input comments -->",
-                                                    '<form class="comment_form" name="comment_form" method="post" action="#">',
-                                                        "<input type='text' class='form-control comment_input' name='status' style='border: none;' placeholder='Comment here...'>",
-                                                        "<input type='hidden' class='hiddenID' name='uid' value='" + localStorage['uid'] + "'/>",
-                                                        "<input type='hidden' class='hiddentoken' name='token' value='" + localStorage['token'] + "'/>",
-                                                        "<input type='hidden' class='hiddenPID' name='pid' value='" + returned_data['PID'] + "'/>",
-                                                        '<button type="submit" class="comment_submit" name="comment_submit" style="display: none; "></button>',
-                                                    '</form>',
-                                                "</div>",
-                                            "</div>",
-                                    "</div>",
-                                "</li>",
-                                ].join('\n');
-
-                            $("#newsfeed_container").prepend(html_newsfeed_content);
-                    });
-                });
-
-            });
 
             $(window).load(function() {
 
@@ -426,17 +231,10 @@
                         console.log("The number of posts about this person is: " + data['data'].length);
                         localStorage["getStream"] = JSON.stringify(data['data']);
 
-                        // loading navbar...
-                        $('#navbar').load('navbar.php'); 
-                        console.log('navbar is loaded...');
-
-                        // loading sidebar...
-                        $('#sidebar').load('sidebar.php'); 
-                        console.log('sidebar is loaded...'); 
-
-                        // loading newsfeed elements...
-                        // $('#last_elems').load('newsfeed_element.php'); 
-                        console.log('newsfeed element is loaded...');
+                        // loading navbar and then sidebar...
+                        $('#navbar').load('navbar.php', function() {
+                        	$('#sidebar').load('sidebar.php');
+                        }); 
                     }
                     else {
 

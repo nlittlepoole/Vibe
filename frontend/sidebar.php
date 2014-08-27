@@ -82,7 +82,6 @@
 			$(window).load(function() {
 
 				// listen for notification click -- render the individual page if of type "posted about you"
-				console.log('render the sidebar elements completely...');
 
 				$(".notif_link").on("click", function() {
 					console.log('rendered a click on notif_link');
