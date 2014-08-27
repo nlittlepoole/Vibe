@@ -51,6 +51,8 @@
                                     var post_content_abbrev = '"' + post_content.substring(0, 20) + '..."';
                                 }
 
+                                var JSON_content = JSON.stringify(get_stream[j]);
+
                                 // GET request to render post page
 
                                 var html_notification_content = [
@@ -63,6 +65,7 @@
                                         '<small><a href="">' + post_content_abbrev + '</a></small>',
                                         '<small class="pid_notif_post" style="display: none;">' + curr_pid + '</small>',
                                         '<small class="timestamp_notif_post" style="display: none;">' +  get_stream[j]["Timestamp"] + '</small>',
+                                        '<small class="JSON_notif_post" style="display: none;">' +  JSON_content + '</small>',
                                     '</div>',
                                 '</div>',
                                 ].join('\n');
