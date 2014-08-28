@@ -108,10 +108,21 @@
                     // trigger form submit
                     $(this).nextAll("form.like_form").submit(); 
 
+                    // trigger like/dislike change
+                    var current_like_number     = parseInt($(this).closest('.widget').find('.like_count').text());
+                    var current_dislike_number  = parseInt($(this).closest('.widget').find('.dislike_count').text());
+
+                    $(this).closest('.widget').find('.like_count').text(current_like_number + 1);
+
                     // toggle chosen class
                     $(this).addClass('chosen');
+
                     if($(this).next().hasClass('chosen')) {
                         $(this).next().removeClass('chosen');
+                        $(this).closest('.widget').find('.dislike_count').text(current_dislike_number - 1);
+                    }
+                    else {
+                        // ...
                     }
                 }
                 else if($(this).hasClass('post_choice_disagree')){
@@ -123,49 +134,27 @@
                     // trigger form submit
                     $(this).nextAll("form.dislike_form").submit(); 
 
+                    // trigger like/dislike count change
+                    var current_like_number     = parseInt($(this).closest('.widget').find('.like_count').text());
+                    var current_dislike_number  = parseInt($(this).closest('.widget').find('.dislike_count').text());
+
+                    $(this).closest('.widget').find('.dislike_count').text(current_dislike_number + 1);
+
                     // toggle chosen class
                     $(this).addClass('chosen');
+
                     if($(this).prev().hasClass('chosen')) {
                         $(this).prev().removeClass('chosen');
+                        $(this).closest('.widget').find('.like_count').text(current_like_number - 1);
+                    }
+                    else {
+                        // ...
                     }
                 }
                 else {
                     // ...
                 }
             }
-            /*
-            var is_unlike = $(this).hasClass("unlike_me").toString();
-
-            if(is_unlike == "true") {
-                $(this).text('like'); 
-            }
-            else {
-                
-                // submit POST request (vote)
-                $(this).nextAll("form").submit(); 
-
-                // grabbing total # of likes on post
-                var parse_like_text = $(this).parent().next().text(); 
-                console.log("# of likes: " + parse_like_text)
-
-                var to_add = "";
-
-                if (!/\S/.test(parse_like_text)) {    // not non-whitespace
-                    to_add = "<span><a href='javascript:;'>" + "&#183; <span class='like_count'>1</span>" + " <i class='fa fa-thumbs-o-up'></i></a></span>";
-                }
-                else {
-                    $(this).parent().next().remove();   
-
-                    like_num = parseFloat(parse_like_text) + 1
-                    to_add = "<span><a href='javascript:;'>" + "<span class='like_count'>" + like_num + "</span>" + " <i class='fa fa-thumbs-o-up'></i></a></span>";
-                }
-
-                $(this).text('Unlike'); 
-                $(to_add).insertAfter($(this).parent());
-            }
-
-            $(this).toggleClass('unlike_me');   // switch classes
-            */
         });
     });
 </script>

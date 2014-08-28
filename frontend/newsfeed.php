@@ -94,6 +94,10 @@
                     
                     names_to_ID[String(my_friends[i]['Name'])] = String(my_friends[i]['UID']);      // name to UID
                     friends_names[i] = my_friends[i]['Name'];                                       // just name
+
+                    if(localStorage["uid"] === my_friends[i]['UID']) {
+                        localStorage["my_name"] = my_friends[i]['Name']
+                    }
                 }
 
                 localStorage["friends_names"]   = JSON.stringify(friends_names);
@@ -311,7 +315,7 @@
 
                               var comment_to_append = ""; 
 
-                              var my_name               = "<?php print($_SESSION['full_name']) ?>"; 
+                              var my_name               = localStorage["my_name"]; 
                               var my_uid                = "<?php print($_SESSION['userID']) ?>"; 
                               var my_profile_load_name  = "<?php print($_SESSION['my_profile_load_name']) ?>"; 
 
