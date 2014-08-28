@@ -36,28 +36,57 @@
 </script>
 
 <script type="text/javascript">
-    // submission of LIKE
-    $(".like_form").submit(function(event) {
-      
-      event.preventDefault();
+    
+    $(window).load(function() {
 
-      var my_vote       = "agree";
+        // submission of LIKE
+        $(".like_form").submit(function(event) {
+          
+          event.preventDefault();
 
-      var my_uid        = $(this).children('.hiddenID').val();
-      var my_token      = $(this).children('.hiddentoken').val();
-      var myPID         = $(this).children('.hiddenPID').val();
-      var my_timestamp  = $(this).children('.timestamp').val();
+          var my_vote       = "agree";
 
-      $.ajax({
-          type: 'POST',
-          url: "http://api.go-vibe.com/api/vibe.php?action=vote",
-          data: { uid: my_uid, token: my_token, pid: myPID, vote: my_vote, timestamp : my_timestamp},
-          success: function(data) {
-              $('.like_form').each(function() {
-                  this.reset();
-              });
-          }
-      });
+          var my_uid        = $(this).children('.hiddenID').val();
+          var my_token      = $(this).children('.hiddentoken').val();
+          var myPID         = $(this).children('.hiddenPID').val();
+          var my_timestamp  = $(this).children('.timestamp').val();
+
+          $.ajax({
+              type: 'POST',
+              url: "http://api.go-vibe.com/api/vibe.php?action=vote",
+              data: { uid: my_uid, token: my_token, pid: myPID, vote: my_vote, timestamp : my_timestamp},
+              success: function(data) {
+                  $('.like_form').each(function() {
+                      this.reset();
+                  });
+              }
+          });
+        });
+
+        // submission of DISLIKE
+        $(".dislike_form").submit(function(event) {
+          
+          event.preventDefault();
+
+          var my_vote       = "disagree";
+
+          var my_uid        = $(this).children('.hiddenID').val();
+          var my_token      = $(this).children('.hiddentoken').val();
+          var myPID         = $(this).children('.hiddenPID').val();
+          var my_timestamp  = $(this).children('.timestamp').val();
+
+          $.ajax({
+              type: 'POST',
+              url: "http://api.go-vibe.com/api/vibe.php?action=vote",
+              data: { uid: my_uid, token: my_token, pid: myPID, vote: my_vote, timestamp : my_timestamp},
+              success: function(data) {
+                  $('.dislike_form').each(function() {
+                      this.reset();
+                  });
+              }
+          });
+        });
+
     });
 </script>
 
@@ -76,6 +105,9 @@
                     $(this).css('color', '#428bca');
                     $(this).next().css('color', 'gray');
 
+                    // trigger form submit
+                    $(this).nextAll("form.like_form").submit(); 
+
                     // toggle chosen class
                     $(this).addClass('chosen');
                     if($(this).next().hasClass('chosen')) {
@@ -85,9 +117,11 @@
                 else if($(this).hasClass('post_choice_disagree')){
                     
                     // light it up and turn other one off
-                    
                     $(this).css('color', '#428bca');
                     $(this).prev().css('color', 'gray');
+
+                    // trigger form submit
+                    $(this).nextAll("form.dislike_form").submit(); 
 
                     // toggle chosen class
                     $(this).addClass('chosen');
@@ -219,12 +253,24 @@
                                 '</form>'
                                 ].join('\n');
 
+                            var dislike_submission_form = [
+                                '<form class="dislike_form" name="dislike_form" method="post" action="#" style="display: none;">',
+                                    "<input type='hidden' class='hiddenID' name='uid' value='" + localStorage['uid'] + "'/>",
+                                    "<input type='hidden' class='hiddentoken' name='token' value='" + localStorage['token'] + "'/>",
+                                    "<input type='hidden' class='hiddenPID' name='pid' value='" + post_PID + "'/>",
+                                    "<input type='hidden' class='timestamp' name='timestamp' value='" + post_timestamp + "'/>",
+                                    '<button type="submit" class="dislike_submit" name="dislike_submit" style="display: none; "></button>',
+                                '</form>'
+                                ].join('\n');
+
                             var show_like_info = [
                                 "<div class='bg-gray innerAll border-top border-bottom text-small'>",
                                     "<span>",
                                         my_post_like,
                                         "<!-- Like Submission Form -->", 
                                         like_submission_form,
+                                        "<!-- Dislike Submission Form -->", 
+                                        dislike_submission_form,
                                     "</span>",
                                     "<span style='float: right;'>",
                                         "<i class='fa fa-thumbs-up' style='color: #606060  '></i>&nbsp;<span class='like_count'>" + total_agrees + "</span>",
