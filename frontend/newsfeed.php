@@ -278,19 +278,108 @@
 
         </script>
 
+        <!-- form listeners (once page has been completely loaded) -->
         <script type="text/javascript">
 
             $(window).load(function() {
 
-                /* 'VIEW ALL' comments triggered */
+                // submission of LIKE
+                $(".like_form").submit(function(event) {
+                  
+                  event.preventDefault();
 
+                  var my_vote       = "agree";
+
+                  var my_uid        = $(this).children('.hiddenID').val();
+                  var my_token      = $(this).children('.hiddentoken').val();
+                  var myPID         = $(this).children('.hiddenPID').val();
+                  var my_timestamp  = $(this).children('.timestamp').val();
+
+                  $.ajax({
+                      type: 'POST',
+                      url: "http://api.go-vibe.com/api/vibe.php?action=vote",
+                      data: { uid: my_uid, token: my_token, pid: myPID, vote: my_vote, timestamp : my_timestamp},
+                      success: function(data) {
+                          $('.like_form').each(function() {
+                              this.reset();
+                          });
+                      }
+                  });
+                });
+
+                // submission of comment
+                $(".comment_form").submit(function(event) {
+
+                      event.preventDefault();
+
+                      var my_comment  = $(this).children('.comment_input').val();
+                      var my_uid      = $(this).children('.hiddenID').val();
+                      var my_token    = $(this).children('.hiddentoken').val();
+                      var myPID       = $(this).children('.hiddenPID').val();
+
+                      var current_elem = $(this);
+
+                      $.ajax({
+                          type: 'POST',
+                          url: "http://api.go-vibe.com/api/vibe.php?action=postComment",
+                          data: { status: my_comment, uid: my_uid, token: my_token, pid: myPID},
+                          success: function(data) {
+                              $('.comment_form').each(function() {
+                                  this.reset();
+                              });
+
+                              // APPENDING COMMENT
+
+                              var comment_to_append = ""; 
+
+                              var my_name               = "<?php print($_SESSION['full_name']) ?>"; 
+                              var my_uid                = "<?php print($_SESSION['userID']) ?>"; 
+                              var my_profile_load_name  = "<?php print($_SESSION['my_profile_load_name']) ?>"; 
+
+                              var my_prof_link = "http://api.go-vibe.com/frontend/profile.php?user=";
+                              my_prof_link += my_uid + "&name=" + my_profile_load_name + "";
+
+                              var pic_href = "https://graph.facebook.com/" + my_uid + "/picture?width=60&height=60";
+
+                              var formatted_datetime = get_formatted_date();
+
+                              comment_data = 
+                                    ['<!-- Comment -->', 
+                                     '<div class="media border-bottom margin-none bg-gray">',
+                                        '<a href="" class="pull-left innerAll half">',
+                                            '<img src="' + pic_href + '" width="60" class="media-object">',
+                                        '</a>',
+                                        '<div class="media-body innerTB">',
+                                            '<a href="#" class="pull-right innerT innerR text-muted">',
+                                                '<i class="icon-reply-all-fill fa fa-2x"></i>',
+                                            '</a>',
+                                            '<a href="' + my_prof_link + '" class="strong text-inverse">' + my_name + '</a>',    
+                                            '<small class="text-muted ">wrote on ' + formatted_datetime + '</small>',
+                                            '<div>' + my_comment + '</div>',
+                                        '</div>',
+                                    '</div>',
+                                    ].join('\n');
+
+                              $(comment_data).insertBefore(current_elem);
+                          }
+                      });
+                }); 
+
+            });
+        </script> 
+
+        <!-- event listeners (once page has been completely loaded) -->
+        <script type="text/javascript">
+
+            $(window).load(function() {
+
+                // 'VIEW ALL' comments trigger
                 $('.widget').on('click', '.comment_data_header', function() {
                     $(this).closest(".widget").children(".comment").css("display", "block");
                     $(this).remove();
                 });
 
-                /* LIKES */
-
+                // a 'LIKE' is clicked
                 $('.widget').on('click', '.like_link', function() {
 
                     var is_unlike = $(this).hasClass("unlike_me").toString();
@@ -325,98 +414,6 @@
 
                     $(this).toggleClass('unlike_me');   // switch classes
                 });
-
-                // submission override of LIKE
-
-                $(".like_form").submit(function(event) {
-                  
-                  // simply override normal send
-                  event.preventDefault();
-
-                  // grab value of comment and display it
-                  var my_vote   = "agree";
-                  var my_uid    = $(this).children('.hiddenID').val();
-                  var my_token  = $(this).children('.hiddentoken').val();
-                  var myPID     = $(this).children('.hiddenPID').val();
-
-                  var my_timestamp = $(this).children('.timestamp').val();
-
-                  console.log('timestamp of submission is: ' + my_timestamp);
-
-                  $.ajax({
-                      type: 'POST',
-                      url: "http://api.go-vibe.com/api/vibe.php?action=vote",
-                      data: { uid: my_uid, token: my_token, pid: myPID, vote: my_vote, timestamp : my_timestamp},
-                      success: function(data) {
-                          $('.like_form').each(function() {
-                              this.reset();
-                          });
-                      },
-                      async: true
-                  });
-                }); 
-
-                /* COMMENTS */
-
-                $(".comment_form").submit(function(event) {
-
-                  var my_comment  = $(this).children('.comment_input').val();
-                  var my_uid      = $(this).children('.hiddenID').val();
-                  var my_token    = $(this).children('.hiddentoken').val();
-                  var myPID       = $(this).children('.hiddenPID').val();
-
-                  var current_elem = $(this);
-
-                  event.preventDefault();
-
-                  // post request (modified)
-
-                  $.ajax({
-                      type: 'POST',
-                      url: "http://api.go-vibe.com/api/vibe.php?action=postComment",
-                      data: { status: my_comment, uid: my_uid, token: my_token, pid: myPID},
-                      success: function(data) {
-                          $('.comment_form').each(function() {
-                              this.reset();
-                          });
-
-                          // APPENDING COMMENT
-
-                          var comment_to_append = ""; 
-
-                          var my_name               = "<?php print($_SESSION['full_name']) ?>"; 
-                          var my_uid                = "<?php print($_SESSION['userID']) ?>"; 
-                          var my_profile_load_name  = "<?php print($_SESSION['my_profile_load_name']) ?>"; 
-
-                          var my_prof_link = "http://api.go-vibe.com/frontend/profile.php?user=";
-                          my_prof_link += my_uid + "&name=" + my_profile_load_name + "";
-
-                          var pic_href = "https://graph.facebook.com/" + my_uid + "/picture?width=60&height=60";
-
-                          var formatted_datetime = get_formatted_date();
-
-                          comment_data = 
-                                ['<!-- Comment -->', 
-                                 '<div class="media border-bottom margin-none bg-gray">',
-                                    '<a href="" class="pull-left innerAll half">',
-                                        '<img src="' + pic_href + '" width="60" class="media-object">',
-                                    '</a>',
-                                    '<div class="media-body innerTB">',
-                                        '<a href="#" class="pull-right innerT innerR text-muted">',
-                                            '<i class="icon-reply-all-fill fa fa-2x"></i>',
-                                        '</a>',
-                                        '<a href="' + my_prof_link + '" class="strong text-inverse">' + my_name + '</a>',    
-                                        '<small class="text-muted ">wrote on ' + formatted_datetime + '</small>',
-                                        '<div>' + my_comment + '</div>',
-                                    '</div>',
-                                '</div>',
-                                ].join('\n');
-
-                          $(comment_data).insertBefore(current_elem);
-                      },
-                      async: true
-                  });
-                }); 
 
             });
 

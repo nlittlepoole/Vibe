@@ -1,18 +1,9 @@
 
 <!-- notifications, created by Noah Stebbins -->
 
-<!-- SEE MONTH POST HISTORY -->
-<!--
-<div class="widget">
-	<h5 class="innerAll margin-none bg-primary">Recent</h5>
-	<div class="widget-body padding-none">
-		<ul class="list-group list-group-1 borders-none margin-none"><li class="list-group-item"><a href="">January</a></li></ul>
-	</div>
-</div>
--->
-
 <!-- SEE NOTIFICATIONS -->
 <script type="text/javascript">
+	
 	$(window).load(function() {
 
 		// check if window width is large enough to make notifications bigger
