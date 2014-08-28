@@ -35,6 +35,7 @@
     });
 </script>
 
+<!-- overrided like and dislike submission -->
 <script type="text/javascript">
     
     $(window).load(function() {
@@ -90,7 +91,7 @@
     });
 </script>
 
-<!-- listeners for likes -->
+<!-- listeners for likes and dislikes -->
 <script type="text/javascript">
     $(window).load(function() {
         
@@ -311,9 +312,6 @@
                                             '<img src="' + pic_href + '" width="60" class="media-object">',
                                         '</a>',
                                         '<div class="media-body innerTB">',
-                                            '<a href="#" class="pull-right innerT innerR text-muted">',
-                                                '<i class="icon-reply-all-fill fa fa-2x"></i>',
-                                            '</a>',
                                             '<a href="' + temp_link + '" class="strong text-inverse">' + comment_author_name + '</a>    <small class="text-muted ">wrote on ' + comment_timestamp + '</small>',
                                             '<div>' + comment_content + '</div>',
                                         '</div>',

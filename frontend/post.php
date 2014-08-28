@@ -47,6 +47,156 @@
         <script type="text/javascript" src="http://api.go-vibe.com/selectize/selectize.js"></script>
         <link rel="stylesheet" type="text/css" href="http://api.go-vibe.com/selectize/selectize.default.css" />
 
+        <!-- overall settings to apply to loaded post content -->
+        <script type="text/javascript">
+            $(window).load(function() {
+
+                // hover (light up thumbs up or thumbs down)
+                $('.fa-thumbs-down, .fa-thumbs-up').filter('.fa-lg').hover(function() {
+                    var color = $(this).css('color');
+
+                    if(color == "rgb(128, 128, 128)") {
+                        $(this).css('color', '#428bca');
+                    }
+
+                }, function() {
+
+                    var color = $(this).css('color');
+                    var has_user_stamped_class = $(this).hasClass('chosen');
+
+                    if((color != "rgb(128, 128, 128)") && !has_user_stamped_class) {
+                        $(this).css('color', 'gray');
+                    }
+
+                });
+            });
+        </script>
+
+        <!-- overrided like and dislike submission -->
+        <script type="text/javascript">
+            
+            $(window).load(function() {
+
+                // submission of LIKE
+                $(".like_form").submit(function(event) {
+                  
+                  event.preventDefault();
+
+                  var my_vote       = "agree";
+
+                  var my_uid        = $(this).children('.hiddenID').val();
+                  var my_token      = $(this).children('.hiddentoken').val();
+                  var myPID         = $(this).children('.hiddenPID').val();
+                  var my_timestamp  = $(this).children('.timestamp').val();
+
+                  $.ajax({
+                      type: 'POST',
+                      url: "http://api.go-vibe.com/api/vibe.php?action=vote",
+                      data: { uid: my_uid, token: my_token, pid: myPID, vote: my_vote, timestamp : my_timestamp},
+                      success: function(data) {
+                          $('.like_form').each(function() {
+                              this.reset();
+                          });
+                      }
+                  });
+                });
+
+                // submission of DISLIKE
+                $(".dislike_form").submit(function(event) {
+                  
+                  event.preventDefault();
+
+                  var my_vote       = "disagree";
+
+                  var my_uid        = $(this).children('.hiddenID').val();
+                  var my_token      = $(this).children('.hiddentoken').val();
+                  var myPID         = $(this).children('.hiddenPID').val();
+                  var my_timestamp  = $(this).children('.timestamp').val();
+
+                  $.ajax({
+                      type: 'POST',
+                      url: "http://api.go-vibe.com/api/vibe.php?action=vote",
+                      data: { uid: my_uid, token: my_token, pid: myPID, vote: my_vote, timestamp : my_timestamp},
+                      success: function(data) {
+                          $('.dislike_form').each(function() {
+                              this.reset();
+                          });
+                      }
+                  });
+                });
+
+            });
+        </script>
+
+        <!-- listeners for likes and dislikes -->
+        <script type="text/javascript">
+            $(window).load(function() {
+                
+                // a 'LIKE' or 'DISLIKED' is clicked
+                $('.post_choice_agree, .post_choice_disagree').on('click', function() {
+
+                    // only do something if it has not already been chosen
+                    if(!$(this).hasClass('chosen')) {
+                        if($(this).hasClass('post_choice_agree')) {
+                            
+                            // light it up and turn other one off
+                            $(this).css('color', '#428bca');
+                            $(this).next().css('color', 'gray');
+
+                            // trigger form submit
+                            $(this).nextAll("form.like_form").submit(); 
+
+                            // trigger like/dislike change
+                            var current_like_number     = parseInt($(this).closest('.widget').find('.like_count').text());
+                            var current_dislike_number  = parseInt($(this).closest('.widget').find('.dislike_count').text());
+
+                            $(this).closest('.widget').find('.like_count').text(current_like_number + 1);
+
+                            // toggle chosen class
+                            $(this).addClass('chosen');
+
+                            if($(this).next().hasClass('chosen')) {
+                                $(this).next().removeClass('chosen');
+                                $(this).closest('.widget').find('.dislike_count').text(current_dislike_number - 1);
+                            }
+                            else {
+                                // ...
+                            }
+                        }
+                        else if($(this).hasClass('post_choice_disagree')){
+                            
+                            // light it up and turn other one off
+                            $(this).css('color', '#428bca');
+                            $(this).prev().css('color', 'gray');
+
+                            // trigger form submit
+                            $(this).nextAll("form.dislike_form").submit(); 
+
+                            // trigger like/dislike count change
+                            var current_like_number     = parseInt($(this).closest('.widget').find('.like_count').text());
+                            var current_dislike_number  = parseInt($(this).closest('.widget').find('.dislike_count').text());
+
+                            $(this).closest('.widget').find('.dislike_count').text(current_dislike_number + 1);
+
+                            // toggle chosen class
+                            $(this).addClass('chosen');
+
+                            if($(this).prev().hasClass('chosen')) {
+                                $(this).prev().removeClass('chosen');
+                                $(this).closest('.widget').find('.like_count').text(current_like_number - 1);
+                            }
+                            else {
+                                // ...
+                            }
+                        }
+                        else {
+                            // ...
+                        }
+                    }
+                });
+            });
+        </script>
+
         <!-- autocomplete code && form submission -->
         <script type="text/javascript" charset="utf-8">
 
@@ -58,73 +208,6 @@
                     $(this).closest(".widget").children(".comment").css("display", "block");
                     $(this).remove();
                 });
-
-                /* LIKES */
-
-                $('.widget').on('click', '.like_link', function() {
-
-                    var is_unlike = $(this).hasClass("unlike_me").toString();
-
-                    if(is_unlike == "true") {
-                        $(this).text('like'); 
-                    }
-                    else {
-                        
-                        // submit POST request (vote)
-                        $(this).nextAll("form").submit(); 
-
-                        // grabbing total # of likes on post
-                        var parse_like_text = $(this).parent().next().text(); 
-                        console.log("# of likes: " + parse_like_text)
-
-                        var to_add = "";
-
-                        if (!/\S/.test(parse_like_text)) {    // not non-whitespace
-                            to_add = "<span><a href='javascript:;'>" + "&#183; <span class='like_count'>1</span>" + " <i class='fa fa-thumbs-o-up'></i></a></span>";
-                        }
-                        else {
-                            $(this).parent().next().remove();   
-
-                            like_num = parseFloat(parse_like_text) + 1
-                            to_add = "<span><a href='javascript:;'>" + "<span class='like_count'>" + like_num + "</span>" + " <i class='fa fa-thumbs-o-up'></i></a></span>";
-                        }
-
-                        $(this).text('Unlike'); 
-                        $(to_add).insertAfter($(this).parent());
-                    }
-
-                    $(this).toggleClass('unlike_me');   // switch classes
-                });
-
-                // submission override of LIKE
-
-                $(".like_form").submit(function(event) {
-                  
-                  // simply override normal send
-                  event.preventDefault();
-
-                  // grab value of comment and display it
-                  var my_vote   = "agree";
-                  var my_uid    = $(this).children('.hiddenID').val();
-                  var my_token  = $(this).children('.hiddentoken').val();
-                  var myPID     = $(this).children('.hiddenPID').val();
-
-                  var my_timestamp = $(this).children('.timestamp').val();
-
-                  console.log('timestamp of submission is: ' + my_timestamp);
-
-                  $.ajax({
-                      type: 'POST',
-                      url: "http://api.go-vibe.com/api/vibe.php?action=vote",
-                      data: { uid: my_uid, token: my_token, pid: myPID, vote: my_vote, timestamp : my_timestamp},
-                      success: function(data) {
-                          $('.like_form').each(function() {
-                              this.reset();
-                          });
-                      },
-                      async: true
-                  });
-                }); 
 
                 /* COMMENTS */
 
