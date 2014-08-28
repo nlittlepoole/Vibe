@@ -427,22 +427,20 @@
                 // JSON request for profile elements
                 var profile_url = "<?php echo $_SESSION['profile_elems_request']; ?>";
 
+                $('#navbar').load('navbar.php');
+                $('#last_elems').load('newsfeed_element.php');
+
                 // grabbing JSON...
                 $.getJSON(profile_url, function(data) {
 
                     if (!data.error) {
                         
                         // simple working statement - for debugging if necessary
-                        console.log("The number of posts about this person is: " + data['data'].length);
+                        console.log("# of posts about this person is: " + data['data'].length);
                         localStorage["getStream"] = JSON.stringify(data['data']);
 
-                        // loading navbar...
-                        $('#navbar').load('navbar.php', function() {
-                            $('#sidebar').load('sidebar.php', function() {
-                                $('#last_elems').load('newsfeed_element.php'); 
-                            }); 
-                        }); 
-                        console.log('navbar is loaded...');
+                        // loading sidebar...
+                        $('#sidebar').load('sidebar.php');
                     }
                     else {
 

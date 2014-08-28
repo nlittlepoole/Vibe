@@ -57,6 +57,8 @@
         var is_visible = false;
 
         $(document).on('click', '#notifications_trigger', function() {
+
+            console.log('[TEMP DEBUG] click has been rendered...');
             
             if(!is_visible) {
               var offset = $('#custom_globe').offset();
@@ -69,7 +71,7 @@
                  'left'     : offset.left + 12,
                  'top'      : top_offset,
                  'z-index'  : '10000'
-              });
+                });
 
               $('#notifications_toolbar').show();
               is_visible = true;
