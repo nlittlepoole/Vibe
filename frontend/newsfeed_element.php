@@ -10,6 +10,32 @@
     $_SESSION['my_votes'] .= $_SESSION['userID'] . "&token=" . $_SESSION['token'];
 ?>
 
+<!-- overall settings to apply to loaded newsfeed content -->
+<script type="text/javascript">
+    $(window).load(function() {
+
+
+        // hover (light up thumbs up or thumbs down)
+        $('.fa-thumbs-down, .fa-thumbs-up').filter('.fa-lg').hover(function() {
+            var color = $(this).css('color');
+
+            if(color == "rgb(128, 128, 128)") {
+                $(this).css('color', '#428bca');
+            }
+
+        }, function() {
+
+            var color = $(this).css('color');
+            var has_user_stamped_class = $(this).hasClass('user-stamped');
+
+            if((color != "rgb(128, 128, 128)") && !has_user_stamped_class) {
+                $(this).css('color', 'gray');
+            }
+
+        });
+    });
+</script>
+
 <script type="text/javascript">
 
     $(function() {
@@ -31,6 +57,7 @@
 
                 // NEWSFEED
                 var newsfeed_url = "<?php echo $_SESSION['newsfeed_elems_request']; ?>";
+                console.log(newsfeed_url);      // for debugging purposes
 
                 $.getJSON(newsfeed_url, function(data) {
 
@@ -45,21 +72,22 @@
 
                             /* LIKES */
 
-                            var my_post_like = "<a href='javascript:;' class='like_link'>Like</a>";
+                            // var my_post_like = "<a href='javascript:;' class='like_link'>Like</a>";
+                            var my_post_like = "";
 
                             if(post_PID in my_votes) {
                                 
                                 // you have upvoted this post
                                 if(my_votes[post_PID] > 0) {
                                     // my_post_like = "<a href='javascript:;' class='like_link unlike_me'>Unlike</a>";
-                                    my_post_like = "<i class='fa fa-lg fa-thumbs-up' style='color: #428bca'></i>";
+                                    my_post_like = "<i class='fa fa-lg fa-thumbs-up user-stamped' style='color: #428bca'></i>";
                                     my_post_like += "&nbsp;&nbsp;&nbsp;<i class='fa fa-lg fa-thumbs-down' style='color: gray'></i>";
                                 }
 
                                 // you have downvoted this post
                                 else if(my_votes[post_PID] < 0) {
                                     my_post_like = "<i class='fa fa-lg fa-thumbs-up' style='color: gray'></i>";
-                                    my_post_like += "&nbsp;&nbsp;&nbsp;<i class='fa fa-lg fa-thumbs-down' style='color: #428bca'></i>";
+                                    my_post_like += "&nbsp;&nbsp;&nbsp;<i class='fa fa-lg fa-thumbs-down user-stamped' style='color: #428bca'></i>";
                                 }
 
                                 // you are currently neutral
@@ -67,6 +95,10 @@
                                     my_post_like = "<i class='fa fa-lg fa-thumbs-up' style='color: gray'></i>";
                                     my_post_like += "&nbsp;&nbsp;&nbsp;<i class='fa fa-lg fa-thumbs-down' style='color: gray'></i>";
                                 }
+                            }
+                            else {
+                                my_post_like = "<i class='fa fa-lg fa-thumbs-up' style='color: gray'></i>";
+                                my_post_like += "&nbsp;&nbsp;&nbsp;<i class='fa fa-lg fa-thumbs-down' style='color: gray'></i>";
                             }
                             
                             var total_likes     = 0;

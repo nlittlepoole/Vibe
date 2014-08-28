@@ -50,34 +50,34 @@
                 // caching initial info in JS
                 localStorage["uid"] = '<?php echo $_SESSION["userID"]; ?>';
                 localStorage["token"] = '<?php echo $_SESSION["token"]; ?>';
-
-                // get today's formatted date
-                function get_formatted_date() {
-                  var current_date = new Date();
-
-                  var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
-                  post_month    = monthNames[current_date.getMonth()];
-                  post_date     = current_date.getDate();
-
-                  var date_append = ""; 
-
-                  if(post_date % 10 === 1) {
-                    date_append = "st";
-                  }
-                  else if(post_date % 10 === 2) {
-                    date_append = "nd";
-                  }
-                  else if(post_date % 10 === 3) {
-                    date_append = "rd";
-                  }
-                  else {
-                    date_append = "th";
-                  }
-
-                  return post_month + " " + post_date + date_append;
-                }
             });
+
+            // get today's formatted date
+            function get_formatted_date() {
+              var current_date = new Date();
+
+              var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+              post_month    = monthNames[current_date.getMonth()];
+              post_date     = current_date.getDate();
+
+              var date_append = ""; 
+
+              if(post_date % 10 === 1) {
+                date_append = "st";
+              }
+              else if(post_date % 10 === 2) {
+                date_append = "nd";
+              }
+              else if(post_date % 10 === 3) {
+                date_append = "rd";
+              }
+              else {
+                date_append = "th";
+              }
+
+              return post_month + " " + post_date + date_append;
+            }
         </script>
 
         <!-- autocomplete (selectize) & caching friends' data -->
@@ -133,6 +133,9 @@
                     
                     var inputted_names  = $('#statusform input[name="recipient_to_convert"]').val();
                     var inputted_vibe   = $('#statusform input[name="status"]').val();
+
+                    var names_to_ID     = localStorage["names_to_ID"];
+                    var friends_names   = localStorage["friends_names"];
 
                     // names and IDs for post
                     var my_names    = inputted_names.split("&&");
