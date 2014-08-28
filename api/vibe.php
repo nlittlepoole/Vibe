@@ -124,7 +124,7 @@
 		$command = 'sudo python cloud.py "' . $user . '" 2>&1';
 		$temp = exec($command, $output);
 		$data = array("url"=>"http://api.go-vibe.com/view/cloud/" . $user . ".png");
-		$response_array = array("status"=> "200 Success" , "data" => $data);
+		$response_array = array("status"=> "200 Success" , "data" => array($data));
 		echo json_encode($response_array, JSON_UNESCAPED_SLASHES);
 	}
 

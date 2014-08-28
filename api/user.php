@@ -97,7 +97,7 @@
 
 		// retrieve overall feed information associated specific user
 		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
-		$sql = "SELECT PID,Content,Author as Author_Name, UID as Author_UID, Timestamp FROM (SELECT PID,Content,Author,Timestamp FROM Posts WHERE PID IN (SELECT PID FROM Tagged WHERE UID='$user')) A JOIN (SELECT Name, UID FROM Users)B ON A.Author= B.UID ORDER BY Timestamp";
+		$sql = "SELECT PID,Content,Name as Author_Name, UID as Author_UID, Timestamp FROM (SELECT PID,Content,Author,Timestamp FROM Posts WHERE PID IN (SELECT PID FROM Tagged WHERE UID='$user')) A JOIN (SELECT Name, UID FROM Users)B ON A.Author= B.UID ORDER BY Timestamp";
 		$st = $conn->prepare($sql);
 		$st->execute();
 		
