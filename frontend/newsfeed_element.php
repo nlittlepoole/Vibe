@@ -14,7 +14,6 @@
 <script type="text/javascript">
     $(window).load(function() {
 
-
         // hover (light up thumbs up or thumbs down)
         $('.fa-thumbs-down, .fa-thumbs-up').filter('.fa-lg').hover(function() {
             var color = $(this).css('color');
@@ -26,12 +25,113 @@
         }, function() {
 
             var color = $(this).css('color');
-            var has_user_stamped_class = $(this).hasClass('user-stamped');
+            var has_user_stamped_class = $(this).hasClass('chosen');
 
             if((color != "rgb(128, 128, 128)") && !has_user_stamped_class) {
                 $(this).css('color', 'gray');
             }
 
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    // submission of LIKE
+    $(".like_form").submit(function(event) {
+      
+      event.preventDefault();
+
+      var my_vote       = "agree";
+
+      var my_uid        = $(this).children('.hiddenID').val();
+      var my_token      = $(this).children('.hiddentoken').val();
+      var myPID         = $(this).children('.hiddenPID').val();
+      var my_timestamp  = $(this).children('.timestamp').val();
+
+      $.ajax({
+          type: 'POST',
+          url: "http://api.go-vibe.com/api/vibe.php?action=vote",
+          data: { uid: my_uid, token: my_token, pid: myPID, vote: my_vote, timestamp : my_timestamp},
+          success: function(data) {
+              $('.like_form').each(function() {
+                  this.reset();
+              });
+          }
+      });
+    });
+</script>
+
+<!-- listeners for likes -->
+<script type="text/javascript">
+    $(window).load(function() {
+        
+        // a 'LIKE' or 'DISLIKED' is clicked
+        $('.post_choice_agree, .post_choice_disagree').on('click', function() {
+
+            // only do something if it has not already been chosen
+            if(!$(this).hasClass('chosen')) {
+                if($(this).hasClass('post_choice_agree')) {
+                    
+                    // light it up and turn other one off
+                    $(this).css('color', '#428bca');
+                    $(this).next().css('color', 'gray');
+
+                    // toggle chosen class
+                    $(this).addClass('chosen');
+                    if($(this).next().hasClass('chosen')) {
+                        $(this).next().removeClass('chosen');
+                    }
+                }
+                else if($(this).hasClass('post_choice_disagree')){
+                    
+                    // light it up and turn other one off
+                    
+                    $(this).css('color', '#428bca');
+                    $(this).prev().css('color', 'gray');
+
+                    // toggle chosen class
+                    $(this).addClass('chosen');
+                    if($(this).prev().hasClass('chosen')) {
+                        $(this).prev().removeClass('chosen');
+                    }
+                }
+                else {
+                    // ...
+                }
+            }
+            /*
+            var is_unlike = $(this).hasClass("unlike_me").toString();
+
+            if(is_unlike == "true") {
+                $(this).text('like'); 
+            }
+            else {
+                
+                // submit POST request (vote)
+                $(this).nextAll("form").submit(); 
+
+                // grabbing total # of likes on post
+                var parse_like_text = $(this).parent().next().text(); 
+                console.log("# of likes: " + parse_like_text)
+
+                var to_add = "";
+
+                if (!/\S/.test(parse_like_text)) {    // not non-whitespace
+                    to_add = "<span><a href='javascript:;'>" + "&#183; <span class='like_count'>1</span>" + " <i class='fa fa-thumbs-o-up'></i></a></span>";
+                }
+                else {
+                    $(this).parent().next().remove();   
+
+                    like_num = parseFloat(parse_like_text) + 1
+                    to_add = "<span><a href='javascript:;'>" + "<span class='like_count'>" + like_num + "</span>" + " <i class='fa fa-thumbs-o-up'></i></a></span>";
+                }
+
+                $(this).text('Unlike'); 
+                $(to_add).insertAfter($(this).parent());
+            }
+
+            $(this).toggleClass('unlike_me');   // switch classes
+            */
         });
     });
 </script>
@@ -80,25 +180,25 @@
                                 // you have upvoted this post
                                 if(my_votes[post_PID] > 0) {
                                     // my_post_like = "<a href='javascript:;' class='like_link unlike_me'>Unlike</a>";
-                                    my_post_like = "<i class='fa fa-lg fa-thumbs-up user-stamped' style='color: #428bca'></i>";
-                                    my_post_like += "&nbsp;&nbsp;&nbsp;<i class='fa fa-lg fa-thumbs-down' style='color: gray'></i>";
+                                    my_post_like = "<i class='fa fa-lg fa-thumbs-up chosen post_choice_agree' style='color: #428bca'></i>";
+                                    my_post_like += "&nbsp;&nbsp;&nbsp;<i class='fa fa-lg fa-thumbs-down post_choice_disagree' style='color: gray'></i>";
                                 }
 
                                 // you have downvoted this post
                                 else if(my_votes[post_PID] < 0) {
-                                    my_post_like = "<i class='fa fa-lg fa-thumbs-up' style='color: gray'></i>";
-                                    my_post_like += "&nbsp;&nbsp;&nbsp;<i class='fa fa-lg fa-thumbs-down user-stamped' style='color: #428bca'></i>";
+                                    my_post_like = "<i class='fa fa-lg fa-thumbs-up post_choice_agree' style='color: gray'></i>";
+                                    my_post_like += "&nbsp;&nbsp;&nbsp;<i class='fa fa-lg fa-thumbs-down chosen post_choice_disagree' style='color: #428bca'></i>";
                                 }
 
                                 // you are currently neutral
                                 else {
-                                    my_post_like = "<i class='fa fa-lg fa-thumbs-up' style='color: gray'></i>";
-                                    my_post_like += "&nbsp;&nbsp;&nbsp;<i class='fa fa-lg fa-thumbs-down' style='color: gray'></i>";
+                                    my_post_like = "<i class='fa fa-lg fa-thumbs-up post_choice_agree' style='color: gray'></i>";
+                                    my_post_like += "&nbsp;&nbsp;&nbsp;<i class='fa fa-lg fa-thumbs-down post_choice_disagree' style='color: gray'></i>";
                                 }
                             }
                             else {
-                                my_post_like = "<i class='fa fa-lg fa-thumbs-up' style='color: gray'></i>";
-                                my_post_like += "&nbsp;&nbsp;&nbsp;<i class='fa fa-lg fa-thumbs-down' style='color: gray'></i>";
+                                my_post_like = "<i class='fa fa-lg fa-thumbs-up post_choice_agree' style='color: gray'></i>";
+                                my_post_like += "&nbsp;&nbsp;&nbsp;<i class='fa fa-lg fa-thumbs-down post_choice_disagree' style='color: gray'></i>";
                             }
                             
                             var total_likes     = 0;

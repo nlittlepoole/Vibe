@@ -286,30 +286,6 @@
 
             $(window).load(function() {
 
-                // submission of LIKE
-                $(".like_form").submit(function(event) {
-                  
-                  event.preventDefault();
-
-                  var my_vote       = "agree";
-
-                  var my_uid        = $(this).children('.hiddenID').val();
-                  var my_token      = $(this).children('.hiddentoken').val();
-                  var myPID         = $(this).children('.hiddenPID').val();
-                  var my_timestamp  = $(this).children('.timestamp').val();
-
-                  $.ajax({
-                      type: 'POST',
-                      url: "http://api.go-vibe.com/api/vibe.php?action=vote",
-                      data: { uid: my_uid, token: my_token, pid: myPID, vote: my_vote, timestamp : my_timestamp},
-                      success: function(data) {
-                          $('.like_form').each(function() {
-                              this.reset();
-                          });
-                      }
-                  });
-                });
-
                 // submission of comment
                 $(".comment_form").submit(function(event) {
 
@@ -380,42 +356,6 @@
                 $('.widget').on('click', '.comment_data_header', function() {
                     $(this).closest(".widget").children(".comment").css("display", "block");
                     $(this).remove();
-                });
-
-                // a 'LIKE' is clicked
-                $('.widget').on('click', '.like_link', function() {
-
-                    var is_unlike = $(this).hasClass("unlike_me").toString();
-
-                    if(is_unlike == "true") {
-                        $(this).text('like'); 
-                    }
-                    else {
-                        
-                        // submit POST request (vote)
-                        $(this).nextAll("form").submit(); 
-
-                        // grabbing total # of likes on post
-                        var parse_like_text = $(this).parent().next().text(); 
-                        console.log("# of likes: " + parse_like_text)
-
-                        var to_add = "";
-
-                        if (!/\S/.test(parse_like_text)) {    // not non-whitespace
-                            to_add = "<span><a href='javascript:;'>" + "&#183; <span class='like_count'>1</span>" + " <i class='fa fa-thumbs-o-up'></i></a></span>";
-                        }
-                        else {
-                            $(this).parent().next().remove();   
-
-                            like_num = parseFloat(parse_like_text) + 1
-                            to_add = "<span><a href='javascript:;'>" + "<span class='like_count'>" + like_num + "</span>" + " <i class='fa fa-thumbs-o-up'></i></a></span>";
-                        }
-
-                        $(this).text('Unlike'); 
-                        $(to_add).insertAfter($(this).parent());
-                    }
-
-                    $(this).toggleClass('unlike_me');   // switch classes
                 });
 
             });
