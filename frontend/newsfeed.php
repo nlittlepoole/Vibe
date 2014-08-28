@@ -387,7 +387,7 @@
                         $('#sidebar').load('sidebar.php');
                     }
                     else {
-
+                        // ...
                     }
                 });
 

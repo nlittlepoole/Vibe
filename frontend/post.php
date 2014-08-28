@@ -47,6 +47,37 @@
         <script type="text/javascript" src="http://api.go-vibe.com/selectize/selectize.js"></script>
         <link rel="stylesheet" type="text/css" href="http://api.go-vibe.com/selectize/selectize.default.css" />
 
+        <!-- initial caching and helper functions -->
+        <script type="text/javascript">
+
+            // get today's formatted date
+            function get_formatted_date() {
+              var current_date = new Date();
+
+              var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+              post_month    = monthNames[current_date.getMonth()];
+              post_date     = current_date.getDate();
+
+              var date_append = ""; 
+
+              if(post_date % 10 === 1) {
+                date_append = "st";
+              }
+              else if(post_date % 10 === 2) {
+                date_append = "nd";
+              }
+              else if(post_date % 10 === 3) {
+                date_append = "rd";
+              }
+              else {
+                date_append = "th";
+              }
+
+              return post_month + " " + post_date + date_append;
+            }
+        </script>
+
         <!-- overall settings to apply to loaded post content -->
         <script type="text/javascript">
             $(window).load(function() {
@@ -197,107 +228,81 @@
             });
         </script>
 
-        <!-- autocomplete code && form submission -->
-        <script type="text/javascript" charset="utf-8">
+        <!-- form listeners (once page has been completely loaded) -->
+        <script type="text/javascript">
 
             $(window).load(function() {
 
-                /* 'VIEW ALL' comments triggered */
+                // submission of comment
+                $(".comment_form").submit(function(event) {
 
+                      event.preventDefault();
+
+                      var my_comment  = $(this).children('.comment_input').val();
+                      var my_uid      = $(this).children('.hiddenID').val();
+                      var my_token    = $(this).children('.hiddentoken').val();
+                      var myPID       = $(this).children('.hiddenPID').val();
+
+                      var current_elem = $(this);
+
+                      $.ajax({
+                          type: 'POST',
+                          url: "http://api.go-vibe.com/api/vibe.php?action=postComment",
+                          data: { status: my_comment, uid: my_uid, token: my_token, pid: myPID},
+                          success: function(data) {
+                              $('.comment_form').each(function() {
+                                  this.reset();
+                              });
+
+                              // APPENDING COMMENT
+
+                              var comment_to_append = ""; 
+
+                              var my_name               = localStorage["my_name"]; 
+                              var my_uid                = "<?php print($_SESSION['userID']) ?>"; 
+                              var my_profile_load_name  = "<?php print($_SESSION['my_profile_load_name']) ?>"; 
+
+                              var my_prof_link = "http://api.go-vibe.com/frontend/profile.php?user=";
+                              my_prof_link += my_uid + "&name=" + my_profile_load_name + "";
+
+                              var pic_href = "https://graph.facebook.com/" + my_uid + "/picture?width=60&height=60";
+
+                              var formatted_datetime = get_formatted_date();
+
+                              comment_data = 
+                                    ['<!-- Comment -->', 
+                                     '<div class="media border-bottom margin-none bg-gray">',
+                                        '<a href="" class="pull-left innerAll half">',
+                                            '<img src="' + pic_href + '" width="60" class="media-object">',
+                                        '</a>',
+                                        '<div class="media-body innerTB">',
+                                            '<a href="' + my_prof_link + '" class="strong text-inverse">' + my_name + '</a>',    
+                                            '<small class="text-muted ">wrote on ' + formatted_datetime + '</small>',
+                                            '<div>' + my_comment + '</div>',
+                                        '</div>',
+                                    '</div>',
+                                    ].join('\n');
+
+                              $(comment_data).insertBefore(current_elem);
+                          }
+                      });
+                }); 
+
+            });
+        </script> 
+
+        <!-- event listeners (once page has been completely loaded) -->
+        <script type="text/javascript">
+
+            $(window).load(function() {
+
+                // 'VIEW ALL' comments trigger
                 $('.widget').on('click', '.comment_data_header', function() {
                     $(this).closest(".widget").children(".comment").css("display", "block");
                     $(this).remove();
                 });
 
-                /* COMMENTS */
-
-                $(".comment_form").submit(function(event) {
-
-                  var my_comment  = $(this).children('.comment_input').val();
-                  var my_uid      = $(this).children('.hiddenID').val();
-                  var my_token    = $(this).children('.hiddentoken').val();
-                  var myPID       = $(this).children('.hiddenPID').val();
-
-                  var current_elem = $(this);
-
-                  event.preventDefault();
-
-                  // post request (modified)
-
-                  $.ajax({
-                      type: 'POST',
-                      url: "http://api.go-vibe.com/api/vibe.php?action=postComment",
-                      data: { status: my_comment, uid: my_uid, token: my_token, pid: myPID},
-                      success: function(data) {
-                          $('.comment_form').each(function() {
-                              this.reset();
-                          });
-
-                          // APPENDING COMMENT
-
-                          var comment_to_append = ""; 
-
-                          var my_name               = "<?php print($_SESSION['full_name']) ?>"; 
-                          var my_uid                = "<?php print($_SESSION['userID']) ?>"; 
-                          var my_profile_load_name  = "<?php print($_SESSION['my_profile_load_name']) ?>"; 
-
-                          var my_prof_link = "http://api.go-vibe.com/frontend/profile.php?user=";
-                          my_prof_link += my_uid + "&name=" + my_profile_load_name + "";
-
-                          var pic_href = "https://graph.facebook.com/" + my_uid + "/picture?width=60&height=60";
-
-                          var formatted_datetime = get_formatted_date();
-
-                          comment_data = 
-                                ['<!-- Comment -->', 
-                                 '<div class="media border-bottom margin-none bg-gray">',
-                                    '<a href="" class="pull-left innerAll half">',
-                                        '<img src="' + pic_href + '" width="60" class="media-object">',
-                                    '</a>',
-                                    '<div class="media-body innerTB">',
-                                        '<a href="#" class="pull-right innerT innerR text-muted">',
-                                            '<i class="icon-reply-all-fill fa fa-2x"></i>',
-                                        '</a>',
-                                        '<a href="' + my_prof_link + '" class="strong text-inverse">' + my_name + '</a>',    
-                                        '<small class="text-muted ">wrote on ' + formatted_datetime + '</small>',
-                                        '<div>' + my_comment + '</div>',
-                                    '</div>',
-                                '</div>',
-                                ].join('\n');
-
-                          $(comment_data).insertBefore(current_elem);
-                      },
-                      async: true
-                  });
-                }); 
-
             });
-
-            function get_formatted_date() {
-              var current_date = new Date();
-
-              var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
-              post_month    = monthNames[current_date.getMonth()];
-              post_date     = current_date.getDate();
-
-              var date_append = ""; 
-
-              if(post_date % 10 === 1) {
-                date_append = "st";
-              }
-              else if(post_date % 10 === 2) {
-                date_append = "nd";
-              }
-              else if(post_date % 10 === 3) {
-                date_append = "rd";
-              }
-              else {
-                date_append = "th";
-              }
-
-              return post_month + " " + post_date + date_append;
-            }
 
         </script>
 
@@ -309,22 +314,23 @@
                 // JSON request for profile elements
                 var profile_url = "<?php echo $_SESSION['profile_elems_request']; ?>";
 
+                $('#navbar').load('navbar.php');
+                $('#last_elems').load('newsfeed_element.php');
+
                 // grabbing JSON...
                 $.getJSON(profile_url, function(data) {
 
                     if (!data.error) {
                         
                         // simple working statement - for debugging if necessary
-                        console.log("The number of posts about this person is: " + data['data'].length);
+                        console.log("# of posts about this person is: " + data['data'].length);
                         localStorage["getStream"] = JSON.stringify(data['data']);
 
-                        // loading navbar and then sidebar...
-                        $('#navbar').load('navbar.php', function() {
-                        	$('#sidebar').load('sidebar.php');
-                        }); 
+                        // loading sidebar...
+                        $('#sidebar').load('sidebar.php');
                     }
                     else {
-                    	console.log('[STATUS] error retrieving profile elems');
+                      // ...
                     }
                 });
 
@@ -421,9 +427,12 @@
 
 
 		                var stringified_data = '<?php echo $_POST["currJSON"]; ?>';
+
+                    console.log(stringified_data);
+
 		                var data = JSON.parse(stringified_data);
 
-		                console.log("PID within the JSON is: " + data['PID']);
+		                // console.log("PID within the JSON is: " + data['PID']);
 
 
                         //  grab overall info about post
@@ -432,28 +441,32 @@
 
                         /* LIKES */
 
-                        var my_post_like = "<a href='javascript:;' class='like_link'>Like</a>";
+                        var my_post_like = "";
 
                         if(post_PID in my_votes) {
                             
                             // you have upvoted this post
                             if(my_votes[post_PID] > 0) {
                                 // my_post_like = "<a href='javascript:;' class='like_link unlike_me'>Unlike</a>";
-                                my_post_like = "<i class='fa fa-lg fa-thumbs-up' style='color: #428bca'></i>";
-                                my_post_like += "&nbsp;&nbsp;&nbsp;<i class='fa fa-lg fa-thumbs-down' style='color: gray'></i>";
+                                my_post_like = "<i class='fa fa-lg fa-thumbs-up chosen post_choice_agree' style='color: #428bca'></i>";
+                                my_post_like += "&nbsp;&nbsp;&nbsp;<i class='fa fa-lg fa-thumbs-down post_choice_disagree' style='color: gray'></i>";
                             }
 
                             // you have downvoted this post
                             else if(my_votes[post_PID] < 0) {
-                                my_post_like = "<i class='fa fa-lg fa-thumbs-up' style='color: gray'></i>";
-                                my_post_like += "&nbsp;&nbsp;&nbsp;<i class='fa fa-lg fa-thumbs-down' style='color: #428bca'></i>";
+                                my_post_like = "<i class='fa fa-lg fa-thumbs-up post_choice_agree' style='color: gray'></i>";
+                                my_post_like += "&nbsp;&nbsp;&nbsp;<i class='fa fa-lg fa-thumbs-down chosen post_choice_disagree' style='color: #428bca'></i>";
                             }
 
                             // you are currently neutral
                             else {
-                                my_post_like = "<i class='fa fa-lg fa-thumbs-up' style='color: gray'></i>";
-                                my_post_like += "&nbsp;&nbsp;&nbsp;<i class='fa fa-lg fa-thumbs-down' style='color: gray'></i>";
+                                my_post_like = "<i class='fa fa-lg fa-thumbs-up post_choice_agree' style='color: gray'></i>";
+                                my_post_like += "&nbsp;&nbsp;&nbsp;<i class='fa fa-lg fa-thumbs-down post_choice_disagree' style='color: gray'></i>";
                             }
+                        }
+                        else {
+                            my_post_like = "<i class='fa fa-lg fa-thumbs-up post_choice_agree' style='color: gray'></i>";
+                            my_post_like += "&nbsp;&nbsp;&nbsp;<i class='fa fa-lg fa-thumbs-down post_choice_disagree' style='color: gray'></i>";
                         }
                         
                         var total_likes     = 0;
@@ -465,12 +478,22 @@
                         }
 
                         var like_submission_form = [
-                            '<form class="like_form" name="like_form" method="post" action="#" style="display: none;">',
+                                '<form class="like_form" name="like_form" method="post" action="#" style="display: none;">',
+                                    "<input type='hidden' class='hiddenID' name='uid' value='" + localStorage['uid'] + "'/>",
+                                    "<input type='hidden' class='hiddentoken' name='token' value='" + localStorage['token'] + "'/>",
+                                    "<input type='hidden' class='hiddenPID' name='pid' value='" + post_PID + "'/>",
+                                    "<input type='hidden' class='timestamp' name='timestamp' value='" + post_timestamp + "'/>",
+                                    '<button type="submit" class="like_submit" name="like_submit" style="display: none; "></button>',
+                                '</form>'
+                                ].join('\n');
+
+                        var dislike_submission_form = [
+                            '<form class="dislike_form" name="dislike_form" method="post" action="#" style="display: none;">',
                                 "<input type='hidden' class='hiddenID' name='uid' value='" + localStorage['uid'] + "'/>",
                                 "<input type='hidden' class='hiddentoken' name='token' value='" + localStorage['token'] + "'/>",
                                 "<input type='hidden' class='hiddenPID' name='pid' value='" + post_PID + "'/>",
                                 "<input type='hidden' class='timestamp' name='timestamp' value='" + post_timestamp + "'/>",
-                                '<button type="submit" class="like_submit" name="like_submit" style="display: none; "></button>',
+                                '<button type="submit" class="dislike_submit" name="dislike_submit" style="display: none; "></button>',
                             '</form>'
                             ].join('\n');
 
@@ -480,6 +503,8 @@
                                     my_post_like,
                                     "<!-- Like Submission Form -->", 
                                     like_submission_form,
+                                    "<!-- Dislike Submission Form -->", 
+                                    dislike_submission_form,
                                 "</span>",
                                 "<span style='float: right;'>",
                                     "<i class='fa fa-thumbs-up' style='color: #606060  '></i>&nbsp;<span class='like_count'>" + total_agrees + "</span>",
@@ -507,10 +532,10 @@
                         for(var j = num_comments - 1; j >= 0; j--) {
 
                             // comment info
-                            comment_content     = data['Comments'][j]['Content']; 
-                            comment_timestamp   = data['Comments'][j]['formatted_time'];
-                            comment_author_UID  = data['Comments'][j]['Author_UID'];
-                            comment_author_name = data['Comments'][j]['Author_Name'];
+                            var comment_content     = data['Comments'][j]['Content']; 
+                            var comment_timestamp   = data['Comments'][j]['formatted_time'];
+                            var comment_author_UID  = data['Comments'][j]['Author_UID'];
+                            var comment_author_name = data['Comments'][j]['Author_Name'];
 
                             var temp_link   = "http://api.go-vibe.com/frontend/profile.php?user=" + comment_author_UID + "&name=" + comment_author_name + "";
                             var pic_href    = "https://graph.facebook.com/" + comment_author_UID + "/picture?width=60&height=60";
