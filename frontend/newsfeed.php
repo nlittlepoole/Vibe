@@ -43,19 +43,52 @@
         <script type="text/javascript" src="http://api.go-vibe.com/selectize/selectize.js"></script>
         <link rel="stylesheet" type="text/css" href="http://api.go-vibe.com/selectize/selectize.default.css" />
 
-        <!-- autocomplete code && form submission -->
-        <script type="text/javascript" charset="utf-8">
-            
+        <!-- initial caching and helper functions -->
+        <script type="text/javascript">
+            $(function() {
+                
+                // caching initial info in JS
+                localStorage["uid"] = '<?php echo $_SESSION["userID"]; ?>';
+                localStorage["token"] = '<?php echo $_SESSION["token"]; ?>';
+
+                // get today's formatted date
+                function get_formatted_date() {
+                  var current_date = new Date();
+
+                  var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+                  post_month    = monthNames[current_date.getMonth()];
+                  post_date     = current_date.getDate();
+
+                  var date_append = ""; 
+
+                  if(post_date % 10 === 1) {
+                    date_append = "st";
+                  }
+                  else if(post_date % 10 === 2) {
+                    date_append = "nd";
+                  }
+                  else if(post_date % 10 === 3) {
+                    date_append = "rd";
+                  }
+                  else {
+                    date_append = "th";
+                  }
+
+                  return post_month + " " + post_date + date_append;
+                }
+            });
+        </script>
+
+        <!-- autocomplete (selectize) & caching friends' data -->
+        <script type="text/javascript">
             $(function() {
 
-                localStorage.setItem("uid", '<?php echo $_SESSION["userID"]; ?>');
-                localStorage.setItem("token", '<?php echo $_SESSION["token"]; ?>');
-                
-                // friends' list (as JSON data)
+                // caching friends' data
                 var my_friends = <?php echo json_encode($_SESSION['friend_list']); ?>;
 
-                var names_to_ID = {}; 
-                var friends_names = new Array(); 
+                var names_to_ID     = {}; 
+                var friends_names   = []; 
 
                 for(var i = 0; i < my_friends.length; i++) {
                     
@@ -63,7 +96,10 @@
                     friends_names[i] = my_friends[i]['Name'];                                       // just name
                 }
 
-                /* SELECTIZE */
+                localStorage["friends_names"]   = JSON.stringify(friends_names);
+                localStorage["names_to_ID"]     = JSON.stringify(names_to_ID);
+
+                /* selectize */
 
                 var items = friends_names.map(function(x) { return { item: x }; });
 
@@ -83,18 +119,20 @@
                         }
                     }
                 });
+            });
+        </script>
 
-                localStorage.setItem("friends_names", JSON.stringify(friends_names));
-                localStorage.setItem("names_to_ID", JSON.stringify(names_to_ID));
-
-                /* SUBMITTING A STATUS */
+        <!-- status form submission -->
+        <script type="text/javascript">
+            
+            $(function() {
 
                 $("#statusform").submit(function(event) {
 
                     event.preventDefault();
                     
-                    var inputted_names = $('#statusform input[name="recipient_to_convert"]').val();
-                    var inputted_vibe = $('#statusform input[name="status"]').val();
+                    var inputted_names  = $('#statusform input[name="recipient_to_convert"]').val();
+                    var inputted_vibe   = $('#statusform input[name="status"]').val();
 
                     // names and IDs for post
                     var my_names    = inputted_names.split("&&");
@@ -106,7 +144,7 @@
                         
                         var curr_UID = names_to_ID[my_names[i]];
                         
-                        // updating both the UID list and the UID serialized string
+                        // updating both UID list and UID serialized string
                         my_ids.push(curr_UID);
                         uid_string += curr_UID; 
                         
@@ -126,13 +164,12 @@
                             $('input[id="inputVibe"]').val("");
 
                             // trim front of JSON (i.e. the extraneous header)
-                            console.log(String(data));
                             var json_string = data.substring(String(data).indexOf('{')); 
                             returned_data   = JSON.parse(json_string);
 
+                            // adding notifications (notify that someone wrote about them)
                             for(var i = 0; i < my_ids.length; i++) {
                                 
-                                // notify user on Vibe that someone wrote about them
                                 $.ajax(
                                 {
                                   type: "POST",
@@ -150,15 +187,14 @@
                                   });
                             }
 
-                            /* -- DYNAMIC CONTENT -- */
+                            /* PREPENDING POST CONTENT TO WEBPAGE DYNAMICALLY */
 
-                            /* RECIPIENTS */
- 
+                            // post tagged names formatting
                             var recipient_size = my_names.length;
                             var post_tagged_formatted_names = "<span style='font-size:115%'>"; 
 
                             if(recipient_size == 1) {
-                                
+
                                 var temp_link = "http://api.go-vibe.com/frontend/profile.php?user=" + my_ids[0] + "&name=" + my_names[0] + "";
                                 
                                 post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + my_names[0] + "</a>"; 
@@ -193,8 +229,7 @@
 
                             var formatted_datetime = get_formatted_date();      // date
 
-                            /* BODY OF CONTENT */
-
+                            // dynamic content to be prepended
                             var html_newsfeed_content = 
                                 ["<li class='active vibe_newsfeed_posts'>", 
                                     "<span class='marker'></span>",
@@ -240,6 +275,10 @@
                 });
 
             });
+
+        </script>
+
+        <script type="text/javascript">
 
             $(window).load(function() {
 
@@ -380,32 +419,6 @@
                 }); 
 
             });
-
-            function get_formatted_date() {
-              var current_date = new Date();
-
-              var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
-              post_month    = monthNames[current_date.getMonth()];
-              post_date     = current_date.getDate();
-
-              var date_append = ""; 
-
-              if(post_date % 10 === 1) {
-                date_append = "st";
-              }
-              else if(post_date % 10 === 2) {
-                date_append = "nd";
-              }
-              else if(post_date % 10 === 3) {
-                date_append = "rd";
-              }
-              else {
-                date_append = "th";
-              }
-
-              return post_month + " " + post_date + date_append;
-            }
 
         </script>
 
