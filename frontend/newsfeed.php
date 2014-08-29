@@ -234,6 +234,51 @@
 
                             post_tagged_formatted_names += "</span>";
 
+                            /* LIKES */
+                            
+                            var my_post_like = "<i class='fa fa-lg fa-thumbs-up post_choice_agree' style='color: gray'></i>";
+                            my_post_like += "&nbsp;&nbsp;&nbsp;<i class='fa fa-lg fa-thumbs-down post_choice_disagree' style='color: gray'></i>";
+                            
+                            var total_likes     = 0;
+                            var total_agrees    = 0; 
+                            var total_disagrees = 0; 
+
+                            var like_submission_form = [
+                                '<form class="like_form" name="like_form" method="post" action="#" style="display: none;">',
+                                    "<input type='hidden' class='hiddenID' name='uid' value='" + localStorage['uid'] + "'/>",
+                                    "<input type='hidden' class='hiddentoken' name='token' value='" + localStorage['token'] + "'/>",
+                                    "<input type='hidden' class='hiddenPID' name='pid' value='" + returned_data['PID'] + "'/>",
+                                    '<button type="submit" class="like_submit" name="like_submit" style="display: none; "></button>',
+                                '</form>'
+                                ].join('\n');
+
+                            var dislike_submission_form = [
+                                '<form class="dislike_form" name="dislike_form" method="post" action="#" style="display: none;">',
+                                    "<input type='hidden' class='hiddenID' name='uid' value='" + localStorage['uid'] + "'/>",
+                                    "<input type='hidden' class='hiddentoken' name='token' value='" + localStorage['token'] + "'/>",
+                                    "<input type='hidden' class='hiddenPID' name='pid' value='" + returned_data['PID'] + "'/>",
+                                    '<button type="submit" class="dislike_submit" name="dislike_submit" style="display: none; "></button>',
+                                '</form>'
+                                ].join('\n');
+
+                            var show_like_info = [
+                                "<div class='bg-gray innerAll border-top border-bottom text-small'>",
+                                    "<span>",
+                                        my_post_like,
+                                        "<!-- Like Submission Form -->", 
+                                        like_submission_form,
+                                        "<!-- Dislike Submission Form -->", 
+                                        dislike_submission_form,
+                                    "</span>",
+                                    "<span style='float: right;'>",
+                                        "<i class='fa fa-thumbs-up' style='color: #606060  '></i>&nbsp;<span class='like_count'>" + total_agrees + "</span>",
+                                        "&nbsp;&nbsp;",
+                                        "<i class='fa fa-thumbs-down' style='color: #606060  '></i>&nbsp;<span class='dislike_count'>" + total_disagrees + "</span>",
+                                    "</span>",
+                                "</div>"
+                                ].join('\n');
+
+                            // formatted datetime
                             var formatted_datetime = get_formatted_date();      // date
 
                             // dynamic content to be prepended
@@ -243,11 +288,12 @@
                                     "<div class='block' style='padding-right: 0px;'>",
                                         "<div class='caret'></div>",
                                             "<div class='inline-block box-generic' style='width: 100%; border: 1px solid #ececec;''>",
+                                                "<!-- SOCIAL MEDIA POST FOR TESTING PURPOSES -->",
                                                 "<div class='widget'>",
                                                     "<!-- Info -->",
                                                     "<div class='bg-primary'>",
                                                         "<div class='media'>",
-                                                            "<div class='media-body innerTB' style='padding-left:20px;'>",
+                                                            "<div class='media-body innerTB' style='padding-left:10px;'>",
                                                                 "<span><i class='fa fa-user'></i> " + post_tagged_formatted_names,
                                                                 " on " + formatted_datetime + "&nbsp;</span>",
                                                             "</div>",
@@ -257,12 +303,8 @@
                                                     "<div class='innerAll'>",
                                                         "<p class='lead' style='display : inline;'>" + inputted_vibe + "</p>",
                                                     "</div>",
-                                                    "<!-- Comment -->",
-                                                    "<div class='bg-gray innerAll border-top border-bottom text-small'>",
-                                                        "<span>",
-                                                            "<a href='#' class='like_link'>Like</a>",
-                                                        "</span>",
-                                                    "</div>",
+                                                    "<!-- Show overall like info -->",
+                                                    show_like_info,
                                                     "<!-- User input comments -->",
                                                     '<form class="comment_form" name="comment_form" method="post" action="#">',
                                                         "<input type='text' class='form-control comment_input' name='status' style='border: none;' placeholder='Comment here...'>",

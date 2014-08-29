@@ -64,7 +64,7 @@
 		});
 	</script>
 
-	<!-- wordcloud checker -->
+	<!-- wordcloud checker (removes invalid pic if cannot be found) -->
 	<script type="text/javascript">
 		$(function() {
 			$('#wordcloud_pic').error(function() {
