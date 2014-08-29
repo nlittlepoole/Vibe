@@ -15,6 +15,13 @@
 
 	// wordcloud URL
 	$_SESSION['wordcloud_URL'] = "http://api.go-vibe.com/view/cloud/" . $_SESSION['prof_UID'] . ".png";
+
+	$_SESSION['is_own_profile'] = False;
+
+	// check if profile UID matches the user's UID (i.e if they are looking at their own profile)
+	if($_SESSION['prof_UID'] == $_SESSION['userID']) {
+		$_SESSION['is_own_profile'] = True;
+	}
 ?>
 
 <!DOCTYPE html>

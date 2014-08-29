@@ -11,6 +11,13 @@
     $_SESSION['my_votes'] .= $_SESSION['userID'] . "&token=" . $_SESSION['token'];
 ?>
 
+<!-- overall style to apply to profile content -->
+<style type="text/css">
+    .ban_elem:hover {
+        color: black;
+    }
+</style>
+
 <!-- overall settings to apply to loaded profile content -->
 <script type="text/javascript">
     
@@ -209,8 +216,6 @@
                         // loop through posts
                         for(var i = 0; i < data['data'].length; i++) {
 
-                        	console.log('[TEMP DEBUG] triggered a post iteration....');
-
                             //  grab overall info about post
                             var post_PID            = data['data'][i]['PID']; 
                             var post_timestamp      = data['data'][i]['Timestamp']; 
@@ -380,6 +385,14 @@
 
                             post_tagged_formatted_names += "</span>";
 
+                            // adding widget to block user if this is their own profile
+                            var block_html = "";
+                            var is_own_profile = '<?php echo $_SESSION["is_own_profile"]; ?>';
+                            
+                            if(is_own_profile == 1) {
+                                block_html = "<span class='ban_elem' style='float: right; margin-right: 10px;'>" + '<i class="fa fa-ban"></i>' + "</span>";
+                            }
+
                             /* BODY OF CONTENT */
 
                             var html_profile_content = 
@@ -388,9 +401,10 @@
 										'<!-- Info -->',
 										'<div class="bg-primary">',
 											'<div class="media">',
-												'<div class="media-body innerTB" style="padding-left:20px;">',
+												'<div class="media-body innerTB" style="padding-left:10px;">',
 													"<span>about " + post_tagged_formatted_names,
                                                     " on " + data['data'][i]['formatted_time'] + "&nbsp;</span>",
+                                                    block_html,
 												'</div>',
 											'</div>',
 										'</div>',
