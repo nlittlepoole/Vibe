@@ -13,6 +13,9 @@
 	// FB Graph API request to grab user's communities
 	$_SESSION['user_networks_request'] = "http://api.go-vibe.com/api/location.php?action=getLocations&uid=";
 	$_SESSION['user_networks_request'] .= $_SESSION['prof_UID'] . "&token=" . $_SESSION['token'];
+
+	// wordcloud URL
+	$_SESSION['wordcloud_URL'] = "http://api.go-vibe.com/view/cloud/" . $_SESSION['prof_UID'] . ".png";
 ?>
 
 <!DOCTYPE html>
@@ -58,6 +61,15 @@
 				$('#network_info').html(network_string);
 			});
 
+		});
+	</script>
+
+	<!-- wordcloud checker -->
+	<script type="text/javascript">
+		$(function() {
+			$('#wordcloud_pic').error(function() {
+			  $('#wordcloud_pic').remove();
+			});
 		});
 	</script>
 
@@ -114,9 +126,12 @@
 										<span id="network_info"></span>
 									</div>
 									<div class="innerAll pull-left">
+										<img id="wordcloud_pic" src=<?php echo $_SESSION['wordcloud_URL'] ?> />
+										<!--
 										<p class="lead margin-none ">
 											<i class="fa fa-quote-left text-muted fa-fw"></i> Hello! This is an optional caption.
 										</p>
+										-->
 									</div>
 								</div>
 								<div class="clearfix"></div>

@@ -138,8 +138,8 @@
                     var inputted_names  = $('#statusform input[name="recipient_to_convert"]').val();
                     var inputted_vibe   = $('#statusform input[name="status"]').val();
 
-                    var names_to_ID     = localStorage["names_to_ID"];
-                    var friends_names   = localStorage["friends_names"];
+                    var names_to_ID     = JSON.parse(localStorage["names_to_ID"]);
+                    var friends_names   = JSON.parse(localStorage["friends_names"]);
 
                     // names and IDs for post
                     var my_names    = inputted_names.split("&&");
