@@ -58,7 +58,8 @@
       <a href=<?php echo '"'. $_SESSION['loginUrl'] . '"' ?>> SIGN UP WITH FACEBOOK</a>
     </div><!-- END .sixteen.columns -->
     <div class="sixteen columns" id="main_graphic">
-      <img src="https://s3.amazonaws.com/HookFeed/main_hero_image.png" width="800" class="scale-with-grid">
+      <!-- <img src="https://s3.amazonaws.com/HookFeed/main_hero_image.png" width="800" class="scale-with-grid"> -->
+      <img src="landing_photo1.png" width="800" class="scale-with-grid">
     </div>
   </div><!-- END #headline.container -->
 </section><!-- END #headline_banner -->
