@@ -18,6 +18,8 @@
 
             if (!data.error) {
 
+                var rendered_notifications = 0;
+
                 var notification_length = data['data'].length;
 
                 for(var i = 0; i < notification_length; i++) {
@@ -43,6 +45,8 @@
 
                             // if the PIDs match, we found our original post in the db so we can add that content to our notifications returned
                             if(get_stream[j]["PID"] == curr_pid) {
+
+                                rendered_notifications += 1;
 
                                 var post_content = get_stream[j]["Content"];
                                 var post_content_abbrev = '"' + post_content + '"';
@@ -71,10 +75,24 @@
                                 '</div>',
                                 ].join('\n');
 
-                            $('#notification_elems').append(html_notification_content);
+                                $('#notification_elems').append(html_notification_content);
                             }
                         }
                     }
+                }
+
+                if(rendered_notifications === 0) {
+                    // no notifications were rendered, so make sure to append notification of notifications
+
+                    var html_notification_content = [
+                        '<div class="media border-bottom innerAll margin-none">',
+                            '<div class="media-body notif_body">',
+                                '<h5 class="margin-none"><a href="javascript:;" class="text-inverse notif_link">You have no new notifications!</a></h5>',
+                            '</div>',
+                        '</div>',
+                        ].join('\n');
+
+                        $('#notification_elems').append(html_notification_content);
                 }
             }
             else {

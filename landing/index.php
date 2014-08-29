@@ -59,7 +59,14 @@
     </div><!-- END .sixteen.columns -->
     <div class="sixteen columns" id="main_graphic">
       <!-- <img src="https://s3.amazonaws.com/HookFeed/main_hero_image.png" width="800" class="scale-with-grid"> -->
-      <img src="landing_photo1.png" width="800" class="scale-with-grid">
+      <style type="text/css">
+        #header_image1 {
+          -moz-border-radius: 0px;
+          -webkit-border-radius: 6px 6px 0px 0px;
+          border-radius: 6px 6px 0px 0px; 
+        }
+      </style>
+      <img id="header_image1" src="landing_photo1.png" width="800" class="scale-with-grid">
     </div>
   </div><!-- END #headline.container -->
 </section><!-- END #headline_banner -->
