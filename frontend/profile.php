@@ -5,7 +5,6 @@
 
 	// grabbing person's UID & name info
 	$_SESSION['prof_UID'] 	= isset($_GET['user']) ? $_GET['user'] : "";
-	$_SESSION['prof_name'] 	= isset($_GET['name']) ? $_GET['name'] : "";
 
 	// picture URL request
 	$pic = "https://graph.facebook.com/" . $_SESSION['prof_UID'] . "/picture?width=200&height=200";
@@ -26,7 +25,7 @@
 <!--[if gt IE 8]> <html class="ie paceCounter paceSocial footer-sticky"> <![endif]-->
 <!--[if !IE]><!--><html class="paceCounter paceSocial footer-sticky"><!-- <![endif]-->
 <head>
-	<title><?php echo $_SESSION['prof_name']; ?></title>
+	<title>Profile</title>
 
 	<!-- jQuery & jQuery UI -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -34,6 +33,19 @@
 
 	<!-- font awesome -->
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+	<!-- grabbing profile name JavaScript -->
+	<script type="text/javascript">
+		$(function() {
+			var prof_UID = '<?php echo $_SESSION["prof_UID"]; ?>';
+			console.log('profile UID: ' + prof_UID);
+
+			var id_to_names = JSON.parse(localStorage["ID_to_names"]); 
+			localStorage["current_prof_name"] = id_to_names[prof_UID];
+
+			$('#current_profile_name').text(localStorage["current_prof_name"]);
+		});
+	</script>
 
 	<script type="text/javascript">
 
@@ -122,7 +134,7 @@
 										<img src=<?php echo '"' . $pic .'"' ?> class="img-circle" style="width: 100px"/> 
 									</div>
 									<div class="innerAll pull-left">
-										<h3 class="margin-none"><?php echo $_SESSION['prof_name'] ?></h3>
+										<h3 class="margin-none" id="current_profile_name"></h3>
 										<span id="network_info"></span>
 									</div>
 									<div class="innerAll pull-left border-left">

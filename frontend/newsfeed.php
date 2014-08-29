@@ -89,10 +89,12 @@
 
                 var names_to_ID     = {}; 
                 var friends_names   = []; 
+                var ID_to_names     = {};
 
                 for(var i = 0; i < my_friends.length; i++) {
                     
                     names_to_ID[String(my_friends[i]['Name'])] = String(my_friends[i]['UID']);      // name to UID
+                    ID_to_names[String(my_friends[i]['UID'])] = String(my_friends[i]['Name']);      // UID to name
                     friends_names[i] = my_friends[i]['Name'];                                       // just name
 
                     if(localStorage["uid"] === my_friends[i]['UID']) {
@@ -102,6 +104,7 @@
 
                 localStorage["friends_names"]   = JSON.stringify(friends_names);
                 localStorage["names_to_ID"]     = JSON.stringify(names_to_ID);
+                localStorage["ID_to_names"]     = JSON.stringify(ID_to_names);
 
                 /* selectize */
 
@@ -202,14 +205,14 @@
 
                             if(recipient_size == 1) {
 
-                                var temp_link = "http://api.go-vibe.com/frontend/profile.php?user=" + my_ids[0] + "&name=" + my_names[0] + "";
+                                var temp_link = "http://api.go-vibe.com/frontend/profile.php?user=" + my_ids[0];
                                 
                                 post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + my_names[0] + "</a>"; 
                             }
                             else if(recipient_size == 2) {
                                 
-                                var temp_link = "http://api.go-vibe.com/frontend/profile.php?user=" + my_ids[0] + "&name=" + my_names[0] + "";
-                                var temp_link2 = "http://api.go-vibe.com/frontend/profile.php?user=" + my_ids[1] + "&name=" + my_names[1] + "";
+                                var temp_link = "http://api.go-vibe.com/frontend/profile.php?user=" + my_ids[0];
+                                var temp_link2 = "http://api.go-vibe.com/frontend/profile.php?user=" + my_ids[1];
                                 
                                 post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + my_names[0] + "</a>" + " and " + "<a href='" + temp_link2 + "' class='text-white strong'>" + my_names[1] + "</a>"; 
                             }
@@ -217,7 +220,7 @@
 
                                 for(var z = 0; z < recipient_size; z++) {
 
-                                    var temp_link = "http://api.go-vibe.com/frontend/profile.php?user=" + my_ids[z] + "&name=" + my_names[z] + "";
+                                    var temp_link = "http://api.go-vibe.com/frontend/profile.php?user=" + my_ids[z];
                                     
                                     if(z == recipient_size - 1) {       // last element
                                         post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + my_names[z] + "</a>&nbsp;";
@@ -377,8 +380,7 @@
                               var my_uid                = "<?php print($_SESSION['userID']) ?>"; 
                               var my_profile_load_name  = "<?php print($_SESSION['my_profile_load_name']) ?>"; 
 
-                              var my_prof_link = "http://api.go-vibe.com/frontend/profile.php?user=";
-                              my_prof_link += my_uid + "&name=" + my_profile_load_name + "";
+                              var my_prof_link = "http://api.go-vibe.com/frontend/profile.php?user=" + my_uid;
 
                               var pic_href = "https://graph.facebook.com/" + my_uid + "/picture?width=60&height=60";
 
