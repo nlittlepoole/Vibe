@@ -12,8 +12,8 @@
 
 <!-- overall settings to apply to loaded newsfeed content -->
 <script type="text/javascript">
-    $(window).load(function() {
-
+    
+    function hover_thumbs_trigger() {
         // hover (light up thumbs up or thumbs down)
         $('.fa-thumbs-down, .fa-thumbs-up').filter('.fa-lg').hover(function() {
             var color = $(this).css('color');
@@ -32,13 +32,17 @@
             }
 
         });
+    }
+
+    $(window).load(function() {
+        hover_thumbs_trigger();
     });
 </script>
 
 <!-- overrided like and dislike submission -->
 <script type="text/javascript">
-    
-    $(window).load(function() {
+
+    function like_submit_trigger() {
 
         // submission of LIKE
         $(".like_form").submit(function(event) {
@@ -63,6 +67,9 @@
               }
           });
         });
+    }
+
+    function dislike_submit_trigger() {
 
         // submission of DISLIKE
         $(".dislike_form").submit(function(event) {
@@ -87,14 +94,21 @@
               }
           });
         });
+    }
+    
+    $(window).load(function() {
+
+        like_submit_trigger();
+        dislike_submit_trigger();
 
     });
 </script>
 
 <!-- listeners for likes and dislikes -->
 <script type="text/javascript">
-    $(window).load(function() {
-        
+    
+    function like_dislike_click_trigger() {
+
         // a 'LIKE' or 'DISLIKED' is clicked
         $('.post_choice_agree, .post_choice_disagree').on('click', function() {
 
@@ -157,6 +171,10 @@
                 }
             }
         });
+    }
+
+    $(window).load(function() {
+        like_dislike_click_trigger();
     });
 </script>
 

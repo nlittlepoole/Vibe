@@ -320,6 +320,23 @@
                                 ].join('\n');
 
                             $("#newsfeed_container").prepend(html_newsfeed_content);
+
+                            // trigger all listeners again
+                            if (typeof hover_thumbs_trigger == 'function') { 
+                              hover_thumbs_trigger(); 
+                            }
+                            if (typeof comment_submit_trigger == 'function') { 
+                              comment_submit_trigger(); 
+                            }
+                            if (typeof like_submit_trigger == 'function') { 
+                              like_submit_trigger(); 
+                            }
+                            if (typeof dislike_submit_trigger == 'function') { 
+                              dislike_submit_trigger(); 
+                            }
+                            if (typeof like_dislike_click_trigger == 'function') { 
+                              like_dislike_click_trigger(); 
+                            }
                     });
                 });
 
@@ -330,8 +347,7 @@
         <!-- form listeners (once page has been completely loaded) -->
         <script type="text/javascript">
 
-            $(window).load(function() {
-
+            function comment_submit_trigger() {
                 // submission of comment
                 $(".comment_form").submit(function(event) {
 
@@ -386,7 +402,10 @@
                           }
                       });
                 }); 
+            }
 
+            $(window).load(function() {
+                comment_submit_trigger();
             });
         </script> 
 
