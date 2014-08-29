@@ -112,7 +112,7 @@
 							<div class="cover image ">
 								<div style="height: 50px"></div>
 								<ul class="list-unstyled">
-									<li class="active"><a href="index.html?lang=en"><i class="fa fa-fw fa-clock-o"></i> <span>Timeline</span></a></li>
+									<li class="active"><a href="index.html?lang=en"><i class="fa fa-fw fa-user"></i> <span>Profile</span></a></li>
 								</ul>
 							</div>
 							<div class="widget cover image">	
@@ -121,12 +121,12 @@
 										<!-- NOTE: on failure (i.e. FB 2.0 non-user), it should load up a default gray person symbol -->
 										<img src=<?php echo '"' . $pic .'"' ?> class="img-circle" style="width: 100px"/> 
 									</div>
-									<div class="innerAll border-right pull-left">
+									<div class="innerAll pull-left">
 										<h3 class="margin-none"><?php echo $_SESSION['prof_name'] ?></h3>
 										<span id="network_info"></span>
 									</div>
-									<div class="innerAll pull-left">
-										<img id="wordcloud_pic" src=<?php echo $_SESSION['wordcloud_URL'] ?> />
+									<div class="innerAll pull-left border-left">
+										<img style="width: 70%; margin-left: auto; margin-right: auto; display: block" id="wordcloud_pic" src=<?php echo $_SESSION['wordcloud_URL'] ?> />
 										<!--
 										<p class="lead margin-none ">
 											<i class="fa fa-quote-left text-muted fa-fw"></i> Hello! This is an optional caption.

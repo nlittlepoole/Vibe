@@ -391,7 +391,7 @@
                                                     "<div class='bg-primary'>",
                                                         "<div class='media'>",
                                                             "<div class='media-body innerTB' style='padding-left:10px;'>",
-                                                                "<span><i class='fa fa-user'></i> " + post_tagged_formatted_names,
+                                                                "<span>about " + post_tagged_formatted_names,
                                                                 " on " + data['data'][i]['formatted_time'] + "&nbsp;</span>",
                                                             "</div>",
                                                         "</div>",
