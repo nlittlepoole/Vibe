@@ -39,6 +39,37 @@
 		<!-- font awesome -->
 		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
+		<!-- initial caching and helper functions -->
+        <script type="text/javascript">
+
+            // get today's formatted date
+            function get_formatted_date() {
+              var current_date = new Date();
+
+              var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+              post_month    = monthNames[current_date.getUTCMonth()];
+              post_date     = current_date.getUTCDate();
+
+              var date_append = ""; 
+
+              if(post_date % 10 === 1) {
+                date_append = "st";
+              }
+              else if(post_date % 10 === 2) {
+                date_append = "nd";
+              }
+              else if(post_date % 10 === 3) {
+                date_append = "rd";
+              }
+              else {
+                date_append = "th";
+              }
+
+              return post_month + " " + post_date + date_append;
+            }
+        </script>
+
 		<!-- grabbing profile name JavaScript -->
 		<script type="text/javascript">
 			$(function() {
@@ -52,6 +83,7 @@
 			});
 		</script>
 
+		<!-- person's communities (unique to Profile) -->
 		<script type="text/javascript">
 
 			// initializing the last stored element to none

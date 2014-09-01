@@ -58,8 +58,8 @@
 
               var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-              post_month    = monthNames[current_date.getMonth()];
-              post_date     = current_date.getDate();
+              post_month    = monthNames[current_date.getUTCMonth()];
+              post_date     = current_date.getUTCDate();
 
               var date_append = ""; 
 
