@@ -85,8 +85,13 @@
 		$response_array['status'] = "200 Request Queued";
 		pushResponse($response_array,"POST");
 		
-		$user = $_POST['user'];
+		$pid = $_POST['pid'];
 		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
+		$sql = "SELECT Author FROM Posts WHERE PID = '$pid';";
+		$st = $conn->prepare($sql);
+		$st->execute();
+		// modify results (include comments below main posts)
+		$user = ($st->fetch(PDO::FETCH_ASSOC))['Author']; 
 		$sql = "UPDATE Friends SET Blocked=1 WHERE `UID` = '$user' AND `Friend` = '$uid' ;";
 		
 		$st = $conn->prepare($sql);
