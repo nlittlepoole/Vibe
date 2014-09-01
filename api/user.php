@@ -91,7 +91,8 @@
 		$st = $conn->prepare($sql);
 		$st->execute();
 		// modify results (include comments below main posts)
-		$user = ($st->fetch(PDO::FETCH_ASSOC))['Author']; 
+		$user = $st->fetch(PDO::FETCH_ASSOC);
+		$user = $user['Author'];
 		$sql = "UPDATE Friends SET Blocked=1 WHERE `UID` = '$user' AND `Friend` = '$uid' ;";
 		
 		$st = $conn->prepare($sql);
