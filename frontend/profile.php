@@ -36,6 +36,13 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 
+		<!-- jQuery UI tooltip -->
+		<script type="text/javascript">
+			$(function() {
+				// $(document).tooltip();
+			});
+		</script>
+
 		<!-- font awesome -->
 		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 

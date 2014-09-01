@@ -390,7 +390,7 @@
                             var is_own_profile = '<?php echo $_SESSION["is_own_profile"]; ?>';
                             
                             if(is_own_profile == 1) {
-                                block_html = "<span class='ban_elem' style='float: right; margin-right: 10px;'>" + '<i class="fa fa-ban"></i>' + "</span>";
+                                block_html = "<a href='#' title='would you like to ban this user?'><span class='ban_elem' style='float: right; margin-right: 10px;'>" + '<i class="fa fa-ban"></i>' + "</span></a>";
                             }
 
                             /* BODY OF CONTENT */
