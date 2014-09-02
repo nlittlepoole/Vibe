@@ -53,8 +53,8 @@
   <section id="headline_banner">
   <div id="headline" class="container">
     <div class="sixteen columns">
-      <h1>Want to be a bro?</h1>
-      <h2>We take your compliments to the next level.</h2>
+      <h1>Does she like you?</h1>
+      <h2>Ask her anonymously.</h2>
       <a href=<?php echo '"'. $_SESSION['loginUrl'] . '"' ?>> SIGN UP WITH FACEBOOK</a>
     </div><!-- END .sixteen.columns -->
     <div class="sixteen columns" id="main_graphic">
@@ -75,12 +75,12 @@
 <section id="testimonial_banner">
   <div class="container testimonial">
     <div class="twelve columns offset-by-two">
-      <h2>"Got something good to say about a buddy? We've got the platform for you."</h2>
-      <div class="john-collison">
+      <h2 style="font-size: 160%"><strong>write</strong> a post. <strong>tag</strong> a friend. <strong>contribute</strong> to their cloud.</h2>
+      <!-- <div class="john-collison">
         <a href="https://twitter.com/collision"><img src="http://api.go-vibe.com/landing/small_prof_pic.jpg" width="160" height="160" id="john" class="person scale-with-grid"></a>
         <h3 style="margin-bottom: 5px"><a href="https://twitter.com/collision">Noah Stebbins</a></h3>
         <h4><a href="https://stripe.com">Co-Founder of Vibe</a></h4>
-      </div>
+      </div> -->
     </div>
   </div><!-- END #testimonial.container -->
 </section><!-- END #testimonial -->
@@ -89,7 +89,7 @@
   <div id="benefits" class="container">
     <div class="row">
       <div class="twelve columns offset-by-two">
-        <h1>There are only three things women need in life: food, water, and <em>compliments</em>.</h1>
+        <h1>the <strong>worldcloud</strong>: insert catchy post here</h1>
       </div>
     </div>
 
