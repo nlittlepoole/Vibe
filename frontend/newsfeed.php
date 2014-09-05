@@ -552,7 +552,7 @@
                             <!-- HEADER Widget of NEWSFEED ELEMENTS -->
                             <div class="media">
                                 
-                                <a href="" class="btn btn-default pull-left">Timeline</a>
+                                <a href="" class="btn btn-default pull-left">Newsfeed</a>
                                 <div class="media-body" style="visibility: hidden;">
                                       <div class="input-group">
                                           <input type="text" class="form-control" placeholder="Share your mood...">
