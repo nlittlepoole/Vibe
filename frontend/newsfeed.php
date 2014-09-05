@@ -136,12 +136,7 @@
             
             $(function() {
 
-                $("#statusform").submit(function(event) {
-
-                    event.preventDefault();
-                    
-                    var inputted_names  = $('#statusform input[name="recipient_to_convert"]').val();
-                    var inputted_vibe   = $('#statusform input[name="status"]').val();
+                function modified_vibe_submit() {
 
                     var names_to_ID     = JSON.parse(localStorage["names_to_ID"]);
                     var friends_names   = JSON.parse(localStorage["friends_names"]);
@@ -343,6 +338,22 @@
                               like_dislike_click_trigger(); 
                             }
                     });
+                }
+
+                $("#statusform").submit(function(event) {
+
+                    event.preventDefault();
+                    
+                    var inputted_names  = $('#statusform input[name="recipient_to_convert"]').val();
+                    var inputted_vibe   = $('#statusform input[name="status"]').val();
+
+                    if(inputted_vibe !== "") {
+                        modified_vibe_submit();
+                    }
+                    else {
+                        $(this).closest('.widget-body').find('#inputVibe').css('border', '1px solid #800000');
+                        $(this).closest('.widget-body').find('#inputVibe').attr('placeholder', 'Please provide some content for submission');
+                    }
                 });
 
             });

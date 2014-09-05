@@ -75,7 +75,7 @@
 <section id="testimonial_banner">
   <div class="container testimonial">
     <div class="twelve columns offset-by-two">
-      <h2 style="font-size: 160%"><strong>write</strong> a post. <strong>tag</strong> a friend. <strong>contribute</strong> to their cloud.</h2>
+      <h2 style="font-size: 160%; margin-bottom: 0px"><strong>write</strong> a post. <strong>tag</strong> a friend. <strong>contribute</strong> to their cloud.</h2>
       <!-- <div class="john-collison">
         <a href="https://twitter.com/collision"><img src="http://api.go-vibe.com/landing/small_prof_pic.jpg" width="160" height="160" id="john" class="person scale-with-grid"></a>
         <h3 style="margin-bottom: 5px"><a href="https://twitter.com/collision">Noah Stebbins</a></h3>
@@ -89,7 +89,7 @@
   <div id="benefits" class="container">
     <div class="row">
       <div class="twelve columns offset-by-two">
-        <h1>the <strong>worldcloud</strong>: insert catchy post here</h1>
+        <h1>the <strong>cloud</strong>: an attribute collection of <strong>you</strong></h1>
       </div>
     </div>
 
