@@ -87,6 +87,12 @@ switch($action) {
     header('Location: /frontend/newsfeed');
 
   break;
+  case 'logout':
+    $url = $_SESSION['logoutUrl'];
+    session_unset();
+    header('Location:'. $url);
+
+  break;
 
   default: 
     // default option (triggered upon initially going to 'api.go-vibe.com')

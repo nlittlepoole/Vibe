@@ -162,7 +162,7 @@
               <b class="caret" id="settings_menu_nav"></b>
             </a>
             <ul class="dropdown-menu">
-              <li><a href="<?php echo $_SESSION['logoutUrl']; ?>">Sign out</a></li>
+              <li><a href="/index.php?action=logout">Sign out</a></li>
             </ul>
           </li>
         </ul>
