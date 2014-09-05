@@ -186,6 +186,40 @@
     });
 </script>
 
+<!-- BAN ajax call -->
+<script type="text/javascript">
+
+    function ban_user() {
+        // hover (light up thumbs up or thumbs down)
+        $('.ban_link').on('click', function() {
+            
+            console.log('ban link has been triggered.');
+
+            // need to send PID, and session data (UID & token)
+
+            var my_uid = localStorage["uid"];
+            var my_token = localStorage["token"]; 
+
+            var my_pid = $(this).closest('.widget').find('.hiddenPID').first().val();
+
+            $.ajax({
+              type: 'POST',
+              url: "http://api.go-vibe.com/api/user.php?action=blockUser",
+              data: { uid: my_uid, token: my_token, pid: my_pid},
+              success: function(data) {
+                // ...
+              }
+            });
+        
+        });
+    }
+
+    $(window).load(function() {
+        ban_user();
+    });
+
+</script>
+
 <script type="text/javascript">
 
     $(function() {
@@ -390,7 +424,7 @@
                             var is_own_profile = '<?php echo $_SESSION["is_own_profile"]; ?>';
                             
                             if(is_own_profile == 1) {
-                                block_html = "<a href='#' style='color: white'><span class='ban_elem' title='Would you like to ban this user?' style='float: right; margin-right: 10px;'>" + '<i class="fa fa-ban"></i>' + "</span></a>";
+                                block_html = "<a href='#' class='ban_link' style='color: white'><span class='ban_elem' title='Would you like to ban this user?' style='float: right; margin-right: 10px;'>" + '<i class="fa fa-ban"></i>' + "</span></a>";
                             }
 
                             /* BODY OF CONTENT */
