@@ -363,7 +363,7 @@
                                     var temp_link = "http://api.go-vibe.com/frontend/profile?user=" + data['data'][i]['Tagged'][z]['UID'];
                                     
                                     if(z == recipient_size - 1) {       // last element
-                                        post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['Tagged'][z]['Name'] + "</a>&nbsp;";
+                                        post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['Tagged'][z]['Name'] + "</a>";
                                     }
                                     else if(z == recipient_size - 2) {  // second-to-last element
                                         post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + data['data'][i]['Tagged'][z]['Name'] + "</a>" + ", and ";

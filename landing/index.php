@@ -66,7 +66,7 @@
           border-radius: 6px 6px 0px 0px; 
         }
       </style>
-      <img id="header_image1" src="landing_photo1.png" width="800" class="scale-with-grid">
+      <img id="header_image1" src="landing_photo1.png" width="900" class="scale-with-grid">
     </div>
   </div><!-- END #headline.container -->
 </section><!-- END #headline_banner -->

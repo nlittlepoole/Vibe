@@ -3,6 +3,8 @@
 	// keep track of session data
 	session_start();
 
+	include("header.php");
+
 	// grabbing person's UID & name info
 	$_SESSION['prof_UID'] 	= isset($_GET['user']) ? $_GET['user'] : "";
 

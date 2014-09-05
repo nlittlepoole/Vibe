@@ -2,6 +2,8 @@
     
     session_start();
 
+    include("header.php");
+
     // FRIEND LIST for Ajax & autocomplete
     
     $request = "http://api.go-vibe.com/api/user.php?action=getFriends&blocked=no&uid=";
