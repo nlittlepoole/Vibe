@@ -1,7 +1,7 @@
 <?php
     session_start(); 
 
-    $_SESSION['my_profile_link'] = "http://api.go-vibe.com/frontend/profile.php?user=" . $_SESSION['userID'];
+    $_SESSION['my_profile_link'] = "http://api.go-vibe.com/frontend/profile?user=" . $_SESSION['userID'];
 
     $_SESSION['my_profile_pic'] = "https://graph.facebook.com/" . $_SESSION['userID'] . "/picture?width=70&height=70";
 
@@ -40,7 +40,7 @@
 
                   var person_name = $('#status-form input[name="search-bar"]').val();
 
-                  temp_link = "http://api.go-vibe.com/frontend/profile.php?user=" + temp_names_to_ID[person_name];
+                  temp_link = "http://api.go-vibe.com/frontend/profile?user=" + temp_names_to_ID[person_name];
                   window.location.href = temp_link;
               }
           });

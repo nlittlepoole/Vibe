@@ -262,7 +262,7 @@
                               var my_uid                = "<?php print($_SESSION['userID']) ?>"; 
                               var my_profile_load_name  = "<?php print($_SESSION['my_profile_load_name']) ?>"; 
 
-                              var my_prof_link = "http://api.go-vibe.com/frontend/profile.php?user=" + my_uid;
+                              var my_prof_link = "http://api.go-vibe.com/frontend/profile?user=" + my_uid;
 
                               var pic_href = "https://graph.facebook.com/" + my_uid + "/picture?width=60&height=60";
 

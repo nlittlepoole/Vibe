@@ -72,17 +72,17 @@ switch($action) {
     $ipod       = strpos($_SERVER['HTTP_USER_AGENT'],"iPod");
 
     if ($iphone || $android || $palmpre || $ipod || $berry == true) { 
-        header('Location: /frontend_mobile/newsfeed.php');  // redirect the user to a different page, designed for mobile
+        header('Location: /frontend_mobile/newsfeed');  // redirect the user to a different page, designed for mobile
     }
     else {
-        header('Location: /frontend/newsfeed.php');
+        header('Location: /frontend/newsfeed');
     }
 
   break;
 
   case 'newsfeed':
     // take user to the new newsfeed
-    header('Location: /frontend/newsfeed.php');
+    header('Location: /frontend/newsfeed');
 
   break;
 
