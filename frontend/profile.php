@@ -2,6 +2,7 @@
 
 	// keep track of session data
 	session_start();
+	include "header.php";
 
 	include("header.php");
 
