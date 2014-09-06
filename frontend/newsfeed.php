@@ -134,12 +134,12 @@
         <!-- editing focus listeners for vibe submit form -->
         <script type="text/javascript">
             $(function() {
-                $('#statusform input[name="status"]').focus(function() {
-                    debugger;
+                $('#statusform input[name="status"], .selectize-input').focus(function() {
                     $(this).css('border', '1px solid #004c00');
+                    // $(this).css('border', '5px solid black');
                 });
 
-                $('#statusform input[name="status"]').focusout(function() {
+                $('#statusform input[name="status"], .selectize-input').focusout(function() {
                     $(this).css('border', '');
                 });
             });
@@ -453,6 +453,14 @@
 
             });
 
+        </script>
+
+        <!-- selectize input editing once the page has been completely loaded -->
+        <script type="text/javascript">
+
+            $(window).load(function () {
+                $(".selectize-input").attr("tabindex", -1);
+            });
         </script>
 
         <!-- loading webelements and using getStream for notifications -->
