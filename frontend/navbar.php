@@ -42,8 +42,13 @@
 
                   var person_name = $('#status-form input[name="search-bar"]').val();
 
-                  temp_link = "http://api.go-vibe.com/frontend/profile?user=" + temp_names_to_ID[person_name];
-                  window.location.href = temp_link;
+                  if(typeof temp_names_to_ID[person_name] == 'undefined') {
+                     // does not exist (so do not submit anything)
+                  }
+                  else {
+                     temp_link = "http://api.go-vibe.com/frontend/profile?user=" + temp_names_to_ID[person_name];
+                     window.location.href = temp_link;
+                  }
               }
           });
       });

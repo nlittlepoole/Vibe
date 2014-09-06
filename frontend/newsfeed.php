@@ -131,12 +131,29 @@
             });
         </script>
 
+        <!-- editing focus listeners for vibe submit form -->
+        <script type="text/javascript">
+            $(function() {
+                $('#statusform input[name="status"]').focus(function() {
+                    debugger;
+                    $(this).css('border', '1px solid #004c00');
+                });
+
+                $('#statusform input[name="status"]').focusout(function() {
+                    $(this).css('border', '');
+                });
+            });
+        </script>
+
         <!-- status form submission -->
         <script type="text/javascript">
             
             $(function() {
 
                 function modified_vibe_submit() {
+
+                    var inputted_names  = $('#statusform input[name="recipient_to_convert"]').val();
+                    var inputted_vibe   = $('#statusform input[name="status"]').val();
 
                     var names_to_ID     = JSON.parse(localStorage["names_to_ID"]);
                     var friends_names   = JSON.parse(localStorage["friends_names"]);
@@ -220,7 +237,7 @@
                                     var temp_link = "http://api.go-vibe.com/frontend/profile?user=" + my_ids[z];
                                     
                                     if(z == recipient_size - 1) {       // last element
-                                        post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + my_names[z] + "</a>&nbsp;";
+                                        post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + my_names[z] + "</a>";
                                     }
                                     else if(z == recipient_size - 2) {  // second-to-last element
                                         post_tagged_formatted_names += "<a href='" + temp_link + "' class='text-white strong'>" + my_names[z] + "</a>" + ", and ";
@@ -240,7 +257,7 @@
                             my_post_like += "&nbsp;&nbsp;&nbsp;<i class='fa fa-lg fa-thumbs-down post_choice_disagree' style='color: gray'></i>";
                             
                             var total_likes     = 0;
-                            var total_agrees    = 0; 
+                            var total_agrees    = 1; 
                             var total_disagrees = 0; 
 
                             var like_submission_form = [
@@ -271,9 +288,9 @@
                                         dislike_submission_form,
                                     "</span>",
                                     "<span style='float: right;'>",
-                                        "<i class='fa fa-thumbs-up' style='color: #606060  '></i>&nbsp;<span class='like_count'>" + total_agrees + "</span>",
+                                        "<i class='fa fa-thumbs-up' style='color: #428bca'></i>&nbsp;<span class='like_count'>" + total_agrees + "</span>",
                                         "&nbsp;&nbsp;",
-                                        "<i class='fa fa-thumbs-down' style='color: #606060  '></i>&nbsp;<span class='dislike_count'>" + total_disagrees + "</span>",
+                                        "<i class='fa fa-thumbs-down' style='color: #606060'></i>&nbsp;<span class='dislike_count'>" + total_disagrees + "</span>",
                                     "</span>",
                                 "</div>"
                                 ].join('\n');
@@ -344,7 +361,6 @@
 
                     event.preventDefault();
                     
-                    var inputted_names  = $('#statusform input[name="recipient_to_convert"]').val();
                     var inputted_vibe   = $('#statusform input[name="status"]').val();
 
                     if(inputted_vibe !== "") {
