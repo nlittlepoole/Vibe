@@ -107,7 +107,7 @@ switch($action) {
     $_SESSION['loginUrl'] = $loginUrl; 
 
     // redirected to new home page 
-    header('Location: http://api.go-vibe.com/landing/index');
+    header('Location: http://api.go-vibe.com/landing/');
 
 }
 ?>
