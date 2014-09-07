@@ -300,9 +300,7 @@
 		$conn = new PDO(DB_DSN, DB_USERNAME, DB_PASSWORD);
 		$name = $conn->quote($name);
 
-		$sql = "INSERT INTO Users (`UID`, `Name`, `Notes`, `Email`)
-		    		VALUES ('$uid', $name, 'Test', '$email')
-		        		ON DUPLICATE KEY UPDATE `Notes` = 'Active' , `Name` = '$name';"; 
+		$sql = "INSERT INTO Users (`UID`, `Name`, `Notes`, `Email`, `Active`) VALUES ('$uid', $name, 'Test', '$email' ,1) ON DUPLICATE KEY UPDATE Active = 1 , `Name` = $name;"; 
 		
 		$st = $conn->prepare($sql);
 		$st->execute();
@@ -399,10 +397,10 @@
 		$blocked = isset( $_GET['blocked'] ) ? $_GET['blocked'] : "";
 		
 		if($blocked == 'no') {
-			$sql = "SELECT `UID`,`Name` FROM Users WHERE `UID` IN (SELECT `Friend` FROM Friends WHERE `UID`='$uid' AND `Blocked`=0)";
+			$sql = "SELECT A.UID,`Name`, (Email IS NOT NULL) Has_Email,  (Temp IS NOT NULL) Can_Email  FROM ( (SELECT * FROM Users WHERE `UID` IN (SELECT `Friend` FROM Friends WHERE `UID`='$uid' AND `Blocked`=0))A LEFT OUTER JOIN (SELECT * FROM Linked)B ON A.UID =B.UID);";
 		}
 		else {
-			$sql = "SELECT `UID`,`Name` FROM Users WHERE `UID` IN (SELECT `Friend` FROM Friends WHERE `UID`='$uid')";
+			$sql = "SELECT `UID`,`Name`,(Email IS NOT NULL) Has_Email FROM Users WHERE `UID` IN (SELECT `Friend` FROM Friends WHERE `UID`='$uid')";
 		
 		}
 

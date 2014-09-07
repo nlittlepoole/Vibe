@@ -82,6 +82,17 @@
             }
         </script>
 
+        <!-- listener (post Vibe) render names Ajax -->
+        <script type="text/javascript">
+
+            $(window).load(function() {
+                $('.selectize-input').find('input').click(function() {
+                    console.log('hello world');
+                });                
+            });
+
+        </script>
+
         <!-- autocomplete (selectize) & caching friends' data -->
         <script type="text/javascript">
             $(function() {
@@ -546,6 +557,7 @@
                                                         <input type="text" class="form-control" id="inputFriend" name="recipient_to_convert" placeholder="Who's this about? Type in a Facebook friend!">
                                                         <input type="hidden" value="" name="recipient" />
                                                         <input type="hidden" value="newsfeed" name="post_source" />
+                                                        Please provide an email or twitter handle for. 
                                                     </div>
 
                                                 </div>
