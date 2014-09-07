@@ -1,0 +1,6 @@
+*.pyc
+*.profile
+MANIFEST
+dist
+build
+pytagcloud/test/out/*
