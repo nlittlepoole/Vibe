@@ -1,4 +1,4 @@
-	<?php
+<?php
 
 		// config settings setup
 		ob_start(); 
